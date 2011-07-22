@@ -54,3 +54,43 @@ div.field, div.actions {
   font-size: 12px;
   list-style: square;
 }
+
+#finance {
+	width:600px;
+	height:400px;
+	padding:20px;
+	float:left;
+	border:1px solid black;
+}
+#series_data {
+	float:left;
+	width:400px;
+	/*height:400px;*/
+	padding:20px;
+	/*overflow-y:scroll;
+	border:1px solid black;*/
+	margin:0 0 0 10px;
+}
+#summary_area {position:absolute; width:350px; padding:20px 0 0 15px; }
+#details_mask {position:absolute; width:530px; height:300px; margin-left:370px; padding:10px 0 0 0; background-color:#FFFFFF; opacity:0.9;}
+#details_area {position:absolute; width:530px; margin-left:370px; padding:10px 0 0 0;}
+#navigation {}
+#summary_area h1 {font-size:72px; line-height:60px; margin:0 0 20px 0;}
+#summary_area h2 {font-size:50px; line-height:50px; margin:0 0 20px 0;}
+td.label {font-weight:bold; padding-right:10px; text-align:right; vertical-align:top;}
+ul.series-list {margin:0;}
+table th {padding:0 10px 0 0; text-align:left;}
+table td {padding: 0 5px 0 0; vertical-align:top; }
+table td {border-bottom:1px solid #bbbbbb;}
+table.spreadsheet_data td {border-right:1px solid #bbbbbb;padding:0 3px 0 3px; font-size:10px;}
+span.series_count {font-style:italic; font-size:8px;}
+
+table.operations-table { border:1px #999999 solid;}
+table.operations-table table { border:1px #999999 solid;}
+table.operations-table td { border: 0; padding:3px;}
+
+div.good-response { background-color:#aea; color:white; }
+div.bad-response { background-color:#eaa; color:white;}
+
+div.datapoint {padding:2px 5px; float:left;}
+div.current-datapoint{font-weight:bold;}
