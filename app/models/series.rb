@@ -1,8 +1,19 @@
 class Series < ActiveRecord::Base
+  include SeriesArithmetic
+  include SeriesAggregation
+  include SeriesComparison
+  include SeriesSeasonalAdjustment
+  include SeriesSharing
+  include SeriesDataAdjustment
+  include SeriesInterpolation
+  include SeriesExternalRelationship
+  include SeriesRelationship
   include SeriesSpecCreation
   
   serialize :data, Hash
   serialize :factors, Hash
+  
+  has_many :data_points
   
   def last_observation
     return data.keys.sort[-1]
