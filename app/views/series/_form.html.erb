@@ -1,0 +1,69 @@
+<%= form_for(@series) do |f| %>
+  <% if @series.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@series.errors.count, "error") %> prohibited this series from being saved:</h2>
+
+      <ul>
+      <% @series.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :frequency %><br />
+    <%= f.text_field :frequency %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :units %><br />
+    <%= f.text_field :units %>
+  </div>
+  <div class="field">
+    <%= f.label :seasonally_adjusted %><br />
+    <%= f.check_box :seasonally_adjusted %>
+  </div>
+  <div class="field">
+    <%= f.label :last_demetra_datestring %><br />
+    <%= f.text_field :last_demetra_datestring %>
+  </div>
+  <div class="field">
+    <%= f.label :factors %><br />
+    <%= f.text_field :factors %>
+  </div>
+  <div class="field">
+    <%= f.label :factor_application %><br />
+    <%= f.text_field :factor_application %>
+  </div>
+  <div class="field">
+    <%= f.label :prognoz_data_file_id %><br />
+    <%= f.text_field :prognoz_data_file_id %>
+  </div>
+  <div class="field">
+    <%= f.label :aremos_missing %><br />
+    <%= f.text_field :aremos_missing %>
+  </div>
+  <div class="field">
+    <%= f.label :aremos_diff %><br />
+    <%= f.text_field :aremos_diff %>
+  </div>
+  <div class="field">
+    <%= f.label :mult %><br />
+    <%= f.text_field :mult %>
+  </div>
+  <div class="field">
+    <%= f.label :data %><br />
+    <%= f.text_field :data %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
