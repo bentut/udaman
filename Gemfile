@@ -7,6 +7,9 @@ gem 'rails', '3.0.9'
 
 #gem 'sqlite3'
 gem 'mysql2', '< 0.3'
+gem 'roo'
+gem 'fastercsv'
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -35,4 +38,5 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails'
   gem 'database_cleaner'
+  gem 'test-unit', '1.2.3'
 end

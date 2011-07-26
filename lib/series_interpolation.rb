@@ -4,7 +4,7 @@ module SeriesInterpolation
   end
   
   def interpolate(frequency, operation)
-    raise InterpolationException if frequency != :quarter or self.frequency != "semi" or operation != :linear
+    raise InterpolationException if frequency != :quarter or self.frequency != :semi or operation != :linear
     raise InterpolationException if data.count < 2
     last = nil
     last_date = nil

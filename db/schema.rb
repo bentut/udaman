@@ -10,7 +10,79 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110722034452) do
+ActiveRecord::Schema.define(:version => 20110722102343) do
+
+  create_table "aremos_series", :force => true do |t|
+    t.string   "name"
+    t.string   "frequency"
+    t.string   "description"
+    t.string   "start"
+    t.string   "end"
+    t.text     "data"
+    t.text     "aremos_data"
+    t.date     "aremos_update_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_load_patterns", :force => true do |t|
+    t.string   "start_date"
+    t.string   "frequency"
+    t.string   "path"
+    t.string   "worksheet"
+    t.string   "row"
+    t.string   "col"
+    t.string   "last_date_read"
+    t.string   "last_read_status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_points", :force => true do |t|
+    t.integer  "series_id"
+    t.string   "date_string"
+    t.float    "value"
+    t.boolean  "current"
+    t.integer  "data_source_id"
+    t.datetime "history"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_source_downloads", :force => true do |t|
+    t.string   "url"
+    t.text     "post_parameters"
+    t.string   "save_path"
+    t.text     "download_log"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "data_sources", :force => true do |t|
+    t.integer  "series_id"
+    t.string   "description"
+    t.string   "eval"
+    t.text     "data"
+    t.datetime "last_run"
+    t.text     "dependencies"
+    t.string   "color"
+    t.float    "runtime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prognoz_data_files", :force => true do |t|
+    t.string   "name"
+    t.string   "filename"
+    t.string   "frequency"
+    t.text     "series_loaded"
+    t.text     "series_covered"
+    t.text     "series_validated"
+    t.text     "output_series"
+    t.string   "output_start_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "series", :force => true do |t|
     t.string   "name"

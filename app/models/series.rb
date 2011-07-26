@@ -14,6 +14,7 @@ class Series < ActiveRecord::Base
   serialize :factors, Hash
   
   has_many :data_points
+  has_many :data_sources
   
   def last_observation
     return data.keys.sort[-1]
@@ -158,7 +159,7 @@ class Series < ActiveRecord::Base
     series_to_set.update_attributes(
       :frequency => series.frequency,
       :units => series.units,
-      :last_updated => Time.now
+#      :last_updated => Time.now
     )
     series_name.ts.save_source(desc, eval_statement, series.data)
     #puts "#{"%.2f" % (Time.now - t)} | #{series.data.count} | #{series_name} | #{eval_statement}"
@@ -243,7 +244,7 @@ class Series < ActiveRecord::Base
     # They're not being created. Definitely an issue
 
     #dh_time = Time.now            #timer
-    data_points.sort.each do |dp|
+    data_points.each do |dp|
       #puts "#{dp.date_string}: #{dp.value} (#{dp.current})"
       data_hash[dp.date_string] = dp.value if dp.current
     end
