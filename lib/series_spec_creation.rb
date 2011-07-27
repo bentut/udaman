@@ -5,7 +5,7 @@ module SeriesSpecCreation
     frequency = frequency_from_code(name.split(".")[1])
     new_series = Series.new(
       :name => name,
-      :data => data_hash[name],
+      :data => data_hash[name].clone,
       :frequency => frequency
       )
     

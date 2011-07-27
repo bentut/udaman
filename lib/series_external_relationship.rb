@@ -8,14 +8,9 @@ module SeriesExternalRelationship
   	return nil
   end
   
-  def set_output_series(multiplier)
-    prognoz_data_file = PrognozDataFile.find prognoz_data_file_id
-    raise PrognozDataFindException if prognoz_data_file.nil?
-    prognoz_data_file.output_series ||= {}
-    prognoz_data_file.output_series[self.name] = multiplier
-    prognoz_data_file.save
-    self.update_attributes(:mult => multiplier)
-  end
+   def set_output_series(multiplier)
+     self.update_attributes(:mult => multiplier)
+   end
   
   def toggle_mult
     self.mult ||= 1

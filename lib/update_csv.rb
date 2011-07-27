@@ -1,9 +1,9 @@
-require 'fastercsv'
+#require 'fastercsv'
 class UpdateCSV 
   include UpdateCore
   def initialize(update_spreadsheet_name)
     begin
-      @data = FasterCSV.read(update_spreadsheet_name)
+      @data = CSV.read(update_spreadsheet_name)
     rescue
       @load_error = true
     end

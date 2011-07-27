@@ -25,6 +25,7 @@ module SeriesSeasonalAdjustment
     self.factor_application = factor_application
     #should throw in some exception handling if this happens for a non sa series
     ns_series = get_ns_series
+    self.factors ||= {}
     
     self.last_demetra_datestring ||= self.get_last_complete_december_datestring
     last_demetra_date = Date.parse self.last_demetra_datestring
@@ -35,8 +36,8 @@ module SeriesSeasonalAdjustment
       #puts "#{datestring} - ns:#{ns_value} sa:#{sa_value}"
       #think can just use months for both months and quarters to keep things simple
       factor_month = Date.parse(datestring).month
-      factors[factor_month.to_s] = ns_value - sa_value if factor_application == :additive
-      factors[factor_month.to_s] = ns_value / sa_value if factor_application == :multiplicative
+      self.factors[factor_month.to_s] = ns_value - sa_value if factor_application == :additive
+      self.factors[factor_month.to_s] = ns_value / sa_value if factor_application == :multiplicative
     end
     self.save
   end

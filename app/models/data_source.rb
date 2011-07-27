@@ -1,5 +1,6 @@
 class DataSource < ActiveRecord::Base
   serialize :data, Hash
+  serialize :dependencies, Array
   
   belongs_to :series
   has_many :data_points

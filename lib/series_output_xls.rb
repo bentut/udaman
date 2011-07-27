@@ -47,13 +47,13 @@ class SeriesOutputXls < Spreadsheet::Workbook
   def write_dates(sheet)
     count=1
     dates.each do |date|
-      sheet[count,0] = date
+      sheet[count,0] = date.dup
       count += 1
     end
   end
   
   def write_series(series_name, data, sheet, col)
-    sheet[0,col] = series_name
+    sheet[0,col] = series_name.dup
     count = 1
     dates.each do |date|
       sheet[count,col] = data[date] unless data[date].nil?

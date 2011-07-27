@@ -18,18 +18,17 @@ module SeriesRelationship
   end
 
   def clean_data_sources
-    results = self.prognoz_data_results
     sources_in_use = {}
     
-    results[:data_matches].each do |data_match|
-      sources_in_use[data_match[1][:source]] ||= 1
+    self.current_data_points.each do |dp|
+      sources_in_use[dp.data_source_id] ||= 1
     end
     
     #puts sources_in_use.count
     self.data_sources.each do |ds|
       if sources_in_use[ds.id].nil?
         #puts "deleting #{self.name}: #{ds.id} : #{ds.description}"
-        self.data_sources.delete ds.id
+        ds.delete
       end
     end
     
@@ -56,8 +55,8 @@ module SeriesRelationship
   
   def new_dependents
     results = []
-    DataSource.all(:conditions => {:description => /#{self.name}/}).each do |ds|
-      #puts ds.description
+    DataSource.all(:conditions => ["description LIKE ?", "%#{self.name}%"]).each do |ds|
+#      puts ds.description
       results.push Series.find(ds.series_id).name
     end
     return results.uniq
