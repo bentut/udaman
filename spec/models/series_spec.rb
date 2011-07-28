@@ -30,33 +30,26 @@ describe Series do
   end
   
   describe "DATA LOADING" do  
-    before(:all) do
-      @ns_update_path = "#{ENV["DATAFILES_PATH"]}/datafiles/ns_update.xls"
-      @ns_load_results = Series.load_all_series_from @ns_update_path
-      @ns_series_names = @ns_load_results[:headers] 
-      @ns_series_name = @ns_series_names.first
-      @ns_series_loaded = @ns_series_name.ts
-      
-      @sa_update_path = "#{ENV["DATAFILES_PATH"]}/datafiles/sa_update.xls"
-      @worksheet_name = "sadata"
-      @sa_load_results = Series.load_all_sa_series_from @sa_update_path, @worksheet_name
-      @sa_series_names = @sa_load_results[:headers] 
-      @sa_series_name = @sa_series_names.first
-      @sa_series = Series.get @sa_series_name
-      @sa_series_loaded = Series.get @sa_series_name
-    end
+
     
     describe "LOADING data from UPDATE SPREADSHEETS" do    
-      before(:each) do
-        @ns_series_loaded.save
-        @ns_series = @ns_series_name.ts
-      end
     
       it "should load a series with 247 values from the ns_update spreadsheet" do
+        @ns_update_path = "#{ENV["DATAFILES_PATH"]}/datafiles/ns_update.xls"
+         @ns_load_results = Series.load_all_series_from @ns_update_path
+         @ns_series_names = @ns_load_results[:headers] 
+         @ns_series_name = @ns_series_names.first
+         @ns_series = @ns_series_name.ts
         @ns_series.observation_count.should == 247
       end
     
       it "should store it's data with YYYY-MM-DD formatted datestrings" do
+        @ns_update_path = "#{ENV["DATAFILES_PATH"]}/datafiles/ns_update.xls"
+         @ns_load_results = Series.load_all_series_from @ns_update_path
+         @ns_series_names = @ns_load_results[:headers] 
+         @ns_series_name = @ns_series_names.first
+         @ns_series = @ns_series_name.ts
+         
         @ns_series.data.each do |datestring,value|
           datestring.split("-").count.should == 3
           datestring.length.should == 10
@@ -97,8 +90,17 @@ describe Series do
   
     describe "LOADING data from DEMETRA OUTPUT" do    
       before (:each) do
-        @ns_series_loaded.save
-        @sa_series_loaded.save
+        @ns_update_path = "#{ENV["DATAFILES_PATH"]}/datafiles/ns_update.xls"
+         @ns_load_results = Series.load_all_series_from @ns_update_path
+         @ns_series_names = @ns_load_results[:headers] 
+         @ns_series_name = @ns_series_names.first
+        
+        @sa_update_path = "#{ENV["DATAFILES_PATH"]}/datafiles/sa_update.xls"
+        @worksheet_name = "sadata"
+        @sa_load_results = Series.load_all_sa_series_from @sa_update_path, @worksheet_name
+        @sa_series_names = @sa_load_results[:headers] 
+        @sa_series_name = @sa_series_names.first
+
         @ns_series = @ns_series_name.ts
         @sa_series = @sa_series_name.ts
       end
@@ -342,7 +344,7 @@ describe Series do
     
     #fill these out
     it "should pull all datapoints for a series and include non-current data points" do
-      #Series.store("EIFNS@HI.M", Series.new(:data => @data_hash))
+      Series.store("EIFNS@HI.M", Series.new(:data => @data_hash))
       "EIFNS@HI.M".ts_eval= %Q|"EIFNS@HI.M".ts + 10|
       sources = "EIFNS@HI.M".ts.data_sources
       sources[0].data_points.count.should == @data_no_nil.count

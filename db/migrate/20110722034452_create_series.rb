@@ -13,7 +13,7 @@ class CreateSeries < ActiveRecord::Migration
       t.integer :aremos_missing
       t.float :aremos_diff
       t.integer :mult
-      t.text :data
+      t.text :data, :limit => 4294967295
 
       t.timestamps
     end

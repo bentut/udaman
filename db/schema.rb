@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(:version => 20110722102343) do
     t.string   "description"
     t.string   "start"
     t.string   "end"
-    t.text     "data"
-    t.text     "aremos_data"
+    t.text     "data",               :limit => 2147483647
+    t.text     "aremos_data",        :limit => 2147483647
     t.date     "aremos_update_date"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(:version => 20110722102343) do
     t.string   "url"
     t.text     "post_parameters"
     t.string   "save_path"
-    t.text     "download_log"
+    t.text     "download_log",    :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(:version => 20110722102343) do
     t.integer  "series_id"
     t.string   "description"
     t.string   "eval"
-    t.text     "data"
+    t.text     "data",         :limit => 2147483647
     t.datetime "last_run"
     t.text     "dependencies"
     t.string   "color"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20110722102343) do
     t.string   "name"
     t.string   "filename"
     t.string   "frequency"
-    t.text     "series_loaded"
+    t.text     "series_loaded",     :limit => 2147483647
     t.text     "series_covered"
     t.text     "series_validated"
     t.text     "output_series"
@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20110722102343) do
     t.integer  "aremos_missing"
     t.float    "aremos_diff"
     t.integer  "mult"
-    t.text     "data"
+    t.text     "data",                    :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
   end

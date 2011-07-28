@@ -4,7 +4,7 @@ class CreateDataSources < ActiveRecord::Migration
       t.integer :series_id
       t.string :description
       t.string :eval
-      t.text :data
+      t.text :data, :limit => 4294967295
       t.datetime :last_run
       t.text :dependencies
       t.string :color

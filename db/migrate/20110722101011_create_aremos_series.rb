@@ -6,8 +6,8 @@ class CreateAremosSeries < ActiveRecord::Migration
       t.string :description
       t.string :start
       t.string :end
-      t.text :data
-      t.text :aremos_data
+      t.text :data, :limit => 4294967295
+      t.text :aremos_data, :limit => 4294967295
       t.date :aremos_update_date
 
       t.timestamps

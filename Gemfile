@@ -8,7 +8,8 @@ gem 'rails', '3.0.9'
 #gem 'sqlite3'
 gem 'mysql2', '< 0.3'
 gem 'roo'
-gem 'fastercsv'
+#gem 'fastercsv'
+gem 'httpclient'
 
 
 # Use unicorn as the web server

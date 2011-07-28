@@ -7,8 +7,8 @@ class DataPoint < ActiveRecord::Base
     
     #no changes at all
     return self if value.nil? and !self.value.nil?
-    #timestamps only
-    self.save if self.value == value and self.data_source_id == data_source.object_id
+    #timestamps only, 
+    self.update_attributes(:updated_at => Time.now) if self.value == value and self.data_source_id == data_source.object_id
     #data source and timestamps
     self.update_attributes( :data_source_id => data_source.id ) if self.value == value and self.data_source_id != data_source.id
     #create a new datapoint because value changed
@@ -23,11 +23,11 @@ class DataPoint < ActiveRecord::Base
   def delete
     date_string = self.date_string
     series_id = self.series_id
-
+    
     super
 
     next_of_kin = DataPoint.where(:date_string => date_string, :series_id => series_id).sort_by(&:updated_at).reverse[0]
-    next_of_kin.update_attributes(:current => true) unless next_of_kin.nil?    
+    next_of_kin.update_attributes(:current => true) unless next_of_kin.nil?        
   end
   
   # in the KEEP scenario, have to update the data source id because 

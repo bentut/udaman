@@ -4,7 +4,7 @@ class CreatePrognozDataFiles < ActiveRecord::Migration
       t.string :name
       t.string :filename
       t.string :frequency
-      t.text :series_loaded
+      t.text :series_loaded, :limit => 4294967295
       t.text :series_covered
       t.text :series_validated
       t.text :output_series

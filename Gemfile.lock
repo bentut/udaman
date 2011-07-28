@@ -53,7 +53,6 @@ GEM
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
-    fastercsv (1.5.4)
     ffi (1.0.9)
     gherkin (2.4.5)
       json (>= 1.4.6)
@@ -62,6 +61,7 @@ GEM
       oauth (>= 0.3.6)
     hoe (2.10.0)
       rake (~> 0.8)
+    httpclient (2.2.1)
     i18n (0.5.0)
     json (1.5.3)
     json_pure (1.5.3)
@@ -138,7 +138,7 @@ PLATFORMS
 DEPENDENCIES
   cucumber-rails
   database_cleaner
-  fastercsv
+  httpclient
   mysql2 (< 0.3)
   rails (= 3.0.9)
   roo

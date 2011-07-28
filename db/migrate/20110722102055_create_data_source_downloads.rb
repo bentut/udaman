@@ -4,7 +4,7 @@ class CreateDataSourceDownloads < ActiveRecord::Migration
       t.string :url
       t.text :post_parameters
       t.string :save_path
-      t.text :download_log
+      t.text :download_log, :limit => 4294967295
 
       t.timestamps
     end

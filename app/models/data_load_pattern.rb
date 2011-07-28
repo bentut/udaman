@@ -1,5 +1,5 @@
 require 'roo'
-require 'fastercsv'
+#require 'fastercsv'
 class DataLoadPattern < ActiveRecord::Base
   def attach_to(series_name)
     series_name.ts_append_eval %Q|"#{series_name}".ts.load_from_pattern_id "#{self.id}"|
@@ -43,7 +43,7 @@ class DataLoadPattern < ActiveRecord::Base
   def DataLoadPattern.retrieve_csv(path, sheet, row, col)
     @csv ||= {}
     begin
-      @csv[path] = FasterCSV.read(path) if @csv[path].nil?
+      @csv[path] = CSV.read(path) if @csv[path].nil?
     rescue
       #resolve one ugly known file formatting problem with faster csv
       alternate_csv_load = DataLoadPattern.alternate_fastercsv_read(path)
@@ -59,7 +59,7 @@ class DataLoadPattern < ActiveRecord::Base
     csv_file = open path, "r"
     while line = csv_file.gets
       next unless line.index("HYPERLINK").nil?
-      csv_data.push(FasterCSV.parse_line(line.strip))
+      csv_data.push(CSV.parse_line(line.strip))
     end
     csv_file.close
     return csv_data 
