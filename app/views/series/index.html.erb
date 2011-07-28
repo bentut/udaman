@@ -1,47 +1,18 @@
-<h1>Listing series</h1>
+<div id="summary_area">
+	<h1>Data Series</h1>
+	<h2>Total: <%= @all_series.count %></h2>
+	<div id="navigation">
+		<%= raw navigation_by_frequency %>
+		<%= raw navigation_by_letter %>
+	</div>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+		<ul>
+		<% @all_series.each do |series| %>
+			<li><%= link_to series.name, {:action => 'show', :id => series.id} %></li>
+		<% end %>
+		</ul>
+</div>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Frequency</th>
-    <th>Description</th>
-    <th>Units</th>
-    <th>Seasonally adjusted</th>
-    <th>Last demetra datestring</th>
-    <th>Factors</th>
-    <th>Factor application</th>
-    <th>Prognoz data file</th>
-    <th>Aremos missing</th>
-    <th>Aremos diff</th>
-    <th>Mult</th>
-    <th>Data</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @series.each do |series| %>
-  <tr>
-    <td><%= series.name %></td>
-    <td><%= series.frequency %></td>
-    <td><%= series.description %></td>
-    <td><%= series.units %></td>
-    <td><%= series.seasonally_adjusted %></td>
-    <td><%= series.last_demetra_datestring %></td>
-    <td><%= series.factors %></td>
-    <td><%= series.factor_application %></td>
-    <td><%= series.prognoz_data_file_id %></td>
-    <td><%= series.aremos_missing %></td>
-    <td><%= series.aremos_diff %></td>
-    <td><%= series.mult %></td>
-    <td><%= series.data %></td>
-    <td><%= link_to 'Show', series %></td>
-    <td><%= link_to 'Edit', edit_series_path(series) %></td>
-    <td><%= link_to 'Destroy', series, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Series', new_series_path %>
+<p>

@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>UheroDb</title>
+  <title><%= @series.nil? ? "UHERO Data Manager" : @series.name %></title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+
+<!--Load the AJAX API-->
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <%= 
+  javascript_include_tag :defaults 
+  %>
   <%= csrf_meta_tag %>
+
 </head>
 <body>
-
+<div id="top-level-nav">
+	<%= 
+	#render 'devise/menu/login_items' 
+	%> | 
+	<a href="/series_data_files">Data Sources</a> | 
+	<a href="/prognoz_data_files">Prognoz Output Files</a> | 
+	<a href="/series">Data Series</a> | 	
+	<a href="/data_source_downloads">Downloads</a> 
+</div>
+<p class="notice"><%= flash[:notice] %></p>
+<p class="alert"><%= flash[:alert] %></p>
 <%= yield %>
 
 </body>

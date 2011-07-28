@@ -1,70 +1,80 @@
-<p id="notice"><%= notice %></p>
+ <script type="text/javascript">
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1', {'packages':['corechart']});
 
-<p>
-  <b>Name:</b>
-  <%= @series.name %>
-</p>
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(drawChart);
 
-<p>
-  <b>Frequency:</b>
-  <%= @series.frequency %>
-</p>
+// Callback that creates and populates a data table, 
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart() {
 
-<p>
-  <b>Description:</b>
-  <%= @series.description %>
-</p>
+// Create our data table.
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'Date');
+data.addColumn('number', '<%= @series.name %>');
+data.addRows([
+<%=
+gct_datapoints @series
+%>
+]);
 
-<p>
-  <b>Units:</b>
-  <%= @series.units %>
-</p>
+// Instantiate and draw our chart, passing in some options.
+var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+// chart.draw(data);
+chart.draw(data, {width: 400, height: 240});
+//chart.draw(data, {width: 900, height: 500});
+google.visualization.events.addListener(chart, 'select', function() {
+  alert("HI");
+});
 
-<p>
-  <b>Seasonally adjusted:</b>
-  <%= @series.seasonally_adjusted %>
-</p>
-
-<p>
-  <b>Last demetra datestring:</b>
-  <%= @series.last_demetra_datestring %>
-</p>
-
-<p>
-  <b>Factors:</b>
-  <%= @series.factors %>
-</p>
-
-<p>
-  <b>Factor application:</b>
-  <%= @series.factor_application %>
-</p>
-
-<p>
-  <b>Prognoz data file:</b>
-  <%= @series.prognoz_data_file_id %>
-</p>
-
-<p>
-  <b>Aremos missing:</b>
-  <%= @series.aremos_missing %>
-</p>
-
-<p>
-  <b>Aremos diff:</b>
-  <%= @series.aremos_diff %>
-</p>
-
-<p>
-  <b>Mult:</b>
-  <%= @series.mult %>
-</p>
-
-<p>
-  <b>Data:</b>
-  <%= @series.data %>
-</p>
+}
 
 
-<%= link_to 'Edit', edit_series_path(@series) %> |
-<%= link_to 'Back', series_index_path %>
+
+</script>
+
+<p class="notice"><%= notice %></p>
+
+<div id="summary_area">
+	<h2>Series:</h2>
+	<h1><%= @series.name %></h1>
+	<div id="navigation">
+		<%= link_to 'Edit', edit_series_path(@series) %> |
+		<%= link_to 'Delete', @series, :method => :delete %> | 
+		<%= link_to 'Back', :action => 'index' %>
+<!--
+<img src="<%= GoogleChart.line(@series.data.values).to_url
+ %>"/>
+-->
+
+<div id="chart_div"></div>
+
+
+	</div>
+	<!--
+	<%= link_to_remote "change replace me block", :update => "replace_me", :url => {:action => "replace_block"} %>
+	<div style="font-size:24px" id="replace_me">
+		Replace Me!
+	</div>
+	-->
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<table>
+		<tr><td class="label">Aremos: </td><td><%= "#{@series.aremos_missing} missing, #{@series.aremos_diff.round(5) unless @series.aremos_diff.nil?} cumulative difference" %> [ refresh ]</td></tr>
+		<tr><td class="label">Output: </td><td>
+		<%= 
+		@pdf.filename unless @pdf.nil?
+		#@match_results[:prognoz_filename] 
+		%></td></tr>
+		<tr><td class="label">Sources: <br />	<%= link_to 'Add', :controller => :data_sources, :action => :new, :series_id => @series.id %>
+		</td><td><%= source_list @series.data_sources_by_last_run, @series.id %></td></tr>
+		<!-- ><tr><td class="label">Data: </td><td><%= 
+			#validate_data_list @match_results[:data_matches], @series.mult 
+		%></td></tr> -->
+		<tr><td class="label">Data: </td><td><%= data_list @series %></td></tr>
+		<tr><td class="label">Source Map</td><td><%= get_operations_map @series.data_sources_by_last_run, @series.name %></td></tr>
+	</table>
+</div>

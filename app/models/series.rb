@@ -273,6 +273,7 @@ class Series < ActiveRecord::Base
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? default_sheet : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     raise SeriesReloadException unless update_spreadsheet.update_formatted?
     
+    self.frequency = update_spreadsheet.frequency
     new_transformation(update_spreadsheet_path, update_spreadsheet.series(self.name))
   end
     

@@ -1,0 +1,3 @@
+<div class="good-response"><%= "OK" if  @test_url_status == 200%></div>
+<div class="bad-response"><%= "This URL is not formatted correctly" if @test_url_status.nil?%></div>
+<div class="bad-response"><%= "NOT OK - HTTP Error Code: #{@test_url_status}" unless @test_url_status.nil? or @test_url_status == 200%></div>

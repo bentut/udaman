@@ -1,0 +1,23 @@
+<p class="notice"><%= notice %></p>
+
+<div id="summary_area">
+	<h2>Series:</h2>
+	<h1><%= @series.name %></h1>
+	<div id="navigation">
+		<%= link_to 'Edit', edit_series_path(@series) %> |
+		<%= link_to 'Delete', @series, :method => :delete %> | 
+		<%= link_to 'Back', :action => 'index', :controller => 'prognoz_data_files' %>
+	</div>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<table>
+		<tr><td class="label">Prognoz Data File: </td><td><%= @prognoz_data_results[:prognoz_filename] %></td></tr>
+		<tr><td class="label">Sources: </td><td><%= source_list @series.sources, @series.get_source_colors, @series.id %></td></tr>
+<!--		<tr><td class="label">Data: </td><td><%= validate_data_list @prognoz_data_results[:data_matches], @series.mult, @series.get_source_colors %> -->
+</td></tr>
+	</table>
+</div>
+<div style="position:absolute; top:300px;">
+	<%= get_operations_map @series.sources %>
+</div>

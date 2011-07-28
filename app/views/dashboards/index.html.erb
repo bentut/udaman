@@ -1,0 +1,350 @@
+<style>
+
+div#dashboard {position:absolute;}
+div#dashboard div {position:absolute;}
+div#series_summary {top:10px; left:10px; width:290px; padding-top:60px;}
+div#aremos_chart {top:10px; left:300px;}
+div#freq_chart {top:230px; left:10px;}
+div#reg_chart {top:230px; left:210px;}
+div#sa_chart {top:230px; left:410px;}
+
+div#annual_obs_chart {top:400px; left:10px;}
+div#semi_obs_chart {top:400px; left:210px;}
+div#quarterly_obs_chart {top:400px; left:410px;}
+div#monthly_obs_chart {top:400px; left:610px;}
+
+div#annual_mod_chart {top:600px; left:10px;}
+div#semi_mod_chart {top:600px; left:210px;}
+div#quarterly_mod_chart {top:600px; left:410px;}
+div#monthly_mod_chart {top:600px; left:610px;}
+
+div#datasource_summary {top:450px; left:810px;}
+div#loaded_from_update_file_chart {top:400px; left:980px;}
+div#transformations_chart {top:550px; left:810px;}
+
+h1 {font-size:104px; margin:0 0 10px 0; text-align:center;}
+h2 {font-size:60px; margin: 0 0 10px 0; }
+h3 {font-size:40px; margin:0; text-align:center;}
+h4 {font-size:20px; }
+</style>
+<script type="text/javascript">
+// Load the Visualization API and the piechart package.
+google.load('visualization', '1', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.setOnLoadCallback(drawChart);
+
+// Callback that creates and populates a data table, 
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart() {
+
+// AREMOS LOAD SUMMARY///////////
+var aremos_chart_data = new google.visualization.DataTable();
+aremos_chart_data.addColumn('string', 'In DB');
+aremos_chart_data.addColumn('number', 'Number of Series');
+aremos_chart_data.addRows([
+	["In new DB", <%= @in_db %>],["Aremos Only", <%= @not_in_db %>]
+]);
+var aremos_chart = new google.visualization.PieChart(document.getElementById('aremos_chart'))
+	aremos_chart.draw(aremos_chart_data, {
+	width:370, 
+	height:230, 
+	titleTextStyle: {fontSize:18},
+	title:"<%= @aremos_series_count %> AREMOS Series", 
+	pieSliceText:"label", 
+	legend:"none"});
+
+	//sometimes selection will get stuck. Not sure what is causing it. Might want to follow error in 
+	//javascript error console. Or search for error
+	google.visualization.events.addListener(aremos_chart, 'select', function() {
+		selected_slice = aremos_chart.getSelection()[0];
+		selected_category = aremos_chart_data.getFormattedValue(selected_slice.row, 0);
+		selected_value = aremos_chart_data.getFormattedValue(selected_slice.row, 1);
+	  alert('Row: ' + selected_slice.row + "\nColumn: " + selected_slice.column + "\nIn DB: " + selected_category + "\nNumber of Series: " + selected_value);
+	
+	});
+//google.visualization.events.addListener(aremos_chart, 'select', aremos_chart_handler);
+
+// function aremos_chart_handler(e) {
+// 	alert ('something on the chart was selected!');
+// }
+////////////////////////////////
+
+// FREQUENCY CHART////////////
+var freq_chart_data = new google.visualization.DataTable();
+freq_chart_data.addColumn('string', 'Frequency');
+freq_chart_data.addColumn('number', 'Number of Series');
+freq_chart_data.addRows([
+<% @frequency_counts.each do |freq,count| %>
+	["<%= freq %>", <%= count %>],
+<% end %>
+]);
+var freq_chart = new google.visualization.PieChart(document.getElementById('freq_chart')).draw(freq_chart_data, {
+	width:200, 
+	height:200, 
+	title:"Series by Frequency", 
+	pieSliceText:"label", 
+	legend:"none"});
+///////////////////////////////
+
+// REGION CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'Region');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @region_counts.each do |reg,count| %>
+	["<%= reg %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.PieChart(document.getElementById('reg_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"Series by Region", 
+	pieSliceText:"label", 
+	legend:"none"});
+///////////////////////////////
+
+// SEASONALLY ADJUSTED SERIES///////////
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'Seasonally Adjusted');
+data.addColumn('number', 'Number of Series');
+data.addRows([
+	["Seasonally Adjusted", <%= @sa_count %>],["Not Seasonally Adjusted", <%= @series_count-@sa_count %>]
+]);
+new google.visualization.PieChart(document.getElementById('sa_chart')).draw(data, {
+	width:200, 
+	height:200, 
+	title:"Series by Seasonal Adjustment", 
+	pieSliceText:"label", 
+	legend:"none"});
+
+////////////////////////////////
+
+
+// ANNUAL LAST OBSERVATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'observation date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @a_counts[:last_observations].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('annual_obs_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"ANNUAL", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Observation Date"},
+	chartArea: {height:80},
+	colors:['red'],
+	legend:"none"});
+///////////////////////////////
+
+// ANNUAL LAST MODIFICATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'modification date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @a_counts[:last_modifications].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('annual_mod_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"ANNUAL", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Update"},
+	chartArea: {height:80},
+	colors:['blue'],
+	legend:"none"});
+///////////////////////////////
+
+// SEMI ANNUAL LAST OBSERVATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'observation date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @s_counts[:last_observations].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('semi_obs_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"SEMI", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Observation Date"},
+	chartArea: {height:80},
+	colors:['red'],
+	legend:"none"});
+///////////////////////////////
+
+// SEMI ANNUAL LAST MODIFICATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'modification date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @s_counts[:last_modifications].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('semi_mod_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"SEMI", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Update"},
+	chartArea: {height:80},
+	colors:['blue'],
+	legend:"none"});
+///////////////////////////////
+
+// QUARTERLY LAST OBSERVATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'observation date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @q_counts[:last_observations].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('quarterly_obs_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"QUARTERLY", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Observation Date"},
+	chartArea: {height:80},
+	colors:['red'],
+	legend:"none"});
+///////////////////////////////
+
+// QUARTERLY LAST MODIFICATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'modification date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @q_counts[:last_modifications].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('quarterly_mod_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"QUARTERLY", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Update"},
+	chartArea: {height:80},
+	colors:['blue'],
+	legend:"none"});
+///////////////////////////////
+
+// MONTHLY LAST OBSERVATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'observation date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @m_counts[:last_observations].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('monthly_obs_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"MONTHLY", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Observation Date"},
+	chartArea: {height:80},
+	colors:['red'],
+	legend:"none"});
+///////////////////////////////
+
+// MONTHLY LAST MODIFICATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'modification date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @m_counts[:last_modifications].sort.reverse.each do |obs_date,count| %>
+	["<%= obs_date %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.ColumnChart(document.getElementById('monthly_mod_chart')).draw(data_reg, {
+	width:200, 
+	height:200, 
+	title:"MONTHLY", 
+	titleTextStyle: {fontSize:12},
+	hAxis: {slantedTextAngle:55, slantedText:true, title:"Last Update"},
+	chartArea: {height:80},
+	colors:['blue'],
+	legend:"none"});
+///////////////////////////////
+
+// LOADED VS TRANFORMATIONS SERIES///////////
+var data = new google.visualization.DataTable();
+data.addColumn('string', 'Loaded from File');
+data.addColumn('number', 'Number of Series');
+data.addRows([
+	["Loaded From File", <%= @load_count %>],["Transformations", <%= @data_source_count-@load_count %>]
+]);
+new google.visualization.PieChart(document.getElementById('loaded_from_update_file_chart')).draw(data, {
+	width:200, 
+	height:150, 
+	title:"Loaded from File vs Transformations Series", 
+	pieSliceText:"label", 
+	legend:"none"});
+
+////////////////////////////////
+
+// TRANSFORMATIONS CHART////////////
+var data_reg = new google.visualization.DataTable();
+data_reg.addColumn('string', 'modification date');
+data_reg.addColumn('number', 'Number of Series');
+data_reg.addRows([
+<% @type_buckets.each do |type,count| %>
+	["<%= type %>", <%= count %>],
+<% end %>
+]);
+new google.visualization.BarChart(document.getElementById('transformations_chart')).draw(data_reg, {
+	width:390, 
+	height:250, 
+	chartArea: {width:150},
+	title:"Transformation Type", 
+	hAxis: {title: 'Number of Series'},
+	colors:['green'],
+	legend:"none"});
+///////////////////////////////
+
+}
+</script>
+​
+<div id="dashboard">
+
+<div id="series_summary">
+<h1><%= @series_count %></h1>
+<h3>Time Series</h3>
+</div>
+
+<div id="aremos_chart"></div>
+<div id="freq_chart"></div>
+<div id="reg_chart"></div>
+<div id="sa_chart"></div>
+
+<div id="annual_obs_chart"></div>
+<div id="annual_mod_chart"></div>
+<div id="semi_obs_chart"></div>
+<div id="semi_mod_chart"></div>
+<div id="quarterly_obs_chart"></div>
+<div id="quarterly_mod_chart"></div>
+<div id="monthly_obs_chart"></div>
+<div id="monthly_mod_chart"></div>
+
+<div id="datasource_summary">
+	<h2><%= @data_source_count %></h2>
+	<h4>Datasources</h4>
+</div>
+<div id="loaded_from_update_file_chart"></div>
+<div id="transformations_chart"></div>
+</div>
