@@ -57,7 +57,7 @@ class PrognozDataFile < ActiveRecord::Base
   end
   
   def prognoz_output_path
-    "/Users/btrevino/Documents/Dev/uhero_db/spec/datafiles/test_output/"
+    "#{ENV["DATAFILES_PATH"]}/datafiles/test_output/"
   end
   
   def create_output_folder
