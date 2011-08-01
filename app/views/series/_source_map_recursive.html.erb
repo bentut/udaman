@@ -1,0 +1,50 @@
+<!-- #def render_operations_map(source, color, colors, depth, seen) -->
+<!-- #to get it back Time.at(1056030443784/1000.0).strftime("%Y-%m-%d %H:%M.%S") -->
+ 	<td style="background-color:#<%= color %>}"><%= source.description %> <br> 
+	[<%= source.last_run.localtime.strftime("%Y-%m-%d %H:%M:%S") %>]</td>
+
+<% if depth <= 6 %>
+	<% components = [] %>
+	<% source.description.split(" ").each do |word| %>
+		<% components.push(word) unless word.index('@').nil? %>
+	<% end %>
+  
+  	<% if components.length > 0 %>
+    	<td><table>
+    		<% components.each do |series_name| %>
+      			<% next unless seen.index(series_name).nil? %>
+      			<% seen.push(series_name) %>
+      			<% color = colors.shift rescue color = "FFFFFF" %>
+      			<% series = series_name.ts %>
+      			<% missing = series.prognoz_missing.nil? ? "N/A" : series.prognoz_missing %>
+      			<% diff = series.prognoz_diff.nil? ? "N/A" : series.prognoz_diff %>
+      			<tr>
+					<td style="background-color:#<%= color %>">
+							<%= link_to series_name, {:action => 'show', :id => series.id} %> 				
+							<br>missing:<%= missing %><br>diff:<%= diff %>
+					</td>
+					<td>
+						<table>
+      						<% series.data_sources_by_last_run.each do |ds| %>
+       						<tr>
+								<%= render  :partial => 'source_map_recursive', 
+											:locals => {
+													:source => ds, 
+													:color => color,
+													:colors => colors,
+													:depth => depth + 1,
+													:seen => seen
+														} %>
+								
+								<!-- #render_operations_map ds, color, colors, depth + 1, seen -->
+							</tr>
+      						<% end %>
+      					</table>
+					</td>
+      			</tr>
+    		<% end %>
+    	</table></td>
+	
+	<% end %>
+
+<% end %>

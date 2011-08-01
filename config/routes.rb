@@ -56,7 +56,7 @@ UheroDb::Application.routes.draw do
   resources :prognoz_data_files
   resources :series_data_files
   resources :dashboards
-  root :controller => :series, :action => :index
+  root :to => 'series#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -113,5 +113,5 @@ UheroDb::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
 end

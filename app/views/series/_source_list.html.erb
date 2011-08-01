@@ -1,0 +1,28 @@
+<table>
+	<tr>
+		<th>source&nbsp;date</th>
+		<th>description</th>
+	</tr>
+	<% series.data_sources_by_last_run.each do |ds| %>
+  	<% eval = ds.eval.nil? ? " " : ds.eval.split(" ").join("&nbsp;") %>
+  	<tr style="background-color:#<%= ds.color%>" >
+  		<td><%= ds.last_run.localtime.strftime("%m/%d/%y") %>&nbsp;
+			<span style="color:gray"><%= ds.last_run.localtime.strftime("%H:%M:%S") %></span><br />
+ 
+ 			<%= link_to "load", {   	:controller=> "data_sources", 
+										:action => 'source', 
+										:id => ds.id} unless ds.eval.nil? %>
+
+			&nbsp;|&nbsp;
+			<%= link_to "delete", { 	:controller=> "data_sources", 
+										:action => 'delete', 
+										:id => ds.id}, 
+										:confirm => "Are you sure you want to delete this data soure?" %>
+
+  			&nbsp;
+			<span style="color:gray">(<%= "#{ds.runtime.round(2)}s" unless ds.runtime.nil? %> )</span>
+  		</td>
+		<td><%= linked_version(ds.description) %><br /> <%= eval %></td>
+	</tr>      
+	<% end %>
+</table>

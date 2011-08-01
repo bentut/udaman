@@ -13,7 +13,7 @@ class SeriesController < ApplicationController
 
   def show
     @series = Series.find params[:id]
-    @pdf = PrognozDataFile.find @series.prognoz_data_file_id
+    @pdf = PrognozDataFile.find @series.prognoz_data_file_id unless @series.prognoz_data_file_id.nil?
     #@series.aremos_match
     #@match_results = @series.match_results
     #@series = Series.find params[:id]

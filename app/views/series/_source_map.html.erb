@@ -1,0 +1,17 @@
+<%  #def get_operations_map(sources, series_name) %>
+<% colors = ["FFCC99", "CCFFFF", "99CCFF", "CC99FF", "FFFF99", "CCFFCC", "FF99CC", "CCCCFF", "9999FF", "99FFCC"] %>
+
+<table class = "operations-table">
+	<% series.data_sources_by_last_run.each do |ds| %>
+    <tr> <%= render :partial => 'source_map_recursive', :locals => {
+															:source => ds, 
+															:color => "AAAAAA",
+															:colors => colors,
+															:depth => 0,
+															:seen => [series.name]
+															} %>
+		<% #def render_operations_map(source, color, colors, depth, seen) %>
+		<% #render_operations_map ds, "AAAAAA", colors, 0, [series_name]} %>
+	</tr>
+  <% end %>
+</table>

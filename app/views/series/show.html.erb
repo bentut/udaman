@@ -44,21 +44,11 @@ google.visualization.events.addListener(chart, 'select', function() {
 		<%= link_to 'Edit', edit_series_path(@series) %> |
 		<%= link_to 'Delete', @series, :method => :delete %> | 
 		<%= link_to 'Back', :action => 'index' %>
-<!--
-<img src="<%= GoogleChart.line(@series.data.values).to_url
- %>"/>
--->
 
 <div id="chart_div"></div>
 
 
 	</div>
-	<!--
-	<%= link_to_remote "change replace me block", :update => "replace_me", :url => {:action => "replace_block"} %>
-	<div style="font-size:24px" id="replace_me">
-		Replace Me!
-	</div>
-	-->
 </div>
 <div id="details_mask"></div>
 <div id="details_area">
@@ -70,11 +60,18 @@ google.visualization.events.addListener(chart, 'select', function() {
 		#@match_results[:prognoz_filename] 
 		%></td></tr>
 		<tr><td class="label">Sources: <br />	<%= link_to 'Add', :controller => :data_sources, :action => :new, :series_id => @series.id %>
-		</td><td><%= source_list @series.data_sources_by_last_run, @series.id %></td></tr>
+		</td><td>
+		<%= render :partial => 'source_list', :locals => { :series => @series } %>
+		<%= #source_list @series.data_sources_by_last_run, @series.id 
+		%></td></tr>
 		<!-- ><tr><td class="label">Data: </td><td><%= 
 			#validate_data_list @match_results[:data_matches], @series.mult 
 		%></td></tr> -->
-		<tr><td class="label">Data: </td><td><%= data_list @series %></td></tr>
-		<tr><td class="label">Source Map</td><td><%= get_operations_map @series.data_sources_by_last_run, @series.name %></td></tr>
+		<tr><td class="label">Data: </td><td>
+			<%= render :partial => 'data_points', :locals => {:series => @series}%>
+		</td></tr>
+		<tr><td class="label">Source Map</td><td>
+		<%= render :partial => 'source_map', :locals => {:series => @series} %>
+		</td></tr>
 	</table>
 </div>
