@@ -1,2 +1,35 @@
-<h1>DataSourceDownloads#index</h1>
-<p>Find me in app/views/data_source_downloads/index.html.erb</p>
+<div id="summary_area">
+	<h1 style="font-size:50px">Downloads</h1>
+	<div id="navigation"><%= link_to "Add Download", {:action => 'new' }%></div>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<table>
+		<tr>
+			<th>Test</th>
+			<th>Last Attempt</th>
+			<th>Last Result</th>
+			<th></th>
+			<th></th>
+			<th>Url / Path</th>
+
+		</tr>
+		<% @output_files.each do |download| %>
+		<%
+			time = (download.download_log.count == 0 or download.download_log.nil?) ? "never downloaded" : download.download_log[-1]["time"]
+			status = (download.download_log.count == 0 or download.download_log.nil?) ? "never downloaded" : download.download_log[-1]["status"]
+		%>
+		<tr>
+			<td><%= link_to "download" , {:action => 'download', :id => download.id}%></td>
+			<td><%= time %></td>
+			<td><%= status %></td>
+			<td><%= link_to "edit" , {:action => 'edit', :id => download.id} %></td>
+			<td><%= link_to "delete" ,  download, :method => :delete %></td>
+			<td><%= download.url %><br />
+			<%= download.save_path %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+
+<p>

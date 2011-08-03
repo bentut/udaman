@@ -1,2 +1,19 @@
-<h1>PrognozDataFiles#new</h1>
-<p>Find me in app/views/prognoz_data_files/new.html.erb</p>
+<div id="summary_area">
+	<h1>Add Prognoz Output File</h1>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<% form_for(@output_file) do |f| %>
+		<div class="field">
+			<%= f.label :name %>
+			<%= f.text_field :name %>
+		</div>
+		<div class="field">
+			<%= f.label :filename %>
+			<%= f.text_field :filename %>
+		</div>
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	<% end %>
+</div>

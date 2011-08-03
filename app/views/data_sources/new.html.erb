@@ -1,2 +1,20 @@
-<h1>DataSources#new</h1>
-<p>Find me in app/views/data_sources/new.html.erb</p>
+<div id="summary_area">
+	<h2>Add Data Source <%= @series.name %></h2>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<% form_for(@data_source) do |ds| %>
+		<div class="field">
+			<%= ds.label :eval %>
+			<!-- could also try to add this with javascript -->
+			<%= ds.text_field :eval, :value => (" "), :size => 120 %>
+		</div>
+		<div class="field">
+			<%= @series.name %>
+			<%= ds.text_field :series_id%>
+		</div>
+		<div class="actions">
+			<%= ds.submit %>
+		</div>
+	<% end %>
+</div>

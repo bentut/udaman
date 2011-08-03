@@ -1,2 +1,20 @@
-<h1>PrognozDataFiles#show</h1>
-<p>Find me in app/views/prognoz_data_files/show.html.erb</p>
+<p class="notice"><%= notice %></p>
+
+<div id="summary_area">
+	<h2>Prognoz Output File</h2>
+	<h1><%= @output_file.name %></h1>
+	<div id="navigation">
+		<%= link_to 'Edit', edit_prognoz_data_file_path(@output_file) %> |
+		<%= link_to 'Delete', @output_file, :method => :delete %> | 
+		<%= link_to 'Back', :action => 'index' %>
+	</div>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<table>
+		<tr><td class="label">Path: </td><td><%= @output_file.filename %></td></tr>
+		<tr><td class="label">Frequency: </td><td><%= @output_file.frequency %></td></tr>
+		<tr><td class="label">View Doc: </td><td></td></tr>
+		<tr><td class="label">Series: </td><td><%= series_table @output_file %></td></tr>
+	</table>
+</div>

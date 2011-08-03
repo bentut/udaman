@@ -80,7 +80,6 @@ class DataSource < ActiveRecord::Base
 
     def delete
       series_id = self.series_id
-
       self.data_points.each do |dp|
         dp.delete
       end    

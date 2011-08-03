@@ -1,6 +1,6 @@
 class DataSourceDownloadsController < ApplicationController
   def index
-    @output_files = DataSourceDownload.all :order => :name
+    @output_files = DataSourceDownload.order(:url).all
   end
 
   def new

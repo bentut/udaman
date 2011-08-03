@@ -15,13 +15,13 @@
 		<td><%= "H" unless cdp.history.nil? %></td>
 		<td>
 			<span class='current-datapoint'>
-				<% bgcolor = DataSource.find(cdp.data_source_id).color %>
+				<% bgcolor = DataSource.find(cdp.data_source_id).color rescue "FFF" %>
 				<div class='datapoint current-datapoint' style='background-color:#<%= bgcolor %>'>
 					<%= "%.3f" % cdp.value %>
 				</div>
 				<% series.data_points.where(:current => false, 
 						:date_string => cdp.date_string).sort_by(&:created_at).reverse.each do |dp| %>
-						<% bgcolor = DataSource.find(dp.data_source_id).color %>
+						<% bgcolor = DataSource.find(dp.data_source_id).color rescue "FFF" %>
 						<div class='datapoint' style='background-color:#<%= bgcolor %>'>
 							<%= "%.3f" % dp.value %>
 						</div>

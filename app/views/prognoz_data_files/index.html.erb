@@ -1,2 +1,46 @@
-<h1>PrognozDataFiles#index</h1>
-<p>Find me in app/views/prognoz_data_files/index.html.erb</p>
+<p class="notice"><%= notice %></p>
+<div id="summary_area">
+	<h1>Prognoz Output Files</h1>
+	<div id="navigation"><%= link_to "Add Data File", {:action => 'new' }%></div>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<table>
+		<tr>
+			<th>Frequency</th>
+			<th>Name</th>
+			<th>Path</th>
+			<th></th>
+			<th>Match</th>
+			<th>Off</th>
+			<th>Missing</th>
+			<th></th>
+		</tr>
+		<% @output_files.each do |data_file| %>
+
+		<tr>
+			<td><%= data_file.frequency %></td>
+			<td><%= link_to data_file.name , {:action => 'show', :id => data_file.id} %></td>
+			<td><%= short_path data_file.filename %><br /><%= link_to "output to xls", {:action => 'write_xls', :id => data_file.id} %></td>
+			<td><%= link_to "load file", {:action => 'load_from_file', :id => data_file.id} %></td>
+			<td>
+				<%= 
+					#data_file.series_validated.count 
+				%>
+			n/a</td>
+			<td><span style="color:#fb8a7b">
+				<%= 
+					#data_file.series_covered.count - data_file.series_validated.count 
+				%>n/a</span></td>
+			<td><span style="color:red">
+				<%= 
+					#data_file.series_loaded.count - data_file.series_covered.count 
+				%>n/a
+			</span></td>
+			<td><%= link_to "refresh matches", {:action => 'refresh_matching_series', :id => data_file.id} %></td>
+		</tr>
+		<% end %>
+	</table>
+</div>
+
+<p>

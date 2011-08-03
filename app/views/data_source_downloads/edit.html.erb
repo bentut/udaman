@@ -1,2 +1,30 @@
-<h1>DataSourceDownloads#edit</h1>
-<p>Find me in app/views/data_source_downloads/edit.html.erb</p>
+<div id="summary_area">
+	<h1>Edit Download</h1>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<% form_for(@output_file) do |f| %>
+		<div class="field">
+			<%= f.label :url %>
+			<div id="url_message"></div>
+			<%= f.text_field :url, :size => 100, :onchange => remote_function(:update => "url_message", :url => {:action => 'test_url'}, :with=>"'change_to='+this.value+''") %>
+			
+		</div>
+		
+		<div class="field">
+			<%= f.label :save_path %>
+			<div id="save_path_message"></div>
+			<%= f.text_field :save_path, :size => 100, :onchange => remote_function(:update => "save_path_message", :url => {:action => 'test_save_path'}, :with=>"'change_to='+this.value+''") %>
+		</div>
+		
+		<div class="field">
+			<%= f.label :post_parameters %>
+			<div id="post_parameters_message"></div>
+			<%= f.text_area :post_parameters, :value => (@output_file.post_param_string+" "), :size => "72x20", :onchange => remote_function(:update => "post_parameters_message", :url => {:action => 'test_post_params'}, :with=>"'change_to='+this.value+' '") %>
+		</div>
+	
+		<div class="actions">
+			<%= f.submit %>
+		</div>
+	<% end %>
+</div>
