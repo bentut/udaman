@@ -1,4 +1,8 @@
 UheroDb::Application.routes.draw do
+  root :to => "series#index"
+  
+  devise_for :users
+
   # get "prognoz_data_files/index"
   # 
   # get "prognoz_data_files/new"
@@ -56,7 +60,6 @@ UheroDb::Application.routes.draw do
   resources :prognoz_data_files
   resources :series_data_files
   resources :dashboards
-  root :to => 'series#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

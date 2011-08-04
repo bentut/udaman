@@ -10,6 +10,7 @@ gem 'mysql2', '< 0.3'
 gem 'roo'
 #gem 'fastercsv'
 gem 'httpclient'
+gem 'devise', '1.1.2'
 
 
 # Use unicorn as the web server
