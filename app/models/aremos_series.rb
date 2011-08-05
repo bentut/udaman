@@ -4,7 +4,7 @@ class AremosSeries < ActiveRecord::Base
   
     def AremosSeries.all_names
       all_names_array = []
-      all_names = AremosSeries.fields(:name).all
+      all_names = AremosSeries.select(:name).all
       all_names.each {|as| all_names_array.push(as.name)}
       all_names_array
     end

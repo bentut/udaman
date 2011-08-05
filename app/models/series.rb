@@ -25,10 +25,10 @@ class Series < ActiveRecord::Base
   def Series.last_observation_buckets(frequency)
     obs_buckets = {}
     mod_buckets = {}
-    results = Series.where(:frequency => frequency).fields(:data, :last_updated)
+    results = Series.where(:frequency => frequency).select("data, updated_at")
     results.each do |s|
       last_date = s.last_observation.nil? ? "no data" : s.last_observation[0..6]
-      last_update = s.last_updated.nil? ? "never" : s.last_updated.to_date.to_s[0..6]
+      last_update = s.updated_at.nil? ? "never" : s.updated_at.to_date.to_s[0..6] #.last_updated.nil?
       obs_buckets[last_date] ||= 0
       obs_buckets[last_date] += 1
       mod_buckets[last_update] ||= 0
@@ -39,7 +39,7 @@ class Series < ActiveRecord::Base
   
   def Series.all_names
     all_names_array = []
-    all_names = Series.fields(:name).all
+    all_names = Series.select(:name).all
     all_names.each {|s| all_names_array.push(s.name)}
     all_names_array
   end
@@ -59,7 +59,7 @@ class Series < ActiveRecord::Base
   
   def Series.frequency_hash
     frequency_hash = {}
-    all_names = Series.fields(:name, :frequency)
+    all_names = Series.select("name, frequency")
     all_names.each do |s|
       frequency_hash[s.frequency] ||= []
       frequency_hash[s.frequency].push(s.name)

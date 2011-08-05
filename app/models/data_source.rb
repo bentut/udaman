@@ -28,7 +28,7 @@ class DataSource < ActiveRecord::Base
     #but this should not happen, so not worried
     def DataSource.all_evals
       all_descriptions_array = []
-      all_descriptions = DataSource.fields(:eval).all
+      all_descriptions = DataSource.select(:eval).all
       all_descriptions.each {|ds| all_descriptions_array.push(ds.eval)}
       all_descriptions_array
     end
