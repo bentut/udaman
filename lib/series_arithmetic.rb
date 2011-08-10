@@ -85,7 +85,7 @@ module SeriesArithmetic
   
   def validate_arithmetic(other_series)
     #puts "#{self.name}: #{self.frequency}, other - #{other_series.name}: #{other_series.frequency}"
-    raise SeriesArithmeticException if self.frequency != other_series.frequency
+    raise SeriesArithmeticException if self.frequency.to_s != other_series.frequency.to_s
     raise SeriesArithmeticException if self.frequency.nil? or other_series.frequency.nil?
   end
   
@@ -119,7 +119,8 @@ module SeriesArithmetic
     new_transformation("Annualized Percentage Change of #{name}", new_series_data)
   end
   
-  def annual_sum    
+  def annual_sum
+    #puts "#{self.name}: FREQUENCY: #{self.frequency} - #{self.frequency.class}"    
     raise AnnualAverageException if self.frequency != :month and self.frequency != :quarter and self.frequency != "month" and self.frequency != "quarter"
     new_series_data = {}
     annual_values = aggregate_data_by :year, :sum

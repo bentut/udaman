@@ -1,4 +1,5 @@
 require 'roo'
+require 'csv'
 #require 'fastercsv'
 class DataLoadPattern < ActiveRecord::Base
   def attach_to(series_name)

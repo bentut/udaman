@@ -152,7 +152,7 @@ class Series < ActiveRecord::Base
   end
 
   def Series.store(series_name, series, desc=nil, eval_statement=nil)
-    #t = Time.now
+    t = Time.now
     desc = series.name if desc.nil?
     desc = "Source Series Name is blank" if desc.nil? or desc == ""
     series_to_set = Series.get_or_new series_name
@@ -161,8 +161,9 @@ class Series < ActiveRecord::Base
       :units => series.units,
 #      :last_updated => Time.now
     )
-    series_name.ts.save_source(desc, eval_statement, series.data)
-    #puts "#{"%.2f" % (Time.now - t)} | #{series.data.count} | #{series_name} | #{eval_statement}"
+    source = series_name.ts.save_source(desc, eval_statement, series.data)
+    puts "#{"%.2f" % (Time.now - t)} | #{series.data.count} | #{series_name} | #{eval_statement}"
+    source
   end
 
   def Series.eval(series_name, eval_statement)
@@ -257,9 +258,11 @@ class Series < ActiveRecord::Base
   end
   
   def new_transformation(name, data)
+    frequency = (self.frequency.nil? and name.split(".").count == 2 and name.split("@") == 2 and name.split(".")[1].length == 1) ? Series.frequency_from_code(name[-1]) : self.frequency
+    #puts "NEW TRANFORMATION: #{name} - frequency: #{frequency}"  
     Series.new(
       :name => name,
-      :frequency => self.frequency,
+      :frequency => frequency,
       :data => data
     )
   end
@@ -283,7 +286,7 @@ class Series < ActiveRecord::Base
     raise SeriesReloadException if update_spreadsheet.load_error?
 
     ns_name = self.name.sub("@", "NS@")
-    default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
+#    default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? "Demetra_Results_fa" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     raise SeriesReloadException unless update_spreadsheet.update_formatted?
 
@@ -299,6 +302,8 @@ class Series < ActiveRecord::Base
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? "Demetra_Results_fa" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     raise SeriesReloadException unless update_spreadsheet.update_formatted?
     demetra_series = new_transformation("demetra series", update_spreadsheet.series(ns_name))
+    demetra_series.frequency = update_spreadsheet.frequency
+    self.frequency = update_spreadsheet.frequency
     mean_corrected_demetra_series = demetra_series / demetra_series.annual_sum * ns_name.ts.annual_sum
     new_transformation("mean corrected against #{ns_name} and loaded from #{update_spreadsheet_path}", mean_corrected_demetra_series.data)
   end
@@ -337,7 +342,7 @@ class Series < ActiveRecord::Base
   
   #original version of this function returned data. Then it returned a series. now returns a pattern for later manipulation
   def Series.load_pattern(start, freq, path, sheet, row, col)
-    DataLoadPattern.new(:col=>col, :start_date=>start, :frequency=>freq , :sheet=>sheet, :row=>row, :path=>path)
+    DataLoadPattern.new(:col=>col, :start_date=>start, :frequency=>freq , :worksheet=>sheet, :row=>row, :path=>path)
     #can also attempt to find duplicate of pattern.
   end
   

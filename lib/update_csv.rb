@@ -1,3 +1,4 @@
+require 'csv'
 class UpdateCSV 
   include UpdateCore
   def initialize(update_spreadsheet_name)

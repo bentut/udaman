@@ -15,23 +15,30 @@ end
 task :const_upd_q => :environment do
   require "Spreadsheet"
   path          = "/Volumes/UHEROwork/data/rawdata/Const_QSER_E.xls"
+  path_g        = "/Volumes/UHEROwork/data/rawdata/Const_QSER_G.xls"
   output_path   = "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"
 
-  sox = SeriesOutputXls.new(output_path)#,true)
+  dsd_e   = DataSourceDownload.get path
+  dsd_g   = DataSourceDownload.get path_g
   
-  sox.add "KPGOVNS@HI.Q",     Series.load_pattern("1998-01-01", "Q", path, "E-1", "increment:37:1", 7)
-  sox.add "KNRSDNS@HI.Q",     Series.load_pattern("1982-01-01", "Q", path, "E-3", "block:5:1:4", "repeat:2:5")
-  sox.add "KNRSDSGFNS@HI.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-4", "block:5:1:4", "repeat:2:5")
-  sox.add "KNRSDMLTNS@HI.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-5", "block:5:1:4", "repeat:2:5")
-  sox.add "PICTSGFNS@HON.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-6", "block:6:1:4", "repeat:2:5")
-  sox.add "PICTCONNS@HON.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-7", "block:6:1:4", "repeat:2:5")  
+  if dsd_e.download_changed? || dsd_g.download_changed?
+    sox = SeriesOutputXls.new(output_path)#,true)
   
-  # KNRSDNS@HON.Q G-25
-  # KNRSDNS@HAW.Q G-26
-  # KNRSDNS@MAU.Q G-27
-  # KNRSDNS@KAU.Q G-28
+    sox.add "KPGOVNS@HI.Q",     Series.load_pattern("1998-01-01", "Q", path, "E-1", "increment:37:1", 7)
+    sox.add "KNRSDNS@HI.Q",     Series.load_pattern("1982-01-01", "Q", path, "E-3", "block:5:1:4", "repeat:2:5")
+    sox.add "KNRSDSGFNS@HI.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-4", "block:5:1:4", "repeat:2:5")
+    sox.add "KNRSDMLTNS@HI.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-5", "block:5:1:4", "repeat:2:5")
+    sox.add "PICTSGFNS@HON.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-6", "block:6:1:4", "repeat:2:5")
+    sox.add "PICTCONNS@HON.Q",  Series.load_pattern("1982-01-01", "Q", path, "E-7", "block:6:1:4", "repeat:2:5")  
+  
+    sox.add "KNRSDNS@HON.Q",    Series.load_pattern("1993-01-01", "Q", path_g, "G-25", "block:6:1:4", "repeat:2:5")
+    sox.add "KNRSDNS@HAW.Q",    Series.load_pattern("1993-01-01", "Q", path_g, "G-26", "block:5:1:4", "repeat:2:5")
+    sox.add "KNRSDNS@MAU.Q",    Series.load_pattern("1993-01-01", "Q", path_g, "G-27", "block:5:1:4", "repeat:2:5")
+    sox.add "KNRSDNS@KAU.Q",    Series.load_pattern("1993-01-01", "Q", path_g, "G-28", "block:5:1:4", "repeat:2:5")
    
-  sox.write_xls
+    sox.write_xls
+    NotificationMailer.deliver_new_download_notification "Quarterly Construction (rake const_upd_q)", sox.output_summary
+  end
 end
 
 task :const_upd_m => :environment do

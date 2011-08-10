@@ -33,7 +33,7 @@ module SeriesAggregation
     
     self.data.keys.each do |date_string|
       date = Date.parse date_string
-      aggregated_data[date.send(frequency_method)] ||= AggregatingArray.new
+      aggregated_data[date.send(frequency_method)] ||= AggregatingArray.new unless self.at(date_string).nil?
       aggregated_data[date.send(frequency_method)].push self.at(date_string) unless self.at(date_string).nil?
     end
     
