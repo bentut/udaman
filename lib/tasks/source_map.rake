@@ -8,157 +8,157 @@ end
 
 task :reconstruct_db => :environment do
     "AVC@KAU.A".ts_append_eval %Q|"AVC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCMNDRMS@KAU.A".ts_append_eval %Q|"YCMNDRMS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNND@KAU.A".ts_append_eval %Q|"YCMNND@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YLAGFFFS@HI.A".ts_append_eval %Q|"YLAGFFFS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLCTBL@HI.A".ts_append_eval %Q|"YLCTBL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLCTHV@HI.A".ts_append_eval %Q|"YLCTHV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YCMNDRMS@KAU.A".ts_append_eval %Q|"YCMNDRMS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNND@KAU.A".ts_append_eval %Q|"YCMNND@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YLAGFFFS@HI.A".ts_append_eval %Q|"YLAGFFFS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTBL@HI.A".ts_append_eval %Q|"YLCTBL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTHV@HI.A".ts_append_eval %Q|"YLCTHV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLMN@HI.A".ts_append_eval %Q|"YLMN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLMN@HI.A".ts_append_eval %Q|"YLMN@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTW@HI.A".ts_append_eval %Q|"YLTW@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLMN@HI.A".ts_append_eval %Q|"YLMN@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTW@HI.A".ts_append_eval %Q|"YLTW@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "GDP_IRS_R@US.A".ts_append_eval %Q|"GDP_IRS_R@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
   "AVCVG@KAU.A".ts_append_eval %Q|"AVCVG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCMNDRMS@HI.A".ts_append_eval %Q|"YCMNDRMS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDBV@HI.A".ts_append_eval %Q|"YCMNNDBV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTSP@HI.A".ts_append_eval %Q|"YCRTSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCAM@HI.A".ts_append_eval %Q|"YCHCAM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCHO@HI.A".ts_append_eval %Q|"YCHCHO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXM@HON.A".ts_append_eval %Q|"YCMNNDXM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDLT@HON.A".ts_append_eval %Q|"YCMNNDLT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCWT@HON.A".ts_append_eval %Q|"YCWT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMV@HON.A".ts_append_eval %Q|"YCRTMV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTEL@HON.A".ts_append_eval %Q|"YCRTEL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFOT@KAU.A".ts_append_eval %Q|"YCAGFFOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTBL@HON.A".ts_append_eval %Q|"YCRTBL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFD@HON.A".ts_append_eval %Q|"YCRTFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTSP@HON.A".ts_append_eval %Q|"YCRTSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMS@HON.A".ts_append_eval %Q|"YCRTMS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTR@HON.A".ts_append_eval %Q|"YCTWTR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTW@HON.A".ts_append_eval %Q|"YCTWTW@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTT@HON.A".ts_append_eval %Q|"YCTWTT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVST@HON.A".ts_append_eval %Q|"YCGVST@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAVR@HAW.A".ts_append_eval %Q|"YCAVR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFA@HAW.A".ts_append_eval %Q|"YCAGFA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_PR@HAW.A".ts_append_eval %Q|"YC_PR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFR@HAW.A".ts_append_eval %Q|"YCRTFR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTOT@HAW.A".ts_append_eval %Q|"YCRTOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFTC@HAW.A".ts_append_eval %Q|"YCIFTC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFICR@HAW.A".ts_append_eval %Q|"YCFICR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRELE@HAW.A".ts_append_eval %Q|"YCRELE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCPS@HAW.A".ts_append_eval %Q|"YCPS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCAM@HAW.A".ts_append_eval %Q|"YCHCAM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCHO@HAW.A".ts_append_eval %Q|"YCHCHO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSPL@HAW.A".ts_append_eval %Q|"YCOSPL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGV@HAW.A".ts_append_eval %Q|"YCGV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVLC@HAW.A".ts_append_eval %Q|"YCGVLC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_NF@KAU.A".ts_append_eval %Q|"YC_NF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTBL@KAU.A".ts_append_eval %Q|"YCCTBL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTSP@KAU.A".ts_append_eval %Q|"YCCTSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRNM@KAU.A".ts_append_eval %Q|"YCMNDRNM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMV@KAU.A".ts_append_eval %Q|"YCMNDRMV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDBV@KAU.A".ts_append_eval %Q|"YCMNNDBV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTSP@KAU.A".ts_append_eval %Q|"YCRTSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTOT@KAU.A".ts_append_eval %Q|"YCRTOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTA@KAU.A".ts_append_eval %Q|"YCTWTA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTW@KAU.A".ts_append_eval %Q|"YCTWTW@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFICR@KAU.A".ts_append_eval %Q|"YCFICR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFISE@KAU.A".ts_append_eval %Q|"YCFISE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERL@KAU.A".ts_append_eval %Q|"YCRERL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCAM@KAU.A".ts_append_eval %Q|"YCHCAM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDBV@MAU.A".ts_append_eval %Q|"YCMNNDBV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXM@MAU.A".ts_append_eval %Q|"YCMNNDXM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDLT@MAU.A".ts_append_eval %Q|"YCMNNDLT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPL@MAU.A".ts_append_eval %Q|"YCMNNDPL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCWT@MAU.A".ts_append_eval %Q|"YCWT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFR@MAU.A".ts_append_eval %Q|"YCRTFR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTBL@MAU.A".ts_append_eval %Q|"YCRTBL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFD@MAU.A".ts_append_eval %Q|"YCRTFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTG@MAU.A".ts_append_eval %Q|"YCTWTG@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSC@MAU.A".ts_append_eval %Q|"YCTWSC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFPB@MAU.A".ts_append_eval %Q|"YCIFPB@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIMO@MAU.A".ts_append_eval %Q|"YCFIMO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIOT@MAU.A".ts_append_eval %Q|"YCFIOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERL@MAU.A".ts_append_eval %Q|"YCRERL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAD@MAU.A".ts_append_eval %Q|"YCAD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHC@MAU.A".ts_append_eval %Q|"YCHC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAF@MAU.A".ts_append_eval %Q|"YCAF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSHH@MAU.A".ts_append_eval %Q|"YCOSHH@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVML@MAU.A".ts_append_eval %Q|"YCGVML@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVST@MAU.A".ts_append_eval %Q|"YCGVST@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAD@HAW.A".ts_append_eval %Q|"YCAD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVFD@HAW.A".ts_append_eval %Q|"YCGVFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVML@HAW.A".ts_append_eval %Q|"YCGVML@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_GVSL@HAW.A".ts_append_eval %Q|"YC_GVSL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMI@KAU.A".ts_append_eval %Q|"YCMI@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDR@KAU.A".ts_append_eval %Q|"YCMNDR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDREL@KAU.A".ts_append_eval %Q|"YCMNDREL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YLAGFFSP@HI.A".ts_append_eval %Q|"YLAGFFSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMIMI@HI.A".ts_append_eval %Q|"YLMIMI@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTSP@HI.A".ts_append_eval %Q|"YLRTSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTGM@HI.A".ts_append_eval %Q|"YLRTGM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWTW@HI.A".ts_append_eval %Q|"YLTWTW@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWTT@HI.A".ts_append_eval %Q|"YLTWTT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWSC@HI.A".ts_append_eval %Q|"YLTWSC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWCU@HI.A".ts_append_eval %Q|"YLTWCU@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWWH@HI.A".ts_append_eval %Q|"YLTWWH@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWTA@HON.A".ts_append_eval %Q|"YLTWTA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YCMNDRMS@HI.A".ts_append_eval %Q|"YCMNDRMS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDBV@HI.A".ts_append_eval %Q|"YCMNNDBV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTSP@HI.A".ts_append_eval %Q|"YCRTSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCAM@HI.A".ts_append_eval %Q|"YCHCAM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCHO@HI.A".ts_append_eval %Q|"YCHCHO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXM@HON.A".ts_append_eval %Q|"YCMNNDXM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDLT@HON.A".ts_append_eval %Q|"YCMNNDLT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCWT@HON.A".ts_append_eval %Q|"YCWT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMV@HON.A".ts_append_eval %Q|"YCRTMV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTEL@HON.A".ts_append_eval %Q|"YCRTEL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFOT@KAU.A".ts_append_eval %Q|"YCAGFFOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTBL@HON.A".ts_append_eval %Q|"YCRTBL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFD@HON.A".ts_append_eval %Q|"YCRTFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTSP@HON.A".ts_append_eval %Q|"YCRTSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMS@HON.A".ts_append_eval %Q|"YCRTMS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTR@HON.A".ts_append_eval %Q|"YCTWTR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTW@HON.A".ts_append_eval %Q|"YCTWTW@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTT@HON.A".ts_append_eval %Q|"YCTWTT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVST@HON.A".ts_append_eval %Q|"YCGVST@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAVR@HAW.A".ts_append_eval %Q|"YCAVR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFA@HAW.A".ts_append_eval %Q|"YCAGFA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_PR@HAW.A".ts_append_eval %Q|"YC_PR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFR@HAW.A".ts_append_eval %Q|"YCRTFR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTOT@HAW.A".ts_append_eval %Q|"YCRTOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFTC@HAW.A".ts_append_eval %Q|"YCIFTC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFICR@HAW.A".ts_append_eval %Q|"YCFICR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRELE@HAW.A".ts_append_eval %Q|"YCRELE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCPS@HAW.A".ts_append_eval %Q|"YCPS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCAM@HAW.A".ts_append_eval %Q|"YCHCAM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCHO@HAW.A".ts_append_eval %Q|"YCHCHO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSPL@HAW.A".ts_append_eval %Q|"YCOSPL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGV@HAW.A".ts_append_eval %Q|"YCGV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVLC@HAW.A".ts_append_eval %Q|"YCGVLC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_NF@KAU.A".ts_append_eval %Q|"YC_NF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTBL@KAU.A".ts_append_eval %Q|"YCCTBL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTSP@KAU.A".ts_append_eval %Q|"YCCTSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRNM@KAU.A".ts_append_eval %Q|"YCMNDRNM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMV@KAU.A".ts_append_eval %Q|"YCMNDRMV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDBV@KAU.A".ts_append_eval %Q|"YCMNNDBV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTSP@KAU.A".ts_append_eval %Q|"YCRTSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTOT@KAU.A".ts_append_eval %Q|"YCRTOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTA@KAU.A".ts_append_eval %Q|"YCTWTA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTW@KAU.A".ts_append_eval %Q|"YCTWTW@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFICR@KAU.A".ts_append_eval %Q|"YCFICR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFISE@KAU.A".ts_append_eval %Q|"YCFISE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERL@KAU.A".ts_append_eval %Q|"YCRERL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCAM@KAU.A".ts_append_eval %Q|"YCHCAM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDBV@MAU.A".ts_append_eval %Q|"YCMNNDBV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXM@MAU.A".ts_append_eval %Q|"YCMNNDXM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDLT@MAU.A".ts_append_eval %Q|"YCMNNDLT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPL@MAU.A".ts_append_eval %Q|"YCMNNDPL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCWT@MAU.A".ts_append_eval %Q|"YCWT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFR@MAU.A".ts_append_eval %Q|"YCRTFR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTBL@MAU.A".ts_append_eval %Q|"YCRTBL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFD@MAU.A".ts_append_eval %Q|"YCRTFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTG@MAU.A".ts_append_eval %Q|"YCTWTG@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSC@MAU.A".ts_append_eval %Q|"YCTWSC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFPB@MAU.A".ts_append_eval %Q|"YCIFPB@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIMO@MAU.A".ts_append_eval %Q|"YCFIMO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIOT@MAU.A".ts_append_eval %Q|"YCFIOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERL@MAU.A".ts_append_eval %Q|"YCRERL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAD@MAU.A".ts_append_eval %Q|"YCAD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHC@MAU.A".ts_append_eval %Q|"YCHC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAF@MAU.A".ts_append_eval %Q|"YCAF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSHH@MAU.A".ts_append_eval %Q|"YCOSHH@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVML@MAU.A".ts_append_eval %Q|"YCGVML@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVST@MAU.A".ts_append_eval %Q|"YCGVST@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAD@HAW.A".ts_append_eval %Q|"YCAD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVFD@HAW.A".ts_append_eval %Q|"YCGVFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVML@HAW.A".ts_append_eval %Q|"YCGVML@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_GVSL@HAW.A".ts_append_eval %Q|"YC_GVSL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMI@KAU.A".ts_append_eval %Q|"YCMI@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDR@KAU.A".ts_append_eval %Q|"YCMNDR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDREL@KAU.A".ts_append_eval %Q|"YCMNDREL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YLAGFFSP@HI.A".ts_append_eval %Q|"YLAGFFSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIMI@HI.A".ts_append_eval %Q|"YLMIMI@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTSP@HI.A".ts_append_eval %Q|"YLRTSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGM@HI.A".ts_append_eval %Q|"YLRTGM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTW@HI.A".ts_append_eval %Q|"YLTWTW@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTT@HI.A".ts_append_eval %Q|"YLTWTT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSC@HI.A".ts_append_eval %Q|"YLTWSC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWCU@HI.A".ts_append_eval %Q|"YLTWCU@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWWH@HI.A".ts_append_eval %Q|"YLTWWH@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTA@HON.A".ts_append_eval %Q|"YLTWTA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "NRBEA@HI.A".ts_append_eval %Q|"NRBEA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "NRBEA@HI.A".ts_append_eval %Q|"NRBEA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "NRBEA@HI.A".ts_append_eval %Q|"NRBEA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVST@HI.A".ts_append_eval %Q|"YLGVST@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLGVST@HI.A".ts_append_eval %Q|"YLGVST@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLGVST@HI.A".ts_append_eval %Q|"YLGVST@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "PMKRCON@HAW.Q".ts_append_eval %Q|"PMKRCON@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
   "PMKRSGF@MAU.Q".ts_append_eval %Q|"PMKRSGF@MAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
-  "YLFISE@HI.A".ts_append_eval %Q|"YLFISE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDPA@HON.A".ts_append_eval %Q|"YLMNNDPA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDPR@HON.A".ts_append_eval %Q|"YLMNNDPR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRWD@HON.A".ts_append_eval %Q|"YLMNDRWD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRNM@HON.A".ts_append_eval %Q|"YLMNDRNM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLCTHV@HAW.A".ts_append_eval %Q|"YLCTHV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTBL@MAU.A".ts_append_eval %Q|"YLRTBL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YLFISE@HI.A".ts_append_eval %Q|"YLFISE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPA@HON.A".ts_append_eval %Q|"YLMNNDPA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPR@HON.A".ts_append_eval %Q|"YLMNNDPR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRWD@HON.A".ts_append_eval %Q|"YLMNDRWD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRNM@HON.A".ts_append_eval %Q|"YLMNDRNM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTHV@HAW.A".ts_append_eval %Q|"YLCTHV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTBL@MAU.A".ts_append_eval %Q|"YLRTBL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "AVLEG@KAU.A".ts_append_eval %Q|"AVLEG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YLTW@HAW.A".ts_append_eval %Q|"YLTW@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YCMNDREL@HI.A".ts_append_eval %Q|"YCMNDREL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YLTW@HAW.A".ts_append_eval %Q|"YLTW@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCMNDREL@HI.A".ts_append_eval %Q|"YCMNDREL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "ANFL@HON.A".ts_append_eval %Q|"ANFL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCRTOT@HI.A".ts_append_eval %Q|"YCRTOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWCU@HI.A".ts_append_eval %Q|"YCTWCU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIF@HI.A".ts_append_eval %Q|"YCIF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFPB@HI.A".ts_append_eval %Q|"YCIFPB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFS@HON.A".ts_append_eval %Q|"YCAGFFFS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFSP@HON.A".ts_append_eval %Q|"YCAGFFSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIOG@HON.A".ts_append_eval %Q|"YCMIOG@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTG@HON.A".ts_append_eval %Q|"YCTWTG@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIMO@HON.A".ts_append_eval %Q|"YCFIMO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIOT@HON.A".ts_append_eval %Q|"YCFIOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERL@HON.A".ts_append_eval %Q|"YCRERL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDREL@HAW.A".ts_append_eval %Q|"YCMNDREL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMV@HAW.A".ts_append_eval %Q|"YCMNDRMV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXP@HAW.A".ts_append_eval %Q|"YCMNNDXP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPA@HAW.A".ts_append_eval %Q|"YCMNNDPA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPR@HAW.A".ts_append_eval %Q|"YCMNNDPR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDCH@HAW.A".ts_append_eval %Q|"YCMNNDCH@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPL@HAW.A".ts_append_eval %Q|"YCMNNDPL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRT@HAW.A".ts_append_eval %Q|"YCRT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAE@HAW.A".ts_append_eval %Q|"YCAE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEMU@HAW.A".ts_append_eval %Q|"YCAEMU@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFFD@HAW.A".ts_append_eval %Q|"YCAFFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSRP@HAW.A".ts_append_eval %Q|"YCOSRP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCWT@KAU.A".ts_append_eval %Q|"YCWT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRT@KAU.A".ts_append_eval %Q|"YCRT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMV@KAU.A".ts_append_eval %Q|"YCRTMV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFD@KAU.A".ts_append_eval %Q|"YCRTFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTT@KAU.A".ts_append_eval %Q|"YCTWTT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSC@KAU.A".ts_append_eval %Q|"YCTWSC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWCU@KAU.A".ts_append_eval %Q|"YCTWCU@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFPB@KAU.A".ts_append_eval %Q|"YCIFPB@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFBC@KAU.A".ts_append_eval %Q|"YCIFBC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAERE@KAU.A".ts_append_eval %Q|"YCAERE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAF@KAU.A".ts_append_eval %Q|"YCAF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSPL@KAU.A".ts_append_eval %Q|"YCOSPL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVML@KAU.A".ts_append_eval %Q|"YCGVML@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YSMNND@HI.A".ts_append_eval %Q|"YSMNND@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDXX@HI.A".ts_append_eval %Q|"YSMNNDXX@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSFI@HI.A".ts_append_eval %Q|"YSFI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSOS@HI.A".ts_append_eval %Q|"YSOS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
+  "YCRTOT@HI.A".ts_append_eval %Q|"YCRTOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWCU@HI.A".ts_append_eval %Q|"YCTWCU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIF@HI.A".ts_append_eval %Q|"YCIF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFPB@HI.A".ts_append_eval %Q|"YCIFPB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFS@HON.A".ts_append_eval %Q|"YCAGFFFS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFSP@HON.A".ts_append_eval %Q|"YCAGFFSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIOG@HON.A".ts_append_eval %Q|"YCMIOG@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTG@HON.A".ts_append_eval %Q|"YCTWTG@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIMO@HON.A".ts_append_eval %Q|"YCFIMO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIOT@HON.A".ts_append_eval %Q|"YCFIOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERL@HON.A".ts_append_eval %Q|"YCRERL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDREL@HAW.A".ts_append_eval %Q|"YCMNDREL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMV@HAW.A".ts_append_eval %Q|"YCMNDRMV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXP@HAW.A".ts_append_eval %Q|"YCMNNDXP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPA@HAW.A".ts_append_eval %Q|"YCMNNDPA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPR@HAW.A".ts_append_eval %Q|"YCMNNDPR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDCH@HAW.A".ts_append_eval %Q|"YCMNNDCH@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPL@HAW.A".ts_append_eval %Q|"YCMNNDPL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRT@HAW.A".ts_append_eval %Q|"YCRT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAE@HAW.A".ts_append_eval %Q|"YCAE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEMU@HAW.A".ts_append_eval %Q|"YCAEMU@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFFD@HAW.A".ts_append_eval %Q|"YCAFFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSRP@HAW.A".ts_append_eval %Q|"YCOSRP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCWT@KAU.A".ts_append_eval %Q|"YCWT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRT@KAU.A".ts_append_eval %Q|"YCRT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMV@KAU.A".ts_append_eval %Q|"YCRTMV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFD@KAU.A".ts_append_eval %Q|"YCRTFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTT@KAU.A".ts_append_eval %Q|"YCTWTT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSC@KAU.A".ts_append_eval %Q|"YCTWSC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWCU@KAU.A".ts_append_eval %Q|"YCTWCU@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFPB@KAU.A".ts_append_eval %Q|"YCIFPB@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFBC@KAU.A".ts_append_eval %Q|"YCIFBC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAERE@KAU.A".ts_append_eval %Q|"YCAERE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAF@KAU.A".ts_append_eval %Q|"YCAF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSPL@KAU.A".ts_append_eval %Q|"YCOSPL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVML@KAU.A".ts_append_eval %Q|"YCGVML@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YSMNND@HI.A".ts_append_eval %Q|"YSMNND@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDXX@HI.A".ts_append_eval %Q|"YSMNNDXX@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSFI@HI.A".ts_append_eval %Q|"YSFI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSOS@HI.A".ts_append_eval %Q|"YSOS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
   "AASU@HI.A".ts_append_eval %Q|"AASU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AAVG@HI.A".ts_append_eval %Q|"AAVG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AACF@HI.A".ts_append_eval %Q|"AACF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -179,34 +179,34 @@ task :reconstruct_db => :environment do
   "ANSU@HAW.A".ts_append_eval %Q|"ANSU@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANCF@MAU.A".ts_append_eval %Q|"ANCF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVCVG@HI.A".ts_append_eval %Q|"AVCVG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCMIOG@HI.A".ts_append_eval %Q|"YCMIOG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTW@HON.A".ts_append_eval %Q|"YCTW@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCUT@HAW.A".ts_append_eval %Q|"YCUT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRCM@HAW.A".ts_append_eval %Q|"YCMNDRCM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFR@HAW.A".ts_append_eval %Q|"YCMNDRFR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNND@HAW.A".ts_append_eval %Q|"YCMNND@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDBV@HAW.A".ts_append_eval %Q|"YCMNNDBV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPT@HAW.A".ts_append_eval %Q|"YCMNNDPT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERE@HAW.A".ts_append_eval %Q|"YCRERE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCSO@HAW.A".ts_append_eval %Q|"YCHCSO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEPF@HAW.A".ts_append_eval %Q|"YCAEPF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIMI@KAU.A".ts_append_eval %Q|"YCMIMI@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRTR@KAU.A".ts_append_eval %Q|"YCMNDRTR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YCMIOG@HI.A".ts_append_eval %Q|"YCMIOG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTW@HON.A".ts_append_eval %Q|"YCTW@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCUT@HAW.A".ts_append_eval %Q|"YCUT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRCM@HAW.A".ts_append_eval %Q|"YCMNDRCM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFR@HAW.A".ts_append_eval %Q|"YCMNDRFR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNND@HAW.A".ts_append_eval %Q|"YCMNND@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDBV@HAW.A".ts_append_eval %Q|"YCMNNDBV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPT@HAW.A".ts_append_eval %Q|"YCMNNDPT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERE@HAW.A".ts_append_eval %Q|"YCRERE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCSO@HAW.A".ts_append_eval %Q|"YCHCSO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEPF@HAW.A".ts_append_eval %Q|"YCAEPF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIMI@KAU.A".ts_append_eval %Q|"YCMIMI@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRTR@KAU.A".ts_append_eval %Q|"YCMNDRTR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "YWAGE@HI.A".ts_append_eval %Q|"YWAGE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YWAGE@HI.A".ts_append_eval %Q|"YWAGE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTHC@HI.A".ts_append_eval %Q|"YLRTHC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTGA@HI.A".ts_append_eval %Q|"YLRTGA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWTA@HI.A".ts_append_eval %Q|"YLTWTA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWTR@HI.A".ts_append_eval %Q|"YLTWTR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWTG@HI.A".ts_append_eval %Q|"YLTWTG@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFTC@HI.A".ts_append_eval %Q|"YLIFTC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLFIIN@HI.A".ts_append_eval %Q|"YLFIIN@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YWAGE@HI.A".ts_append_eval %Q|"YWAGE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTHC@HI.A".ts_append_eval %Q|"YLRTHC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGA@HI.A".ts_append_eval %Q|"YLRTGA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTA@HI.A".ts_append_eval %Q|"YLTWTA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTR@HI.A".ts_append_eval %Q|"YLTWTR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTG@HI.A".ts_append_eval %Q|"YLTWTG@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFTC@HI.A".ts_append_eval %Q|"YLIFTC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIIN@HI.A".ts_append_eval %Q|"YLFIIN@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLRE@HI.A".ts_append_eval %Q|"YLRE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLRE@HI.A".ts_append_eval %Q|"YLRE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLRE@HI.A".ts_append_eval %Q|"YLRE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLPS@HI.A".ts_append_eval %Q|"YLPS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLPS@HI.A".ts_append_eval %Q|"YLPS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDPR@HAW.A".ts_append_eval %Q|"YLMNNDPR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNNDPT@HAW.A".ts_append_eval %Q|"YLMNNDPT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YLPS@HI.A".ts_append_eval %Q|"YLPS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPR@HAW.A".ts_append_eval %Q|"YLMNNDPR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPT@HAW.A".ts_append_eval %Q|"YLMNNDPT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "GDP_CS_R@US.A".ts_append_eval %Q|"GDP_CS_R@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
   "YPCDPI_R@US.A".ts_append_eval %Q|"YPCDPI_R@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
   "YLPMNCH&@HAW.A".ts_append_eval %Q|"YLPMNCH&@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -214,18 +214,18 @@ task :reconstruct_db => :environment do
   "PMKRCON@HON.Q".ts_append_eval %Q|"PMKRCON@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
   "PMKRSGF@HAW.Q".ts_append_eval %Q|"PMKRSGF@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
   "PAKRCON@HAW.Q".ts_append_eval %Q|"PAKRCON@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
-  "YLRTMV@HON.A".ts_append_eval %Q|"YLRTMV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTFR@HON.A".ts_append_eval %Q|"YLRTFR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLHCHO@HON.A".ts_append_eval %Q|"YLHCHO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTWSP@KAU.A".ts_append_eval %Q|"YLTWSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLRTMV@HON.A".ts_append_eval %Q|"YLRTMV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFR@HON.A".ts_append_eval %Q|"YLRTFR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCHO@HON.A".ts_append_eval %Q|"YLHCHO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSP@KAU.A".ts_append_eval %Q|"YLTWSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YTRNSF@HI.A".ts_append_eval %Q|"YTRNSF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YTRNSF@HI.A".ts_append_eval %Q|"YTRNSF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YTRNSF@HI.A".ts_append_eval %Q|"YTRNSF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGV@HI.A".ts_append_eval %Q|"YLGV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLGV@HI.A".ts_append_eval %Q|"YLGV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRNM@HI.A".ts_append_eval %Q|"YLMNDRNM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRPM@HI.A".ts_append_eval %Q|"YLMNDRPM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRFB@HI.A".ts_append_eval %Q|"YLMNDRFB@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRMC@HI.A".ts_append_eval %Q|"YLMNDRMC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLGV@HI.A".ts_append_eval %Q|"YLGV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRNM@HI.A".ts_append_eval %Q|"YLMNDRNM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRPM@HI.A".ts_append_eval %Q|"YLMNDRPM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFB@HI.A".ts_append_eval %Q|"YLMNDRFB@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMC@HI.A".ts_append_eval %Q|"YLMNDRMC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YOTLAB&@HI.A".ts_append_eval %Q|"YOTLAB&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
    "PCCM_FB@HON.S".ts_append_eval %Q|"PCCM_FB@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "PCAP@HON.S".ts_append_eval %Q|"PCAP@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
@@ -234,32 +234,32 @@ task :reconstruct_db => :environment do
    "PCMD@HON.S".ts_append_eval %Q|"PCMD@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "PCTRGSPR@HON.S".ts_append_eval %Q|"PCTRGSPR@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "PCCMDR@HON.S".ts_append_eval %Q|"PCCMDR@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
-  "YLMNDR@HI.Q".ts_append_eval %Q|"YLMNDR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-  "YLCTBL@HON.A".ts_append_eval %Q|"YLCTBL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLCTSP@HON.A".ts_append_eval %Q|"YLCTSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRFB@HON.A".ts_append_eval %Q|"YLMNDRFB@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRMC@HON.A".ts_append_eval %Q|"YLMNDRMC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLAGFFFO@HAW.A".ts_append_eval %Q|"YLAGFFFO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAGFFFS@HAW.A".ts_append_eval %Q|"YLAGFFFS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMIMI@HAW.A".ts_append_eval %Q|"YLMIMI@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLCTBL@HAW.A".ts_append_eval %Q|"YLCTBL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLCTSP@HAW.A".ts_append_eval %Q|"YLCTSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLTWTR@HAW.A".ts_append_eval %Q|"YLTWTR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLTWTG@HAW.A".ts_append_eval %Q|"YLTWTG@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YSOCSECPR@MAU.A".ts_append_eval %Q|"YSOCSECPR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YSOCSECEM@MAU.A".ts_append_eval %Q|"YSOCSECEM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRTFR@MAU.A".ts_append_eval %Q|"YLRTFR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRTFD@MAU.A".ts_append_eval %Q|"YLRTFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRTHC@MAU.A".ts_append_eval %Q|"YLRTHC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YSOCSECPR@KAU.A".ts_append_eval %Q|"YSOCSECPR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YSOCSECEM@KAU.A".ts_append_eval %Q|"YSOCSECEM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNNDLT@KAU.A".ts_append_eval %Q|"YLMNNDLT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNNDPA@KAU.A".ts_append_eval %Q|"YLMNNDPA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNNDPR@KAU.A".ts_append_eval %Q|"YLMNNDPR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNNDPT@KAU.A".ts_append_eval %Q|"YLMNNDPT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNNDCH@KAU.A".ts_append_eval %Q|"YLMNNDCH@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNNDPL@KAU.A".ts_append_eval %Q|"YLMNNDPL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTMV@KAU.A".ts_append_eval %Q|"YLRTMV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLMNDR@HI.Q".ts_append_eval %Q|"YLMNDR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+  "YLCTBL@HON.A".ts_append_eval %Q|"YLCTBL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTSP@HON.A".ts_append_eval %Q|"YLCTSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFB@HON.A".ts_append_eval %Q|"YLMNDRFB@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMC@HON.A".ts_append_eval %Q|"YLMNDRMC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFO@HAW.A".ts_append_eval %Q|"YLAGFFFO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFS@HAW.A".ts_append_eval %Q|"YLAGFFFS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIMI@HAW.A".ts_append_eval %Q|"YLMIMI@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTBL@HAW.A".ts_append_eval %Q|"YLCTBL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTSP@HAW.A".ts_append_eval %Q|"YLCTSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTR@HAW.A".ts_append_eval %Q|"YLTWTR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTG@HAW.A".ts_append_eval %Q|"YLTWTG@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECPR@MAU.A".ts_append_eval %Q|"YSOCSECPR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECEM@MAU.A".ts_append_eval %Q|"YSOCSECEM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFR@MAU.A".ts_append_eval %Q|"YLRTFR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFD@MAU.A".ts_append_eval %Q|"YLRTFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTHC@MAU.A".ts_append_eval %Q|"YLRTHC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECPR@KAU.A".ts_append_eval %Q|"YSOCSECPR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECEM@KAU.A".ts_append_eval %Q|"YSOCSECEM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDLT@KAU.A".ts_append_eval %Q|"YLMNNDLT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPA@KAU.A".ts_append_eval %Q|"YLMNNDPA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPR@KAU.A".ts_append_eval %Q|"YLMNNDPR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPT@KAU.A".ts_append_eval %Q|"YLMNNDPT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDCH@KAU.A".ts_append_eval %Q|"YLMNNDCH@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPL@KAU.A".ts_append_eval %Q|"YLMNNDPL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMV@KAU.A".ts_append_eval %Q|"YLRTMV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "NRBEA&@HI.A".ts_append_eval %Q|"NRBEA&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YPCBEA&@HI.A".ts_append_eval %Q|"YPCBEA&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLP&@HI.A".ts_append_eval %Q|"YLP&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -386,7 +386,7 @@ task :reconstruct_db => :environment do
   "YLPSVED&@KAU.A".ts_append_eval %Q|"YLPSVED&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPSVMU&@KAU.A".ts_append_eval %Q|"YLPSVMU&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPSVEN&@KAU.A".ts_append_eval %Q|"YLPSVEN&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
-  "YC_PR@MAU.A".ts_append_eval %Q|"YC_PR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YC_PR@MAU.A".ts_append_eval %Q|"YC_PR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "NDEA@HAW.A".ts_append_eval %Q|"NDEA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/census/update/census_upd_reformatted.xls"|
   "AAMC@HON.A".ts_append_eval %Q|"AAMC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANFL@HAW.A".ts_append_eval %Q|"ANFL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -398,9 +398,9 @@ task :reconstruct_db => :environment do
   "ANFR@MAU.A".ts_append_eval %Q|"ANFR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANVG@KAU.A".ts_append_eval %Q|"ANVG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANFR@HAW.A".ts_append_eval %Q|"ANFR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YLRE@MAU.A".ts_append_eval %Q|"YLRE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAGFFOT@HON.A".ts_append_eval %Q|"YLAGFFOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNND@KAU.A".ts_append_eval %Q|"YLMNND@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLRE@MAU.A".ts_append_eval %Q|"YLRE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFOT@HON.A".ts_append_eval %Q|"YLAGFFOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNND@KAU.A".ts_append_eval %Q|"YLMNND@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "KVIHST@KAU.A".ts_append_eval %Q|"KVIHST@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "KVT@KAU.A".ts_append_eval %Q|"KVT@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "KVI@KAU.A".ts_append_eval %Q|"KVI@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
@@ -416,7 +416,7 @@ task :reconstruct_db => :environment do
   "ROINTNS@KAU.A".ts_append_eval %Q|"ROINTNS@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "ROITGNS@KAU.A".ts_append_eval %Q|"ROITGNS@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "Y@MAU.A".ts_append_eval %Q|"Y@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-  "Y@MAU.A".ts_append_eval %Q|"Y@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "Y@MAU.A".ts_append_eval %Q|"Y@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "ANTR@HAW.A".ts_append_eval %Q|"ANTR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANTR@HON.A".ts_append_eval %Q|"ANTR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANMC@KAU.A".ts_append_eval %Q|"ANMC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -427,94 +427,94 @@ task :reconstruct_db => :environment do
   "AVLHG@KAU.A".ts_append_eval %Q|"AVLHG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVL@KAU.A".ts_append_eval %Q|"AVL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVA@MAU.A".ts_append_eval %Q|"AVA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCMNNDAP@HI.A".ts_append_eval %Q|"YCMNNDAP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC@HI.A".ts_append_eval %Q|"YC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAVR@HI.A".ts_append_eval %Q|"YCAVR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFA@HI.A".ts_append_eval %Q|"YCAGFA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_NF@HI.A".ts_append_eval %Q|"YC_NF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_PR@HI.A".ts_append_eval %Q|"YC_PR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFF@HI.A".ts_append_eval %Q|"YCAGFF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFS@HI.A".ts_append_eval %Q|"YCAGFFFS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFSP@HI.A".ts_append_eval %Q|"YCAGFFSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRTR@HI.A".ts_append_eval %Q|"YCMNDRTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFR@HI.A".ts_append_eval %Q|"YCMNDRFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNND@HI.A".ts_append_eval %Q|"YCMNND@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXM@HI.A".ts_append_eval %Q|"YCMNNDXM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDLT@HI.A".ts_append_eval %Q|"YCMNNDLT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDCH@HI.A".ts_append_eval %Q|"YCMNNDCH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRT@HI.A".ts_append_eval %Q|"YCRT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMV@HI.A".ts_append_eval %Q|"YCRTMV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTA@HI.A".ts_append_eval %Q|"YCTWTA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTR@HI.A".ts_append_eval %Q|"YCTWTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTW@HI.A".ts_append_eval %Q|"YCTWTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTG@HI.A".ts_append_eval %Q|"YCTWTG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWPL@HI.A".ts_append_eval %Q|"YCTWPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSC@HI.A".ts_append_eval %Q|"YCTWSC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRE@HI.A".ts_append_eval %Q|"YCRE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERE@HI.A".ts_append_eval %Q|"YCRERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERL@HI.A".ts_append_eval %Q|"YCRERL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCPS@HI.A".ts_append_eval %Q|"YCPS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMA@HI.A".ts_append_eval %Q|"YCMA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADWM@HI.A".ts_append_eval %Q|"YCADWM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCED@HI.A".ts_append_eval %Q|"YCED@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHC@HI.A".ts_append_eval %Q|"YCHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCNR@HI.A".ts_append_eval %Q|"YCHCNR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAE@HI.A".ts_append_eval %Q|"YCAE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEMU@HI.A".ts_append_eval %Q|"YCAEMU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAERE@HI.A".ts_append_eval %Q|"YCAERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFFD@HI.A".ts_append_eval %Q|"YCAFFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSRP@HI.A".ts_append_eval %Q|"YCOSRP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSPL@HI.A".ts_append_eval %Q|"YCOSPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSMA@HI.A".ts_append_eval %Q|"YCOSMA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSHH@HI.A".ts_append_eval %Q|"YCOSHH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGV@HI.A".ts_append_eval %Q|"YCGV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVLC@HI.A".ts_append_eval %Q|"YCGVLC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_NF@HON.A".ts_append_eval %Q|"YC_NF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFF@HON.A".ts_append_eval %Q|"YCAGFF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMISP@HON.A".ts_append_eval %Q|"YCMISP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTBL@HON.A".ts_append_eval %Q|"YCCTBL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHC@HON.A".ts_append_eval %Q|"YCHC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAF@HON.A".ts_append_eval %Q|"YCAF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSHH@HON.A".ts_append_eval %Q|"YCOSHH@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVML@HON.A".ts_append_eval %Q|"YCGVML@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCT@HAW.A".ts_append_eval %Q|"YCCT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTSP@HAW.A".ts_append_eval %Q|"YCCTSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRWD@HAW.A".ts_append_eval %Q|"YCMNDRWD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFB@HAW.A".ts_append_eval %Q|"YCMNDRFB@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFBC@HAW.A".ts_append_eval %Q|"YCIFBC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_PR@KAU.A".ts_append_eval %Q|"YC_PR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFF@KAU.A".ts_append_eval %Q|"YCAGFF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFO@KAU.A".ts_append_eval %Q|"YCAGFFFO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMISP@KAU.A".ts_append_eval %Q|"YCMISP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCT@KAU.A".ts_append_eval %Q|"YCCT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_NF@MAU.A".ts_append_eval %Q|"YC_NF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFF@MAU.A".ts_append_eval %Q|"YCAGFF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFO@MAU.A".ts_append_eval %Q|"YCAGFFFO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFSP@MAU.A".ts_append_eval %Q|"YCAGFFSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFOT@MAU.A".ts_append_eval %Q|"YCAGFFOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIOG@MAU.A".ts_append_eval %Q|"YCMIOG@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIMI@MAU.A".ts_append_eval %Q|"YCMIMI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMISP@MAU.A".ts_append_eval %Q|"YCMISP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRNM@MAU.A".ts_append_eval %Q|"YCMNDRNM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMS@MAU.A".ts_append_eval %Q|"YCRTMS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTA@MAU.A".ts_append_eval %Q|"YCTWTA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTW@MAU.A".ts_append_eval %Q|"YCTWTW@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTT@MAU.A".ts_append_eval %Q|"YCTWTT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YSMISP@HI.A".ts_append_eval %Q|"YSMISP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSUT@HI.A".ts_append_eval %Q|"YSUT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRNM@HI.A".ts_append_eval %Q|"YSMNDRNM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRFB@HI.A".ts_append_eval %Q|"YSMNDRFB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDFD@HI.A".ts_append_eval %Q|"YSMNNDFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDPR@HI.A".ts_append_eval %Q|"YSMNNDPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWTR@HI.A".ts_append_eval %Q|"YSTWTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWTT@HI.A".ts_append_eval %Q|"YSTWTT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWTG@HI.A".ts_append_eval %Q|"YSTWTG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWSP@HI.A".ts_append_eval %Q|"YSTWSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSIFPB@HI.A".ts_append_eval %Q|"YSIFPB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSPS@HI.A".ts_append_eval %Q|"YSPS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAE@HI.A".ts_append_eval %Q|"YSAE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAFFD@HI.A".ts_append_eval %Q|"YSAFFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSGVML@HI.A".ts_append_eval %Q|"YSGVML@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
+  "YCMNNDAP@HI.A".ts_append_eval %Q|"YCMNNDAP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC@HI.A".ts_append_eval %Q|"YC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAVR@HI.A".ts_append_eval %Q|"YCAVR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFA@HI.A".ts_append_eval %Q|"YCAGFA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_NF@HI.A".ts_append_eval %Q|"YC_NF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_PR@HI.A".ts_append_eval %Q|"YC_PR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFF@HI.A".ts_append_eval %Q|"YCAGFF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFS@HI.A".ts_append_eval %Q|"YCAGFFFS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFSP@HI.A".ts_append_eval %Q|"YCAGFFSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRTR@HI.A".ts_append_eval %Q|"YCMNDRTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFR@HI.A".ts_append_eval %Q|"YCMNDRFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNND@HI.A".ts_append_eval %Q|"YCMNND@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXM@HI.A".ts_append_eval %Q|"YCMNNDXM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDLT@HI.A".ts_append_eval %Q|"YCMNNDLT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDCH@HI.A".ts_append_eval %Q|"YCMNNDCH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRT@HI.A".ts_append_eval %Q|"YCRT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMV@HI.A".ts_append_eval %Q|"YCRTMV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTA@HI.A".ts_append_eval %Q|"YCTWTA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTR@HI.A".ts_append_eval %Q|"YCTWTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTW@HI.A".ts_append_eval %Q|"YCTWTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTG@HI.A".ts_append_eval %Q|"YCTWTG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWPL@HI.A".ts_append_eval %Q|"YCTWPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSC@HI.A".ts_append_eval %Q|"YCTWSC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRE@HI.A".ts_append_eval %Q|"YCRE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERE@HI.A".ts_append_eval %Q|"YCRERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERL@HI.A".ts_append_eval %Q|"YCRERL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCPS@HI.A".ts_append_eval %Q|"YCPS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMA@HI.A".ts_append_eval %Q|"YCMA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADWM@HI.A".ts_append_eval %Q|"YCADWM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCED@HI.A".ts_append_eval %Q|"YCED@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHC@HI.A".ts_append_eval %Q|"YCHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCNR@HI.A".ts_append_eval %Q|"YCHCNR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAE@HI.A".ts_append_eval %Q|"YCAE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEMU@HI.A".ts_append_eval %Q|"YCAEMU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAERE@HI.A".ts_append_eval %Q|"YCAERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFFD@HI.A".ts_append_eval %Q|"YCAFFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSRP@HI.A".ts_append_eval %Q|"YCOSRP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSPL@HI.A".ts_append_eval %Q|"YCOSPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSMA@HI.A".ts_append_eval %Q|"YCOSMA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSHH@HI.A".ts_append_eval %Q|"YCOSHH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGV@HI.A".ts_append_eval %Q|"YCGV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVLC@HI.A".ts_append_eval %Q|"YCGVLC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_NF@HON.A".ts_append_eval %Q|"YC_NF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFF@HON.A".ts_append_eval %Q|"YCAGFF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMISP@HON.A".ts_append_eval %Q|"YCMISP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTBL@HON.A".ts_append_eval %Q|"YCCTBL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHC@HON.A".ts_append_eval %Q|"YCHC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAF@HON.A".ts_append_eval %Q|"YCAF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSHH@HON.A".ts_append_eval %Q|"YCOSHH@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVML@HON.A".ts_append_eval %Q|"YCGVML@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCT@HAW.A".ts_append_eval %Q|"YCCT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTSP@HAW.A".ts_append_eval %Q|"YCCTSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRWD@HAW.A".ts_append_eval %Q|"YCMNDRWD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFB@HAW.A".ts_append_eval %Q|"YCMNDRFB@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFBC@HAW.A".ts_append_eval %Q|"YCIFBC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_PR@KAU.A".ts_append_eval %Q|"YC_PR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFF@KAU.A".ts_append_eval %Q|"YCAGFF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFO@KAU.A".ts_append_eval %Q|"YCAGFFFO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMISP@KAU.A".ts_append_eval %Q|"YCMISP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCT@KAU.A".ts_append_eval %Q|"YCCT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_NF@MAU.A".ts_append_eval %Q|"YC_NF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFF@MAU.A".ts_append_eval %Q|"YCAGFF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFO@MAU.A".ts_append_eval %Q|"YCAGFFFO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFSP@MAU.A".ts_append_eval %Q|"YCAGFFSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFOT@MAU.A".ts_append_eval %Q|"YCAGFFOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIOG@MAU.A".ts_append_eval %Q|"YCMIOG@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIMI@MAU.A".ts_append_eval %Q|"YCMIMI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMISP@MAU.A".ts_append_eval %Q|"YCMISP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRNM@MAU.A".ts_append_eval %Q|"YCMNDRNM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMS@MAU.A".ts_append_eval %Q|"YCRTMS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTA@MAU.A".ts_append_eval %Q|"YCTWTA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTW@MAU.A".ts_append_eval %Q|"YCTWTW@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTT@MAU.A".ts_append_eval %Q|"YCTWTT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YSMISP@HI.A".ts_append_eval %Q|"YSMISP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSUT@HI.A".ts_append_eval %Q|"YSUT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRNM@HI.A".ts_append_eval %Q|"YSMNDRNM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRFB@HI.A".ts_append_eval %Q|"YSMNDRFB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDFD@HI.A".ts_append_eval %Q|"YSMNNDFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDPR@HI.A".ts_append_eval %Q|"YSMNNDPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWTR@HI.A".ts_append_eval %Q|"YSTWTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWTT@HI.A".ts_append_eval %Q|"YSTWTT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWTG@HI.A".ts_append_eval %Q|"YSTWTG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWSP@HI.A".ts_append_eval %Q|"YSTWSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSIFPB@HI.A".ts_append_eval %Q|"YSIFPB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSPS@HI.A".ts_append_eval %Q|"YSPS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAE@HI.A".ts_append_eval %Q|"YSAE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAFFD@HI.A".ts_append_eval %Q|"YSAFFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSGVML@HI.A".ts_append_eval %Q|"YSGVML@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
   "AAFR@HI.A".ts_append_eval %Q|"AAFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AAPI@HAW.A".ts_append_eval %Q|"AAPI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AAVG@HAW.A".ts_append_eval %Q|"AAVG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -543,173 +543,173 @@ task :reconstruct_db => :environment do
   "AVCSU@KAU.A".ts_append_eval %Q|"AVCSU@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVCFL@MAU.A".ts_append_eval %Q|"AVCFL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVLML@HI.A".ts_append_eval %Q|"AVLML@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCCT@HI.A".ts_append_eval %Q|"YCCT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTHV@HI.A".ts_append_eval %Q|"YCCTHV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGM@HI.A".ts_append_eval %Q|"YCRTGM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTT@HI.A".ts_append_eval %Q|"YCTWTT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSP@HI.A".ts_append_eval %Q|"YCTWSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWWH@HI.A".ts_append_eval %Q|"YCTWWH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCUT@HI.A".ts_append_eval %Q|"YCUT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMN@HI.A".ts_append_eval %Q|"YCMN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDR@HI.A".ts_append_eval %Q|"YCMNDR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRWD@HI.A".ts_append_eval %Q|"YCMNDRWD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRNM@HI.A".ts_append_eval %Q|"YCMNDRNM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRCM@HI.A".ts_append_eval %Q|"YCMNDRCM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMV@HI.A".ts_append_eval %Q|"YCMNDRMV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDFD@HI.A".ts_append_eval %Q|"YCMNNDFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXP@HI.A".ts_append_eval %Q|"YCMNNDXP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPT@HI.A".ts_append_eval %Q|"YCMNNDPT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPL@HI.A".ts_append_eval %Q|"YCMNNDPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRELE@HI.A".ts_append_eval %Q|"YCRELE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADAD@HI.A".ts_append_eval %Q|"YCADAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEPF@HI.A".ts_append_eval %Q|"YCAEPF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAF@HI.A".ts_append_eval %Q|"YCAF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFAC@HI.A".ts_append_eval %Q|"YCAFAC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC@HON.A".ts_append_eval %Q|"YC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFA@HON.A".ts_append_eval %Q|"YCAGFA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFOT@HON.A".ts_append_eval %Q|"YCAGFFOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCUT@HON.A".ts_append_eval %Q|"YCUT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTHV@HON.A".ts_append_eval %Q|"YCCTHV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMN@HON.A".ts_append_eval %Q|"YCMN@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRWD@HON.A".ts_append_eval %Q|"YCMNDRWD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRCM@HON.A".ts_append_eval %Q|"YCMNDRCM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMV@HON.A".ts_append_eval %Q|"YCMNDRMV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDFD@HON.A".ts_append_eval %Q|"YCMNNDFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDBV@HON.A".ts_append_eval %Q|"YCMNNDBV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPR@HON.A".ts_append_eval %Q|"YCMNNDPR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPT@HON.A".ts_append_eval %Q|"YCMNNDPT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDCH@HON.A".ts_append_eval %Q|"YCMNNDCH@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPL@HON.A".ts_append_eval %Q|"YCMNNDPL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRT@HON.A".ts_append_eval %Q|"YCRT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTHC@HON.A".ts_append_eval %Q|"YCRTHC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTCL@HON.A".ts_append_eval %Q|"YCRTCL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTOT@HON.A".ts_append_eval %Q|"YCRTOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWPL@HON.A".ts_append_eval %Q|"YCTWPL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSC@HON.A".ts_append_eval %Q|"YCTWSC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIF@HON.A".ts_append_eval %Q|"YCIF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFBC@HON.A".ts_append_eval %Q|"YCIFBC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFIT@HON.A".ts_append_eval %Q|"YCIFIT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFDP@HON.A".ts_append_eval %Q|"YCIFDP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFI@HON.A".ts_append_eval %Q|"YCFI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFICR@HON.A".ts_append_eval %Q|"YCFICR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFISE@HON.A".ts_append_eval %Q|"YCFISE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRE@HON.A".ts_append_eval %Q|"YCRE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMA@HON.A".ts_append_eval %Q|"YCMA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAD@HON.A".ts_append_eval %Q|"YCAD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCED@HON.A".ts_append_eval %Q|"YCED@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEPF@HON.A".ts_append_eval %Q|"YCAEPF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAERE@HON.A".ts_append_eval %Q|"YCAERE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSRP@HON.A".ts_append_eval %Q|"YCOSRP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSPL@HON.A".ts_append_eval %Q|"YCOSPL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVFD@HON.A".ts_append_eval %Q|"YCGVFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_GVSL@HON.A".ts_append_eval %Q|"YC_GVSL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YOTLABPEN@HAW.A".ts_append_eval %Q|"YOTLABPEN@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YC_NF@HAW.A".ts_append_eval %Q|"YC_NF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFF@HAW.A".ts_append_eval %Q|"YCAGFF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFO@HAW.A".ts_append_eval %Q|"YCAGFFFO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFS@HAW.A".ts_append_eval %Q|"YCAGFFFS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFOT@HAW.A".ts_append_eval %Q|"YCAGFFOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMI@HAW.A".ts_append_eval %Q|"YCMI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIOG@HAW.A".ts_append_eval %Q|"YCMIOG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIMI@HAW.A".ts_append_eval %Q|"YCMIMI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMISP@HAW.A".ts_append_eval %Q|"YCMISP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTBL@HAW.A".ts_append_eval %Q|"YCCTBL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTHV@HAW.A".ts_append_eval %Q|"YCCTHV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMN@HAW.A".ts_append_eval %Q|"YCMN@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDR@HAW.A".ts_append_eval %Q|"YCMNDR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRPM@HAW.A".ts_append_eval %Q|"YCMNDRPM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMC@HAW.A".ts_append_eval %Q|"YCMNDRMC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRTR@HAW.A".ts_append_eval %Q|"YCMNDRTR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDFD@HAW.A".ts_append_eval %Q|"YCMNNDFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXM@HAW.A".ts_append_eval %Q|"YCMNNDXM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDAP@HAW.A".ts_append_eval %Q|"YCMNNDAP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDLT@HAW.A".ts_append_eval %Q|"YCMNNDLT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCWT@HAW.A".ts_append_eval %Q|"YCWT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMV@HAW.A".ts_append_eval %Q|"YCRTMV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTEL@HAW.A".ts_append_eval %Q|"YCRTEL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTBL@HAW.A".ts_append_eval %Q|"YCRTBL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFD@HAW.A".ts_append_eval %Q|"YCRTFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTHC@HAW.A".ts_append_eval %Q|"YCRTHC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGA@HAW.A".ts_append_eval %Q|"YCRTGA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTCL@HAW.A".ts_append_eval %Q|"YCRTCL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTSP@HAW.A".ts_append_eval %Q|"YCRTSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGM@HAW.A".ts_append_eval %Q|"YCRTGM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMS@HAW.A".ts_append_eval %Q|"YCRTMS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTW@HAW.A".ts_append_eval %Q|"YCTW@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTA@HAW.A".ts_append_eval %Q|"YCTWTA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTR@HAW.A".ts_append_eval %Q|"YCTWTR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTW@HAW.A".ts_append_eval %Q|"YCTWTW@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWPL@HAW.A".ts_append_eval %Q|"YCTWPL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSC@HAW.A".ts_append_eval %Q|"YCTWSC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWWH@HAW.A".ts_append_eval %Q|"YCTWWH@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIF@HAW.A".ts_append_eval %Q|"YCIF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFPB@HAW.A".ts_append_eval %Q|"YCIFPB@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFDP@HAW.A".ts_append_eval %Q|"YCIFDP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFOT@HAW.A".ts_append_eval %Q|"YCIFOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRE@HAW.A".ts_append_eval %Q|"YCRE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMA@HAW.A".ts_append_eval %Q|"YCMA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADWM@HAW.A".ts_append_eval %Q|"YCADWM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCED@HAW.A".ts_append_eval %Q|"YCED@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHC@HAW.A".ts_append_eval %Q|"YCHC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAERE@HAW.A".ts_append_eval %Q|"YCAERE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAF@HAW.A".ts_append_eval %Q|"YCAF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFAC@HAW.A".ts_append_eval %Q|"YCAFAC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOS@HAW.A".ts_append_eval %Q|"YCOS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSMA@HAW.A".ts_append_eval %Q|"YCOSMA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSHH@HAW.A".ts_append_eval %Q|"YCOSHH@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YOTLABSS@KAU.A".ts_append_eval %Q|"YOTLABSS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YCAGFA@KAU.A".ts_append_eval %Q|"YCAGFA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFS@KAU.A".ts_append_eval %Q|"YCAGFFFS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCUT@KAU.A".ts_append_eval %Q|"YCUT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTHV@KAU.A".ts_append_eval %Q|"YCCTHV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMN@KAU.A".ts_append_eval %Q|"YCMN@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRWD@KAU.A".ts_append_eval %Q|"YCMNDRWD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRPM@KAU.A".ts_append_eval %Q|"YCMNDRPM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFR@KAU.A".ts_append_eval %Q|"YCMNDRFR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YCCT@HI.A".ts_append_eval %Q|"YCCT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTHV@HI.A".ts_append_eval %Q|"YCCTHV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGM@HI.A".ts_append_eval %Q|"YCRTGM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTT@HI.A".ts_append_eval %Q|"YCTWTT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSP@HI.A".ts_append_eval %Q|"YCTWSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWWH@HI.A".ts_append_eval %Q|"YCTWWH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCUT@HI.A".ts_append_eval %Q|"YCUT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMN@HI.A".ts_append_eval %Q|"YCMN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDR@HI.A".ts_append_eval %Q|"YCMNDR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRWD@HI.A".ts_append_eval %Q|"YCMNDRWD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRNM@HI.A".ts_append_eval %Q|"YCMNDRNM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRCM@HI.A".ts_append_eval %Q|"YCMNDRCM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMV@HI.A".ts_append_eval %Q|"YCMNDRMV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDFD@HI.A".ts_append_eval %Q|"YCMNNDFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXP@HI.A".ts_append_eval %Q|"YCMNNDXP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPT@HI.A".ts_append_eval %Q|"YCMNNDPT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPL@HI.A".ts_append_eval %Q|"YCMNNDPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRELE@HI.A".ts_append_eval %Q|"YCRELE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADAD@HI.A".ts_append_eval %Q|"YCADAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEPF@HI.A".ts_append_eval %Q|"YCAEPF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAF@HI.A".ts_append_eval %Q|"YCAF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFAC@HI.A".ts_append_eval %Q|"YCAFAC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC@HON.A".ts_append_eval %Q|"YC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFA@HON.A".ts_append_eval %Q|"YCAGFA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFOT@HON.A".ts_append_eval %Q|"YCAGFFOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCUT@HON.A".ts_append_eval %Q|"YCUT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTHV@HON.A".ts_append_eval %Q|"YCCTHV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMN@HON.A".ts_append_eval %Q|"YCMN@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRWD@HON.A".ts_append_eval %Q|"YCMNDRWD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRCM@HON.A".ts_append_eval %Q|"YCMNDRCM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMV@HON.A".ts_append_eval %Q|"YCMNDRMV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDFD@HON.A".ts_append_eval %Q|"YCMNNDFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDBV@HON.A".ts_append_eval %Q|"YCMNNDBV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPR@HON.A".ts_append_eval %Q|"YCMNNDPR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPT@HON.A".ts_append_eval %Q|"YCMNNDPT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDCH@HON.A".ts_append_eval %Q|"YCMNNDCH@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPL@HON.A".ts_append_eval %Q|"YCMNNDPL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRT@HON.A".ts_append_eval %Q|"YCRT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTHC@HON.A".ts_append_eval %Q|"YCRTHC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTCL@HON.A".ts_append_eval %Q|"YCRTCL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTOT@HON.A".ts_append_eval %Q|"YCRTOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWPL@HON.A".ts_append_eval %Q|"YCTWPL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSC@HON.A".ts_append_eval %Q|"YCTWSC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIF@HON.A".ts_append_eval %Q|"YCIF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFBC@HON.A".ts_append_eval %Q|"YCIFBC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFIT@HON.A".ts_append_eval %Q|"YCIFIT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFDP@HON.A".ts_append_eval %Q|"YCIFDP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFI@HON.A".ts_append_eval %Q|"YCFI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFICR@HON.A".ts_append_eval %Q|"YCFICR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFISE@HON.A".ts_append_eval %Q|"YCFISE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRE@HON.A".ts_append_eval %Q|"YCRE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMA@HON.A".ts_append_eval %Q|"YCMA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAD@HON.A".ts_append_eval %Q|"YCAD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCED@HON.A".ts_append_eval %Q|"YCED@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEPF@HON.A".ts_append_eval %Q|"YCAEPF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAERE@HON.A".ts_append_eval %Q|"YCAERE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSRP@HON.A".ts_append_eval %Q|"YCOSRP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSPL@HON.A".ts_append_eval %Q|"YCOSPL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVFD@HON.A".ts_append_eval %Q|"YCGVFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_GVSL@HON.A".ts_append_eval %Q|"YC_GVSL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YOTLABPEN@HAW.A".ts_append_eval %Q|"YOTLABPEN@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YC_NF@HAW.A".ts_append_eval %Q|"YC_NF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFF@HAW.A".ts_append_eval %Q|"YCAGFF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFO@HAW.A".ts_append_eval %Q|"YCAGFFFO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFS@HAW.A".ts_append_eval %Q|"YCAGFFFS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFOT@HAW.A".ts_append_eval %Q|"YCAGFFOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMI@HAW.A".ts_append_eval %Q|"YCMI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIOG@HAW.A".ts_append_eval %Q|"YCMIOG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIMI@HAW.A".ts_append_eval %Q|"YCMIMI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMISP@HAW.A".ts_append_eval %Q|"YCMISP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTBL@HAW.A".ts_append_eval %Q|"YCCTBL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTHV@HAW.A".ts_append_eval %Q|"YCCTHV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMN@HAW.A".ts_append_eval %Q|"YCMN@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDR@HAW.A".ts_append_eval %Q|"YCMNDR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRPM@HAW.A".ts_append_eval %Q|"YCMNDRPM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMC@HAW.A".ts_append_eval %Q|"YCMNDRMC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRTR@HAW.A".ts_append_eval %Q|"YCMNDRTR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDFD@HAW.A".ts_append_eval %Q|"YCMNNDFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXM@HAW.A".ts_append_eval %Q|"YCMNNDXM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDAP@HAW.A".ts_append_eval %Q|"YCMNNDAP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDLT@HAW.A".ts_append_eval %Q|"YCMNNDLT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCWT@HAW.A".ts_append_eval %Q|"YCWT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMV@HAW.A".ts_append_eval %Q|"YCRTMV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTEL@HAW.A".ts_append_eval %Q|"YCRTEL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTBL@HAW.A".ts_append_eval %Q|"YCRTBL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFD@HAW.A".ts_append_eval %Q|"YCRTFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTHC@HAW.A".ts_append_eval %Q|"YCRTHC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGA@HAW.A".ts_append_eval %Q|"YCRTGA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTCL@HAW.A".ts_append_eval %Q|"YCRTCL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTSP@HAW.A".ts_append_eval %Q|"YCRTSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGM@HAW.A".ts_append_eval %Q|"YCRTGM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMS@HAW.A".ts_append_eval %Q|"YCRTMS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTW@HAW.A".ts_append_eval %Q|"YCTW@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTA@HAW.A".ts_append_eval %Q|"YCTWTA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTR@HAW.A".ts_append_eval %Q|"YCTWTR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTW@HAW.A".ts_append_eval %Q|"YCTWTW@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWPL@HAW.A".ts_append_eval %Q|"YCTWPL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSC@HAW.A".ts_append_eval %Q|"YCTWSC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWWH@HAW.A".ts_append_eval %Q|"YCTWWH@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIF@HAW.A".ts_append_eval %Q|"YCIF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFPB@HAW.A".ts_append_eval %Q|"YCIFPB@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFDP@HAW.A".ts_append_eval %Q|"YCIFDP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFOT@HAW.A".ts_append_eval %Q|"YCIFOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRE@HAW.A".ts_append_eval %Q|"YCRE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMA@HAW.A".ts_append_eval %Q|"YCMA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADWM@HAW.A".ts_append_eval %Q|"YCADWM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCED@HAW.A".ts_append_eval %Q|"YCED@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHC@HAW.A".ts_append_eval %Q|"YCHC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAERE@HAW.A".ts_append_eval %Q|"YCAERE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAF@HAW.A".ts_append_eval %Q|"YCAF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFAC@HAW.A".ts_append_eval %Q|"YCAFAC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOS@HAW.A".ts_append_eval %Q|"YCOS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSMA@HAW.A".ts_append_eval %Q|"YCOSMA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSHH@HAW.A".ts_append_eval %Q|"YCOSHH@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YOTLABSS@KAU.A".ts_append_eval %Q|"YOTLABSS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCAGFA@KAU.A".ts_append_eval %Q|"YCAGFA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFS@KAU.A".ts_append_eval %Q|"YCAGFFFS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCUT@KAU.A".ts_append_eval %Q|"YCUT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTHV@KAU.A".ts_append_eval %Q|"YCCTHV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMN@KAU.A".ts_append_eval %Q|"YCMN@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRWD@KAU.A".ts_append_eval %Q|"YCMNDRWD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRPM@KAU.A".ts_append_eval %Q|"YCMNDRPM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFR@KAU.A".ts_append_eval %Q|"YCMNDRFR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "YOTLAB@HI.A".ts_append_eval %Q|"YOTLAB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YOTLAB@HI.A".ts_append_eval %Q|"YOTLAB@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YOTLAB@HI.A".ts_append_eval %Q|"YOTLAB@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YOTLABPEN@HI.A".ts_append_eval %Q|"YOTLABPEN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YOTLABPEN@HI.A".ts_append_eval %Q|"YOTLABPEN@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YOTLABPEN@HI.A".ts_append_eval %Q|"YOTLABPEN@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YOTLABSS@HI.A".ts_append_eval %Q|"YOTLABSS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YOTLABSS@HI.A".ts_append_eval %Q|"YOTLABSS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLAGFFFO@HI.A".ts_append_eval %Q|"YLAGFFFO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMIOG@HI.A".ts_append_eval %Q|"YLMIOG@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMISP@HI.A".ts_append_eval %Q|"YLMISP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLUT@HI.A".ts_append_eval %Q|"YLUT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLCTSP@HI.A".ts_append_eval %Q|"YLCTSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTFD@HI.A".ts_append_eval %Q|"YLRTFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTCL@HI.A".ts_append_eval %Q|"YLRTCL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTMS@HI.A".ts_append_eval %Q|"YLRTMS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTOT@HI.A".ts_append_eval %Q|"YLRTOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWPL@HI.A".ts_append_eval %Q|"YLTWPL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLTWSP@HI.A".ts_append_eval %Q|"YLTWSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFPB@HI.A".ts_append_eval %Q|"YLIFPB@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFMP@HI.A".ts_append_eval %Q|"YLIFMP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFBC@HI.A".ts_append_eval %Q|"YLIFBC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFIT@HI.A".ts_append_eval %Q|"YLIFIT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFDP@HI.A".ts_append_eval %Q|"YLIFDP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLIFOT@HI.A".ts_append_eval %Q|"YLIFOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLFIMO@HI.A".ts_append_eval %Q|"YLFIMO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YOTLABSS@HI.A".ts_append_eval %Q|"YOTLABSS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFO@HI.A".ts_append_eval %Q|"YLAGFFFO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIOG@HI.A".ts_append_eval %Q|"YLMIOG@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMISP@HI.A".ts_append_eval %Q|"YLMISP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLUT@HI.A".ts_append_eval %Q|"YLUT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTSP@HI.A".ts_append_eval %Q|"YLCTSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFD@HI.A".ts_append_eval %Q|"YLRTFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTCL@HI.A".ts_append_eval %Q|"YLRTCL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMS@HI.A".ts_append_eval %Q|"YLRTMS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTOT@HI.A".ts_append_eval %Q|"YLRTOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWPL@HI.A".ts_append_eval %Q|"YLTWPL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSP@HI.A".ts_append_eval %Q|"YLTWSP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFPB@HI.A".ts_append_eval %Q|"YLIFPB@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFMP@HI.A".ts_append_eval %Q|"YLIFMP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFBC@HI.A".ts_append_eval %Q|"YLIFBC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFIT@HI.A".ts_append_eval %Q|"YLIFIT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFDP@HI.A".ts_append_eval %Q|"YLIFDP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFOT@HI.A".ts_append_eval %Q|"YLIFOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIMO@HI.A".ts_append_eval %Q|"YLFIMO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLED@HI.A".ts_append_eval %Q|"YLED@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLED@HI.A".ts_append_eval %Q|"YLED@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLAFAC@HI.A".ts_append_eval %Q|"YLAFAC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLED@HI.A".ts_append_eval %Q|"YLED@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAFAC@HI.A".ts_append_eval %Q|"YLAFAC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAFAC@HI.A".ts_append_eval %Q|"YLAFAC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
   "YLGVLC@HI.A".ts_append_eval %Q|"YLGVLC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLGVLC@HI.A".ts_append_eval %Q|"YLGVLC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLAGFFFO@HON.A".ts_append_eval %Q|"YLAGFFFO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDR@HON.A".ts_append_eval %Q|"YLMNDR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTHC@HON.A".ts_append_eval %Q|"YLRTHC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTGA@HON.A".ts_append_eval %Q|"YLRTGA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTOT@HON.A".ts_append_eval %Q|"YLRTOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDPA@HAW.A".ts_append_eval %Q|"YLMNNDPA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNNDPL@HAW.A".ts_append_eval %Q|"YLMNNDPL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDREL@MAU.A".ts_append_eval %Q|"YLMNDREL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRMV@MAU.A".ts_append_eval %Q|"YLMNDRMV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRTR@MAU.A".ts_append_eval %Q|"YLMNDRTR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDBV@MAU.A".ts_append_eval %Q|"YLMNNDBV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLCTBL@KAU.A".ts_append_eval %Q|"YLCTBL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLCTHV@KAU.A".ts_append_eval %Q|"YLCTHV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFOT@KAU.A".ts_append_eval %Q|"YLIFOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLGVLC@HI.A".ts_append_eval %Q|"YLGVLC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFO@HON.A".ts_append_eval %Q|"YLAGFFFO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDR@HON.A".ts_append_eval %Q|"YLMNDR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTHC@HON.A".ts_append_eval %Q|"YLRTHC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGA@HON.A".ts_append_eval %Q|"YLRTGA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTOT@HON.A".ts_append_eval %Q|"YLRTOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPA@HAW.A".ts_append_eval %Q|"YLMNNDPA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPL@HAW.A".ts_append_eval %Q|"YLMNNDPL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDREL@MAU.A".ts_append_eval %Q|"YLMNDREL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMV@MAU.A".ts_append_eval %Q|"YLMNDRMV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRTR@MAU.A".ts_append_eval %Q|"YLMNDRTR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDBV@MAU.A".ts_append_eval %Q|"YLMNNDBV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTBL@KAU.A".ts_append_eval %Q|"YLCTBL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTHV@KAU.A".ts_append_eval %Q|"YLCTHV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFOT@KAU.A".ts_append_eval %Q|"YLIFOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "PCHSHF@HON.S".ts_append_eval %Q|"PCHSHF@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "PCFBFD@HON.S".ts_append_eval %Q|"PCFBFD@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "PC_SH@HON.S".ts_append_eval %Q|"PC_SH@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
@@ -725,36 +725,36 @@ task :reconstruct_db => :environment do
    "PCFBFDHM@HON.S".ts_append_eval %Q|"PCFBFDHM@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
   "YMED@KAU.A".ts_append_eval %Q|"YMED@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/misc/hud/update/hud_upd.xls"|
   "YPCBEA@HI.A".ts_append_eval %Q|"YPCBEA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YPCBEA@HI.A".ts_append_eval %Q|"YPCBEA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YPCBEA@HI.A".ts_append_eval %Q|"YPCBEA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLCT@HI.A".ts_append_eval %Q|"YLCT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLCT@HI.A".ts_append_eval %Q|"YLCT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLCT@HI.A".ts_append_eval %Q|"YLCT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLIF@HI.A".ts_append_eval %Q|"YLIF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLIF@HI.A".ts_append_eval %Q|"YLIF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLIF@HI.A".ts_append_eval %Q|"YLIF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAF@HI.A".ts_append_eval %Q|"YLAF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLAF@HI.A".ts_append_eval %Q|"YLAF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLAF@HI.A".ts_append_eval %Q|"YLAF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "Y@HON.A".ts_append_eval %Q|"Y@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "Y@HON.A".ts_append_eval %Q|"Y@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "Y@HON.A".ts_append_eval %Q|"Y@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL@HON.A".ts_append_eval %Q|"YL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YL@HON.A".ts_append_eval %Q|"YL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YL@HON.A".ts_append_eval %Q|"YL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YDIV@HON.A".ts_append_eval %Q|"YDIV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YDIV@HON.A".ts_append_eval %Q|"YDIV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YDIV@HON.A".ts_append_eval %Q|"YDIV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YTRNSF@HON.A".ts_append_eval %Q|"YTRNSF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YTRNSF@HON.A".ts_append_eval %Q|"YTRNSF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YTRNSF@HON.A".ts_append_eval %Q|"YTRNSF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVFD@HON.A".ts_append_eval %Q|"YLGVFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLGVFD@HON.A".ts_append_eval %Q|"YLGVFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLGVFD@HON.A".ts_append_eval %Q|"YLGVFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVML@HON.A".ts_append_eval %Q|"YLGVML@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLGVML@HON.A".ts_append_eval %Q|"YLGVML@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLGVML@HON.A".ts_append_eval %Q|"YLGVML@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLCT@HON.A".ts_append_eval %Q|"YLCT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLCT@HON.A".ts_append_eval %Q|"YLCT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLCT@HON.A".ts_append_eval %Q|"YLCT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLFI@HON.A".ts_append_eval %Q|"YLFI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLFI@HON.A".ts_append_eval %Q|"YLFI@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLFI@HON.A".ts_append_eval %Q|"YLFI@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAF@HON.A".ts_append_eval %Q|"YLAF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLAF@HON.A".ts_append_eval %Q|"YLAF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLAF@HON.A".ts_append_eval %Q|"YLAF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAFAC@HON.A".ts_append_eval %Q|"YLAFAC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLAFAC@HON.A".ts_append_eval %Q|"YLAFAC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLAFAC@HON.A".ts_append_eval %Q|"YLAFAC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_OT@HON.A".ts_append_eval %Q|"YL_OT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
   "YRESADJ@HAW.A".ts_append_eval %Q|"YRESADJ@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YRESADJ@HAW.A".ts_append_eval %Q|"YRESADJ@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YRESADJ@HAW.A".ts_append_eval %Q|"YRESADJ@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "GDP_CP@JP.A".ts_append_eval %Q|"GDP_CP@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
   "GDP_INRP_R@JP.A".ts_append_eval %Q|"GDP_INRP_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
   "GDP_IFX@JP.A".ts_append_eval %Q|"GDP_IFX@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
@@ -856,38 +856,38 @@ task :reconstruct_db => :environment do
   "GDP_NX_R@US.A".ts_append_eval %Q|"GDP_NX_R@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
   "GDP_IRS@US.A".ts_append_eval %Q|"GDP_IRS@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
   "CPI@CA.A".ts_append_eval %Q|"CPI@CA.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
-  "YLOSRP@HI.A".ts_append_eval %Q|"YLOSRP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLOSPL@HI.A".ts_append_eval %Q|"YLOSPL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLOSMA@HI.A".ts_append_eval %Q|"YLOSMA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTBL@HON.A".ts_append_eval %Q|"YLRTBL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTFD@HON.A".ts_append_eval %Q|"YLRTFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDAP@HAW.A".ts_append_eval %Q|"YLMNNDAP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNNDLT@HAW.A".ts_append_eval %Q|"YLMNNDLT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLHCAM@HAW.A".ts_append_eval %Q|"YLHCAM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLHCHO@HAW.A".ts_append_eval %Q|"YLHCHO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLHCNR@HAW.A".ts_append_eval %Q|"YLHCNR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLHCSO@HAW.A".ts_append_eval %Q|"YLHCSO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAEPF@HAW.A".ts_append_eval %Q|"YLAEPF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRNM@MAU.A".ts_append_eval %Q|"YLMNDRNM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRPM@MAU.A".ts_append_eval %Q|"YLMNDRPM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRFB@MAU.A".ts_append_eval %Q|"YLMNDRFB@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRMC@MAU.A".ts_append_eval %Q|"YLMNDRMC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRCM@MAU.A".ts_append_eval %Q|"YLMNDRCM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLFIIN@MAU.A".ts_append_eval %Q|"YLFIIN@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLFIOT@MAU.A".ts_append_eval %Q|"YLFIOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRERE@MAU.A".ts_append_eval %Q|"YLRERE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRERL@MAU.A".ts_append_eval %Q|"YLRERL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRELE@MAU.A".ts_append_eval %Q|"YLRELE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMI@KAU.A".ts_append_eval %Q|"YLMI@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMIOG@KAU.A".ts_append_eval %Q|"YLMIOG@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMIMI@KAU.A".ts_append_eval %Q|"YLMIMI@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMISP@KAU.A".ts_append_eval %Q|"YLMISP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFPB@KAU.A".ts_append_eval %Q|"YLIFPB@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFMP@KAU.A".ts_append_eval %Q|"YLIFMP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFBC@KAU.A".ts_append_eval %Q|"YLIFBC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFIT@KAU.A".ts_append_eval %Q|"YLIFIT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFTC@KAU.A".ts_append_eval %Q|"YLIFTC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIFDP@KAU.A".ts_append_eval %Q|"YLIFDP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLOSRP@HI.A".ts_append_eval %Q|"YLOSRP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSPL@HI.A".ts_append_eval %Q|"YLOSPL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSMA@HI.A".ts_append_eval %Q|"YLOSMA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTBL@HON.A".ts_append_eval %Q|"YLRTBL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFD@HON.A".ts_append_eval %Q|"YLRTFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDAP@HAW.A".ts_append_eval %Q|"YLMNNDAP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDLT@HAW.A".ts_append_eval %Q|"YLMNNDLT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCAM@HAW.A".ts_append_eval %Q|"YLHCAM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCHO@HAW.A".ts_append_eval %Q|"YLHCHO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCNR@HAW.A".ts_append_eval %Q|"YLHCNR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCSO@HAW.A".ts_append_eval %Q|"YLHCSO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEPF@HAW.A".ts_append_eval %Q|"YLAEPF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRNM@MAU.A".ts_append_eval %Q|"YLMNDRNM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRPM@MAU.A".ts_append_eval %Q|"YLMNDRPM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFB@MAU.A".ts_append_eval %Q|"YLMNDRFB@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMC@MAU.A".ts_append_eval %Q|"YLMNDRMC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRCM@MAU.A".ts_append_eval %Q|"YLMNDRCM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIIN@MAU.A".ts_append_eval %Q|"YLFIIN@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIOT@MAU.A".ts_append_eval %Q|"YLFIOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERE@MAU.A".ts_append_eval %Q|"YLRERE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERL@MAU.A".ts_append_eval %Q|"YLRERL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRELE@MAU.A".ts_append_eval %Q|"YLRELE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMI@KAU.A".ts_append_eval %Q|"YLMI@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIOG@KAU.A".ts_append_eval %Q|"YLMIOG@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIMI@KAU.A".ts_append_eval %Q|"YLMIMI@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMISP@KAU.A".ts_append_eval %Q|"YLMISP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFPB@KAU.A".ts_append_eval %Q|"YLIFPB@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFMP@KAU.A".ts_append_eval %Q|"YLIFMP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFBC@KAU.A".ts_append_eval %Q|"YLIFBC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFIT@KAU.A".ts_append_eval %Q|"YLIFIT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFTC@KAU.A".ts_append_eval %Q|"YLIFTC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFDP@KAU.A".ts_append_eval %Q|"YLIFDP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROPNF&@HI.A".ts_append_eval %Q|"YPROPNF&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPMDST&@HAW.A".ts_append_eval %Q|"YLPMDST&@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPMN&@HAW.A".ts_append_eval %Q|"YLPMN&@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -900,7 +900,7 @@ task :reconstruct_db => :environment do
   "NRC@HON.A".ts_append_eval %Q|"NRC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/census/update/census_upd_reformatted.xls"|
   "NRCNM@NBI.A".ts_append_eval %Q|"NRCNM@NBI.A".tsn.load_from "/Volumes/UHEROwork/data/census/update/census_upd_reformatted.xls"|
   "YL_PR@HON.A".ts_append_eval %Q|"YL_PR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YL_PR@HON.A".ts_append_eval %Q|"YL_PR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YL_PR@HON.A".ts_append_eval %Q|"YL_PR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_TRADE@HON.A".ts_append_eval %Q|"YL_TRADE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
   "YL_TU@HON.A".ts_append_eval %Q|"YL_TU@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
   "TGBU4NS@MAU.A".ts_append_eval %Q|"TGBU4NS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
@@ -921,49 +921,49 @@ task :reconstruct_db => :environment do
   "PMKRSGF@KAU.Q".ts_append_eval %Q|"PMKRSGF@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
   "PMKRCON@HI.Q".ts_append_eval %Q|"PMKRCON@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
   "YL_TRADE@HI.A".ts_append_eval %Q|"YL_TRADE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLMNNDFD@HI.A".ts_append_eval %Q|"YLMNNDFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDBV@HI.A".ts_append_eval %Q|"YLMNNDBV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLFIOT@HI.A".ts_append_eval %Q|"YLFIOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRFR@HON.A".ts_append_eval %Q|"YLMNDRFR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRMS@HON.A".ts_append_eval %Q|"YLMNDRMS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDPL@HON.A".ts_append_eval %Q|"YLMNNDPL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTCL@HON.A".ts_append_eval %Q|"YLRTCL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLIFIT@HON.A".ts_append_eval %Q|"YLIFIT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLADAD@HON.A".ts_append_eval %Q|"YLADAD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLHCAM@HON.A".ts_append_eval %Q|"YLHCAM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLAEPF@HON.A".ts_append_eval %Q|"YLAEPF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLAEMU@HON.A".ts_append_eval %Q|"YLAEMU@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLOSMA@HON.A".ts_append_eval %Q|"YLOSMA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLMNNDFD@HI.A".ts_append_eval %Q|"YLMNNDFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDBV@HI.A".ts_append_eval %Q|"YLMNNDBV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIOT@HI.A".ts_append_eval %Q|"YLFIOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFR@HON.A".ts_append_eval %Q|"YLMNDRFR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMS@HON.A".ts_append_eval %Q|"YLMNDRMS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPL@HON.A".ts_append_eval %Q|"YLMNNDPL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTCL@HON.A".ts_append_eval %Q|"YLRTCL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFIT@HON.A".ts_append_eval %Q|"YLIFIT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLADAD@HON.A".ts_append_eval %Q|"YLADAD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCAM@HON.A".ts_append_eval %Q|"YLHCAM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEPF@HON.A".ts_append_eval %Q|"YLAEPF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEMU@HON.A".ts_append_eval %Q|"YLAEMU@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSMA@HON.A".ts_append_eval %Q|"YLOSMA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGV@HON.A".ts_append_eval %Q|"YLGV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLGV@HON.A".ts_append_eval %Q|"YLGV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRCM@HAW.A".ts_append_eval %Q|"YLMNDRCM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDREL@HAW.A".ts_append_eval %Q|"YLMNDREL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNND@HAW.A".ts_append_eval %Q|"YLMNND@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLTWTT@HAW.A".ts_append_eval %Q|"YLTWTT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLFIMO@HAW.A".ts_append_eval %Q|"YLFIMO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTMS@MAU.A".ts_append_eval %Q|"YLRTMS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWTW@MAU.A".ts_append_eval %Q|"YLTWTW@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWTG@MAU.A".ts_append_eval %Q|"YLTWTG@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWPL@MAU.A".ts_append_eval %Q|"YLTWPL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWSC@MAU.A".ts_append_eval %Q|"YLTWSC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWSP@MAU.A".ts_append_eval %Q|"YLTWSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLIFPB@MAU.A".ts_append_eval %Q|"YLIFPB@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLIFIT@MAU.A".ts_append_eval %Q|"YLIFIT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAGFFFS@KAU.A".ts_append_eval %Q|"YLAGFFFS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTGA@KAU.A".ts_append_eval %Q|"YLRTGA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWTW@KAU.A".ts_append_eval %Q|"YLTWTW@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWCU@KAU.A".ts_append_eval %Q|"YLTWCU@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWWH@KAU.A".ts_append_eval %Q|"YLTWWH@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLHCAM@KAU.A".ts_append_eval %Q|"YLHCAM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLHCHO@KAU.A".ts_append_eval %Q|"YLHCHO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLGV@HON.A".ts_append_eval %Q|"YLGV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRCM@HAW.A".ts_append_eval %Q|"YLMNDRCM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDREL@HAW.A".ts_append_eval %Q|"YLMNDREL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNND@HAW.A".ts_append_eval %Q|"YLMNND@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTT@HAW.A".ts_append_eval %Q|"YLTWTT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIMO@HAW.A".ts_append_eval %Q|"YLFIMO@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMS@MAU.A".ts_append_eval %Q|"YLRTMS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTW@MAU.A".ts_append_eval %Q|"YLTWTW@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTG@MAU.A".ts_append_eval %Q|"YLTWTG@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWPL@MAU.A".ts_append_eval %Q|"YLTWPL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSC@MAU.A".ts_append_eval %Q|"YLTWSC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSP@MAU.A".ts_append_eval %Q|"YLTWSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFPB@MAU.A".ts_append_eval %Q|"YLIFPB@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFIT@MAU.A".ts_append_eval %Q|"YLIFIT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFS@KAU.A".ts_append_eval %Q|"YLAGFFFS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGA@KAU.A".ts_append_eval %Q|"YLRTGA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTW@KAU.A".ts_append_eval %Q|"YLTWTW@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWCU@KAU.A".ts_append_eval %Q|"YLTWCU@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWWH@KAU.A".ts_append_eval %Q|"YLTWWH@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCAM@KAU.A".ts_append_eval %Q|"YLHCAM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCHO@KAU.A".ts_append_eval %Q|"YLHCHO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YNETR@HI.A".ts_append_eval %Q|"YNETR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YNETR@HI.A".ts_append_eval %Q|"YNETR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRWD@HI.A".ts_append_eval %Q|"YLMNDRWD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDREL@HI.A".ts_append_eval %Q|"YLMNDREL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRMV@HI.A".ts_append_eval %Q|"YLMNDRMV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRTR@HI.A".ts_append_eval %Q|"YLMNDRTR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRCM@HON.A".ts_append_eval %Q|"YLMNDRCM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMIOG@HAW.A".ts_append_eval %Q|"YLMIOG@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YNETR@HI.A".ts_append_eval %Q|"YNETR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRWD@HI.A".ts_append_eval %Q|"YLMNDRWD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDREL@HI.A".ts_append_eval %Q|"YLMNDREL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMV@HI.A".ts_append_eval %Q|"YLMNDRMV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRTR@HI.A".ts_append_eval %Q|"YLMNDRTR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRCM@HON.A".ts_append_eval %Q|"YLMNDRCM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIOG@HAW.A".ts_append_eval %Q|"YLMIOG@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YP&@HI.A".ts_append_eval %Q|"YP&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPMNPT&@HI.A".ts_append_eval %Q|"YLPMNPT&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPMNRB&@HI.A".ts_append_eval %Q|"YLPMNRB&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -1045,43 +1045,43 @@ task :reconstruct_db => :environment do
   "KPPRVRSDNS@HON.A".ts_append_eval %Q|"KPPRVRSDNS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
   "KPPRVRSDNS@HI.A".ts_append_eval %Q|"KPPRVRSDNS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
   "KPPRVNRSDNS@HI.M".ts_append_eval %Q|"KPPRVNRSDNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
-  "YLTWTA@HAW.A".ts_append_eval %Q|"YLTWTA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRT@KAU.A".ts_append_eval %Q|"YLRT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLTWTA@HAW.A".ts_append_eval %Q|"YLTWTA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRT@KAU.A".ts_append_eval %Q|"YLRT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLPSV&@KAU.A".ts_append_eval %Q|"YLPSV&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPSVHL&@KAU.A".ts_append_eval %Q|"YLPSVHL&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
-  "YLAE@KAU.A".ts_append_eval %Q|"YLAE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLHC@MAU.A".ts_append_eval %Q|"YLHC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAE@MAU.A".ts_append_eval %Q|"YLAE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAF@MAU.A".ts_append_eval %Q|"YLAF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAD@HAW.A".ts_append_eval %Q|"YLAD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRT@MAU.A".ts_append_eval %Q|"YLRT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLUT@MAU.A".ts_append_eval %Q|"YLUT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRT@HON.A".ts_append_eval %Q|"YLRT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLUT@HON.A".ts_append_eval %Q|"YLUT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLCT@MAU.A".ts_append_eval %Q|"YLCT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLED@KAU.A".ts_append_eval %Q|"YLED@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLPS@KAU.A".ts_append_eval %Q|"YLPS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLED@MAU.A".ts_append_eval %Q|"YLED@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLPS@MAU.A".ts_append_eval %Q|"YLPS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLWT@MAU.A".ts_append_eval %Q|"YLWT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLWT@HON.A".ts_append_eval %Q|"YLWT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRT@HAW.A".ts_append_eval %Q|"YLRT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLUT@HAW.A".ts_append_eval %Q|"YLUT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLFI@MAU.A".ts_append_eval %Q|"YLFI@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLIF@KAU.A".ts_append_eval %Q|"YLIF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLOS@KAU.A".ts_append_eval %Q|"YLOS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLIF@MAU.A".ts_append_eval %Q|"YLIF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAD@KAU.A".ts_append_eval %Q|"YLAD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLOS@MAU.A".ts_append_eval %Q|"YLOS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLOS@HON.A".ts_append_eval %Q|"YLOS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMA@MAU.A".ts_append_eval %Q|"YLMA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMA@HON.A".ts_append_eval %Q|"YLMA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLAD@MAU.A".ts_append_eval %Q|"YLAD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAD@HON.A".ts_append_eval %Q|"YLAD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMN@KAU.A".ts_append_eval %Q|"YLMN@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMN@MAU.A".ts_append_eval %Q|"YLMN@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLHC@KAU.A".ts_append_eval %Q|"YLHC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YCAGFFFO@HON.A".ts_append_eval %Q|"YCAGFFFO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YLAE@KAU.A".ts_append_eval %Q|"YLAE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHC@MAU.A".ts_append_eval %Q|"YLHC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAE@MAU.A".ts_append_eval %Q|"YLAE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAF@MAU.A".ts_append_eval %Q|"YLAF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAD@HAW.A".ts_append_eval %Q|"YLAD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRT@MAU.A".ts_append_eval %Q|"YLRT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLUT@MAU.A".ts_append_eval %Q|"YLUT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRT@HON.A".ts_append_eval %Q|"YLRT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLUT@HON.A".ts_append_eval %Q|"YLUT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCT@MAU.A".ts_append_eval %Q|"YLCT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLED@KAU.A".ts_append_eval %Q|"YLED@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLPS@KAU.A".ts_append_eval %Q|"YLPS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLED@MAU.A".ts_append_eval %Q|"YLED@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLPS@MAU.A".ts_append_eval %Q|"YLPS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLWT@MAU.A".ts_append_eval %Q|"YLWT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLWT@HON.A".ts_append_eval %Q|"YLWT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRT@HAW.A".ts_append_eval %Q|"YLRT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLUT@HAW.A".ts_append_eval %Q|"YLUT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFI@MAU.A".ts_append_eval %Q|"YLFI@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIF@KAU.A".ts_append_eval %Q|"YLIF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOS@KAU.A".ts_append_eval %Q|"YLOS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIF@MAU.A".ts_append_eval %Q|"YLIF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAD@KAU.A".ts_append_eval %Q|"YLAD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOS@MAU.A".ts_append_eval %Q|"YLOS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOS@HON.A".ts_append_eval %Q|"YLOS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMA@MAU.A".ts_append_eval %Q|"YLMA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMA@HON.A".ts_append_eval %Q|"YLMA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAD@MAU.A".ts_append_eval %Q|"YLAD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAD@HON.A".ts_append_eval %Q|"YLAD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMN@KAU.A".ts_append_eval %Q|"YLMN@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMN@MAU.A".ts_append_eval %Q|"YLMN@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHC@KAU.A".ts_append_eval %Q|"YLHC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCAGFFFO@HON.A".ts_append_eval %Q|"YCAGFFFO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "AAMC@HAW.A".ts_append_eval %Q|"AAMC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVCMC@HI.A".ts_append_eval %Q|"AVCMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AGP@KAU.A".ts_append_eval %Q|"AGP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -1113,8 +1113,8 @@ task :reconstruct_db => :environment do
   "VISUSWNS@HAW.M".ts_append_eval %Q|"VISUSWNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "VISCANNS@KAU.M".ts_append_eval %Q|"VISCANNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "AVA@HON.A".ts_append_eval %Q|"AVA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCMNDRMC@HI.A".ts_append_eval %Q|"YCMNDRMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTHC@HI.A".ts_append_eval %Q|"YCRTHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YCMNDRMC@HI.A".ts_append_eval %Q|"YCMNDRMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTHC@HI.A".ts_append_eval %Q|"YCRTHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "ANSU@MAU.A".ts_append_eval %Q|"ANSU@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANPI@MAU.A".ts_append_eval %Q|"ANPI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANVG@MAU.A".ts_append_eval %Q|"ANVG@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -1153,106 +1153,106 @@ task :reconstruct_db => :environment do
   "AVLEG@HAW.A".ts_append_eval %Q|"AVLEG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVL@HAW.A".ts_append_eval %Q|"AVL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AV@KAU.A".ts_append_eval %Q|"AV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCIFOT@HI.A".ts_append_eval %Q|"YCIFOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIOT@HI.A".ts_append_eval %Q|"YCFIOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPR@HI.A".ts_append_eval %Q|"YCMNNDPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFD@HI.A".ts_append_eval %Q|"YCRTFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTCL@HI.A".ts_append_eval %Q|"YCRTCL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTW@HI.A".ts_append_eval %Q|"YCTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFMP@HI.A".ts_append_eval %Q|"YCIFMP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFBC@HI.A".ts_append_eval %Q|"YCIFBC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFIT@HI.A".ts_append_eval %Q|"YCIFIT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFTC@HI.A".ts_append_eval %Q|"YCIFTC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAD@HI.A".ts_append_eval %Q|"YCAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCSO@HI.A".ts_append_eval %Q|"YCHCSO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOS@HI.A".ts_append_eval %Q|"YCOS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YOTLABPEN@HON.A".ts_append_eval %Q|"YOTLABPEN@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YCAVR@HON.A".ts_append_eval %Q|"YCAVR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_PR@HON.A".ts_append_eval %Q|"YC_PR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTSP@HON.A".ts_append_eval %Q|"YCCTSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDR@HON.A".ts_append_eval %Q|"YCMNDR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFB@HON.A".ts_append_eval %Q|"YCMNDRFB@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMS@HON.A".ts_append_eval %Q|"YCMNDRMS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDAP@HON.A".ts_append_eval %Q|"YCMNNDAP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTA@HON.A".ts_append_eval %Q|"YCTWTA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWCU@HON.A".ts_append_eval %Q|"YCTWCU@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFMP@HON.A".ts_append_eval %Q|"YCIFMP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFOT@HON.A".ts_append_eval %Q|"YCIFOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIIN@HON.A".ts_append_eval %Q|"YCFIIN@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERE@HON.A".ts_append_eval %Q|"YCRERE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRELE@HON.A".ts_append_eval %Q|"YCRELE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCPS@HON.A".ts_append_eval %Q|"YCPS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADAD@HON.A".ts_append_eval %Q|"YCADAD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADWM@HON.A".ts_append_eval %Q|"YCADWM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCAM@HON.A".ts_append_eval %Q|"YCHCAM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCHO@HON.A".ts_append_eval %Q|"YCHCHO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCNR@HON.A".ts_append_eval %Q|"YCHCNR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCSO@HON.A".ts_append_eval %Q|"YCHCSO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAE@HON.A".ts_append_eval %Q|"YCAE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEMU@HON.A".ts_append_eval %Q|"YCAEMU@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFFD@HON.A".ts_append_eval %Q|"YCAFFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSMA@HON.A".ts_append_eval %Q|"YCOSMA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVLC@HON.A".ts_append_eval %Q|"YCGVLC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC@HAW.A".ts_append_eval %Q|"YC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YOTLABSS@HAW.A".ts_append_eval %Q|"YOTLABSS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YCAGFFSP@HAW.A".ts_append_eval %Q|"YCAGFFSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRNM@HAW.A".ts_append_eval %Q|"YCMNDRNM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMS@HAW.A".ts_append_eval %Q|"YCMNDRMS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTT@HAW.A".ts_append_eval %Q|"YCTWTT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTG@HAW.A".ts_append_eval %Q|"YCTWTG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSP@HAW.A".ts_append_eval %Q|"YCTWSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWCU@HAW.A".ts_append_eval %Q|"YCTWCU@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFMP@HAW.A".ts_append_eval %Q|"YCIFMP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFIT@HAW.A".ts_append_eval %Q|"YCIFIT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFI@HAW.A".ts_append_eval %Q|"YCFI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIMO@HAW.A".ts_append_eval %Q|"YCFIMO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFISE@HAW.A".ts_append_eval %Q|"YCFISE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIIN@HAW.A".ts_append_eval %Q|"YCFIIN@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIOT@HAW.A".ts_append_eval %Q|"YCFIOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERL@HAW.A".ts_append_eval %Q|"YCRERL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADAD@HAW.A".ts_append_eval %Q|"YCADAD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCNR@HAW.A".ts_append_eval %Q|"YCHCNR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVST@HAW.A".ts_append_eval %Q|"YCGVST@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC@KAU.A".ts_append_eval %Q|"YC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YOTLABPEN@KAU.A".ts_append_eval %Q|"YOTLABPEN@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YCAGFFSP@KAU.A".ts_append_eval %Q|"YCAGFFSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIOG@KAU.A".ts_append_eval %Q|"YCMIOG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFB@KAU.A".ts_append_eval %Q|"YCMNDRFB@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMC@KAU.A".ts_append_eval %Q|"YCMNDRMC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRCM@KAU.A".ts_append_eval %Q|"YCMNDRCM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YLRTSP@HON.A".ts_append_eval %Q|"YLRTSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTGM@HON.A".ts_append_eval %Q|"YLRTGM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTMS@HON.A".ts_append_eval %Q|"YLRTMS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTWTR@HON.A".ts_append_eval %Q|"YLTWTR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTWTW@HON.A".ts_append_eval %Q|"YLTWTW@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTWTT@HON.A".ts_append_eval %Q|"YLTWTT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTWTG@HON.A".ts_append_eval %Q|"YLTWTG@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTWPL@HON.A".ts_append_eval %Q|"YLTWPL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YSOCSECPR@HAW.A".ts_append_eval %Q|"YSOCSECPR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YSOCSECEM@HAW.A".ts_append_eval %Q|"YSOCSECEM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNNDCH@HAW.A".ts_append_eval %Q|"YLMNNDCH@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLWT@HAW.A".ts_append_eval %Q|"YLWT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTMV@HAW.A".ts_append_eval %Q|"YLRTMV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTFR@HAW.A".ts_append_eval %Q|"YLRTFR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTEL@HAW.A".ts_append_eval %Q|"YLRTEL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTBL@HAW.A".ts_append_eval %Q|"YLRTBL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTFD@HAW.A".ts_append_eval %Q|"YLRTFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAEMU@HAW.A".ts_append_eval %Q|"YLAEMU@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAERE@HAW.A".ts_append_eval %Q|"YLAERE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLOSRP@HAW.A".ts_append_eval %Q|"YLOSRP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLOSPL@HAW.A".ts_append_eval %Q|"YLOSPL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRFR@MAU.A".ts_append_eval %Q|"YLMNDRFR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDRMS@MAU.A".ts_append_eval %Q|"YLMNDRMS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNND@MAU.A".ts_append_eval %Q|"YLMNND@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDFD@MAU.A".ts_append_eval %Q|"YLMNNDFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDXM@MAU.A".ts_append_eval %Q|"YLMNNDXM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLCTSP@KAU.A".ts_append_eval %Q|"YLCTSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDR@KAU.A".ts_append_eval %Q|"YLMNDR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRWD@KAU.A".ts_append_eval %Q|"YLMNDRWD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRNM@KAU.A".ts_append_eval %Q|"YLMNDRNM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRPM@KAU.A".ts_append_eval %Q|"YLMNDRPM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRFB@KAU.A".ts_append_eval %Q|"YLMNDRFB@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRMC@KAU.A".ts_append_eval %Q|"YLMNDRMC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YCIFOT@HI.A".ts_append_eval %Q|"YCIFOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIOT@HI.A".ts_append_eval %Q|"YCFIOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPR@HI.A".ts_append_eval %Q|"YCMNNDPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFD@HI.A".ts_append_eval %Q|"YCRTFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTCL@HI.A".ts_append_eval %Q|"YCRTCL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTW@HI.A".ts_append_eval %Q|"YCTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFMP@HI.A".ts_append_eval %Q|"YCIFMP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFBC@HI.A".ts_append_eval %Q|"YCIFBC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFIT@HI.A".ts_append_eval %Q|"YCIFIT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFTC@HI.A".ts_append_eval %Q|"YCIFTC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAD@HI.A".ts_append_eval %Q|"YCAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCSO@HI.A".ts_append_eval %Q|"YCHCSO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOS@HI.A".ts_append_eval %Q|"YCOS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YOTLABPEN@HON.A".ts_append_eval %Q|"YOTLABPEN@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCAVR@HON.A".ts_append_eval %Q|"YCAVR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_PR@HON.A".ts_append_eval %Q|"YC_PR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTSP@HON.A".ts_append_eval %Q|"YCCTSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDR@HON.A".ts_append_eval %Q|"YCMNDR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFB@HON.A".ts_append_eval %Q|"YCMNDRFB@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMS@HON.A".ts_append_eval %Q|"YCMNDRMS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDAP@HON.A".ts_append_eval %Q|"YCMNNDAP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTA@HON.A".ts_append_eval %Q|"YCTWTA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWCU@HON.A".ts_append_eval %Q|"YCTWCU@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFMP@HON.A".ts_append_eval %Q|"YCIFMP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFOT@HON.A".ts_append_eval %Q|"YCIFOT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIIN@HON.A".ts_append_eval %Q|"YCFIIN@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERE@HON.A".ts_append_eval %Q|"YCRERE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRELE@HON.A".ts_append_eval %Q|"YCRELE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCPS@HON.A".ts_append_eval %Q|"YCPS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADAD@HON.A".ts_append_eval %Q|"YCADAD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADWM@HON.A".ts_append_eval %Q|"YCADWM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCAM@HON.A".ts_append_eval %Q|"YCHCAM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCHO@HON.A".ts_append_eval %Q|"YCHCHO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCNR@HON.A".ts_append_eval %Q|"YCHCNR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCSO@HON.A".ts_append_eval %Q|"YCHCSO@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAE@HON.A".ts_append_eval %Q|"YCAE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEMU@HON.A".ts_append_eval %Q|"YCAEMU@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFFD@HON.A".ts_append_eval %Q|"YCAFFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSMA@HON.A".ts_append_eval %Q|"YCOSMA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVLC@HON.A".ts_append_eval %Q|"YCGVLC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC@HAW.A".ts_append_eval %Q|"YC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YOTLABSS@HAW.A".ts_append_eval %Q|"YOTLABSS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCAGFFSP@HAW.A".ts_append_eval %Q|"YCAGFFSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRNM@HAW.A".ts_append_eval %Q|"YCMNDRNM@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMS@HAW.A".ts_append_eval %Q|"YCMNDRMS@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTT@HAW.A".ts_append_eval %Q|"YCTWTT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTG@HAW.A".ts_append_eval %Q|"YCTWTG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSP@HAW.A".ts_append_eval %Q|"YCTWSP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWCU@HAW.A".ts_append_eval %Q|"YCTWCU@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFMP@HAW.A".ts_append_eval %Q|"YCIFMP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFIT@HAW.A".ts_append_eval %Q|"YCIFIT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFI@HAW.A".ts_append_eval %Q|"YCFI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIMO@HAW.A".ts_append_eval %Q|"YCFIMO@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFISE@HAW.A".ts_append_eval %Q|"YCFISE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIIN@HAW.A".ts_append_eval %Q|"YCFIIN@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIOT@HAW.A".ts_append_eval %Q|"YCFIOT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERL@HAW.A".ts_append_eval %Q|"YCRERL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADAD@HAW.A".ts_append_eval %Q|"YCADAD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCNR@HAW.A".ts_append_eval %Q|"YCHCNR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVST@HAW.A".ts_append_eval %Q|"YCGVST@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC@KAU.A".ts_append_eval %Q|"YC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YOTLABPEN@KAU.A".ts_append_eval %Q|"YOTLABPEN@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCAGFFSP@KAU.A".ts_append_eval %Q|"YCAGFFSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIOG@KAU.A".ts_append_eval %Q|"YCMIOG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFB@KAU.A".ts_append_eval %Q|"YCMNDRFB@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMC@KAU.A".ts_append_eval %Q|"YCMNDRMC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRCM@KAU.A".ts_append_eval %Q|"YCMNDRCM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YLRTSP@HON.A".ts_append_eval %Q|"YLRTSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGM@HON.A".ts_append_eval %Q|"YLRTGM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMS@HON.A".ts_append_eval %Q|"YLRTMS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTR@HON.A".ts_append_eval %Q|"YLTWTR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTW@HON.A".ts_append_eval %Q|"YLTWTW@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTT@HON.A".ts_append_eval %Q|"YLTWTT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTG@HON.A".ts_append_eval %Q|"YLTWTG@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWPL@HON.A".ts_append_eval %Q|"YLTWPL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECPR@HAW.A".ts_append_eval %Q|"YSOCSECPR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECEM@HAW.A".ts_append_eval %Q|"YSOCSECEM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDCH@HAW.A".ts_append_eval %Q|"YLMNNDCH@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLWT@HAW.A".ts_append_eval %Q|"YLWT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMV@HAW.A".ts_append_eval %Q|"YLRTMV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFR@HAW.A".ts_append_eval %Q|"YLRTFR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTEL@HAW.A".ts_append_eval %Q|"YLRTEL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTBL@HAW.A".ts_append_eval %Q|"YLRTBL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFD@HAW.A".ts_append_eval %Q|"YLRTFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEMU@HAW.A".ts_append_eval %Q|"YLAEMU@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAERE@HAW.A".ts_append_eval %Q|"YLAERE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSRP@HAW.A".ts_append_eval %Q|"YLOSRP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSPL@HAW.A".ts_append_eval %Q|"YLOSPL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFR@MAU.A".ts_append_eval %Q|"YLMNDRFR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMS@MAU.A".ts_append_eval %Q|"YLMNDRMS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNND@MAU.A".ts_append_eval %Q|"YLMNND@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDFD@MAU.A".ts_append_eval %Q|"YLMNNDFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDXM@MAU.A".ts_append_eval %Q|"YLMNNDXM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTSP@KAU.A".ts_append_eval %Q|"YLCTSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDR@KAU.A".ts_append_eval %Q|"YLMNDR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRWD@KAU.A".ts_append_eval %Q|"YLMNDRWD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRNM@KAU.A".ts_append_eval %Q|"YLMNDRNM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRPM@KAU.A".ts_append_eval %Q|"YLMNDRPM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFB@KAU.A".ts_append_eval %Q|"YLMNDRFB@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMC@KAU.A".ts_append_eval %Q|"YLMNDRMC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_PR&@HI.A".ts_append_eval %Q|"YL_PR&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPAGFF&@HI.A".ts_append_eval %Q|"YLPAGFF&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPAGFFA&@HI.A".ts_append_eval %Q|"YLPAGFFA&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -1297,13 +1297,13 @@ task :reconstruct_db => :environment do
   "PWWTNS&@HI.M".ts_append_eval %Q|"PWWTNS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
   "kpprvnrsdns@hi.A".ts_append_eval %Q|"kpprvnrsdns@hi.A".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
   "ERTCLNS@MAU.M".ts_append_eval %Q|"ERTCLNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
-  "PICTCONNS@HON.Q".ts_append_eval %Q|"PICTCONNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
-  "KNRSDNS@HI.Q".ts_append_eval %Q|"KNRSDNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
-  "PICTSGFNS@HON.Q".ts_append_eval %Q|"PICTSGFNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
+  "PICTCONNS@HON.Q".ts_append_eval %Q|"PICTCONNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
+  "KNRSDNS@HI.Q".ts_append_eval %Q|"KNRSDNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
+  "PICTSGFNS@HON.Q".ts_append_eval %Q|"PICTSGFNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
   "YMED@MAU.A".ts_append_eval %Q|"YMED@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/misc/hud/update/hud_upd.xls"|
   "YMED@HON.A".ts_append_eval %Q|"YMED@HON.A".tsn.load_from "/Volumes/UHEROwork/data/misc/hud/update/hud_upd.xls"|
   "YPROPFA@HAW.A".ts_append_eval %Q|"YPROPFA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YPROPFA@HAW.A".ts_append_eval %Q|"YPROPFA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YPROPFA@HAW.A".ts_append_eval %Q|"YPROPFA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_TRADE@HAW.A".ts_append_eval %Q|"YL_TRADE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
   "YL_OT@HAW.A".ts_append_eval %Q|"YL_OT@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
   "GNIDEF@JP.A".ts_append_eval %Q|"GNIDEF@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
@@ -1484,12 +1484,12 @@ task :reconstruct_db => :environment do
   "N@US.Q".ts_append_eval %Q|"N@US.Q".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_q.xls"|
   "GDP_C_R@US.Q".ts_append_eval %Q|"GDP_C_R@US.Q".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_q.xls"|
   "GDP_C@US.Q".ts_append_eval %Q|"GDP_C@US.Q".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_q.xls"|
-  "YLAGFFOT@HI.A".ts_append_eval %Q|"YLAGFFOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTMV@HI.A".ts_append_eval %Q|"YLRTMV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTFR@HI.A".ts_append_eval %Q|"YLRTFR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTEL@HI.A".ts_append_eval %Q|"YLRTEL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRTBL@HI.A".ts_append_eval %Q|"YLRTBL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLOSHH@HI.A".ts_append_eval %Q|"YLOSHH@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLAGFFOT@HI.A".ts_append_eval %Q|"YLAGFFOT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMV@HI.A".ts_append_eval %Q|"YLRTMV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFR@HI.A".ts_append_eval %Q|"YLRTFR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTEL@HI.A".ts_append_eval %Q|"YLRTEL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTBL@HI.A".ts_append_eval %Q|"YLRTBL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSHH@HI.A".ts_append_eval %Q|"YLOSHH@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROPFA&@HI.A".ts_append_eval %Q|"YPROPFA&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPAGFA&@HI.A".ts_append_eval %Q|"YLPAGFA&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YL_NF&@HI.A".ts_append_eval %Q|"YL_NF&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -1522,96 +1522,96 @@ task :reconstruct_db => :environment do
   "PCSV@HON.Q".ts_eval= %Q|'PCSV@HON.S'.ts.interpolate :quarter, :linear|
   "PC_FDEN@HON.Q".ts_eval= %Q|'PC_FDEN@HON.S'.ts.interpolate :quarter, :linear|
   "YPCBEA@HAW.A".ts_append_eval %Q|"YPCBEA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YPCBEA@HAW.A".ts_append_eval %Q|"YPCBEA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YPCBEA@HAW.A".ts_append_eval %Q|"YPCBEA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAGFF@HI.A".ts_append_eval %Q|"YLAGFF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLAGFF@HI.A".ts_append_eval %Q|"YLAGFF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNND@HI.A".ts_append_eval %Q|"YLMNND@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDXM@HI.A".ts_append_eval %Q|"YLMNNDXM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDLT@HI.A".ts_append_eval %Q|"YLMNNDLT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDPR@HI.A".ts_append_eval %Q|"YLMNNDPR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDPT@HI.A".ts_append_eval %Q|"YLMNNDPT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNNDPL@HI.A".ts_append_eval %Q|"YLMNNDPL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRMV@HON.A".ts_append_eval %Q|"YLMNDRMV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNND@HON.A".ts_append_eval %Q|"YLMNND@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDFD@HON.A".ts_append_eval %Q|"YLMNNDFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDBV@HON.A".ts_append_eval %Q|"YLMNNDBV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDXM@HON.A".ts_append_eval %Q|"YLMNNDXM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDXP@HON.A".ts_append_eval %Q|"YLMNNDXP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDAP@HON.A".ts_append_eval %Q|"YLMNNDAP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNNDPT@HON.A".ts_append_eval %Q|"YLMNNDPT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTEL@HON.A".ts_append_eval %Q|"YLRTEL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLTW@HON.A".ts_append_eval %Q|"YLTW@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLIFMP@HON.A".ts_append_eval %Q|"YLIFMP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLIFBC@HON.A".ts_append_eval %Q|"YLIFBC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLIFTC@HON.A".ts_append_eval %Q|"YLIFTC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLIFDP@HON.A".ts_append_eval %Q|"YLIFDP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRERL@HON.A".ts_append_eval %Q|"YLRERL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLOSRP@HON.A".ts_append_eval %Q|"YLOSRP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLOSPL@HON.A".ts_append_eval %Q|"YLOSPL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDR@HAW.A".ts_append_eval %Q|"YLMNDR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRWD@HAW.A".ts_append_eval %Q|"YLMNDRWD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRNM@HAW.A".ts_append_eval %Q|"YLMNDRNM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRPM@HAW.A".ts_append_eval %Q|"YLMNDRPM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRFB@HAW.A".ts_append_eval %Q|"YLMNDRFB@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLFICR@HAW.A".ts_append_eval %Q|"YLFICR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLFIOT@HAW.A".ts_append_eval %Q|"YLFIOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRELE@HAW.A".ts_append_eval %Q|"YLRELE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLADAD@HAW.A".ts_append_eval %Q|"YLADAD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLCTHV@MAU.A".ts_append_eval %Q|"YLCTHV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLCTSP@MAU.A".ts_append_eval %Q|"YLCTSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNDR@MAU.A".ts_append_eval %Q|"YLMNDR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRTCL@MAU.A".ts_append_eval %Q|"YLRTCL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRTSP@MAU.A".ts_append_eval %Q|"YLRTSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLRTGM@MAU.A".ts_append_eval %Q|"YLRTGM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWTA@MAU.A".ts_append_eval %Q|"YLTWTA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWTR@MAU.A".ts_append_eval %Q|"YLTWTR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWTT@MAU.A".ts_append_eval %Q|"YLTWTT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLTWCU@MAU.A".ts_append_eval %Q|"YLTWCU@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLIFMP@MAU.A".ts_append_eval %Q|"YLIFMP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLIFBC@MAU.A".ts_append_eval %Q|"YLIFBC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLIFDP@MAU.A".ts_append_eval %Q|"YLIFDP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLFISE@MAU.A".ts_append_eval %Q|"YLFISE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAFFD@MAU.A".ts_append_eval %Q|"YLAFFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLOSRP@MAU.A".ts_append_eval %Q|"YLOSRP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLOSPL@MAU.A".ts_append_eval %Q|"YLOSPL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLOSMA@MAU.A".ts_append_eval %Q|"YLOSMA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLOSHH@MAU.A".ts_append_eval %Q|"YLOSHH@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAGFF@KAU.A".ts_append_eval %Q|"YLAGFF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLAGFFFO@KAU.A".ts_append_eval %Q|"YLAGFFFO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLAGFFSP@KAU.A".ts_append_eval %Q|"YLAGFFSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLCT@KAU.A".ts_append_eval %Q|"YLCT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTFR@KAU.A".ts_append_eval %Q|"YLRTFR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTEL@KAU.A".ts_append_eval %Q|"YLRTEL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTBL@KAU.A".ts_append_eval %Q|"YLRTBL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTFD@KAU.A".ts_append_eval %Q|"YLRTFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTCL@KAU.A".ts_append_eval %Q|"YLRTCL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTSP@KAU.A".ts_append_eval %Q|"YLRTSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTGM@KAU.A".ts_append_eval %Q|"YLRTGM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTMS@KAU.A".ts_append_eval %Q|"YLRTMS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRTOT@KAU.A".ts_append_eval %Q|"YLRTOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTW@KAU.A".ts_append_eval %Q|"YLTW@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWTA@KAU.A".ts_append_eval %Q|"YLTWTA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWTR@KAU.A".ts_append_eval %Q|"YLTWTR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWTT@KAU.A".ts_append_eval %Q|"YLTWTT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWTG@KAU.A".ts_append_eval %Q|"YLTWTG@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWPL@KAU.A".ts_append_eval %Q|"YLTWPL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWSC@KAU.A".ts_append_eval %Q|"YLTWSC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMA@KAU.A".ts_append_eval %Q|"YLMA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLADWM@KAU.A".ts_append_eval %Q|"YLADWM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLHCNR@KAU.A".ts_append_eval %Q|"YLHCNR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLHCSO@KAU.A".ts_append_eval %Q|"YLHCSO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLAEPF@KAU.A".ts_append_eval %Q|"YLAEPF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLAFFD@KAU.A".ts_append_eval %Q|"YLAFFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLAGFF@HI.A".ts_append_eval %Q|"YLAGFF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNND@HI.A".ts_append_eval %Q|"YLMNND@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDXM@HI.A".ts_append_eval %Q|"YLMNNDXM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDLT@HI.A".ts_append_eval %Q|"YLMNNDLT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPR@HI.A".ts_append_eval %Q|"YLMNNDPR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPT@HI.A".ts_append_eval %Q|"YLMNNDPT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPL@HI.A".ts_append_eval %Q|"YLMNNDPL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMV@HON.A".ts_append_eval %Q|"YLMNDRMV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNND@HON.A".ts_append_eval %Q|"YLMNND@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDFD@HON.A".ts_append_eval %Q|"YLMNNDFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDBV@HON.A".ts_append_eval %Q|"YLMNNDBV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDXM@HON.A".ts_append_eval %Q|"YLMNNDXM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDXP@HON.A".ts_append_eval %Q|"YLMNNDXP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDAP@HON.A".ts_append_eval %Q|"YLMNNDAP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPT@HON.A".ts_append_eval %Q|"YLMNNDPT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTEL@HON.A".ts_append_eval %Q|"YLRTEL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTW@HON.A".ts_append_eval %Q|"YLTW@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFMP@HON.A".ts_append_eval %Q|"YLIFMP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFBC@HON.A".ts_append_eval %Q|"YLIFBC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFTC@HON.A".ts_append_eval %Q|"YLIFTC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFDP@HON.A".ts_append_eval %Q|"YLIFDP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERL@HON.A".ts_append_eval %Q|"YLRERL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSRP@HON.A".ts_append_eval %Q|"YLOSRP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSPL@HON.A".ts_append_eval %Q|"YLOSPL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDR@HAW.A".ts_append_eval %Q|"YLMNDR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRWD@HAW.A".ts_append_eval %Q|"YLMNDRWD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRNM@HAW.A".ts_append_eval %Q|"YLMNDRNM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRPM@HAW.A".ts_append_eval %Q|"YLMNDRPM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFB@HAW.A".ts_append_eval %Q|"YLMNDRFB@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFICR@HAW.A".ts_append_eval %Q|"YLFICR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIOT@HAW.A".ts_append_eval %Q|"YLFIOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRELE@HAW.A".ts_append_eval %Q|"YLRELE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLADAD@HAW.A".ts_append_eval %Q|"YLADAD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTHV@MAU.A".ts_append_eval %Q|"YLCTHV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTSP@MAU.A".ts_append_eval %Q|"YLCTSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDR@MAU.A".ts_append_eval %Q|"YLMNDR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTCL@MAU.A".ts_append_eval %Q|"YLRTCL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTSP@MAU.A".ts_append_eval %Q|"YLRTSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGM@MAU.A".ts_append_eval %Q|"YLRTGM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTA@MAU.A".ts_append_eval %Q|"YLTWTA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTR@MAU.A".ts_append_eval %Q|"YLTWTR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTT@MAU.A".ts_append_eval %Q|"YLTWTT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWCU@MAU.A".ts_append_eval %Q|"YLTWCU@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFMP@MAU.A".ts_append_eval %Q|"YLIFMP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFBC@MAU.A".ts_append_eval %Q|"YLIFBC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFDP@MAU.A".ts_append_eval %Q|"YLIFDP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFISE@MAU.A".ts_append_eval %Q|"YLFISE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAFFD@MAU.A".ts_append_eval %Q|"YLAFFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSRP@MAU.A".ts_append_eval %Q|"YLOSRP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSPL@MAU.A".ts_append_eval %Q|"YLOSPL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSMA@MAU.A".ts_append_eval %Q|"YLOSMA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSHH@MAU.A".ts_append_eval %Q|"YLOSHH@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFF@KAU.A".ts_append_eval %Q|"YLAGFF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFO@KAU.A".ts_append_eval %Q|"YLAGFFFO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFSP@KAU.A".ts_append_eval %Q|"YLAGFFSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCT@KAU.A".ts_append_eval %Q|"YLCT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFR@KAU.A".ts_append_eval %Q|"YLRTFR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTEL@KAU.A".ts_append_eval %Q|"YLRTEL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTBL@KAU.A".ts_append_eval %Q|"YLRTBL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTFD@KAU.A".ts_append_eval %Q|"YLRTFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTCL@KAU.A".ts_append_eval %Q|"YLRTCL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTSP@KAU.A".ts_append_eval %Q|"YLRTSP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGM@KAU.A".ts_append_eval %Q|"YLRTGM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMS@KAU.A".ts_append_eval %Q|"YLRTMS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTOT@KAU.A".ts_append_eval %Q|"YLRTOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTW@KAU.A".ts_append_eval %Q|"YLTW@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTA@KAU.A".ts_append_eval %Q|"YLTWTA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTR@KAU.A".ts_append_eval %Q|"YLTWTR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTT@KAU.A".ts_append_eval %Q|"YLTWTT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWTG@KAU.A".ts_append_eval %Q|"YLTWTG@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWPL@KAU.A".ts_append_eval %Q|"YLTWPL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSC@KAU.A".ts_append_eval %Q|"YLTWSC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMA@KAU.A".ts_append_eval %Q|"YLMA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLADWM@KAU.A".ts_append_eval %Q|"YLADWM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCNR@KAU.A".ts_append_eval %Q|"YLHCNR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCSO@KAU.A".ts_append_eval %Q|"YLHCSO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEPF@KAU.A".ts_append_eval %Q|"YLAEPF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAFFD@KAU.A".ts_append_eval %Q|"YLAFFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "KRSGFNS_NMC@HAW.Q".ts_append_eval %Q|"KRSGFNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
   "OCUP%NS@MAU.M".ts_append_eval %Q|"OCUP%NS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd2.xls"|
   "TGRWTNS@MAU.A".ts_append_eval %Q|"TGRWTNS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
   "TGRSINS@MAU.A".ts_append_eval %Q|"TGRSINS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
   "YDIV@HI.A".ts_append_eval %Q|"YDIV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YDIV@HI.A".ts_append_eval %Q|"YDIV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YDIV@HI.A".ts_append_eval %Q|"YDIV@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROP@HI.A".ts_append_eval %Q|"YPROP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YPROP@HI.A".ts_append_eval %Q|"YPROP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YPROP@HI.A".ts_append_eval %Q|"YPROP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROPFA@HI.A".ts_append_eval %Q|"YPROPFA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YPROPFA@HI.A".ts_append_eval %Q|"YPROPFA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YPROPFA@HI.A".ts_append_eval %Q|"YPROPFA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROPNF&@HI.Q".ts_append_eval %Q|"YPROPNF&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YDIR&@HI.Q".ts_append_eval %Q|"YDIR&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YTWPER&@HI.Q".ts_append_eval %Q|"YTWPER&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -1645,9 +1645,9 @@ task :reconstruct_db => :environment do
   "PCTRGSMD@HON.M".ts_append_eval %Q|"PCTRGSMD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m.xls"|
   "PC_SH@HON.M".ts_append_eval %Q|"PC_SH@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m.xls"|
   "PC_FDEN@HON.M".ts_append_eval %Q|"PC_FDEN@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m.xls"|
-  "YLAGFFFO@MAU.A".ts_append_eval %Q|"YLAGFFFO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAGFFFS@MAU.A".ts_append_eval %Q|"YLAGFFFS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMI@MAU.A".ts_append_eval %Q|"YLMI@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YLAGFFFO@MAU.A".ts_append_eval %Q|"YLAGFFFO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFFS@MAU.A".ts_append_eval %Q|"YLAGFFFS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMI@MAU.A".ts_append_eval %Q|"YLMI@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "KVTSFM@KAU.A".ts_append_eval %Q|"KVTSFM@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "YNETR&@HON.A".ts_append_eval %Q|"YNETR&@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YDIR&@HON.A".ts_append_eval %Q|"YDIR&@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -1657,16 +1657,16 @@ task :reconstruct_db => :environment do
   "YLPSVMB&@MAU.A".ts_append_eval %Q|"YLPSVMB&@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPSVEN&@MAU.A".ts_append_eval %Q|"YLPSVEN&@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPMDWD&@KAU.A".ts_append_eval %Q|"YLPMDWD&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
-  "YLAGFF@HI.Q".ts_append_eval %Q|"YLAGFF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-  "YLMI@HI.Q".ts_append_eval %Q|"YLMI@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-  "YLUT@HI.Q".ts_append_eval %Q|"YLUT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-  "YLRT@HI.Q".ts_append_eval %Q|"YLRT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-  "YLMA@HI.Q".ts_append_eval %Q|"YLMA@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-  "YLAGFFSP@HON.A".ts_append_eval %Q|"YLAGFFSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRTGM@HAW.A".ts_append_eval %Q|"YLRTGM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTMV@MAU.A".ts_append_eval %Q|"YLRTMV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAGFFOT@HAW.A".ts_append_eval %Q|"YLAGFFOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAGFFOT@MAU.A".ts_append_eval %Q|"YLAGFFOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YLAGFF@HI.Q".ts_append_eval %Q|"YLAGFF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+  "YLMI@HI.Q".ts_append_eval %Q|"YLMI@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+  "YLUT@HI.Q".ts_append_eval %Q|"YLUT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+  "YLRT@HI.Q".ts_append_eval %Q|"YLRT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+  "YLMA@HI.Q".ts_append_eval %Q|"YLMA@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+  "YLAGFFSP@HON.A".ts_append_eval %Q|"YLAGFFSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGM@HAW.A".ts_append_eval %Q|"YLRTGM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTMV@MAU.A".ts_append_eval %Q|"YLRTMV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFOT@HAW.A".ts_append_eval %Q|"YLAGFFOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFOT@MAU.A".ts_append_eval %Q|"YLAGFFOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "VDAYJPNS@KAU.M".ts_append_eval %Q|"VDAYJPNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "VISUSWNS@HI.M".ts_append_eval %Q|"VISUSWNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "VISUSENS@HAW.M".ts_append_eval %Q|"VISUSENS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
@@ -1827,48 +1827,48 @@ task :reconstruct_db => :environment do
    "WHRTNS&@HI.M".ts_append_eval %Q|"WHRTNS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
    "NMIGCNM@HI.A".ts_append_eval %Q|"NMIGCNM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/census/update/census_upd_reformatted.xls"|
    "ERTGMDSNS@MAU.M".ts_append_eval %Q|"ERTGMDSNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
-   "KNRSDNS@HAW.Q".ts_append_eval %Q|"KNRSDNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
-   "KNRSDNS@HON.Q".ts_append_eval %Q|"KNRSDNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
-   "KNRSDSGFNS@HI.Q".ts_append_eval %Q|"KNRSDSGFNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
+   "KNRSDNS@HAW.Q".ts_append_eval %Q|"KNRSDNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
+   "KNRSDNS@HON.Q".ts_append_eval %Q|"KNRSDNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
+   "KNRSDSGFNS@HI.Q".ts_append_eval %Q|"KNRSDSGFNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
    "KBSGFNS@HON.M".ts_append_eval %Q|"KBSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/hbr/update/hbr_upd_m.csv"|
    "KBCONNS@HON.M".ts_append_eval %Q|"KBCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/hbr/update/hbr_upd_m.csv"|
    "PAKBSGF@HON.M".ts_append_eval %Q|"PAKBSGF@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/hbr/update/hbr_upd_m.csv"|
    "PAKBCON@HON.M".ts_append_eval %Q|"PAKBCON@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/hbr/update/hbr_upd_m.csv"|
    "YSOCSEC@HI.Q".ts_append_eval %Q|"YSOCSEC@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-   "YSOCSEC@HI.Q".ts_append_eval %Q|"YSOCSEC@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YSOCSEC@HI.Q".ts_append_eval %Q|"YSOCSEC@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YSOCSECPR@HI.Q".ts_append_eval %Q|"YSOCSECPR@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-   "YSOCSECPR@HI.Q".ts_append_eval %Q|"YSOCSECPR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YSOCSECPR@HI.Q".ts_append_eval %Q|"YSOCSECPR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YRESADJ@HI.Q".ts_append_eval %Q|"YRESADJ@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-   "YRESADJ@HI.Q".ts_append_eval %Q|"YRESADJ@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YRESADJ@HI.Q".ts_append_eval %Q|"YRESADJ@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YNETR@HI.Q".ts_append_eval %Q|"YNETR@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-   "YNETR@HI.Q".ts_append_eval %Q|"YNETR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YNETR@HI.Q".ts_append_eval %Q|"YNETR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YDIV@HI.Q".ts_append_eval %Q|"YDIV@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-   "YDIV@HI.Q".ts_append_eval %Q|"YDIV@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YDIV@HI.Q".ts_append_eval %Q|"YDIV@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YTRNSF@HI.Q".ts_append_eval %Q|"YTRNSF@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-   "YTRNSF@HI.Q".ts_append_eval %Q|"YTRNSF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YTRNSF@HI.Q".ts_append_eval %Q|"YTRNSF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YLFI@HI.A".ts_append_eval %Q|"YLFI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-   "YLFI@HI.A".ts_append_eval %Q|"YLFI@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+   "YLFI@HI.A".ts_append_eval %Q|"YLFI@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YSOCSEC@HON.A".ts_append_eval %Q|"YSOCSEC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YSOCSEC@HON.A".ts_append_eval %Q|"YSOCSEC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YSOCSEC@HON.A".ts_append_eval %Q|"YSOCSEC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YRESADJ@HON.A".ts_append_eval %Q|"YRESADJ@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YRESADJ@HON.A".ts_append_eval %Q|"YRESADJ@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YRESADJ@HON.A".ts_append_eval %Q|"YRESADJ@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROPFA@HON.A".ts_append_eval %Q|"YPROPFA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YPROPFA@HON.A".ts_append_eval %Q|"YPROPFA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YPROPFA@HON.A".ts_append_eval %Q|"YPROPFA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROPNF@HON.A".ts_append_eval %Q|"YPROPNF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YPROPNF@HON.A".ts_append_eval %Q|"YPROPNF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YPROPNF@HON.A".ts_append_eval %Q|"YPROPNF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVST@HON.A".ts_append_eval %Q|"YLGVST@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLGVST@HON.A".ts_append_eval %Q|"YLGVST@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YLGVST@HON.A".ts_append_eval %Q|"YLGVST@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVLC@HON.A".ts_append_eval %Q|"YLGVLC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLGVLC@HON.A".ts_append_eval %Q|"YLGVLC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YLGVLC@HON.A".ts_append_eval %Q|"YLGVLC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLPS@HON.A".ts_append_eval %Q|"YLPS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLPS@HON.A".ts_append_eval %Q|"YLPS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YLPS@HON.A".ts_append_eval %Q|"YLPS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL@HAW.A".ts_append_eval %Q|"YL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-   "YL@HAW.A".ts_append_eval %Q|"YL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YL@HAW.A".ts_append_eval %Q|"YL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YSOCSEC@HAW.A".ts_append_eval %Q|"YSOCSEC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-   "YSOCSEC@HAW.A".ts_append_eval %Q|"YSOCSEC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLCT@HAW.A".ts_append_eval %Q|"YLCT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YSOCSEC@HAW.A".ts_append_eval %Q|"YSOCSEC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLCT@HAW.A".ts_append_eval %Q|"YLCT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVLC@KAU.A".ts_append_eval %Q|"YLGVLC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YLGVLC@KAU.A".ts_append_eval %Q|"YLGVLC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YLGVLC@KAU.A".ts_append_eval %Q|"YLGVLC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "GDP_IIVG_R@JP.A".ts_append_eval %Q|"GDP_IIVG_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "GDPPC_R@JP.A".ts_append_eval %Q|"GDPPC_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "GDP_IFXG@JP.A".ts_append_eval %Q|"GDP_IFXG@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
@@ -2017,27 +2017,27 @@ task :reconstruct_db => :environment do
    "UICINS@WPHU.W".ts_append_eval %Q|"UICINS@WPHU.W".tsn.load_from "/Volumes/UHEROwork/data/misc/uiclaims/update/uiclaims_upd.xls"|
    "PCSV_MD@HON.Q".ts_eval= %Q|'PCSV_MD@HON.S'.ts.interpolate :quarter, :linear|
    "YL_NF@HAW.A".ts_append_eval %Q|"YL_NF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-   "YL_NF@HAW.A".ts_append_eval %Q|"YL_NF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YL_NF@HAW.A".ts_append_eval %Q|"YL_NF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "NMIG@KAU.A".ts_append_eval %Q|"NMIG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/census/update/census_upd_reformatted.xls"|
-   "YLMNNDXP@HI.A".ts_append_eval %Q|"YLMNNDXP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLMNNDAP@HI.A".ts_append_eval %Q|"YLMNNDAP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLMNNDPA@HI.A".ts_append_eval %Q|"YLMNNDPA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLFICR@HI.A".ts_append_eval %Q|"YLFICR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLMNNDLT@HON.A".ts_append_eval %Q|"YLMNNDLT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLFISE@HON.A".ts_append_eval %Q|"YLFISE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLAERE@HON.A".ts_append_eval %Q|"YLAERE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMNDRMC@HAW.A".ts_append_eval %Q|"YLMNDRMC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMNDRFR@HAW.A".ts_append_eval %Q|"YLMNDRFR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLIFDP@HAW.A".ts_append_eval %Q|"YLIFDP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLADWM@HAW.A".ts_append_eval %Q|"YLADWM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLED@HAW.A".ts_append_eval %Q|"YLED@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMNDRWD@MAU.A".ts_append_eval %Q|"YLMNDRWD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLWT@KAU.A".ts_append_eval %Q|"YLWT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-   "YLAERE@KAU.A".ts_append_eval %Q|"YLAERE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YLMNNDXP@HI.A".ts_append_eval %Q|"YLMNNDXP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDAP@HI.A".ts_append_eval %Q|"YLMNNDAP@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDPA@HI.A".ts_append_eval %Q|"YLMNNDPA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLFICR@HI.A".ts_append_eval %Q|"YLFICR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDLT@HON.A".ts_append_eval %Q|"YLMNNDLT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLFISE@HON.A".ts_append_eval %Q|"YLFISE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAERE@HON.A".ts_append_eval %Q|"YLAERE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNDRMC@HAW.A".ts_append_eval %Q|"YLMNDRMC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNDRFR@HAW.A".ts_append_eval %Q|"YLMNDRFR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFDP@HAW.A".ts_append_eval %Q|"YLIFDP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLADWM@HAW.A".ts_append_eval %Q|"YLADWM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLED@HAW.A".ts_append_eval %Q|"YLED@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNDRWD@MAU.A".ts_append_eval %Q|"YLMNDRWD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLWT@KAU.A".ts_append_eval %Q|"YLWT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAERE@KAU.A".ts_append_eval %Q|"YLAERE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "PCCMDR@HON.Q".ts_eval= %Q|'PCCMDR@HON.S'.ts.interpolate :quarter, :linear|
    "PCHSFUGS@HON.S".ts_append_eval %Q|"PCHSFUGS@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "YSOCSEC@HI.A".ts_append_eval %Q|"YSOCSEC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-   "YSOCSEC@HI.A".ts_append_eval %Q|"YSOCSEC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+   "YSOCSEC@HI.A".ts_append_eval %Q|"YSOCSEC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLPSVAU&@KAU.A".ts_append_eval %Q|"YLPSVAU&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
    "YLPSVMR&@KAU.A".ts_append_eval %Q|"YLPSVMR&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
    "YLPSVAM&@KAU.A".ts_append_eval %Q|"YLPSVAM&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -2094,16 +2094,16 @@ task :reconstruct_db => :environment do
    "GDP_CS_R@US.Q".ts_append_eval %Q|"GDP_CS_R@US.Q".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_q.xls"|
    "GDP_CS@US.Q".ts_append_eval %Q|"GDP_CS@US.Q".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_q.xls"|
    "CAPUMN@US.Q".ts_append_eval %Q|"CAPUMN@US.Q".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_q.xls"|
-   "YLWT@HI.Q".ts_append_eval %Q|"YLWT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLTW@HI.Q".ts_append_eval %Q|"YLTW@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLIF@HI.Q".ts_append_eval %Q|"YLIF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLFI@HI.Q".ts_append_eval %Q|"YLFI@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLRE@HI.Q".ts_append_eval %Q|"YLRE@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLPS@HI.Q".ts_append_eval %Q|"YLPS@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLAD@HI.Q".ts_append_eval %Q|"YLAD@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLED@HI.Q".ts_append_eval %Q|"YLED@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLHC@HI.Q".ts_append_eval %Q|"YLHC@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "KPGOVNS@HI.Q".ts_append_eval %Q|"KPGOVNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
+   "YLWT@HI.Q".ts_append_eval %Q|"YLWT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLTW@HI.Q".ts_append_eval %Q|"YLTW@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLIF@HI.Q".ts_append_eval %Q|"YLIF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLFI@HI.Q".ts_append_eval %Q|"YLFI@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLRE@HI.Q".ts_append_eval %Q|"YLRE@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLPS@HI.Q".ts_append_eval %Q|"YLPS@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLAD@HI.Q".ts_append_eval %Q|"YLAD@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLED@HI.Q".ts_append_eval %Q|"YLED@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLHC@HI.Q".ts_append_eval %Q|"YLHC@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "KPGOVNS@HI.Q".ts_append_eval %Q|"KPGOVNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
    "PAKRSGFNS@HAW.Q".ts_append_eval %Q|"PAKRSGFNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
    "PAKRCONNS@HAW.Q".ts_append_eval %Q|"PAKRCONNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
    "PMKRCONNS@KAU.Q".ts_append_eval %Q|"PMKRCONNS@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
@@ -2119,15 +2119,15 @@ task :reconstruct_db => :environment do
    "GDP_IIVG@JP.A".ts_append_eval %Q|"GDP_IIVG@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "VXPDUSWFB@HI.A".ts_append_eval %Q|"VXPDUSWFB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|
    "VXPDUSWEN@HI.A".ts_append_eval %Q|"VXPDUSWEN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|
-   "YLAGFFFS@HON.A".ts_append_eval %Q|"YLAGFFFS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMIOG@HON.A".ts_append_eval %Q|"YLMIOG@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMIMI@HON.A".ts_append_eval %Q|"YLMIMI@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMISP@HON.A".ts_append_eval %Q|"YLMISP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLCTHV@HON.A".ts_append_eval %Q|"YLCTHV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMNDRPM@HON.A".ts_append_eval %Q|"YLMNDRPM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLTWCU@HON.A".ts_append_eval %Q|"YLTWCU@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLIFOT@HON.A".ts_append_eval %Q|"YLIFOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMNDRMS@KAU.A".ts_append_eval %Q|"YLMNDRMS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YLAGFFFS@HON.A".ts_append_eval %Q|"YLAGFFFS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMIOG@HON.A".ts_append_eval %Q|"YLMIOG@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMIMI@HON.A".ts_append_eval %Q|"YLMIMI@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMISP@HON.A".ts_append_eval %Q|"YLMISP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLCTHV@HON.A".ts_append_eval %Q|"YLCTHV@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNDRPM@HON.A".ts_append_eval %Q|"YLMNDRPM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWCU@HON.A".ts_append_eval %Q|"YLTWCU@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFOT@HON.A".ts_append_eval %Q|"YLIFOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNDRMS@KAU.A".ts_append_eval %Q|"YLMNDRMS@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "TRCVNS@HI.M".ts_append_eval %Q|"TRCVNS@HI.M".tsn.load_from "   /Volumes/UHEROwork/data/tax/update/collec_upd.csv"|
    "TRIHNS@HI.M".ts_append_eval %Q|"TRIHNS@HI.M".tsn.load_from "   /Volumes/UHEROwork/data/tax/update/collec_upd.csv"|
    "TRGLNS@HAW.M".ts_append_eval %Q|"TRGLNS@HAW.M".tsn.load_from "   /Volumes/UHEROwork/data/tax/update/collec_upd.csv"|
@@ -2371,8 +2371,8 @@ task :reconstruct_db => :environment do
    "TGBCTNS@MAU.M".ts_append_eval %Q|"TGBCTNS@MAU.M".tsn.load_from "    /Volumes/UHEROwork/data/tax/update/ge_upd.csv"|
    "TGBCTNS@HON.M".ts_append_eval %Q|"TGBCTNS@HON.M".tsn.load_from "    /Volumes/UHEROwork/data/tax/update/ge_upd.csv"|
    "TDCTTTNS@HI.M".ts_append_eval %Q|"TDCTTTNS@HI.M".tsn.load_from "   /Volumes/UHEROwork/data/tax/update/collec_upd.csv"|
-   "YLAF@HI.Q".ts_append_eval %Q|"YLAF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLOS@HI.Q".ts_append_eval %Q|"YLOS@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YLAF@HI.Q".ts_append_eval %Q|"YLAF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLOS@HI.Q".ts_append_eval %Q|"YLOS@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "YLPAGFF&@HI.Q".ts_append_eval %Q|"YLPAGFF&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
    "YLPMI&@HI.Q".ts_append_eval %Q|"YLPMI&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
    "YLPC&@HI.Q".ts_append_eval %Q|"YLPC&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -2408,20 +2408,20 @@ task :reconstruct_db => :environment do
    "AAMC@HI.A".ts_append_eval %Q|"AAMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
    "AA@HON.A".ts_append_eval %Q|"AA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
    "AASU@KAU.A".ts_append_eval %Q|"AASU@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-   "YCAGFFFO@HI.A".ts_append_eval %Q|"YCAGFFFO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCRTFR@HI.A".ts_append_eval %Q|"YCRTFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCRTEL@HI.A".ts_append_eval %Q|"YCRTEL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCRTBL@HI.A".ts_append_eval %Q|"YCRTBL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCRTGA@HI.A".ts_append_eval %Q|"YCRTGA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCGVFD@HI.A".ts_append_eval %Q|"YCGVFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCGVML@HI.A".ts_append_eval %Q|"YCGVML@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YC_GVSL@HI.A".ts_append_eval %Q|"YC_GVSL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCGVST@HI.A".ts_append_eval %Q|"YCGVST@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCMIMI@HON.A".ts_append_eval %Q|"YCMIMI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCMNDRNM@HON.A".ts_append_eval %Q|"YCMNDRNM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCMNDRPM@HON.A".ts_append_eval %Q|"YCMNDRPM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCMNDRTR@HON.A".ts_append_eval %Q|"YCMNDRTR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCIFPB@HON.A".ts_append_eval %Q|"YCIFPB@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+   "YCAGFFFO@HI.A".ts_append_eval %Q|"YCAGFFFO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCRTFR@HI.A".ts_append_eval %Q|"YCRTFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCRTEL@HI.A".ts_append_eval %Q|"YCRTEL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCRTBL@HI.A".ts_append_eval %Q|"YCRTBL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCRTGA@HI.A".ts_append_eval %Q|"YCRTGA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCGVFD@HI.A".ts_append_eval %Q|"YCGVFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCGVML@HI.A".ts_append_eval %Q|"YCGVML@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YC_GVSL@HI.A".ts_append_eval %Q|"YC_GVSL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCGVST@HI.A".ts_append_eval %Q|"YCGVST@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCMIMI@HON.A".ts_append_eval %Q|"YCMIMI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCMNDRNM@HON.A".ts_append_eval %Q|"YCMNDRNM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCMNDRPM@HON.A".ts_append_eval %Q|"YCMNDRPM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCMNDRTR@HON.A".ts_append_eval %Q|"YCMNDRTR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCIFPB@HON.A".ts_append_eval %Q|"YCIFPB@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
    "ANPI@HAW.A".ts_append_eval %Q|"ANPI@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
    "ANVG@HAW.A".ts_append_eval %Q|"ANVG@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
    "ANCF@HAW.A".ts_append_eval %Q|"ANCF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -2434,24 +2434,24 @@ task :reconstruct_db => :environment do
    "ANTR@KAU.A".ts_append_eval %Q|"ANTR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
    "ANFL@KAU.A".ts_append_eval %Q|"ANFL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
    "AVC@MAU   .A".ts_append_eval %Q|"AVC@MAU   .A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-   "YCCT@HON.A".ts_append_eval %Q|"YCCT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCAFAC@HON.A".ts_append_eval %Q|"YCAFAC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCOS@HON.A".ts_append_eval %Q|"YCOS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YCGV@HON.A".ts_append_eval %Q|"YCGV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-   "YLMNND@HI.Q".ts_append_eval %Q|"YLMNND@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YOTLABSS@HON.A".ts_append_eval %Q|"YOTLABSS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YCCT@HON.A".ts_append_eval %Q|"YCCT@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCAFAC@HON.A".ts_append_eval %Q|"YCAFAC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCOS@HON.A".ts_append_eval %Q|"YCOS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YCGV@HON.A".ts_append_eval %Q|"YCGV@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+   "YLMNND@HI.Q".ts_append_eval %Q|"YLMNND@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YOTLABSS@HON.A".ts_append_eval %Q|"YOTLABSS@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLAGFA@HON.A".ts_append_eval %Q|"YLAGFA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLAGFA@HON.A".ts_append_eval %Q|"YLAGFA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YLAGFA@HON.A".ts_append_eval %Q|"YLAGFA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLAGFF@HON.A".ts_append_eval %Q|"YLAGFF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLAGFF@HON.A".ts_append_eval %Q|"YLAGFF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YLAGFF@HON.A".ts_append_eval %Q|"YLAGFF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLMI@HON.A".ts_append_eval %Q|"YLMI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLMI@HON.A".ts_append_eval %Q|"YLMI@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YLMI@HON.A".ts_append_eval %Q|"YLMI@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLMN@HON.A".ts_append_eval %Q|"YLMN@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YLMN@HON.A".ts_append_eval %Q|"YLMN@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMNNDCH@HON.A".ts_append_eval %Q|"YLMNNDCH@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLTWSC@HON.A".ts_append_eval %Q|"YLTWSC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLTWSP@HON.A".ts_append_eval %Q|"YLTWSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLFI@KAU.A".ts_append_eval %Q|"YLFI@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YLMN@HON.A".ts_append_eval %Q|"YLMN@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDCH@HON.A".ts_append_eval %Q|"YLMNNDCH@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWSC@HON.A".ts_append_eval %Q|"YLTWSC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWSP@HON.A".ts_append_eval %Q|"YLTWSP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLFI@KAU.A".ts_append_eval %Q|"YLFI@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "EFIOTNS&@HI.M".ts_append_eval %Q|"EFIOTNS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA1.xls"|
    "EGVFDAFNS&@HI.M".ts_append_eval %Q|"EGVFDAFNS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA1.xls"|
    "EGVFDAFNS&@HON.M".ts_append_eval %Q|"EGVFDAFNS&@HON.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA1.xls"|
@@ -2497,72 +2497,72 @@ task :reconstruct_db => :environment do
    "kpprvrsdns@nbi.A".ts_append_eval %Q|"kpprvrsdns@nbi.A".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
    "kpprvrsdns@hon.A".ts_append_eval %Q|"kpprvrsdns@hon.A".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
    "kpprvrsdns@hi.A".ts_append_eval %Q|"kpprvrsdns@hi.A".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
-   "KNRSDNS@KAU.Q".ts_append_eval %Q|"KNRSDNS@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
-   "KNRSDNS@MAU.Q".ts_append_eval %Q|"KNRSDNS@MAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
+   "KNRSDNS@KAU.Q".ts_append_eval %Q|"KNRSDNS@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
+   "KNRSDNS@MAU.Q".ts_append_eval %Q|"KNRSDNS@MAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
    "YMED@HI.A".ts_append_eval %Q|"YMED@HI.A".tsn.load_from "/Volumes/UHEROwork/data/misc/hud/update/hud_upd.xls"|
    "YMED@HAW.A".ts_append_eval %Q|"YMED@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/misc/hud/update/hud_upd.xls"|
    "YLGVST@HAW.A".ts_append_eval %Q|"YLGVST@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-   "YLGVST@HAW.A".ts_append_eval %Q|"YLGVST@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMN@HAW.A".ts_append_eval %Q|"YLMN@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YLGVST@HAW.A".ts_append_eval %Q|"YLGVST@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMN@HAW.A".ts_append_eval %Q|"YLMN@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL_TU@HAW.A".ts_append_eval %Q|"YL_TU@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-   "YLAF@HAW.A".ts_append_eval %Q|"YLAF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLAFAC@HAW.A".ts_append_eval %Q|"YLAFAC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLAFFD@HAW.A".ts_append_eval %Q|"YLAFFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLPS@HAW.A".ts_append_eval %Q|"YLPS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YLAF@HAW.A".ts_append_eval %Q|"YLAF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAFAC@HAW.A".ts_append_eval %Q|"YLAFAC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAFFD@HAW.A".ts_append_eval %Q|"YLAFFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLPS@HAW.A".ts_append_eval %Q|"YLPS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL@MAU.A".ts_append_eval %Q|"YL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YL@MAU.A".ts_append_eval %Q|"YL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YL@MAU.A".ts_append_eval %Q|"YL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YSOCSEC@MAU.A".ts_append_eval %Q|"YSOCSEC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YSOCSEC@MAU.A".ts_append_eval %Q|"YSOCSEC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YSOCSEC@MAU.A".ts_append_eval %Q|"YSOCSEC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YRESADJ@MAU.A".ts_append_eval %Q|"YRESADJ@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YRESADJ@MAU.A".ts_append_eval %Q|"YRESADJ@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YRESADJ@MAU.A".ts_append_eval %Q|"YRESADJ@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YNETR@MAU.A".ts_append_eval %Q|"YNETR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YNETR@MAU.A".ts_append_eval %Q|"YNETR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YNETR@MAU.A".ts_append_eval %Q|"YNETR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YDIV@MAU.A".ts_append_eval %Q|"YDIV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YDIV@MAU.A".ts_append_eval %Q|"YDIV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YDIV@MAU.A".ts_append_eval %Q|"YDIV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YTRNSF@MAU.A".ts_append_eval %Q|"YTRNSF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YTRNSF@MAU.A".ts_append_eval %Q|"YTRNSF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YTRNSF@MAU.A".ts_append_eval %Q|"YTRNSF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YWAGE@MAU.A".ts_append_eval %Q|"YWAGE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YWAGE@MAU.A".ts_append_eval %Q|"YWAGE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YWAGE@MAU.A".ts_append_eval %Q|"YWAGE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YOTLAB@MAU.A".ts_append_eval %Q|"YOTLAB@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YOTLAB@MAU.A".ts_append_eval %Q|"YOTLAB@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YOTLAB@MAU.A".ts_append_eval %Q|"YOTLAB@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROP@MAU.A".ts_append_eval %Q|"YPROP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YPROP@MAU.A".ts_append_eval %Q|"YPROP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YPROP@MAU.A".ts_append_eval %Q|"YPROP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROPFA@MAU.A".ts_append_eval %Q|"YPROPFA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YPROPFA@MAU.A".ts_append_eval %Q|"YPROPFA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YPROPFA@MAU.A".ts_append_eval %Q|"YPROPFA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROPNF@MAU.A".ts_append_eval %Q|"YPROPNF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YPROPNF@MAU.A".ts_append_eval %Q|"YPROPNF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YPROPNF@MAU.A".ts_append_eval %Q|"YPROPNF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL_NF@MAU.A".ts_append_eval %Q|"YL_NF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YL_NF@MAU.A".ts_append_eval %Q|"YL_NF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YL_NF@MAU.A".ts_append_eval %Q|"YL_NF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL_PR@MAU.A".ts_append_eval %Q|"YL_PR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YL_PR@MAU.A".ts_append_eval %Q|"YL_PR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YL_PR@MAU.A".ts_append_eval %Q|"YL_PR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVFD@MAU.A".ts_append_eval %Q|"YLGVFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YLGVFD@MAU.A".ts_append_eval %Q|"YLGVFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YLGVFD@MAU.A".ts_append_eval %Q|"YLGVFD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVML@MAU.A".ts_append_eval %Q|"YLGVML@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YLGVML@MAU.A".ts_append_eval %Q|"YLGVML@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YLGVML@MAU.A".ts_append_eval %Q|"YLGVML@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVST@MAU.A".ts_append_eval %Q|"YLGVST@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YLGVST@MAU.A".ts_append_eval %Q|"YLGVST@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YLGVST@MAU.A".ts_append_eval %Q|"YLGVST@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGVLC@MAU.A".ts_append_eval %Q|"YLGVLC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YLGVLC@MAU.A".ts_append_eval %Q|"YLGVLC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+   "YLGVLC@MAU.A".ts_append_eval %Q|"YLGVLC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPCBEA@KAU.A".ts_append_eval %Q|"YPCBEA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YPCBEA@KAU.A".ts_append_eval %Q|"YPCBEA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YPCBEA@KAU.A".ts_append_eval %Q|"YPCBEA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL@KAU.A".ts_append_eval %Q|"YL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YL@KAU.A".ts_append_eval %Q|"YL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YL@KAU.A".ts_append_eval %Q|"YL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YRESADJ@KAU.A".ts_append_eval %Q|"YRESADJ@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YRESADJ@KAU.A".ts_append_eval %Q|"YRESADJ@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YRESADJ@KAU.A".ts_append_eval %Q|"YRESADJ@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YNETR@KAU.A".ts_append_eval %Q|"YNETR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YNETR@KAU.A".ts_append_eval %Q|"YNETR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YNETR@KAU.A".ts_append_eval %Q|"YNETR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROP@KAU.A".ts_append_eval %Q|"YPROP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YPROP@KAU.A".ts_append_eval %Q|"YPROP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YPROP@KAU.A".ts_append_eval %Q|"YPROP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROPFA@KAU.A".ts_append_eval %Q|"YPROPFA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YPROPFA@KAU.A".ts_append_eval %Q|"YPROPFA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YPROPFA@KAU.A".ts_append_eval %Q|"YPROPFA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YPROPNF@KAU.A".ts_append_eval %Q|"YPROPNF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YPROPNF@KAU.A".ts_append_eval %Q|"YPROPNF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YPROPNF@KAU.A".ts_append_eval %Q|"YPROPNF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLAGFA@KAU.A".ts_append_eval %Q|"YLAGFA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YLAGFA@KAU.A".ts_append_eval %Q|"YLAGFA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YLAGFA@KAU.A".ts_append_eval %Q|"YLAGFA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL_PR@KAU.A".ts_append_eval %Q|"YL_PR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YL_PR@KAU.A".ts_append_eval %Q|"YL_PR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YL_PR@KAU.A".ts_append_eval %Q|"YL_PR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLGV@KAU.A".ts_append_eval %Q|"YLGV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-   "YLGV@KAU.A".ts_append_eval %Q|"YLGV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YLGV@KAU.A".ts_append_eval %Q|"YLGV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "GDP_IM@JP.A".ts_append_eval %Q|"GDP_IM@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "GDP_EX_R@JP.A".ts_append_eval %Q|"GDP_EX_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "KNNIND@HON.M".ts_append_eval %Q|"KNNIND@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/permits/update/permits_upd.xls"|
@@ -2628,7 +2628,7 @@ task :reconstruct_db => :environment do
    "TGBSVNS@KAU.A".ts_append_eval %Q|"TGBSVNS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
    "TGBTHNS@KAU.A".ts_append_eval %Q|"TGBTHNS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
    "TGBITNS@KAU.A".ts_append_eval %Q|"TGBITNS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
-   "YLAFFD@HI.A".ts_append_eval %Q|"YLAFFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+   "YLAFFD@HI.A".ts_append_eval %Q|"YLAFFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YLAFFD@HI.A".ts_append_eval %Q|"YLAFFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
    "YLPGSL&@HI.Q".ts_append_eval %Q|"YLPGSL&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
    "YLPAGFFFOT&@HON.A".ts_append_eval %Q|"YLPAGFFFOT&@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -2650,62 +2650,62 @@ task :reconstruct_db => :environment do
    "PAKRCON@KAU.Q".ts_append_eval %Q|"PAKRCON@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
    "PMKRCON@KAU.Q".ts_append_eval %Q|"PMKRCON@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_hist.xls"|
    "YPCBEA@MAU.A".ts_append_eval %Q|"YPCBEA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-   "YPCBEA@MAU.A".ts_append_eval %Q|"YPCBEA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLMNNDCH@HI.A".ts_append_eval %Q|"YLMNNDCH@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLAD@HI.A".ts_append_eval %Q|"YLAD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLADAD@HI.A".ts_append_eval %Q|"YLADAD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLADWM@HI.A".ts_append_eval %Q|"YLADWM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLHCAM@HI.A".ts_append_eval %Q|"YLHCAM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLHCHO@HI.A".ts_append_eval %Q|"YLHCHO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLHCNR@HI.A".ts_append_eval %Q|"YLHCNR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLHCSO@HI.A".ts_append_eval %Q|"YLHCSO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLAEPF@HI.A".ts_append_eval %Q|"YLAEPF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLAEMU@HI.A".ts_append_eval %Q|"YLAEMU@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLAERE@HI.A".ts_append_eval %Q|"YLAERE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLMNDREL@HON.A".ts_append_eval %Q|"YLMNDREL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLRELE@HON.A".ts_append_eval %Q|"YLRELE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLADWM@HON.A".ts_append_eval %Q|"YLADWM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLHCNR@HON.A".ts_append_eval %Q|"YLHCNR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLHCSO@HON.A".ts_append_eval %Q|"YLHCSO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YPCBEA@MAU.A".ts_append_eval %Q|"YPCBEA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDCH@HI.A".ts_append_eval %Q|"YLMNNDCH@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAD@HI.A".ts_append_eval %Q|"YLAD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLADAD@HI.A".ts_append_eval %Q|"YLADAD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLADWM@HI.A".ts_append_eval %Q|"YLADWM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLHCAM@HI.A".ts_append_eval %Q|"YLHCAM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLHCHO@HI.A".ts_append_eval %Q|"YLHCHO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLHCNR@HI.A".ts_append_eval %Q|"YLHCNR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLHCSO@HI.A".ts_append_eval %Q|"YLHCSO@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAEPF@HI.A".ts_append_eval %Q|"YLAEPF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAEMU@HI.A".ts_append_eval %Q|"YLAEMU@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAERE@HI.A".ts_append_eval %Q|"YLAERE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNDREL@HON.A".ts_append_eval %Q|"YLMNDREL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRELE@HON.A".ts_append_eval %Q|"YLRELE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLADWM@HON.A".ts_append_eval %Q|"YLADWM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLHCNR@HON.A".ts_append_eval %Q|"YLHCNR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLHCSO@HON.A".ts_append_eval %Q|"YLHCSO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "YL_GVSL@HON.A".ts_append_eval %Q|"YL_GVSL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YL_GVSL@HON.A".ts_append_eval %Q|"YL_GVSL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-   "YLMNNDFD@HAW.A".ts_append_eval %Q|"YLMNNDFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMNNDBV@HAW.A".ts_append_eval %Q|"YLMNNDBV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMNNDXM@HAW.A".ts_append_eval %Q|"YLMNNDXM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMNNDXP@HAW.A".ts_append_eval %Q|"YLMNNDXP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLTWTW@HAW.A".ts_append_eval %Q|"YLTWTW@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLTWSP@HAW.A".ts_append_eval %Q|"YLTWSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLTWCU@HAW.A".ts_append_eval %Q|"YLTWCU@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLTWWH@HAW.A".ts_append_eval %Q|"YLTWWH@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLIFPB@HAW.A".ts_append_eval %Q|"YLIFPB@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLIFMP@HAW.A".ts_append_eval %Q|"YLIFMP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLIFBC@HAW.A".ts_append_eval %Q|"YLIFBC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLIFTC@HAW.A".ts_append_eval %Q|"YLIFTC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLIFOT@HAW.A".ts_append_eval %Q|"YLIFOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLFIIN@HAW.A".ts_append_eval %Q|"YLFIIN@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLRE@HAW.A".ts_append_eval %Q|"YLRE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLRERE@HAW.A".ts_append_eval %Q|"YLRERE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLRERL@HAW.A".ts_append_eval %Q|"YLRERL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLRTGA@MAU.A".ts_append_eval %Q|"YLRTGA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLRTOT@MAU.A".ts_append_eval %Q|"YLRTOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLTW@MAU.A".ts_append_eval %Q|"YLTW@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLTWWH@MAU.A".ts_append_eval %Q|"YLTWWH@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLIFTC@MAU.A".ts_append_eval %Q|"YLIFTC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLIFOT@MAU.A".ts_append_eval %Q|"YLIFOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLFIMO@MAU.A".ts_append_eval %Q|"YLFIMO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLFICR@MAU.A".ts_append_eval %Q|"YLFICR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLAFAC@MAU.A".ts_append_eval %Q|"YLAFAC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-   "YLAGFFOT@KAU.A".ts_append_eval %Q|"YLAGFFOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-   "YLAFAC@KAU.A".ts_append_eval %Q|"YLAFAC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-   "YLOSRP@KAU.A".ts_append_eval %Q|"YLOSRP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-   "YLOSPL@KAU.A".ts_append_eval %Q|"YLOSPL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-   "YLOSMA@KAU.A".ts_append_eval %Q|"YLOSMA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-   "YLOSHH@KAU.A".ts_append_eval %Q|"YLOSHH@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+   "YL_GVSL@HON.A".ts_append_eval %Q|"YL_GVSL@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDFD@HAW.A".ts_append_eval %Q|"YLMNNDFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDBV@HAW.A".ts_append_eval %Q|"YLMNNDBV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDXM@HAW.A".ts_append_eval %Q|"YLMNNDXM@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMNNDXP@HAW.A".ts_append_eval %Q|"YLMNNDXP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWTW@HAW.A".ts_append_eval %Q|"YLTWTW@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWSP@HAW.A".ts_append_eval %Q|"YLTWSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWCU@HAW.A".ts_append_eval %Q|"YLTWCU@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWWH@HAW.A".ts_append_eval %Q|"YLTWWH@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFPB@HAW.A".ts_append_eval %Q|"YLIFPB@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFMP@HAW.A".ts_append_eval %Q|"YLIFMP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFBC@HAW.A".ts_append_eval %Q|"YLIFBC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFTC@HAW.A".ts_append_eval %Q|"YLIFTC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFOT@HAW.A".ts_append_eval %Q|"YLIFOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLFIIN@HAW.A".ts_append_eval %Q|"YLFIIN@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRE@HAW.A".ts_append_eval %Q|"YLRE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRERE@HAW.A".ts_append_eval %Q|"YLRERE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRERL@HAW.A".ts_append_eval %Q|"YLRERL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRTGA@MAU.A".ts_append_eval %Q|"YLRTGA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRTOT@MAU.A".ts_append_eval %Q|"YLRTOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTW@MAU.A".ts_append_eval %Q|"YLTW@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLTWWH@MAU.A".ts_append_eval %Q|"YLTWWH@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFTC@MAU.A".ts_append_eval %Q|"YLIFTC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLIFOT@MAU.A".ts_append_eval %Q|"YLIFOT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLFIMO@MAU.A".ts_append_eval %Q|"YLFIMO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLFICR@MAU.A".ts_append_eval %Q|"YLFICR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAFAC@MAU.A".ts_append_eval %Q|"YLAFAC@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAGFFOT@KAU.A".ts_append_eval %Q|"YLAGFFOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAFAC@KAU.A".ts_append_eval %Q|"YLAFAC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLOSRP@KAU.A".ts_append_eval %Q|"YLOSRP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLOSPL@KAU.A".ts_append_eval %Q|"YLOSPL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLOSMA@KAU.A".ts_append_eval %Q|"YLOSMA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLOSHH@KAU.A".ts_append_eval %Q|"YLOSHH@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   
   "VISDEMETRA_MC@HI.M".ts_eval= %Q|"VIS@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
    "PCHSSHRT@HON.S".ts_append_eval %Q|"PCHSSHRT@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
    "PCED@HON.S".ts_append_eval %Q|"PCED@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
-  "YLMNDRCM@HI.A".ts_append_eval %Q|"YLMNDRCM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLMNDRCM@HI.A".ts_append_eval %Q|"YLMNDRCM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "RMRVNS@MAU.M".ts_append_eval %Q|"RMRVNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd2.xls"|
   "KVISFM@KAU.A".ts_append_eval %Q|"KVISFM@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "VXPR@HI.A".ts_append_eval %Q|"VXPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|
@@ -2713,11 +2713,11 @@ task :reconstruct_db => :environment do
   "VXPRJP@HI.A".ts_append_eval %Q|"VXPRJP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|
   "VXPRCAN@HI.A".ts_append_eval %Q|"VXPRCAN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|
   "YDIV@HAW.A".ts_append_eval %Q|"YDIV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YDIV@HAW.A".ts_append_eval %Q|"YDIV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YDIV@HAW.A".ts_append_eval %Q|"YDIV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "TGBCTNS@HON.A".ts_append_eval %Q|"TGBCTNS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
   "TGBMNNS@HON.A".ts_append_eval %Q|"TGBMNNS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
   "YPROPNF@HI.A".ts_append_eval %Q|"YPROPNF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YPROPNF@HI.A".ts_append_eval %Q|"YPROPNF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YPROPNF@HI.A".ts_append_eval %Q|"YPROPNF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "GDP@US.A".ts_append_eval %Q|"GDP@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
   "VISJPNS@MAUI.M".ts_append_eval %Q|"VISJPNS@MAUI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "RMRVNS@KAU.M".ts_append_eval %Q|"RMRVNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd2.xls"|
@@ -2729,7 +2729,7 @@ task :reconstruct_db => :environment do
   "ECTSPNS@HAW.M".ts_append_eval %Q|"ECTSPNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
   "VISUSENS@LAN.M".ts_append_eval %Q|"VISUSENS@LAN.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "PCCMND@HON.M".ts_append_eval %Q|"PCCMND@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m.xls"|
-  "YLAE@HI.Q".ts_append_eval %Q|"YLAE@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YLAE@HI.Q".ts_append_eval %Q|"YLAE@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "PMKRSGFNS@KAU.Q".ts_append_eval %Q|"PMKRSGFNS@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
   "GDP_EX@JP.A".ts_append_eval %Q|"GDP_EX@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
   "GDP_CG_R@JP.A".ts_append_eval %Q|"GDP_CG_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
@@ -2741,20 +2741,20 @@ task :reconstruct_db => :environment do
   "PCFBFDHM@HON.Q".ts_eval= %Q|'PCFBFDHM@HON.S'.ts.interpolate :quarter, :linear|
   "PCFBFDBV@HON.Q".ts_eval= %Q|'PCFBFDBV@HON.S'.ts.interpolate :quarter, :linear|
   "YPROP@HI.Q".ts_append_eval %Q|"YPROP@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YPROP@HI.Q".ts_append_eval %Q|"YPROP@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YPROP@HI.Q".ts_append_eval %Q|"YPROP@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YPROPNF@HI.Q".ts_append_eval %Q|"YPROPNF@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YPROPNF@HI.Q".ts_append_eval %Q|"YPROPNF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YPROPNF@HI.Q".ts_append_eval %Q|"YPROPNF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YL_PR@HI.Q".ts_append_eval %Q|"YL_PR@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YL_PR@HI.Q".ts_append_eval %Q|"YL_PR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YL_PR@HI.Q".ts_append_eval %Q|"YL_PR@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YLED@HON.A".ts_append_eval %Q|"YLED@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLED@HON.A".ts_append_eval %Q|"YLED@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLED@HON.A".ts_append_eval %Q|"YLED@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "PMKRSGFNS@HON.A".ts_eval= %Q|"PMKRSGFNS@HON.Q".ts.aggregate(:year, :average)|
-  "YLMISP@HAW.A".ts_append_eval %Q|"YLMISP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTEL@MAU.A".ts_append_eval %Q|"YLRTEL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDXP@KAU.A".ts_append_eval %Q|"YLMNNDXP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLTWWH@HON.A".ts_append_eval %Q|"YLTWWH@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLIFPB@HON.A".ts_append_eval %Q|"YLIFPB@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLAGFF@MAU.A".ts_append_eval %Q|"YLAGFF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YLMISP@HAW.A".ts_append_eval %Q|"YLMISP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTEL@MAU.A".ts_append_eval %Q|"YLRTEL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDXP@KAU.A".ts_append_eval %Q|"YLMNNDXP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWWH@HON.A".ts_append_eval %Q|"YLTWWH@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFPB@HON.A".ts_append_eval %Q|"YLIFPB@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFF@MAU.A".ts_append_eval %Q|"YLAGFF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "VSONS@HI.M".ts_append_eval %Q|"VSONS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/seats_upd.xls"|
   "VSODMNS@HI.M".ts_append_eval %Q|"VSODMNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/seats_upd.xls"|
   "VSOUSWNS@HI.M".ts_append_eval %Q|"VSOUSWNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/seats_upd.xls"|
@@ -2815,12 +2815,12 @@ task :reconstruct_db => :environment do
   "AAPI@HI.A".ts_append_eval %Q|"AAPI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AA@MAU.A".ts_append_eval %Q|"AA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANVG@HI.A".ts_append_eval %Q|"ANVG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCMNDRPM@HI.A".ts_append_eval %Q|"YCMNDRPM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFB@HI.A".ts_append_eval %Q|"YCMNDRFB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMI@HI.A".ts_append_eval %Q|"YCMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPA@HI.A".ts_append_eval %Q|"YCMNNDPA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCWT@HI.A".ts_append_eval %Q|"YCWT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMS@HI.A".ts_append_eval %Q|"YCRTMS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YCMNDRPM@HI.A".ts_append_eval %Q|"YCMNDRPM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFB@HI.A".ts_append_eval %Q|"YCMNDRFB@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMI@HI.A".ts_append_eval %Q|"YCMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPA@HI.A".ts_append_eval %Q|"YCMNNDPA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCWT@HI.A".ts_append_eval %Q|"YCWT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMS@HI.A".ts_append_eval %Q|"YCRTMS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "ANVG@HON.A".ts_append_eval %Q|"ANVG@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "ANCF@HON.A".ts_append_eval %Q|"ANCF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AVCMC@HON.A".ts_append_eval %Q|"AVCMC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
@@ -2862,329 +2862,329 @@ task :reconstruct_db => :environment do
   "AVLA@MAU.A".ts_append_eval %Q|"AVLA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AV@MAU.A".ts_append_eval %Q|"AV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
   "AGP@MAU.A".ts_append_eval %Q|"AGP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
-  "YCIFDP@HI.A".ts_append_eval %Q|"YCIFDP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFOT@HI.A".ts_append_eval %Q|"YCAGFFOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMIMI@HI.A".ts_append_eval %Q|"YCMIMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMISP@HI.A".ts_append_eval %Q|"YCMISP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTBL@HI.A".ts_append_eval %Q|"YCCTBL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTSP@HI.A".ts_append_eval %Q|"YCCTSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFI@HI.A".ts_append_eval %Q|"YCFI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIMO@HI.A".ts_append_eval %Q|"YCFIMO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFICR@HI.A".ts_append_eval %Q|"YCFICR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFISE@HI.A".ts_append_eval %Q|"YCFISE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIIN@HI.A".ts_append_eval %Q|"YCFIIN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
+  "YCIFDP@HI.A".ts_append_eval %Q|"YCIFDP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFOT@HI.A".ts_append_eval %Q|"YCAGFFOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMIMI@HI.A".ts_append_eval %Q|"YCMIMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMISP@HI.A".ts_append_eval %Q|"YCMISP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTBL@HI.A".ts_append_eval %Q|"YCCTBL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTSP@HI.A".ts_append_eval %Q|"YCCTSP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFI@HI.A".ts_append_eval %Q|"YCFI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIMO@HI.A".ts_append_eval %Q|"YCFIMO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFICR@HI.A".ts_append_eval %Q|"YCFICR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFISE@HI.A".ts_append_eval %Q|"YCFISE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIIN@HI.A".ts_append_eval %Q|"YCFIIN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
   "YWAGE@HON.A".ts_append_eval %Q|"YWAGE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YWAGE@HON.A".ts_append_eval %Q|"YWAGE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YWAGE@HON.A".ts_append_eval %Q|"YWAGE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YOTLAB@HON.A".ts_append_eval %Q|"YOTLAB@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YOTLAB@HON.A".ts_append_eval %Q|"YOTLAB@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YCMI@HON.A".ts_append_eval %Q|"YCMI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMC@HON.A".ts_append_eval %Q|"YCMNDRMC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDREL@HON.A".ts_append_eval %Q|"YCMNDREL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFR@HON.A".ts_append_eval %Q|"YCMNDRFR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNND@HON.A".ts_append_eval %Q|"YCMNND@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXP@HON.A".ts_append_eval %Q|"YCMNNDXP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPA@HON.A".ts_append_eval %Q|"YCMNNDPA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFR@HON.A".ts_append_eval %Q|"YCRTFR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGA@HON.A".ts_append_eval %Q|"YCRTGA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGM@HON.A".ts_append_eval %Q|"YCRTGM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSP@HON.A".ts_append_eval %Q|"YCTWSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWWH@HON.A".ts_append_eval %Q|"YCTWWH@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFTC@HON.A".ts_append_eval %Q|"YCIFTC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAVR@KAU.A".ts_append_eval %Q|"YCAVR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDFD@KAU.A".ts_append_eval %Q|"YCMNNDFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXM@KAU.A".ts_append_eval %Q|"YCMNNDXM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXP@KAU.A".ts_append_eval %Q|"YCMNNDXP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDAP@KAU.A".ts_append_eval %Q|"YCMNNDAP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDLT@KAU.A".ts_append_eval %Q|"YCMNNDLT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPA@KAU.A".ts_append_eval %Q|"YCMNNDPA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPR@KAU.A".ts_append_eval %Q|"YCMNNDPR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPT@KAU.A".ts_append_eval %Q|"YCMNNDPT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDCH@KAU.A".ts_append_eval %Q|"YCMNNDCH@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPL@KAU.A".ts_append_eval %Q|"YCMNNDPL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTFR@KAU.A".ts_append_eval %Q|"YCRTFR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTEL@KAU.A".ts_append_eval %Q|"YCRTEL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTBL@KAU.A".ts_append_eval %Q|"YCRTBL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTHC@KAU.A".ts_append_eval %Q|"YCRTHC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGA@KAU.A".ts_append_eval %Q|"YCRTGA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTCL@KAU.A".ts_append_eval %Q|"YCRTCL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGM@KAU.A".ts_append_eval %Q|"YCRTGM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMS@KAU.A".ts_append_eval %Q|"YCRTMS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTW@KAU.A".ts_append_eval %Q|"YCTW@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTR@KAU.A".ts_append_eval %Q|"YCTWTR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTG@KAU.A".ts_append_eval %Q|"YCTWTG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWPL@KAU.A".ts_append_eval %Q|"YCTWPL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSP@KAU.A".ts_append_eval %Q|"YCTWSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWWH@KAU.A".ts_append_eval %Q|"YCTWWH@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIF@KAU.A".ts_append_eval %Q|"YCIF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFMP@KAU.A".ts_append_eval %Q|"YCIFMP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFIT@KAU.A".ts_append_eval %Q|"YCIFIT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFTC@KAU.A".ts_append_eval %Q|"YCIFTC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFDP@KAU.A".ts_append_eval %Q|"YCIFDP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFOT@KAU.A".ts_append_eval %Q|"YCIFOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFI@KAU.A".ts_append_eval %Q|"YCFI@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIMO@KAU.A".ts_append_eval %Q|"YCFIMO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIIN@KAU.A".ts_append_eval %Q|"YCFIIN@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIOT@KAU.A".ts_append_eval %Q|"YCFIOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRE@KAU.A".ts_append_eval %Q|"YCRE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERE@KAU.A".ts_append_eval %Q|"YCRERE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRELE@KAU.A".ts_append_eval %Q|"YCRELE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCPS@KAU.A".ts_append_eval %Q|"YCPS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMA@KAU.A".ts_append_eval %Q|"YCMA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAD@KAU.A".ts_append_eval %Q|"YCAD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADAD@KAU.A".ts_append_eval %Q|"YCADAD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADWM@KAU.A".ts_append_eval %Q|"YCADWM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCED@KAU.A".ts_append_eval %Q|"YCED@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHC@KAU.A".ts_append_eval %Q|"YCHC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCHO@KAU.A".ts_append_eval %Q|"YCHCHO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCNR@KAU.A".ts_append_eval %Q|"YCHCNR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCSO@KAU.A".ts_append_eval %Q|"YCHCSO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAE@KAU.A".ts_append_eval %Q|"YCAE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEPF@KAU.A".ts_append_eval %Q|"YCAEPF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEMU@KAU.A".ts_append_eval %Q|"YCAEMU@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFAC@KAU.A".ts_append_eval %Q|"YCAFAC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFFD@KAU.A".ts_append_eval %Q|"YCAFFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOS@KAU.A".ts_append_eval %Q|"YCOS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSRP@KAU.A".ts_append_eval %Q|"YCOSRP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSMA@KAU.A".ts_append_eval %Q|"YCOSMA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSHH@KAU.A".ts_append_eval %Q|"YCOSHH@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGV@KAU.A".ts_append_eval %Q|"YCGV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVFD@KAU.A".ts_append_eval %Q|"YCGVFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_GVSL@KAU.A".ts_append_eval %Q|"YC_GVSL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVST@KAU.A".ts_append_eval %Q|"YCGVST@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVLC@KAU.A".ts_append_eval %Q|"YCGVLC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC@MAU.A".ts_append_eval %Q|"YC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YOTLABPEN@MAU.A".ts_append_eval %Q|"YOTLABPEN@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YCAVR@MAU.A".ts_append_eval %Q|"YCAVR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFA@MAU.A".ts_append_eval %Q|"YCAGFA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAGFFFS@MAU.A".ts_append_eval %Q|"YCAGFFFS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMI@MAU.A".ts_append_eval %Q|"YCMI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCUT@MAU.A".ts_append_eval %Q|"YCUT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCT@MAU.A".ts_append_eval %Q|"YCCT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTBL@MAU.A".ts_append_eval %Q|"YCCTBL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTHV@MAU.A".ts_append_eval %Q|"YCCTHV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCCTSP@MAU.A".ts_append_eval %Q|"YCCTSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMN@MAU.A".ts_append_eval %Q|"YCMN@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDR@MAU.A".ts_append_eval %Q|"YCMNDR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRWD@MAU.A".ts_append_eval %Q|"YCMNDRWD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRPM@MAU.A".ts_append_eval %Q|"YCMNDRPM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFB@MAU.A".ts_append_eval %Q|"YCMNDRFB@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMC@MAU.A".ts_append_eval %Q|"YCMNDRMC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRCM@MAU.A".ts_append_eval %Q|"YCMNDRCM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDREL@MAU.A".ts_append_eval %Q|"YCMNDREL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMV@MAU.A".ts_append_eval %Q|"YCMNDRMV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRTR@MAU.A".ts_append_eval %Q|"YCMNDRTR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRFR@MAU.A".ts_append_eval %Q|"YCMNDRFR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNDRMS@MAU.A".ts_append_eval %Q|"YCMNDRMS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNND@MAU.A".ts_append_eval %Q|"YCMNND@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDFD@MAU.A".ts_append_eval %Q|"YCMNNDFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDXP@MAU.A".ts_append_eval %Q|"YCMNNDXP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDAP@MAU.A".ts_append_eval %Q|"YCMNNDAP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPA@MAU.A".ts_append_eval %Q|"YCMNNDPA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPR@MAU.A".ts_append_eval %Q|"YCMNNDPR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDPT@MAU.A".ts_append_eval %Q|"YCMNNDPT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMNNDCH@MAU.A".ts_append_eval %Q|"YCMNNDCH@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRT@MAU.A".ts_append_eval %Q|"YCRT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTMV@MAU.A".ts_append_eval %Q|"YCRTMV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTEL@MAU.A".ts_append_eval %Q|"YCRTEL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTHC@MAU.A".ts_append_eval %Q|"YCRTHC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGA@MAU.A".ts_append_eval %Q|"YCRTGA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTCL@MAU.A".ts_append_eval %Q|"YCRTCL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTSP@MAU.A".ts_append_eval %Q|"YCRTSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTGM@MAU.A".ts_append_eval %Q|"YCRTGM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRTOT@MAU.A".ts_append_eval %Q|"YCRTOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTW@MAU.A".ts_append_eval %Q|"YCTW@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWTR@MAU.A".ts_append_eval %Q|"YCTWTR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWPL@MAU.A".ts_append_eval %Q|"YCTWPL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWSP@MAU.A".ts_append_eval %Q|"YCTWSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWCU@MAU.A".ts_append_eval %Q|"YCTWCU@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCTWWH@MAU.A".ts_append_eval %Q|"YCTWWH@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIF@MAU.A".ts_append_eval %Q|"YCIF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFMP@MAU.A".ts_append_eval %Q|"YCIFMP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFBC@MAU.A".ts_append_eval %Q|"YCIFBC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFIT@MAU.A".ts_append_eval %Q|"YCIFIT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFTC@MAU.A".ts_append_eval %Q|"YCIFTC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFDP@MAU.A".ts_append_eval %Q|"YCIFDP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCIFOT@MAU.A".ts_append_eval %Q|"YCIFOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFI@MAU.A".ts_append_eval %Q|"YCFI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFICR@MAU.A".ts_append_eval %Q|"YCFICR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFISE@MAU.A".ts_append_eval %Q|"YCFISE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCFIIN@MAU.A".ts_append_eval %Q|"YCFIIN@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRE@MAU.A".ts_append_eval %Q|"YCRE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRERE@MAU.A".ts_append_eval %Q|"YCRERE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCRELE@MAU.A".ts_append_eval %Q|"YCRELE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCPS@MAU.A".ts_append_eval %Q|"YCPS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCMA@MAU.A".ts_append_eval %Q|"YCMA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADAD@MAU.A".ts_append_eval %Q|"YCADAD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCADWM@MAU.A".ts_append_eval %Q|"YCADWM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCED@MAU.A".ts_append_eval %Q|"YCED@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCAM@MAU.A".ts_append_eval %Q|"YCHCAM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCHO@MAU.A".ts_append_eval %Q|"YCHCHO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCNR@MAU.A".ts_append_eval %Q|"YCHCNR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCHCSO@MAU.A".ts_append_eval %Q|"YCHCSO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAE@MAU.A".ts_append_eval %Q|"YCAE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEPF@MAU.A".ts_append_eval %Q|"YCAEPF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAEMU@MAU.A".ts_append_eval %Q|"YCAEMU@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAERE@MAU.A".ts_append_eval %Q|"YCAERE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFAC@MAU.A".ts_append_eval %Q|"YCAFAC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCAFFD@MAU.A".ts_append_eval %Q|"YCAFFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOS@MAU.A".ts_append_eval %Q|"YCOS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSRP@MAU.A".ts_append_eval %Q|"YCOSRP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSPL@MAU.A".ts_append_eval %Q|"YCOSPL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCOSMA@MAU.A".ts_append_eval %Q|"YCOSMA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGV@MAU.A".ts_append_eval %Q|"YCGV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVFD@MAU.A".ts_append_eval %Q|"YCGVFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YC_GVSL@MAU.A".ts_append_eval %Q|"YC_GVSL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YCGVLC@MAU.A".ts_append_eval %Q|"YCGVLC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd.xls"|
-  "YS_PR@HI.A".ts_append_eval %Q|"YS_PR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAGFA@HI.A".ts_append_eval %Q|"YSAGFA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMIOG@HI.A".ts_append_eval %Q|"YSMIOG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMIMI@HI.A".ts_append_eval %Q|"YSMIMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSCT@HI.A".ts_append_eval %Q|"YSCT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMN@HI.A".ts_append_eval %Q|"YSMN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDR@HI.A".ts_append_eval %Q|"YSMNDR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRWD@HI.A".ts_append_eval %Q|"YSMNDRWD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRPM@HI.A".ts_append_eval %Q|"YSMNDRPM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRMC@HI.A".ts_append_eval %Q|"YSMNDRMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRCM@HI.A".ts_append_eval %Q|"YSMNDRCM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YLRTHC@HAW.A".ts_append_eval %Q|"YLRTHC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YSMNDREL@HI.A".ts_append_eval %Q|"YSMNDREL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRMV@HI.A".ts_append_eval %Q|"YSMNDRMV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRTR@HI.A".ts_append_eval %Q|"YSMNDRTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRFR@HI.A".ts_append_eval %Q|"YSMNDRFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNDRMS@HI.A".ts_append_eval %Q|"YSMNDRMS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSIFDP@HI.A".ts_append_eval %Q|"YSIFDP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSFIMC@HI.A".ts_append_eval %Q|"YSFIMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSFISE@HI.A".ts_append_eval %Q|"YSFISE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSFIOT@HI.A".ts_append_eval %Q|"YSFIOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSRERL@HI.A".ts_append_eval %Q|"YSRERL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSPSCO@HI.A".ts_append_eval %Q|"YSPSCO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSPSOS@HI.A".ts_append_eval %Q|"YSPSOS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSADWM@HI.A".ts_append_eval %Q|"YSADWM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSED@HI.A".ts_append_eval %Q|"YSED@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSHC@HI.A".ts_append_eval %Q|"YSHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSHCAM@HI.A".ts_append_eval %Q|"YSHCAM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSHCHO@HI.A".ts_append_eval %Q|"YSHCHO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSHCSO@HI.A".ts_append_eval %Q|"YSHCSO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAEPF@HI.A".ts_append_eval %Q|"YSAEPF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAERE@HI.A".ts_append_eval %Q|"YSAERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAF@HI.A".ts_append_eval %Q|"YSAF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAFAC@HI.A".ts_append_eval %Q|"YSAFAC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSGV@HI.A".ts_append_eval %Q|"YSGV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSGVFD@HI.A".ts_append_eval %Q|"YSGVFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YS_GVSL@HI.A".ts_append_eval %Q|"YS_GVSL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YS@HI.A".ts_append_eval %Q|"YS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAG@HI.A".ts_append_eval %Q|"YSAG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAGFF@HI.A".ts_append_eval %Q|"YSAGFF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMI@HI.A".ts_append_eval %Q|"YSMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDAP@HI.A".ts_append_eval %Q|"YSMNNDAP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDPA@HI.A".ts_append_eval %Q|"YSMNNDPA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDPT@HI.A".ts_append_eval %Q|"YSMNNDPT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDCH@HI.A".ts_append_eval %Q|"YSMNNDCH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMNNDPL@HI.A".ts_append_eval %Q|"YSMNNDPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSWT@HI.A".ts_append_eval %Q|"YSWT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSRT@HI.A".ts_append_eval %Q|"YSRT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTW@HI.A".ts_append_eval %Q|"YSTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWTA@HI.A".ts_append_eval %Q|"YSTWTA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWTW@HI.A".ts_append_eval %Q|"YSTWTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWPL@HI.A".ts_append_eval %Q|"YSTWPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSTWWH@HI.A".ts_append_eval %Q|"YSTWWH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSIF@HI.A".ts_append_eval %Q|"YSIF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSIFMP@HI.A".ts_append_eval %Q|"YSIFMP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSIFBC@HI.A".ts_append_eval %Q|"YSIFBC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSFIIN@HI.A".ts_append_eval %Q|"YSFIIN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSRE@HI.A".ts_append_eval %Q|"YSRE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSRERE@HI.A".ts_append_eval %Q|"YSRERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSPSLS@HI.A".ts_append_eval %Q|"YSPSLS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSMA@HI.A".ts_append_eval %Q|"YSMA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSAD@HI.A".ts_append_eval %Q|"YSAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
-  "YSADAD@HI.A".ts_append_eval %Q|"YSADAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd.xls "|
+  "YOTLAB@HON.A".ts_append_eval %Q|"YOTLAB@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCMI@HON.A".ts_append_eval %Q|"YCMI@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMC@HON.A".ts_append_eval %Q|"YCMNDRMC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDREL@HON.A".ts_append_eval %Q|"YCMNDREL@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFR@HON.A".ts_append_eval %Q|"YCMNDRFR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNND@HON.A".ts_append_eval %Q|"YCMNND@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXP@HON.A".ts_append_eval %Q|"YCMNNDXP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPA@HON.A".ts_append_eval %Q|"YCMNNDPA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFR@HON.A".ts_append_eval %Q|"YCRTFR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGA@HON.A".ts_append_eval %Q|"YCRTGA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGM@HON.A".ts_append_eval %Q|"YCRTGM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSP@HON.A".ts_append_eval %Q|"YCTWSP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWWH@HON.A".ts_append_eval %Q|"YCTWWH@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFTC@HON.A".ts_append_eval %Q|"YCIFTC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAVR@KAU.A".ts_append_eval %Q|"YCAVR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDFD@KAU.A".ts_append_eval %Q|"YCMNNDFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXM@KAU.A".ts_append_eval %Q|"YCMNNDXM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXP@KAU.A".ts_append_eval %Q|"YCMNNDXP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDAP@KAU.A".ts_append_eval %Q|"YCMNNDAP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDLT@KAU.A".ts_append_eval %Q|"YCMNNDLT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPA@KAU.A".ts_append_eval %Q|"YCMNNDPA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPR@KAU.A".ts_append_eval %Q|"YCMNNDPR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPT@KAU.A".ts_append_eval %Q|"YCMNNDPT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDCH@KAU.A".ts_append_eval %Q|"YCMNNDCH@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPL@KAU.A".ts_append_eval %Q|"YCMNNDPL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTFR@KAU.A".ts_append_eval %Q|"YCRTFR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTEL@KAU.A".ts_append_eval %Q|"YCRTEL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTBL@KAU.A".ts_append_eval %Q|"YCRTBL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTHC@KAU.A".ts_append_eval %Q|"YCRTHC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGA@KAU.A".ts_append_eval %Q|"YCRTGA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTCL@KAU.A".ts_append_eval %Q|"YCRTCL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGM@KAU.A".ts_append_eval %Q|"YCRTGM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMS@KAU.A".ts_append_eval %Q|"YCRTMS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTW@KAU.A".ts_append_eval %Q|"YCTW@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTR@KAU.A".ts_append_eval %Q|"YCTWTR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTG@KAU.A".ts_append_eval %Q|"YCTWTG@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWPL@KAU.A".ts_append_eval %Q|"YCTWPL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSP@KAU.A".ts_append_eval %Q|"YCTWSP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWWH@KAU.A".ts_append_eval %Q|"YCTWWH@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIF@KAU.A".ts_append_eval %Q|"YCIF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFMP@KAU.A".ts_append_eval %Q|"YCIFMP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFIT@KAU.A".ts_append_eval %Q|"YCIFIT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFTC@KAU.A".ts_append_eval %Q|"YCIFTC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFDP@KAU.A".ts_append_eval %Q|"YCIFDP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFOT@KAU.A".ts_append_eval %Q|"YCIFOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFI@KAU.A".ts_append_eval %Q|"YCFI@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIMO@KAU.A".ts_append_eval %Q|"YCFIMO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIIN@KAU.A".ts_append_eval %Q|"YCFIIN@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIOT@KAU.A".ts_append_eval %Q|"YCFIOT@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRE@KAU.A".ts_append_eval %Q|"YCRE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERE@KAU.A".ts_append_eval %Q|"YCRERE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRELE@KAU.A".ts_append_eval %Q|"YCRELE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCPS@KAU.A".ts_append_eval %Q|"YCPS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMA@KAU.A".ts_append_eval %Q|"YCMA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAD@KAU.A".ts_append_eval %Q|"YCAD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADAD@KAU.A".ts_append_eval %Q|"YCADAD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADWM@KAU.A".ts_append_eval %Q|"YCADWM@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCED@KAU.A".ts_append_eval %Q|"YCED@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHC@KAU.A".ts_append_eval %Q|"YCHC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCHO@KAU.A".ts_append_eval %Q|"YCHCHO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCNR@KAU.A".ts_append_eval %Q|"YCHCNR@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCSO@KAU.A".ts_append_eval %Q|"YCHCSO@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAE@KAU.A".ts_append_eval %Q|"YCAE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEPF@KAU.A".ts_append_eval %Q|"YCAEPF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEMU@KAU.A".ts_append_eval %Q|"YCAEMU@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFAC@KAU.A".ts_append_eval %Q|"YCAFAC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFFD@KAU.A".ts_append_eval %Q|"YCAFFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOS@KAU.A".ts_append_eval %Q|"YCOS@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSRP@KAU.A".ts_append_eval %Q|"YCOSRP@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSMA@KAU.A".ts_append_eval %Q|"YCOSMA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSHH@KAU.A".ts_append_eval %Q|"YCOSHH@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGV@KAU.A".ts_append_eval %Q|"YCGV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVFD@KAU.A".ts_append_eval %Q|"YCGVFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_GVSL@KAU.A".ts_append_eval %Q|"YC_GVSL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVST@KAU.A".ts_append_eval %Q|"YCGVST@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVLC@KAU.A".ts_append_eval %Q|"YCGVLC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC@MAU.A".ts_append_eval %Q|"YC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YOTLABPEN@MAU.A".ts_append_eval %Q|"YOTLABPEN@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YCAVR@MAU.A".ts_append_eval %Q|"YCAVR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFA@MAU.A".ts_append_eval %Q|"YCAGFA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAGFFFS@MAU.A".ts_append_eval %Q|"YCAGFFFS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMI@MAU.A".ts_append_eval %Q|"YCMI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCUT@MAU.A".ts_append_eval %Q|"YCUT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCT@MAU.A".ts_append_eval %Q|"YCCT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTBL@MAU.A".ts_append_eval %Q|"YCCTBL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTHV@MAU.A".ts_append_eval %Q|"YCCTHV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCCTSP@MAU.A".ts_append_eval %Q|"YCCTSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMN@MAU.A".ts_append_eval %Q|"YCMN@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDR@MAU.A".ts_append_eval %Q|"YCMNDR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRWD@MAU.A".ts_append_eval %Q|"YCMNDRWD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRPM@MAU.A".ts_append_eval %Q|"YCMNDRPM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFB@MAU.A".ts_append_eval %Q|"YCMNDRFB@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMC@MAU.A".ts_append_eval %Q|"YCMNDRMC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRCM@MAU.A".ts_append_eval %Q|"YCMNDRCM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDREL@MAU.A".ts_append_eval %Q|"YCMNDREL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMV@MAU.A".ts_append_eval %Q|"YCMNDRMV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRTR@MAU.A".ts_append_eval %Q|"YCMNDRTR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRFR@MAU.A".ts_append_eval %Q|"YCMNDRFR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNDRMS@MAU.A".ts_append_eval %Q|"YCMNDRMS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNND@MAU.A".ts_append_eval %Q|"YCMNND@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDFD@MAU.A".ts_append_eval %Q|"YCMNNDFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDXP@MAU.A".ts_append_eval %Q|"YCMNNDXP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDAP@MAU.A".ts_append_eval %Q|"YCMNNDAP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPA@MAU.A".ts_append_eval %Q|"YCMNNDPA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPR@MAU.A".ts_append_eval %Q|"YCMNNDPR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDPT@MAU.A".ts_append_eval %Q|"YCMNNDPT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMNNDCH@MAU.A".ts_append_eval %Q|"YCMNNDCH@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRT@MAU.A".ts_append_eval %Q|"YCRT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTMV@MAU.A".ts_append_eval %Q|"YCRTMV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTEL@MAU.A".ts_append_eval %Q|"YCRTEL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTHC@MAU.A".ts_append_eval %Q|"YCRTHC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGA@MAU.A".ts_append_eval %Q|"YCRTGA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTCL@MAU.A".ts_append_eval %Q|"YCRTCL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTSP@MAU.A".ts_append_eval %Q|"YCRTSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTGM@MAU.A".ts_append_eval %Q|"YCRTGM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRTOT@MAU.A".ts_append_eval %Q|"YCRTOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTW@MAU.A".ts_append_eval %Q|"YCTW@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWTR@MAU.A".ts_append_eval %Q|"YCTWTR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWPL@MAU.A".ts_append_eval %Q|"YCTWPL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWSP@MAU.A".ts_append_eval %Q|"YCTWSP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWCU@MAU.A".ts_append_eval %Q|"YCTWCU@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCTWWH@MAU.A".ts_append_eval %Q|"YCTWWH@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIF@MAU.A".ts_append_eval %Q|"YCIF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFMP@MAU.A".ts_append_eval %Q|"YCIFMP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFBC@MAU.A".ts_append_eval %Q|"YCIFBC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFIT@MAU.A".ts_append_eval %Q|"YCIFIT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFTC@MAU.A".ts_append_eval %Q|"YCIFTC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFDP@MAU.A".ts_append_eval %Q|"YCIFDP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCIFOT@MAU.A".ts_append_eval %Q|"YCIFOT@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFI@MAU.A".ts_append_eval %Q|"YCFI@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFICR@MAU.A".ts_append_eval %Q|"YCFICR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFISE@MAU.A".ts_append_eval %Q|"YCFISE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCFIIN@MAU.A".ts_append_eval %Q|"YCFIIN@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRE@MAU.A".ts_append_eval %Q|"YCRE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRERE@MAU.A".ts_append_eval %Q|"YCRERE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCRELE@MAU.A".ts_append_eval %Q|"YCRELE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCPS@MAU.A".ts_append_eval %Q|"YCPS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCMA@MAU.A".ts_append_eval %Q|"YCMA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADAD@MAU.A".ts_append_eval %Q|"YCADAD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCADWM@MAU.A".ts_append_eval %Q|"YCADWM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCED@MAU.A".ts_append_eval %Q|"YCED@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCAM@MAU.A".ts_append_eval %Q|"YCHCAM@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCHO@MAU.A".ts_append_eval %Q|"YCHCHO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCNR@MAU.A".ts_append_eval %Q|"YCHCNR@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCHCSO@MAU.A".ts_append_eval %Q|"YCHCSO@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAE@MAU.A".ts_append_eval %Q|"YCAE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEPF@MAU.A".ts_append_eval %Q|"YCAEPF@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAEMU@MAU.A".ts_append_eval %Q|"YCAEMU@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAERE@MAU.A".ts_append_eval %Q|"YCAERE@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFAC@MAU.A".ts_append_eval %Q|"YCAFAC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCAFFD@MAU.A".ts_append_eval %Q|"YCAFFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOS@MAU.A".ts_append_eval %Q|"YCOS@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSRP@MAU.A".ts_append_eval %Q|"YCOSRP@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSPL@MAU.A".ts_append_eval %Q|"YCOSPL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCOSMA@MAU.A".ts_append_eval %Q|"YCOSMA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGV@MAU.A".ts_append_eval %Q|"YCGV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVFD@MAU.A".ts_append_eval %Q|"YCGVFD@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YC_GVSL@MAU.A".ts_append_eval %Q|"YC_GVSL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YCGVLC@MAU.A".ts_append_eval %Q|"YCGVLC@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"|
+  "YS_PR@HI.A".ts_append_eval %Q|"YS_PR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAGFA@HI.A".ts_append_eval %Q|"YSAGFA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMIOG@HI.A".ts_append_eval %Q|"YSMIOG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMIMI@HI.A".ts_append_eval %Q|"YSMIMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSCT@HI.A".ts_append_eval %Q|"YSCT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMN@HI.A".ts_append_eval %Q|"YSMN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDR@HI.A".ts_append_eval %Q|"YSMNDR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRWD@HI.A".ts_append_eval %Q|"YSMNDRWD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRPM@HI.A".ts_append_eval %Q|"YSMNDRPM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRMC@HI.A".ts_append_eval %Q|"YSMNDRMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRCM@HI.A".ts_append_eval %Q|"YSMNDRCM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YLRTHC@HAW.A".ts_append_eval %Q|"YLRTHC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSMNDREL@HI.A".ts_append_eval %Q|"YSMNDREL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRMV@HI.A".ts_append_eval %Q|"YSMNDRMV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRTR@HI.A".ts_append_eval %Q|"YSMNDRTR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRFR@HI.A".ts_append_eval %Q|"YSMNDRFR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNDRMS@HI.A".ts_append_eval %Q|"YSMNDRMS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSIFDP@HI.A".ts_append_eval %Q|"YSIFDP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSFIMC@HI.A".ts_append_eval %Q|"YSFIMC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSFISE@HI.A".ts_append_eval %Q|"YSFISE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSFIOT@HI.A".ts_append_eval %Q|"YSFIOT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSRERL@HI.A".ts_append_eval %Q|"YSRERL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSPSCO@HI.A".ts_append_eval %Q|"YSPSCO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSPSOS@HI.A".ts_append_eval %Q|"YSPSOS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSADWM@HI.A".ts_append_eval %Q|"YSADWM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSED@HI.A".ts_append_eval %Q|"YSED@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSHC@HI.A".ts_append_eval %Q|"YSHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSHCAM@HI.A".ts_append_eval %Q|"YSHCAM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSHCHO@HI.A".ts_append_eval %Q|"YSHCHO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSHCSO@HI.A".ts_append_eval %Q|"YSHCSO@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAEPF@HI.A".ts_append_eval %Q|"YSAEPF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAERE@HI.A".ts_append_eval %Q|"YSAERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAF@HI.A".ts_append_eval %Q|"YSAF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAFAC@HI.A".ts_append_eval %Q|"YSAFAC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSGV@HI.A".ts_append_eval %Q|"YSGV@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSGVFD@HI.A".ts_append_eval %Q|"YSGVFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YS_GVSL@HI.A".ts_append_eval %Q|"YS_GVSL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YS@HI.A".ts_append_eval %Q|"YS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAG@HI.A".ts_append_eval %Q|"YSAG@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAGFF@HI.A".ts_append_eval %Q|"YSAGFF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMI@HI.A".ts_append_eval %Q|"YSMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDAP@HI.A".ts_append_eval %Q|"YSMNNDAP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDPA@HI.A".ts_append_eval %Q|"YSMNNDPA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDPT@HI.A".ts_append_eval %Q|"YSMNNDPT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDCH@HI.A".ts_append_eval %Q|"YSMNNDCH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMNNDPL@HI.A".ts_append_eval %Q|"YSMNNDPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSWT@HI.A".ts_append_eval %Q|"YSWT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSRT@HI.A".ts_append_eval %Q|"YSRT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTW@HI.A".ts_append_eval %Q|"YSTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWTA@HI.A".ts_append_eval %Q|"YSTWTA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWTW@HI.A".ts_append_eval %Q|"YSTWTW@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWPL@HI.A".ts_append_eval %Q|"YSTWPL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSTWWH@HI.A".ts_append_eval %Q|"YSTWWH@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSIF@HI.A".ts_append_eval %Q|"YSIF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSIFMP@HI.A".ts_append_eval %Q|"YSIFMP@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSIFBC@HI.A".ts_append_eval %Q|"YSIFBC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSFIIN@HI.A".ts_append_eval %Q|"YSFIIN@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSRE@HI.A".ts_append_eval %Q|"YSRE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSRERE@HI.A".ts_append_eval %Q|"YSRERE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSPSLS@HI.A".ts_append_eval %Q|"YSPSLS@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSMA@HI.A".ts_append_eval %Q|"YSMA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSAD@HI.A".ts_append_eval %Q|"YSAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
+  "YSADAD@HI.A".ts_append_eval %Q|"YSADAD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"|
   "YLAGFA@HI.Q".ts_append_eval %Q|"YLAGFA@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YLAGFA@HI.Q".ts_append_eval %Q|"YLAGFA@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YLAGFA@HI.Q".ts_append_eval %Q|"YLAGFA@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YL_NF@HI.Q".ts_append_eval %Q|"YL_NF@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YL_NF@HI.Q".ts_append_eval %Q|"YL_NF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YL_NF@HI.Q".ts_append_eval %Q|"YL_NF@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YLIF@HON.A".ts_append_eval %Q|"YLIF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLIF@HON.A".ts_append_eval %Q|"YLIF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLIF@HON.A".ts_append_eval %Q|"YLIF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "Y@HAW.A".ts_append_eval %Q|"Y@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "Y@HAW.A".ts_append_eval %Q|"Y@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "Y@HAW.A".ts_append_eval %Q|"Y@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "NRBEA@HAW.A".ts_append_eval %Q|"NRBEA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "NRBEA@HAW.A".ts_append_eval %Q|"NRBEA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "NRBEA@HAW.A".ts_append_eval %Q|"NRBEA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YTRNSF@HAW.A".ts_append_eval %Q|"YTRNSF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YTRNSF@HAW.A".ts_append_eval %Q|"YTRNSF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YTRNSF@HAW.A".ts_append_eval %Q|"YTRNSF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YWAGE@HAW.A".ts_append_eval %Q|"YWAGE@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YWAGE@HAW.A".ts_append_eval %Q|"YWAGE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YWAGE@HAW.A".ts_append_eval %Q|"YWAGE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YOTLAB@HAW.A".ts_append_eval %Q|"YOTLAB@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YOTLAB@HAW.A".ts_append_eval %Q|"YOTLAB@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YOTLAB@HAW.A".ts_append_eval %Q|"YOTLAB@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAGFA@HAW.A".ts_append_eval %Q|"YLAGFA@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YLAGFA@HAW.A".ts_append_eval %Q|"YLAGFA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTGA@HAW.A".ts_append_eval %Q|"YLRTGA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTCL@HAW.A".ts_append_eval %Q|"YLRTCL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLRTSP@HAW.A".ts_append_eval %Q|"YLRTSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLIF@HAW.A".ts_append_eval %Q|"YLIF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMA@HAW.A".ts_append_eval %Q|"YLMA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLOSMA@HAW.A".ts_append_eval %Q|"YLOSMA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLOSHH@HAW.A".ts_append_eval %Q|"YLOSHH@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YLAGFA@HAW.A".ts_append_eval %Q|"YLAGFA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTGA@HAW.A".ts_append_eval %Q|"YLRTGA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTCL@HAW.A".ts_append_eval %Q|"YLRTCL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRTSP@HAW.A".ts_append_eval %Q|"YLRTSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIF@HAW.A".ts_append_eval %Q|"YLIF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMA@HAW.A".ts_append_eval %Q|"YLMA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSMA@HAW.A".ts_append_eval %Q|"YLOSMA@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSHH@HAW.A".ts_append_eval %Q|"YLOSHH@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGV@HAW.A".ts_append_eval %Q|"YLGV@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YLGV@HAW.A".ts_append_eval %Q|"YLGV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YLGV@HAW.A".ts_append_eval %Q|"YLGV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVFD@HAW.A".ts_append_eval %Q|"YLGVFD@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YLGVFD@HAW.A".ts_append_eval %Q|"YLGVFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YLGVFD@HAW.A".ts_append_eval %Q|"YLGVFD@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_GVSL@HAW.A".ts_append_eval %Q|"YL_GVSL@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YL_GVSL@HAW.A".ts_append_eval %Q|"YL_GVSL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YL_GVSL@HAW.A".ts_append_eval %Q|"YL_GVSL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVLC@HAW.A".ts_append_eval %Q|"YLGVLC@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YLGVLC@HAW.A".ts_append_eval %Q|"YLGVLC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YLGVLC@HAW.A".ts_append_eval %Q|"YLGVLC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "NRBEA@MAU.A".ts_append_eval %Q|"NRBEA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-  "NRBEA@MAU.A".ts_append_eval %Q|"NRBEA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YOTLABSS@MAU.A".ts_append_eval %Q|"YOTLABSS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "NRBEA@MAU.A".ts_append_eval %Q|"NRBEA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YOTLABSS@MAU.A".ts_append_eval %Q|"YOTLABSS@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAGFA@MAU.A".ts_append_eval %Q|"YLAGFA@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-  "YLAGFA@MAU.A".ts_append_eval %Q|"YLAGFA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDXP@MAU.A".ts_append_eval %Q|"YLMNNDXP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDAP@MAU.A".ts_append_eval %Q|"YLMNNDAP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDLT@MAU.A".ts_append_eval %Q|"YLMNNDLT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDPA@MAU.A".ts_append_eval %Q|"YLMNNDPA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDPR@MAU.A".ts_append_eval %Q|"YLMNNDPR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDPT@MAU.A".ts_append_eval %Q|"YLMNNDPT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMNNDCH@MAU.A".ts_append_eval %Q|"YLMNNDCH@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLADAD@MAU.A".ts_append_eval %Q|"YLADAD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLADWM@MAU.A".ts_append_eval %Q|"YLADWM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLHCAM@MAU.A".ts_append_eval %Q|"YLHCAM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLHCHO@MAU.A".ts_append_eval %Q|"YLHCHO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLHCNR@MAU.A".ts_append_eval %Q|"YLHCNR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLHCSO@MAU.A".ts_append_eval %Q|"YLHCSO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAEPF@MAU.A".ts_append_eval %Q|"YLAEPF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAEMU@MAU.A".ts_append_eval %Q|"YLAEMU@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAERE@MAU.A".ts_append_eval %Q|"YLAERE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YLAGFA@MAU.A".ts_append_eval %Q|"YLAGFA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDXP@MAU.A".ts_append_eval %Q|"YLMNNDXP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDAP@MAU.A".ts_append_eval %Q|"YLMNNDAP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDLT@MAU.A".ts_append_eval %Q|"YLMNNDLT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPA@MAU.A".ts_append_eval %Q|"YLMNNDPA@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPR@MAU.A".ts_append_eval %Q|"YLMNNDPR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDPT@MAU.A".ts_append_eval %Q|"YLMNNDPT@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNNDCH@MAU.A".ts_append_eval %Q|"YLMNNDCH@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLADAD@MAU.A".ts_append_eval %Q|"YLADAD@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLADWM@MAU.A".ts_append_eval %Q|"YLADWM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCAM@MAU.A".ts_append_eval %Q|"YLHCAM@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCHO@MAU.A".ts_append_eval %Q|"YLHCHO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCNR@MAU.A".ts_append_eval %Q|"YLHCNR@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHCSO@MAU.A".ts_append_eval %Q|"YLHCSO@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEPF@MAU.A".ts_append_eval %Q|"YLAEPF@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEMU@MAU.A".ts_append_eval %Q|"YLAEMU@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAERE@MAU.A".ts_append_eval %Q|"YLAERE@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGV@MAU.A".ts_append_eval %Q|"YLGV@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-  "YLGV@MAU.A".ts_append_eval %Q|"YLGV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YLGV@MAU.A".ts_append_eval %Q|"YLGV@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_GVSL@MAU.A".ts_append_eval %Q|"YL_GVSL@MAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "MAU"|
-  "YL_GVSL@MAU.A".ts_append_eval %Q|"YL_GVSL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
+  "YL_GVSL@MAU.A".ts_append_eval %Q|"YL_GVSL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "Y@KAU.A".ts_append_eval %Q|"Y@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "Y@KAU.A".ts_append_eval %Q|"Y@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "Y@KAU.A".ts_append_eval %Q|"Y@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "NRBEA@KAU.A".ts_append_eval %Q|"NRBEA@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "NRBEA@KAU.A".ts_append_eval %Q|"NRBEA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "NRBEA@KAU.A".ts_append_eval %Q|"NRBEA@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YSOCSEC@KAU.A".ts_append_eval %Q|"YSOCSEC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "YSOCSEC@KAU.A".ts_append_eval %Q|"YSOCSEC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YSOCSEC@KAU.A".ts_append_eval %Q|"YSOCSEC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YDIV@KAU.A".ts_append_eval %Q|"YDIV@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "YDIV@KAU.A".ts_append_eval %Q|"YDIV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YDIV@KAU.A".ts_append_eval %Q|"YDIV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YWAGE@KAU.A".ts_append_eval %Q|"YWAGE@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "YWAGE@KAU.A".ts_append_eval %Q|"YWAGE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YWAGE@KAU.A".ts_append_eval %Q|"YWAGE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YOTLAB@KAU.A".ts_append_eval %Q|"YOTLAB@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "YOTLAB@KAU.A".ts_append_eval %Q|"YOTLAB@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRCM@KAU.A".ts_append_eval %Q|"YLMNDRCM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDREL@KAU.A".ts_append_eval %Q|"YLMNDREL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRMV@KAU.A".ts_append_eval %Q|"YLMNDRMV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRTR@KAU.A".ts_append_eval %Q|"YLMNDRTR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLMNDRFR@KAU.A".ts_append_eval %Q|"YLMNDRFR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLFIMO@KAU.A".ts_append_eval %Q|"YLFIMO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLFICR@KAU.A".ts_append_eval %Q|"YLFICR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLFISE@KAU.A".ts_append_eval %Q|"YLFISE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLFIIN@KAU.A".ts_append_eval %Q|"YLFIIN@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLFIOT@KAU.A".ts_append_eval %Q|"YLFIOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRE@KAU.A".ts_append_eval %Q|"YLRE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRERE@KAU.A".ts_append_eval %Q|"YLRERE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRERL@KAU.A".ts_append_eval %Q|"YLRERL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLRELE@KAU.A".ts_append_eval %Q|"YLRELE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLADAD@KAU.A".ts_append_eval %Q|"YLADAD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YOTLAB@KAU.A".ts_append_eval %Q|"YOTLAB@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRCM@KAU.A".ts_append_eval %Q|"YLMNDRCM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDREL@KAU.A".ts_append_eval %Q|"YLMNDREL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMV@KAU.A".ts_append_eval %Q|"YLMNDRMV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRTR@KAU.A".ts_append_eval %Q|"YLMNDRTR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFR@KAU.A".ts_append_eval %Q|"YLMNDRFR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIMO@KAU.A".ts_append_eval %Q|"YLFIMO@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFICR@KAU.A".ts_append_eval %Q|"YLFICR@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFISE@KAU.A".ts_append_eval %Q|"YLFISE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIIN@KAU.A".ts_append_eval %Q|"YLFIIN@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIOT@KAU.A".ts_append_eval %Q|"YLFIOT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRE@KAU.A".ts_append_eval %Q|"YLRE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERE@KAU.A".ts_append_eval %Q|"YLRERE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERL@KAU.A".ts_append_eval %Q|"YLRERL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRELE@KAU.A".ts_append_eval %Q|"YLRELE@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLADAD@KAU.A".ts_append_eval %Q|"YLADAD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVST@KAU.A".ts_append_eval %Q|"YLGVST@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-  "YLGVST@KAU.A".ts_append_eval %Q|"YLGVST@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLGVST@KAU.A".ts_append_eval %Q|"YLGVST@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YP&@HI.Q".ts_append_eval %Q|"YP&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLP&@HI.Q".ts_append_eval %Q|"YLP&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YRESADJ&@HI.Q".ts_append_eval %Q|"YRESADJ&@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
@@ -3530,53 +3530,53 @@ task :reconstruct_db => :environment do
   "ECTSPNS@KAU.M".ts_append_eval %Q|"ECTSPNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
   "EGVSTEDNS@KAU.M".ts_append_eval %Q|"EGVSTEDNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
   "ERTFDNS@MAU.M".ts_append_eval %Q|"ERTFDNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
-  "KNRSDMLTNS@HI.Q".ts_append_eval %Q|"KNRSDMLTNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q.xls"|
+  "KNRSDMLTNS@HI.Q".ts_append_eval %Q|"KNRSDMLTNS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"|
   "PMKBCON@HON.M".ts_append_eval %Q|"PMKBCON@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/hbr/update/hbr_upd_m.csv"|
   "YSOCSECEM@HI.Q".ts_append_eval %Q|"YSOCSECEM@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YSOCSECEM@HI.Q".ts_append_eval %Q|"YSOCSECEM@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YSOCSECEM@HI.Q".ts_append_eval %Q|"YSOCSECEM@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YTRNSFUI@HI.Q".ts_append_eval %Q|"YTRNSFUI@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YTRNSFUI@HI.Q".ts_append_eval %Q|"YTRNSFUI@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YTRNSFUI@HI.Q".ts_append_eval %Q|"YTRNSFUI@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YTRNSFOT@HI.Q".ts_append_eval %Q|"YTRNSFOT@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YTRNSFOT@HI.Q".ts_append_eval %Q|"YTRNSFOT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YTRNSFOT@HI.Q".ts_append_eval %Q|"YTRNSFOT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YWAGE@HI.Q".ts_append_eval %Q|"YWAGE@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YWAGE@HI.Q".ts_append_eval %Q|"YWAGE@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YWAGE@HI.Q".ts_append_eval %Q|"YWAGE@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YOTLAB@HI.Q".ts_append_eval %Q|"YOTLAB@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YOTLAB@HI.Q".ts_append_eval %Q|"YOTLAB@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YOTLAB@HI.Q".ts_append_eval %Q|"YOTLAB@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YOTLABPEN@HI.Q".ts_append_eval %Q|"YOTLABPEN@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YOTLABPEN@HI.Q".ts_append_eval %Q|"YOTLABPEN@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YOTLABPEN@HI.Q".ts_append_eval %Q|"YOTLABPEN@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YOTLABSS@HI.Q".ts_append_eval %Q|"YOTLABSS@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YOTLABSS@HI.Q".ts_append_eval %Q|"YOTLABSS@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YOTLABSS@HI.Q".ts_append_eval %Q|"YOTLABSS@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YLGV@HI.Q".ts_append_eval %Q|"YLGV@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YLGV@HI.Q".ts_append_eval %Q|"YLGV@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YLGV@HI.Q".ts_append_eval %Q|"YLGV@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YLGVFD@HI.Q".ts_append_eval %Q|"YLGVFD@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YLGVFD@HI.Q".ts_append_eval %Q|"YLGVFD@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YLGVFD@HI.Q".ts_append_eval %Q|"YLGVFD@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YLGVML@HI.Q".ts_append_eval %Q|"YLGVML@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YLGVML@HI.Q".ts_append_eval %Q|"YLGVML@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YLGVML@HI.Q".ts_append_eval %Q|"YLGVML@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YL_GVSL@HI.Q".ts_append_eval %Q|"YL_GVSL@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-  "YL_GVSL@HI.Q".ts_append_eval %Q|"YL_GVSL@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+  "YL_GVSL@HI.Q".ts_append_eval %Q|"YL_GVSL@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
   "YLMI@HI.A".ts_append_eval %Q|"YLMI@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLMI@HI.A".ts_append_eval %Q|"YLMI@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLMI@HI.A".ts_append_eval %Q|"YLMI@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLHC@HI.A".ts_append_eval %Q|"YLHC@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLHC@HI.A".ts_append_eval %Q|"YLHC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLHC@HI.A".ts_append_eval %Q|"YLHC@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_OT@HI.A".ts_append_eval %Q|"YL_OT@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
   "YNETR@HON.A".ts_append_eval %Q|"YNETR@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YNETR@HON.A".ts_append_eval %Q|"YNETR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YNETR@HON.A".ts_append_eval %Q|"YNETR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROP@HON.A".ts_append_eval %Q|"YPROP@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YPROP@HON.A".ts_append_eval %Q|"YPROP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YPROP@HON.A".ts_append_eval %Q|"YPROP@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_NF@HON.A".ts_append_eval %Q|"YL_NF@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YL_NF@HON.A".ts_append_eval %Q|"YL_NF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YL_NF@HON.A".ts_append_eval %Q|"YL_NF@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLRE@HON.A".ts_append_eval %Q|"YLRE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLRE@HON.A".ts_append_eval %Q|"YLRE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLRE@HON.A".ts_append_eval %Q|"YLRE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YNETR@HAW.A".ts_append_eval %Q|"YNETR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YNETR@HAW.A".ts_append_eval %Q|"YNETR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YNETR@HAW.A".ts_append_eval %Q|"YNETR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROP@HAW.A".ts_append_eval %Q|"YPROP@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YPROP@HAW.A".ts_append_eval %Q|"YPROP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YPROP@HAW.A".ts_append_eval %Q|"YPROP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YPROPNF@HAW.A".ts_append_eval %Q|"YPROPNF@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YPROPNF@HAW.A".ts_append_eval %Q|"YPROPNF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YPROPNF@HAW.A".ts_append_eval %Q|"YPROPNF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_PR@HAW.A".ts_append_eval %Q|"YL_PR@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YL_PR@HAW.A".ts_append_eval %Q|"YL_PR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YL_PR@HAW.A".ts_append_eval %Q|"YL_PR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVML@HAW.A".ts_append_eval %Q|"YLGVML@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HAW"|
-  "YLGVML@HAW.A".ts_append_eval %Q|"YLGVML@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+  "YLGVML@HAW.A".ts_append_eval %Q|"YLGVML@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "GDP_IIVP_R@JP.A".ts_append_eval %Q|"GDP_IIVP_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
   "GDP_CP_R@JP.A".ts_append_eval %Q|"GDP_CP_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
   "GDP_IFXG_R@JP.A".ts_append_eval %Q|"GDP_IFXG_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
@@ -3653,77 +3653,77 @@ task :reconstruct_db => :environment do
   "VEXPUSENS@HI.M".ts_append_eval %Q|"VEXPUSENS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd3.xls"|
   "NRCNM@HON.A".ts_append_eval %Q|"NRCNM@HON.A".tsn.load_from "/Volumes/UHEROwork/data/census/update/census_upd_reformatted.xls"|
   "YL_NF@HI.A".ts_append_eval %Q|"YL_NF@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YL_NF@HI.A".ts_append_eval %Q|"YL_NF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YL_NF@HI.A".ts_append_eval %Q|"YL_NF@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_PR@HI.A".ts_append_eval %Q|"YL_PR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YL_PR@HI.A".ts_append_eval %Q|"YL_PR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRFR@HI.A".ts_append_eval %Q|"YLMNDRFR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDRMS@HI.A".ts_append_eval %Q|"YLMNDRMS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLWT@HI.A".ts_append_eval %Q|"YLWT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRT@HI.A".ts_append_eval %Q|"YLRT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRERE@HI.A".ts_append_eval %Q|"YLRERE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRERL@HI.A".ts_append_eval %Q|"YLRERL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLRELE@HI.A".ts_append_eval %Q|"YLRELE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMA@HI.A".ts_append_eval %Q|"YLMA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLOS@HI.A".ts_append_eval %Q|"YLOS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YL_PR@HI.A".ts_append_eval %Q|"YL_PR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRFR@HI.A".ts_append_eval %Q|"YLMNDRFR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMS@HI.A".ts_append_eval %Q|"YLMNDRMS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLWT@HI.A".ts_append_eval %Q|"YLWT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRT@HI.A".ts_append_eval %Q|"YLRT@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERE@HI.A".ts_append_eval %Q|"YLRERE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERL@HI.A".ts_append_eval %Q|"YLRERL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRELE@HI.A".ts_append_eval %Q|"YLRELE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMA@HI.A".ts_append_eval %Q|"YLMA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOS@HI.A".ts_append_eval %Q|"YLOS@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVFD@HI.A".ts_append_eval %Q|"YLGVFD@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLGVFD@HI.A".ts_append_eval %Q|"YLGVFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLGVFD@HI.A".ts_append_eval %Q|"YLGVFD@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLGVML@HI.A".ts_append_eval %Q|"YLGVML@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLGVML@HI.A".ts_append_eval %Q|"YLGVML@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLGVML@HI.A".ts_append_eval %Q|"YLGVML@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YL_GVSL@HI.A".ts_append_eval %Q|"YL_GVSL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YL_GVSL@HI.A".ts_append_eval %Q|"YL_GVSL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YSOCSECPR@HON.A".ts_append_eval %Q|"YSOCSECPR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YSOCSECEM@HON.A".ts_append_eval %Q|"YSOCSECEM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRTR@HON.A".ts_append_eval %Q|"YLMNDRTR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLFIMO@HON.A".ts_append_eval %Q|"YLFIMO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLFICR@HON.A".ts_append_eval %Q|"YLFICR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLFIIN@HON.A".ts_append_eval %Q|"YLFIIN@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLFIOT@HON.A".ts_append_eval %Q|"YLFIOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLRERE@HON.A".ts_append_eval %Q|"YLRERE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YL_GVSL@HI.A".ts_append_eval %Q|"YL_GVSL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECPR@HON.A".ts_append_eval %Q|"YSOCSECPR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YSOCSECEM@HON.A".ts_append_eval %Q|"YSOCSECEM@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRTR@HON.A".ts_append_eval %Q|"YLMNDRTR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIMO@HON.A".ts_append_eval %Q|"YLFIMO@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFICR@HON.A".ts_append_eval %Q|"YLFICR@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIIN@HON.A".ts_append_eval %Q|"YLFIIN@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFIOT@HON.A".ts_append_eval %Q|"YLFIOT@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLRERE@HON.A".ts_append_eval %Q|"YLRERE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAE@HON.A".ts_append_eval %Q|"YLAE@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLAE@HON.A".ts_append_eval %Q|"YLAE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "YLAE@HON.A".ts_append_eval %Q|"YLAE@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAFFD@HON.A".ts_append_eval %Q|"YLAFFD@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "YLAFFD@HON.A".ts_append_eval %Q|"YLAFFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLOSHH@HON.A".ts_append_eval %Q|"YLOSHH@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
-  "YLMNDRMV@HAW.A".ts_append_eval %Q|"YLMNDRMV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRTR@HAW.A".ts_append_eval %Q|"YLMNDRTR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLMNDRMS@HAW.A".ts_append_eval %Q|"YLMNDRMS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLTWPL@HAW.A".ts_append_eval %Q|"YLTWPL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLTWSC@HAW.A".ts_append_eval %Q|"YLTWSC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLIFIT@HAW.A".ts_append_eval %Q|"YLIFIT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLFI@HAW.A".ts_append_eval %Q|"YLFI@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLFISE@HAW.A".ts_append_eval %Q|"YLFISE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLHC@HAW.A".ts_append_eval %Q|"YLHC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAE@HAW.A".ts_append_eval %Q|"YLAE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLOS@HAW.A".ts_append_eval %Q|"YLOS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-  "YLAGFFSP@MAU.A".ts_append_eval %Q|"YLAGFFSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMIOG@MAU.A".ts_append_eval %Q|"YLMIOG@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMIMI@MAU.A".ts_append_eval %Q|"YLMIMI@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLMISP@MAU.A".ts_append_eval %Q|"YLMISP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLCTBL@MAU.A".ts_append_eval %Q|"YLCTBL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-  "YLAEMU@KAU.A".ts_append_eval %Q|"YLAEMU@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-  "YLAF@KAU.A".ts_append_eval %Q|"YLAF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+  "YLAFFD@HON.A".ts_append_eval %Q|"YLAFFD@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOSHH@HON.A".ts_append_eval %Q|"YLOSHH@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMV@HAW.A".ts_append_eval %Q|"YLMNDRMV@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRTR@HAW.A".ts_append_eval %Q|"YLMNDRTR@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDRMS@HAW.A".ts_append_eval %Q|"YLMNDRMS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWPL@HAW.A".ts_append_eval %Q|"YLTWPL@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLTWSC@HAW.A".ts_append_eval %Q|"YLTWSC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLIFIT@HAW.A".ts_append_eval %Q|"YLIFIT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFI@HAW.A".ts_append_eval %Q|"YLFI@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLFISE@HAW.A".ts_append_eval %Q|"YLFISE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLHC@HAW.A".ts_append_eval %Q|"YLHC@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAE@HAW.A".ts_append_eval %Q|"YLAE@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLOS@HAW.A".ts_append_eval %Q|"YLOS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAGFFSP@MAU.A".ts_append_eval %Q|"YLAGFFSP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIOG@MAU.A".ts_append_eval %Q|"YLMIOG@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMIMI@MAU.A".ts_append_eval %Q|"YLMIMI@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMISP@MAU.A".ts_append_eval %Q|"YLMISP@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLCTBL@MAU.A".ts_append_eval %Q|"YLCTBL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAEMU@KAU.A".ts_append_eval %Q|"YLAEMU@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLAF@KAU.A".ts_append_eval %Q|"YLAF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "PCCM_FD@HON.S".ts_append_eval %Q|"PCCM_FD@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
   "KRCONNS_NMC@HON.Q".ts_append_eval %Q|"KRCONNS@HON.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
   "KRSGFNS_NMC@KAU.Q".ts_append_eval %Q|"KRSGFNS@KAU.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
   "PCSV_RN@HON.S".ts_append_eval %Q|"PCSV_RN@HON.S".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s.xls"|
   "YL@HI.A".ts_append_eval %Q|"YL@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YL@HI.A".ts_append_eval %Q|"YL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YL@HI.A".ts_append_eval %Q|"YL@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YSOCSECPR@HI.A".ts_append_eval %Q|"YSOCSECPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YSOCSECPR@HI.A".ts_append_eval %Q|"YSOCSECPR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YSOCSECPR@HI.A".ts_append_eval %Q|"YSOCSECPR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YSOCSECEM@HI.A".ts_append_eval %Q|"YSOCSECEM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YSOCSECEM@HI.A".ts_append_eval %Q|"YSOCSECEM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-  "YLMNDR@HI.A".ts_append_eval %Q|"YLMNDR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YSOCSECEM@HI.A".ts_append_eval %Q|"YSOCSECEM@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+  "YLMNDR@HI.A".ts_append_eval %Q|"YLMNDR@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLPG&@KAU.A".ts_append_eval %Q|"YLPG&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "YLPGFC&@KAU.A".ts_append_eval %Q|"YLPGFC&@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "RTFCNS@KAU.A".ts_append_eval %Q|"RTFCNS@KAU.A".tsn.load_from "   /Volumes/UHEROwork/data/Kauai/update/Kauai.xls"|
   "Y@HI.A".ts_append_eval %Q|"Y@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "Y@HI.A".ts_append_eval %Q|"Y@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "Y@HI.A".ts_append_eval %Q|"Y@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YRESADJ@HI.A".ts_append_eval %Q|"YRESADJ@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YRESADJ@HI.A".ts_append_eval %Q|"YRESADJ@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YRESADJ@HI.A".ts_append_eval %Q|"YRESADJ@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLAE@HI.A".ts_append_eval %Q|"YLAE@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-  "YLAE@HI.A".ts_append_eval %Q|"YLAE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
+  "YLAE@HI.A".ts_append_eval %Q|"YLAE@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "NRBEA@HON.A".ts_append_eval %Q|"NRBEA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-  "NRBEA@HON.A".ts_append_eval %Q|"NRBEA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+  "NRBEA@HON.A".ts_append_eval %Q|"NRBEA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
   "YLPSVSO&@HI.A".ts_append_eval %Q|"YLPSVSO&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
   "VISJPNS@MAU.M".ts_append_eval %Q|"VISJPNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
   "VISJPNS@HON.M".ts_append_eval %Q|"VISJPNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
@@ -3764,27 +3764,27 @@ task :reconstruct_db => :environment do
     "PCCMND_FB@HON.Q".ts_eval= %Q|'PCCMND_FB@HON.S'.ts.interpolate :quarter, :linear|
     "PCSV_RN@HON.Q".ts_eval= %Q|'PCSV_RN@HON.S'.ts.interpolate :quarter, :linear|
     "Y@HI.Q".ts_append_eval %Q|"Y@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-    "Y@HI.Q".ts_append_eval %Q|"Y@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+    "Y@HI.Q".ts_append_eval %Q|"Y@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
     "YL@HI.Q".ts_append_eval %Q|"YL@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-    "YL@HI.Q".ts_append_eval %Q|"YL@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+    "YL@HI.Q".ts_append_eval %Q|"YL@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
     "YPROPFA@HI.Q".ts_append_eval %Q|"YPROPFA@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls"|
-    "YPROPFA@HI.Q".ts_append_eval %Q|"YPROPFA@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+    "YPROPFA@HI.Q".ts_append_eval %Q|"YPROPFA@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
     "YLHC@HON.A".ts_append_eval %Q|"YLHC@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-    "YLHC@HON.A".ts_append_eval %Q|"YLHC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+    "YLHC@HON.A".ts_append_eval %Q|"YLHC@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
     "YL_NF@KAU.A".ts_append_eval %Q|"YL_NF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-    "YL_NF@KAU.A".ts_append_eval %Q|"YL_NF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+    "YL_NF@KAU.A".ts_append_eval %Q|"YL_NF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
     "ERTFDGSNS@KAU.M".ts_append_eval %Q|"ERTFDGSNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
     "E_PRSVCPRNS@MAU.M".ts_append_eval %Q|"E_PRSVCPRNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
     "ERTFDGSNS@MAU.M".ts_append_eval %Q|"ERTFDGSNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
     "PMKRCONNS@HAW.Q".ts_append_eval %Q|"PMKRCONNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
-    "YLMNNDPL@MAU.A".ts_append_eval %Q|"YLMNNDPL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "mau"|
-    "YLRTMS@HAW.A".ts_append_eval %Q|"YLRTMS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-    "YLMNNDFD@KAU.A".ts_append_eval %Q|"YLMNNDFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-    "YLMNNDBV@KAU.A".ts_append_eval %Q|"YLMNNDBV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-    "YLMNNDXM@KAU.A".ts_append_eval %Q|"YLMNNDXM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-    "YLMNNDAP@KAU.A".ts_append_eval %Q|"YLMNNDAP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-    "YLRTHC@KAU.A".ts_append_eval %Q|"YLRTHC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
-    "YLUT@KAU.A".ts_append_eval %Q|"YLUT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+    "YLMNNDPL@MAU.A".ts_append_eval %Q|"YLMNNDPL@MAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLRTMS@HAW.A".ts_append_eval %Q|"YLRTMS@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLMNNDFD@KAU.A".ts_append_eval %Q|"YLMNNDFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLMNNDBV@KAU.A".ts_append_eval %Q|"YLMNNDBV@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLMNNDXM@KAU.A".ts_append_eval %Q|"YLMNNDXM@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLMNNDAP@KAU.A".ts_append_eval %Q|"YLMNNDAP@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLRTHC@KAU.A".ts_append_eval %Q|"YLRTHC@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+    "YLUT@KAU.A".ts_append_eval %Q|"YLUT@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
     "PC@HON.M".ts_append_eval %Q|"PC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m.xls"|
     "PC@HON.M".ts_append_eval %Q|"PC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_histextend_date_format_correct.xls"|
     "EFINS@HAW.M".ts_append_eval %Q|"EFINS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_histextend_date_format_correct.xls"|
@@ -4040,11 +4040,11 @@ task :reconstruct_db => :environment do
      "HRSVACNS&@HI.M".ts_append_eval %Q|"HRSVACNS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
      "HRSVACNS&@HON.M".ts_append_eval %Q|"HRSVACNS&@HON.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
      "YTRNSF@KAU.A".ts_append_eval %Q|"YTRNSF@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-     "YTRNSF@KAU.A".ts_append_eval %Q|"YTRNSF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+     "YTRNSF@KAU.A".ts_append_eval %Q|"YTRNSF@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
      "YLGVFD@KAU.A".ts_append_eval %Q|"YLGVFD@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-     "YLGVFD@KAU.A".ts_append_eval %Q|"YLGVFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+     "YLGVFD@KAU.A".ts_append_eval %Q|"YLGVFD@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
      "YLGVML@KAU.A".ts_append_eval %Q|"YLGVML@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-     "YLGVML@KAU.A".ts_append_eval %Q|"YLGVML@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+     "YLGVML@KAU.A".ts_append_eval %Q|"YLGVML@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
      "YLPMNTB&@HI.A".ts_append_eval %Q|"YLPMNTB&@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/SIC/Copy_of_sic_income.xls"|
      "HRTUCUNS&@HI.M".ts_append_eval %Q|"HRTUCUNS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
      "HRTUCUNS&@HON.M".ts_append_eval %Q|"HRTUCUNS&@HON.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
@@ -4090,7 +4090,7 @@ task :reconstruct_db => :environment do
      "EGVFDDDNS@HAW.M".ts_append_eval %Q|"EGVFDDDNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
      "PMKBSGF@HON.M".ts_append_eval %Q|"PMKBSGF@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/hbr/update/hbr_upd_m.csv"|
      "YL_GVSL@KAU.A".ts_append_eval %Q|"YL_GVSL@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "KAU"|
-     "YL_GVSL@KAU.A".ts_append_eval %Q|"YL_GVSL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "kau"|
+     "YL_GVSL@KAU.A".ts_append_eval %Q|"YL_GVSL@KAU.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
      "IPNS@JP.M".ts_append_eval %Q|"IPNS@JP.M".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_m.xls"|
      "IPMNNS@JP.M".ts_append_eval %Q|"IPMNNS@JP.M".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_m.xls"|
      "TKEMPS_NS@JP.Q".ts_append_eval %Q|"TKEMPS_NS@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_q.xls"|
@@ -4181,17 +4181,17 @@ task :reconstruct_db => :environment do
      "WW_TR$FDNS&@HON.M".ts_append_eval %Q|"WW_TR$FDNS&@HON.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
      "WW_TRADENS&@HI.M".ts_append_eval %Q|"WW_TRADENS&@HI.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
      "WW_TRADENS&@HON.M".ts_append_eval %Q|"WW_TRADENS&@HON.M".tsn.load_from " /Volumes/UHEROwork/data/bls/SIC/DATA2.xls"|
-     "KPPRVADDNS@HAW.M".ts_append_eval %Q|"KPPRVADDNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVCOMNS@HI.M".ts_append_eval %Q|"KPPRVCOMNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVRSDNS@HAW.M".ts_append_eval %Q|"KPPRVRSDNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVNS@HI.M".ts_append_eval %Q|"KPPRVNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVNS@HON.M".ts_append_eval %Q|"KPPRVNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
+     "KPPRVADDNS@HAW.M".ts_append_eval %Q|"KPPRVADDNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVCOMNS@HI.M".ts_append_eval %Q|"KPPRVCOMNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVRSDNS@HAW.M".ts_append_eval %Q|"KPPRVRSDNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVNS@HI.M".ts_append_eval %Q|"KPPRVNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVNS@HON.M".ts_append_eval %Q|"KPPRVNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
      "KPPRVRSDNS@HI.M".ts_append_eval %Q|"KPPRVRSDNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
-     "KPPRVRSDNS@HI.M".ts_append_eval %Q|"KPPRVRSDNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVNS@HAW.M".ts_append_eval %Q|"KPPRVNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "PICTSGFNS@US.M".ts_append_eval %Q|"PICTSGFNS@US.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVADDNS@HI.M".ts_append_eval %Q|"KPPRVADDNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-     "KPPRVCOMNS@KAU.M".ts_append_eval %Q|"KPPRVCOMNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
+     "KPPRVRSDNS@HI.M".ts_append_eval %Q|"KPPRVRSDNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVNS@HAW.M".ts_append_eval %Q|"KPPRVNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "PICTSGFNS@US.M".ts_append_eval %Q|"PICTSGFNS@US.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVADDNS@HI.M".ts_append_eval %Q|"KPPRVADDNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+     "KPPRVCOMNS@KAU.M".ts_append_eval %Q|"KPPRVCOMNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
      "ECTNS@HI.M".ts_append_eval %Q|"ECTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_histextend_date_format_correct.xls"|
      "ECTNS@HI.M".ts_append_eval %Q|"ECTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_job_upd.xls"|
      "E_TUNS@HI.M".ts_append_eval %Q|"E_TUNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_histextend_date_format_correct.xls"|
@@ -4790,7 +4790,7 @@ task :reconstruct_db => :environment do
    "VISUSNS@MOL.M".ts_append_eval %Q|"VISUSNS@MOL.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd3.xls"|
    "VEXPNS@MAU.M".ts_append_eval %Q|"VEXPNS@MAUI.M".ts + "VEXPNS@LAN.M".ts + "VEXPNS@MOL.M".ts|
    "KPPRVRSDNS@HON.M".ts_append_eval %Q|"KPPRVRSDNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_hist_m.xls "|
-   "KPPRVRSDNS@HON.M".ts_append_eval %Q|"KPPRVRSDNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
+   "KPPRVRSDNS@HON.M".ts_append_eval %Q|"KPPRVRSDNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
    "VISNS@HAW.M".ts_append_eval %Q|"VISNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
    "VISNS@MAUI.M".ts_append_eval %Q|"VISNS@MAUI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd1.xls"|
    "VDAYNS@HON.M".ts_eval= %Q|"VDAYDMNS@HON.M".ts + "VDAYITNS@HON.M".ts|
@@ -4798,7 +4798,7 @@ task :reconstruct_db => :environment do
    "VISUS@HI.M".ts_append_eval %Q|"VISDM@HI.M".ts.apply_seasonal_adjustment :multiplicative|
    "VISUS@HI.M".ts_append_eval %Q|"VISUS@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
    "VISUS@HI.M".ts_append_eval %Q|"VISUS@HI.M".ts.apply_seasonal_adjustment :additive|
-   "KPPRVNS@MAU.M".ts_append_eval %Q|"KPPRVNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
+   "KPPRVNS@MAU.M".ts_append_eval %Q|"KPPRVNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
    "KBCON@HON.M".ts_append_eval %Q|"KBCON@HON.M".tsn.load_sa_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"|
    "KBSGF@HON.M".ts_append_eval %Q|"KBSGF@HON.M".tsn.load_sa_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"|
    "VISDM@HON.M".ts_eval= %Q|"VISDM@HI.M".ts.mc_ma_county_share_for("HON")|
@@ -4878,7 +4878,7 @@ task :reconstruct_db => :environment do
    "VXBU@HI.A".ts_append_eval %Q|"VXBU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|
    "TGBSUNS@HON.A".ts_append_eval %Q|"TGBSUNS@HON.A".tsn.load_from "/Volumes/UHEROwork/data/tax/update/tax_hist.xls"|
    "YPCBEA@HON.A".ts_append_eval %Q|"YPCBEA@HON.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HON"|
-   "YPCBEA@HON.A".ts_append_eval %Q|"YPCBEA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hon"|
+   "YPCBEA@HON.A".ts_append_eval %Q|"YPCBEA@HON.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "GDPPC@US.A".ts_append_eval %Q|"GDPPC@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
    "GDP_CN@US.A".ts_append_eval %Q|"GDP_CN@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
    "GDP_CN_R@US.A".ts_append_eval %Q|"GDP_CN_R@US.A".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_a.xls"|
@@ -4941,9 +4941,9 @@ task :reconstruct_db => :environment do
    "GDP_IRSP@JP.A".ts_append_eval %Q|"GDP_IRSP@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "GDP_IM_R@JP.A".ts_append_eval %Q|"GDP_IM_R@JP.A".tsn.load_from "/Volumes/UHEROwork/data/japan/update/jp_upd_a.xls"|
    "YLAGFA@HI.A".ts_append_eval %Q|"YLAGFA@HI.A".tsn.load_from "/Volumes/UHEROwork/data/bea/update/inc_hist.xls", "HI"|
-   "YLAGFA@HI.A".ts_append_eval %Q|"YLAGFA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "hi"|
-   "YLAGFF@HAW.A".ts_append_eval %Q|"YLAGFF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLMI@HAW.A".ts_append_eval %Q|"YLMI@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YLAGFA@HI.A".ts_append_eval %Q|"YLAGFA@HI.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLAGFF@HAW.A".ts_append_eval %Q|"YLAGFF@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLMI@HAW.A".ts_append_eval %Q|"YLMI@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "ECTSA@HI.M".ts_append_eval %Q|"ECTSA@HI.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_job_upd.xls"|
    "EAFFDRSNS@HAW.M".ts_append_eval %Q|"EAFFDRSNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
    "ERTCLNS@HAW.M".ts_append_eval %Q|"ERTCLNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
@@ -4974,23 +4974,23 @@ task :reconstruct_db => :environment do
    "E_PRSVCPRNS@HAW.M".ts_append_eval %Q|"E_PRSVCPRNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
    "ERTCLNS@KAU.M".ts_append_eval %Q|"ERTCLNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
    "EGVFDDDNS@MAU.M".ts_append_eval %Q|"EGVFDDDNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/hiwi_upd.xls"|
-   "YLCT@HI.Q".ts_append_eval %Q|"YLCT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
-   "YLMN@HI.Q".ts_append_eval %Q|"YLMN@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls"|
+   "YLCT@HI.Q".ts_append_eval %Q|"YLCT@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
+   "YLMN@HI.Q".ts_append_eval %Q|"YLMN@HI.Q".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"|
    "PRM@HI.Q".ts_eval= %Q|"PRM@HI.M".ts.aggregate(:quarter, :average)|
    "PMKRSGFNS@HAW.Q".ts_append_eval %Q|"PMKRSGFNS@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/misc/prud/update/prud_upd.xls"|
-   "YLAGFFSP@HAW.A".ts_append_eval %Q|"YLAGFFSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
-   "YLRTOT@HAW.A".ts_append_eval %Q|"YLRTOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd.xls", "haw"|
+   "YLAGFFSP@HAW.A".ts_append_eval %Q|"YLAGFFSP@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
+   "YLRTOT@HAW.A".ts_append_eval %Q|"YLRTOT@HAW.A".tsn.load_from " /Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"|
    "WHAFFDNS@HON.M".ts_append_eval %Q|"WHAFFDNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_job_upd.xls"|
    "WWWTNS@HI.M".ts_append_eval %Q|"WWWTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/bls/update/bls_job_upd.xls"|
-   "KPPRVADDNS@KAU.M".ts_append_eval %Q|"KPPRVADDNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVCOMNS@MAU.M".ts_append_eval %Q|"KPPRVCOMNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVCOMNS@HON.M".ts_append_eval %Q|"KPPRVCOMNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVADDNS@MAU.M".ts_append_eval %Q|"KPPRVADDNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVADDNS@HON.M".ts_append_eval %Q|"KPPRVADDNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVRSDNS@KAU.M".ts_append_eval %Q|"KPPRVRSDNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVNS@KAU.M".ts_append_eval %Q|"KPPRVNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVCOMNS@HAW.M".ts_append_eval %Q|"KPPRVCOMNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
-   "KPPRVRSDNS@MAU.M".ts_append_eval %Q|"KPPRVRSDNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m.xls  "|
+   "KPPRVADDNS@KAU.M".ts_append_eval %Q|"KPPRVADDNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVCOMNS@MAU.M".ts_append_eval %Q|"KPPRVCOMNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVCOMNS@HON.M".ts_append_eval %Q|"KPPRVCOMNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVADDNS@MAU.M".ts_append_eval %Q|"KPPRVADDNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVADDNS@HON.M".ts_append_eval %Q|"KPPRVADDNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVRSDNS@KAU.M".ts_append_eval %Q|"KPPRVRSDNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVNS@KAU.M".ts_append_eval %Q|"KPPRVNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVCOMNS@HAW.M".ts_append_eval %Q|"KPPRVCOMNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
+   "KPPRVRSDNS@MAU.M".ts_append_eval %Q|"KPPRVRSDNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"|
    "VEXPUSWNS@HI.M".ts_append_eval %Q|"VEXPUSWNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/tour/update/tour_upd3.xls"|
    "IP@US.M".ts_append_eval %Q|"IP@US.M".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_m.xls"|
    "CAPU@US.M".ts_append_eval %Q|"CAPU@US.M".tsn.load_from "/Volumes/UHEROwork/data/US/update/us_upd_m.xls"|

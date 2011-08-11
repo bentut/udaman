@@ -13,11 +13,9 @@ class String
   
   def ts_eval=(eval_statement)
     begin
-#      t = Time.now
-      # new_series = eval eval_statement
-      # Series.store self, new_series, new_series.name, eval_statement
+      t = Time.now
       Series.eval self, eval_statement
-#      puts "#{"%.2f" % (Time.now - t)} | #{new_series.data.count} | #{self} | #{eval_statement}"
+      puts "#{"%.2f" % (Time.now - t)} | #{new_series.data.count} | #{self} | #{eval_statement}"
     rescue Exception
        puts "ERROR | #{self} | #{eval_statement}"
     end

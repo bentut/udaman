@@ -153,7 +153,6 @@ class Series < ActiveRecord::Base
   end
 
   def Series.store(series_name, series, desc=nil, eval_statement=nil)
-    t = Time.now
     desc = series.name if desc.nil?
     desc = "Source Series Name is blank" if desc.nil? or desc == ""
     series_to_set = Series.get_or_new series_name
@@ -163,7 +162,6 @@ class Series < ActiveRecord::Base
 #      :last_updated => Time.now
     )
     source = series_name.ts.save_source(desc, eval_statement, series.data)
-    puts "#{"%.2f" % (Time.now - t)} | #{series.data.count} | #{series_name} | #{eval_statement}"
     source
   end
 
