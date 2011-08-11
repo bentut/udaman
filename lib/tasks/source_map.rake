@@ -4758,8 +4758,8 @@ task :reconstruct_db => :environment do
 
 
 
-
-    {}"VLOSJPNS@LAN.M".ts_eval= %Q|"VDAYJPNS@LAN.M".ts / "VISJPNS@LAN.M".ts|
+    # getting NaN values
+    "VLOSJPNS@LAN.M".ts_eval= %Q|"VDAYJPNS@LAN.M".ts / "VISJPNS@LAN.M".ts|
 
 
 
@@ -5277,7 +5277,7 @@ task :reconstruct_db => :environment do
 
 
 
-
+  #getting NAN values
   "PRM@KAU.Q".ts_eval= %Q|(("PRMNS@KAU.M".ts.moving_average / "PRMNS@HI.M".ts.moving_average * "PRM@HI.M".ts) / ("PRMNS@KAU.M".ts.moving_average / "PRMNS@HI.M".ts.moving_average * "PRM@HI.M".ts).annual_sum * "PRMNS@KAU.M".ts.annual_sum).aggregate :quarter, :average|
 
 
@@ -5504,7 +5504,7 @@ task :reconstruct_db => :environment do
 
 
 
-
+  #getting NAN Values
   "VEXPPTOTNS@HI.M".ts_append_eval %Q|"VEXPOTNS@HI.M".ts / "VISOTNS@HI.M".ts*1000|
 
 

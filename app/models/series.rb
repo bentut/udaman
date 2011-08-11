@@ -17,6 +17,7 @@ class Series < ActiveRecord::Base
   has_many :data_sources
   
   def last_observation
+    return nil if data.nil?
     return data.keys.sort[-1]
   end
   

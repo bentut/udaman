@@ -12,15 +12,15 @@ class String
   end
   
   def ts_eval=(eval_statement)
-#    begin
+    begin
 #      t = Time.now
       # new_series = eval eval_statement
       # Series.store self, new_series, new_series.name, eval_statement
       Series.eval self, eval_statement
 #      puts "#{"%.2f" % (Time.now - t)} | #{new_series.data.count} | #{self} | #{eval_statement}"
-#    rescue Exception
-    #   puts "ERROR | #{self} | #{eval_statement}"
-    # end
+    rescue Exception
+       puts "ERROR | #{self} | #{eval_statement}"
+    end
   end
     
   def ts_append(series)
