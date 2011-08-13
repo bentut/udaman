@@ -55,18 +55,18 @@ google.visualization.events.addListener(chart, 'select', function() {
 	<table>
 		<tr><td class="label">Aremos: </td><td><%= "#{@series.aremos_missing} missing, #{@series.aremos_diff.round(5) unless @series.aremos_diff.nil?} cumulative difference" %> [ refresh ]</td></tr>
 		<tr><td class="label">Output: </td><td>
-		<%= 
-		@pdf.filename unless @pdf.nil?
-		#@match_results[:prognoz_filename] 
-		%></td></tr>
+		<%= @pdf.filename unless @pdf.nil? %></td></tr>
+		<tr><td class="label">Dependent Series: </td>
+			<td>
+				<% @series.new_dependents.sort.each do |nd| %>
+				<%= link_to nd, {:action => 'show', :id => nd.ts.id} %>
+				<% end %>
+			</td>
+		</tr>
 		<tr><td class="label">Sources: <br />	<%= link_to 'Add', :controller => :data_sources, :action => :new, :series_id => @series.id %>
 		</td><td>
 		<%= render :partial => 'source_list', :locals => { :series => @series } %>
-		<%= #source_list @series.data_sources_by_last_run, @series.id 
-		%></td></tr>
-		<!-- ><tr><td class="label">Data: </td><td><%= 
-			#validate_data_list @match_results[:data_matches], @series.mult 
-		%></td></tr> -->
+		</td></tr>
 		<tr><td class="label">Data: </td><td>
 			<%= render :partial => 'data_points', :locals => {:series => @series}%>
 		</td></tr>

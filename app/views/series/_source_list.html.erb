@@ -18,12 +18,12 @@
 							:controller=> "data_sources", 
 							:action => 'delete', 
 							:id => ds.id}, 
-							:confirm => "Are you sure you want to delete this data soure?" 
+							:confirm => "Are you sure you want to delete this data source?" 
 					%>&nbsp;<span style="color:gray">(<%= 
 						"#{ds.runtime.round(2)}s" unless ds.runtime.nil? 
 					%>)</span>
   		</td>
-		<td><%= linked_version(ds.description) %><br /> <%= eval %></td>
+		<td><%= raw linked_version(ds.description) %><br /> <%= raw eval %></td>
 	</tr>      
 	<% end %>
 </table>

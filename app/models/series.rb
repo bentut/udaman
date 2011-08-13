@@ -170,6 +170,9 @@ class Series < ActiveRecord::Base
     new_series = Kernel::eval eval_statement
     source = Series.store series_name, new_series, new_series.name, eval_statement
     source.update_attributes(:runtime => (Time.now - t))
+    puts "#{"%.2f" % (Time.now - t)} | #{source.data.count} | #{series_name} | #{eval_statement}" 
+  rescue Exception 
+      puts "ERROR | #{series_name} | #{eval_statement}"
   end
   
   def save_source(source_desc, source_eval_statement, data, last_run = Time.now)
@@ -288,7 +291,7 @@ class Series < ActiveRecord::Base
 #    default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? "Demetra_Results_fa" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     raise SeriesReloadException unless update_spreadsheet.update_formatted?
-
+    self.frequency = update_spreadsheet.frequency 
     new_transformation(update_spreadsheet_path, update_spreadsheet.series(ns_name))
   end
     

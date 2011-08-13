@@ -57,7 +57,9 @@ module SeriesRelationship
     results = []
     DataSource.all(:conditions => ["description LIKE ?", "%#{self.name}%"]).each do |ds|
 #      puts ds.description
-      results.push Series.find(ds.series_id).name
+      s = Series.find(ds.series_id)
+      results.push s.name
+      results += s.new_dependents
     end
     return results.uniq
   end
@@ -67,7 +69,9 @@ module SeriesRelationship
     self.data_sources.each do |ds|
       results |= ds.dependencies 
     end
-    results
+    second_order_results = []
+    results.each {|s| second_order_results |= s.ts.new_dependencies}
+    results |= second_order_results
   end
   
   def Series.print_multi_sources

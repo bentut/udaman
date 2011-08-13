@@ -6,28 +6,44 @@
 		<th></th>
 		<th>Values</th>
 	</tr>
-  	<% series.current_data_points.sort_by(&:date_string).each do |cdp| %>
-    <% a_value = (as.nil? or as.data[cdp.date_string].nil?) ? "-" : as.data[cdp.date_string].round(3) %>
-    <% a_color = a_value - cdp.value.round(3) == 0 ? "gray" : "red" unless a_value.nil? or a_value.class == String %>
-    <tr>
-		<td><%= cdp.date_string %></td>
-		<td><span style='color:<%= a_color %>'><%= a_value %></span></td>
-		<td><%= "H" unless cdp.history.nil? %></td>
-		<td>
-			<span class='current-datapoint'>
-				<% bgcolor = DataSource.find(cdp.data_source_id).color rescue "FFF" %>
-				<div class='datapoint current-datapoint' style='background-color:#<%= bgcolor %>'>
-					<%= "%.3f" % cdp.value %>
-				</div>
-				<% series.data_points.where(:current => false, 
-						:date_string => cdp.date_string).sort_by(&:created_at).reverse.each do |dp| %>
-						<% bgcolor = DataSource.find(dp.data_source_id).color rescue "FFF" %>
-						<div class='datapoint' style='background-color:#<%= bgcolor %>'>
-							<%= "%.3f" % dp.value %>
-						</div>
-				<% end %>
-			</span>
-		</td>
-	</tr>
+	<%
+		date_hash = {}
+		missing_dates = as.data.keys - series.data.keys unless as.nil?
+		missing_dates.each {|md| date_hash[md] = as.data[md]} unless as.nil?
+		series.current_data_points.sort_by(&:date_string).each {|cdp| date_hash[cdp.date_string] = cdp}
+	%>
+ 	<% date_hash.sort.each do |date_string, element| %>
+	<% if element.class == DataPoint %>
+		<% cdp = element %>
+	    <% a_value = (as.nil? or as.data[cdp.date_string].nil?) ? "-" : as.data[cdp.date_string].round(3) %>
+	    <% a_color = a_value - cdp.value.round(3) == 0 ? "gray" : "red" unless a_value.nil? or a_value.class == String %>
+	    <tr>
+			<td><%= cdp.date_string %></td>
+			<td><span style='color:<%= a_color %>'><%= a_value %></span></td>
+			<td><%= "H" unless cdp.history.nil? %></td>
+			<td>
+				<span class='current-datapoint'>
+					<% bgcolor = DataSource.find(cdp.data_source_id).color rescue "FFF" %>
+					<div class='datapoint current-datapoint' style='background-color:#<%= bgcolor %>'>
+						<%= "%.3f" % cdp.value %>
+					</div>
+					<% series.data_points.where(:current => false, 
+							:date_string => cdp.date_string).sort_by(&:created_at).reverse.each do |dp| %>
+							<% bgcolor = DataSource.find(dp.data_source_id).color rescue "FFF" %>
+							<div class='datapoint' style='background-color:#<%= bgcolor %>'>
+								<%= "%.3f" % dp.value %>
+							</div>
+					<% end %>
+				</span>
+			</td>
+		</tr>
+	<% else %>
+		<tr>
+			<td><%= date_string %></td>
+			<td><span style='color:red'><%= element %></span></td>
+			<td></td>
+			<td style="text-align:center"><span style='color:red'> - </span></td>
+		</tr>
+	<% end %>
   	<% end %>
 </table>
