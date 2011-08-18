@@ -19,4 +19,32 @@ class DashboardsController < ApplicationController
     @sa_count = @type_buckets.delete :sa_load
     @load_count = @type_buckets.delete(:load) + @sa_count + @type_buckets[:mean_corrected_load]
   end
+  
+  def investigate
+    @maybe_ok_count = Series.where(:aremos_missing => 0, :aremos_diff =>  '< 0.1').count
+    @maybe_ok = Series.where(:aremos_missing => 0, :aremos_diff =>  '< 0.1').limit(20)
+    
+    @wrong_count = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 0.1', :aremos_diff => '< 1000').count
+    @wrong = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 0.1', :aremos_diff => '< 1000').limit(20)
+    
+    @way_off_count = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 1000').count
+    @way_off = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 1000').limit(20)
+    
+    Series.where(:aremos_missing => '> 0').count
+    @missing_low_to_high = Series.where(:aremos_missing => '> 0').order('aremos_missing ASC').limit(10)
+    @missing_high_to_low = Series.where(:aremos_missing => '> 0').order('aremos_missing DESC').limit(10)
+  end
 end
+
+#kinds of series
+# all ok - 0 diff, 0 missing
+# off by a little - 0 missing, diff < .1
+# off by a little more - 0 missing .1 < diff < 1000
+# probably a multiple - 0 missing diff > 1000
+# missing values, high to low and low to high
+
+#special situations
+#only has one source, read, but still missing or off
+#missing or off with no dependencies, but dependents
+#missing or of, but dependencies are all ok
+

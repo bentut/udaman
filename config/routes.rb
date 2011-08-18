@@ -60,6 +60,8 @@ UheroDb::Application.routes.draw do
   resources :prognoz_data_files
   resources :series_data_files
   resources :dashboards
+  
+  match 'investigate' => 'dashboards#investigate'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
