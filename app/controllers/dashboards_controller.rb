@@ -21,18 +21,20 @@ class DashboardsController < ApplicationController
   end
   
   def investigate
-    @maybe_ok_count = Series.where(:aremos_missing => 0, :aremos_diff =>  '< 0.1').count
-    @maybe_ok = Series.where(:aremos_missing => 0, :aremos_diff =>  '< 0.1').limit(20)
     
-    @wrong_count = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 0.1', :aremos_diff => '< 1000').count
-    @wrong = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 0.1', :aremos_diff => '< 1000').limit(20)
+    @maybe_ok_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) < 0.1 AND ABS(aremos_diff) > 0.0").count
+    @maybe_ok = Series.where("aremos_missing = 0 AND ABS(aremos_diff) < 0.1 AND ABS(aremos_diff) > 0.0").limit(20)
     
-    @way_off_count = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 1000').count
-    @way_off = Series.where(:aremos_missing => 0, :aremos_diff =>  '>= 1000').limit(20)
+    
+    @wrong_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 0.1 AND ABS(aremos_diff) < 1000").count
+    @wrong = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 0.1 AND ABS(aremos_diff) < 1000").limit(20)
+    
+    @way_off_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 1000").count
+    @way_off = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 1000").limit(20)
     
     Series.where(:aremos_missing => '> 0').count
-    @missing_low_to_high = Series.where(:aremos_missing => '> 0').order('aremos_missing ASC').limit(10)
-    @missing_high_to_low = Series.where(:aremos_missing => '> 0').order('aremos_missing DESC').limit(10)
+    @missing_low_to_high = Series.where("aremos_missing > 0").order('aremos_missing ASC').limit(10)
+    @missing_high_to_low = Series.where("aremos_missing > 0").order('aremos_missing DESC').limit(10)
   end
 end
 

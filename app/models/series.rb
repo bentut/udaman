@@ -376,6 +376,11 @@ class Series < ActiveRecord::Base
     data[date]
   end
   
+  def units_at(date)
+    self.units ||= 1
+    data[date] / self.units
+  end
+  
   def new_at(date)
     dp = DataPoint.first
     DataPoint.first(:conditions => {:date_string => date, :current => true, :series_id => self.id})

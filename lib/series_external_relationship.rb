@@ -26,12 +26,15 @@ module SeriesExternalRelationship
       if as.nil?
         puts "NO MATCH: #{self.name}"
         self.aremos_missing = "-1"
+        self.save
         return {:missing => "No Matching Aremos Series", :diff => "No Matching Aremos Series"}
       end
       self.aremos_missing = (as.data.keys - self.data.keys).count
       self.aremos_diff = 0
+      #self.units ||= 1
       as.data.each do |datestring, value|
-        self.aremos_diff += (value - self.data[datestring]) unless self.data[datestring].nil?
+        #puts self.units
+        self.aremos_diff += (value - self.units_at(datestring)) unless self.data[datestring].nil?
       end
       self.save
       puts "Compared #{self.name}: Missing: #{self.aremos_missing} Diff:#{self.aremos_diff}"
@@ -40,4 +43,23 @@ module SeriesExternalRelationship
       puts "ERROR WITH \"#{self.name}\".ts.aremos_comparison"
     end
   end
+  
+  def find_units
+    unit_options = [1,10,100,1000]
+    lowest_diff = nil
+    best_unit = nil
+    
+    unit_options.each do |u|
+      self.units = u
+      diff = aremos_comparison[:diff]
+      if lowest_diff.nil? or diff.abs < lowest_diff
+        lowest_diff = diff.abs
+        best_unit = u
+      end
+    end
+    
+    self.units = best_unit
+    self.aremos_comparison  
+  end
+  
 end
