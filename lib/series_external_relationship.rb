@@ -45,21 +45,27 @@ module SeriesExternalRelationship
   end
   
   def find_units
-    unit_options = [1,10,100,1000]
-    lowest_diff = nil
-    best_unit = nil
+    begin
+      unit_options = [1,10,100,1000]
+      lowest_diff = nil
+      best_unit = nil
     
-    unit_options.each do |u|
-      self.units = u
-      diff = aremos_comparison[:diff]
-      if lowest_diff.nil? or diff.abs < lowest_diff
-        lowest_diff = diff.abs
-        best_unit = u
+      unit_options.each do |u|
+        self.units = u
+        diff = aremos_comparison[:diff]
+        if lowest_diff.nil? or diff.abs < lowest_diff
+          lowest_diff = diff.abs
+          best_unit = u
+        end
       end
-    end
     
-    self.units = best_unit
-    self.aremos_comparison  
+      puts "#{self.name}: SETTING units = #{best_unit}"
+      self.units = best_unit
+      self.aremos_comparison  
+    rescue Exception
+      puts "#{self.name}: SETTING DEFAULT"
+      self.update_attributes(:units => 1)
+    end
   end
   
 end
