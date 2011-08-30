@@ -1,6 +1,11 @@
 class DataSourceDownloadsController < ApplicationController
   def index
     @output_files = DataSourceDownload.order(:url).all
+    @domain_hash = {}
+    @output_files.each do |dsd|
+      @domain_hash[dsd.url.split("/")[2]] ||= []
+      @domain_hash[dsd.url.split("/")[2]].push(dsd.save_path)
+    end
   end
 
   def new

@@ -4,32 +4,43 @@
 </div>
 <div id="details_mask"></div>
 <div id="details_area">
-	<table>
-		<tr>
-			<th>Test</th>
-			<th>Last Attempt</th>
-			<th>Last Result</th>
-			<th></th>
-			<th></th>
-			<th>Url / Path</th>
+	<% @domain_hash.sort.each do |domain, save_path_array| %>
+		<h2><%= domain %></h2>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+				<th colspan="2">Last Attempt</th>
+				<th></th>
+				<th></th>
+				<th>Url / Path</th>
 
-		</tr>
-		<% @output_files.each do |download| %>
-		<%
-			time = (download.download_log.count == 0 or download.download_log.nil?) ? "never downloaded" : download.download_log[-1]["time"]
-			status = (download.download_log.count == 0 or download.download_log.nil?) ? "never downloaded" : download.download_log[-1]["status"]
-		%>
-		<tr>
-			<td><%= link_to "download" , {:action => 'download', :id => download.id}%></td>
-			<td><%= time %></td>
-			<td><%= status %></td>
-			<td><%= link_to "edit" , {:action => 'edit', :id => download.id} %></td>
-			<td><%= link_to "delete" ,  download, :method => :delete %></td>
-			<td><%= download.url %><br />
-			<%= download.save_path %></td>
-		</tr>
-		<% end %>
-	</table>
+			</tr>
+			<% save_path_array.sort.each do |save_path| %>
+			<%
+			download = nil
+			@output_files.each do |dsd|
+				if dsd.save_path == save_path
+					download = dsd
+					break
+				end
+			end
+			time = ( download.download_log.nil? or download.download_log.count == 0) ? "never downloaded" : download.download_log[-1]["time"].strftime("%m/%d&nbsp;<span style=\"color:#999\">%H:%M</span>")
+			status = ( download.download_log.nil? or download.download_log.count == 0) ? "never downloaded" : download.download_log[-1]["status"]
+			filename = download.save_path.nil? ? "" : download.save_path.split("/")[-1]
+			%>
+			<tr>
+					<td><strong><%= filename %></strong></td>
+					<td><%= link_to "download" , {:action => 'download', :id => download.id}%></td>
+					<td><%= time %></td>
+					<td><%= status %></td>
+					<td><%= link_to "edit" , {:action => 'edit', :id => download.id} %></td>
+					<td><%= link_to "delete" ,  download, :method => :delete %></td>
+					<td><span style="color:#999"><%= download.url %></span></td>
+			</tr>
+			<% end %>
+		</table>
+	<% end %>
 </div>
 
 <p>
