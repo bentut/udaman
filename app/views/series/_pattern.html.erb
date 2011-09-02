@@ -1,0 +1,8 @@
+<% pattern = DataLoadPattern.find pattern_id %>
+<table class="pattern-info">
+	<tr><th class="fade"></th><th>Pattern <%= pattern_id %></th></tr>
+	<tr><td class="fade">File</td><td><%= pattern.path %></td></tr>
+	<tr><td class="fade">Sheet</td><td><%= pattern.worksheet %></td></tr>
+	<tr><td class="fade">Row</td><td><%= pattern.row %></td></tr>
+	<tr><td class="fade">Col</td><td><%= pattern.col %></td></tr>
+</table>
