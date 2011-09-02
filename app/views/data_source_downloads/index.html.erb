@@ -25,8 +25,8 @@
 					break
 				end
 			end
-			time = ( download.download_log.nil? or download.download_log.count == 0) ? "never downloaded" : download.download_log[-1]["time"].strftime("%m/%d&nbsp;<span style=\"color:#999\">%H:%M</span>")
-			status = ( download.download_log.nil? or download.download_log.count == 0) ? "never downloaded" : download.download_log[-1]["status"]
+			time = ( download.download_log.nil? or download.download_log.count == 0) ? raw("<span style='color:red'>never downloaded</span>") : raw(download.download_log[-1][:time].strftime("%m/%d&nbsp;<span style=\"color:#999\">%H:%M</span>"))
+			status = ( download.download_log.nil? or download.download_log.count == 0) ? raw("<span style='color:red'>never downloaded</span>") : download.download_log[-1][:status]
 			filename = download.save_path.nil? ? "" : download.save_path.split("/")[-1]
 			%>
 			<tr>

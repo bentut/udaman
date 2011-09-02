@@ -1,4 +1,3 @@
-<%  as = AremosSeries.get series.name %>
 <table>
 	<tr>
 		<th>Date</th>
@@ -10,11 +9,13 @@
 		date_hash = {}
 		missing_dates = as.data.keys - series.data.keys unless as.nil?
 		missing_dates.each {|md| date_hash[md] = as.data[md]} unless as.nil?
+		ncdps = series.data_points.where(:current => false) 
 		series.current_data_points.sort_by(&:date_string).each {|cdp| date_hash[cdp.date_string] = cdp}
 	%>
  	<% date_hash.sort.each do |date_string, element| %>
 	<% if element.class == DataPoint %>
 		<% cdp = element %>
+		<% series.units ||= 1 %>
 		<% cdp_val = cdp.value / series.units %>
 		
 	    <% a_value = (as.nil? or as.data[cdp.date_string].nil?) ? "-" : as.data[cdp.date_string].round(3) %>
@@ -29,8 +30,14 @@
 					<div class='datapoint current-datapoint' style='background-color:#<%= bgcolor %>'>
 						<%= "%.3f" % cdp_val %>
 					</div>
-					<% series.data_points.where(:current => false, 
-							:date_string => cdp.date_string).sort_by(&:created_at).reverse.each do |dp| %>
+					<% 
+						#series.data_points.where(:current => false, 
+						#	:date_string => cdp.date_string).sort_by(&:created_at).reverse.each do |dp| 
+						previous_data_points = []
+						ncdps.each {|dp| previous_data_points.push(dp) if dp.date_string == cdp.date_string}
+						pdp_sort = previous_data_points.sort {|dp1, dp2| dp1.created_at <=> dp2.created_at}
+						pdp_sort.each do |dp|
+					%>
 							<% dp_val = dp.value / series.units %>
 							<% bgcolor = DataSource.find(dp.data_source_id).color rescue "FFF" %>
 							<div class='datapoint' style='background-color:#<%= bgcolor %>'>

@@ -74,6 +74,10 @@ module SeriesRelationship
     results |= second_order_results
   end
   
+  def Series.print_prioritization_info
+    Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 10").order('ABS(aremos_diff) DESC').each {|s| puts "#{s.id} - #{s.name}: #{s.new_dependents.count} / #{s.new_dependencies.count} : #{s.aremos_diff}" if s.new_dependents.count > 0 }
+  end
+  
   def Series.print_multi_sources
     s = Series.all
     s.each do |series|

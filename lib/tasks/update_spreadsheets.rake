@@ -18,10 +18,10 @@ task :const_upd_q => :environment do
   path_g        = "/Volumes/UHEROwork/data/rawdata/Const_QSER_G.xls"
   output_path   = "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_new.xls"
 
-  dsd_e   = DataSourceDownload.get path
-  dsd_g   = DataSourceDownload.get path_g
+  dsd_e   = DataSourceDownload.get(path).download_changed?
+  dsd_g   = DataSourceDownload.get(path_g).download_changed?
   
-  if dsd_e.download_changed? || dsd_g.download_changed?
+  if dsd_e || dsd_g
     sox = SeriesOutputXls.new(output_path)#,true)
   
     sox.add "KPGOVNS@HI.Q",     Series.load_pattern("1998-01-01", "Q", path, "E-1", "increment:37:1", 7)
@@ -37,7 +37,7 @@ task :const_upd_q => :environment do
     sox.add "KNRSDNS@KAU.Q",    Series.load_pattern("1993-01-01", "Q", path_g, "G-28", "block:5:1:4", "repeat:2:5")
    
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Quarterly Construction (rake const_upd_q)", sox.output_summary
+    ##NotificationMailerNotificationMailer.deliver_new_download_notification "Quarterly Construction (rake const_upd_q)", sox.output_summary
   end
 end
 
@@ -51,14 +51,14 @@ task :const_upd_m => :environment do
   pathPICT         = "/Volumes/UHEROwork/data/rawdata/PICT.xls"   
   output_path      = "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"
 
-  dsdHI   = DataSourceDownload.get pathHI
-  dsdHAW  = DataSourceDownload.get pathHAW
-  dsdHON  = DataSourceDownload.get pathHON
-  dsdMAU  = DataSourceDownload.get pathMAU
-  dsdKAU  = DataSourceDownload.get pathKAU
-  dsdPICT = DataSourceDownload.get pathPICT
+  dsdHI   = DataSourceDownload.get(pathHI).download_changed?
+  dsdHAW  = DataSourceDownload.get(pathHAW).download_changed?
+  dsdHON  = DataSourceDownload.get(pathHON).download_changed?
+  dsdMAU  = DataSourceDownload.get(pathMAU).download_changed?
+  dsdKAU  = DataSourceDownload.get(pathKAU).download_changed?
+  dsdPICT = DataSourceDownload.get(pathPICT).download_changed?
   
-  if dsdHI.download_changed? || dsdHAW.download_changed? || dsdHON.download_changed? || dsdMAU.download_changed?  || dsdKAU.download_changed? || dsdPICT.download_changed? 
+  if dsdHI || dsdHAW || dsdHON || dsdMAU || dsdKAU || dsdPICT 
     sox = SeriesOutputXls.new(output_path)  
     sox.add "KPPRVNS@HI.M",         Series.load_pattern("1990-01-01", "M", pathHI, "sheet_num:1", "increment:5:1", 41)
     sox.add "KPPRVRSDNS@HI.M",      Series.load_pattern("1990-01-01", "M", pathHI, "sheet_num:1", "increment:5:1", 42)
@@ -83,7 +83,7 @@ task :const_upd_m => :environment do
   
     sox.add "PICTSGFNS@US.M",       Series.load_pattern("1964-01-01", "M", pathPICT, "fixed", "block:9:1:12", "repeat_with_step:7:29:2")
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Monthly Construction (rake const_upd_m)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Monthly Construction (rake const_upd_m)", sox.output_summary
   end
 end
 
@@ -179,7 +179,7 @@ task :gsp_upd => :environment do
     sox.add "YS_GVSL@HI.A",         Series.load_pattern("1997-01-01", "A", pathGSP, "csv",82,"increment:7:1") 
 
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Gross State Product (rake gsp_upd)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Gross State Product (rake gsp_upd)", sox.output_summary
   end
 end
 
@@ -240,7 +240,7 @@ task :inc_upd_q => :environment do
     sox.add "YL_GVSL@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",47,"increment:4:1")
     
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Quarterly State Personal Income (rake inc_upd_q)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Quarterly State Personal Income (rake inc_upd_q)", sox.output_summary
   end
 end
 
@@ -249,10 +249,10 @@ task :inc_upd_a => :environment do
   pathSA05N         = "/Volumes/UHEROwork/data/rawdata/BEA_SA05N.csv"       #annual state personal income
   pathCA05N         = "/Volumes/UHEROwork/data/rawdata/BEA_CA05N.csv"       #local area personal income
   output_path_inc   = "/Volumes/UHEROwork/data/bea/update/inc_upd_a_NEW.xls"
-  dsdSA05N          = DataSourceDownload.get pathSA05N
-  dsdCA05N          = DataSourceDownload.get pathCA05N
+  dsdSA05N          = DataSourceDownload.get(pathSA05N).download_changed?
+  dsdCA05N          = DataSourceDownload.get(pathCA05N).download_changed?
   
-  if dsdSA05N.download_changed? || dsdCA05N.download_changed?
+  if dsdSA05N || dsdCA05N
     sox = SeriesOutputXls.new(output_path_inc)
     
     sox.add "Y@HI.A",                 Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",2,"increment:4:1")
@@ -927,7 +927,7 @@ task :inc_upd_a => :environment do
     # sox.add "YLAGFFOT@MAU",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",999,"increment:999:1")
     
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Annual State Personal Income (rake inc_upd_a)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Annual State Personal Income (rake inc_upd_a)", sox.output_summary
   end
 end
 
@@ -936,10 +936,10 @@ task :com_upd => :environment do
   pathCA06N        = "/Volumes/UHEROwork/data/rawdata/BEA_CA06N.csv"       #county compensation
   pathSA06N        = "/Volumes/UHEROwork/data/rawdata/BEA_SA06N.csv"       #state compensation
   output_path_com   = "/Volumes/UHEROwork/data/bea/update/com_upd_NEW.xls"
-  dsdSA06N          = DataSourceDownload.get pathSA06N
-  dsdCA06N          = DataSourceDownload.get pathCA06N
+  dsdSA06N          = DataSourceDownload.get(pathSA06N).download_changed?
+  dsdCA06N          = DataSourceDownload.get(pathCA06N).download_changed?
   
-  if dsdSA06N.download_changed? || dsdCA06N.download_changed?
+  if dsdSA06N || dsdCA06N
     sox = SeriesOutputXls.new(output_path_com)
     
     #SA06N
@@ -1553,6 +1553,6 @@ task :com_upd => :environment do
     
     
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Annual State and County Compensation (rake com_upd)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Annual State and County Compensation (rake com_upd)", sox.output_summary
   end
 end

@@ -94,3 +94,8 @@ div.bad-response { background-color:#eaa; color:white;}
 
 div.datapoint {padding:2px 5px; float:left;}
 div.current-datapoint{font-weight:bold;}
+
+table.pattern-info td {border:0;}
+table.pattern-info th {border-bottom:1px solid #BBB;}
+th.fade{text-align:right;}
+td.fade {color:#BBB; text-align:right;}

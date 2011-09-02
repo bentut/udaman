@@ -15,7 +15,7 @@ class DataPoint < ActiveRecord::Base
     #need to understand how to control the rounding...not sure what sets this
     #rounding doesnt work, looks like there's some kind of truncation too.
     if self.value.round(4) != value.round(4)
-      puts "SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
+      #puts "SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
       self.update_attributes(:current => false)
       new_dp = self.clone
       new_dp.update_attributes(:data_source_id => data_source.id, :value => value, :current => true, :created_at => Time.now, :updated_at => Time.now)

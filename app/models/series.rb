@@ -129,7 +129,7 @@ class Series < ActiveRecord::Base
   
   def Series.load_all_series_from(update_spreadsheet_path, sheet_to_load = nil)
     each_spreadsheet_header(update_spreadsheet_path, sheet_to_load, false) do |series_name, update_spreadsheet|
-      Series.store(series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{series_name}".tsn.load_from "#{update_spreadsheet_path}", "#{sheet_to_load}^) unless sheet_to_load.nil?
+      Series.store(series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{series_name}".tsn.load_from "#{update_spreadsheet_path}", "#{sheet_to_load}"^) unless sheet_to_load.nil?
       Series.store(series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{series_name}".tsn.load_from "#{update_spreadsheet_path}"^) if sheet_to_load.nil?      
       series_name
     end

@@ -94,6 +94,7 @@ class DataSourceDownload < ActiveRecord::Base
     end
 
     def post_param_string
+      return "" if post_parameters.nil?
       string = ""
       post_parameters.sort.each do |key,value|
         string += %Q|'#{key}'=>'#{value}',\n|

@@ -13,6 +13,8 @@ class SeriesController < ApplicationController
 
   def show
     @series = Series.find params[:id]
+    @as = AremosSeries.get @series.name 
+    @desc = @as.nil? ? "No Aremos Series" : @as.description
     @pdf = PrognozDataFile.find @series.prognoz_data_file_id unless @series.prognoz_data_file_id.nil?
   end
 

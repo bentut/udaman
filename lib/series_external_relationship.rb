@@ -34,6 +34,7 @@ module SeriesExternalRelationship
       #self.units ||= 1
       as.data.each do |datestring, value|
         #puts self.units
+        #puts self.units_at(datestring)
         self.aremos_diff += (value - self.units_at(datestring)) unless self.data[datestring].nil?
       end
       self.save

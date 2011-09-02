@@ -87,6 +87,8 @@ class DataSource < ActiveRecord::Base
 
       s = Series.find series_id
   #    puts "Series name: #{s.name}, Sources:#{s.data_sources_by_last_run.count}"
+  
+  
       s.data_sources_by_last_run.reverse.each {|ds| ds.reload_source}
     end
 

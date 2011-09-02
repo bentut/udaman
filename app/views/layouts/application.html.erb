@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @series.nil? ? "UHERO Data Manager" : @series.name %></title>
+  <title><%= @series.nil? ? "UHERO Data Manager" : "#{@series.name} - #{@desc}" %></title>
   <%= stylesheet_link_tag :all %>
 
 <!--Load the AJAX API-->

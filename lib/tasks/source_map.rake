@@ -2,8 +2,8 @@ task :reload_aremos => :environment do
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/A_DATA.TSD")
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/Q_DATA.TSD")
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/M_DATA.TSD")
-  AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/W_DATA.TSD")
-  AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
+  #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/W_DATA.TSD")
+  #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
 end
 
 task :reconstruct_db => :environment do

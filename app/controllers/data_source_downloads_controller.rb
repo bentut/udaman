@@ -21,9 +21,10 @@ class DataSourceDownloadsController < ApplicationController
   end
   
   def create
+    post_params = params[:data_source_download].delete(:post_parameters)
     @output_file = DataSourceDownload.new(params[:data_source_download])
     if @output_file.save
-      @output_file.process_post_params(params[:data_source_download][:post_parameters])
+      @output_file.process_post_params(post_params)
       redirect_to :action => 'index'
     else
       render :action => 'new'
@@ -32,9 +33,10 @@ class DataSourceDownloadsController < ApplicationController
   
   def update
     @output_file = DataSourceDownload.find params[:id]
+    post_params = params[:data_source_download].delete(:post_parameters)
     respond_to do |format|
       if @output_file.update_attributes(params[:data_source_download])
-        @output_file.process_post_params(params[:data_source_download][:post_parameters])
+        @output_file.process_post_params(post_params)
         #@output_file.update_attributes(:post_parameters => params[:data_source_download])
         format.html { redirect_to( :action => 'index',
                         :notice => 'Data Source Download successfully updated.') }
