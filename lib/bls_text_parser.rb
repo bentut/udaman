@@ -1,5 +1,5 @@
 class BlsTextParser
-  def initialize(filename, rows_to_skip)
+  def initialize(filename, rows_to_skip = 1)
     file = open filename, "r"
 
     rows_skipped = 0
@@ -7,10 +7,35 @@ class BlsTextParser
       file.gets
       rows_skipped += 1
     end
-    @data_hash = []
+    @data_hash = {}
     while data_row = file.gets
-      data = data_row.split(",")
+      data = data_row.split(" ")
+      
+      frequency = "M" if data[2][0] == "M" and data[2] != "M13"
+      frequency = "A" if data[2] == "M13"
+      frequency = "Q" if data[2][0] == "Q"
+      dateyear = data[1]
+      if frequency == "Q"
+        datemonth = "01" if data[2] = "Q1"
+        datemonth = "04" if data[2] = "Q2"
+        datemonth = "07" if data[2] = "Q3"
+        datemonth = "10" if data[2] = "Q4"
+      else
+        datemonth = data[2] == "M13" ? "01" : data[2][1..2]
+      end
+      
+      @data_hash[data[0]] ||= {}
+      @data_hash[data[0]][frequency] ||= {}
+      @data_hash[data[0]][frequency]["#{dateyear}-#{datemonth}-01"] = data[3]
     end
+  end
+  
+  def get_data_hash
+    @data_hash
+  end
+  
+  def get_data(code,frequency)
+    @data_hash[code][frequency]
   end
 end
   
