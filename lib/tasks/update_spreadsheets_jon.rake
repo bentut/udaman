@@ -5,7 +5,8 @@ task :tour_PC_upd_w => :environment do
   output_path   = "/Volumes/UHEROwork/data/tour/update/tour_PC_upd_NEW.xls"
 
   dsd_tour_PC     = DataSourceDownload.get path_tour_PC
-    
+ 
+#testing comment to save   
     
   if dsd_tour_PC.download_changed?
     sox = SeriesOutputXls.new(output_path)#,true)
