@@ -1,6 +1,6 @@
 class DataHtmlParser
 
-  def get_bls_series(code)
+  def get_bls_series(code, frequency = nil)
     @code = code
     @url = 'http://data.bls.gov/pdq/SurveyOutputServlet'
     @post_parameters = {
@@ -15,7 +15,8 @@ class DataHtmlParser
       'years_option'=>'all_years'
     }
     @doc = self.download
-    return @doc
+    frequency = self.data.keys[0] if frequency.nil?
+    return self.data[frequency]
   end
   
   def doc
@@ -45,6 +46,7 @@ class DataHtmlParser
       @data_hash[freq] ||= {}
       @data_hash[freq][date_string] = cols[3].to_f
     end
+    @data_hash
   end
   
   def data
@@ -55,6 +57,7 @@ class DataHtmlParser
     return "A" if other_string == "M13"
     return "M" if other_string[0] == "M"
     return "S" if other_string[0] == "S"
+    return "Q" if other_string[0] == "Q"
   end
   
   def get_date(year_string, other_string)

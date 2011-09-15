@@ -3,7 +3,7 @@ require 'spec_helper'
 describe DataHtmlParser do
   before(:all) do
     @dhp = DataHtmlParser.new
-    @bls_text = @dhp.get_bls_series('CES0000000001')
+    @bls_text = @dhp.get_bls_series('CES0000000001',"M")
   end
   it "should connect to a website with optional post parameters and return a parseable object" do
     @dhp.doc.class.should == Nokogiri::HTML::Document
@@ -31,10 +31,10 @@ describe DataHtmlParser do
   end
   
   it "should be able to extract series data from download" do
-    data = @dhp.get_data
+    data = @dhp.data
     data.class.should == Hash
-    data.keys.should = ["M"]
-    data["M"].count.should == 10
+    data.keys.should == ["M"]
+    data["M"].count.should == 872
     data["M"]["2009-06-01"].should == 130493
   end
 

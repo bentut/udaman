@@ -372,6 +372,11 @@ class Series < ActiveRecord::Base
     new_transformation("loaded from pattern id #{p.id}", series_data)
   end
 
+  def load_from_bls(code, frequency = nil)
+    series_data = DataHtmlParser.new.get_bls_series(code,frequency)
+    new_transformation("loaded series code: #{code} from bls website", series_data)
+  end
+  
   def at(date)
     data[date]
   end

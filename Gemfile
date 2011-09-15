@@ -11,7 +11,7 @@ gem 'roo'
 #gem 'fastercsv'
 gem 'httpclient'
 gem 'devise', '1.1.2'
-
+gem 'spork', '~> 0.9.0.rc'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -39,6 +39,7 @@ gem 'nokogiri'
 group :development, :test do
   gem 'rspec-rails'
   gem 'cucumber-rails'
+  gem 'watchr'
   gem 'database_cleaner'
   gem 'test-unit', '1.2.3'
 end
