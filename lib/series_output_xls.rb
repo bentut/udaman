@@ -1,5 +1,6 @@
 class SeriesOutputXls < Spreadsheet::Workbook
   def initialize(output_path)
+    output_path = output_path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
     super output_path
     @output_path = output_path
     @output_filename = @output_path.split("/")[-1]

@@ -5,6 +5,8 @@ class DataSource < ActiveRecord::Base
   belongs_to :series
   has_many :data_points
   
+  #DataSource.where("eval LIKE '%load_from%'").all.each {|ds| puts "#{ds.series.name} - #{ds.eval}" }
+  
     def DataSource.type_buckets
       type_buckets = {:arithmetic => 0, :aggregation => 0, :share => 0, :seasonal_factors => 0, :mean_corrected_load => 0, :interpolation => 0, :sa_load => 0, :other_mathemetical => 0, :load => 0}
       all_evals = DataSource.all_evals
