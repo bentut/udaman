@@ -30,6 +30,11 @@ class DataSourceDownload < ActiveRecord::Base
     #but this script doesn't appear to need it
     #client.ssl_config.set_trust_ca('ca.secure.webapp.domain.com.crt')
 
+    def save_path_flex
+      return save_path unless ENV["JON"] == "true"
+      return save_path.gsub("UHEROwork", "UHEROwork-1")
+    end
+    
     def download_changed?
       self.download
       puts self.download_log[-1][:changed].to_s+" "+save_path 
@@ -51,7 +56,7 @@ class DataSourceDownload < ActiveRecord::Base
 
       backup if data_changed
 
-      open(save_path, "wb") { |file| file.write resp.content }
+      open(save_path_flex, "wb") { |file| file.write resp.content }
       #logging section
       download_time = Time.now
       download_url = url
@@ -63,17 +68,17 @@ class DataSourceDownload < ActiveRecord::Base
     end
 
     def content_changed?(new_content)
-      return true unless File::exists? save_path
-      previous_download = open(save_path, "r").read
+      return true unless File::exists? save_path_flex
+      previous_download = open(save_path_flex, "r").read
       return previous_download != new_content
     end
 
     def backup
-      return unless File::exists? save_path 
-      Dir.mkdir save_path+"_vintages" unless File::directory?(save_path+"_vintages")
-      filename = save_path.split("/")[-1]
+      return unless File::exists? save_path_flex 
+      Dir.mkdir save_path_flex+"_vintages" unless File::directory?(save_path_flex+"_vintages")
+      filename = save_path_flex.split("/")[-1]
       date = Date.today    
-      FileUtils.cp(save_path, save_path+"_vintages/#{date}_"+filename)
+      FileUtils.cp(save_path_flex, save_path_flex+"_vintages/#{date}_"+filename)
     end
 
     def test_process_post_params(post_param)

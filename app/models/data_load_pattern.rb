@@ -122,6 +122,7 @@ class DataLoadPattern < ActiveRecord::Base
   
   def compute_path(date_string)
     return Pattern.pos_by_date_string(start_date_string, frequency, path, compute_index_for_date(date_string)) unless path.index("%").nil?
+    return path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
     return path
   end
   
