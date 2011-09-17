@@ -35,6 +35,24 @@ class DataSource < ActiveRecord::Base
       all_descriptions_array
     end
 
+    def DataSource.all_load_from_file_series_names
+      series_names = []
+      DataSource.where("eval LIKE '%load_from %'").all.each do |ds|
+        series_names.push ds.series.name
+        puts "#{ds.series.name} - #{ds.eval}"
+      end
+      series_names
+    end
+    
+    def DataSource.all_pattern_series_names
+      series_names = []
+      DataSource.where("eval LIKE '%load_from_pattern_id%'").all.each do |ds| 
+        series_names.push ds.series.name
+        puts "#{ds.series.name} - #{ds.eval}"
+      end
+      series_names
+    end
+    
     def DataSource.series_sources
       sa_series_sources = [] 
       DataSource.all_evals.each {|eval| sa_series_sources.push(eval) unless eval.index("load_sa_from").nil?}
