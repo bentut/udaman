@@ -12,6 +12,16 @@ task :test_text_file => :environment do
   
 end
 
+task :bls_web_upd => :environment do
+  output_path = "/Volumes/UHEROwork/data/misc/const/update/DELETEME.xls"
+  sox = SeriesOutputXls.new(output_path)
+  
+  sox.add_data "PC@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0", "M")
+  sox.add_data "PCFB@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAF", "M")
+  sox.add_data "PCFBFD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAF1", "M")
+
+  sox.write_xls
+end
 task :const_upd_q => :environment do
   require "Spreadsheet"
   path          = "/Volumes/UHEROwork/data/rawdata/Const_QSER_E.xls"
