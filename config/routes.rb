@@ -62,7 +62,7 @@ UheroDb::Application.routes.draw do
   resources :dashboards
   
   match 'investigate' => 'dashboards#investigate'
-
+  match 'mapping' => 'dashboards#mapping'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

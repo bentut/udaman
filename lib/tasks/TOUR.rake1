@@ -7,7 +7,7 @@
 ###*******************************************************************
 
 
-task :tour_PC_upd_w => :environment do
+task :tour_PC_upd => :environment do
   require "Spreadsheet"
   path_tour_PC       = "/Volumes/UHEROwork/data/rawdata/Tour_PC.xls"
   
@@ -30,7 +30,7 @@ task :tour_PC_upd_w => :environment do
   sox.add "PCNS@HI",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Total"," increment:5:1", 4)
    
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Tour PC (rake const_upd_q)", sox.output_summary
+ #   NotificationMailer.deliver_new_download_notification "Tour PC (rake tour_PC_upd)", sox.output_summary
   end
 end
 
@@ -40,7 +40,7 @@ end
 
 
 
-task :tour_seats_upd_q => :environment do
+task :tour_seats_upd => :environment do
   require "Spreadsheet"
   path_seats_Aug11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_AUG11.xls"
   
@@ -113,7 +113,7 @@ task :tour_seats_upd_q => :environment do
    sox.add "VSOOTNS@HAWH",         Series.load_pattern("2011-08-01", "M",  "path_seats_Aug11", "SEATS Jul-Sep", 52, 10)
    
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Weekly UIC (rake const_upd_q)", sox.output_summary
+   # NotificationMailer.deliver_new_download_notification "Weekly UIC (rake const_upd_q)", sox.output_summary
   end
 end
 
@@ -130,10 +130,10 @@ task :tour_upd1 => :environment do
   output_path3   = "/Volumes/UHEROwork/data/tour/update/tour_upd3_NEW.xls"
 
 
-  dsd_seats_Aug11     = DataSourceDownload.get path_seats_Aug11 
+  dsd_tour_jun11     = DataSourceDownload.get path_tour_jun11 
     
     
-  if dsd_seats_Aug11.download_changed?
+  if dsd_tour_jun11.download_changed?
     sox = SeriesOutputXls.new(output_path1)#,true)
 
 ###Want to split this into three different output files
@@ -314,6 +314,10 @@ task :tour_upd1 => :environment do
   sox.add "VSTCANNPCNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "CAN", 91, 2)
   sox.add "VSTCANINDNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "CAN", 93, 2)
 
+ sox.write_xls
+
+sox = SeriesOutputXls.new(output_path2)#,true)
+
   sox.add "VISI1NS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "HL", 39, 2)
   sox.add "VISIMNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "HL", 40, 2)
   sox.add "NAIVNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "HL", 41, 2)
@@ -493,6 +497,10 @@ task :tour_upd1 => :environment do
   sox.add "VISCANNS@HAW",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "ISLAND BY MMA", 18, 12)
   sox.add "VRLSCANNS@HAW",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "ISLAND BY MMA", 19, 12)
 
+ sox.write_xls
+
+sox = SeriesOutputXls.new(output_path2)#,true)
+
   sox.add "VSNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "SEATS", 4, 2)
   sox.add "VSSCHNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "SEATS", 5, 2)
   sox.add "VSCHTNS@HI",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "SEATS", 6, 2)
@@ -654,7 +662,7 @@ task :tour_upd1 => :environment do
   sox.add "RMRVNS@KAU",         Series.load_pattern("2012-06-01", "M",  "path_tour_jun11" , "OCCUPANCY", 16, 10)
    
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Tour Highlights (rake tour_upd1)", sox.output_summary
+   # NotificationMailer.deliver_new_download_notification "Tour Highlights (rake tour_upd1)", sox.output_summary
   end
 end
 

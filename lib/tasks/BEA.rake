@@ -4,6 +4,8 @@
 ###*******************************************************************
 ###NOTES BOX
 
+#gsp_up works and is complete
+
 ###*******************************************************************
 
 
@@ -99,7 +101,7 @@ task :gsp_upd => :environment do
     sox.add "YS_GVSL@HI.A",         Series.load_pattern("1997-01-01", "A", pathGSP, "csv",82,"increment:7:1") 
 
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Gross State Product (rake gsp_upd)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Gross State Product (rake gsp_upd)", sox.output_summary
   end
 end
 
@@ -110,6 +112,7 @@ end
 task :inc_upd_q => :environment do
   require "Spreadsheet"
   pathSQ5N          = "/Volumes/UHEROwork/data/rawdata/BEA_SQ5N.csv"        #quarterly state personal income
+  
   output_path_inc   = "/Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"
   dsdSQ5N           = DataSourceDownload.get pathSQ5N
 
@@ -164,7 +167,7 @@ task :inc_upd_q => :environment do
     sox.add "YL_GVSL@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",47,"increment:4:1")
     
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Quarterly State Personal Income (rake inc_upd_q)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Quarterly State Personal Income (rake inc_upd_q)", sox.output_summary
   end
 end
 
@@ -859,7 +862,7 @@ task :inc_upd_a => :environment do
     # sox.add "YLAGFFOT@MAU",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",999,"increment:999:1")
     
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Annual State Personal Income (rake inc_upd_a)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Annual State Personal Income (rake inc_upd_a)", sox.output_summary
   end
 end
 
@@ -1494,6 +1497,6 @@ task :com_upd => :environment do
     
     
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Annual State and County Compensation (rake com_upd)", sox.output_summary
+    #NotificationMailer.deliver_new_download_notification "Annual State and County Compensation (rake com_upd)", sox.output_summary
   end
 end

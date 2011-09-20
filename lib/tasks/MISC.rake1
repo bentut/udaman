@@ -4,6 +4,10 @@
 ###*******************************************************************
 ###NOTES BOX
 
+#uic_upd works and is complete
+#misc_const_upd_q works and is complete
+#misc_const_upd_m works and is complete
+
 ###*******************************************************************
 
 
@@ -60,7 +64,7 @@ end
 
 task :const_upd_q => :environment do
   require "Spreadsheet"
-  path_QSER_E          = "/Volumes/UHEROwork/data/rawdata/Const_QSER_E.xls"
+  path_QSER_E        = "/Volumes/UHEROwork/data/rawdata/Const_QSER_E.xls"
   path_QSER_G        = "/Volumes/UHEROwork/data/rawdata/Const_QSER_G.xls"
   
   output_path   = "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_NEW.xls"
@@ -114,26 +118,26 @@ task :const_upd_m => :environment do
   if dsd_CONST_HI.download_changed? || dsd_CONST_HAW.download_changed? || dsd_CONST_HON.download_changed? || dsd_CONST_MAU.download_changed?  || dsd_CONST_KAU.download_changed? || dsd_CONST_PICT.download_changed? 
     sox = SeriesOutputXls.new(output_path)  
 
-  sox.add "KPPRVNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-04p", "increment:5:1", 41)
-  sox.add "KPPRVRSDNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-04p", "increment:5:1", 42)
-  sox.add "KPPRVCOMNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-04p", "increment:5:1", 43)
-  sox.add "KPPRVADDNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-04p", "increment:5:1", 44)
-  sox.add "KPPRVNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-04p", "increment:5:1", 41)
-  sox.add "KPPRVRSDNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-04p", "increment:5:1", 42)
-  sox.add "KPPRVCOMNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-04p", "increment:5:1", 43)
-  sox.add "KPPRVADDNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-04p", "increment:5:1", 44)
-  sox.add "KPPRVNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-04p", "increment:5:1", 41)
-  sox.add "KPPRVRSDNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-04p", "increment:5:1", 42)
-  sox.add "KPPRVCOMNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-04p", "increment:5:1", 43)
-  sox.add "KPPRVADDNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-04p", "increment:5:1", 44)
-  sox.add "KPPRVNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-04p", "increment:5:1", 41)
-  sox.add "KPPRVRSDNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-04p", "increment:5:1", 42)
-  sox.add "KPPRVCOMNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-04p", "increment:5:1", 43)
-  sox.add "KPPRVADDNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-04p", "increment:5:1", 44)
-  sox.add "KPPRVNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-04p", "increment:5:1", 41)
-  sox.add "KPPRVRSDNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-04p", "increment:5:1", 42)
-  sox.add "KPPRVCOMNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-04p", "increment:5:1", 43)
-  sox.add "KPPRVADDNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-04p", "increment:5:1", 44)
+  sox.add "KPPRVNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-07p", "increment:5:1", 41)
+  sox.add "KPPRVRSDNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-07p", "increment:5:1", 42)
+  sox.add "KPPRVCOMNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-07p", "increment:5:1", 43)
+  sox.add "KPPRVADDNS@HI",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "STATE_2011-07p", "increment:5:1", 44)
+  sox.add "KPPRVNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-07p", "increment:5:1", 41)
+  sox.add "KPPRVRSDNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-07p", "increment:5:1", 42)
+  sox.add "KPPRVCOMNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-07p", "increment:5:1", 43)
+  sox.add "KPPRVADDNS@HON",         Series.load_pattern("1990-01-01", "M",  path_CONST_HON, "Honolulu_2011-07p", "increment:5:1", 44)
+  sox.add "KPPRVNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-07p", "increment:5:1", 41)
+  sox.add "KPPRVRSDNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-07p", "increment:5:1", 42)
+  sox.add "KPPRVCOMNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-07p", "increment:5:1", 43)
+  sox.add "KPPRVADDNS@HAW",         Series.load_pattern("1990-01-01", "M",  path_CONST_HAW, "Hawaii Cty_2011-07p", "increment:5:1", 44)
+  sox.add "KPPRVNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-07p", "increment:5:1", 41)
+  sox.add "KPPRVRSDNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-07p", "increment:5:1", 42)
+  sox.add "KPPRVCOMNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-07p", "increment:5:1", 43)
+  sox.add "KPPRVADDNS@MAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_MAU, "Maui Cty_2011-07p", "increment:5:1", 44)
+  sox.add "KPPRVNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-07p", "increment:5:1", 41)
+  sox.add "KPPRVRSDNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-07p", "increment:5:1", 42)
+  sox.add "KPPRVCOMNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-07p", "increment:5:1", 43)
+  sox.add "KPPRVADDNS@KAU",         Series.load_pattern("1990-01-01", "M",  path_CONST_KAU, "Kauai Cty_2011-07p", "increment:5:1", 44)
 
   sox.add "PICTSGFNS@US.M",         Series.load_pattern("1964-01-01", "M",  path_CONST_PICT, "fixed", "block:9:1:12", "repeat_with_step:7:29:2")
 
