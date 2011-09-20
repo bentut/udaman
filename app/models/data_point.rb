@@ -14,7 +14,7 @@ class DataPoint < ActiveRecord::Base
     #create a new datapoint because value changed
     #need to understand how to control the rounding...not sure what sets this
     #rounding doesnt work, looks like there's some kind of truncation too.
-    if self.value.round(4) != value.round(4)
+    if self.value.round(3) != value.round(3)
       #puts "SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
       self.update_attributes(:current => false)
       new_dp = self.clone

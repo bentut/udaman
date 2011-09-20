@@ -94,6 +94,7 @@ class DataSource < ActiveRecord::Base
       #puts dates.sort
       self.data_points.each do |dp| 
         #puts "history: #{dp.history}, date: #{dp.date_string}"
+        dp.update_attributes(:history => nil) if (!dp.history.nil? and !dates.index(dp.date_string).nil?) 
         dp.update_attributes(:history => Time.now) if (dp.history.nil? and dates.index(dp.date_string).nil?)
       end
     end
