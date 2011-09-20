@@ -1,0 +1,33 @@
+<h1>Mapping Page</h1>
+<img src="http://chart.apis.google.com/chart?chs=400x200&cht=v&chd=t:<%= @load.count/100.0 %>,<%= @pattern.count/100.0 %>,0,<%= @pattern_and_load.count/100.0 %>&chdl=Load(<%= @load.count %>)|Pattern(<%= @pattern.count %>)" width="400" height="200" alt="" />
+<p></p>
+<p></p>
+<p></p>
+
+<table>
+	<tr>
+		<td>Pattern Only (<%= @pattern_only.count %>)</td>
+		<td>Pattern and Load (<%= @pattern_and_load.count %>)</td>
+		<td>Load Only (<%= @load_only.count %>)</td>
+	</tr>
+	<tr>
+		<td>
+			<% @pattern_only.each do |p| %>
+			<% s = p.ts %>
+			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id} %><br />
+			<% end %>
+		</td>
+		<td>
+			<% @pattern_and_load.each do |p| %>
+			<% s = p.ts %>
+			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id} %><br />
+			<% end %>
+		</td>
+		<td>
+			<% @load_only.each do |p| %>
+			<% s = p.ts %>
+			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id} %><br />
+			<% end %>
+		</td>
+	</tr>
+</table>

@@ -3,6 +3,7 @@
 ###*******************************************************************
 ###NOTES BOX
 
+#With the download being to a zip file, there seems to be a problem in unzipping the data to a usable form.
 
 ###*******************************************************************
 
@@ -359,7 +360,7 @@ task :tax_upd_m => :environment do
   sox.add "TGRNS@KAU",         Series.load_pattern("2011-03-01", "M", "2011-05/03ge.xls", "MAR", 32, 5)
    
     sox.write_xls
-    NotificationMailer.deliver_new_download_notification "Tax (tax_upd_m)", sox.output_summary
+   # NotificationMailer.deliver_new_download_notification "Tax (tax_upd_m)", sox.output_summary
   end
 end
 

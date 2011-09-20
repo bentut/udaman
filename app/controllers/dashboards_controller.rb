@@ -37,6 +37,14 @@ class DashboardsController < ApplicationController
     @missing_high_to_low = Series.where("aremos_missing > 0").order('aremos_missing DESC').limit(10)
   end
   
+  def mapping
+    @pattern = DataSource.all_pattern_series_names
+    @load = DataSource.all_load_from_file_series_names
+    @pattern_only = @pattern - @load
+    @load_only = @load - @pattern
+    @pattern_and_load = @pattern & @load
+  end
+  
   
 end
 
