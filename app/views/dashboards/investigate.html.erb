@@ -1,41 +1,29 @@
 
 
-<div id="maybe-ok">
+<table>
+	<tr>
+		<td>
 	<%= render :partial => 'investigate_queue', :locals => {
 											:title => 'Maybe OK', 
-											:count => @maybe_ok_count,
-											:description => "No Missing Values, cumulative diff < 0.1",
+											:count => @maybe_ok.count,
+											:description => "No Missing Values, cumulative diff < 1.0",
 											:queue => @maybe_ok }%>	
-</div>
+		</td>
 
-<div id="wrong">
+		<td>
 	<%= render :partial => 'investigate_queue', :locals => {
 									:title => 'Wrong', 
-									:count => @wrong_count,
-									:description => "No Missing Values, cumulative diff >= 0.1, < 1000",
+									:count => @wrong.count,
+									:description => "No Missing Values, cumulative diff >= 1.0",
 									:queue => @wrong }%>	
-</div>
-
-<div id="way-off">
-	<%= render :partial => 'investigate_queue', :locals => {
-									:title => 'Way Off', 
-									:count => @way_off_count,
-									:description => "No Missing Values, cumulative diff >= 1000",
-									:queue => @way_off }%>	
-</div>
-
+		</td>
+		<td>
 <div id="missing-low-to-high">
 	<%= render :partial => 'investigate_queue', :locals => {
 									:title => 'Missing Low to High', 
-									:count => @missing_count,
+									:count => @missing_low_to_high.count,
 									:description => "Ascending Missing Values",
 									:queue => @missing_low_to_high }%>	
-</div>
-
-<div id="missing-high-to-low">
-	<%= render :partial => 'investigate_queue', :locals => {
-									:title => 'Missing High to Low', 
-									:count => @missing_count,
-									:description => "Descending Missing Values",
-									:queue => @missing_high_to_low }%>	
-</div>
+		</td>
+</tr>
+</table>
