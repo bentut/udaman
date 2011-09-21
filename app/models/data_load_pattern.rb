@@ -56,7 +56,12 @@ class DataLoadPattern < ActiveRecord::Base
 
       @csv[path] = alternate_csv_load if @csv[path].nil?
     end
-    @csv[path][row-1][col-1]
+    val = @csv[path][row-1][col-1]
+    if val.class == String
+      val = Float val.gsub(",","") rescue val
+    end
+    return val
+    
   end
   
   def DataLoadPattern.alternate_fastercsv_read(path)
@@ -69,6 +74,7 @@ class DataLoadPattern < ActiveRecord::Base
     csv_file.close
     return csv_data 
   rescue
+    puts "CSV is having a problem with the following line"
     puts line
     return nil
   end

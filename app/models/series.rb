@@ -345,7 +345,6 @@ class Series < ActiveRecord::Base
   
   #original version of this function returned data. Then it returned a series. now returns a pattern for later manipulation
   def Series.load_pattern(start, freq, path, sheet, row, col)
-    puts "HERE!!!"
     DataLoadPattern.new(:col=>col, :start_date=>start, :frequency=>freq , :worksheet=>sheet, :row=>row, :path=>path)
     #can also attempt to find duplicate of pattern.
   end
