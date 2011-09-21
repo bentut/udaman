@@ -86,10 +86,24 @@ module SeriesRelationship
     return 1
   end
   
+  def reload_sources
+    begin
+      self.data_sources_by_last_run.each do |ds|
+        ds.print_eval_statement
+        ds.reload_source
+      end
+      return 0
+    rescue Exception
+      puts "SOMETHING BROKE -----------------------------------------------"
+    end
+  end
+  
   def print_source_eval_statements
     self.data_sources_by_last_run.each do |ds|
       ds.print_eval_statement
     end
     return 0
   end
+  
+  
 end

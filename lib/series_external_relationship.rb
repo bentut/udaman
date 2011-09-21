@@ -24,7 +24,7 @@ module SeriesExternalRelationship
     begin
       as = AremosSeries.get self.name
       if as.nil?
-        puts "NO MATCH: #{self.name}"
+        #puts "NO MATCH: #{self.name}"
         self.aremos_missing = "-1"
         self.save
         return {:missing => "No Matching Aremos Series", :diff => "No Matching Aremos Series"}
@@ -33,12 +33,11 @@ module SeriesExternalRelationship
       self.aremos_diff = 0
       #self.units ||= 1
       as.data.each do |datestring, value|
-        #puts self.units
-        #puts self.units_at(datestring)
-        self.aremos_diff += (value - self.units_at(datestring)) unless self.data[datestring].nil?
+        #have to do all the rounding because it still seems to suffer some precision errors after initial rounding
+        self.aremos_diff += (value.round(3) - self.units_at(datestring).round(3)).round(3).abs unless self.data[datestring].nil?
       end
       self.save
-      puts "Compared #{self.name}: Missing: #{self.aremos_missing} Diff:#{self.aremos_diff}"
+      #puts "Compared #{self.name}: Missing: #{self.aremos_missing} Diff:#{self.aremos_diff}"
       return {:missing => self.aremos_missing, :diff => self.aremos_diff}
     rescue Exception
       puts "ERROR WITH \"#{self.name}\".ts.aremos_comparison"

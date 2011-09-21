@@ -236,6 +236,7 @@ class Series < ActiveRecord::Base
     #puts "#{"%.2f" % (Time.now - mh_time)} : #{data_points.count} : #{self.name} : MARKING HISTORY FOR SERIES (ALL DATA POINTS)"
     
     update_data_hash
+    aremos_comparison
   end
   
   def update_data_hash
@@ -289,7 +290,7 @@ class Series < ActiveRecord::Base
 
     ns_name = self.name.sub("@", "NS@")
 #    default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
-    update_spreadsheet.default_sheet = sheet_to_load.nil? ? "Demetra_Results_fa" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
+    update_spreadsheet.default_sheet = sheet_to_load.nil? ? "sadata" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     raise SeriesReloadException unless update_spreadsheet.update_formatted?
     self.frequency = update_spreadsheet.frequency 
     new_transformation(update_spreadsheet_path, update_spreadsheet.series(ns_name))
@@ -344,6 +345,7 @@ class Series < ActiveRecord::Base
   
   #original version of this function returned data. Then it returned a series. now returns a pattern for later manipulation
   def Series.load_pattern(start, freq, path, sheet, row, col)
+    puts "HERE!!!"
     DataLoadPattern.new(:col=>col, :start_date=>start, :frequency=>freq , :worksheet=>sheet, :row=>row, :path=>path)
     #can also attempt to find duplicate of pattern.
   end
@@ -427,6 +429,30 @@ class Series < ActiveRecord::Base
       puts "#{datestring}: #{value_array.sort.join}"
     end
     puts name
+  end
+  
+  def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )
+    return series_to_finish if series_to_finish.count == 0 or depth == 25
+    series_to_finish_new = []
+    series_to_finish.each do |series|
+      if series.open_dependencies(series_names_finished).count == 0
+        series_names_finished.push series.name
+        series.reload_sources      
+      else
+        series_to_finish_new.push series
+      end
+    end
+    puts "# Series To finish: #{series_to_finish_new.count}"
+    #puts series_names_finished.count
+    puts "# -----end------"
+    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n"
+    if (series_to_finish.count == series_to_finish_new.count)
+      # series_to_finish.each do |stuck|
+      #   puts stuck.name
+      # end
+      return series_to_finish_new
+    end
+    return Series.smart_update(series_names_finished, series_to_finish_new, depth+1)
   end
   
   def Series.output_database_rebuild_statements(series_names_finished = [], series_to_finish = Series.all, depth = 0 )

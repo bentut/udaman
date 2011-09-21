@@ -3,24 +3,35 @@ class DataPoint < ActiveRecord::Base
   belongs_to :data_source
   
   def upd(value, data_source)
+    #right now only doing comparisons to 3 digits. Still storing full floats. 
+    #puts "#{date_string} - SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
     new_dp = self
     
     #no changes at all
     return self if value.nil? and !self.value.nil?
     #timestamps only, 
-    self.update_attributes(:updated_at => Time.now) if self.value == value and self.data_source_id == data_source.object_id
+    #puts "SCEN1: #{self.date_string}" if same_value_as?(value) and self.data_source_id == data_source.object_id
+    self.update_attributes(:updated_at => Time.now) if same_value_as?(value) and self.data_source_id == data_source.object_id
+    
     #data source and timestamps
-    self.update_attributes( :data_source_id => data_source.id ) if self.value == value and self.data_source_id != data_source.id
+    #puts "SCEN2: #{self.date_string}" if same_value_as?(value) and self.data_source_id != data_source.id
+    self.update_attributes( :data_source_id => data_source.id, :value => value ) if same_value_as?(value) and self.data_source_id != data_source.id
+    
     #create a new datapoint because value changed
     #need to understand how to control the rounding...not sure what sets this
     #rounding doesnt work, looks like there's some kind of truncation too.
-    if self.value.round(3) != value.round(3)
+    if !same_value_as?(value)
+      #puts "SCEN3: #{self.date_string}"
       #puts "SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
       self.update_attributes(:current => false)
       new_dp = self.clone
       new_dp.update_attributes(:data_source_id => data_source.id, :value => value, :current => true, :created_at => Time.now, :updated_at => Time.now)
     end
     new_dp
+  end
+  
+  def same_value_as?(value)
+    return self.value.round(3) == value.round(3)
   end
   
   def delete

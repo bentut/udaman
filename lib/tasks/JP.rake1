@@ -23,36 +23,37 @@ task :jp_upd_a => :environment do
   if dsd_JP_GDP_A.download_changed? || dsd_JP_GDP_R_A.download_changed? || dsd_JP_GDPDEF_A.download_changed?
     sox = SeriesOutputXls.new(output_path)#,true)
   
-#  sox.add "GDP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 2)
-#  sox.add "GDP_CP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 3)
-#  sox.add "GDP_IRSP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 6)
-#  sox.add "GDP_INRP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 7)
-#  sox.add "GDP_IIVP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 8)
-#  sox.add "GDP_CG@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 9)
-#  sox.add "GDP_IFXG@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 10)
-#  sox.add "GDP_IIVG@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 11)
-#  sox.add "GDP_NX@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 12)
-#  sox.add "GDP_EX@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 13)
-#  sox.add "GDP_IM@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 14)
-#  sox.add "GNI@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 19)
-#  sox.add "GDP_IFX@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "INCREMENT:8:1", 25)
 
- # sox.add "GDP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 2)
- # sox.add "GDP_CP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 3)
- # sox.add "GDP_IRSP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 6)
- # sox.add "GDP_INRP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 7)
- # sox.add "GDP_IIVP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 8)
- # sox.add "GDP_CG_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 9)
- # sox.add "GDP_IFXG_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 10)
- # sox.add "GDP_IIVG_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 11)
- # sox.add "GDP_NX_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 12)
- # sox.add "GDP_EX_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 13)
- # sox.add "GDP_IM_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 14)
- # sox.add "GNI_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 22)
- # sox.add "GDP_IFX_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "INCREMENT:8:1", 28)
+  sox.add "GDP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 2)
+  sox.add "GDP_CP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 3)
+  sox.add "GDP_IRSP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 6)
+  sox.add "GDP_INRP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 7)
+  sox.add "GDP_IIVP@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 8)
+  sox.add "GDP_CG@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 9)
+  sox.add "GDP_IFXG@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 10)
+  sox.add "GDP_IIVG@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 11)
+  sox.add "GDP_NX@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 12)
+  sox.add "GDP_EX@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 13)
+  sox.add "GDP_IM@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 14)
+  sox.add "GNI@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 19)
+  sox.add "GDP_IFX@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_A, "csv", "increment:8:1", 25)
 
-  sox.add "GDPDEF@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "INCREMENT:8:1", 2)
-  sox.add "GNIDEF@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "INCREMENT:8:1", 19)
+  sox.add "GDP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 2)
+  sox.add "GDP_CP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 3)
+  sox.add "GDP_IRSP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 6)
+  sox.add "GDP_INRP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 7)
+  sox.add "GDP_IIVP_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 8)
+  sox.add "GDP_CG_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 9)
+  sox.add "GDP_IFXG_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 10)
+  sox.add "GDP_IIVG_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 11)
+  sox.add "GDP_NX_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 12)
+  sox.add "GDP_EX_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 13)
+  sox.add "GDP_IM_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 14)
+  sox.add "GNI_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 22)
+  sox.add "GDP_IFX_R@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDP_R_A, "csv", "increment:8:1", 28)
+
+  sox.add "GDPDEF@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 2)
+  sox.add "GNIDEF@JP",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 19)
   
     sox.write_xls
     #NotificationMailer.deliver_new_download_notification "ANNUAL JAPAN (rake jp_upd_a)", sox.output_summary
@@ -160,7 +161,7 @@ end
 
 task :jp_upd_m => :environment do
   require "Spreadsheet"
-  path_JP_R            = "/Volumes/UHEROwork/data/rawdata/JP_R.CSV"
+  #path_JP_R            = "/Volumes/UHEROwork/data/rawdata/JP_R.CSV"
   path_JP_STKNS        = "/Volumes/UHEROwork/data/rawdata/JP_STKNS.CSV"
   path_JP_LF           = "/Volumes/UHEROwork/data/rawdata/JP_LF.XLS"
   path_JP_CPI          = "/Volumes/UHEROwork/data/rawdata/JP_CPI.XLS"
@@ -172,7 +173,7 @@ task :jp_upd_m => :environment do
 
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_m_NEW.xls"
 
-  dsd_JP_R           = DataSourceDownload.get path_JP_R
+  #dsd_JP_R           = DataSourceDownload.get path_JP_R
   dsd_JP_STKNS       = DataSourceDownload.get path_JP_STKNS
   dsd_JP_LF          = DataSourceDownload.get path_JP_LF
   dsd_JP_CPI         = DataSourceDownload.get path_JP_CPI
