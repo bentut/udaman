@@ -29,7 +29,12 @@ module SeriesExternalRelationship
         self.save
         return {:missing => "No Matching Aremos Series", :diff => "No Matching Aremos Series"}
       end
-      self.aremos_missing = (as.data.keys - self.data.keys).count
+      missing_keys = (as.data.keys - self.data.keys)
+      
+      #remove all suppressed values
+      missing_keys.delete_if {|key| as.data[key] == 1000000000000000.0}
+      
+      self.aremos_missing = missing_keys.count
       self.aremos_diff = 0
       #self.units ||= 1
       as.data.each do |datestring, value|
