@@ -84,7 +84,7 @@ class DataSource < ActiveRecord::Base
     def create_from_form
       Series.eval Series.find(self.series_id).name, self.eval
   #    puts "OK!"
-  #    return true
+      return true
     # rescue Exception
     #   puts "PROBLEM!!"
     #   return false
@@ -144,9 +144,10 @@ class DataSource < ActiveRecord::Base
     end
 
     def print_eval_statement
+      #might not need to do something different for seasonal adjustment anymore
       if self.eval.index("apply_seasonal_adjustment").nil?
-        puts "\"#{self.series.name}\".ts_append_eval %Q|#{self.eval}|" if self.mode == "append"
-        puts "\"#{self.series.name}\".ts_eval= %Q|#{self.eval}|" if self.mode == "set"
+        #puts "\"#{self.series.name}\".ts_append_eval %Q|#{self.eval}|" if self.mode == "append"
+        puts "\"#{self.series.name}\".ts_eval= %Q|#{self.eval}|" #if self.mode == "set"
       else
         puts self.eval
       end
