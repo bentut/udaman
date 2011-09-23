@@ -32,6 +32,7 @@ class DataHtmlParser
   end
   
   def bls_text
+    #puts @doc.css("pre").text
     @doc.css("pre").text
   end
   
@@ -63,8 +64,8 @@ class DataHtmlParser
   def get_date(year_string, other_string)
     return "#{year_string}-01-01" if other_string == "M13"
     return "#{year_string}-#{other_string[1..2]}-01" unless ["M01","M02","M03","M04","M05","M06","M07","M08","M09","M10","M11","M12"].index(other_string).nil?
-    return "#{year_string}-01-01" if other_string == "S1"
-    return "#{year_string}-06-01" if other_string == "S2"
+    return "#{year_string}-01-01" if other_string == "S01"
+    return "#{year_string}-06-01" if other_string == "S02"
   end
   
   def download
