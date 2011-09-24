@@ -12,19 +12,19 @@
 	</tr>
 	<tr>
 		<td>
-			<% @pattern_only.each do |p| %>
+			<% @pattern_only.sort.each do |p| %>
 			<% s = p.ts %>
 			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank" %><br />
 			<% end %>
 		</td>
 		<td>
-			<% @pattern_and_load.each do |p| %>
+			<% @pattern_and_load.sort.each do |p| %>
 			<% s = p.ts %>
 			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank" %><br />
 			<% end %>
 		</td>
 		<td>
-			<% @load_only.each do |p| %>
+			<% @load_only.sort.each do |p| %>
 			<% s = p.ts %>
 			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank" %><br />
 			<% end %>

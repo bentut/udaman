@@ -42,6 +42,12 @@ class DataLoadPattern < ActiveRecord::Base
         return "READ_ERROR:WORKSHEET DOES NOT EXIST"
       end
     end
+    # puts path
+    # puts sheet
+    # puts row
+    # puts col
+    # puts @workbooks[path][sheet]
+    # puts @workbooks[path][sheet].cell(row,col)
     @workbooks[path][sheet].cell(row,col)
   end
   
@@ -91,6 +97,7 @@ class DataLoadPattern < ActiveRecord::Base
   def retrieve(date_string)
     mapping = compute(date_string)
     result = DataLoadPattern.retrieve(mapping["path"], mapping["sheet"], mapping["row"], mapping["col"])
+    #puts result
     begin
       return Float result
     rescue

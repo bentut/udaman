@@ -47,7 +47,7 @@ class DataSource < ActiveRecord::Base
     
     def DataSource.all_pattern_series_names
       series_names = []
-      DataSource.where("eval LIKE '%load_from_pattern_id%'").all.each do |ds| 
+      DataSource.where("eval LIKE '%load_from_pattern_id%' OR eval LIKE '%DataHtmlParser.new.get_bls_series%'").all.each do |ds| 
         series_names.push ds.series.name
         #puts "#{ds.series.name} - #{ds.eval}"
       end
