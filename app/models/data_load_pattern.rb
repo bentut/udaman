@@ -29,6 +29,7 @@ class DataLoadPattern < ActiveRecord::Base
     begin
       @workbooks[path][sheet] = Excel.new(path) if @workbooks[path][sheet].nil? 
     rescue
+      #puts "WORKBOOK CAN'T BE FOUND"
       return "READ_ERROR:WORKBOOK DOES NOT EXIST"
     end
 
@@ -39,6 +40,7 @@ class DataLoadPattern < ActiveRecord::Base
       begin
         @workbooks[path][sheet].default_sheet = sheet unless @workbooks[path][sheet].default_sheet == sheet
       rescue
+        #puts "WORKSHEET CAN'T BE FOUND"
         return "READ_ERROR:WORKSHEET DOES NOT EXIST"
       end
     end
@@ -134,9 +136,11 @@ class DataLoadPattern < ActiveRecord::Base
   end
   
   def compute_path(date_string)
-    return Pattern.pos_by_date_string(start_date_string, frequency, path, compute_index_for_date(date_string)) unless path.index("%").nil?
-    return path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
-    return path
+    subbed_path = path
+    subbed_path = path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
+    return Pattern.pos_by_date_string(start_date_string, frequency, subbed_path, compute_index_for_date(date_string)) unless path.index("%").nil?
+    return subbed_path
+    #return path
   end
   
   def compute_sheet(date_string)
