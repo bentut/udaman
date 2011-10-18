@@ -88,6 +88,7 @@ class DataLoadPattern < ActiveRecord::Base
   end
   
   #available to process patterns if that ever becomes an issue
+  #also normalize dates to month if specified start date and frequency is month (some of the rolling start dates don't use day 1)
   def start_date_string
     start_date
   end
