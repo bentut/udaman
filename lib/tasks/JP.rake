@@ -17,14 +17,17 @@ task :jp_upd_a => :environment do
   path_JP_GDP_A          = "/Volumes/UHEROwork/data/rawdata/JP_GDP_A.CSV"
   path_JP_GDP_R_A        = "/Volumes/UHEROwork/data/rawdata/JP_GDP_R_A.CSV"
   path_JP_GDPDEF_A       = "/Volumes/UHEROwork/data/rawdata/JP_GDPDEF_A.CSV"
+  path_JP_POP            = "/Volumes/UHEROwork/data/rawdata/JP_POP.xls"
+
 
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_a_NEW.xls"
 
   dsd_JP_GDP_A         = DataSourceDownload.get path_JP_GDP_A  
   dsd_JP_GDP_R_A       = DataSourceDownload.get path_JP_GDP_R_A  
   dsd_JP_GDPDEF_A      = DataSourceDownload.get path_JP_GDPDEF_A  
+  dsd_JP_POP           = DataSourceDownload.get path_JP_POP  
 
-  if dsd_JP_GDP_A.download_changed? || dsd_JP_GDP_R_A.download_changed? || dsd_JP_GDPDEF_A.download_changed?
+  if dsd_JP_GDP_A.download_changed? || dsd_JP_GDP_R_A.download_changed? || dsd_JP_GDPDEF_A.download_changed? || dsd_JP_POP.download_changed?
     sox = SeriesOutputXls.new(output_path)#,true)
   
 
@@ -58,6 +61,9 @@ task :jp_upd_a => :environment do
 
   sox.add "GDPDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 2)
   sox.add "GNIDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 19)
+  
+  sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", "94", increment:6:1)
+
   
     sox.write_xls
     #NotificationMailer.deliver_new_download_notification "ANNUAL JAPAN (rake jp_upd_a)", sox.output_summary
@@ -168,7 +174,7 @@ task :jp_upd_m => :environment do
 # path_JP_R            = "/Volumes/UHEROwork/data/rawdata/JP_R.CSV"
 # path_JP_STKNS        = "/Volumes/UHEROwork/data/rawdata/JP_STKNS.CSV"
   path_JP_LF           = "/Volumes/UHEROwork/data/rawdata/JP_LF.XLS"
-# path_JP_CPI          = "/Volumes/UHEROwork/data/rawdata/JP_CPI.XLS"
+  path_JP_CPI          = "/Volumes/UHEROwork/data/rawdata/JP_CPI.XLS"
   path_JP_IP           = "/Volumes/UHEROwork/data/rawdata/JP_IP.CSV"
   path_JP_IPNS         = "/Volumes/UHEROwork/data/rawdata/JP_IPNS.CSV"
   path_JP_IP_hist      = "/Volumes/UHEROwork/data/rawdata/JP_IP_hist.CSV"
@@ -180,7 +186,7 @@ task :jp_upd_m => :environment do
 # dsd_JP_R           = DataSourceDownload.get path_JP_R
 # dsd_JP_STKNS       = DataSourceDownload.get path_JP_STKNS
   dsd_JP_LF          = DataSourceDownload.get path_JP_LF
-# dsd_JP_CPI         = DataSourceDownload.get path_JP_CPI
+  dsd_JP_CPI         = DataSourceDownload.get path_JP_CPI
   dsd_JP_IP          = DataSourceDownload.get path_JP_IP
   dsd_JP_IPNS        = DataSourceDownload.get path_JP_IPNS
   dsd_JP_IP_hist     = DataSourceDownload.get path_JP_IP_hist
@@ -198,8 +204,8 @@ task :jp_upd_m => :environment do
   sox.add "E_NF@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 14)
   sox.add "UR@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 31)
 
-#  sox.add "CPINS@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 6)
-#  sox.add "CPICORENS@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 7)
+  sox.add "CPINS@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 3)
+  sox.add "CPICORENS@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 4)
 #  sox.add "CPI@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 21)
 #  sox.add "CPICORE@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 22)
 

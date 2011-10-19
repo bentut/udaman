@@ -24,22 +24,23 @@ task :us_upd_q => :environment do
   path_66Q      = "/Volumes/UHEROwork/data/rawdata/US_BEA66QTR.csv"
   path_253Q     = "/Volumes/UHEROwork/data/rawdata/US_BEA253QTR.csv"
   path_264Q     = "/Volumes/UHEROwork/data/rawdata/US_BEA264QTR.csv"
+  path_us_gdp   = "/Volumes/UHEROwork/data/rawdata/US_GDP.xls"
 
   
   output_path   = "/Volumes/UHEROwork/data/us/update/us_upd_q_NEW.xls"
 
-  dsd_5     = DataSourceDownload.get path_5Q 
-  dsd_6     = DataSourceDownload.get path_6Q 
-  dsd_13    = DataSourceDownload.get path_13Q 
-  dsd_43    = DataSourceDownload.get path_43Q 
-  dsd_44    = DataSourceDownload.get path_44Q 
-  dsd_58    = DataSourceDownload.get path_58Q 
-  dsd_66    = DataSourceDownload.get path_66Q 
-  dsd_253   = DataSourceDownload.get path_253Q 
-  dsd_264   = DataSourceDownload.get path_264Q 
-
+  dsd_5      = DataSourceDownload.get path_5Q 
+  dsd_6      = DataSourceDownload.get path_6Q 
+  dsd_13     = DataSourceDownload.get path_13Q 
+  dsd_43     = DataSourceDownload.get path_43Q 
+  dsd_44     = DataSourceDownload.get path_44Q 
+  dsd_58     = DataSourceDownload.get path_58Q 
+  dsd_66     = DataSourceDownload.get path_66Q 
+  dsd_253    = DataSourceDownload.get path_253Q 
+  dsd_264    = DataSourceDownload.get path_264Q 
+  dsd_us_gdp = DataSourceDownload.get path_us_gdp 
   
-  if dsd_5.download_changed? || dsd_6.download_changed?  || dsd_13.download_changed?  || dsd_43.download_changed?  || dsd_44.download_changed?  || dsd_58.download_changed?  || dsd_66.download_changed?  || dsd_253.download_changed?  || dsd_264.download_changed?
+  if dsd_5.download_changed? || dsd_6.download_changed?  || dsd_13.download_changed?  || dsd_43.download_changed?  || dsd_44.download_changed?  || dsd_58.download_changed?  || dsd_66.download_changed?  || dsd_253.download_changed?  || dsd_264.download_changed? || dsd_us_gdp.download_changed?
     sox = SeriesOutputXls.new(output_path)#,true)
   
   
@@ -87,6 +88,8 @@ task :us_upd_q => :environment do
     sox.add "GDP_EX_R@US.Q",         Series.load_pattern("1947-01-01", "Q",  path_6Q, "csv", 22,  "increment:3:1")
     sox.add "GDP_IM_R@US.Q",         Series.load_pattern("1947-01-01", "Q",  path_6Q, "csv", 25,  "increment:3:1")
     sox.add "GDP_G_R@US.Q",         Series.load_pattern("1947-01-01", "Q",  path_6Q, "csv", 28,  "increment:3:1")
+    sox.add "GDP@US.Q",         Series.load_pattern("1947-01-01", "Q",  path_us_gdp, "sheet_num:1", "increment:9:1", 6)
+    sox.add "GDP_R@US.Q",         Series.load_pattern("1947-01-01", "Q",  path_us_gdp, "sheet_num:1", "increment:9:1", 7)
 
   
     sox.write_xls
@@ -110,7 +113,8 @@ task :us_upd_a => :environment do
   path_66A      = "/Volumes/UHEROwork/data/rawdata/US_BEA66YEAR.csv"
   path_253A     = "/Volumes/UHEROwork/data/rawdata/US_BEA253YEAR.csv"
   path_264A     = "/Volumes/UHEROwork/data/rawdata/US_BEA264YEAR.csv"
-
+  path_us_gdp   = "/Volumes/UHEROwork/data/rawdata/US_GDP.xls"
+  path_ca_cpi   = "/Volumes/UHEROwork/data/rawdata/CA_CPI.xls"
   
   output_path   = "/Volumes/UHEROwork/data/us/update/us_upd_a_NEW.xls"
 
@@ -123,9 +127,10 @@ task :us_upd_a => :environment do
   dsd_66A    = DataSourceDownload.get path_66A 
   dsd_253A   = DataSourceDownload.get path_253A 
   dsd_264A   = DataSourceDownload.get path_264A 
-
+  dsd_us_gdp = DataSourceDownload.get path_us_gdp 
+  dsd_ca_cpi = DataSourceDownload.get path_ca_cpi 
   
-  if dsd_5A.download_changed? || dsd_6A.download_changed?  || dsd_13A.download_changed?  || dsd_43A.download_changed?  || dsd_44A.download_changed?  || dsd_58A.download_changed?  || dsd_66A.download_changed?  || dsd_253A.download_changed?  || dsd_264A.download_changed?
+  if dsd_5A.download_changed? || dsd_6A.download_changed?  || dsd_13A.download_changed?  || dsd_43A.download_changed?  || dsd_44A.download_changed?  || dsd_58A.download_changed?  || dsd_66A.download_changed?  || dsd_253A.download_changed?  || dsd_264A.download_changed? || dsd_us_gdp.download_changed? || dsd_ca_cpi.download_changed?
     sox = SeriesOutputXls.new(output_path)#,true)
   
 
@@ -172,6 +177,9 @@ task :us_upd_a => :environment do
      sox.add "GDP_EX_R@US.A",         Series.load_pattern("1929-01-01", "A",  path_6A, "csv", 21,  "increment:3:1")
      sox.add "GDP_IM_R@US.A",         Series.load_pattern("1929-01-01", "A",  path_6A, "csv", 24,  "increment:3:1")
      sox.add "GDP_G_R@US.A",         Series.load_pattern("1929-01-01", "A",  path_6A, "csv", 27,  "increment:3:1")
+     sox.add "GDP@US.A",         Series.load_pattern("1929-01-01", "A",  path_us_gdp, "sheet_num:1", "increment:9:1", 2)
+     sox.add "GDP_R@US.A",         Series.load_pattern("1929-01-01", "A",  path_us_gdp, "sheet_num:1", "increment:9:1", 3)
+     sox.add "CPI@CA.A",         Series.load_pattern("1970-01-01", "A",  path_ca_cpi, "sheet_num:1", "increment:7:1", 9)
 
    
     sox.write_xls
@@ -209,7 +217,100 @@ task :us_upd_m => :environment do
   sox.add "YPCDPI_R@US.M",         Series.load_pattern("1959-01-01", "M",  path_76M, "csv", 44,  "increment:3:1")
   sox.add "N@US.M",         Series.load_pattern("1959-01-01", "M",  path_76M, "csv", 45,  "increment:3:1")
   sox.add "YCE_R@US.M",         Series.load_pattern("1995-01-01", "M",  path_83M, "csv", 7,  "increment:3:1")
-   
+  
+  sox.add_data "E_NF@US.M", DataHtmlParser.new.get_bls_series("CES0000000001", "M")
+  sox.add_data "E_NFNS@US.M", DataHtmlParser.new.get_bls_series("CEU0000000001", "M")
+  sox.add_data "E_PR@US.M", DataHtmlParser.new.get_bls_series("CES0500000001", "M")
+  sox.add_data "E_PRNS@US.M", DataHtmlParser.new.get_bls_series("CEU0500000001", "M")
+  sox.add_data "E_GDSPR@US.M", DataHtmlParser.new.get_bls_series("CES0600000001", "M")
+  sox.add_data "E_GDSPRNS@US.M", DataHtmlParser.new.get_bls_series("CEU0600000001", "M")
+  sox.add_data "E_SVCPR@US.M", DataHtmlParser.new.get_bls_series("CES0700000001", "M")
+  sox.add_data "E_SVCPRNS@US.M", DataHtmlParser.new.get_bls_series("CEU0700000001", "M")
+  sox.add_data "EMI@US.M", DataHtmlParser.new.get_bls_series("CES1000000001", "M")
+  sox.add_data "EMINS@US.M", DataHtmlParser.new.get_bls_series("CEU1000000001", "M")
+  sox.add_data "ECT@US.M", DataHtmlParser.new.get_bls_series("CES2000000001", "M")
+  sox.add_data "ECTNS@US.M", DataHtmlParser.new.get_bls_series("CEU2000000001", "M")
+  sox.add_data "EMN@US.M", DataHtmlParser.new.get_bls_series("CES3000000001", "M")
+  sox.add_data "EMNNS@US.M", DataHtmlParser.new.get_bls_series("CEU3000000001", "M")
+  sox.add_data "EMNDR@US.M", DataHtmlParser.new.get_bls_series("CES3100000001", "M")
+  sox.add_data "EMNDRNS@US.M", DataHtmlParser.new.get_bls_series("CEU3100000001", "M")
+  sox.add_data "EMNND@US.M", DataHtmlParser.new.get_bls_series("CES3200000001", "M")
+  sox.add_data "EMNNDNS@US.M", DataHtmlParser.new.get_bls_series("CEU3200000001", "M")
+  sox.add_data "E_TTU@US.M", DataHtmlParser.new.get_bls_series("CES4000000001", "M")
+  sox.add_data "E_TTUNS@US.M", DataHtmlParser.new.get_bls_series("CEU4000000001", "M")
+  sox.add_data "EWT@US.M", DataHtmlParser.new.get_bls_series("CES4142000001", "M")
+  sox.add_data "EWTNS@US.M", DataHtmlParser.new.get_bls_series("CEU4142000001", "M")
+  sox.add_data "ERT@US.M", DataHtmlParser.new.get_bls_series("CES4200000001", "M")
+  sox.add_data "ERTNS@US.M", DataHtmlParser.new.get_bls_series("CEU4200000001", "M")
+  sox.add_data "ETW@US.M", DataHtmlParser.new.get_bls_series("CES4300000001", "M")
+  sox.add_data "ETWNS@US.M", DataHtmlParser.new.get_bls_series("CEU4300000001", "M")
+  sox.add_data "EUT@US.M", DataHtmlParser.new.get_bls_series("CES4422000001", "M")
+  sox.add_data "EUTNS@US.M", DataHtmlParser.new.get_bls_series("CEU4422000001", "M")
+  sox.add_data "EIF@US.M", DataHtmlParser.new.get_bls_series("CES5000000001", "M")
+  sox.add_data "EIFNS@US.M", DataHtmlParser.new.get_bls_series("CEU5000000001", "M")
+  sox.add_data "E_FIR@US.M", DataHtmlParser.new.get_bls_series("CES5500000001", "M")
+  sox.add_data "E_FIRNS@US.M", DataHtmlParser.new.get_bls_series("CEU5500000001", "M")
+  sox.add_data "EFI@US.M", DataHtmlParser.new.get_bls_series("CES5552000001", "M")
+  sox.add_data "EFINS@US.M", DataHtmlParser.new.get_bls_series("CEU5552000001", "M")
+  sox.add_data "ERE@US.M", DataHtmlParser.new.get_bls_series("CES5553000001", "M")
+  sox.add_data "ERENS@US.M", DataHtmlParser.new.get_bls_series("CEU5553000001", "M")
+  sox.add_data "E_PBS@US.M", DataHtmlParser.new.get_bls_series("CES6000000001", "M")
+  sox.add_data "E_PBSNS@US.M", DataHtmlParser.new.get_bls_series("CEU6000000001", "M")
+  sox.add_data "EPS@US.M", DataHtmlParser.new.get_bls_series("CES6054000001", "M")
+  sox.add_data "EPSNS@US.M", DataHtmlParser.new.get_bls_series("CEU6054000001", "M")
+  sox.add_data "EMA@US.M", DataHtmlParser.new.get_bls_series("CES6055000001", "M")
+  sox.add_data "EMANS@US.M", DataHtmlParser.new.get_bls_series("CEU6055000001", "M")
+  sox.add_data "EAD@US.M", DataHtmlParser.new.get_bls_series("CES6056000001", "M")
+  sox.add_data "EADNS@US.M", DataHtmlParser.new.get_bls_series("CEU6056000001", "M")
+  sox.add_data "E_EDHC@US.M", DataHtmlParser.new.get_bls_series("CES6500000001", "M")
+  sox.add_data "E_EDHCNS@US.M", DataHtmlParser.new.get_bls_series("CEU6500000001", "M")
+  sox.add_data "EED@US.M", DataHtmlParser.new.get_bls_series("CES6561000001", "M")
+  sox.add_data "EEDNS@US.M", DataHtmlParser.new.get_bls_series("CEU6561000001", "M")
+  sox.add_data "EHC@US.M", DataHtmlParser.new.get_bls_series("CES6562000001", "M")
+  sox.add_data "EHCNS@US.M", DataHtmlParser.new.get_bls_series("CEU6562000001", "M")
+  sox.add_data "E_LH@US.M", DataHtmlParser.new.get_bls_series("CES7000000001", "M")
+  sox.add_data "E_LHNS@US.M", DataHtmlParser.new.get_bls_series("CEU7000000001", "M")
+  sox.add_data "EAE@US.M", DataHtmlParser.new.get_bls_series("CES7071000001", "M")
+  sox.add_data "EAENS@US.M", DataHtmlParser.new.get_bls_series("CEU7071000001", "M")
+  sox.add_data "EAF@US.M", DataHtmlParser.new.get_bls_series("CES7072000001", "M")
+  sox.add_data "EAFNS@US.M", DataHtmlParser.new.get_bls_series("CEU7072000001", "M")
+  sox.add_data "EAFAC@US.M", DataHtmlParser.new.get_bls_series("CES7072100001", "M")
+  sox.add_data "EAFACNS@US.M", DataHtmlParser.new.get_bls_series("CEU7072100001", "M")
+  sox.add_data "EAFFD@US.M", DataHtmlParser.new.get_bls_series("CES7072200001", "M")
+  sox.add_data "EAFFDNS@US.M", DataHtmlParser.new.get_bls_series("CEU7072200001", "M")
+  sox.add_data "EOS@US.M", DataHtmlParser.new.get_bls_series("CES8000000001", "M")
+  sox.add_data "EOSNS@US.M", DataHtmlParser.new.get_bls_series("CEU8000000001", "M")
+  sox.add_data "EGV@US.M", DataHtmlParser.new.get_bls_series("CES9000000001", "M")
+  sox.add_data "EGVNS@US.M", DataHtmlParser.new.get_bls_series("CEU9000000001", "M")
+  sox.add_data "EGVFD@US.M", DataHtmlParser.new.get_bls_series("CES9091000001", "M")
+  sox.add_data "EGVFDNS@US.M", DataHtmlParser.new.get_bls_series("CEU9091000001", "M")
+  sox.add_data "EGVST@US.M", DataHtmlParser.new.get_bls_series("CES9092000001", "M")
+  sox.add_data "EGVSTNS@US.M", DataHtmlParser.new.get_bls_series("CEU9092000001", "M")
+  sox.add_data "EGVLC@US.M", DataHtmlParser.new.get_bls_series("CES9093000001", "M")
+  sox.add_data "EGVLCNS@US.M", DataHtmlParser.new.get_bls_series("CEU9093000001", "M")
+  
+  sox.add_data "LF@US.M", DataHtmlParser.new.get_bls_series("LNS11000000", "M")
+  sox.add_data "LFNS@US.M", DataHtmlParser.new.get_bls_series("LNU01000000", "M")
+  sox.add_data "EMPL@US.M", DataHtmlParser.new.get_bls_series("LNS12000000", "M")
+  sox.add_data "EMPLNS@US.M", DataHtmlParser.new.get_bls_series("LNU02000000", "M")
+  sox.add_data "UR@US.M", DataHtmlParser.new.get_bls_series("LNS14000000", "M")
+  sox.add_data "URNS@US.M", DataHtmlParser.new.get_bls_series("LNU04000000", "M")
+  
+  sox.add_data "UR@CA.M", DataHtmlParser.new.get_bls_series("LASST06000003", "M")
+  sox.add_data "EMPL@CA.M", DataHtmlParser.new.get_bls_series("LASST06000005", "M")
+  sox.add_data "LF@CA.M", DataHtmlParser.new.get_bls_series("LASST06000006", "M")
+  sox.add_data "URNS@CA.M", DataHtmlParser.new.get_bls_series("LAUST06000003", "M")
+  sox.add_data "EMPLNS@CA.M", DataHtmlParser.new.get_bls_series("LAUST06000005", "M")
+  sox.add_data "LFNS@CA.M", DataHtmlParser.new.get_bls_series("LAUST06000006", "M")
+  sox.add_data "ENF@CA.M", DataHtmlParser.new.get_bls_series("SMS06000000000000001", "M")
+  sox.add_data "ENFNS@CA.M", DataHtmlParser.new.get_bls_series("SMU06000000000000001", "M")
+  
+  sox.add_data "CPI@US.M", DataHtmlParser.new.get_bls_series("CUSR0000SA0", "M")
+  sox.add_data "CPINS@US.M", DataHtmlParser.new.get_bls_series("CUUR0000SA0", "M")
+  sox.add_data "CPICORE@US.M", DataHtmlParser.new.get_bls_series("CUSR0000SA0L1E", "M")
+  sox.add_data "CPICORENS@US.M", DataHtmlParser.new.get_bls_series("CUUR0000SA0L1E", "M")
+
+  
     sox.write_xls
    # NotificationMailer.deliver_new_download_notification "Monthly US (rake US_upd_m)", sox.output_summary
   end

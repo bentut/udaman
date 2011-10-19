@@ -6,6 +6,101 @@ task :reload_aremos => :environment do
   #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
 end
 
+# task :us_from_bls => :environment do
+#   
+#   sox.add_data "E_NF@US.M", DataHtmlParser.new.get_bls_series("CES0000000001", "M")
+#   sox.add_data "E_NFNS@US.M", DataHtmlParser.new.get_bls_series("CEU0000000001", "M")
+#   sox.add_data "E_PR@US.M", DataHtmlParser.new.get_bls_series("CES0500000001", "M")
+#   sox.add_data "E_PRNS@US.M", DataHtmlParser.new.get_bls_series("CEU0500000001", "M")
+#   sox.add_data "E_GDSPR@US.M", DataHtmlParser.new.get_bls_series("CES0600000001", "M")
+#   sox.add_data "E_GDSPRNS@US.M", DataHtmlParser.new.get_bls_series("CEU0600000001", "M")
+#   sox.add_data "E_SVCPR@US.M", DataHtmlParser.new.get_bls_series("CES0700000001", "M")
+#   sox.add_data "E_SVCPRNS@US.M", DataHtmlParser.new.get_bls_series("CEU0700000001", "M")
+#   sox.add_data "EMI@US.M", DataHtmlParser.new.get_bls_series("CES1000000001", "M")
+#   sox.add_data "EMINS@US.M", DataHtmlParser.new.get_bls_series("CEU1000000001", "M")
+#   sox.add_data "ECT@US.M", DataHtmlParser.new.get_bls_series("CES2000000001", "M")
+#   sox.add_data "ECTNS@US.M", DataHtmlParser.new.get_bls_series("CEU2000000001", "M")
+#   sox.add_data "EMN@US.M", DataHtmlParser.new.get_bls_series("CES3000000001", "M")
+#   sox.add_data "EMNNS@US.M", DataHtmlParser.new.get_bls_series("CEU3000000001", "M")
+#   sox.add_data "EMNDR@US.M", DataHtmlParser.new.get_bls_series("CES3100000001", "M")
+#   sox.add_data "EMNDRNS@US.M", DataHtmlParser.new.get_bls_series("CEU3100000001", "M")
+#   sox.add_data "EMNND@US.M", DataHtmlParser.new.get_bls_series("CES3200000001", "M")
+#   sox.add_data "EMNNDNS@US.M", DataHtmlParser.new.get_bls_series("CEU3200000001", "M")
+#   sox.add_data "E_TTU@US.M", DataHtmlParser.new.get_bls_series("CES4000000001", "M")
+#   sox.add_data "E_TTUNS@US.M", DataHtmlParser.new.get_bls_series("CEU4000000001", "M")
+#   sox.add_data "EWT@US.M", DataHtmlParser.new.get_bls_series("CES4142000001", "M")
+#   sox.add_data "EWTNS@US.M", DataHtmlParser.new.get_bls_series("CEU4142000001", "M")
+#   sox.add_data "ERT@US.M", DataHtmlParser.new.get_bls_series("CES4200000001", "M")
+#   sox.add_data "ERTNS@US.M", DataHtmlParser.new.get_bls_series("CEU4200000001", "M")
+#   sox.add_data "ETW@US.M", DataHtmlParser.new.get_bls_series("CES4300000001", "M")
+#   sox.add_data "ETWNS@US.M", DataHtmlParser.new.get_bls_series("CEU4300000001", "M")
+#   sox.add_data "EUT@US.M", DataHtmlParser.new.get_bls_series("CES4422000001", "M")
+#   sox.add_data "EUTNS@US.M", DataHtmlParser.new.get_bls_series("CEU4422000001", "M")
+#   sox.add_data "EIF@US.M", DataHtmlParser.new.get_bls_series("CES5000000001", "M")
+#   sox.add_data "EIFNS@US.M", DataHtmlParser.new.get_bls_series("CEU5000000001", "M")
+#   sox.add_data "E_FIR@US.M", DataHtmlParser.new.get_bls_series("CES5500000001", "M")
+#   sox.add_data "E_FIRNS@US.M", DataHtmlParser.new.get_bls_series("CEU5500000001", "M")
+#   sox.add_data "EFI@US.M", DataHtmlParser.new.get_bls_series("CES5552000001", "M")
+#   sox.add_data "EFINS@US.M", DataHtmlParser.new.get_bls_series("CEU5552000001", "M")
+#   sox.add_data "ERE@US.M", DataHtmlParser.new.get_bls_series("CES5553000001", "M")
+#   sox.add_data "ERENS@US.M", DataHtmlParser.new.get_bls_series("CEU5553000001", "M")
+#   sox.add_data "E_PBS@US.M", DataHtmlParser.new.get_bls_series("CES6000000001", "M")
+#   sox.add_data "E_PBSNS@US.M", DataHtmlParser.new.get_bls_series("CEU6000000001", "M")
+#   sox.add_data "EPS@US.M", DataHtmlParser.new.get_bls_series("CES6054000001", "M")
+#   sox.add_data "EPSNS@US.M", DataHtmlParser.new.get_bls_series("CEU6054000001", "M")
+#   sox.add_data "EMA@US.M", DataHtmlParser.new.get_bls_series("CES6055000001", "M")
+#   sox.add_data "EMANS@US.M", DataHtmlParser.new.get_bls_series("CEU6055000001", "M")
+#   sox.add_data "EAD@US.M", DataHtmlParser.new.get_bls_series("CES6056000001", "M")
+#   sox.add_data "EADNS@US.M", DataHtmlParser.new.get_bls_series("CEU6056000001", "M")
+#   sox.add_data "E_EDHC@US.M", DataHtmlParser.new.get_bls_series("CES6500000001", "M")
+#   sox.add_data "E_EDHCNS@US.M", DataHtmlParser.new.get_bls_series("CEU6500000001", "M")
+#   sox.add_data "EED@US.M", DataHtmlParser.new.get_bls_series("CES6561000001", "M")
+#   sox.add_data "EEDNS@US.M", DataHtmlParser.new.get_bls_series("CEU6561000001", "M")
+#   sox.add_data "EHC@US.M", DataHtmlParser.new.get_bls_series("CES6562000001", "M")
+#   sox.add_data "EHCNS@US.M", DataHtmlParser.new.get_bls_series("CEU6562000001", "M")
+#   sox.add_data "E_LH@US.M", DataHtmlParser.new.get_bls_series("CES7000000001", "M")
+#   sox.add_data "E_LHNS@US.M", DataHtmlParser.new.get_bls_series("CEU7000000001", "M")
+#   sox.add_data "EAE@US.M", DataHtmlParser.new.get_bls_series("CES7071000001", "M")
+#   sox.add_data "EAENS@US.M", DataHtmlParser.new.get_bls_series("CEU7071000001", "M")
+#   sox.add_data "EAF@US.M", DataHtmlParser.new.get_bls_series("CES7072000001", "M")
+#   sox.add_data "EAFNS@US.M", DataHtmlParser.new.get_bls_series("CEU7072000001", "M")
+#   sox.add_data "EAFAC@US.M", DataHtmlParser.new.get_bls_series("CES7072100001", "M")
+#   sox.add_data "EAFACNS@US.M", DataHtmlParser.new.get_bls_series("CEU7072100001", "M")
+#   sox.add_data "EAFFD@US.M", DataHtmlParser.new.get_bls_series("CES7072200001", "M")
+#   sox.add_data "EAFFDNS@US.M", DataHtmlParser.new.get_bls_series("CEU7072200001", "M")
+#   sox.add_data "EOS@US.M", DataHtmlParser.new.get_bls_series("CES8000000001", "M")
+#   sox.add_data "EOSNS@US.M", DataHtmlParser.new.get_bls_series("CEU8000000001", "M")
+#   sox.add_data "EGV@US.M", DataHtmlParser.new.get_bls_series("CES9000000001", "M")
+#   sox.add_data "EGVNS@US.M", DataHtmlParser.new.get_bls_series("CEU9000000001", "M")
+#   sox.add_data "EGVFD@US.M", DataHtmlParser.new.get_bls_series("CES9091000001", "M")
+#   sox.add_data "EGVFDNS@US.M", DataHtmlParser.new.get_bls_series("CEU9091000001", "M")
+#   sox.add_data "EGVST@US.M", DataHtmlParser.new.get_bls_series("CES9092000001", "M")
+#   sox.add_data "EGVSTNS@US.M", DataHtmlParser.new.get_bls_series("CEU9092000001", "M")
+#   sox.add_data "EGVLC@US.M", DataHtmlParser.new.get_bls_series("CES9093000001", "M")
+#   sox.add_data "EGVLCNS@US.M", DataHtmlParser.new.get_bls_series("CEU9093000001", "M")
+#   
+#   sox.add_data "LF@US.M", DataHtmlParser.new.get_bls_series("LNS11000000", "M")
+#   sox.add_data "LFNS@US.M", DataHtmlParser.new.get_bls_series("LNU01000000", "M")
+#   sox.add_data "EMPL@US.M", DataHtmlParser.new.get_bls_series("LNS12000000", "M")
+#   sox.add_data "EMPLNS@US.M", DataHtmlParser.new.get_bls_series("LNU02000000", "M")
+#   sox.add_data "UR@US.M", DataHtmlParser.new.get_bls_series("LNS14000000", "M")
+#   sox.add_data "URNS@US.M", DataHtmlParser.new.get_bls_series("LNU04000000", "M")
+#   
+#   sox.add_data "UR@CA.M", DataHtmlParser.new.get_bls_series("LASST06000003", "M")
+#   sox.add_data "EMPL@CA.M", DataHtmlParser.new.get_bls_series("LASST06000005", "M")
+#   sox.add_data "LF@CA.M", DataHtmlParser.new.get_bls_series("LASST06000006", "M")
+#   sox.add_data "URNS@CA.M", DataHtmlParser.new.get_bls_series("LAUST06000003", "M")
+#   sox.add_data "EMPLNS@CA.M", DataHtmlParser.new.get_bls_series("LAUST06000005", "M")
+#   sox.add_data "LFNS@CA.M", DataHtmlParser.new.get_bls_series("LAUST06000006", "M")
+#   sox.add_data "ENF@CA.M", DataHtmlParser.new.get_bls_series("SMS06000000000000001", "M")
+#   sox.add_data "ENFNS@CA.M", DataHtmlParser.new.get_bls_series("SMU06000000000000001", "M")
+#   
+#   sox.add_data "CPI@US.M", DataHtmlParser.new.get_bls_series("CUSR0000SA0", "M")
+#   sox.add_data "CPINS@US.M", DataHtmlParser.new.get_bls_series("CUUR0000SA0", "M")
+#   sox.add_data "CPICORE@US.M", DataHtmlParser.new.get_bls_series("CUSR0000SA0L1E", "M")
+#   sox.add_data "CPICORENS@US.M", DataHtmlParser.new.get_bls_series("CUUR0000SA0L1E", "M")
+# end
+
 task :bls_web_series => :environment do
   "PC@HON.M".ts_eval=%Q|"PC@HON.M".tsn.load_from_bls("CUURA426SA0", "M")|
   "PCFB@HON.M".ts_eval=%Q|"PCFB@HON.M".tsn.load_from_bls("CUURA426SAF", "M")|
@@ -50,18 +145,6 @@ task :bls_web_series => :environment do
   "PC_FDEN@HON.M".ts_eval=%Q|"PC_FDEN@HON.M".tsn.load_from_bls("CUURA426SA0L1E", "M")|
   "PC_SH@HON.M".ts_eval=%Q|"PC_SH@HON.M".tsn.load_from_bls("CUURA426SA0L2", "M")|
   "PCEN@HON.M".ts_eval=%Q|"PCEN@HON.M".tsn.load_from_bls("CUURA426SA0E", "M")|
-
-
-
-
-
-
-
-
-
-
-
-
 
   "PC@HON.S".ts_eval=%Q|"PC@HON.S".tsn.load_from_bls("CUUSA426SA0", "S")|
   "PCFB@HON.S".ts_eval=%Q|"PCFB@HON.S".tsn.load_from_bls("CUUSA426SAF", "S")|
@@ -308,6 +391,7 @@ task :bls_web_series => :environment do
   "EGVSTEDNS@HON.M".ts_eval=%Q|"EGVSTEDNS@HON.M".tsn.load_from_bls("SMU15261809092161101", "M")|
   "EGVLCNS@HON.M".ts_eval=%Q|"EGVLCNS@HON.M".tsn.load_from_bls("SMU15261809093000001", "M")|
 end
+
 
 task :reconstruct_db => :environment do
     "AVC@KAU.A".ts_append_eval %Q|"AVC@KAU.A".tsn.load_from "/Volumes/UHEROwork/data/agriculture/AgricultureForNewDB.xls"|
