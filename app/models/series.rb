@@ -349,6 +349,10 @@ class Series < ActiveRecord::Base
     #can also attempt to find duplicate of pattern.
   end
   
+  def load_standard_text(path)
+    Series.load_standard_text(path)
+  end
+  
   def load_from_pattern_id(pattern_id)
     p = DataLoadPattern.find pattern_id
     s = load_from_pattern(p)
