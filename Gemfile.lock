@@ -160,6 +160,7 @@ DEPENDENCIES
   rails (= 3.0.9)
   roo
   rspec-rails
+  rubyzip (~> 0.9.4)
   spork (~> 0.9.0.rc)
   test-unit (= 1.2.3)
   watchr

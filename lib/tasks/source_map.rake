@@ -6,6 +6,13 @@ task :reload_aremos => :environment do
   #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
 end
 
+# fixed a problem with the semi-annual reads
+# DataSource.where("eval LIKE '%load_from_bls%\"S\"%'").each do |ds|
+# dsd=ds
+# ds.delete
+# eval("\"#{dsd.eval.split("\"")[1]}\".ts_eval=%Q|#{dsd.eval}|")
+# end
+
 # task :us_from_bls => :environment do
 #   
 #   sox.add_data "E_NF@US.M", DataHtmlParser.new.get_bls_series("CES0000000001", "M")
