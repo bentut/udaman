@@ -4,8 +4,10 @@ class DataSourceDownload < ActiveRecord::Base
   serialize :post_parameters, Hash
   serialize :download_log, Array
 
+    #some tight coupling to the unizipping functionality in the string extension
     def DataSourceDownload.get(save_path)
-      DataSourceDownload.where(:save_path => save_path).first
+      sp = save_path.split("_extracted_files/")[0] 
+      DataSourceDownload.where(:save_path => sp).first
     end
 
     def DataSourceDownload.test_url(url)
@@ -35,6 +37,7 @@ class DataSourceDownload < ActiveRecord::Base
       return save_path.gsub("UHEROwork", "UHEROwork-1")
     end
     
+    #this needs to be fixed
     def download_changed?
       self.download
       puts self.download_log[-1][:changed].to_s+" "+save_path 
@@ -57,6 +60,7 @@ class DataSourceDownload < ActiveRecord::Base
       backup if data_changed
 
       open(save_path_flex, "wb") { |file| file.write resp.content }
+      save_path_flex.unzip if save_path_flex[-3..-1] == "zip"
       #logging section
       download_time = Time.now
       download_url = url
@@ -69,7 +73,7 @@ class DataSourceDownload < ActiveRecord::Base
 
     def content_changed?(new_content)
       return true unless File::exists? save_path_flex
-      previous_download = open(save_path_flex, "r").read
+      previous_download = open(save_path_flex, "rb").read
       return previous_download != new_content
     end
 
