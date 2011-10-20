@@ -90,7 +90,19 @@ class DataLoadPattern < ActiveRecord::Base
   #available to process patterns if that ever becomes an issue
   #also normalize dates to month if specified start date and frequency is month (some of the rolling start dates don't use day 1)
   def start_date_string
-    start_date
+    @start_date ||= process_start_date_pattern
+  end
+  
+  def process_start_date_pattern
+    return start_date if start_date.index(":").nil?
+    date_parts = start_date.split(":")
+    reverse = true if date_parts[-1] == "rev"
+    return read_start_date_from_file(date_parts[0][3..-1].to_i,date_parts[1][3..-1].to_i) if date_parts[0].starts_with("row")
+    return date_parts[0]
+  end
+  
+  def read_start_date_from_file(row_i,col_i)
+    DataLoadPattern.retrieve(compute_path, sheet, row_i, col_i)
   end
   
   def compute(date_string)
@@ -139,6 +151,7 @@ class DataLoadPattern < ActiveRecord::Base
   def compute_path(date_string)
     subbed_path = path
     subbed_path = path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
+    return subbed_path if date_string.nil?
     return Pattern.pos_by_date_string(start_date_string, frequency, subbed_path, compute_index_for_date(date_string)) unless path.index("%").nil?
     return subbed_path
     #return path

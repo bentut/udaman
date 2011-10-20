@@ -62,7 +62,7 @@ task :jp_upd_a => :environment do
   sox.add "GDPDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 2)
   sox.add "GNIDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 19)
   
-  sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", "94", increment:6:1)
+  #sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", "94", increment:6:1)
 
   
     sox.write_xls
