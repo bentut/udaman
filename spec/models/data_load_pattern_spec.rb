@@ -163,6 +163,52 @@ describe DataLoadPattern do
   end
   
   
+  it "should be able to identify the start date and index as normal when a row and column are specified" do
+    dlp = DataLoadPattern.new(
+      :start_date => "row2:col1", 
+      :frequency => "M" , 
+      :path => @pattern_spreadsheet_name , 
+      :worksheet => "csv", 
+      :row => "increment:2:1", 
+      :col => 2
+    )
+  end
+  
+  it "should be able to index dates in reverse when specified" do
+  end
+  
+  it "should be able to index dates in reverse and identify a special start date when a row and column are specified" do
+    dlp = DataLoadPattern.new(
+      :start_date => "row2:col1:rev", 
+      :frequency => "M" , 
+      :path => @pattern_spreadsheet_name , 
+      :worksheet => "JP_STKNS", 
+      :row => "increment:2:1", 
+      :col => 2
+    )
+    dlp.start_date_string.should == "2011-09-01"
+    dlp.retrieve("2011-06-01").should == 9708.5
+    
+    
+  end
+  
+  it "should be able to index dates in reverse and identify a special start date when a row and column are specified and frequency is daily and skips days" do
+    dlp = DataLoadPattern.new(
+      :start_date => "row2:col1:rev", 
+      :frequency => "D" , 
+      :path => @pattern_spreadsheet_name , 
+      :worksheet => "US_STKNS_DATA", 
+      :row => "increment:2:1", 
+      :col => 2
+    )
+    dlp.start_date_string.should == "2011-09-01"
+    dlp.retrieve("2011-06-01").should == 9708.5
+    
+    
+  end
+  
+  
+  
   
   # it "should load a single mapping from an xls file" do
   # end

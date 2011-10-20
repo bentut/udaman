@@ -13,6 +13,12 @@ end
 # eval("\"#{dsd.eval.split("\"")[1]}\".ts_eval=%Q|#{dsd.eval}|")
 # end
 
+
+# DataSource.where("eval LIKE '%load_from_bls%'").each do |ds|
+#   puts "\"#{ds.eval.split("\"")[1]}\".ts_eval=%Q|#{ds.eval}|" 
+# end
+
+
 # task :us_from_bls => :environment do
 #   
 #   sox.add_data "E_NF@US.M", DataHtmlParser.new.get_bls_series("CES0000000001", "M")
