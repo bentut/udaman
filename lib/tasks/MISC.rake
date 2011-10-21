@@ -68,10 +68,10 @@ task :const_upd_q => :environment do
   
   output_path   = "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_NEW.xls"
 
-  dsd_QSER_E   = DataSourceDownload.get path_QSER_E
-  dsd_QSER_G   = DataSourceDownload.get path_QSER_G
+  dsd_QSER_E   = DataSourceDownload.get(path_QSER_E).download_changed?
+  dsd_QSER_G   = DataSourceDownload.get(path_QSER_G).download_changed?
   
-  if dsd_QSER_E.download_changed? || dsd_QSER_G.download_changed?
+  if dsd_QSER_E || dsd_QSER_G
     sox = SeriesOutputXls.new(output_path)#,true)
   
   sox.add "KNRSDNS@HON.Q",         Series.load_pattern("1993-01-01", "Q",  path_QSER_G, "G-25", "block:6:1:4", "repeat:2:5")
@@ -107,14 +107,14 @@ task :const_upd_m => :environment do
   
   output_path      = "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"
 
-  dsd_CONST_HI   = DataSourceDownload.get path_CONST_HI
-  dsd_CONST_HAW  = DataSourceDownload.get path_CONST_HAW
-  dsd_CONST_HON  = DataSourceDownload.get path_CONST_HON
-  dsd_CONST_MAU  = DataSourceDownload.get path_CONST_MAU
-  dsd_CONST_KAU  = DataSourceDownload.get path_CONST_KAU
-  dsd_CONST_PICT = DataSourceDownload.get path_CONST_PICT
+  dsd_CONST_HI   = DataSourceDownload.get(path_CONST_HI).download_changed?
+  dsd_CONST_HAW  = DataSourceDownload.get(path_CONST_HAW).download_changed?
+  dsd_CONST_HON  = DataSourceDownload.get(path_CONST_HON).download_changed?
+  dsd_CONST_MAU  = DataSourceDownload.get(path_CONST_MAU).download_changed?
+  dsd_CONST_KAU  = DataSourceDownload.get(path_CONST_KAU).download_changed?
+  dsd_CONST_PICT = DataSourceDownload.get(path_CONST_PICT).download_changed?
   
-  if dsd_CONST_HI.download_changed? || dsd_CONST_HAW.download_changed? || dsd_CONST_HON.download_changed? || dsd_CONST_MAU.download_changed?  || dsd_CONST_KAU.download_changed? || dsd_CONST_PICT.download_changed? 
+  if dsd_CONST_HI || dsd_CONST_HAW || dsd_CONST_HON || dsd_CONST_MAU || dsd_CONST_KAU || dsd_CONST_PICT 
     sox = SeriesOutputXls.new(output_path)  
 
   sox.add "KPPRVNS@HI.M",         Series.load_pattern("1990-01-01", "M",  path_CONST_HI, "sheet_num:1", "increment:5:1", 41)

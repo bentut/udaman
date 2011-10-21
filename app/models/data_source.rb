@@ -39,15 +39,43 @@ class DataSource < ActiveRecord::Base
       series_names = []
       DataSource.where("eval LIKE '%load_from %'").all.each do |ds|
         series_names.push ds.series.name
-        #puts "#{ds.series.name} - #{ds.eval}"
       end
       series_names.uniq
     end
     
+    #const is not there yet
+    def DataSource.all_history_and_manual_series_names
+      series_names = []
+      ['sic','permits','agriculture','Kauai','HBR','prud','census','trms','vexp','hud'].each do |type| 
+        DataSource.where("eval LIKE '%load_from %#{type}%'").each do |ds|
+          series_names.push ds.series.name
+        end
+      end
+      series_names.uniq
+    end
+    
+    # History
+    # DataSource.where("eval LIKE '%sic%'").limit(5).each {|ds| puts ds.eval}; 0 (gets bls and bea SIC)
+    # DataSource.where("eval LIKE '%permits%'").limit(5).each {|ds| puts ds.eval}; 0
+    # DataSource.where("eval LIKE '%const%'").limit(5).each {|ds| puts ds.eval}; 0
+    # prices SIC
+    # Various 
+    # YL
+    
+    # Manual
+    # DataSource.where("eval LIKE '%agriculture%'").limit(10).each {|ds| puts ds.eval}
+    # DataSource.where("eval LIKE '%Kauai%'").limit(5).each {|ds| puts ds.eval}
+    # CAFRS?
+    # DataSource.where("eval LIKE '%HBR%'").limit(5).each {|ds| puts ds.eval}
+    # DataSource.where("eval LIKE '%prud%'").limit(5).each {|ds| puts ds.eval}
+    # DataSource.where("eval LIKE '%census%'").limit(5).each {|ds| puts ds.eval}
+    # DataSource.where("eval LIKE '%trms%'").limit(5).each {|ds| puts ds.eval}
+    # DataSource.where("eval LIKE '%vexp%'").limit(5).each {|ds| puts ds.eval}
+    # DataSource.where("eval LIKE '%hud%'").limit(5).each {|ds| puts ds.eval};
     
     def DataSource.all_pattern_series_names
       series_names = []
-      DataSource.where("eval LIKE '%load_from_pattern_id%' OR eval LIKE '%load_from_bls%'").all.each do |ds| 
+      DataSource.where("eval LIKE '%load_from_pattern_id%' OR eval LIKE '%load_from_bls%' OR eval LIKE '%load_standard_text%'").all.each do |ds| 
         series_names.push ds.series.name
         #puts "#{ds.series.name} - #{ds.eval}"
       end

@@ -369,6 +369,7 @@ class Series < ActiveRecord::Base
       #puts index.to_s+": "+(Time.now-t).to_s
       date_string = p.compute_date_string_for_index index
       data_value = p.retrieve(date_string)
+      #puts "#{date_string}: #{data_value}"
       #puts p.last_read_status if data_value == "END"
       break if data_value == "END"
       series_data[date_string] = data_value

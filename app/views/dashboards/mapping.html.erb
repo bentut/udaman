@@ -9,6 +9,7 @@
 		<td>Pattern Only (<%= @pattern_only.count %>)</td>
 		<td>Pattern and Load (<%= @pattern_and_load.count %>)</td>
 		<td>Load Only (<%= @load_only.count %>)</td>
+		<td>Exempted - History or Manual (<%= @exempted.count %>)</td>
 	</tr>
 	<tr>
 		<td>
@@ -25,6 +26,12 @@
 		</td>
 		<td>
 			<% @load_only.sort.each do |p| %>
+			<% s = p.ts %>
+			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank" %><br />
+			<% end %>
+		</td>
+		<td>
+			<% @exempted.sort.each do |p| %>
 			<% s = p.ts %>
 			<%= link_to s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank" %><br />
 			<% end %>

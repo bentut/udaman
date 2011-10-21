@@ -38,11 +38,12 @@ class DashboardsController < ApplicationController
   end
   
   def mapping
-    @pattern = DataSource.all_pattern_series_names
-    @load = DataSource.all_load_from_file_series_names
-    @pattern_only = @pattern - @load
-    @load_only = @load - @pattern
-    @pattern_and_load = @pattern & @load
+    @exempted = DataSource.all_history_and_manual_series_names
+    @pattern = DataSource.all_pattern_series_names - @exempted
+    @load = DataSource.all_load_from_file_series_names - @exempted
+    @pattern_only = (@pattern - @load)
+    @load_only = (@load - @pattern)
+    @pattern_and_load = (@pattern & @load)
   end
   
   
