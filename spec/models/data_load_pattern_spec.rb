@@ -57,6 +57,49 @@ describe DataLoadPattern do
     dlp.compute_index_for_date("2000-01-16").should == 15
   end
   
+  it "should compute the index of a given date for a weekday pattern" do
+    dlp = DataLoadPattern.new(
+      :start_date => "2000-08-26", #friday 
+      :frequency => "WD"  
+    )
+  end
+  
+  it "should compute the index of a given date for a weekday pattern in reverse" do
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-26:rev") #friday
+    dlp.compute_index_for_date("2011-07-13").should == 32
+    dlp.compute_index_for_date("2011-08-19").should == 5
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-25:rev") #thursday
+    dlp.compute_index_for_date("2011-07-13").should == 31
+    dlp.compute_index_for_date("2011-08-18").should == 5
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-24:rev") #wednesday
+    dlp.compute_index_for_date("2011-07-13").should == 30
+    dlp.compute_index_for_date("2011-08-17").should == 5
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-23:rev") #tuesday
+    dlp.compute_index_for_date("2011-07-13").should == 29
+    dlp.compute_index_for_date("2011-08-16").should == 5
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-22:rev") #monday
+    dlp.compute_index_for_date("2011-07-13").should == 28
+    dlp.compute_index_for_date("2011-08-15").should == 5
+  end
+  
+  it "should compute the date for a given index for a weekday pattern" do
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-26:rev") #friday
+    dlp.compute_date_string_for_index(32).should == "2011-07-13"
+    dlp.compute_date_string_for_index(5).should == "2011-08-19"
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-25:rev") #thursday
+    dlp.compute_date_string_for_index(31).should == "2011-07-13"
+    dlp.compute_date_string_for_index(5).should == "2011-08-18"
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-24:rev") #wednesday
+    dlp.compute_date_string_for_index(30).should == "2011-07-13"
+    dlp.compute_date_string_for_index(5).should == "2011-08-17"
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-23:rev") #tuesday
+    dlp.compute_date_string_for_index(29).should == "2011-07-13"
+    dlp.compute_date_string_for_index(5).should == "2011-08-16"
+    dlp = DataLoadPattern.new( :frequency => "WD", :start_date => "2011-08-22:rev") #monday
+    dlp.compute_date_string_for_index(28).should == "2011-07-13"
+    dlp.compute_date_string_for_index(5).should == "2011-08-15"
+  end
+  
   it "should compute the row for a row pattern correctly" do
     dlp = DataLoadPattern.new(
       :start_date => "1998-01-01", 
@@ -168,10 +211,12 @@ describe DataLoadPattern do
       :start_date => "row2:col1", 
       :frequency => "M" , 
       :path => @pattern_spreadsheet_name , 
-      :worksheet => "csv", 
+      :worksheet => "ROLLING_START_DATE", 
       :row => "increment:2:1", 
       :col => 2
     )
+    dlp.start_date_string.should == "2010-12-01"
+    dlp.retrieve("2011-06-01").should == 9708.05
   end
   
   it "should be able to index dates in reverse when specified" do
@@ -187,7 +232,7 @@ describe DataLoadPattern do
       :col => 2
     )
     dlp.start_date_string.should == "2011-09-01"
-    dlp.retrieve("2011-06-01").should == 9708.5
+    dlp.retrieve("2011-06-01").should == 9708.05
     
     
   end
@@ -201,10 +246,13 @@ describe DataLoadPattern do
       :row => "increment:2:1", 
       :col => 2
     )
-    dlp.start_date_string.should == "2011-09-01"
-    dlp.retrieve("2011-06-01").should == 9708.5
+    dlp.start_date_string.should == "2011-08-30"
+    dlp.retrieve("2011-07-29").should == 1300.12
     
     
+  end
+  
+  it "should be able to parse dates in month frequency when date is not first of month" do
   end
   
   

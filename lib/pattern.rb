@@ -70,6 +70,17 @@ class Pattern
     return first_date >> (index) if frequency == "M"
     return first_date + (7*index) if frequency == "W"
     return first_date + (index) if frequency == "D"
+    return Pattern.week_date_at_index(index, first_date) if frequency == "WD"
+  end
+  
+  def Pattern.week_date_at_index(index, first_date)
+    #should be 5?
+    weekends_between_dates = ((first_date.cwday + index + 1) / 7).truncate
+    weekends_between_dates = ((((5-first_date.cwday)*-1) + index ) / 5).truncate if index < 0
+    puts "index #{index}"
+    puts "start day of week #{first_date.cwday}"
+    puts "weekends between dates #{weekends_between_dates}"
+    first_date + index + (weekends_between_dates * 2)
   end
   
   

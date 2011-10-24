@@ -89,6 +89,7 @@ class DataLoadPattern < ActiveRecord::Base
   
   #available to process patterns if that ever becomes an issue
   #also normalize dates to month if specified start date and frequency is month (some of the rolling start dates don't use day 1)
+  #one potential issue is that reverse doesn't get set until this gets called.
   def start_date_string
     @start_date ||= process_start_date_pattern
   end
@@ -96,13 +97,13 @@ class DataLoadPattern < ActiveRecord::Base
   def process_start_date_pattern
     return start_date if start_date.index(":").nil?
     date_parts = start_date.split(":")
-    reverse = true if date_parts[-1] == "rev"
+    self.update_attributes(:reverse => true) if date_parts[-1] == "rev"
     return read_start_date_from_file(date_parts[0][3..-1].to_i,date_parts[1][3..-1].to_i) if date_parts[0].starts_with("row")
     return date_parts[0]
   end
   
   def read_start_date_from_file(row_i,col_i)
-    DataLoadPattern.retrieve(compute_path, sheet, row_i, col_i)
+    DataLoadPattern.retrieve(compute_path(nil), worksheet, row_i, col_i).to_s
   end
   
   def compute(date_string)
@@ -130,21 +131,35 @@ class DataLoadPattern < ActiveRecord::Base
     end
   end
 
+  #this behavior seems odd. Not sure why it needs to reverse
   def compute_index_for_date(date_string)
-    start = start_date_string.to_date
-    finish = date_string.to_date
-    start_month = start.month + start.year*12
+    start_date_string
+    start        = self.reverse ? date_string.to_date : start_date_string.to_date
+    finish       = self.reverse ? start_date_string.to_date : date_string.to_date
+    start_month  = start.month + start.year*12
     finish_month = finish.month + finish.year*12
-    
+
     return ((finish_month - start_month) / 12).to_i if frequency == "A"
     return ((finish_month - start_month) / 6).to_i if frequency == "S"
     return ((finish_month - start_month) / 3).to_i if frequency == "Q"
     return finish_month - start_month if frequency == "M"
     return ((finish - start).to_i / 7).to_i if frequency == "W"
     return (finish - start).to_i if frequency == "D"
+    return weekday_index(finish, start) if frequency == "WD"
   end
   
+  def weekday_index(finish, start)
+    diff = (finish-start).to_i
+    #adding start.cwday (day of week) extends the week as if that day was the monday of that week. so
+    #that the division by 7 will always accurately count the number of weeks spanned by the diff
+    weekends_passed = ((diff + (start.cwday - 1)) / 7).round
+    diff - (2 * weekends_passed)
+  end
+  
+  #start_date_string must have been called previously for the reversing to work
   def compute_date_string_for_index(index)
+    start_date_string
+    index = index * (-1) if self.reverse
     Pattern.date_at_index(index, start_date_string.to_date, frequency).to_s
   end
   
