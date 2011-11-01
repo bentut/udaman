@@ -240,7 +240,7 @@ describe DataLoadPattern do
   it "should be able to index dates in reverse and identify a special start date when a row and column are specified and frequency is daily and skips days" do
     dlp = DataLoadPattern.new(
       :start_date => "row2:col1:rev", 
-      :frequency => "D" , 
+      :frequency => "WD" , 
       :path => @pattern_spreadsheet_name , 
       :worksheet => "US_STKNS_DATA", 
       :row => "increment:2:1", 
