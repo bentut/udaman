@@ -198,6 +198,7 @@ task :us_upd_m => :environment do
   path_83M      = "/Volumes/UHEROwork/data/rawdata/US_BEA83MONTH.csv"
   path_75M      = "/Volumes/UHEROwork/data/rawdata/US_BEA75MONTH.csv"
   path_82M      = "/Volumes/UHEROwork/data/rawdata/US_BEA82MONTH.csv"
+  path_US_STKNS        = "/Volumes/UHEROwork/data/rawdata/US_STKNS.CSV"
   
   output_path   = "/Volumes/UHEROwork/data/us/update/us_upd_m_NEW.xls"
 
@@ -205,6 +206,7 @@ task :us_upd_m => :environment do
   dsd_83M    = DataSourceDownload.get path_83M
   dsd_75M    = DataSourceDownload.get path_75M
   dsd_82M    = DataSourceDownload.get path_82M 
+  dsd_US_STKNS       = DataSourceDownload.get path_US_STKNS
   
   if dsd_76M.download_changed? || dsd_83M.download_changed?  || dsd_75M.download_changed?  || dsd_82M.download_changed?
   	sox = SeriesOutputXls.new(output_path)#,true)
@@ -217,6 +219,23 @@ task :us_upd_m => :environment do
   sox.add "YPCDPI_R@US.M",         Series.load_pattern("1959-01-01", "M",  path_76M, "csv", 44,  "increment:3:1")
   sox.add "N@US.M",         Series.load_pattern("1959-01-01", "M",  path_76M, "csv", 45,  "increment:3:1")
   sox.add "YCE_R@US.M",         Series.load_pattern("1995-01-01", "M",  path_83M, "csv", 7,  "increment:3:1")
+  
+  "CAPU@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_CAPU_M.TXT")
+  "EXUSEU@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_EXUSEU_M.TXT")
+  "HOUST@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_HOUST_M.TXT")
+  "IP@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_IP_M.TXT")
+  "M2@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_M2_M.TXT")
+  "M2NS@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_M2NS_M.TXT")
+  "N@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_N_M.TXT")
+  "PCE@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_PCE_M.TXT")
+  "PCECORE@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_PCECORE_M.TXT")
+  "POIL@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_POIL_M.TXT")
+  "RAAANS@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RAAANS_M.TXT")
+  "RFED@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RFED_M.TXT")
+  "RILGFCY10@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RILGFCY10_M.TXT")
+  "RMORT@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RMORT_M.TXT")
+  "UMCSENT@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_UMCSENT_M.TXT")
+  "YXR@JP.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/JP_YXR.TXT")  
   
   "E_NF@US.M".ts_eval=%Q|"E_NF@US.M".tsn.load_from_bls("CES0000000001", "M")|
   "E_NFNS@US.M".ts_eval=%Q|"E_NFNS@US.M".tsn.load_from_bls("CEU0000000001", "M")|
@@ -310,22 +329,16 @@ task :us_upd_m => :environment do
   "CPICORE@US.M".ts_eval=%Q|"CPICORE@US.M".tsn.load_from_bls("CUSR0000SA0L1E", "M")|
   "CPICORENS@US.M".ts_eval=%Q|"CPICORENS@US.M".tsn.load_from_bls("CUUR0000SA0L1E", "M")|
 
-  "CAPU@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_CAPU_M.TXT")
-  "EXUSEU@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_EXUSEU_M.TXT")
-  "HOUST@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_HOUST_M.TXT")
-  "IP@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_IP_M.TXT")
-  "M2@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_M2_M.TXT")
-  "M2NS@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_M2NS_M.TXT")
-  "N@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_N_M.TXT")
-  "PCE@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_PCE_M.TXT")
-  "PCECORE@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_PCECORE_M.TXT")
-  "POIL@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_POIL_M.TXT")
-  "RAAANS@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RAAANS_M.TXT")
-  "RFED@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RFED_M.TXT")
-  "RILGFCY10@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RILGFCY10_M.TXT")
-  "RMORT@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_RMORT_M.TXT")
-  "UMCSENT@US.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/US_UMCSENT_M.TXT")
-  "YXR@JP.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/JP_YXR.TXT")
+  sox.add "STKNS@US.D",         Series.load_pattern("row2:col1:rev", "WD", path_US_STKNS, "csv", "increment:2:1", 7)
+
+    dlp = DataLoadPattern.new(
+      :start_date => "row2:col1:rev", 
+      :frequency => "WD" , 
+      :path => "/Volumes/UHEROwork/data/rawdata/US_STKNS.CSV" , 
+      :worksheet => "csv", 
+      :row => "increment:2:1", 
+      :col => 7
+    )
 
   
     sox.write_xls

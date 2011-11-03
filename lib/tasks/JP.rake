@@ -62,7 +62,7 @@ task :jp_upd_a => :environment do
   sox.add "GDPDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 2)
   sox.add "GNIDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 19)
   
-  #sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", "94", increment:6:1)
+  sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", 94, "increment:6:1")
 
   
     sox.write_xls
@@ -172,7 +172,7 @@ end
 task :jp_upd_m => :environment do
   require "Spreadsheet"
 # path_JP_R            = "/Volumes/UHEROwork/data/rawdata/JP_R.CSV"
-# path_JP_STKNS        = "/Volumes/UHEROwork/data/rawdata/JP_STKNS.CSV"
+  path_JP_STKNS        = "/Volumes/UHEROwork/data/rawdata/JP_STKNS.CSV"
   path_JP_LF           = "/Volumes/UHEROwork/data/rawdata/JP_LF.XLS"
   path_JP_CPI          = "/Volumes/UHEROwork/data/rawdata/JP_CPI.XLS"
   path_JP_IP           = "/Volumes/UHEROwork/data/rawdata/JP_IP.CSV"
@@ -184,7 +184,7 @@ task :jp_upd_m => :environment do
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_m_NEW.xls"
 
 # dsd_JP_R           = DataSourceDownload.get path_JP_R
-# dsd_JP_STKNS       = DataSourceDownload.get path_JP_STKNS
+  dsd_JP_STKNS       = DataSourceDownload.get path_JP_STKNS
   dsd_JP_LF          = DataSourceDownload.get path_JP_LF
   dsd_JP_CPI         = DataSourceDownload.get path_JP_CPI
   dsd_JP_IP          = DataSourceDownload.get path_JP_IP
@@ -197,7 +197,6 @@ task :jp_upd_m => :environment do
     sox = SeriesOutputXls.new(output_path)#,true)
   
  # sox.add "R@JP.M",         Series.load_pattern("1960-01-01", "M", path_JP_R, "csv", "increment:4:1", 3)
- # sox.add "STKNS@JP.M",         Series.load_pattern("2011-08-01", "M", path_JP_STKNS, "csv", "increment:2:1", 5)
 
   sox.add "LF@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 4)
   sox.add "EMPL@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 7)
@@ -220,6 +219,9 @@ task :jp_upd_m => :environment do
 
 #  sox.add "CSCFNS@JP.M",         Series.load_pattern("2004-03-01", "M", path_JP_CSCFNS, "original series", "increment:94:1", 2)
   
+  sox.add "STKNS@JP.D",         Series.load_pattern("row2:col1:rev", "WD", path_JP_STKNS, "csv", "increment:2:1", 7)
+  # This thing doesn't work?
+   
     sox.write_xls
     #NotificationMailer.deliver_new_download_notification "MONTHLY JAPAN (rake jp_upd_m)", sox.output_summary
   end

@@ -46,7 +46,7 @@ class DataSource < ActiveRecord::Base
     #const is not there yet
     def DataSource.all_history_and_manual_series_names
       series_names = []
-      ['sic','permits','agriculture','Kauai','HBR','prud','census','trms','vexp','hud'].each do |type| 
+      ['sic','permits','agriculture','Kauai','HBR','prud','census','trms','vexp','hud','hiwi_upd'].each do |type| 
         DataSource.where("eval LIKE '%load_from %#{type}%'").each do |ds|
           series_names.push ds.series.name
         end
