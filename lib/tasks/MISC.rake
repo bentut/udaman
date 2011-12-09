@@ -19,10 +19,10 @@ task :uic_upd => :environment do
     
   output_path   = "/Volumes/UHEROwork/data/misc/uiclaims/update/UIC_upd_NEW.xls"
 
-  dsd_uic     = DataSourceDownload.get path_UIC 
+  dsd_uic     = DataSourceDownload.get(path_UIC).download_changed?
     
     
-  if dsd_uic.download_changed?
+  if dsd_uic
     sox = SeriesOutputXls.new(output_path)#,true)
   
   sox.add "UICINS@HONO.W",         Series.load_pattern("2000-08-19", "W",  path_UIC, "icweekly", "increment:7:1", 2)

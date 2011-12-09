@@ -15,50 +15,49 @@ task :bls_cpi_upd_m => :environment do
   output_path = "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m_NEW.xls"
   sox = SeriesOutputXls.new(output_path)
 
-  "PC@HON.M".ts_eval=%Q|"PC@HON.M".tsn.load_from_bls("CUURA426SA0", "M")|
-  "PCFB@HON.M".ts_eval=%Q|"PCFB@HON.M".tsn.load_from_bls("CUURA426SAF", "M")|
-  "PCFBFD@HON.M".ts_eval=%Q|"PCFBFD@HON.M".tsn.load_from_bls("CUURA426SAF1", "M")|
-  "PCFBFDHM@HON.M".ts_eval=%Q|"PCFBFDHM@HON.M".tsn.load_from_bls("CUURA426SAF11", "M")|
-  "PCFBFDAW@HON.M".ts_eval=%Q|"PCFBFDAW@HON.M".tsn.load_from_bls("CUURA426SEFV", "M")|
-  "PCFBFDBV@HON.M".ts_eval=%Q|"PCFBFDBV@HON.M".tsn.load_from_bls("CUURA426SAF116", "M")|
-  "PCHS@HON.M".ts_eval=%Q|"PCHS@HON.M".tsn.load_from_bls("CUURA426SAH", "M")|
-  "PCHSSH@HON.M".ts_eval=%Q|"PCHSSH@HON.M".tsn.load_from_bls("CUURA426SAH1", "M")|
-  "PCHSSHRT@HON.M".ts_eval=%Q|"PCHSSHRT@HON.M".tsn.load_from_bls("CUURA426SEHA", "M")|
-  "PCHSSHOW@HON.M".ts_eval=%Q|"PCHSSHOW@HON.M".tsn.load_from_bls("CUURA426SEHC", "M")|
-  "PCHSFU@HON.M".ts_eval=%Q|"PCHSFU@HON.M".tsn.load_from_bls("CUURA426SAH2", "M")|
-  "PCHSFUEL@HON.M".ts_eval=%Q|"PCHSFUEL@HON.M".tsn.load_from_bls("CUURA426SAH21", "M")|
-  "PCHSFUGS@HON.M".ts_eval=%Q|"PCHSFUGS@HON.M".tsn.load_from_bls("CUURA426SEHF", "M")|
-  "PCHSFUGSE@HON.M".ts_eval=%Q|"PCHSFUGSE@HON.M".tsn.load_from_bls("CUURA426SEHF01", "M")|
-  "PCHSFUGSU@HON.M".ts_eval=%Q|"PCHSFUGSU@HON.M".tsn.load_from_bls("CUURA426SEHF02", "M")|
-  "PCHSHF@HON.M".ts_eval=%Q|"PCHSHF@HON.M".tsn.load_from_bls("CUURA426SAH3", "M")|
-  "PCAP@HON.M".ts_eval=%Q|"PCAP@HON.M".tsn.load_from_bls("CUURA426SAA", "M")|
-  "PCTR@HON.M".ts_eval=%Q|"PCTR@HON.M".tsn.load_from_bls("CUURA426SAT", "M")|
-  "PCTRPR@HON.M".ts_eval=%Q|"PCTRPR@HON.M".tsn.load_from_bls("CUURA426SAT1", "M")|
-  "PCTRMF@HON.M".ts_eval=%Q|"PCTRMF@HON.M".tsn.load_from_bls("CUURA426SETB", "M")|
-  "PCTRGS@HON.M".ts_eval=%Q|"PCTRGS@HON.M".tsn.load_from_bls("CUURA426SETB01", "M")|
-  "PCTRGSRG@HON.M".ts_eval=%Q|"PCTRGSRG@HON.M".tsn.load_from_bls("CUURA426SS47014", "M")|
-  
-  "PCTRGSPR@HON.M".ts_eval=%Q|"PCTRGSPR@HON.M".tsn.load_from_bls("CUURA426SS47016", "M")|
-  "PCMD@HON.M".ts_eval=%Q|"PCMD@HON.M".tsn.load_from_bls("CUURA426SAM", "M")|
-  "PCRE@HON.M".ts_eval=%Q|"PCRE@HON.M".tsn.load_from_bls("CUURA426SAR", "M")|
-  "PCED@HON.M".ts_eval=%Q|"PCED@HON.M".tsn.load_from_bls("CUURA426SAE", "M")|
-  "PCOT@HON.M".ts_eval=%Q|"PCOT@HON.M".tsn.load_from_bls("CUURA426SAG", "M")|
-  "PCCM@HON.M".ts_eval=%Q|"PCCM@HON.M".tsn.load_from_bls("CUURA426SAC", "M")|
-  "PCCM_FD@HON.M".ts_eval=%Q|"PCCM_FD@HON.M".tsn.load_from_bls("CUURA426SACL1", "M")|
-  "PCCM_FB@HON.M".ts_eval=%Q|"PCCM_FB@HON.M".tsn.load_from_bls("CUURA426SACL11", "M")|
-  "PCCMND@HON.M".ts_eval=%Q|"PCCMND@HON.M".tsn.load_from_bls("CUURA426SAN", "M")|
-  "PCCMND_FD@HON.M".ts_eval=%Q|"PCCMND_FD@HON.M".tsn.load_from_bls("CUURA426SANL1", "M")|
-  "PCCMND_FB@HON.M".ts_eval=%Q|"PCCMND_FB@HON.M".tsn.load_from_bls("CUURA426SANL11", "M")|
-  "PCCMDR@HON.M".ts_eval=%Q|"PCCMDR@HON.M".tsn.load_from_bls("CUURA426SAD", "M")|
-  "PCSV@HON.M".ts_eval=%Q|"PCSV@HON.M".tsn.load_from_bls("CUURA426SAS", "M")|
-  "PCSV_MD@HON.M".ts_eval=%Q|"PCSV_MD@HON.M".tsn.load_from_bls("CUURA426SASL5", "M")|
-  "PCSV_RN@HON.M".ts_eval=%Q|"PCSV_RN@HON.M".tsn.load_from_bls("CUURA426SASL2RS", "M")|
-  "PC_MD@HON.M".ts_eval=%Q|"PC_MD@HON.M".tsn.load_from_bls("CUURA426SA0L5", "M")|
-  "PC_EN@HON.M".ts_eval=%Q|"PC_EN@HON.M".tsn.load_from_bls("CUURA426SA0LE", "M")|
-  "PC_FDEN@HON.M".ts_eval=%Q|"PC_FDEN@HON.M".tsn.load_from_bls("CUURA426SA0L1E", "M")|
-  "PC_SH@HON.M".ts_eval=%Q|"PC_SH@HON.M".tsn.load_from_bls("CUURA426SA0L2", "M")|
-  "PCEN@HON.M".ts_eval=%Q|"PCEN@HON.M".tsn.load_from_bls("CUURA426SA0E", "M")|
+  sox.add_data "PC@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0", "M")
+  sox.add_data "PCFB@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAF", "M")
+  sox.add_data "PCFBFD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAF1", "M")
+  sox.add_data "PCFBFDHM@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAF11", "M")
+  sox.add_data "PCFBFDAW@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SEFV", "M")
+  sox.add_data "PCFBFDBV@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAF116", "M")
+  sox.add_data "PCHS@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAH", "M")
+  sox.add_data "PCHSSH@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAH1", "M")
+  sox.add_data "PCHSSHRT@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SEHA", "M")
+  sox.add_data "PCHSSHOW@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SEHC", "M")
+  sox.add_data "PCHSFU@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAH2", "M")
+  sox.add_data "PCHSFUEL@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAH21", "M")
+  sox.add_data "PCHSFUGS@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SEHF", "M")
+  sox.add_data "PCHSFUGSE@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SEHF01", "M")
+  sox.add_data "PCHSFUGSU@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SEHF02", "M")
+  sox.add_data "PCHSHF@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAH3", "M")
+  sox.add_data "PCAP@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAA", "M")
+  sox.add_data "PCTR@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAT", "M")
+  sox.add_data "PCTRPR@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAT1", "M")
+  sox.add_data "PCTRMF@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SETB", "M")
+  sox.add_data "PCTRGS@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SETB01", "M")
+  sox.add_data "PCTRGSRG@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SS47014", "M")
 
+  sox.add_data "PCTRGSPR@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SS47016", "M")
+  sox.add_data "PCMD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAM", "M")
+  sox.add_data "PCRE@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAR", "M")
+  sox.add_data "PCED@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAE", "M")
+  sox.add_data "PCOT@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAG", "M")
+  sox.add_data "PCCM@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAC", "M")
+  sox.add_data "PCCM_FD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SACL1", "M")
+  sox.add_data "PCCM_FB@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SACL11", "M")
+  sox.add_data "PCCMND@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAN", "M")
+  sox.add_data "PCCMND_FD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SANL1", "M")
+  sox.add_data "PCCMND_FB@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SANL11", "M")
+  sox.add_data "PCCMDR@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAD", "M")
+  sox.add_data "PCSV@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SAS", "M")
+  sox.add_data "PCSV_MD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SASL5", "M")
+  sox.add_data "PCSV_RN@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SASL2RS", "M")
+  sox.add_data "PC_MD@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0L5", "M")
+  sox.add_data "PC_EN@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0LE", "M")
+  sox.add_data "PC_FDEN@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0L1E", "M")
+  sox.add_data "PC_SH@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0L2", "M")
+  sox.add_data "PCEN@HON.M", DataHtmlParser.new.get_bls_series("CUURA426SA0E", "M")
 
   sox.write_xls
 end
@@ -72,49 +71,49 @@ task :bls_cpi_upd_s => :environment do
   output_path = "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s_NEW.xls"
   sox = SeriesOutputXls.new(output_path)
   
-  "PC@HON.S".ts_eval=%Q|"PC@HON.S".tsn.load_from_bls("CUUSA426SA0", "S")|
-  "PCFB@HON.S".ts_eval=%Q|"PCFB@HON.S".tsn.load_from_bls("CUUSA426SAF", "S")|
-  "PCFBFD@HON.S".ts_eval=%Q|"PCFBFD@HON.S".tsn.load_from_bls("CUUSA426SAF1", "S")|
-  "PCFBFDHM@HON.S".ts_eval=%Q|"PCFBFDHM@HON.S".tsn.load_from_bls("CUUSA426SAF11", "S")|
-  "PCFBFDAW@HON.S".ts_eval=%Q|"PCFBFDAW@HON.S".tsn.load_from_bls("CUUSA426SEFV", "S")|
-  "PCFBFDBV@HON.S".ts_eval=%Q|"PCFBFDBV@HON.S".tsn.load_from_bls("CUUSA426SAF116", "S")|
-  "PCHS@HON.S".ts_eval=%Q|"PCHS@HON.S".tsn.load_from_bls("CUUSA426SAH", "S")|
-  "PCHSSH@HON.S".ts_eval=%Q|"PCHSSH@HON.S".tsn.load_from_bls("CUUSA426SAH1", "S")|
-  "PCHSSHRT@HON.S".ts_eval=%Q|"PCHSSHRT@HON.S".tsn.load_from_bls("CUUSA426SEHA", "S")|
-  "PCHSSHOW@HON.S".ts_eval=%Q|"PCHSSHOW@HON.S".tsn.load_from_bls("CUUSA426SEHC", "S")|
-  "PCHSFU@HON.S".ts_eval=%Q|"PCHSFU@HON.S".tsn.load_from_bls("CUUSA426SAH2", "S")|
-  "PCHSFUEL@HON.S".ts_eval=%Q|"PCHSFUEL@HON.S".tsn.load_from_bls("CUUSA426SAH21", "S")|
-  "PCHSFUGS@HON.S".ts_eval=%Q|"PCHSFUGS@HON.S".tsn.load_from_bls("CUUSA426SEHF", "S")|
-  "PCHSFUGSE@HON.S".ts_eval=%Q|"PCHSFUGSE@HON.S".tsn.load_from_bls("CUUSA426SEHF01", "S")|
-  "PCHSFUGSU@HON.S".ts_eval=%Q|"PCHSFUGSU@HON.S".tsn.load_from_bls("CUUSA426SEHF02", "S")|
-  "PCHSHF@HON.S".ts_eval=%Q|"PCHSHF@HON.S".tsn.load_from_bls("CUUSA426SAH3", "S")|
-  "PCAP@HON.S".ts_eval=%Q|"PCAP@HON.S".tsn.load_from_bls("CUUSA426SAA", "S")|
-  "PCTR@HON.S".ts_eval=%Q|"PCTR@HON.S".tsn.load_from_bls("CUUSA426SAT", "S")|
-  "PCTRPR@HON.S".ts_eval=%Q|"PCTRPR@HON.S".tsn.load_from_bls("CUUSA426SAT1", "S")|
-  "PCTRMF@HON.S".ts_eval=%Q|"PCTRMF@HON.S".tsn.load_from_bls("CUUSA426SETB", "S")|
-  "PCTRGS@HON.S".ts_eval=%Q|"PCTRGS@HON.S".tsn.load_from_bls("CUUSA426SETB01", "S")|
-  "PCTRGSRG@HON.S".ts_eval=%Q|"PCTRGSRG@HON.S".tsn.load_from_bls("CUUSA426SS47014", "S")|
-  "PCTRGSMD@HON.S".ts_eval=%Q|"PCTRGSMD@HON.S".tsn.load_from_bls("CUUSA426SS47015", "S")|
-  "PCTRGSPR@HON.S".ts_eval=%Q|"PCTRGSPR@HON.S".tsn.load_from_bls("CUUSA426SS47016", "S")|
-  "PCMD@HON.S".ts_eval=%Q|"PCMD@HON.S".tsn.load_from_bls("CUUSA426SAM", "S")|
-  "PCRE@HON.S".ts_eval=%Q|"PCRE@HON.S".tsn.load_from_bls("CUUSA426SAR", "S")|
-  "PCED@HON.S".ts_eval=%Q|"PCED@HON.S".tsn.load_from_bls("CUUSA426SAE", "S")|
-  "PCOT@HON.S".ts_eval=%Q|"PCOT@HON.S".tsn.load_from_bls("CUUSA426SAG", "S")|
-  "PCCM@HON.S".ts_eval=%Q|"PCCM@HON.S".tsn.load_from_bls("CUUSA426SAC", "S")|
-  "PCCM_FD@HON.S".ts_eval=%Q|"PCCM_FD@HON.S".tsn.load_from_bls("CUUSA426SACL1", "S")|
-  "PCCM_FB@HON.S".ts_eval=%Q|"PCCM_FB@HON.S".tsn.load_from_bls("CUUSA426SACL11", "S")|
-  "PCCMND@HON.S".ts_eval=%Q|"PCCMND@HON.S".tsn.load_from_bls("CUUSA426SAN", "S")|
-  "PCCMND_FD@HON.S".ts_eval=%Q|"PCCMND_FD@HON.S".tsn.load_from_bls("CUUSA426SANL1", "S")|
-  "PCCMND_FB@HON.S".ts_eval=%Q|"PCCMND_FB@HON.S".tsn.load_from_bls("CUUSA426SANL11", "S")|
-  "PCCMDR@HON.S".ts_eval=%Q|"PCCMDR@HON.S".tsn.load_from_bls("CUUSA426SAD", "S")|
-  "PCSV@HON.S".ts_eval=%Q|"PCSV@HON.S".tsn.load_from_bls("CUUSA426SAS", "S")|
-  "PCSV_MD@HON.S".ts_eval=%Q|"PCSV_MD@HON.S".tsn.load_from_bls("CUUSA426SASL5", "S")|
-  "PCSV_RN@HON.S".ts_eval=%Q|"PCSV_RN@HON.S".tsn.load_from_bls("CUUSA426SASL2RS", "S")|
-  "PC_MD@HON.S".ts_eval=%Q|"PC_MD@HON.S".tsn.load_from_bls("CUUSA426SA0L5", "S")|
-  "PC_EN@HON.S".ts_eval=%Q|"PC_EN@HON.S".tsn.load_from_bls("CUUSA426SA0LE", "S")|
-  "PC_FDEN@HON.S".ts_eval=%Q|"PC_FDEN@HON.S".tsn.load_from_bls("CUUSA426SA0L1E", "S")|
-  "PC_SH@HON.S".ts_eval=%Q|"PC_SH@HON.S".tsn.load_from_bls("CUUSA426SA0L2", "S")|
-  "PCEN@HON.S".ts_eval=%Q|"PCEN@HON.S".tsn.load_from_bls("CUUSA426SA0E", "S")|
+  sox.add_data "PC@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SA0", "S")
+  sox.add_data "PCFB@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAF", "S")
+  sox.add_data "PCFBFD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAF1", "S")
+  sox.add_data "PCFBFDHM@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAF11", "S")
+  sox.add_data "PCFBFDAW@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SEFV", "S")
+  sox.add_data "PCFBFDBV@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAF116", "S")
+  sox.add_data "PCHS@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAH", "S")
+  sox.add_data "PCHSSH@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAH1", "S")
+  sox.add_data "PCHSSHRT@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SEHA", "S")
+  sox.add_data "PCHSSHOW@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SEHC", "S")
+  sox.add_data "PCHSFU@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAH2", "S")
+  sox.add_data "PCHSFUEL@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAH21", "S")
+  sox.add_data "PCHSFUGS@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SEHF", "S")
+  sox.add_data "PCHSFUGSE@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SEHF01", "S")
+  sox.add_data "PCHSFUGSU@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SEHF02", "S")
+  sox.add_data "PCHSHF@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAH3", "S")
+  sox.add_data "PCAP@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAA", "S")
+  sox.add_data "PCTR@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAT", "S")
+  sox.add_data "PCTRPR@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAT1", "S")
+  sox.add_data "PCTRMF@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SETB", "S")
+  sox.add_data "PCTRGS@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SETB01", "S")
+  sox.add_data "PCTRGSRG@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SS47014", "S")
+  sox.add_data "PCTRGSMD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SS47015", "S")
+  sox.add_data "PCTRGSPR@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SS47016", "S")
+  sox.add_data "PCMD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAM", "S")
+  sox.add_data "PCRE@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAR", "S")
+  sox.add_data "PCED@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAE", "S")
+  sox.add_data "PCOT@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAG", "S")
+  sox.add_data "PCCM@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAC", "S")
+  sox.add_data "PCCM_FD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SACL1", "S")
+  sox.add_data "PCCM_FB@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SACL11", "S")
+  sox.add_data "PCCMND@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAN", "S")
+  sox.add_data "PCCMND_FD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SANL1", "S")
+  sox.add_data "PCCMND_FB@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SANL11", "S")
+  sox.add_data "PCCMDR@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAD", "S")
+  sox.add_data "PCSV@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SAS", "S")
+  sox.add_data "PCSV_MD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SASL5", "S")
+  sox.add_data "PCSV_RN@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SASL2RS", "S")
+  sox.add_data "PC_MD@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SA0L5", "S")
+  sox.add_data "PC_EN@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SA0LE", "S")
+  sox.add_data "PC_FDEN@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SA0L1E", "S")
+  sox.add_data "PC_SH@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SA0L2", "S")
+  sox.add_data "PCEN@HON.S", DataHtmlParser.new.get_bls_series("CUUSA426SA0E", "S")
 
 
   sox.write_xls
@@ -128,196 +127,196 @@ task :bls_job_upd_m => :environment do
   output_path = "/Volumes/UHEROwork/data/bls/update/bls_job_upd_m_NEW.xls"
   sox = SeriesOutputXls.new(output_path)
 
-   "E_NFSA@HI.M".ts_eval=%Q|"E_NFSA@HI.M".tsn.load_from_bls("SMS15000000000000001", "M")|
-   "ECTSA@HI.M".ts_eval=%Q|"ECTSA@HI.M".tsn.load_from_bls("SMS15000001500000001", "M")|
-  #"EMNSA@HI.M".ts_eval=%Q|"EMNSA@HI.M".tsn.load_from_bls("SMS15000003000000001", "M")|
-   "E_TTUSA@HI.M".ts_eval=%Q|"E_TTUSA@HI.M".tsn.load_from_bls("SMS15000004000000001", "M")|
-   "E_EDHCSA@HI.M".ts_eval=%Q|"E_EDHCSA@HI.M".tsn.load_from_bls("SMS15000006500000001", "M")|
-   "E_LHSA@HI.M".ts_eval=%Q|"E_LHSA@HI.M".tsn.load_from_bls("SMS15000007000000001", "M")|
-   "EOSSA@HI.M".ts_eval=%Q|"EOSSA@HI.M".tsn.load_from_bls("SMS15000008000000001", "M")|
-   "EGVSA@HI.M".ts_eval=%Q|"EGVSA@HI.M".tsn.load_from_bls("SMS15000009000000001", "M")|
+  sox.add_data "E_NFSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000000000000001", "M")
+  sox.add_data "ECTSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000001500000001", "M")
+#  sox.add_data "EMNSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000003000000001", "M")
+  sox.add_data "E_TTUSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000004000000001", "M")
+  sox.add_data "E_EDHCSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000006500000001", "M")
+  sox.add_data "E_LHSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000007000000001", "M")
+  sox.add_data "EOSSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000008000000001", "M")
+  sox.add_data "EGVSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000009000000001", "M")
+  
+  sox.add_data "EWTSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000004100000001", "M")
+  sox.add_data "ERTSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000004200000001", "M")
+  sox.add_data "E_FIRSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000005500000001", "M")
+  sox.add_data "ERESA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000005553000001", "M")
+  sox.add_data "E_PBSSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000006000000001", "M")
+  sox.add_data "EPSSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000006054000001", "M")
+  sox.add_data "EEDSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000006561000001", "M")
+  sox.add_data "EHCSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000006562000001", "M")
+  sox.add_data "EAESA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000007071000001", "M")
+  sox.add_data "EAFSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000007072000001", "M")
+  sox.add_data "EGVFDSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000009091000001", "M")
+  sox.add_data "EGVSTSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000009092000001", "M")
+  sox.add_data "EGVLCSA@HI.M", DataHtmlParser.new.get_bls_series("SMS15000009093000001", "M")
+  
+  sox.add_data "EMPLSA@HI.M", DataHtmlParser.new.get_bls_series("LASST15000005", "M")
+  sox.add_data "EMPLNS@HI.M", DataHtmlParser.new.get_bls_series("LAUST15000005", "M")
+  sox.add_data "EMPLNS@HON.M", DataHtmlParser.new.get_bls_series("LAUPS15007005", "M")
+  sox.add_data "EMPLNS@HAW.M", DataHtmlParser.new.get_bls_series("LAUPA15010005", "M")
+  sox.add_data "EMPLNS@MAU.M", DataHtmlParser.new.get_bls_series("LAUPA15015005", "M")
+  sox.add_data "EMPLNS@KAU.M", DataHtmlParser.new.get_bls_series("LAUCN15007005", "M")
+  sox.add_data "LFSA@HI.M", DataHtmlParser.new.get_bls_series("LASST15000006", "M")
+  sox.add_data "LFNS@HI.M", DataHtmlParser.new.get_bls_series("LAUST15000006", "M")
+  sox.add_data "LFNS@HON.M", DataHtmlParser.new.get_bls_series("LAUPS15007006", "M")
+  sox.add_data "LFNS@HAW.M", DataHtmlParser.new.get_bls_series("LAUPA15010006", "M")
+  sox.add_data "LFNS@MAU.M", DataHtmlParser.new.get_bls_series("LAUPA15015006", "M")
+  sox.add_data "LFNS@KAU.M", DataHtmlParser.new.get_bls_series("LAUCN15007006", "M")
+  sox.add_data "URSA@HI.M", DataHtmlParser.new.get_bls_series("LASST15000003", "M")
+  sox.add_data "URNS@HI.M", DataHtmlParser.new.get_bls_series("LAUST15000003", "M")
+  sox.add_data "URNS@HON.M", DataHtmlParser.new.get_bls_series("LAUPS15007003", "M")
+  sox.add_data "URNS@HAW.M", DataHtmlParser.new.get_bls_series("LAUPA15010003", "M")
+  sox.add_data "URNS@MAU.M", DataHtmlParser.new.get_bls_series("LAUPA15015003", "M")
+  sox.add_data "URNS@KAU.M", DataHtmlParser.new.get_bls_series("LAUCN15007003", "M")
+  
+  sox.add_data "WWCTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000001500000030", "M")
+  sox.add_data "WHCTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000001500000008", "M")
+  sox.add_data "WWMNNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000003000000030", "M")
+  sox.add_data "WHMNNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000003000000008", "M")
+  sox.add_data "WW_TTUNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004000000030", "M")
+  sox.add_data "WH_TTUNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004000000008", "M")
+  sox.add_data "WWWTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004100000030", "M")
+  sox.add_data "WHWTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004100000008", "M")
+  sox.add_data "WWRTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004200000030", "M")
+  sox.add_data "WHRTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004200000008", "M")
+#  sox.add_data "WWIFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005000000030", "M")
+#  sox.add_data "WHIFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005000000008", "M")
+  sox.add_data "WW_FINNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005500000030", "M")
+  sox.add_data "WH_FINNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005500000008", "M")
+  sox.add_data "WWAFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072000030", "M")
+  sox.add_data "WHAFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072000008", "M")
+#  sox.add_data "WWAFACNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072100030", "M")
+#  sox.add_data "WHAFACNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072100008", "M")
+  sox.add_data "WWAFFDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072200030", "M")
+  sox.add_data "WHAFFDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072200008", "M")
+  sox.add_data "WWCTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261801500000030", "M")
+  sox.add_data "WHCTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261801500000008", "M")
+  sox.add_data "WWMNNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261803000000030", "M")
+  sox.add_data "WHMNNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261803000000008", "M")
+  sox.add_data "WW_TTUNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804000000030", "M")
+  sox.add_data "WH_TTUNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804000000008", "M")
+  sox.add_data "WWWTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804100000030", "M")
+  sox.add_data "WHWTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804100000008", "M")
+  sox.add_data "WWRTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804200000030", "M")
+  sox.add_data "WHRTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804200000008", "M")
+#  sox.add_data "WWIFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805000000030", "M")
+#  sox.add_data "WHIFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805000000008", "M")
+  sox.add_data "WW_FINNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805500000030", "M")
+  sox.add_data "WH_FINNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805500000008", "M")
+  sox.add_data "WWAFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072000030", "M")
+  sox.add_data "WHAFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072000008", "M")
+#  sox.add_data "WWAFACNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072100030", "M")
+#  sox.add_data "WHAFACNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072100008", "M")
+  sox.add_data "WWAFFDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072200030", "M")
+  sox.add_data "WHAFFDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072200008", "M")
+ 
+  sox.add_data "E_NFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000000000000001", "M")
+  sox.add_data "E_PRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000000500000001", "M")
+  sox.add_data "E_GDSPRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000000600000001", "M")
+  sox.add_data "E_SVCPRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000000700000001", "M")
+  sox.add_data "E_PRSVCPRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000000800000001", "M")
+  sox.add_data "ECTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000001500000001", "M")
+  sox.add_data "ECTBLNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000001523600001", "M")
+  sox.add_data "ECTSPNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000001523800001", "M")
+  sox.add_data "EMNNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000003000000001", "M")
+  sox.add_data "EMNDRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000003100000001", "M")
+  sox.add_data "EMNNDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000003200000001", "M")
+  sox.add_data "E_TTUNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004000000001", "M")
+  sox.add_data "EWTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004100000001", "M")
+  sox.add_data "ERTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004200000001", "M")
+  sox.add_data "ERTFDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004244500001", "M")
+  sox.add_data "ERTFDGSNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004244510001", "M")
+  sox.add_data "ERTCLNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004244800001", "M")
+  sox.add_data "ERTGMNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004245200001", "M")
+  sox.add_data "ERTGMDSNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004245210001", "M")
+  sox.add_data "E_TUNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004300000001", "M")
+  sox.add_data "EUTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004322000001", "M")
+  sox.add_data "ETWNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004340008901", "M")
+  sox.add_data "ETWTANS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000004348100001", "M")
+  sox.add_data "EIFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005000000001", "M")
+  sox.add_data "EIFTCNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005051700001", "M")
+  sox.add_data "E_FIRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005500000001", "M")
+  sox.add_data "EFINS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005552000001", "M")
+  sox.add_data "ERENS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000005553000001", "M")
+  sox.add_data "E_PBSNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006000000001", "M")
+  sox.add_data "EPSNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006054000001", "M")
+  sox.add_data "EMANS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006055000001", "M")
+  sox.add_data "EADNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006056000001", "M")
+  sox.add_data "EADESNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006056130001", "M")
+  sox.add_data "E_EDHCNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006500000001", "M")
+  sox.add_data "EEDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006561000001", "M")
+  sox.add_data "EED12NS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006561110001", "M")
+  sox.add_data "EHCNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006562000001", "M")
+  sox.add_data "EHCAMNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006562100001", "M")
+  sox.add_data "EHCHONS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006562200001", "M")
+  sox.add_data "EHCNRNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006562300001", "M")
+  sox.add_data "EHCSONS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006562400001", "M")
+  sox.add_data "EHCSOIFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000006562410001", "M")
+  sox.add_data "E_LHNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007000000001", "M")
+  sox.add_data "EAENS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007071000001", "M")
+  sox.add_data "EAFNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072000001", "M")
+  sox.add_data "EAFACNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072100001", "M")
+  sox.add_data "EAFFDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072200001", "M")
+  sox.add_data "EAFFDRSNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000007072210001", "M")
+  sox.add_data "EOSNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000008000000001", "M")
+  sox.add_data "EGVNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009000000001", "M")
+  sox.add_data "EGVFDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009091000001", "M")
+  sox.add_data "EGVFDSPNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009091336601", "M")
+#  sox.add_data "EGVFDDDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009091911001", "M")
+  sox.add_data "EGVSTNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009092000001", "M")
+  sox.add_data "EGVSTEDNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009092161101", "M")
+  sox.add_data "EGVLCNS@HI.M", DataHtmlParser.new.get_bls_series("SMU15000009093000001", "M")
+  sox.add_data "E_NFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261800000000001", "M")
+  sox.add_data "E_PRNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261800500000001", "M")
+  sox.add_data "E_GDSPRNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261800600000001", "M")
+  sox.add_data "E_SVCPRNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261800700000001", "M")
+  sox.add_data "E_PRSVCPRNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261800800000001", "M")
+  sox.add_data "ECTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261801500000001", "M")
+  sox.add_data "ECTSPNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261801523800001", "M")
+  sox.add_data "EMNNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261803000000001", "M")
+  sox.add_data "EMNDRNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261803100000001", "M")
+  sox.add_data "EMNNDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261803200000001", "M")
+  sox.add_data "E_TTUNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804000000001", "M")
+  sox.add_data "EWTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804100000001", "M")
+  sox.add_data "ERTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804200000001", "M")
+  sox.add_data "ERTFDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804244500001", "M")
+  sox.add_data "ERTFDGSNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804244510001", "M")
+  sox.add_data "ERTCLNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804244800001", "M")
+  sox.add_data "ERTGMNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804245200001", "M")
+  sox.add_data "ERTGMDSNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804245210001", "M")
+  sox.add_data "E_TUNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804300000001", "M")
+  sox.add_data "ETWNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804340008901", "M")
+  sox.add_data "ETWTANS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261804348100001", "M")
+  sox.add_data "EIFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805000000001", "M")
+  sox.add_data "EIFTCNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805051700001", "M")
+  sox.add_data "E_FIRNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805500000001", "M")
+  sox.add_data "EFINS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805552000001", "M")
+  sox.add_data "ERENS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261805553000001", "M")
+  sox.add_data "E_PBSNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806000000001", "M")
+  sox.add_data "EPSNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806054000001", "M")
+  sox.add_data "EMANS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806055000001", "M")
+  sox.add_data "EADNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806056000001", "M")
+  sox.add_data "EADESNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806056130001", "M")
+  sox.add_data "E_EDHCNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806500000001", "M")
+  sox.add_data "EEDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806561000001", "M")
+  sox.add_data "EED12NS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806561110001", "M")
+  sox.add_data "EHCNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806562000001", "M")
+  sox.add_data "EHCAMNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806562100001", "M")
+  sox.add_data "EHCHONS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261806562200001", "M")
+  sox.add_data "E_LHNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807000000001", "M")
+  sox.add_data "EAFNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072000001", "M")
+  sox.add_data "EAFACNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072100001", "M")
+  sox.add_data "EAFFDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072200001", "M")
+  sox.add_data "EAFFDRSNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261807072210001", "M")
+  sox.add_data "EOSNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261808000000001", "M")
+  sox.add_data "EGVNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809000000001", "M")
+  sox.add_data "EGVFDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809091000001", "M")
+  sox.add_data "EGVFDSPNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809091336601", "M")
+#  sox.add_data "EGVFDDDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809091911001", "M")
+  sox.add_data "EGVSTNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809092000001", "M")
+  sox.add_data "EGVSTEDNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809092161101", "M")
+  sox.add_data "EGVLCNS@HON.M", DataHtmlParser.new.get_bls_series("SMU15261809093000001", "M")
    
-   "EWTSA@HI.M".ts_eval=%Q|"EWTSA@HI.M".tsn.load_from_bls("SMS15000004100000001", "M")|
-   "ERTSA@HI.M".ts_eval=%Q|"ERTSA@HI.M".tsn.load_from_bls("SMS15000004200000001", "M")|
-   "E_FIRSA@HI.M".ts_eval=%Q|"E_FIRSA@HI.M".tsn.load_from_bls("SMS15000005500000001", "M")|
-   "ERESA@HI.M".ts_eval=%Q|"ERESA@HI.M".tsn.load_from_bls("SMS15000005553000001", "M")|
-   "E_PBSSA@HI.M".ts_eval=%Q|"E_PBSSA@HI.M".tsn.load_from_bls("SMS15000006000000001", "M")|
-   "EPSSA@HI.M".ts_eval=%Q|"EPSSA@HI.M".tsn.load_from_bls("SMS15000006054000001", "M")|
-   "EEDSA@HI.M".ts_eval=%Q|"EEDSA@HI.M".tsn.load_from_bls("SMS15000006561000001", "M")|
-   "EHCSA@HI.M".ts_eval=%Q|"EHCSA@HI.M".tsn.load_from_bls("SMS15000006562000001", "M")|
-   "EAESA@HI.M".ts_eval=%Q|"EAESA@HI.M".tsn.load_from_bls("SMS15000007071000001", "M")|
-   "EAFSA@HI.M".ts_eval=%Q|"EAFSA@HI.M".tsn.load_from_bls("SMS15000007072000001", "M")|
-   "EGVFDSA@HI.M".ts_eval=%Q|"EGVFDSA@HI.M".tsn.load_from_bls("SMS15000009091000001", "M")|
-   "EGVSTSA@HI.M".ts_eval=%Q|"EGVSTSA@HI.M".tsn.load_from_bls("SMS15000009092000001", "M")|
-   "EGVLCSA@HI.M".ts_eval=%Q|"EGVLCSA@HI.M".tsn.load_from_bls("SMS15000009093000001", "M")|
-   
-   "EMPLSA@HI.M".ts_eval=%Q|"EMPLSA@HI.M".tsn.load_from_bls("LASST15000005", "M")|
-   "EMPLNS@HI.M".ts_eval=%Q|"EMPLNS@HI.M".tsn.load_from_bls("LAUST15000005", "M")|
-   "EMPLNS@HON.M".ts_eval=%Q|"EMPLNS@HON.M".tsn.load_from_bls("LAUPS15007005", "M")|
-   "EMPLNS@HAW.M".ts_eval=%Q|"EMPLNS@HAW.M".tsn.load_from_bls("LAUPA15010005", "M")|
-   "EMPLNS@MAU.M".ts_eval=%Q|"EMPLNS@MAU.M".tsn.load_from_bls("LAUPA15015005", "M")|
-   "EMPLNS@KAU.M".ts_eval=%Q|"EMPLNS@KAU.M".tsn.load_from_bls("LAUCN15007005", "M")|
-  #"LFSA@HI.M".ts_eval=%Q|"LFSA@HI.M".tsn.load_from_bls("LASST15000006 ", "M")|
-   "LFNS@HI.M".ts_eval=%Q|"LFNS@HI.M".tsn.load_from_bls("LAUST15000006", "M")|
-   "LFNS@HON.M".ts_eval=%Q|"LFNS@HON.M".tsn.load_from_bls("LAUPS15007006", "M")|
-   "LFNS@HAW.M".ts_eval=%Q|"LFNS@HAW.M".tsn.load_from_bls("LAUPA15010006", "M")|
-   "LFNS@MAU.M".ts_eval=%Q|"LFNS@MAU.M".tsn.load_from_bls("LAUPA15015006", "M")|
-   "LFNS@KAU.M".ts_eval=%Q|"LFNS@KAU.M".tsn.load_from_bls("LAUCN15007006", "M")|
-  #"URSA@HI.M".ts_eval=%Q|"URSA@HI.M".tsn.load_from_bls("LASST15000003 ", "M")|
-   "URNS@HI.M".ts_eval=%Q|"URNS@HI.M".tsn.load_from_bls("LAUST15000003", "M")|
-   "URNS@HON.M".ts_eval=%Q|"URNS@HON.M".tsn.load_from_bls("LAUPS15007003", "M")|
-   "URNS@HAW.M".ts_eval=%Q|"URNS@HAW.M".tsn.load_from_bls("LAUPA15010003", "M")|
-   "URNS@MAU.M".ts_eval=%Q|"URNS@MAU.M".tsn.load_from_bls("LAUPA15015003", "M")|
-   "URNS@KAU.M".ts_eval=%Q|"URNS@KAU.M".tsn.load_from_bls("LAUCN15007003", "M")|
-   
-   "WWCTNS@HI.M".ts_eval=%Q|"WWCTNS@HI.M".tsn.load_from_bls("SMU15000001500000030", "M")|
-   "WHCTNS@HI.M".ts_eval=%Q|"WHCTNS@HI.M".tsn.load_from_bls("SMU15000001500000008", "M")|
-   "WWMNNS@HI.M".ts_eval=%Q|"WWMNNS@HI.M".tsn.load_from_bls("SMU15000003000000030", "M")|
-   "WHMNNS@HI.M".ts_eval=%Q|"WHMNNS@HI.M".tsn.load_from_bls("SMU15000003000000008", "M")|
-   "WW_TTUNS@HI.M".ts_eval=%Q|"WW_TTUNS@HI.M".tsn.load_from_bls("SMU15000004000000030", "M")|
-   "WH_TTUNS@HI.M".ts_eval=%Q|"WH_TTUNS@HI.M".tsn.load_from_bls("SMU15000004000000008", "M")|
-   "WWWTNS@HI.M".ts_eval=%Q|"WWWTNS@HI.M".tsn.load_from_bls("SMU15000004100000030", "M")|
-   "WHWTNS@HI.M".ts_eval=%Q|"WHWTNS@HI.M".tsn.load_from_bls("SMU15000004100000008", "M")|
-   "WWRTNS@HI.M".ts_eval=%Q|"WWRTNS@HI.M".tsn.load_from_bls("SMU15000004200000030", "M")|
-   "WHRTNS@HI.M".ts_eval=%Q|"WHRTNS@HI.M".tsn.load_from_bls("SMU15000004200000008", "M")|
-  #"WWIFNS@HI.M".ts_eval=%Q|"WWIFNS@HI.M".tsn.load_from_bls("SMU15000005000000030", "M")|
-  #"WHIFNS@HI.M".ts_eval=%Q|"WHIFNS@HI.M".tsn.load_from_bls("SMU15000005000000008", "M")|
-   "WW_FINNS@HI.M".ts_eval=%Q|"WW_FINNS@HI.M".tsn.load_from_bls("SMU15000005500000030", "M")|
-   "WH_FINNS@HI.M".ts_eval=%Q|"WH_FINNS@HI.M".tsn.load_from_bls("SMU15000005500000008", "M")|
-   "WWAFNS@HI.M".ts_eval=%Q|"WWAFNS@HI.M".tsn.load_from_bls("SMU15000007072000030", "M")|
-   "WHAFNS@HI.M".ts_eval=%Q|"WHAFNS@HI.M".tsn.load_from_bls("SMU15000007072000008", "M")|
-  #"WWAFACNS@HI.M".ts_eval=%Q|"WWAFACNS@HI.M".tsn.load_from_bls("SMU15000007072100030", "M")|
-  #"WHAFACNS@HI.M".ts_eval=%Q|"WHAFACNS@HI.M".tsn.load_from_bls("SMU15000007072100008", "M")|
-   "WWAFFDNS@HI.M".ts_eval=%Q|"WWAFFDNS@HI.M".tsn.load_from_bls("SMU15000007072200030", "M")|
-   "WHAFFDNS@HI.M".ts_eval=%Q|"WHAFFDNS@HI.M".tsn.load_from_bls("SMU15000007072200008", "M")|
-   "WWCTNS@HON.M".ts_eval=%Q|"WWCTNS@HON.M".tsn.load_from_bls("SMU15261801500000030", "M")|
-   "WHCTNS@HON.M".ts_eval=%Q|"WHCTNS@HON.M".tsn.load_from_bls("SMU15261801500000008", "M")|
-   "WWMNNS@HON.M".ts_eval=%Q|"WWMNNS@HON.M".tsn.load_from_bls("SMU15261803000000030", "M")|
-   "WHMNNS@HON.M".ts_eval=%Q|"WHMNNS@HON.M".tsn.load_from_bls("SMU15261803000000008", "M")|
-   "WW_TTUNS@HON.M".ts_eval=%Q|"WW_TTUNS@HON.M".tsn.load_from_bls("SMU15261804000000030", "M")|
-   "WH_TTUNS@HON.M".ts_eval=%Q|"WH_TTUNS@HON.M".tsn.load_from_bls("SMU15261804000000008", "M")|
-   "WWWTNS@HON.M".ts_eval=%Q|"WWWTNS@HON.M".tsn.load_from_bls("SMU15261804100000030", "M")|
-   "WHWTNS@HON.M".ts_eval=%Q|"WHWTNS@HON.M".tsn.load_from_bls("SMU15261804100000008", "M")|
-   "WWRTNS@HON.M".ts_eval=%Q|"WWRTNS@HON.M".tsn.load_from_bls("SMU15261804200000030", "M")|
-   "WHRTNS@HON.M".ts_eval=%Q|"WHRTNS@HON.M".tsn.load_from_bls("SMU15261804200000008", "M")|
-  #"WWIFNS@HON.M".ts_eval=%Q|"WWIFNS@HON.M".tsn.load_from_bls("SMU15261805000000030", "M")|
-  #"WHIFNS@HON.M".ts_eval=%Q|"WHIFNS@HON.M".tsn.load_from_bls("SMU15261805000000008", "M")|
-   "WW_FINNS@HON.M".ts_eval=%Q|"WW_FINNS@HON.M".tsn.load_from_bls("SMU15261805500000030", "M")|
-   "WH_FINNS@HON.M".ts_eval=%Q|"WH_FINNS@HON.M".tsn.load_from_bls("SMU15261805500000008", "M")|
-   "WWAFNS@HON.M".ts_eval=%Q|"WWAFNS@HON.M".tsn.load_from_bls("SMU15261807072000030", "M")|
-   "WHAFNS@HON.M".ts_eval=%Q|"WHAFNS@HON.M".tsn.load_from_bls("SMU15261807072000008", "M")|
-  #"WWAFACNS@HON.M".ts_eval=%Q|"WWAFACNS@HON.M".tsn.load_from_bls("SMU15261807072100030", "M")|
-  #"WHAFACNS@HON.M".ts_eval=%Q|"WHAFACNS@HON.M".tsn.load_from_bls("SMU15261807072100008", "M")|
-   "WWAFFDNS@HON.M".ts_eval=%Q|"WWAFFDNS@HON.M".tsn.load_from_bls("SMU15261807072200030", "M")|
-   "WHAFFDNS@HON.M".ts_eval=%Q|"WHAFFDNS@HON.M".tsn.load_from_bls("SMU15261807072200008", "M")|
-   
-   "E_NFNS@HI.M".ts_eval=%Q|"E_NFNS@HI.M".tsn.load_from_bls("SMU15000000000000001", "M")|
-   "E_PRNS@HI.M".ts_eval=%Q|"E_PRNS@HI.M".tsn.load_from_bls("SMU15000000500000001", "M")|
-   "E_GDSPRNS@HI.M".ts_eval=%Q|"E_GDSPRNS@HI.M".tsn.load_from_bls("SMU15000000600000001", "M")|
-   "E_SVCPRNS@HI.M".ts_eval=%Q|"E_SVCPRNS@HI.M".tsn.load_from_bls("SMU15000000700000001", "M")|
-   "E_PRSVCPRNS@HI.M".ts_eval=%Q|"E_PRSVCPRNS@HI.M".tsn.load_from_bls("SMU15000000800000001", "M")|
-   "ECTNS@HI.M".ts_eval=%Q|"ECTNS@HI.M".tsn.load_from_bls("SMU15000001500000001", "M")|
-   "ECTBLNS@HI.M".ts_eval=%Q|"ECTBLNS@HI.M".tsn.load_from_bls("SMU15000001523600001", "M")|
-   "ECTSPNS@HI.M".ts_eval=%Q|"ECTSPNS@HI.M".tsn.load_from_bls("SMU15000001523800001", "M")|
-   "EMNNS@HI.M".ts_eval=%Q|"EMNNS@HI.M".tsn.load_from_bls("SMU15000003000000001", "M")|
-   "EMNDRNS@HI.M".ts_eval=%Q|"EMNDRNS@HI.M".tsn.load_from_bls("SMU15000003100000001", "M")|
-   "EMNNDNS@HI.M".ts_eval=%Q|"EMNNDNS@HI.M".tsn.load_from_bls("SMU15000003200000001", "M")|
-   "E_TTUNS@HI.M".ts_eval=%Q|"E_TTUNS@HI.M".tsn.load_from_bls("SMU15000004000000001", "M")|
-   "EWTNS@HI.M".ts_eval=%Q|"EWTNS@HI.M".tsn.load_from_bls("SMU15000004100000001", "M")|
-   "ERTNS@HI.M".ts_eval=%Q|"ERTNS@HI.M".tsn.load_from_bls("SMU15000004200000001", "M")|
-   "ERTFDNS@HI.M".ts_eval=%Q|"ERTFDNS@HI.M".tsn.load_from_bls("SMU15000004244500001", "M")|
-   "ERTFDGSNS@HI.M".ts_eval=%Q|"ERTFDGSNS@HI.M".tsn.load_from_bls("SMU15000004244510001", "M")|
-   "ERTCLNS@HI.M".ts_eval=%Q|"ERTCLNS@HI.M".tsn.load_from_bls("SMU15000004244800001", "M")|
-   "ERTGMNS@HI.M".ts_eval=%Q|"ERTGMNS@HI.M".tsn.load_from_bls("SMU15000004245200001", "M")|
-   "ERTGMDSNS@HI.M".ts_eval=%Q|"ERTGMDSNS@HI.M".tsn.load_from_bls("SMU15000004245210001", "M")|
-   "E_TUNS@HI.M".ts_eval=%Q|"E_TUNS@HI.M".tsn.load_from_bls("SMU15000004300000001", "M")|
-   "EUTNS@HI.M".ts_eval=%Q|"EUTNS@HI.M".tsn.load_from_bls("SMU15000004322000001", "M")|
-   "ETWNS@HI.M".ts_eval=%Q|"ETWNS@HI.M".tsn.load_from_bls("SMU15000004340008901", "M")|
-   "ETWTANS@HI.M".ts_eval=%Q|"ETWTANS@HI.M".tsn.load_from_bls("SMU15000004348100001", "M")|
-   "EIFNS@HI.M".ts_eval=%Q|"EIFNS@HI.M".tsn.load_from_bls("SMU15000005000000001", "M")|
-   "EIFTCNS@HI.M".ts_eval=%Q|"EIFTCNS@HI.M".tsn.load_from_bls("SMU15000005051700001", "M")|
-   "E_FIRNS@HI.M".ts_eval=%Q|"E_FIRNS@HI.M".tsn.load_from_bls("SMU15000005500000001", "M")|
-   "EFINS@HI.M".ts_eval=%Q|"EFINS@HI.M".tsn.load_from_bls("SMU15000005552000001", "M")|
-   "ERENS@HI.M".ts_eval=%Q|"ERENS@HI.M".tsn.load_from_bls("SMU15000005553000001", "M")|
-   "E_PBSNS@HI.M".ts_eval=%Q|"E_PBSNS@HI.M".tsn.load_from_bls("SMU15000006000000001", "M")|
-   "EPSNS@HI.M".ts_eval=%Q|"EPSNS@HI.M".tsn.load_from_bls("SMU15000006054000001", "M")|
-   "EMANS@HI.M".ts_eval=%Q|"EMANS@HI.M".tsn.load_from_bls("SMU15000006055000001", "M")|
-   "EADNS@HI.M".ts_eval=%Q|"EADNS@HI.M".tsn.load_from_bls("SMU15000006056000001", "M")|
-   "EADESNS@HI.M".ts_eval=%Q|"EADESNS@HI.M".tsn.load_from_bls("SMU15000006056130001", "M")|
-   "E_EDHCNS@HI.M".ts_eval=%Q|"E_EDHCNS@HI.M".tsn.load_from_bls("SMU15000006500000001", "M")|
-   "EEDNS@HI.M".ts_eval=%Q|"EEDNS@HI.M".tsn.load_from_bls("SMU15000006561000001", "M")|
-   "EED12NS@HI.M".ts_eval=%Q|"EED12NS@HI.M".tsn.load_from_bls("SMU15000006561110001", "M")|
-   "EHCNS@HI.M".ts_eval=%Q|"EHCNS@HI.M".tsn.load_from_bls("SMU15000006562000001", "M")|
-   "EHCAMNS@HI.M".ts_eval=%Q|"EHCAMNS@HI.M".tsn.load_from_bls("SMU15000006562100001", "M")|
-   "EHCHONS@HI.M".ts_eval=%Q|"EHCHONS@HI.M".tsn.load_from_bls("SMU15000006562200001", "M")|
-   "EHCNRNS@HI.M".ts_eval=%Q|"EHCNRNS@HI.M".tsn.load_from_bls("SMU15000006562300001", "M")|
-   "EHCSONS@HI.M".ts_eval=%Q|"EHCSONS@HI.M".tsn.load_from_bls("SMU15000006562400001", "M")|
-   "EHCSOIFNS@HI.M".ts_eval=%Q|"EHCSOIFNS@HI.M".tsn.load_from_bls("SMU15000006562410001", "M")|
-   "E_LHNS@HI.M".ts_eval=%Q|"E_LHNS@HI.M".tsn.load_from_bls("SMU15000007000000001", "M")|
-   "EAENS@HI.M".ts_eval=%Q|"EAENS@HI.M".tsn.load_from_bls("SMU15000007071000001", "M")|
-   "EAFNS@HI.M".ts_eval=%Q|"EAFNS@HI.M".tsn.load_from_bls("SMU15000007072000001", "M")|
-   "EAFACNS@HI.M".ts_eval=%Q|"EAFACNS@HI.M".tsn.load_from_bls("SMU15000007072100001", "M")|
-   "EAFFDNS@HI.M".ts_eval=%Q|"EAFFDNS@HI.M".tsn.load_from_bls("SMU15000007072200001", "M")|
-   "EAFFDRSNS@HI.M".ts_eval=%Q|"EAFFDRSNS@HI.M".tsn.load_from_bls("SMU15000007072210001", "M")|
-   "EOSNS@HI.M".ts_eval=%Q|"EOSNS@HI.M".tsn.load_from_bls("SMU15000008000000001", "M")|
-   "EGVNS@HI.M".ts_eval=%Q|"EGVNS@HI.M".tsn.load_from_bls("SMU15000009000000001", "M")|
-   "EGVFDNS@HI.M".ts_eval=%Q|"EGVFDNS@HI.M".tsn.load_from_bls("SMU15000009091000001", "M")|
-   "EGVFDSPNS@HI.M".ts_eval=%Q|"EGVFDSPNS@HI.M".tsn.load_from_bls("SMU15000009091336601", "M")|
-  #"EGVFDDDNS@HI.M".ts_eval=%Q|"EGVFDDDNS@HI.M".tsn.load_from_bls("SMU15000009091911001", "M")|
-   "EGVSTNS@HI.M".ts_eval=%Q|"EGVSTNS@HI.M".tsn.load_from_bls("SMU15000009092000001", "M")|
-   "EGVSTEDNS@HI.M".ts_eval=%Q|"EGVSTEDNS@HI.M".tsn.load_from_bls("SMU15000009092161101", "M")|
-   "EGVLCNS@HI.M".ts_eval=%Q|"EGVLCNS@HI.M".tsn.load_from_bls("SMU15000009093000001", "M")|
-   "E_NFNS@HON.M".ts_eval=%Q|"E_NFNS@HON.M".tsn.load_from_bls("SMU15261800000000001", "M")|
-   "E_PRNS@HON.M".ts_eval=%Q|"E_PRNS@HON.M".tsn.load_from_bls("SMU15261800500000001", "M")|
-   "E_GDSPRNS@HON.M".ts_eval=%Q|"E_GDSPRNS@HON.M".tsn.load_from_bls("SMU15261800600000001", "M")|
-   "E_SVCPRNS@HON.M".ts_eval=%Q|"E_SVCPRNS@HON.M".tsn.load_from_bls("SMU15261800700000001", "M")|
-   "E_PRSVCPRNS@HON.M".ts_eval=%Q|"E_PRSVCPRNS@HON.M".tsn.load_from_bls("SMU15261800800000001", "M")|
-   "ECTNS@HON.M".ts_eval=%Q|"ECTNS@HON.M".tsn.load_from_bls("SMU15261801500000001", "M")|
-   "ECTSPNS@HON.M".ts_eval=%Q|"ECTSPNS@HON.M".tsn.load_from_bls("SMU15261801523800001", "M")|
-   "EMNNS@HON.M".ts_eval=%Q|"EMNNS@HON.M".tsn.load_from_bls("SMU15261803000000001", "M")|
-   "EMNDRNS@HON.M".ts_eval=%Q|"EMNDRNS@HON.M".tsn.load_from_bls("SMU15261803100000001", "M")|
-   "EMNNDNS@HON.M".ts_eval=%Q|"EMNNDNS@HON.M".tsn.load_from_bls("SMU15261803200000001", "M")|
-   "E_TTUNS@HON.M".ts_eval=%Q|"E_TTUNS@HON.M".tsn.load_from_bls("SMU15261804000000001", "M")|
-   "EWTNS@HON.M".ts_eval=%Q|"EWTNS@HON.M".tsn.load_from_bls("SMU15261804100000001", "M")|
-   "ERTNS@HON.M".ts_eval=%Q|"ERTNS@HON.M".tsn.load_from_bls("SMU15261804200000001", "M")|
-   "ERTFDNS@HON.M".ts_eval=%Q|"ERTFDNS@HON.M".tsn.load_from_bls("SMU15261804244500001", "M")|
-   "ERTFDGSNS@HON.M".ts_eval=%Q|"ERTFDGSNS@HON.M".tsn.load_from_bls("SMU15261804244510001", "M")|
-   "ERTCLNS@HON.M".ts_eval=%Q|"ERTCLNS@HON.M".tsn.load_from_bls("SMU15261804244800001", "M")|
-   "ERTGMNS@HON.M".ts_eval=%Q|"ERTGMNS@HON.M".tsn.load_from_bls("SMU15261804245200001", "M")|
-   "ERTGMDSNS@HON.M".ts_eval=%Q|"ERTGMDSNS@HON.M".tsn.load_from_bls("SMU15261804245210001", "M")|
-   "E_TUNS@HON.M".ts_eval=%Q|"E_TUNS@HON.M".tsn.load_from_bls("SMU15261804300000001", "M")|
-   "ETWNS@HON.M".ts_eval=%Q|"ETWNS@HON.M".tsn.load_from_bls("SMU15261804340008901", "M")|
-   "ETWTANS@HON.M".ts_eval=%Q|"ETWTANS@HON.M".tsn.load_from_bls("SMU15261804348100001", "M")|
-   "EIFNS@HON.M".ts_eval=%Q|"EIFNS@HON.M".tsn.load_from_bls("SMU15261805000000001", "M")|
-   "EIFTCNS@HON.M".ts_eval=%Q|"EIFTCNS@HON.M".tsn.load_from_bls("SMU15261805051700001", "M")|
-   "E_FIRNS@HON.M".ts_eval=%Q|"E_FIRNS@HON.M".tsn.load_from_bls("SMU15261805500000001", "M")|
-   "EFINS@HON.M".ts_eval=%Q|"EFINS@HON.M".tsn.load_from_bls("SMU15261805552000001", "M")|
-   "ERENS@HON.M".ts_eval=%Q|"ERENS@HON.M".tsn.load_from_bls("SMU15261805553000001", "M")|
-   "E_PBSNS@HON.M".ts_eval=%Q|"E_PBSNS@HON.M".tsn.load_from_bls("SMU15261806000000001", "M")|
-   "EPSNS@HON.M".ts_eval=%Q|"EPSNS@HON.M".tsn.load_from_bls("SMU15261806054000001", "M")|
-   "EMANS@HON.M".ts_eval=%Q|"EMANS@HON.M".tsn.load_from_bls("SMU15261806055000001", "M")|
-   "EADNS@HON.M".ts_eval=%Q|"EADNS@HON.M".tsn.load_from_bls("SMU15261806056000001", "M")|
-   "EADESNS@HON.M".ts_eval=%Q|"EADESNS@HON.M".tsn.load_from_bls("SMU15261806056130001", "M")|
-   "E_EDHCNS@HON.M".ts_eval=%Q|"E_EDHCNS@HON.M".tsn.load_from_bls("SMU15261806500000001", "M")|
-   "EEDNS@HON.M".ts_eval=%Q|"EEDNS@HON.M".tsn.load_from_bls("SMU15261806561000001", "M")|
-   "EED12NS@HON.M".ts_eval=%Q|"EED12NS@HON.M".tsn.load_from_bls("SMU15261806561110001", "M")|
-   "EHCNS@HON.M".ts_eval=%Q|"EHCNS@HON.M".tsn.load_from_bls("SMU15261806562000001", "M")|
-   "EHCAMNS@HON.M".ts_eval=%Q|"EHCAMNS@HON.M".tsn.load_from_bls("SMU15261806562100001", "M")|
-   "EHCHONS@HON.M".ts_eval=%Q|"EHCHONS@HON.M".tsn.load_from_bls("SMU15261806562200001", "M")|
-   "E_LHNS@HON.M".ts_eval=%Q|"E_LHNS@HON.M".tsn.load_from_bls("SMU15261807000000001", "M")|
-   "EAFNS@HON.M".ts_eval=%Q|"EAFNS@HON.M".tsn.load_from_bls("SMU15261807072000001", "M")|
-   "EAFACNS@HON.M".ts_eval=%Q|"EAFACNS@HON.M".tsn.load_from_bls("SMU15261807072100001", "M")|
-   "EAFFDNS@HON.M".ts_eval=%Q|"EAFFDNS@HON.M".tsn.load_from_bls("SMU15261807072200001", "M")|
-   "EAFFDRSNS@HON.M".ts_eval=%Q|"EAFFDRSNS@HON.M".tsn.load_from_bls("SMU15261807072210001", "M")|
-   "EOSNS@HON.M".ts_eval=%Q|"EOSNS@HON.M".tsn.load_from_bls("SMU15261808000000001", "M")|
-   "EGVNS@HON.M".ts_eval=%Q|"EGVNS@HON.M".tsn.load_from_bls("SMU15261809000000001", "M")|
-   "EGVFDNS@HON.M".ts_eval=%Q|"EGVFDNS@HON.M".tsn.load_from_bls("SMU15261809091000001", "M")|
-   "EGVFDSPNS@HON.M".ts_eval=%Q|"EGVFDSPNS@HON.M".tsn.load_from_bls("SMU15261809091336601", "M")|
-  #"EGVFDDDNS@HON.M".ts_eval=%Q|"EGVFDDDNS@HON.M".tsn.load_from_bls("SMU15261809091911001", "M")|
-   "EGVSTNS@HON.M".ts_eval=%Q|"EGVSTNS@HON.M".tsn.load_from_bls("SMU15261809092000001", "M")|
-   "EGVSTEDNS@HON.M".ts_eval=%Q|"EGVSTEDNS@HON.M".tsn.load_from_bls("SMU15261809092161101", "M")|
-   "EGVLCNS@HON.M".ts_eval=%Q|"EGVLCNS@HON.M".tsn.load_from_bls("SMU15261809093000001", "M")|
-
   sox.write_xls
 end
 

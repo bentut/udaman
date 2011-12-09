@@ -17,10 +17,10 @@ task :tour_PC_upd => :environment do
   
   output_path   = "/Volumes/UHEROwork/data/tour/update/tour_PC_upd_NEW.xls"
 
-  dsd_tour_PC     = DataSourceDownload.get path_tour_PC
+  dsd_tour_PC     = DataSourceDownload.get(path_tour_PC).download_changed?
     
     
-  if dsd_tour_PC.download_changed?
+  if dsd_tour_PC
     sox = SeriesOutputXls.new(output_path)#,true)
   
   sox.add "PCDMNS@HAW.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Domestic", "increment:5:1", 6)
@@ -31,7 +31,7 @@ task :tour_PC_upd => :environment do
   sox.add "PCITJPNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "International", "increment:6:1", 4)
   sox.add "PCITNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "International", "increment:6:1", 3)
   sox.add "PCITOTNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "International", "increment:6:1", 5)
-  sox.add "PCNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Total"," increment:5:1", 4)
+  sox.add "PCNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Total", "increment:5:1", 4)
    
     sox.write_xls
  #   NotificationMailer.deliver_new_download_notification "Tour PC (rake tour_PC_upd)", sox.output_summary
@@ -49,16 +49,16 @@ task :tour_seats_upd => :environment do
  # path_seats_Jun11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_Jun11.xls"
  # path_seats_Jul11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_Jul11.xls"
  # path_seats_Aug11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_Aug11.xls"
-  path_seats             = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_%b%y.xls"
+  path_seats              = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_%b%y.xls"
   
   output_path   = "/Volumes/UHEROwork/data/tour/update/tour_seats_upd_NEW.xls"
 
- # dsd_seats_Jun11     = DataSourceDownload.get path_seats_Jun11 
- # dsd_seats_Jul11     = DataSourceDownload.get path_seats_Jul11 
- # dsd_seats_Aug11     = DataSourceDownload.get path_seats_Aug11 
-  dsd_seats           = DataSourceDownload.get path_seats
+ # dsd_seats_Jun11     = DataSourceDownload.get(path_seats_Jun11).download_changed?
+ # dsd_seats_Jul11     = DataSourceDownload.get(path_seats_Jul11).download_changed?
+ # dsd_seats_Aug11     = DataSourceDownload.get(path_seats_Aug11).download_changed?
+ # dsd_seats            = DataSourceDownload.get(path_seats).download_changed?
     
-#  if dsd_seats.download_changed?
+ # if dsd_seats
     sox = SeriesOutputXls.new(output_path)#,true)
   
      sox.add "VSONS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 2)
@@ -125,7 +125,7 @@ task :tour_seats_upd => :environment do
     sox.write_xls
    # NotificationMailer.deliver_new_download_notification "Weekly UIC (rake const_upd_q)", sox.output_summary
    end
-# end
+ #end
 
 
 ###*******************************************************************
@@ -133,6 +133,8 @@ task :tour_seats_upd => :environment do
 
 task :tour_upd => :environment do
   require "Spreadsheet"
+  
+#The pathname jj indicates that Jimmy Jones needs to manually reformat these before Ruby is ready for it  
   path_tour             = "/Volumes/UHEROwork/data/rawdata/Tour_%b%Yjj.xls"  
   
   output_path1   = "/Volumes/UHEROwork/data/tour/update/tour_upd1_NEW.xls"
@@ -146,7 +148,7 @@ task :tour_upd => :environment do
   #if dsd_tour_jun11.download_changed?
     sox = SeriesOutputXls.new(output_path1)#,true)
 
-###Remember to change month to first month in series
+###Remember to change month to first month in series after finalizing what will be loaded in
   
   sox.add "VAHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 47, 2)
   sox.add "VAHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 48, 2)

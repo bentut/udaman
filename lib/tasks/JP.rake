@@ -19,15 +19,16 @@ task :jp_upd_a => :environment do
   path_JP_GDPDEF_A       = "/Volumes/UHEROwork/data/rawdata/JP_GDPDEF_A.CSV"
   path_JP_POP            = "/Volumes/UHEROwork/data/rawdata/JP_POP.xls"
 
+#UPDATE GDP LINKS AT FOLLOWING SITE: http://www.esri.cao.go.jp/en/sna/sokuhou/qe/gdemenu_ea.html
 
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_a_NEW.xls"
 
-  dsd_JP_GDP_A         = DataSourceDownload.get path_JP_GDP_A  
-  dsd_JP_GDP_R_A       = DataSourceDownload.get path_JP_GDP_R_A  
-  dsd_JP_GDPDEF_A      = DataSourceDownload.get path_JP_GDPDEF_A  
-  dsd_JP_POP           = DataSourceDownload.get path_JP_POP  
+  dsd_JP_GDP_A         = DataSourceDownload.get(path_JP_GDP_A).download_changed?
+  dsd_JP_GDP_R_A       = DataSourceDownload.get(path_JP_GDP_R_A).download_changed?
+  dsd_JP_GDPDEF_A      = DataSourceDownload.get(path_JP_GDPDEF_A).download_changed?
+  dsd_JP_POP           = DataSourceDownload.get(path_JP_POP).download_changed?
 
-  if dsd_JP_GDP_A.download_changed? || dsd_JP_GDP_R_A.download_changed? || dsd_JP_GDPDEF_A.download_changed? || dsd_JP_POP.download_changed?
+  if dsd_JP_GDP_A || dsd_JP_GDP_R_A || dsd_JP_GDPDEF_A || dsd_JP_POP
     sox = SeriesOutputXls.new(output_path)#,true)
   
 
@@ -62,7 +63,7 @@ task :jp_upd_a => :environment do
   sox.add "GDPDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 2)
   sox.add "GNIDEF@JP.A",         Series.load_pattern("1980-01-01", "A", path_JP_GDPDEF_A, "csv", "increment:8:1", 19)
   
-  sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", 94, "increment:6:1")
+  sox.add "N@JP.A",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", 94, "increment:6:1")
 
   
     sox.write_xls
@@ -87,15 +88,15 @@ task :jp_upd_q => :environment do
 
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_q_NEW.xls"
 
-  dsd_JP_GDP_Q        = DataSourceDownload.get path_JP_GDP_Q
-  dsd_JP_GDPNS_Q      = DataSourceDownload.get path_JP_GDPNS_Q 
-  dsd_JP_GDP_R_Q      = DataSourceDownload.get path_JP_GDP_R_Q
-  dsd_JP_GDP_RNS_Q    = DataSourceDownload.get path_JP_GDP_RNS_Q 
-  dsd_JP_GDPDEF_Q     = DataSourceDownload.get path_JP_GDPDEF_Q 
-  dsd_JP_CSCFNS       = DataSourceDownload.get path_JP_CSCFNS
-  dsd_JP_CSCF         = DataSourceDownload.get path_JP_CSCF
+  dsd_JP_GDP_Q        = DataSourceDownload.get(path_JP_GDP_Q).download_changed?
+  dsd_JP_GDPNS_Q      = DataSourceDownload.get(path_JP_GDPNS_Q).download_changed?
+  dsd_JP_GDP_R_Q      = DataSourceDownload.get(path_JP_GDP_R_Q).download_changed?
+  dsd_JP_GDP_RNS_Q    = DataSourceDownload.get(path_JP_GDP_RNS_Q).download_changed?
+  dsd_JP_GDPDEF_Q     = DataSourceDownload.get(path_JP_GDPDEF_Q).download_changed?
+  dsd_JP_CSCFNS       = DataSourceDownload.get(path_JP_CSCFNS).download_changed?
+  dsd_JP_CSCF         = DataSourceDownload.get(path_JP_CSCF).download_changed?
 
-  if dsd_JP_GDP_Q.download_changed? || dsd_JP_GDPNS_Q.download_changed? || dsd_JP_GDP_R_Q.download_changed? || dsd_JP_GDP_RNS_Q.download_changed? || dsd_JP_GDPDEF_Q.download_changed? || dsd_JP_CSCFNS.download_changed? || dsd_JP_CSCF.download_changed?
+  if dsd_JP_GDP_Q || dsd_JP_GDPNS_Q || dsd_JP_GDP_R_Q || dsd_JP_GDP_RNS_Q || dsd_JP_GDPDEF_Q || dsd_JP_CSCFNS || dsd_JP_CSCF
     sox = SeriesOutputXls.new(output_path)#,true)
   
   sox.add "GDP@JP.Q",         Series.load_pattern("1980-01-01", "Q", path_JP_GDP_Q, "csv", "increment:8:1", 2)
@@ -174,39 +175,46 @@ task :jp_upd_m => :environment do
 # path_JP_R            = "/Volumes/UHEROwork/data/rawdata/JP_R.CSV"
   path_JP_STKNS        = "/Volumes/UHEROwork/data/rawdata/JP_STKNS.CSV"
   path_JP_LF           = "/Volumes/UHEROwork/data/rawdata/JP_LF.XLS"
-  path_JP_CPI          = "/Volumes/UHEROwork/data/rawdata/JP_CPI.XLS"
+  path_JP_EMPL         = "/Volumes/UHEROwork/data/rawdata/JP_EMPL.XLS"
+  path_JP_UR           = "/Volumes/UHEROwork/data/rawdata/JP_UR.XLS"
+  path_JP_CPI          = "/Volumes/UHEROwork/data/rawdata/JP_CPI.CSV"
   path_JP_IP           = "/Volumes/UHEROwork/data/rawdata/JP_IP.CSV"
   path_JP_IPNS         = "/Volumes/UHEROwork/data/rawdata/JP_IPNS.CSV"
   path_JP_IP_hist      = "/Volumes/UHEROwork/data/rawdata/JP_IP_hist.CSV"
   path_JP_IPNS_hist    = "/Volumes/UHEROwork/data/rawdata/JP_IPNS_hist.CSV"
+# path_JP_CSCF         = "/Volumes/UHEROwork/data/rawdata/JP_CSCF.XLS"
   path_JP_CSCFNS       = "/Volumes/UHEROwork/data/rawdata/JP_CSCFNS.XLS"
 
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_m_NEW.xls"
 
-# dsd_JP_R           = DataSourceDownload.get path_JP_R
-  dsd_JP_STKNS       = DataSourceDownload.get path_JP_STKNS
-  dsd_JP_LF          = DataSourceDownload.get path_JP_LF
-  dsd_JP_CPI         = DataSourceDownload.get path_JP_CPI
-  dsd_JP_IP          = DataSourceDownload.get path_JP_IP
-  dsd_JP_IPNS        = DataSourceDownload.get path_JP_IPNS
-  dsd_JP_IP_hist     = DataSourceDownload.get path_JP_IP_hist
-  dsd_JP_IPNS_hist   = DataSourceDownload.get path_JP_IPNS_hist
-  dsd_JP_CSCFNS      = DataSourceDownload.get path_JP_CSCFNS
+# dsd_JP_R           = DataSourceDownload.get(path_JP_R).download_changed?
+  dsd_JP_STKNS       = DataSourceDownload.get(path_JP_STKNS).download_changed?
+  dsd_JP_LF          = DataSourceDownload.get(path_JP_LF).download_changed?
+  dsd_JP_EMPL         = DataSourceDownload.get(path_JP_EMPL).download_changed?
+  dsd_JP_UR          = DataSourceDownload.get(path_JP_UR).download_changed?
+  dsd_JP_CPI         = DataSourceDownload.get(path_JP_CPI).download_changed?
+  dsd_JP_IP          = DataSourceDownload.get(path_JP_IP).download_changed?
+  dsd_JP_IPNS        = DataSourceDownload.get(path_JP_IPNS).download_changed?
+  dsd_JP_IP_hist     = DataSourceDownload.get(path_JP_IP_hist).download_changed?
+  dsd_JP_IPNS_hist   = DataSourceDownload.get(path_JP_IPNS_hist).download_changed?
+#  dsd_JP_CSCF        = DataSourceDownload.get(path_JP_CSCF).download_changed?
+  dsd_JP_CSCFNS      = DataSourceDownload.get(path_JP_CSCFNS).download_changed?
 
-  if dsd_JP_LF.download_changed? || dsd_JP_CPI.download_changed? || dsd_JP_IP.download_changed? || dsd_JP_IPNS.download_changed? || dsd_JP_IP_hist.download_changed? || dsd_JP_IPNS_hist.download_changed? || dsd_JP_CSCFNS.download_changed?
+  if dsd_JP_STKNS || dsd_JP_LF || dsd_JP_EMPL || dsd_JP_UR || dsd_JP_CPI || dsd_JP_IP || dsd_JP_IPNS || dsd_JP_IP_hist || dsd_JP_IPNS_hist || dsd_JP_CSCF || dsd_JP_CSCFNS
     sox = SeriesOutputXls.new(output_path)#,true)
   
  # sox.add "R@JP.M",         Series.load_pattern("1960-01-01", "M", path_JP_R, "csv", "increment:4:1", 3)
 
-  sox.add "LF@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 4)
-  sox.add "EMPL@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 7)
-  sox.add "E_NF@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 14)
-  sox.add "UR@JP.M",         Series.load_pattern("2009-01-01", "M", path_JP_LF, "Table 18", "increment:11:1", 31)
+  sox.add "LF@JP.M",         Series.load_pattern("1953-01-01", "M", path_JP_LF, "sheet_num:1", "increment:11:1", 5)
+  sox.add "EMPL@JP.M",         Series.load_pattern("1953-01-01", "M", path_JP_EMPL, "sheet_num:1", "increment:12:1", 5)
+  sox.add "E_NF@JP.M",         Series.load_pattern("1953-01-01", "M", path_JP_EMPL, "sheet_num:1", "increment:12:1", 11)
+  sox.add "UR@JP.M",         Series.load_pattern("1953-01-01", "M", path_JP_UR, "sheet_num:1", "increment:11:1", 5)
 
-  sox.add "CPINS@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 3)
-  sox.add "CPICORENS@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 4)
-#  sox.add "CPI@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 21)
-#  sox.add "CPICORE@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 22)
+#The URL constantly changes; currently manually update the URL by searching on eStat website > search for CPI > 2005 base > time series > 005
+  sox.add "CPINS@JP.M",         Series.load_pattern("1970-01-01", "M", path_JP_CPI, "csv", "increment:19:1", 2)
+  sox.add "CPICORENS@JP.M",         Series.load_pattern("1970-01-01", "M", path_JP_CPI, "csv", "increment:19:1", 42)
+  sox.add "CPI@JP.M",         Series.load_pattern("2000-01-01", "M", path_JP_CPI, "csv", "increment:379:1", 46)
+  sox.add "CPICORE@JP.M",         Series.load_pattern("2000-01-01", "M", path_JP_CPI, "csv", "increment:379:1", 47)
 
   sox.add "IP@JP.M",         Series.load_pattern("2003-01-01", "M", path_JP_IP, "csv", "4", "increment:4:1")
   sox.add "IPNS@JP.M",         Series.load_pattern("2003-01-01", "M", path_JP_IPNS, "csv", "4", "increment:4:1")
@@ -217,11 +225,14 @@ task :jp_upd_m => :environment do
 #  sox.add "IPMN@JP.M",         Series.load_pattern("1978-01-01", "M", path_JP_IP_hist, "csv", "increment:6:1", 3)
 #  sox.add "IPMNNS@JP.M",         Series.load_pattern("1978-01-01", "M", path_JP_IPNS_hist, "csv", "increment:6:1", 3)
 
-#  sox.add "CSCFNS@JP.M",         Series.load_pattern("2004-03-01", "M", path_JP_CSCFNS, "original series", "increment:94:1", 2)
+#The paths for CSCF need to be updated monthly for a variable that tells it what month the file is from  
+#  sox.add "CSCF@JP.M",         Series.load_pattern("2004-03-01", "M", path_JP_CSCF, "sheet_num:1", "increment:94:1", 2)
+  sox.add "CSCFNS@JP.M",         Series.load_pattern("2004-03-01", "M", path_JP_CSCFNS, "sheet_num:1", "increment:94:1", 2)
   
-  sox.add "STKNS@JP.D",         Series.load_pattern("row2:col1:rev", "WD", path_JP_STKNS, "csv", "increment:2:1", 7)
-  # This thing doesn't work?
-   
+  sox.add "STKNS@JP.M",         Series.load_pattern("row2:col1:rev", "M", path_JP_STKNS, "csv", "increment:2:1", 7)
+  
+  sox.add_data "YXR@JP.M",       "YXR@JP.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/JP_YXR.TXT").data
+  
     sox.write_xls
     #NotificationMailer.deliver_new_download_notification "MONTHLY JAPAN (rake jp_upd_m)", sox.output_summary
   end

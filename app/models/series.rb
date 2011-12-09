@@ -312,6 +312,7 @@ class Series < ActiveRecord::Base
   end
   
   def Series.load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
+    path = path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
     f = open path, "r"
     rows_skipped = 0
     while (rows_to_skip > rows_skipped)
@@ -322,6 +323,7 @@ class Series < ActiveRecord::Base
   end
   
   def Series.load_standard_text(path)
+    path = path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
     f = open path, "r"
     while line = f.gets
       break if line.starts_with "DATE"

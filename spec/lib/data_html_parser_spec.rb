@@ -3,6 +3,7 @@ require 'spec_helper'
 describe DataHtmlParser do
   before(:all) do
     @dhp = DataHtmlParser.new
+    #have to fix this to make static
     @bls_text = @dhp.get_bls_series('CES0000000001',"M")
   end
   it "should connect to a website with optional post parameters and return a parseable object" do

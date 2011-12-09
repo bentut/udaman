@@ -106,6 +106,7 @@ task :gsp_upd => :environment do
 
     sox.write_xls
     #NotificationMailer.deliver_new_download_notification "Gross State Product (rake gsp_upd)", sox.output_summary
+    DataLoadMailer.download_notification("Gross State Product (rake gsp_upd)", sox.output_summary).deliver
   end
 end
 
@@ -186,17 +187,17 @@ task :inc_upd_a => :environment do
   pathSA05N         = "/Volumes/UHEROwork/data/rawdata/BEA_SA05N.csv"       #annual state personal income
   pathCA05N         = "/Volumes/UHEROwork/data/rawdata/BEA_CA05N.csv"       #local area personal income
   
-  output_path_HIQ     = "/Volumes/UHEROwork/data/bea/update/inc_upd_HIQ_NEW.xls"
+  output_path_HIa     = "/Volumes/UHEROwork/data/bea/update/inc_upd_HIa_NEW.xls"
   output_path_HAWa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_HAWa_NEW.xls"
   output_path_HONa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_HONa_NEW.xls"
   output_path_KAUa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_KAUa_NEW.xls"
   output_path_MAUa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_MAUa_NEW.xls"  
   
-  dsdSA05N          = DataSourceDownload.get pathSA05N
-  dsdCA05N          = DataSourceDownload.get pathCA05N
-  
-  if dsdSA05N.download_changed? || dsdCA05N.download_changed?
-    sox = SeriesOutputXls.new(output_path_HIQ)
+  dsdSA05N          = DataSourceDownload.get(pathSA05N).download_changed?
+  dsdCA05N          = DataSourceDownload.get(pathCA05N).download_changed?
+
+  if dsdSA05N || dsdCA05N
+    sox = SeriesOutputXls.new(output_path_HIa)
     
     sox.add "Y@HI.A",                 Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",2,"increment:4:1")
     sox.add "NRBEA@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",3,"increment:4:1")
@@ -904,10 +905,10 @@ task :com_upd => :environment do
   output_path_comKAU   = "/Volumes/UHEROwork/data/bea/update/com_upd_KAU_NEW.xls"
   output_path_comMAU   = "/Volumes/UHEROwork/data/bea/update/com_upd_MAU_NEW.xls"
 
-  dsdSA06N          = DataSourceDownload.get pathSA06N
-  dsdCA06N          = DataSourceDownload.get pathCA06N
+  dsdSA06N          = DataSourceDownload.get(pathSA06N).download_changed?
+  dsdCA06N          = DataSourceDownload.get(pathCA06N).download_changed?
   
-  if dsdSA06N.download_changed? || dsdCA06N.download_changed?
+  if dsdSA06N || dsdCA06N
     sox = SeriesOutputXls.new(output_path_comHI)
 
    

@@ -64,7 +64,7 @@ class DataLoadPattern < ActiveRecord::Base
 
       @csv[path] = alternate_csv_load if @csv[path].nil?
     end
-    puts "row:#{row}, col:#{col}, #{path}"
+    #puts "row:#{row}, col:#{col}, #{path}"
     val = @csv[path][row-1][col-1] rescue ""
     if val.class == String
       val = Float val.gsub(",","") rescue val

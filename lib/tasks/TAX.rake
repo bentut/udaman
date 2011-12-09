@@ -18,10 +18,10 @@ task :tax_upd => :environment do
   output_path_collec   = "/Volumes/UHEROwork/data/tax/update/tax_upd_collec_NEW.xls"
   output_path_ge       = "/Volumes/UHEROwork/data/tax/update/tax_upd_ge_NEW.xls"
  
-  #dsd_tax_collec_May11     = DataSourceDownload.get path_tax_collec_May11
-  #dsd_tax_GE_Mar11         = DataSourceDownload.get path_tax_GE_Mar11    
+  #dsd_tax_collec_May11     = DataSourceDownload.get(path_tax_collec_May11).download_changed?
+  #dsd_tax_GE_Mar11         = DataSourceDownload.get(path_tax_GE_Mar11).download_changed?    
     
-  #if dsd_tax_collec_May11.download_changed? || dsd_tax_GE_Mar11 .download_changed?
+  #if dsd_tax_collec_May11 || dsd_tax_GE_Mar11
 
     sox = SeriesOutputXls.new(output_path_collec)#,true)
       

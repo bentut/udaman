@@ -48,6 +48,9 @@ class DataSourceDownload < ActiveRecord::Base
     def download
       self.download_log ||= []
       client = HTTPClient.new
+      #some will only respond to certain user agents... this may have to be updated
+      client.agent_name = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0'
+      
       if post_parameters.nil? or post_parameters.length == 0
         resp = client.get(URI.encode(url)) 
       else
