@@ -46,11 +46,20 @@ class DataSource < ActiveRecord::Base
     #const is not there yet
     def DataSource.all_history_and_manual_series_names
       series_names = []
-      ['sic','permits','agriculture','Kauai','HBR','prud','census','trms','vexp','hud','hiwi_upd'].each do |type| 
+      ['sic','permits','agriculture','Kauai','HBR','prud','census','trms','vexp','hud','hiwi_upd','const_hist', 'tax_hist', 'tke'].each do |type| 
         DataSource.where("eval LIKE '%load_from %#{type}%'").each do |ds|
           series_names.push ds.series.name
         end
       end
+      ['visusns', 'vrlsns', 'tke', 'tkb','vrdc', 'gffot', 'yl_o', 'yl_tu', 'yl_trade'].each do |type| 
+        DataSource.where("eval LIKE '%#{type}%load_from %'").each do |ds|
+          series_names.push ds.series.name
+        end
+      end
+
+      series_names.push "PC_ANNUAL@HON.M"
+      series_names.push "PCTRGSMD@HON.M"
+      series_names.push "NTTOURNS@HI.M"
       series_names.uniq
     end
     
@@ -71,7 +80,7 @@ class DataSource < ActiveRecord::Base
     # DataSource.where("eval LIKE '%census%'").limit(5).each {|ds| puts ds.eval}
     # DataSource.where("eval LIKE '%trms%'").limit(5).each {|ds| puts ds.eval}
     # DataSource.where("eval LIKE '%vexp%'").limit(5).each {|ds| puts ds.eval}
-    # DataSource.where("eval LIKE '%hud%'").limit(5).each {|ds| puts ds.eval};
+    # DataSource.where("eval LIKE '%hud%'").limit(5).each {|ds| puts ds.eval}; 0
     
     def DataSource.all_pattern_series_names
       series_names = []
