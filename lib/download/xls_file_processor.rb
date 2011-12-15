@@ -15,9 +15,9 @@ def observation_at(index)
   col = @col_processor.compute(index)
   handle = @handle_processor.compute(index)
   sheet = @sheet_processor.compute(index)
-  worksheet_2d_array = @cached_files.xls(handle, sheet)
+  worksheet = @cached_files.xls(handle, sheet)
   date = @date_processor.compute(index)
-  {date => worksheet_2d_array[row][col]}
+  {date => worksheet.cell(row,col)}
 end
 
 
