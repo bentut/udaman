@@ -17,7 +17,7 @@ def initialize(handle, options, cached_files = nil)
 end
 
 def get_data
-  return TextFileProcessor.new(@handle,@options).get_data if @file_type == "text"
+  return TextFileProcessor.new(@handle,@options, @cached_files).get_data if @file_type == "text"
   return get_data_spreadsheet
 end
 

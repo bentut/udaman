@@ -1,24 +1,34 @@
-def Series.load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
-  f = open path, "r"
+def initialize(handle, options)
+  @cached_files = cached_files
+  @handle = handle
+  @options = options
+end
+
+def get_data
+  @file_lines_array = @cached_files.text(@handle)
+  load_from_basic_text unless @options["rows_to_skip"].nil?
+  load_standard_text if @options["rows_to_skip"].nil?
+end
+
+def load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
   rows_skipped = 0
-  while (rows_to_skip > rows_skipped)
-    f.gets
+  while (@options["rows_to_skip"] > rows_skipped)
+    @file_lines_array.slice![0]
     rows_skipped += 1
   end
-  load_from_queued_up_file(f, delimiter, date_col, value_col)
+  load_from_queued_up_file(@options["delimiter"], @options["date_col"], @options["value_col"])
 end
 
-def Series.load_standard_text(path)
-  f = open path, "r"
-  while line = f.gets
+def load_standard_text(path)
+  while line = @file_lines_array.slice![0]
     break if line.starts_with "DATE"
   end
-  load_from_queued_up_file(f, " ", 0, 1)
+  load_from_queued_up_file(" ", 0, 1)
 end
 
-def Series.load_from_queued_up_file(f, delimiter, date_col, value_col)
+def load_from_queued_up_file(delimiter, date_col, value_col)
   series_data = {}
-  while data_row = f.gets
+  while data_row = @file_lines_array.slice![0]
     data = data_row.split(delimiter)
     begin
       date = Date.parse(data[date_col])
@@ -27,9 +37,5 @@ def Series.load_from_queued_up_file(f, delimiter, date_col, value_col)
     end
     series_data[date.to_s] = data[value_col].to_f
   end
-  Series.new.new_transformation("loaded from textfile #{f.path}", series_data)
-end
-
-def load_standard_text(path)
-  Series.load_standard_text(path)
+  series_data
 end

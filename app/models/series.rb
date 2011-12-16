@@ -326,6 +326,18 @@ class Series < ActiveRecord::Base
     new_transformation("loaded series code: #{code} from bls website", series_data)
   end
   
+  def Series.open_cached_files
+    @@cached_files = CachedFiles.new
+  end
+  
+  def Series.get_cached_files
+    @@cached_files
+  end
+  
+  def Series.close_cached_files
+    @@cached_files = nil
+  end
+  
   def at(date)
     data[date]
   end

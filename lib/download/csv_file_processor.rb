@@ -12,42 +12,24 @@ def observation_at(index)
   row = @row_processor.compute(index)
   col = @col_processor.compute(index)
   handle = @handle_processor.compute(index)
+  
   csv_2d_array = @cached_files.csv(handle)
   date = @date_processor.compute(index)
-  {date => csv_2d_array[row][col]}
-end
-
-
-def DataLoadPattern.alternate_fastercsv_read(path)
-  csv_data = []
-  csv_file = open path, "r"
-  while line = csv_file.gets
-    next unless line.index("HYPERLINK").nil?
-    csv_data.push(CSV.parse_line(line.strip))
-  end
-  csv_file.close
-  return csv_data 
-rescue
-  puts "CSV is having a problem with the following line"
-  puts line
-  return nil
-end
-
-def DataLoadPattern.retrieve_csv(path, sheet, row, col)
-  @csv ||= {}
-  begin
-    @csv[path] = CSV.read(path) if @csv[path].nil?
-  rescue
-    #resolve one ugly known file formatting problem with faster csv
-    alternate_csv_load = DataLoadPattern.alternate_fastercsv_read(path)
-    return "READ_ERROR:CSV FORMAT OR FILE PROBLEM" if alternate_csv_load.nil? 
-
-    @csv[path] = alternate_csv_load if @csv[path].nil?
-  end
-  val = @csv[path][row-1][col-1]
-  if val.class == String
-    val = Float val.gsub(",","") rescue val
-  end
-  return val
+  
+  observation_value = parse_cell(csv_2d_array[row-1][col-1]})
+  return "END" if observation_value == "BREAK IN DATA"
+  {date => observation_value}
   
 end
+
+def parse_cell(cell_value)
+  begin
+    return Float cell_value.gsub(",","") if cell_value.class == String
+    return Float cell_value
+  rescue    
+    #known data values that should be suppressed as nils... may need to separate these by file being read in
+    #return nil if ["(D) ", "(L) ", "(N) ", "(T) "].include? cell_value
+    return "BREAK IN DATA"
+  end
+end
+
