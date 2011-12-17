@@ -124,7 +124,9 @@ task :us_upd_a => :environment do
   path_264A     = "/Volumes/UHEROwork/data/rawdata/US_BEA264YEAR.csv"
   path_us_gdp   = "/Volumes/UHEROwork/data/rawdata/US_GDP.xls"
   path_ca_cpi   = "/Volumes/UHEROwork/data/rawdata/CA_CPI.xls"
-  
+  path_US_POP   = "/Volumes/UHEROwork/data/rawdata/JP_POP.xls"  
+  #NOTE: N@US uses the same source file as N@JP from the UN 
+ 
   output_path   = "/Volumes/UHEROwork/data/us/update/us_upd_a_NEW.xls"
 
   dsd_5A     = DataSourceDownload.get(path_5A).download_changed? 
@@ -138,6 +140,7 @@ task :us_upd_a => :environment do
   dsd_264A   = DataSourceDownload.get(path_264A).download_changed? 
   dsd_us_gdp = DataSourceDownload.get(path_us_gdp).download_changed? 
   dsd_ca_cpi = DataSourceDownload.get(path_ca_cpi).download_changed? 
+  #dsd_US_POP = DataSourceDownload.get(path_US_POP).download_changed? 
   
   if dsd_5A || dsd_6A  || dsd_13A  || dsd_43A  || dsd_44A  || dsd_58A  || dsd_66A  || dsd_253A  || dsd_264A || dsd_us_gdp || dsd_ca_cpi
     sox = SeriesOutputXls.new(output_path)#,true)
@@ -189,6 +192,8 @@ task :us_upd_a => :environment do
      sox.add "GDP@US.A",         Series.load_pattern("1929-01-01", "A",  path_us_gdp, "sheet_num:1", "increment:9:1", 2)
      sox.add "GDP_R@US.A",         Series.load_pattern("1929-01-01", "A",  path_us_gdp, "sheet_num:1", "increment:9:1", 3)
      sox.add "CPI@CA.A",         Series.load_pattern("1970-01-01", "A",  path_ca_cpi, "sheet_num:1", "increment:7:1", 9)
+
+    sox.add "N@US.A",         Series.load_pattern("1950-01-01", "A", path_US_POP, "sheet_num:1", 254, "increment:6:1")
 
    
     sox.write_xls

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111020020529) do
+ActiveRecord::Schema.define(:version => 20111214233147) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20111020020529) do
     t.text     "data",                    :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "investigation_notes"
   end
 
   add_index "series", ["name"], :name => "index_series_on_name"

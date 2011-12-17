@@ -19,7 +19,13 @@
 							:action => 'delete', 
 							:id => ds.id}, 
 							:confirm => "Are you sure you want to delete this data source?" 
-					%>&nbsp;<span style="color:gray">(<%= 
+					%>&nbsp;<span style="color:gray">
+					&nbsp;|&nbsp;<%= 
+							link_to "edit", { 	
+								:controller=> "data_sources", 
+								:action => 'edit', 
+								:id => ds.id}
+						%>&nbsp;<span style="color:gray">(<%= 
 						"#{ds.runtime.round(2)}s" unless ds.runtime.nil? 
 					%>)</span>
   		</td>
@@ -27,7 +33,7 @@
 			<%= raw linked_version(ds.description) %>
 			<br /> 
 			<%= raw eval %>
-			<%= render(:partial => 'pattern', :locals => {:pattern_id => ds.description.split(" ")[-1]}) if ds.description.start_with?("loaded from pattern id")%>
+			<%= render(:partial => 'pattern', :locals => {:pattern_id => ds.description.split(" ")[4]}) if ds.description.start_with?("loaded from pattern id")%>
 		</td>
 	</tr>      
 	<% end %>

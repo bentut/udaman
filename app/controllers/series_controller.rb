@@ -62,6 +62,11 @@ class SeriesController < ApplicationController
     render :partial => "validate_row"
   end
 
+  def update_notes
+    @series = Series.find(params[:id])
+    @series.update_attributes({:investigation_notes => params[:note]})
+    render :partial => "investigation_sort.html"
+  end
 
   # # GET /series
   # # GET /series.xml

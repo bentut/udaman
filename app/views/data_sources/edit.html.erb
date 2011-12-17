@@ -1,0 +1,16 @@
+<div id="summary_area">
+	<h2>Add Data Source </h2>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	<% form_for(@data_source) do |ds| %>
+		<div class="field">
+			<%= ds.label :eval %>
+			<!-- could also try to add this with javascript -->
+			<%= ds.text_field :eval, :size => 120 %>
+		</div>
+		<div class="actions">
+			<%= ds.submit %>
+		</div>
+	<% end %>
+</div>

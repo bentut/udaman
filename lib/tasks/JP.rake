@@ -185,6 +185,8 @@ task :jp_upd_m => :environment do
 # path_JP_CSCF         = "/Volumes/UHEROwork/data/rawdata/JP_CSCF.XLS"
   path_JP_CSCFNS       = "/Volumes/UHEROwork/data/rawdata/JP_CSCFNS.XLS"
 
+#NOTE: Consumer confidence link must be updated from here: http://www.esri.cao.go.jp/en/stat/shouhi/shouhi-e.html
+
   output_path   = "/Volumes/UHEROwork/data/japan/update/jp_upd_m_NEW.xls"
 
 # dsd_JP_R           = DataSourceDownload.get(path_JP_R).download_changed?
@@ -231,7 +233,8 @@ task :jp_upd_m => :environment do
   
   sox.add "STKNS@JP.M",         Series.load_pattern("row2:col1:rev", "M", path_JP_STKNS, "csv", "increment:2:1", 7)
   
-  sox.add_data "YXR@JP.M",       "YXR@JP.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/JP_YXR.TXT").data
+  #sox.add_data "YXR@JP.M",       "YXR@JP.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/JP_YXR.TXT").data
+  "YXR@JP.M".ts_eval= %Q|"YXR@JP.M".tsn.load_standard_text("/Volumes/UHEROwork/data/rawdata/JP_YXR.TXT")|
   
     sox.write_xls
     #NotificationMailer.deliver_new_download_notification "MONTHLY JAPAN (rake jp_upd_m)", sox.output_summary

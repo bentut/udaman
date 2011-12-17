@@ -1,3 +1,10 @@
+<style>
+.set-notes {color: #AAA; font-size:10px;}
+a.pattern-1000s {background-color:#FF0;}
+a.aremos-history-units {background-color:#F0F;}
+a.wrong-series-units {background-color:#0FF;}
+</style>
+
 <% dseries = [] %>
 <h2><%= title %>: <%= count %> Series </h2>
 <h5><%= description %></h5>
@@ -7,10 +14,12 @@
 	<% queue.each do |s| %>
 		<% 
 			dep = s.new_dependencies 
+			link_class = "plain"
+			link_class = s.investigation_notes.gsub("_", "-") if !s.investigation_notes.nil? and s.investigation_notes.split(" ").count == 1
 		%>
 		<% if dep.count == 0 %>
 			<tr>
-				<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank")  %></td>
+				<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank", :class => link_class)  %></td>
 				<td><%= s.aremos_missing %></td>
 				<td><%= s.aremos_diff %></td>
 			</tr>

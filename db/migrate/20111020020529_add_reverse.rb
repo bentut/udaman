@@ -4,6 +4,6 @@ class AddReverse < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :data_load_patterns, :ssl_enabled
+    remove_column :data_load_patterns, :reverse
   end
 end

@@ -1,0 +1,34 @@
+<div id="investigation-sort">
+
+	<style>
+	.set-notes {color: #AAA; font-size:10px;}
+	#pattern-1000s {background-color:#FF0;}
+	#aremos-history-units {background-color:#F0F;}
+	#wrong-series-units {background-color:#0FF;}
+	</style>	
+
+
+<%= link_to "pattern_1000s", {:action => 'update_notes', :note => "pattern_1000s", :id => @series.id}, 
+			:remote => true, :id => "pattern-1000s", :class => "set-notes"  %>
+<%= link_to "aremos_history_units", {:action => 'update_notes', :note => "aremos_history_units", :id => @series.id}, 
+			:remote => true, :id => "aremos-history-units", :class => "set-notes"  %>
+<%= link_to "wrong_series_units", {:action => 'update_notes', :note => "wrong_series_units", :id => @series.id}, 
+			:remote => true, :id => "wrong-series-units", :class => "set-notes"  %>
+
+<h3 style="color:#AAA">Investigation Notes</h3>
+<div style="color:#AAA"><%= @series.investigation_notes %></div>
+
+</div>
+
+<%= javascript_tag do %>
+  $('a.set-notes').bind("ajax:complete", function(et, e){
+    $("#investigation-sort").html(e.responseText); // insert content
+  });
+<% end %>
+
+
+<%= javascript_tag do %>
+  $('a.set-notes').bind("ajax:loading", function(et, e){
+    $("#investigation-sort").html("Loading..."); // swap link text
+  });
+<% end %>
