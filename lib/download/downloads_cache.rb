@@ -1,0 +1,91 @@
+#handle the jonathan "UHEROWork-1" type stuff in here
+
+#FIGURE OUT HOW TO DO ALL ERROR HANDLING HERE WHEN TESTING RAKE FILES AND GETTING SOME FAILURES
+#CSV STUFF IS WEIRD... TRY TO CLEAN UP
+#GENERAL ERROR STRATEGY MAY BE TO PASS UP A LITTLE MORE ERROR INFO IN A CATCH (print the handle and sheet or just handle) 
+#BUT GENERALLY JUST THROWING REGULAR EXCEPTIONS
+class DownloadsCache
+  def xls(handle, sheet)
+    @handle = handle
+    @sheet = sheet
+    @xls ||= {}
+    download_handle if @xls[handle].nil? #if handle in cache, it was downloaded recently
+    @xls[handle] ||= {}
+    set_xls_sheet if @xls[handle][sheet].nil? #if sheet not present, only other sheets were used so far
+    
+    @xls[handle][sheet]
+  end
+
+  def set_xls_sheet
+    dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
+    excel = Excel.new(dsd.save_path_flex) #rescue condition if file does not exist
+    sheet_parts = @sheet.split(":")
+    excel.default_sheet = excel.sheets[sheet_part[1].to_i - 1] if sheet_parts[0] == "sheet_num" and excel.default_sheet != excel.sheets[sheet_part[1].to_i - 1]
+    excel.default_sheet = @sheet unless excel.default_sheet == @sheet #rescue condition if sheet does not exist
+    @xls[@handle] ||= {}
+    @xls[@handle][@sheet] = excel
+  end
+
+  def download_results
+    @download_results
+  end
+
+  def download_handle
+    @download_results ||= {}
+    @download_results[@handle] = DataSourceDownload.get(@handle).download #THIS is the first rescue condition situation
+  end
+
+  def csv(handle)
+    @handle = handle
+    @csv ||= {}
+    if @csv[handle].nil? 
+      download_handle 
+      begin
+        dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
+        @csv[handle] = CSV.read(dsd.save_path_flex)
+      rescue
+        #resolve one ugly known file formatting problem with faster csv
+        alternate_csv_load = DataLoadPattern.alternate_fastercsv_read(dsd.save_path_flex) #rescue condition if this fails
+        #return "READ_ERROR:CSV FORMAT OR FILE PROBLEM" if alternate_csv_load.nil? 
+        @csv[handle] = alternate_csv_load
+      end
+    end
+    @csv[handle]
+  end
+
+
+  def alternate_fastercsv_read(path)
+    csv_data = []
+    csv_file = open path, "r"
+    while line = csv_file.gets
+      next unless line.index("HYPERLINK").nil?
+      csv_data.push(CSV.parse_line(line.strip))
+    end
+    csv_file.close
+    return csv_data 
+  rescue
+    puts "CSV is having a problem with the following line"
+    puts line
+    return nil
+  end
+
+  def text(handle)
+    @handle = handle
+    @text ||= {}
+    if @text[handle].nil?
+      download_handle
+      @text[handle] = get_text_rows
+    end
+    @text[handle]
+  end
+
+  def get_text_rows
+    dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
+    f = open dsd.save_path_flex, "r"
+    text_rows = []
+    while row = f.gets
+      text_rows.push row 
+    end
+    text_rows
+  end
+end
