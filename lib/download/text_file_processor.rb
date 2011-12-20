@@ -6,17 +6,17 @@ end
 
 def get_data
   @file_lines_array = @cached_files.text(@handle)
-  load_from_basic_text unless @options["rows_to_skip"].nil?
-  load_standard_text if @options["rows_to_skip"].nil?
+  load_from_basic_text unless @options[:rows_to_skip].nil?
+  load_standard_text if @options[:rows_to_skip].nil?
 end
 
 def load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
   rows_skipped = 0
-  while (@options["rows_to_skip"] > rows_skipped)
+  while (@options[:rows_to_skip] > rows_skipped)
     @file_lines_array.slice![0]
     rows_skipped += 1
   end
-  load_from_queued_up_file(@options["delimiter"], @options["date_col"], @options["value_col"])
+  load_from_queued_up_file(@options[:delimiter], @options[:date_col], @options[:value_col])
 end
 
 def load_standard_text(path)

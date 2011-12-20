@@ -1,6 +1,6 @@
 class AddDataSourceDownloadHandles < ActiveRecord::Migration
   def self.up
-    add_column :data_source_downloads, :handle, t.string
+    add_column :data_source_downloads, :handle, :string
   end
 
   def self.down

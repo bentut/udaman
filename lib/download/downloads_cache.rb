@@ -20,8 +20,11 @@ class DownloadsCache
     dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
     excel = Excel.new(dsd.save_path_flex) #rescue condition if file does not exist
     sheet_parts = @sheet.split(":")
-    excel.default_sheet = excel.sheets[sheet_part[1].to_i - 1] if sheet_parts[0] == "sheet_num" and excel.default_sheet != excel.sheets[sheet_part[1].to_i - 1]
-    excel.default_sheet = @sheet unless excel.default_sheet == @sheet #rescue condition if sheet does not exist
+    if sheet_parts[0] == "sheet_num" and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
+      excel.default_sheet = excel.sheets[sheet_parts[1].to_i - 1] 
+    else
+      excel.default_sheet = @sheet unless excel.default_sheet == @sheet #rescue condition if sheet does not exist
+    end
     @xls[@handle] ||= {}
     @xls[@handle][@sheet] = excel
   end
@@ -84,7 +87,7 @@ class DownloadsCache
     f = open dsd.save_path_flex, "r"
     text_rows = []
     while row = f.gets
-      text_rows.push row 
+      text_rows.push = row 
     end
     text_rows
   end

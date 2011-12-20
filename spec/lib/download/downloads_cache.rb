@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 describe DownloadsCache do
-  before(:all) do
+  before(:each) do
+    @dsd = mock "data_source_download"
+    @dsd.stub(:download).and_return(nil)
+    DataSourceDownload.stub!(:get).and_return(@dsd)
+    @dc = DownloadsCache.new
   end
   
   describe "XLS Cache Requests" do
     before(:each) do
-      @dsd = mock "data_source_download"
-      @dsd.stub(:download).and_return(nil)
       @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/pattern.xls")
-      DataSourceDownload.stub!(:get).and_return(@dsd)
-      @dc = DownloadsCache.new
     end
   
     it "should return the correct Excel object from an xls call" do
@@ -49,11 +49,7 @@ describe DownloadsCache do
   
   describe "CSV Cache Requests" do
     before(:each) do
-      @dsd = mock "data_source_download"
-      @dsd.stub(:download).and_return(nil)
       @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/pattern_csv.csv")
-      DataSourceDownload.stub!(:get).and_return(@dsd)
-      @dc = DownloadsCache.new
     end
     
     it "should return the correct 2D array object from a csv call" do
@@ -85,11 +81,7 @@ describe DownloadsCache do
   
   describe "Text File Cache Requests" do
     before(:each) do
-      @dsd = mock "data_source_download"
-      @dsd.stub(:download).and_return(nil)
       @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/pattern.txt")
-      DataSourceDownload.stub!(:get).and_return(@dsd)
-      @dc = DownloadsCache.new
     end
     
     it "should return the correct array of strings containing lines of file from a txt call" do
