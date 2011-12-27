@@ -1,12 +1,11 @@
-#handle the jonathan "UHEROWork-1" type stuff in here
-
-#FIGURE OUT HOW TO DO ALL ERROR HANDLING HERE WHEN TESTING RAKE FILES AND GETTING SOME FAILURES
 #CSV STUFF IS WEIRD... TRY TO CLEAN UP
-#GENERAL ERROR STRATEGY MAY BE TO PASS UP A LITTLE MORE ERROR INFO IN A CATCH (print the handle and sheet or just handle) 
-#BUT GENERALLY JUST THROWING REGULAR EXCEPTIONS
+
 class DownloadsCache
   def xls(handle, sheet)
-    @handle = handle
+    @dsd = DataSourceDownload.get(handle)
+    raise "handle '#{handle}' does not exist" if @dsd.nil?
+
+    @handle = handle    
     @sheet = sheet
     @xls ||= {}
     download_handle if @xls[handle].nil? #if handle in cache, it was downloaded recently
@@ -17,13 +16,16 @@ class DownloadsCache
   end
 
   def set_xls_sheet
-    dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
-    excel = Excel.new(dsd.save_path_flex) #rescue condition if file does not exist
+    excel = Excel.new(@dsd.save_path_flex) 
     sheet_parts = @sheet.split(":")
     if sheet_parts[0] == "sheet_num" and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
       excel.default_sheet = excel.sheets[sheet_parts[1].to_i - 1] 
     else
-      excel.default_sheet = @sheet unless excel.default_sheet == @sheet #rescue condition if sheet does not exist
+      begin
+        excel.default_sheet = @sheet unless excel.default_sheet == @sheet 
+      rescue RangeError
+        raise "sheet '#{@sheet}' does not exist in workbook '#{@dsd.save_path_flex}' [Handle: #{@handle}]"
+      end
     end
     @xls[@handle] ||= {}
     @xls[@handle][@sheet] = excel
@@ -35,17 +37,20 @@ class DownloadsCache
 
   def download_handle
     @download_results ||= {}
-    @download_results[@handle] = DataSourceDownload.get(@handle).download #THIS is the first rescue condition situation
+    @download_results[@handle] = @dsd.download 
+    raise "the download for handle '#{@handle} failed with status code #{@download_results[@handle][:status]} when attempt to reach #{@dsd.url}" if @download_results[@handle] and @download_results[@handle][:status] != 200
   end
 
   def csv(handle)
+    @dsd = DataSourceDownload.get(handle)
+    raise "handle '#{handle}' does not exist" if @dsd.nil?
+    
     @handle = handle
     @csv ||= {}
     if @csv[handle].nil? 
       download_handle 
       begin
-        dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
-        @csv[handle] = CSV.read(dsd.save_path_flex)
+        @csv[handle] = CSV.read(@dsd.save_path_flex)
       rescue
         #resolve one ugly known file formatting problem with faster csv
         alternate_csv_load = DataLoadPattern.alternate_fastercsv_read(dsd.save_path_flex) #rescue condition if this fails
@@ -73,6 +78,9 @@ class DownloadsCache
   end
 
   def text(handle)
+    @dsd = DataSourceDownload.get(handle)
+    raise "handle '#{handle}' does not exist" if @dsd.nil?
+    
     @handle = handle
     @text ||= {}
     if @text[handle].nil?
@@ -83,8 +91,7 @@ class DownloadsCache
   end
 
   def get_text_rows
-    dsd = DataSourceDownload.get(@handle) #rescue condition if no handle
-    f = open dsd.save_path_flex, "r"
+    f = open @dsd.save_path_flex, "r"
     text_rows = []
     while row = f.gets
       text_rows.push = row 

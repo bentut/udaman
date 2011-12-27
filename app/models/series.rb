@@ -271,6 +271,7 @@ class Series < ActiveRecord::Base
   end
   
   #need to spec out tests for this
+  #this would benefit from some caching scheme
   def load_from(update_spreadsheet_path, sheet_to_load = nil)
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
     raise SeriesReloadException if update_spreadsheet.load_error?
@@ -327,7 +328,7 @@ class Series < ActiveRecord::Base
   end
   
   def Series.open_cached_files
-    @@cached_files = CachedFiles.new
+    @@cached_files = DownloadsCache.new
   end
   
   def Series.get_cached_files

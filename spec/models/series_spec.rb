@@ -131,35 +131,36 @@ describe Series do
         ns_values.should have(7).items
       end
     end
-    
-    describe "LOADING data from RAWDATA using PATTERNS" do
-      before (:each) do
-      end
-      
-      it "should pull the correct data using mapping from a pattern" do
-        dlp = DataLoadPattern.new(
-          :start_date => "1998-01-01", 
-          :frequency => "Q" , 
-          :path => "#{ENV["DATAFILES_PATH"]}/datafiles/data_mapping_test_files/Const_QSER_E.xls", 
-          :worksheet => "E-1", 
-          :row => "increment:37:1", 
-          :col => 7
-        )
-        #KPGOVNS@HI.Q
-        dlp.save
-        pattern_id = dlp.id
-        
-        #need to optimize... should be comparable load time
-        #move to Class level "Series" function
-        t0 = Time.now
-        s1 = Series.new.load_from_pattern_id pattern_id
-        t1 = Time.now
-        s2 = "KPGOVNS@HI.Q".tsn.load_from "#{ENV["DATAFILES_PATH"]}/datafiles/data_mapping_samples.xls", "q_series"
-        t2 = Time.now
-        #puts "Pattern Load: #{t1-t0} - Update Spreadsheet Load: #{t2-t1}"
-        s1.identical_to?(s2.data).should be_true
-      end
-    end
+
+    # can retest this stuff using new functionality
+    # describe "LOADING data from RAWDATA using PATTERNS" do
+    #   before (:each) do
+    #   end
+    #   
+    #   it "should pull the correct data using mapping from a pattern" do
+    #     dlp = DataLoadPattern.new(
+    #       :start_date => "1998-01-01", 
+    #       :frequency => "Q" , 
+    #       :path => "#{ENV["DATAFILES_PATH"]}/datafiles/data_mapping_test_files/Const_QSER_E.xls", 
+    #       :worksheet => "E-1", 
+    #       :row => "increment:37:1", 
+    #       :col => 7
+    #     )
+    #     #KPGOVNS@HI.Q
+    #     dlp.save
+    #     pattern_id = dlp.id
+    #     
+    #     #need to optimize... should be comparable load time
+    #     #move to Class level "Series" function
+    #     t0 = Time.now
+    #     s1 = Series.new.load_from_pattern_id pattern_id
+    #     t1 = Time.now
+    #     s2 = "KPGOVNS@HI.Q".tsn.load_from "#{ENV["DATAFILES_PATH"]}/datafiles/data_mapping_samples.xls", "q_series"
+    #     t2 = Time.now
+    #     #puts "Pattern Load: #{t1-t0} - Update Spreadsheet Load: #{t2-t1}"
+    #     s1.identical_to?(s2.data).should be_true
+    #   end
+    # end
     
     
     

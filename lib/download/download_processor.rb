@@ -1,18 +1,26 @@
 require 'roo'
 require 'csv'
 
+# Error handling in download processor calls
+# --------------------------------------------
+# line level calls should always raise descriptive errors. 
+# Errors can be rescued by Packager or Front End
+# as necessary
+
 class DownloadProcessor
   def initialize(handle, options, cached_files = nil)
+    raise "File type must be specified when initializing a Download Processor" if options[:file_type].nil?
+    
     @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
     @handle = handle
     @options = options
     @file_type = options[:file_type]
-    @spreadsheet = CsvFileProcessor.new(handle, options, parse_date_options, @cached_files) if @file_type == "csv"
-    @spreadsheet = XlsFileProcessor.new(handle, options, parse_date_options, @cached_files) if @file_type == "xls"  
+    @spreadsheet = CsvFileProcessor.new(handle, options, parse_date_options, @cached_files) if @file_type == "csv" and validate_csv
+    @spreadsheet = XlsFileProcessor.new(handle, options, parse_date_options, @cached_files) if @file_type == "xls" and validate_xls
   end
 
   def get_data
-    return TextFileProcessor.new(@handle,@options, @cached_files).get_data if @file_type == "text"
+    return TextFileProcessor.new(@handle,@options, @cached_files).get_data if @file_type == "text" #and validate_text
     return get_data_spreadsheet
   end
 
@@ -44,6 +52,32 @@ class DownloadProcessor
     puts @cached_files.csv(@handle)[start_row-1][start_col-1].to_s + "is csv" if @file_type == "csv"
     return @cached_files.csv(@handle)[start_row-1][start_col-1].to_s if @file_type == "csv"
     return @cached_files.xls(@handle, @options[:sheet]).cell(start_row, start_col).to_s if @file_type == "xls"
+  end
+  
+  def validate_csv
+    return true unless !date_ok or @options[:row].nil? or @options[:col].nil? or @options[:frequency].nil?
+    error_string = ""
+    error_string += "start date information, " if !date_ok
+    error_string += "row specification, " if @options[:row].nil?
+    error_string += "column specification, " if @options[:col].nil?
+    error_string += "frequency specification, " if @options[:frequency].nil?
+    raise "incomplete Download Processor specification because the following information is missing: " + error_string.chop.chop
+  end
+  
+  def date_ok
+    return false if @options[:start_date].nil? and (@options[:start_row].nil? or @options[:start_col].nil?)
+    return true
+  end
+  
+  def validate_xls
+    return true unless !date_ok or @options[:row].nil? or @options[:col].nil? or @options[:sheet].nil? or @options[:frequency].nil?
+    error_string = ""
+    error_string += "start date information, " if !date_ok
+    error_string += "row specification, " if @options[:row].nil?
+    error_string += "column specification, " if @options[:col].nil?
+    error_string += "sheet specification, " if @options[:sheet].nil?
+    error_string += "frequency specification, " if @options[:frequency].nil?
+    raise "incomplete Download Processor specification because the following information is missing: " + error_string.chop.chop
   end
 end
 
