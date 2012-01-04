@@ -9,368 +9,354 @@
 
 
 task :tax_upd => :environment do
-  require "Spreadsheet"
-  #path_tax_collec_May11       = "/Volumes/UHEROwork/data/rawdata/2011-05/05collec.xls"
-  #path_tax_GE_Mar11           = "/Volumes/UHEROwork/data/rawdata/2011-05/03ge.xls"
-  path_tax_collec       = "/Volumes/UHEROwork/data/rawdata/TAX/%Y/%mcollec.xls"
-  path_tax_GE           = "/Volumes/UHEROwork/data/rawdata/TAX/%Y/%mge.xls"
-  
-  output_path_collec   = "/Volumes/UHEROwork/data/tax/update/tax_upd_collec_NEW.xls"
-  output_path_ge       = "/Volumes/UHEROwork/data/tax/update/tax_upd_ge_NEW.xls"
- 
-  #dsd_tax_collec_May11     = DataSourceDownload.get path_tax_collec_May11
-  #dsd_tax_GE_Mar11         = DataSourceDownload.get path_tax_GE_Mar11    
-    
-  #if dsd_tax_collec_May11.download_changed? || dsd_tax_GE_Mar11 .download_changed?
-
-    sox = SeriesOutputXls.new(output_path_collec)#,true)
-      
-  sox.add "TRFINS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 5, 6)
-  sox.add "TRCVNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 6, 6)
-  sox.add "TREMNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 7, 6)
-  sox.add "TRFUNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 8, 6)
-  sox.add "TRGLNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 9, 6)
-  sox.add "TRGTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 10, 6)
-  sox.add "TRHSNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 11, 6)
-  sox.add "TRCOESNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 13, 6)
-  sox.add "TRCOPRNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 14, 6)
-  sox.add "TRCORFNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 15, 6)
-  sox.add "TRINESNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 17, 6)
-  sox.add "TRINPRNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 18, 6)
-  sox.add "TRINWHNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 19, 6)
-  sox.add "TRINRFNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 20, 6)
-  sox.add "TRIHNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 21, 6)
-  sox.add "TRISNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 23, 6)
-  sox.add "TRLINS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 24, 6)
-  sox.add "TRMTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 25, 6)
-  sox.add "TRPSNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 26, 6)
-  sox.add "TRTBNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 27, 6)
-  sox.add "TRTFNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 28, 6)
-  sox.add "TRTTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 29, 6)
-  sox.add "TROTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 30, 6)
-  sox.add "TRNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 31, 6)
-  sox.add "TRFINS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 5, 2)
-  sox.add "TRCVNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 6, 2)
-  sox.add "TREMNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 7, 2)
-  sox.add "TRFUNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 8, 2)
-  sox.add "TRGLNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 9, 2)
-  sox.add "TRGTNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 10, 2)
-  sox.add "TRHSNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 11, 2)
-  sox.add "TRCOESNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 13, 2)
-  sox.add "TRCOPRNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 14, 2)
-  sox.add "TRCORFNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 15, 2)
-  sox.add "TRINESNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 17, 2)
-  sox.add "TRINPRNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 18, 2)
-  sox.add "TRINWHNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 19, 2)
-  sox.add "TRINRFNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 20, 2)
-  sox.add "TRIHNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 21, 2)
-  sox.add "TRISNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 23, 2)
-  sox.add "TRLINS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 24, 2)
-  sox.add "TRMTNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 25, 2)
-  sox.add "TRPSNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 26, 2)
-  sox.add "TRTBNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 27, 2)
-  sox.add "TRTFNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 28, 2)
-  sox.add "TRTTNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 29, 2)
-  sox.add "TROTNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 30, 2)
-  sox.add "TRNS@HON.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 31, 2)
-  sox.add "TRFINS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 5, 3)
-  sox.add "TRCVNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 6, 3)
-  sox.add "TREMNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 7, 3)
-  sox.add "TRFUNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 8, 3)
-  sox.add "TRGLNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 9, 3)
-  sox.add "TRGTNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 10, 3)
-  sox.add "TRHSNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 11, 3)
-  sox.add "TRCOESNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 13, 3)
-  sox.add "TRCOPRNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 14, 3)
-  sox.add "TRCORFNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 15, 3)
-  sox.add "TRINESNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 17, 3)
-  sox.add "TRINPRNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 18, 3)
-  sox.add "TRINWHNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 19, 3)
-  sox.add "TRINRFNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 20, 3)
-  sox.add "TRIHNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 21, 3)
-  sox.add "TRISNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 23, 3)
-  sox.add "TRLINS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 24, 3)
-  sox.add "TRMTNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 25, 3)
-  sox.add "TRPSNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 26, 3)
-  sox.add "TRTBNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 27, 3)
-  sox.add "TRTFNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 28, 3)
-  sox.add "TRTTNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 29, 3)
-  sox.add "TROTNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 30, 3)
-  sox.add "TRNS@MAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 31, 3)
-  sox.add "TRFINS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 5, 4)
-  sox.add "TRCVNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 6, 4)
-  sox.add "TREMNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 7, 4)
-  sox.add "TRFUNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 8, 4)
-  sox.add "TRGLNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 9, 4)
-  sox.add "TRGTNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 10, 4)
-  sox.add "TRHSNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 11, 4)
-  sox.add "TRCOESNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 13, 4)
-  sox.add "TRCOPRNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 14, 4)
-  sox.add "TRCORFNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 15, 4)
-  sox.add "TRINESNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 17, 4)
-  sox.add "TRINPRNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 18, 4)
-  sox.add "TRINWHNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 19, 4)
-  sox.add "TRINRFNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 20, 4)
-  sox.add "TRIHNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 21, 4)
-  sox.add "TRISNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 23, 4)
-  sox.add "TRLINS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 24, 4)
-  sox.add "TRMTNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 25, 4)
-  sox.add "TRPSNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 26, 4)
-  sox.add "TRTBNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 27, 4)
-  sox.add "TRTFNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 28, 4)
-  sox.add "TRTTNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 29, 4)
-  sox.add "TROTNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 30, 4)
-  sox.add "TRNS@HAW.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 31, 4)
-  sox.add "TRFINS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 5, 5)
-  sox.add "TRCVNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 6, 5)
-  sox.add "TREMNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 7, 5)
-  sox.add "TRFUNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 8, 5)
-  sox.add "TRGLNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 9, 5)
-  sox.add "TRGTNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 10, 5)
-  sox.add "TRHSNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 11, 5)
-  sox.add "TRCOESNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 13, 5)
-  sox.add "TRCOPRNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 14, 5)
-  sox.add "TRCORFNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 15, 5)
-  sox.add "TRINESNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 17, 5)
-  sox.add "TRINPRNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 18, 5)
-  sox.add "TRINWHNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 19, 5)
-  sox.add "TRINRFNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 20, 5)
-  sox.add "TRIHNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 21, 5)
-  sox.add "TRISNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 23, 5)
-  sox.add "TRLINS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 24, 5)
-  sox.add "TRMTNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 25, 5)
-  sox.add "TRPSNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 26, 5)
-  sox.add "TRTBNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 27, 5)
-  sox.add "TRTFNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 28, 5)
-  sox.add "TRTTNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 29, 5)
-  sox.add "TROTNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 30, 5)
-  sox.add "TRNS@KAU.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 31, 5)
-  sox.add "TDGFNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 36, 6)
-  sox.add "TDHWNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 37, 6)
-  sox.add "TDAPNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 38, 6)
-  sox.add "TDBONS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 39, 6)
-  sox.add "TDEVNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 40, 6)
-  sox.add "TDCANS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 41, 6)
-  sox.add "TDCENS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 42, 6)
-  sox.add "TDEMNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 45, 6)
-  sox.add "TDRHNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 46, 6)
-  sox.add "TDNANS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 47, 6)
-  sox.add "TDCVNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 48, 6)
-  sox.add "TDTTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 49, 4)
-  sox.add "TDTSNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 51, 6)
-  sox.add "TDCTFUNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 66, 6)
-  sox.add "TDCTTTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 67, 6)
-  sox.add "TDCTNS@HI.M",         Series.load_pattern("2011-01-01", "M", path_tax_collec, "sheet_num:1", 68, 6)
-
- sox.write_xls
-
-    sox = SeriesOutputXls.new(output_path_ge)#,true)
-
-  sox.add "TGBRTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 38, 6)
-  sox.add "TGBSVNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 39, 6)
-  sox.add "TGBCTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 40, 6)
-  sox.add "TGBTHNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 41, 6)
-  sox.add "TGBITNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 42, 6)
-  sox.add "TGBCMNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 43, 6)
-  sox.add "TGBHTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 44, 6)
-  sox.add "TGBORNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 45, 6)
-  sox.add "TGBU4NS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 46, 6)
-  sox.add "TGBOTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 47, 6)
-  sox.add "TGBISNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 50, 6)
-  sox.add "TGBSUNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 51, 6)
-  sox.add "TGBPINS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 52, 6)
-  sox.add "TGBPDNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 53, 6)
-  sox.add "TGBMNNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 54, 6)
-  sox.add "TGBWTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 55, 6)
-  sox.add "TGBSINS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 56, 6)
-  sox.add "TGBU5NS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 57, 6)
-  sox.add "TGBNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 60, 6)
-  sox.add "TGBRTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 38, 2)
-  sox.add "TGBSVNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 39, 2)
-  sox.add "TGBCTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 40, 2)
-  sox.add "TGBTHNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 41, 2)
-  sox.add "TGBITNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 42, 2)
-  sox.add "TGBCMNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 43, 2)
-  sox.add "TGBHTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 44, 2)
-  sox.add "TGBORNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 45, 2)
-  sox.add "TGBU4NS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 46, 2)
-  sox.add "TGBOTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 47, 2)
-  sox.add "TGBISNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 50, 2)
-  sox.add "TGBSUNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 51, 2)
-  sox.add "TGBPINS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 52, 2)
-  sox.add "TGBPDNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 53, 2)
-  sox.add "TGBMNNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 54, 2)
-  sox.add "TGBWTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 55, 2)
-  sox.add "TGBSINS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 56, 2)
-  sox.add "TGBU5NS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 57, 2)
-  sox.add "TGBNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 60, 2)
-  sox.add "TGBRTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 38, 3)
-  sox.add "TGBSVNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 39, 3)
-  sox.add "TGBCTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 40, 3)
-  sox.add "TGBTHNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 41, 3)
-  sox.add "TGBITNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 42, 3)
-  sox.add "TGBCMNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 43, 3)
-  sox.add "TGBHTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 44, 3)
-  sox.add "TGBORNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 45, 3)
-  sox.add "TGBU4NS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 46, 3)
-  sox.add "TGBOTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 47, 3)
-  sox.add "TGBISNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 50, 3)
-  sox.add "TGBSUNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 51, 3)
-  sox.add "TGBPINS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 52, 3)
-  sox.add "TGBPDNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 53, 3)
-  sox.add "TGBMNNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 54, 3)
-  sox.add "TGBWTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 55, 3)
-  sox.add "TGBSINS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 56, 3)
-  sox.add "TGBU5NS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 57, 3)
-  sox.add "TGBNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 60, 3)
-  sox.add "TGBRTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 38, 4)
-  sox.add "TGBSVNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 39, 4)
-  sox.add "TGBCTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 40, 4)
-  sox.add "TGBTHNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 41, 4)
-  sox.add "TGBITNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 42, 4)
-  sox.add "TGBCMNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 43, 4)
-  sox.add "TGBHTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 44, 4)
-  sox.add "TGBORNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 45, 4)
-  sox.add "TGBU4NS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 46, 4)
-  sox.add "TGBOTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 47, 4)
-  sox.add "TGBISNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 50, 4)
-  sox.add "TGBSUNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 51, 4)
-  sox.add "TGBPINS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 52, 4)
-  sox.add "TGBPDNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 53, 4)
-  sox.add "TGBMNNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 54, 4)
-  sox.add "TGBWTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 55, 4)
-  sox.add "TGBSINS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 56, 4)
-  sox.add "TGBU5NS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 57, 4)
-  sox.add "TGBNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 60, 4)
-  sox.add "TGBRTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 38, 5)
-  sox.add "TGBSVNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 39, 5)
-  sox.add "TGBCTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 40, 5)
-  sox.add "TGBTHNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 41, 5)
-  sox.add "TGBITNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 42, 5)
-  sox.add "TGBCMNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 43, 5)
-  sox.add "TGBHTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 44, 5)
-  sox.add "TGBORNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 45, 5)
-  sox.add "TGBU4NS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 46, 5)
-  sox.add "TGBOTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 47, 5)
-  sox.add "TGBISNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 50, 5)
-  sox.add "TGBSUNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 51, 5)
-  sox.add "TGBPINS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 52, 5)
-  sox.add "TGBPDNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 53, 5)
-  sox.add "TGBMNNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 54, 5)
-  sox.add "TGBWTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 55, 5)
-  sox.add "TGBSINS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 56, 5)
-  sox.add "TGBU5NS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 57, 5)
-  sox.add "TGBNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 60, 5)
-  sox.add "TGRRTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 6, 6)
-  sox.add "TGRSVNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 7, 6)
-  sox.add "TGRCTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 8, 6)
-  sox.add "TGRTHNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 9, 6)
-  sox.add "TGRITNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 10, 6)
-  sox.add "TGRCMNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 11, 6)
-  sox.add "TGRHTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 12, 6)
-  sox.add "TGRORNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 13, 6)
-  sox.add "TGRU4NS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 14, 6)
-  sox.add "TGROTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 15, 6)
-  sox.add "TGRISNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 18, 6)
-  sox.add "TGRSUNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 19, 6)
-  sox.add "TGRPINS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 20, 6)
-  sox.add "TGRPDNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 21, 6)
-  sox.add "TGRMNNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 22, 6)
-  sox.add "TGRWTNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 23, 6)
-  sox.add "TGRSINS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 24, 6)
-  sox.add "TGRU5NS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 25, 6)
-  sox.add "TGRALNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 28, 6)
-  sox.add "TGRUANS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 30, 6)
-  sox.add "TGRNS@HI.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 32, 6)
-  sox.add "TGRRTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 6, 2)
-  sox.add "TGRSVNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 7, 2)
-  sox.add "TGRCTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 8, 2)
-  sox.add "TGRTHNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 9, 2)
-  sox.add "TGRITNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 10, 2)
-  sox.add "TGRCMNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 11, 2)
-  sox.add "TGRHTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 12, 2)
-  sox.add "TGRORNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 13, 2)
-  sox.add "TGRU4NS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 14, 2)
-  sox.add "TGROTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 15, 2)
-  sox.add "TGRISNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 18, 2)
-  sox.add "TGRSUNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 19, 2)
-  sox.add "TGRPINS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 20, 2)
-  sox.add "TGRPDNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 21, 2)
-  sox.add "TGRMNNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 22, 2)
-  sox.add "TGRWTNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 23, 2)
-  sox.add "TGRSINS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 24, 2)
-  sox.add "TGRU5NS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 25, 2)
-  sox.add "TGRALNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 28, 2)
-  sox.add "TGRUANS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 30, 2)
-  sox.add "TGRNS@HON.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 32, 2)
-  sox.add "TGRRTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 6, 3)
-  sox.add "TGRSVNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 7, 3)
-  sox.add "TGRCTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 8, 3)
-  sox.add "TGRTHNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 9, 3)
-  sox.add "TGRITNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 10, 3)
-  sox.add "TGRCMNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 11, 3)
-  sox.add "TGRHTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 12, 3)
-  sox.add "TGRORNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 13, 3)
-  sox.add "TGRU4NS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 14, 3)
-  sox.add "TGROTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 15, 3)
-  sox.add "TGRISNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 18, 3)
-  sox.add "TGRSUNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 19, 3)
-  sox.add "TGRPINS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 20, 3)
-  sox.add "TGRPDNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 21, 3)
-  sox.add "TGRMNNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 22, 3)
-  sox.add "TGRWTNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 23, 3)
-  sox.add "TGRSINS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 24, 3)
-  sox.add "TGRU5NS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 25, 3)
-  sox.add "TGRALNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 28, 3)
-  sox.add "TGRUANS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 30, 3)
-  sox.add "TGRNS@MAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 32, 3)
-  sox.add "TGRRTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 6, 4)
-  sox.add "TGRSVNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 7, 4)
-  sox.add "TGRCTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 8, 4)
-  sox.add "TGRTHNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 9, 4)
-  sox.add "TGRITNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 10, 4)
-  sox.add "TGRCMNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 11, 4)
-  sox.add "TGRHTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 12, 4)
-  sox.add "TGRORNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 13, 4)
-  sox.add "TGRU4NS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 14, 4)
-  sox.add "TGROTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 15, 4)
-  sox.add "TGRISNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 18, 4)
-  sox.add "TGRSUNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 19, 4)
-  sox.add "TGRPINS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 20, 4)
-  sox.add "TGRPDNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 21, 4)
-  sox.add "TGRMNNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 22, 4)
-  sox.add "TGRWTNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 23, 4)
-  sox.add "TGRSINS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 24, 4)
-  sox.add "TGRU5NS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 25, 4)
-  sox.add "TGRALNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 28, 4)
-  sox.add "TGRUANS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 30, 4)
-  sox.add "TGRNS@HAW.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 32, 4)
-  sox.add "TGRRTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 6, 5)
-  sox.add "TGRSVNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 7, 5)
-  sox.add "TGRCTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 8, 5)
-  sox.add "TGRTHNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 9, 5)
-  sox.add "TGRITNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 10, 5)
-  sox.add "TGRCMNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 11, 5)
-  sox.add "TGRHTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 12, 5)
-  sox.add "TGRORNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 13, 5)
-  sox.add "TGRU4NS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 14, 5)
-  sox.add "TGROTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 15, 5)
-  sox.add "TGRISNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 18, 5)
-  sox.add "TGRSUNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 19, 5)
-  sox.add "TGRPINS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 20, 5)
-  sox.add "TGRPDNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 21, 5)
-  sox.add "TGRMNNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 22, 5)
-  sox.add "TGRWTNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 23, 5)
-  sox.add "TGRSINS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 24, 5)
-  sox.add "TGRU5NS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 25, 5)
-  sox.add "TGRALNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 28, 5)
-  sox.add "TGRUANS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 30, 5)
-  sox.add "TGRNS@KAU.M",         Series.load_pattern("2011-03-01", "M", path_tax_GE, "sheet_num:1", 32, 5)
-   
-          sox.write_xls
-   # NotificationMailer.deliver_new_download_notification "Tax (tax_upd_m)", sox.output_summary
-  end
-#end
+	collec = {
+		"TRFINS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 6, :frequency => "M" }|, 
+		"TRCVNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 6, :frequency => "M" }|, 
+		"TREMNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 6, :frequency => "M" }|, 
+		"TRFUNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 8, :col => 6, :frequency => "M" }|, 
+		"TRGLNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 9, :col => 6, :frequency => "M" }|, 
+		"TRGTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 10, :col => 6, :frequency => "M" }|, 
+		"TRHSNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 11, :col => 6, :frequency => "M" }|, 
+		"TRCOESNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 13, :col => 6, :frequency => "M" }|, 
+		"TRCOPRNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 14, :col => 6, :frequency => "M" }|, 
+		"TRCORFNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 15, :col => 6, :frequency => "M" }|, 
+		"TRINESNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 17, :col => 6, :frequency => "M" }|, 
+		"TRINPRNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 18, :col => 6, :frequency => "M" }|, 
+		"TRINWHNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 19, :col => 6, :frequency => "M" }|, 
+		"TRINRFNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 20, :col => 6, :frequency => "M" }|, 
+		"TRIHNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 21, :col => 6, :frequency => "M" }|, 
+		"TRISNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 6, :frequency => "M" }|, 
+		"TRLINS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 24, :col => 6, :frequency => "M" }|, 
+		"TRMTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 25, :col => 6, :frequency => "M" }|, 
+		"TRPSNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 26, :col => 6, :frequency => "M" }|, 
+		"TRTBNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 27, :col => 6, :frequency => "M" }|, 
+		"TRTFNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 28, :col => 6, :frequency => "M" }|, 
+		"TRTTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 29, :col => 6, :frequency => "M" }|, 
+		"TROTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 30, :col => 6, :frequency => "M" }|, 
+		"TRNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 31, :col => 6, :frequency => "M" }|, 
+		"TRFINS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 2, :frequency => "M" }|, 
+		"TRCVNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 2, :frequency => "M" }|, 
+		"TREMNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 2, :frequency => "M" }|, 
+		"TRFUNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 8, :col => 2, :frequency => "M" }|, 
+		"TRGLNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 9, :col => 2, :frequency => "M" }|, 
+		"TRGTNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 10, :col => 2, :frequency => "M" }|, 
+		"TRHSNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 11, :col => 2, :frequency => "M" }|, 
+		"TRCOESNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 13, :col => 2, :frequency => "M" }|, 
+		"TRCOPRNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 14, :col => 2, :frequency => "M" }|, 
+		"TRCORFNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 15, :col => 2, :frequency => "M" }|, 
+		"TRINESNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 17, :col => 2, :frequency => "M" }|, 
+		"TRINPRNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 18, :col => 2, :frequency => "M" }|, 
+		"TRINWHNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 19, :col => 2, :frequency => "M" }|, 
+		"TRINRFNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 20, :col => 2, :frequency => "M" }|, 
+		"TRIHNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 21, :col => 2, :frequency => "M" }|, 
+		"TRISNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 2, :frequency => "M" }|, 
+		"TRLINS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 24, :col => 2, :frequency => "M" }|, 
+		"TRMTNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 25, :col => 2, :frequency => "M" }|, 
+		"TRPSNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 26, :col => 2, :frequency => "M" }|, 
+		"TRTBNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 27, :col => 2, :frequency => "M" }|, 
+		"TRTFNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 28, :col => 2, :frequency => "M" }|, 
+		"TRTTNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 29, :col => 2, :frequency => "M" }|, 
+		"TROTNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 30, :col => 2, :frequency => "M" }|, 
+		"TRNS@HON.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 31, :col => 2, :frequency => "M" }|, 
+		"TRFINS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 3, :frequency => "M" }|, 
+		"TRCVNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 3, :frequency => "M" }|, 
+		"TREMNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 3, :frequency => "M" }|, 
+		"TRFUNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 8, :col => 3, :frequency => "M" }|, 
+		"TRGLNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 9, :col => 3, :frequency => "M" }|, 
+		"TRGTNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 10, :col => 3, :frequency => "M" }|, 
+		"TRHSNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 11, :col => 3, :frequency => "M" }|, 
+		"TRCOESNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 13, :col => 3, :frequency => "M" }|, 
+		"TRCOPRNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 14, :col => 3, :frequency => "M" }|, 
+		"TRCORFNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 15, :col => 3, :frequency => "M" }|, 
+		"TRINESNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 17, :col => 3, :frequency => "M" }|, 
+		"TRINPRNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 18, :col => 3, :frequency => "M" }|, 
+		"TRINWHNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 19, :col => 3, :frequency => "M" }|, 
+		"TRINRFNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 20, :col => 3, :frequency => "M" }|, 
+		"TRIHNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 21, :col => 3, :frequency => "M" }|, 
+		"TRISNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 3, :frequency => "M" }|, 
+		"TRLINS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 24, :col => 3, :frequency => "M" }|, 
+		"TRMTNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 25, :col => 3, :frequency => "M" }|, 
+		"TRPSNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 26, :col => 3, :frequency => "M" }|, 
+		"TRTBNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 27, :col => 3, :frequency => "M" }|, 
+		"TRTFNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 28, :col => 3, :frequency => "M" }|, 
+		"TRTTNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 29, :col => 3, :frequency => "M" }|, 
+		"TROTNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 30, :col => 3, :frequency => "M" }|, 
+		"TRNS@MAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 31, :col => 3, :frequency => "M" }|, 
+		"TRFINS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 4, :frequency => "M" }|, 
+		"TRCVNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 4, :frequency => "M" }|, 
+		"TREMNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 4, :frequency => "M" }|, 
+		"TRFUNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 8, :col => 4, :frequency => "M" }|, 
+		"TRGLNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 9, :col => 4, :frequency => "M" }|, 
+		"TRGTNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 10, :col => 4, :frequency => "M" }|, 
+		"TRHSNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 11, :col => 4, :frequency => "M" }|, 
+		"TRCOESNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 13, :col => 4, :frequency => "M" }|, 
+		"TRCOPRNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 14, :col => 4, :frequency => "M" }|, 
+		"TRCORFNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 15, :col => 4, :frequency => "M" }|, 
+		"TRINESNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 17, :col => 4, :frequency => "M" }|, 
+		"TRINPRNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 18, :col => 4, :frequency => "M" }|, 
+		"TRINWHNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 19, :col => 4, :frequency => "M" }|, 
+		"TRINRFNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 20, :col => 4, :frequency => "M" }|, 
+		"TRIHNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 21, :col => 4, :frequency => "M" }|, 
+		"TRISNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 4, :frequency => "M" }|, 
+		"TRLINS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 24, :col => 4, :frequency => "M" }|, 
+		"TRMTNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 25, :col => 4, :frequency => "M" }|, 
+		"TRPSNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 26, :col => 4, :frequency => "M" }|, 
+		"TRTBNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 27, :col => 4, :frequency => "M" }|, 
+		"TRTFNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 28, :col => 4, :frequency => "M" }|, 
+		"TRTTNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 29, :col => 4, :frequency => "M" }|, 
+		"TROTNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 30, :col => 4, :frequency => "M" }|, 
+		"TRNS@HAW.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 31, :col => 4, :frequency => "M" }|, 
+		"TRFINS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 5, :frequency => "M" }|, 
+		"TRCVNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 5, :frequency => "M" }|, 
+		"TREMNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 5, :frequency => "M" }|, 
+		"TRFUNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 8, :col => 5, :frequency => "M" }|, 
+		"TRGLNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 9, :col => 5, :frequency => "M" }|, 
+		"TRGTNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 10, :col => 5, :frequency => "M" }|, 
+		"TRHSNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 11, :col => 5, :frequency => "M" }|, 
+		"TRCOESNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 13, :col => 5, :frequency => "M" }|, 
+		"TRCOPRNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 14, :col => 5, :frequency => "M" }|, 
+		"TRCORFNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 15, :col => 5, :frequency => "M" }|, 
+		"TRINESNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 17, :col => 5, :frequency => "M" }|, 
+		"TRINPRNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 18, :col => 5, :frequency => "M" }|, 
+		"TRINWHNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 19, :col => 5, :frequency => "M" }|, 
+		"TRINRFNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 20, :col => 5, :frequency => "M" }|, 
+		"TRIHNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 21, :col => 5, :frequency => "M" }|, 
+		"TRISNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 5, :frequency => "M" }|, 
+		"TRLINS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 24, :col => 5, :frequency => "M" }|, 
+		"TRMTNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 25, :col => 5, :frequency => "M" }|, 
+		"TRPSNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 26, :col => 5, :frequency => "M" }|, 
+		"TRTBNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 27, :col => 5, :frequency => "M" }|, 
+		"TRTFNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 28, :col => 5, :frequency => "M" }|, 
+		"TRTTNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 29, :col => 5, :frequency => "M" }|, 
+		"TROTNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 30, :col => 5, :frequency => "M" }|, 
+		"TRNS@KAU.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 31, :col => 5, :frequency => "M" }|, 
+		"TDGFNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 36, :col => 6, :frequency => "M" }|, 
+		"TDHWNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 37, :col => 6, :frequency => "M" }|, 
+		"TDAPNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 6, :frequency => "M" }|, 
+		"TDBONS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 6, :frequency => "M" }|, 
+		"TDEVNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 40, :col => 6, :frequency => "M" }|, 
+		"TDCANS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 41, :col => 6, :frequency => "M" }|, 
+		"TDCENS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 42, :col => 6, :frequency => "M" }|, 
+		"TDEMNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 45, :col => 6, :frequency => "M" }|, 
+		"TDRHNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 46, :col => 6, :frequency => "M" }|, 
+		"TDNANS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 6, :frequency => "M" }|, 
+		"TDCVNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 48, :col => 6, :frequency => "M" }|, 
+		"TDTTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 4, :frequency => "M" }|, 
+		"TDTSNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 51, :col => 6, :frequency => "M" }|, 
+		"TDCTFUNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 66, :col => 6, :frequency => "M" }|, 
+		"TDCTTTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 67, :col => 6, :frequency => "M" }|, 
+		"TDCTNS@HI.M" => %Q|Series.load_from_download  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 68, :col => 6, :frequency => "M" }|
+	}
+	
+	ge = {
+		"TGBRTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 38, :col => 6, :frequency => "M" }|, 
+		"TGBSVNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 39, :col => 6, :frequency => "M" }|, 
+		"TGBCTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 40, :col => 6, :frequency => "M" }|, 
+		"TGBTHNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 41, :col => 6, :frequency => "M" }|, 
+		"TGBITNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 42, :col => 6, :frequency => "M" }|, 
+		"TGBCMNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 43, :col => 6, :frequency => "M" }|, 
+		"TGBHTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 44, :col => 6, :frequency => "M" }|, 
+		"TGBORNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 45, :col => 6, :frequency => "M" }|, 
+		"TGBU4NS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 46, :col => 6, :frequency => "M" }|, 
+		"TGBOTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 47, :col => 6, :frequency => "M" }|, 
+		"TGBISNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 50, :col => 6, :frequency => "M" }|, 
+		"TGBSUNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 51, :col => 6, :frequency => "M" }|, 
+		"TGBPINS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 52, :col => 6, :frequency => "M" }|, 
+		"TGBPDNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 53, :col => 6, :frequency => "M" }|, 
+		"TGBMNNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 54, :col => 6, :frequency => "M" }|, 
+		"TGBWTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 55, :col => 6, :frequency => "M" }|, 
+		"TGBSINS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 56, :col => 6, :frequency => "M" }|, 
+		"TGBU5NS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 57, :col => 6, :frequency => "M" }|, 
+		"TGBNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 60, :col => 6, :frequency => "M" }|, 
+		"TGBRTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 38, :col => 2, :frequency => "M" }|, 
+		"TGBSVNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 39, :col => 2, :frequency => "M" }|, 
+		"TGBCTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 40, :col => 2, :frequency => "M" }|, 
+		"TGBTHNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 41, :col => 2, :frequency => "M" }|, 
+		"TGBITNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 42, :col => 2, :frequency => "M" }|, 
+		"TGBCMNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 43, :col => 2, :frequency => "M" }|, 
+		"TGBHTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 44, :col => 2, :frequency => "M" }|, 
+		"TGBORNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 45, :col => 2, :frequency => "M" }|, 
+		"TGBU4NS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 46, :col => 2, :frequency => "M" }|, 
+		"TGBOTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 47, :col => 2, :frequency => "M" }|, 
+		"TGBISNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 50, :col => 2, :frequency => "M" }|, 
+		"TGBSUNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 51, :col => 2, :frequency => "M" }|, 
+		"TGBPINS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 52, :col => 2, :frequency => "M" }|, 
+		"TGBPDNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 53, :col => 2, :frequency => "M" }|, 
+		"TGBMNNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 54, :col => 2, :frequency => "M" }|, 
+		"TGBWTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 55, :col => 2, :frequency => "M" }|, 
+		"TGBSINS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 56, :col => 2, :frequency => "M" }|, 
+		"TGBU5NS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 57, :col => 2, :frequency => "M" }|, 
+		"TGBNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 60, :col => 2, :frequency => "M" }|, 
+		"TGBRTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 38, :col => 3, :frequency => "M" }|, 
+		"TGBSVNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 39, :col => 3, :frequency => "M" }|, 
+		"TGBCTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 40, :col => 3, :frequency => "M" }|, 
+		"TGBTHNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 41, :col => 3, :frequency => "M" }|, 
+		"TGBITNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 42, :col => 3, :frequency => "M" }|, 
+		"TGBCMNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 43, :col => 3, :frequency => "M" }|, 
+		"TGBHTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 44, :col => 3, :frequency => "M" }|, 
+		"TGBORNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 45, :col => 3, :frequency => "M" }|, 
+		"TGBU4NS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 46, :col => 3, :frequency => "M" }|, 
+		"TGBOTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 47, :col => 3, :frequency => "M" }|, 
+		"TGBISNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 50, :col => 3, :frequency => "M" }|, 
+		"TGBSUNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 51, :col => 3, :frequency => "M" }|, 
+		"TGBPINS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 52, :col => 3, :frequency => "M" }|, 
+		"TGBPDNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 53, :col => 3, :frequency => "M" }|, 
+		"TGBMNNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 54, :col => 3, :frequency => "M" }|, 
+		"TGBWTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 55, :col => 3, :frequency => "M" }|, 
+		"TGBSINS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 56, :col => 3, :frequency => "M" }|, 
+		"TGBU5NS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 57, :col => 3, :frequency => "M" }|, 
+		"TGBNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 60, :col => 3, :frequency => "M" }|, 
+		"TGBRTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 38, :col => 4, :frequency => "M" }|, 
+		"TGBSVNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 39, :col => 4, :frequency => "M" }|, 
+		"TGBCTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 40, :col => 4, :frequency => "M" }|, 
+		"TGBTHNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 41, :col => 4, :frequency => "M" }|, 
+		"TGBITNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 42, :col => 4, :frequency => "M" }|, 
+		"TGBCMNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 43, :col => 4, :frequency => "M" }|, 
+		"TGBHTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 44, :col => 4, :frequency => "M" }|, 
+		"TGBORNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 45, :col => 4, :frequency => "M" }|, 
+		"TGBU4NS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 46, :col => 4, :frequency => "M" }|, 
+		"TGBOTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 47, :col => 4, :frequency => "M" }|, 
+		"TGBISNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 50, :col => 4, :frequency => "M" }|, 
+		"TGBSUNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 51, :col => 4, :frequency => "M" }|, 
+		"TGBPINS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 52, :col => 4, :frequency => "M" }|, 
+		"TGBPDNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 53, :col => 4, :frequency => "M" }|, 
+		"TGBMNNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 54, :col => 4, :frequency => "M" }|, 
+		"TGBWTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 55, :col => 4, :frequency => "M" }|, 
+		"TGBSINS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 56, :col => 4, :frequency => "M" }|, 
+		"TGBU5NS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 57, :col => 4, :frequency => "M" }|, 
+		"TGBNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 60, :col => 4, :frequency => "M" }|, 
+		"TGBRTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 38, :col => 5, :frequency => "M" }|, 
+		"TGBSVNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 39, :col => 5, :frequency => "M" }|, 
+		"TGBCTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 40, :col => 5, :frequency => "M" }|, 
+		"TGBTHNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 41, :col => 5, :frequency => "M" }|, 
+		"TGBITNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 42, :col => 5, :frequency => "M" }|, 
+		"TGBCMNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 43, :col => 5, :frequency => "M" }|, 
+		"TGBHTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 44, :col => 5, :frequency => "M" }|, 
+		"TGBORNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 45, :col => 5, :frequency => "M" }|, 
+		"TGBU4NS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 46, :col => 5, :frequency => "M" }|, 
+		"TGBOTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 47, :col => 5, :frequency => "M" }|, 
+		"TGBISNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 50, :col => 5, :frequency => "M" }|, 
+		"TGBSUNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 51, :col => 5, :frequency => "M" }|, 
+		"TGBPINS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 52, :col => 5, :frequency => "M" }|, 
+		"TGBPDNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 53, :col => 5, :frequency => "M" }|, 
+		"TGBMNNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 54, :col => 5, :frequency => "M" }|, 
+		"TGBWTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 55, :col => 5, :frequency => "M" }|, 
+		"TGBSINS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 56, :col => 5, :frequency => "M" }|, 
+		"TGBU5NS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 57, :col => 5, :frequency => "M" }|, 
+		"TGBNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 60, :col => 5, :frequency => "M" }|, 
+		"TGRRTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 6, :col => 6, :frequency => "M" }|, 
+		"TGRSVNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 7, :col => 6, :frequency => "M" }|, 
+		"TGRCTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 8, :col => 6, :frequency => "M" }|, 
+		"TGRTHNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 9, :col => 6, :frequency => "M" }|, 
+		"TGRITNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 10, :col => 6, :frequency => "M" }|, 
+		"TGRCMNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 11, :col => 6, :frequency => "M" }|, 
+		"TGRHTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 12, :col => 6, :frequency => "M" }|, 
+		"TGRORNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 13, :col => 6, :frequency => "M" }|, 
+		"TGRU4NS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 14, :col => 6, :frequency => "M" }|, 
+		"TGROTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 15, :col => 6, :frequency => "M" }|, 
+		"TGRISNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 18, :col => 6, :frequency => "M" }|, 
+		"TGRSUNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 19, :col => 6, :frequency => "M" }|, 
+		"TGRPINS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 20, :col => 6, :frequency => "M" }|, 
+		"TGRPDNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 21, :col => 6, :frequency => "M" }|, 
+		"TGRMNNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 22, :col => 6, :frequency => "M" }|, 
+		"TGRWTNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 23, :col => 6, :frequency => "M" }|, 
+		"TGRSINS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 24, :col => 6, :frequency => "M" }|, 
+		"TGRU5NS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 25, :col => 6, :frequency => "M" }|, 
+		"TGRALNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 28, :col => 6, :frequency => "M" }|, 
+		"TGRUANS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 30, :col => 6, :frequency => "M" }|, 
+		"TGRNS@HI.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 6, :frequency => "M" }|, 
+		"TGRRTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 6, :col => 2, :frequency => "M" }|, 
+		"TGRSVNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 7, :col => 2, :frequency => "M" }|, 
+		"TGRCTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 8, :col => 2, :frequency => "M" }|, 
+		"TGRTHNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 9, :col => 2, :frequency => "M" }|, 
+		"TGRITNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 10, :col => 2, :frequency => "M" }|, 
+		"TGRCMNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 11, :col => 2, :frequency => "M" }|, 
+		"TGRHTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 12, :col => 2, :frequency => "M" }|, 
+		"TGRORNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 13, :col => 2, :frequency => "M" }|, 
+		"TGRU4NS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 14, :col => 2, :frequency => "M" }|, 
+		"TGROTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 15, :col => 2, :frequency => "M" }|, 
+		"TGRISNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 18, :col => 2, :frequency => "M" }|, 
+		"TGRSUNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 19, :col => 2, :frequency => "M" }|, 
+		"TGRPINS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 20, :col => 2, :frequency => "M" }|, 
+		"TGRPDNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 21, :col => 2, :frequency => "M" }|, 
+		"TGRMNNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 22, :col => 2, :frequency => "M" }|, 
+		"TGRWTNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 23, :col => 2, :frequency => "M" }|, 
+		"TGRSINS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 24, :col => 2, :frequency => "M" }|, 
+		"TGRU5NS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 25, :col => 2, :frequency => "M" }|, 
+		"TGRALNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 28, :col => 2, :frequency => "M" }|, 
+		"TGRUANS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 30, :col => 2, :frequency => "M" }|, 
+		"TGRNS@HON.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 2, :frequency => "M" }|, 
+		"TGRRTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 6, :col => 3, :frequency => "M" }|, 
+		"TGRSVNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 7, :col => 3, :frequency => "M" }|, 
+		"TGRCTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 8, :col => 3, :frequency => "M" }|, 
+		"TGRTHNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 9, :col => 3, :frequency => "M" }|, 
+		"TGRITNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 10, :col => 3, :frequency => "M" }|, 
+		"TGRCMNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 11, :col => 3, :frequency => "M" }|, 
+		"TGRHTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 12, :col => 3, :frequency => "M" }|, 
+		"TGRORNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 13, :col => 3, :frequency => "M" }|, 
+		"TGRU4NS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 14, :col => 3, :frequency => "M" }|, 
+		"TGROTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 15, :col => 3, :frequency => "M" }|, 
+		"TGRISNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 18, :col => 3, :frequency => "M" }|, 
+		"TGRSUNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 19, :col => 3, :frequency => "M" }|, 
+		"TGRPINS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 20, :col => 3, :frequency => "M" }|, 
+		"TGRPDNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 21, :col => 3, :frequency => "M" }|, 
+		"TGRMNNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 22, :col => 3, :frequency => "M" }|, 
+		"TGRWTNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 23, :col => 3, :frequency => "M" }|, 
+		"TGRSINS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 24, :col => 3, :frequency => "M" }|, 
+		"TGRU5NS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 25, :col => 3, :frequency => "M" }|, 
+		"TGRALNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 28, :col => 3, :frequency => "M" }|, 
+		"TGRUANS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 30, :col => 3, :frequency => "M" }|, 
+		"TGRNS@MAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 3, :frequency => "M" }|, 
+		"TGRRTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 6, :col => 4, :frequency => "M" }|, 
+		"TGRSVNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 7, :col => 4, :frequency => "M" }|, 
+		"TGRCTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 8, :col => 4, :frequency => "M" }|, 
+		"TGRTHNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 9, :col => 4, :frequency => "M" }|, 
+		"TGRITNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 10, :col => 4, :frequency => "M" }|, 
+		"TGRCMNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 11, :col => 4, :frequency => "M" }|, 
+		"TGRHTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 12, :col => 4, :frequency => "M" }|, 
+		"TGRORNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 13, :col => 4, :frequency => "M" }|, 
+		"TGRU4NS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 14, :col => 4, :frequency => "M" }|, 
+		"TGROTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 15, :col => 4, :frequency => "M" }|, 
+		"TGRISNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 18, :col => 4, :frequency => "M" }|, 
+		"TGRSUNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 19, :col => 4, :frequency => "M" }|, 
+		"TGRPINS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 20, :col => 4, :frequency => "M" }|, 
+		"TGRPDNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 21, :col => 4, :frequency => "M" }|, 
+		"TGRMNNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 22, :col => 4, :frequency => "M" }|, 
+		"TGRWTNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 23, :col => 4, :frequency => "M" }|, 
+		"TGRSINS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 24, :col => 4, :frequency => "M" }|, 
+		"TGRU5NS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 25, :col => 4, :frequency => "M" }|, 
+		"TGRALNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 28, :col => 4, :frequency => "M" }|, 
+		"TGRUANS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 30, :col => 4, :frequency => "M" }|, 
+		"TGRNS@HAW.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 4, :frequency => "M" }|, 
+		"TGRRTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 6, :col => 5, :frequency => "M" }|, 
+		"TGRSVNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 7, :col => 5, :frequency => "M" }|, 
+		"TGRCTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 8, :col => 5, :frequency => "M" }|, 
+		"TGRTHNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 9, :col => 5, :frequency => "M" }|, 
+		"TGRITNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 10, :col => 5, :frequency => "M" }|, 
+		"TGRCMNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 11, :col => 5, :frequency => "M" }|, 
+		"TGRHTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 12, :col => 5, :frequency => "M" }|, 
+		"TGRORNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 13, :col => 5, :frequency => "M" }|, 
+		"TGRU4NS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 14, :col => 5, :frequency => "M" }|, 
+		"TGROTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 15, :col => 5, :frequency => "M" }|, 
+		"TGRISNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 18, :col => 5, :frequency => "M" }|, 
+		"TGRSUNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 19, :col => 5, :frequency => "M" }|, 
+		"TGRPINS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 20, :col => 5, :frequency => "M" }|, 
+		"TGRPDNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 21, :col => 5, :frequency => "M" }|, 
+		"TGRMNNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 22, :col => 5, :frequency => "M" }|, 
+		"TGRWTNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 23, :col => 5, :frequency => "M" }|, 
+		"TGRSINS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 24, :col => 5, :frequency => "M" }|, 
+		"TGRU5NS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 25, :col => 5, :frequency => "M" }|, 
+		"TGRALNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 28, :col => 5, :frequency => "M" }|, 
+		"TGRUANS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 30, :col => 5, :frequency => "M" }|, 
+		"TGRNS@KAU.M" => %Q|Series.load_from_download  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 5, :frequency => "M" }|
+	}
+	
+	p = Packager.new
+	p.add_definitions collec
+	p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/tax_upd_collec_NEW.xls"
 
 
-###*******************************************************************
+	p = Packager.new
+	p.add_definitions ge
+	p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/tax_upd_ge_NEW.xls"
+end

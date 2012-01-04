@@ -20,7 +20,7 @@ class DownloadProcessor
   end
 
   def get_data
-    return TextFileProcessor.new(@handle,@options, @cached_files).get_data if @file_type == "text" #and validate_text
+    return TextFileProcessor.new(@handle,@options, @cached_files).get_data if @file_type == "txt" #and validate_text
     return get_data_spreadsheet
   end
 

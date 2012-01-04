@@ -12,670 +12,626 @@
 
 #not reading into the database.
 task :tour_PC_upd => :environment do
-  require "Spreadsheet"
-  path_tour_PC       = "/Volumes/UHEROwork/data/rawdata/Tour_PC.xls"
-  
-  output_path   = "/Volumes/UHEROwork/data/tour/update/tour_PC_upd_NEW.xls"
-
-  dsd_tour_PC     = DataSourceDownload.get path_tour_PC
-    
-    
-  if dsd_tour_PC.download_changed?
-    sox = SeriesOutputXls.new(output_path)#,true)
-  
-  sox.add "PCDMNS@HAW.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Domestic", "increment:5:1", 6)
-  sox.add "PCDMNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Domestic", "increment:5:1", 3)
-  sox.add "PCDMNS@HON.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Domestic", "increment:5:1", 4)
-  sox.add "PCDMNS@KAU.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Domestic", "increment:5:1", 7)
-  sox.add "PCDMNS@MAU.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Domestic", "increment:5:1", 5)
-  sox.add "PCITJPNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "International", "increment:6:1", 4)
-  sox.add "PCITNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "International", "increment:6:1", 3)
-  sox.add "PCITOTNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "International", "increment:6:1", 5)
-  sox.add "PCNS@HI.D",         Series.load_pattern("2009-08-31", "D",  path_tour_PC, "Total"," increment:5:1", 4)
-   
-    sox.write_xls
- #   NotificationMailer.deliver_new_download_notification "Tour PC (rake tour_PC_upd)", sox.output_summary
-  end
+	tour_PC = {
+		"PCDMNS@HAW.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "Domestic", :row => "increment:5:1", :col => 6, :frequency => "D" }|, 
+		"PCDMNS@HI.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "Domestic", :row => "increment:5:1", :col => 3, :frequency => "D" }|, 
+		"PCDMNS@HON.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "Domestic", :row => "increment:5:1", :col => 4, :frequency => "D" }|, 
+		"PCDMNS@KAU.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "Domestic", :row => "increment:5:1", :col => 7, :frequency => "D" }|, 
+		"PCDMNS@MAU.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "Domestic", :row => "increment:5:1", :col => 5, :frequency => "D" }|, 
+		"PCITJPNS@HI.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "International", :row => "increment:6:1", :col => 4, :frequency => "D" }|, 
+		"PCITNS@HI.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "International", :row => "increment:6:1", :col => 3, :frequency => "D" }|, 
+		"PCITOTNS@HI.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "International", :row => "increment:6:1", :col => 5, :frequency => "D" }|, 
+		"PCNS@HI.D" => %Q|Series.load_from_download  "tour_PC@hawaii.gov", { :file_type => "xls", :start_date => "2009-08-31", :sheet => "Total", :row => "increment:5:1", :col => 4, :frequency => "D" }|
+	}
+	
+	p = Packager.new
+	p.add_definitions tour_PC
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_PC_upd_NEW.xls"
 end
 
 
-###*******************************************************************
-
-
-
-
 task :tour_seats_upd => :environment do
-  require "Spreadsheet"
- # path_seats_Jun11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_Jun11.xls"
- # path_seats_Jul11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_Jul11.xls"
- # path_seats_Aug11       = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_Aug11.xls"
-  path_seats             = "/Volumes/UHEROwork/data/rawdata/Tour_Seats_%b%y.xls"
-  
-  output_path   = "/Volumes/UHEROwork/data/tour/update/tour_seats_upd_NEW.xls"
-
- # dsd_seats_Jun11     = DataSourceDownload.get path_seats_Jun11 
- # dsd_seats_Jul11     = DataSourceDownload.get path_seats_Jul11 
- # dsd_seats_Aug11     = DataSourceDownload.get path_seats_Aug11 
-  dsd_seats           = DataSourceDownload.get path_seats
-    
-#  if dsd_seats.download_changed?
-    sox = SeriesOutputXls.new(output_path)#,true)
-  
-     sox.add "VSONS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 2)
-     sox.add "VSODMNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 6, 2)
-     sox.add "VSOUSWNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 7, 2)
-     sox.add "VSOUSENS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 23, 2)
-     sox.add "VSOITNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 38, 2)
-     sox.add "VSOJPNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 39, 2)
-     sox.add "VSOCANNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 44, 2)
-     sox.add "VSOOTANS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 47, 2)
-     sox.add "VSOAUSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 49, 2)
-     sox.add "VSOOTNS@HI.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 52, 2)
-     sox.add "VSONS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 4)
-     sox.add "VSODMNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 6, 4)
-     sox.add "VSOUSWNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 7, 4)
-     sox.add "VSOUSENS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 23, 4)
-     sox.add "VSOITNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 38, 4)
-     sox.add "VSOJPNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 39, 4)
-     sox.add "VSOCANNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 44, 4)
-     sox.add "VSOOTANS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 47, 4)
-     sox.add "VSOAUSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 49, 4)
-     sox.add "VSOOTNS@HON.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 52, 4)
-     sox.add "VSONS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 6)
-     sox.add "VSODMNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 6, 6)
-     sox.add "VSOUSWNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 7, 6)
-     sox.add "VSOUSENS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 23, 6)
-     sox.add "VSOITNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 38, 6)
-     sox.add "VSOJPNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 39, 6)
-     sox.add "VSOCANNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 44, 6)
-     sox.add "VSOOTANS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 47, 6)
-     sox.add "VSOAUSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 49, 6)
-     sox.add "VSOOTNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 52, 6)
-     sox.add "VSONS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 12)
-     sox.add "VSODMNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 6, 12)
-     sox.add "VSOUSWNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 7, 12)
-     sox.add "VSOUSENS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 23, 12)
-     sox.add "VSOITNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 38, 12)
-     sox.add "VSOJPNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 39, 12)
-     sox.add "VSOCANNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 44, 12)
-     sox.add "VSOOTANS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 47, 12)
-     sox.add "VSOAUSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 49, 12)
-     sox.add "VSOOTNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 52, 12)
-     sox.add "VSONS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 8)
-     sox.add "VSODMNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 6, 8)
-     sox.add "VSOUSWNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 7, 8)
-     sox.add "VSOUSENS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 23, 8)
-     sox.add "VSOITNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 38, 8)
-     sox.add "VSOJPNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 39, 8)
-     sox.add "VSOCANNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 44, 8)
-     sox.add "VSOOTANS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 47, 8)
-     sox.add "VSOAUSNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 49, 8)
-     sox.add "VSOOTNS@HAWK.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 52, 8)
-     sox.add "VSONS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 5, 10)
-     sox.add "VSODMNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 6, 10)
-     sox.add "VSOUSWNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 7, 10)
-     sox.add "VSOUSENS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 23, 10)
-     sox.add "VSOITNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 38, 10)
-     sox.add "VSOJPNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 39, 10)
-     sox.add "VSOCANNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 44, 10)
-     sox.add "VSOOTANS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 47, 10)
-     sox.add "VSOAUSNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 49, 10)
-     sox.add "VSOOTNS@HAWH.M",         Series.load_pattern("2011-01-01", "M",  path_seats, "sheet_num:1", 52, 10)
-   
-    sox.write_xls
-   # NotificationMailer.deliver_new_download_notification "Weekly UIC (rake const_upd_q)", sox.output_summary
-   end
-# end
-
-
-###*******************************************************************
+	tour_seats = {
+		"VSONS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 2, :frequency => "M" }|, 
+		"VSODMNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 2, :frequency => "M" }|, 
+		"VSOUSWNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VSOUSENS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 2, :frequency => "M" }|, 
+		"VSOITNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 2, :frequency => "M" }|, 
+		"VSOJPNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 2, :frequency => "M" }|, 
+		"VSOCANNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 44, :col => 2, :frequency => "M" }|, 
+		"VSOOTANS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VSOAUSNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VSOOTNS@HI.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 52, :col => 2, :frequency => "M" }|, 
+		"VSONS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 4, :frequency => "M" }|, 
+		"VSODMNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 4, :frequency => "M" }|, 
+		"VSOUSWNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 4, :frequency => "M" }|, 
+		"VSOUSENS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 4, :frequency => "M" }|, 
+		"VSOITNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 4, :frequency => "M" }|, 
+		"VSOJPNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 4, :frequency => "M" }|, 
+		"VSOCANNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 44, :col => 4, :frequency => "M" }|, 
+		"VSOOTANS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 4, :frequency => "M" }|, 
+		"VSOAUSNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 4, :frequency => "M" }|, 
+		"VSOOTNS@HON.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 52, :col => 4, :frequency => "M" }|, 
+		"VSONS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 6, :frequency => "M" }|, 
+		"VSODMNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 6, :frequency => "M" }|, 
+		"VSOUSWNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 6, :frequency => "M" }|, 
+		"VSOUSENS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 6, :frequency => "M" }|, 
+		"VSOITNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 6, :frequency => "M" }|, 
+		"VSOJPNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 6, :frequency => "M" }|, 
+		"VSOCANNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 44, :col => 6, :frequency => "M" }|, 
+		"VSOOTANS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 6, :frequency => "M" }|, 
+		"VSOAUSNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 6, :frequency => "M" }|, 
+		"VSOOTNS@MAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 52, :col => 6, :frequency => "M" }|, 
+		"VSONS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 12, :frequency => "M" }|, 
+		"VSODMNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 12, :frequency => "M" }|, 
+		"VSOUSWNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 12, :frequency => "M" }|, 
+		"VSOUSENS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 12, :frequency => "M" }|, 
+		"VSOITNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 12, :frequency => "M" }|, 
+		"VSOJPNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 12, :frequency => "M" }|, 
+		"VSOCANNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 44, :col => 12, :frequency => "M" }|, 
+		"VSOOTANS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 12, :frequency => "M" }|, 
+		"VSOAUSNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 12, :frequency => "M" }|, 
+		"VSOOTNS@KAU.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 52, :col => 12, :frequency => "M" }|, 
+		"VSONS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 8, :frequency => "M" }|, 
+		"VSODMNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 8, :frequency => "M" }|, 
+		"VSOUSWNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 8, :frequency => "M" }|, 
+		"VSOUSENS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 8, :frequency => "M" }|, 
+		"VSOITNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 8, :frequency => "M" }|, 
+		"VSOJPNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 8, :frequency => "M" }|, 
+		"VSOCANNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 44, :col => 8, :frequency => "M" }|, 
+		"VSOOTANS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 8, :frequency => "M" }|, 
+		"VSOAUSNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 8, :frequency => "M" }|, 
+		"VSOOTNS@HAWK.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 52, :col => 8, :frequency => "M" }|, 
+		"VSONS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 10, :frequency => "M" }|, 
+		"VSODMNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 10, :frequency => "M" }|, 
+		"VSOUSWNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 7, :col => 10, :frequency => "M" }|, 
+		"VSOUSENS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 23, :col => 10, :frequency => "M" }|, 
+		"VSOITNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 38, :col => 10, :frequency => "M" }|, 
+		"VSOJPNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 39, :col => 10, :frequency => "M" }|, 
+		"VSOCANNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 44, :col => 10, :frequency => "M" }|, 
+		"VSOOTANS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 47, :col => 10, :frequency => "M" }|, 
+		"VSOAUSNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 49, :col => 10, :frequency => "M" }|, 
+		"VSOOTNS@HAWH.M" => %Q|Series.load_from_download  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 52, :col => 10, :frequency => "M" }|
+	}
+	
+	p = Packager.new
+	p.add_definitions tour_seats
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_seats_upd_NEW.xls"
+end
 
 
 task :tour_upd => :environment do
-  require "Spreadsheet"
-  path_tour             = "/Volumes/UHEROwork/data/rawdata/Tour_%b%Yjj.xls"  
-  
-  output_path1   = "/Volumes/UHEROwork/data/tour/update/tour_upd1_NEW.xls"
-  output_path2   = "/Volumes/UHEROwork/data/tour/update/tour_upd2_NEW.xls"
-  output_path3   = "/Volumes/UHEROwork/data/tour/update/tour_upd3_NEW.xls"
+	tour_1 = {
+		"VAHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VAHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 48, :col => 2, :frequency => "M" }|, 
+		"VACNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VACNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VATSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VATSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 52, :col => 2, :frequency => "M" }|, 
+		"VACRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 54, :col => 2, :frequency => "M" }|, 
+		"VAFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 55, :col => 2, :frequency => "M" }|, 
+		"VABBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 56, :col => 2, :frequency => "M" }|, 
+		"VAOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 57, :col => 2, :frequency => "M" }|, 
+		"VADMHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 141, :col => 2, :frequency => "M" }|, 
+		"VADMHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 142, :col => 2, :frequency => "M" }|, 
+		"VADMCNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 143, :col => 2, :frequency => "M" }|, 
+		"VADMCNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 144, :col => 2, :frequency => "M" }|, 
+		"VADMTSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 145, :col => 2, :frequency => "M" }|, 
+		"VADMTSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 146, :col => 2, :frequency => "M" }|, 
+		"VADMCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 148, :col => 2, :frequency => "M" }|, 
+		"VADMFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 149, :col => 2, :frequency => "M" }|, 
+		"VADMBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 150, :col => 2, :frequency => "M" }|, 
+		"VADMOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 151, :col => 2, :frequency => "M" }|, 
+		"VAITHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 235, :col => 2, :frequency => "M" }|, 
+		"VAITHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 236, :col => 2, :frequency => "M" }|, 
+		"VAITCNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 237, :col => 2, :frequency => "M" }|, 
+		"VAITCNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 238, :col => 2, :frequency => "M" }|, 
+		"VAITTSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 239, :col => 2, :frequency => "M" }|, 
+		"VAITTSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 240, :col => 2, :frequency => "M" }|, 
+		"VAITCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 242, :col => 2, :frequency => "M" }|, 
+		"VAITFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 243, :col => 2, :frequency => "M" }|, 
+		"VAITBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 244, :col => 2, :frequency => "M" }|, 
+		"VAITOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 245, :col => 2, :frequency => "M" }|, 
+		"VAUSWHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 46, :col => 2, :frequency => "M" }|, 
+		"VAUSWHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VAUSWCNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 48, :col => 2, :frequency => "M" }|, 
+		"VAUSWCNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VAUSWTSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VAUSWTSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VAUSWCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 53, :col => 2, :frequency => "M" }|, 
+		"VAUSWFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 54, :col => 2, :frequency => "M" }|, 
+		"VAUSWBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 55, :col => 2, :frequency => "M" }|, 
+		"VAUSWOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 56, :col => 2, :frequency => "M" }|, 
+		"VAUSEHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 46, :col => 2, :frequency => "M" }|, 
+		"VAUSEHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VAUSECNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 48, :col => 2, :frequency => "M" }|, 
+		"VAUSECNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VAUSETSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VAUSETSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VAUSECRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 53, :col => 2, :frequency => "M" }|, 
+		"VAUSEFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 54, :col => 2, :frequency => "M" }|, 
+		"VAUSEBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 55, :col => 2, :frequency => "M" }|, 
+		"VAUSEOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 56, :col => 2, :frequency => "M" }|, 
+		"VAJPHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 46, :col => 2, :frequency => "M" }|, 
+		"VAJPHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VAJPCNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 48, :col => 2, :frequency => "M" }|, 
+		"VAJPCNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VAJPTSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VAJPTSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VAJPCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 53, :col => 2, :frequency => "M" }|, 
+		"VAJPFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 54, :col => 2, :frequency => "M" }|, 
+		"VAJPBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 55, :col => 2, :frequency => "M" }|, 
+		"VAJPOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 56, :col => 2, :frequency => "M" }|, 
+		"VACANHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 46, :col => 2, :frequency => "M" }|, 
+		"VACANHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VACANCNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 48, :col => 2, :frequency => "M" }|, 
+		"VACANCNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VACANTSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VACANTSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VACANCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 53, :col => 2, :frequency => "M" }|, 
+		"VACANFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 54, :col => 2, :frequency => "M" }|, 
+		"VACANBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 55, :col => 2, :frequency => "M" }|, 
+		"VACANOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 56, :col => 2, :frequency => "M" }|, 
+		"VPFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 67, :col => 2, :frequency => "M" }|, 
+		"VPCNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 72, :col => 2, :frequency => "M" }|, 
+		"VPBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 77, :col => 2, :frequency => "M" }|, 
+		"VPRELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 78, :col => 2, :frequency => "M" }|, 
+		"VPGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 79, :col => 2, :frequency => "M" }|, 
+		"VPEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 80, :col => 2, :frequency => "M" }|, 
+		"VPSPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 81, :col => 2, :frequency => "M" }|, 
+		"VPDMFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 161, :col => 2, :frequency => "M" }|, 
+		"VPDMCNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 166, :col => 2, :frequency => "M" }|, 
+		"VPDMBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 171, :col => 2, :frequency => "M" }|, 
+		"VPDMRELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 172, :col => 2, :frequency => "M" }|, 
+		"VPDMGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 173, :col => 2, :frequency => "M" }|, 
+		"VPDMEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 174, :col => 2, :frequency => "M" }|, 
+		"VPDMSPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 175, :col => 2, :frequency => "M" }|, 
+		"VPITFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 254, :col => 2, :frequency => "M" }|, 
+		"VPITCNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 259, :col => 2, :frequency => "M" }|, 
+		"VPITBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 264, :col => 2, :frequency => "M" }|, 
+		"VPITRELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 265, :col => 2, :frequency => "M" }|, 
+		"VPITGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 266, :col => 2, :frequency => "M" }|, 
+		"VPITEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 267, :col => 2, :frequency => "M" }|, 
+		"VPITSPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 268, :col => 2, :frequency => "M" }|, 
+		"VPUSWFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 66, :col => 2, :frequency => "M" }|, 
+		"VPUSWCNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 71, :col => 2, :frequency => "M" }|, 
+		"VPUSWBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 76, :col => 2, :frequency => "M" }|, 
+		"VPUSWRELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 77, :col => 2, :frequency => "M" }|, 
+		"VPUSWGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 78, :col => 2, :frequency => "M" }|, 
+		"VPUSWEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 79, :col => 2, :frequency => "M" }|, 
+		"VPUSWSPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 80, :col => 2, :frequency => "M" }|, 
+		"VPUSEFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 66, :col => 2, :frequency => "M" }|, 
+		"VPUSECNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 71, :col => 2, :frequency => "M" }|, 
+		"VPUSEBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 76, :col => 2, :frequency => "M" }|, 
+		"VPUSERELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 77, :col => 2, :frequency => "M" }|, 
+		"VPUSEGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 78, :col => 2, :frequency => "M" }|, 
+		"VPUSEEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 79, :col => 2, :frequency => "M" }|, 
+		"VPUSESPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 80, :col => 2, :frequency => "M" }|, 
+		"VPJPFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 66, :col => 2, :frequency => "M" }|, 
+		"VPJPCNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 71, :col => 2, :frequency => "M" }|, 
+		"VPJPBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 76, :col => 2, :frequency => "M" }|, 
+		"VPJPRELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 77, :col => 2, :frequency => "M" }|, 
+		"VPJPGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 78, :col => 2, :frequency => "M" }|, 
+		"VPJPEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 79, :col => 2, :frequency => "M" }|, 
+		"VPJPSPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 80, :col => 2, :frequency => "M" }|, 
+		"VPCANFUNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 66, :col => 2, :frequency => "M" }|, 
+		"VPCANCNVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 71, :col => 2, :frequency => "M" }|, 
+		"VPCANBUSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 76, :col => 2, :frequency => "M" }|, 
+		"VPCANRELNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 77, :col => 2, :frequency => "M" }|, 
+		"VPCANGOVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 78, :col => 2, :frequency => "M" }|, 
+		"VPCANEDUNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 79, :col => 2, :frequency => "M" }|, 
+		"VPCANSPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 80, :col => 2, :frequency => "M" }|, 
+		"VSTFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 84, :col => 2, :frequency => "M" }|, 
+		"VSTRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 85, :col => 2, :frequency => "M" }|, 
+		"VSTNTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 86, :col => 2, :frequency => "M" }|, 
+		"VSTGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 88, :col => 2, :frequency => "M" }|, 
+		"VSTNGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 89, :col => 2, :frequency => "M" }|, 
+		"VSTPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 91, :col => 2, :frequency => "M" }|, 
+		"VSTNPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 92, :col => 2, :frequency => "M" }|, 
+		"VSTINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 94, :col => 2, :frequency => "M" }|, 
+		"VSTDMFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 178, :col => 2, :frequency => "M" }|, 
+		"VSTDMRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 179, :col => 2, :frequency => "M" }|, 
+		"VSTDMNTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 180, :col => 2, :frequency => "M" }|, 
+		"VSTDMGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 182, :col => 2, :frequency => "M" }|, 
+		"VSTDMNGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 183, :col => 2, :frequency => "M" }|, 
+		"VSTDMPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 185, :col => 2, :frequency => "M" }|, 
+		"VSTDMNPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 186, :col => 2, :frequency => "M" }|, 
+		"VSTDMINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 188, :col => 2, :frequency => "M" }|, 
+		"VSTITFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 271, :col => 2, :frequency => "M" }|, 
+		"VSTITRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 272, :col => 2, :frequency => "M" }|, 
+		"VSTITNTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 273, :col => 2, :frequency => "M" }|, 
+		"VSTITGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 275, :col => 2, :frequency => "M" }|, 
+		"VSTITNGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 276, :col => 2, :frequency => "M" }|, 
+		"VSTITPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 278, :col => 2, :frequency => "M" }|, 
+		"VSTITNPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 279, :col => 2, :frequency => "M" }|, 
+		"VSTITINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 281, :col => 2, :frequency => "M" }|, 
+		"VSTUSWFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 83, :col => 2, :frequency => "M" }|, 
+		"VSTUSWRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 84, :col => 2, :frequency => "M" }|, 
+		"VSTUSWNTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 85, :col => 2, :frequency => "M" }|, 
+		"VSTUSWGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 87, :col => 2, :frequency => "M" }|, 
+		"VSTUSWNGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 88, :col => 2, :frequency => "M" }|, 
+		"VSTUSWPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 90, :col => 2, :frequency => "M" }|, 
+		"VSTUSWNPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 91, :col => 2, :frequency => "M" }|, 
+		"VSTUSWINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 93, :col => 2, :frequency => "M" }|, 
+		"VSTUSEFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 83, :col => 2, :frequency => "M" }|, 
+		"VSTUSERPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 84, :col => 2, :frequency => "M" }|, 
+		"VSTUSENTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 85, :col => 2, :frequency => "M" }|, 
+		"VSTUSEGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 87, :col => 2, :frequency => "M" }|, 
+		"VSTUSENGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 88, :col => 2, :frequency => "M" }|, 
+		"VSTUSEPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 90, :col => 2, :frequency => "M" }|, 
+		"VSTUSENPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 91, :col => 2, :frequency => "M" }|, 
+		"VSTUSEINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 93, :col => 2, :frequency => "M" }|, 
+		"VSTJPFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 83, :col => 2, :frequency => "M" }|, 
+		"VSTJPRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 84, :col => 2, :frequency => "M" }|, 
+		"VSTJPNTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 85, :col => 2, :frequency => "M" }|, 
+		"VSTJPGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 87, :col => 2, :frequency => "M" }|, 
+		"VSTJPNGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 88, :col => 2, :frequency => "M" }|, 
+		"VSTJPPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 90, :col => 2, :frequency => "M" }|, 
+		"VSTJPNPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 91, :col => 2, :frequency => "M" }|, 
+		"VSTJPINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 93, :col => 2, :frequency => "M" }|, 
+		"VSTCANFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 83, :col => 2, :frequency => "M" }|, 
+		"VSTCANRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 84, :col => 2, :frequency => "M" }|, 
+		"VSTCANNTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 85, :col => 2, :frequency => "M" }|, 
+		"VSTCANGRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 87, :col => 2, :frequency => "M" }|, 
+		"VSTCANNGRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 88, :col => 2, :frequency => "M" }|, 
+		"VSTCANPCKNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 90, :col => 2, :frequency => "M" }|, 
+		"VSTCANNPCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 91, :col => 2, :frequency => "M" }|, 
+		"VSTCANINDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 93, :col => 2, :frequency => "M" }|
+	}
 
+	tour_2 = {
+		"VISI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 39, :col => 2, :frequency => "M" }|, 
+		"VISIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 40, :col => 2, :frequency => "M" }|, 
+		"NAIVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 41, :col => 2, :frequency => "M" }|, 
+		"VISNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 21, :col => 2, :frequency => "M" }|, 
+		"VISDMI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 133, :col => 2, :frequency => "M" }|, 
+		"VISDMIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 134, :col => 2, :frequency => "M" }|, 
+		"NAIVDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 135, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 115, :col => 2, :frequency => "M" }|, 
+		"VISITI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 227, :col => 2, :frequency => "M" }|, 
+		"VISITIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 228, :col => 2, :frequency => "M" }|, 
+		"NAIVITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 229, :col => 2, :frequency => "M" }|, 
+		"VISITNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 209, :col => 2, :frequency => "M" }|, 
+		"VISUSWI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 38, :col => 2, :frequency => "M" }|, 
+		"VISUSWIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 39, :col => 2, :frequency => "M" }|, 
+		"NAIVUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 40, :col => 2, :frequency => "M" }|, 
+		"VISUSWNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 20, :col => 2, :frequency => "M" }|, 
+		"VISUSEI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 38, :col => 2, :frequency => "M" }|, 
+		"VISUSEIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 39, :col => 2, :frequency => "M" }|, 
+		"NAIVUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 40, :col => 2, :frequency => "M" }|, 
+		"VISUSENS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 20, :col => 2, :frequency => "M" }|, 
+		"VISJPI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 38, :col => 2, :frequency => "M" }|, 
+		"VISJPIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 39, :col => 2, :frequency => "M" }|, 
+		"NAIVJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 40, :col => 2, :frequency => "M" }|, 
+		"VISJPNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 20, :col => 2, :frequency => "M" }|, 
+		"VISCANI1NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 38, :col => 2, :frequency => "M" }|, 
+		"VISCANIMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 39, :col => 2, :frequency => "M" }|, 
+		"NAIVCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 40, :col => 2, :frequency => "M" }|, 
+		"VISCANNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 20, :col => 2, :frequency => "M" }|, 
+		"VDAYNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VRLSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 44, :col => 2, :frequency => "M" }|, 
+		"VRDCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VDAYDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 103, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 104, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 138, :col => 2, :frequency => "M" }|, 
+		"VRDCDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 105, :col => 2, :frequency => "M" }|, 
+		"VDAYITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 197, :col => 2, :frequency => "M" }|, 
+		"VISITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 198, :col => 2, :frequency => "M" }|, 
+		"VRLSITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 232, :col => 2, :frequency => "M" }|, 
+		"VRDCITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => 199, :col => 2, :frequency => "M" }|, 
+		"VDAYUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VRLSUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 43, :col => 2, :frequency => "M" }|, 
+		"VRDCUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VISUSWDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISUSWITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:3", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VDAYUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VRLSUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 43, :col => 2, :frequency => "M" }|, 
+		"VRDCUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VISUSEDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISUSEITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:4", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VDAYJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VRLSJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 43, :col => 2, :frequency => "M" }|, 
+		"VRDCJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VISJPDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISJPITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:5", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VDAYCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VRLSCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 43, :col => 2, :frequency => "M" }|, 
+		"VRDCCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VISCANDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISCANITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:6", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VISNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 26, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 6, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 46, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 109, :col => 2, :frequency => "M" }|, 
+		"VISITNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 203, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VRLSITNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VISNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 30, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 112, :col => 2, :frequency => "M" }|, 
+		"VISITNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 206, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VRLSITNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VISNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 27, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 47, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 116, :col => 2, :frequency => "M" }|, 
+		"VISITNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 210, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VRLSITNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VISNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 28, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 48, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 119, :col => 2, :frequency => "M" }|, 
+		"VISITNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 213, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VRLSITNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VISNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 29, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 49, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 122, :col => 2, :frequency => "M" }|, 
+		"VISITNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 216, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VRLSITNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VISNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 31, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VISDMNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 125, :col => 2, :frequency => "M" }|, 
+		"VISITNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 219, :col => 2, :frequency => "M" }|, 
+		"VRLSDMNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VRLSITNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => 99, :col => 99, :frequency => "M" }|, 
+		"VDAYUSWNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 5, :col => 2, :frequency => "M" }|, 
+		"VISUSWNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 6, :col => 2, :frequency => "M" }|, 
+		"VRLSUSWNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VDAYUSENS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISUSENS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VRLSUSENS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VDAYJPNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 13, :col => 2, :frequency => "M" }|, 
+		"VISJPNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 14, :col => 2, :frequency => "M" }|, 
+		"VRLSJPNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 15, :col => 2, :frequency => "M" }|, 
+		"VDAYCANNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 17, :col => 2, :frequency => "M" }|, 
+		"VISCANNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 18, :col => 2, :frequency => "M" }|, 
+		"VRLSCANNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 19, :col => 2, :frequency => "M" }|, 
+		"VDAYUSWNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 5, :col => 4, :frequency => "M" }|, 
+		"VISUSWNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 6, :col => 4, :frequency => "M" }|, 
+		"VRLSUSWNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 7, :col => 4, :frequency => "M" }|, 
+		"VDAYUSENS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 9, :col => 4, :frequency => "M" }|, 
+		"VISUSENS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 10, :col => 4, :frequency => "M" }|, 
+		"VRLSUSENS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 11, :col => 4, :frequency => "M" }|, 
+		"VDAYJPNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 13, :col => 4, :frequency => "M" }|, 
+		"VISJPNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 14, :col => 4, :frequency => "M" }|, 
+		"VRLSJPNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 15, :col => 4, :frequency => "M" }|, 
+		"VDAYCANNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 17, :col => 4, :frequency => "M" }|, 
+		"VISCANNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 18, :col => 4, :frequency => "M" }|, 
+		"VRLSCANNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 19, :col => 4, :frequency => "M" }|, 
+		"VDAYUSWNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 5, :col => 6, :frequency => "M" }|, 
+		"VISUSWNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 6, :col => 6, :frequency => "M" }|, 
+		"VRLSUSWNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 7, :col => 6, :frequency => "M" }|, 
+		"VDAYUSENS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 9, :col => 6, :frequency => "M" }|, 
+		"VISUSENS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 10, :col => 6, :frequency => "M" }|, 
+		"VRLSUSENS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 11, :col => 6, :frequency => "M" }|, 
+		"VDAYJPNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 13, :col => 6, :frequency => "M" }|, 
+		"VISJPNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 14, :col => 6, :frequency => "M" }|, 
+		"VRLSJPNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 15, :col => 6, :frequency => "M" }|, 
+		"VDAYCANNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 17, :col => 6, :frequency => "M" }|, 
+		"VISCANNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 18, :col => 6, :frequency => "M" }|, 
+		"VRLSCANNS@MAUI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 19, :col => 6, :frequency => "M" }|, 
+		"VDAYUSWNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 5, :col => 8, :frequency => "M" }|, 
+		"VISUSWNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 6, :col => 8, :frequency => "M" }|, 
+		"VRLSUSWNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 7, :col => 8, :frequency => "M" }|, 
+		"VDAYUSENS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 9, :col => 8, :frequency => "M" }|, 
+		"VISUSENS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 10, :col => 8, :frequency => "M" }|, 
+		"VRLSUSENS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 11, :col => 8, :frequency => "M" }|, 
+		"VDAYJPNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 13, :col => 8, :frequency => "M" }|, 
+		"VISJPNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 14, :col => 8, :frequency => "M" }|, 
+		"VRLSJPNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 15, :col => 8, :frequency => "M" }|, 
+		"VDAYCANNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 17, :col => 8, :frequency => "M" }|, 
+		"VISCANNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 18, :col => 8, :frequency => "M" }|, 
+		"VRLSCANNS@MOL.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 19, :col => 8, :frequency => "M" }|, 
+		"VDAYUSWNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 5, :col => 10, :frequency => "M" }|, 
+		"VISUSWNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 6, :col => 10, :frequency => "M" }|, 
+		"VRLSUSWNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 7, :col => 10, :frequency => "M" }|, 
+		"VDAYUSENS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 9, :col => 10, :frequency => "M" }|, 
+		"VISUSENS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 10, :col => 10, :frequency => "M" }|, 
+		"VRLSUSENS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 11, :col => 10, :frequency => "M" }|, 
+		"VDAYJPNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 13, :col => 10, :frequency => "M" }|, 
+		"VISJPNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 14, :col => 10, :frequency => "M" }|, 
+		"VRLSJPNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 15, :col => 10, :frequency => "M" }|, 
+		"VDAYCANNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 17, :col => 10, :frequency => "M" }|, 
+		"VISCANNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 18, :col => 10, :frequency => "M" }|, 
+		"VRLSCANNS@LAN.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 19, :col => 10, :frequency => "M" }|, 
+		"VDAYUSWNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 5, :col => 12, :frequency => "M" }|, 
+		"VISUSWNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 6, :col => 12, :frequency => "M" }|, 
+		"VRLSUSWNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 7, :col => 12, :frequency => "M" }|, 
+		"VDAYUSENS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 9, :col => 12, :frequency => "M" }|, 
+		"VISUSENS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 10, :col => 12, :frequency => "M" }|, 
+		"VRLSUSENS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 11, :col => 12, :frequency => "M" }|, 
+		"VDAYJPNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 13, :col => 12, :frequency => "M" }|, 
+		"VISJPNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 14, :col => 12, :frequency => "M" }|, 
+		"VRLSJPNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 15, :col => 12, :frequency => "M" }|, 
+		"VDAYCANNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 17, :col => 12, :frequency => "M" }|, 
+		"VISCANNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 18, :col => 12, :frequency => "M" }|, 
+		"VRLSCANNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:9", :row => 19, :col => 12, :frequency => "M" }|
+	}
 
-  #dsd_tour     = DataSourceDownload.get path_tour 
-    
-    
-  #if dsd_tour_jun11.download_changed?
-    sox = SeriesOutputXls.new(output_path1)#,true)
-
-###Remember to change month to first month in series
-  
-  sox.add "VAHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 47, 2)
-  sox.add "VAHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 48, 2)
-  sox.add "VACNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 49, 2)
-  sox.add "VACNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 50, 2)
-  sox.add "VATSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 51, 2)
-  sox.add "VATSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 52, 2)
-  sox.add "VACRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 54, 2)
-  sox.add "VAFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 55, 2)
-  sox.add "VABBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 56, 2)
-  sox.add "VAOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 57, 2)
-  sox.add "VADMHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 141, 2)
-  sox.add "VADMHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 142, 2)
-  sox.add "VADMCNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 143, 2)
-  sox.add "VADMCNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 144, 2)
-  sox.add "VADMTSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 145, 2)
-  sox.add "VADMTSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 146, 2)
-  sox.add "VADMCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 148, 2)
-  sox.add "VADMFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 149, 2)
-  sox.add "VADMBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 150, 2)
-  sox.add "VADMOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 151, 2)
-  sox.add "VAITHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 235, 2)
-  sox.add "VAITHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 236, 2)
-  sox.add "VAITCNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 237, 2)
-  sox.add "VAITCNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 238, 2)
-  sox.add "VAITTSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 239, 2)
-  sox.add "VAITTSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 240, 2)
-  sox.add "VAITCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 242, 2)
-  sox.add "VAITFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 243, 2)
-  sox.add "VAITBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 244, 2)
-  sox.add "VAITOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 245, 2)
-  sox.add "VAUSWHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 46, 2)
-  sox.add "VAUSWHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 47, 2)
-  sox.add "VAUSWCNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 48, 2)
-  sox.add "VAUSWCNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 49, 2)
-  sox.add "VAUSWTSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 50, 2)
-  sox.add "VAUSWTSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 51, 2)
-  sox.add "VAUSWCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 53, 2)
-  sox.add "VAUSWFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 54, 2)
-  sox.add "VAUSWBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 55, 2)
-  sox.add "VAUSWOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 56, 2)
-  sox.add "VAUSEHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 46, 2)
-  sox.add "VAUSEHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 47, 2)
-  sox.add "VAUSECNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 48, 2)
-  sox.add "VAUSECNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 49, 2)
-  sox.add "VAUSETSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 50, 2)
-  sox.add "VAUSETSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 51, 2)
-  sox.add "VAUSECRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 53, 2)
-  sox.add "VAUSEFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 54, 2)
-  sox.add "VAUSEBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 55, 2)
-  sox.add "VAUSEOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 56, 2)
-  sox.add "VAJPHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 46, 2)
-  sox.add "VAJPHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 47, 2)
-  sox.add "VAJPCNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 48, 2)
-  sox.add "VAJPCNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 49, 2)
-  sox.add "VAJPTSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 50, 2)
-  sox.add "VAJPTSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 51, 2)
-  sox.add "VAJPCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 53, 2)
-  sox.add "VAJPFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 54, 2)
-  sox.add "VAJPBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 55, 2)
-  sox.add "VAJPOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 56, 2)
-  sox.add "VACANHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 46, 2)
-  sox.add "VACANHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 47, 2)
-  sox.add "VACANCNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 48, 2)
-  sox.add "VACANCNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 49, 2)
-  sox.add "VACANTSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 50, 2)
-  sox.add "VACANTSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 51, 2)
-  sox.add "VACANCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 53, 2)
-  sox.add "VACANFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 54, 2)
-  sox.add "VACANBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 55, 2)
-  sox.add "VACANOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 56, 2)
-  sox.add "VPFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 67, 2)
-  sox.add "VPCNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 72, 2)
-  sox.add "VPBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 77, 2)
-  sox.add "VPRELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 78, 2)
-  sox.add "VPGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 79, 2)
-  sox.add "VPEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 80, 2)
-  sox.add "VPSPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 81, 2)
-  sox.add "VPDMFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 161, 2)
-  sox.add "VPDMCNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 166, 2)
-  sox.add "VPDMBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 171, 2)
-  sox.add "VPDMRELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 172, 2)
-  sox.add "VPDMGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 173, 2)
-  sox.add "VPDMEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 174, 2)
-  sox.add "VPDMSPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 175, 2)
-  sox.add "VPITFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 254, 2)
-  sox.add "VPITCNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 259, 2)
-  sox.add "VPITBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 264, 2)
-  sox.add "VPITRELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 265, 2)
-  sox.add "VPITGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 266, 2)
-  sox.add "VPITEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 267, 2)
-  sox.add "VPITSPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 268, 2)
-  sox.add "VPUSWFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 66, 2)
-  sox.add "VPUSWCNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 71, 2)
-  sox.add "VPUSWBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 76, 2)
-  sox.add "VPUSWRELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 77, 2)
-  sox.add "VPUSWGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 78, 2)
-  sox.add "VPUSWEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 79, 2)
-  sox.add "VPUSWSPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 80, 2)
-  sox.add "VPUSEFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 66, 2)
-  sox.add "VPUSECNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 71, 2)
-  sox.add "VPUSEBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 76, 2)
-  sox.add "VPUSERELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 77, 2)
-  sox.add "VPUSEGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 78, 2)
-  sox.add "VPUSEEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 79, 2)
-  sox.add "VPUSESPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 80, 2)
-  sox.add "VPJPFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 66, 2)
-  sox.add "VPJPCNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 71, 2)
-  sox.add "VPJPBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 76, 2)
-  sox.add "VPJPRELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 77, 2)
-  sox.add "VPJPGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 78, 2)
-  sox.add "VPJPEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 79, 2)
-  sox.add "VPJPSPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 80, 2)
-  sox.add "VPCANFUNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 66, 2)
-  sox.add "VPCANCNVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 71, 2)
-  sox.add "VPCANBUSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 76, 2)
-  sox.add "VPCANRELNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 77, 2)
-  sox.add "VPCANGOVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 78, 2)
-  sox.add "VPCANEDUNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 79, 2)
-  sox.add "VPCANSPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 80, 2)
-  sox.add "VSTFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 84, 2)
-  sox.add "VSTRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 85, 2)
-  sox.add "VSTNTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 86, 2)
-  sox.add "VSTGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 88, 2)
-  sox.add "VSTNGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 89, 2)
-  sox.add "VSTPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 91, 2)
-  sox.add "VSTNPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 92, 2)
-  sox.add "VSTINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 94, 2)
-  sox.add "VSTDMFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 178, 2)
-  sox.add "VSTDMRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 179, 2)
-  sox.add "VSTDMNTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 180, 2)
-  sox.add "VSTDMGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 182, 2)
-  sox.add "VSTDMNGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 183, 2)
-  sox.add "VSTDMPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 185, 2)
-  sox.add "VSTDMNPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 186, 2)
-  sox.add "VSTDMINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 188, 2)
-  sox.add "VSTITFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 271, 2)
-  sox.add "VSTITRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 272, 2)
-  sox.add "VSTITNTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 273, 2)
-  sox.add "VSTITGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 275, 2)
-  sox.add "VSTITNGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 276, 2)
-  sox.add "VSTITPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 278, 2)
-  sox.add "VSTITNPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 279, 2)
-  sox.add "VSTITINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 281, 2)
-  sox.add "VSTUSWFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 83, 2)
-  sox.add "VSTUSWRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 84, 2)
-  sox.add "VSTUSWNTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 85, 2)
-  sox.add "VSTUSWGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 87, 2)
-  sox.add "VSTUSWNGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 88, 2)
-  sox.add "VSTUSWPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 90, 2)
-  sox.add "VSTUSWNPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 91, 2)
-  sox.add "VSTUSWINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 93, 2)
-  sox.add "VSTUSEFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 83, 2)
-  sox.add "VSTUSERPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 84, 2)
-  sox.add "VSTUSENTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 85, 2)
-  sox.add "VSTUSEGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 87, 2)
-  sox.add "VSTUSENGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 88, 2)
-  sox.add "VSTUSEPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 90, 2)
-  sox.add "VSTUSENPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 91, 2)
-  sox.add "VSTUSEINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 93, 2)
-  sox.add "VSTJPFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 83, 2)
-  sox.add "VSTJPRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 84, 2)
-  sox.add "VSTJPNTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 85, 2)
-  sox.add "VSTJPGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 87, 2)
-  sox.add "VSTJPNGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 88, 2)
-  sox.add "VSTJPPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 90, 2)
-  sox.add "VSTJPNPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 91, 2)
-  sox.add "VSTJPINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 93, 2)
-  sox.add "VSTCANFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 83, 2)
-  sox.add "VSTCANRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 84, 2)
-  sox.add "VSTCANNTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 85, 2)
-  sox.add "VSTCANGRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 87, 2)
-  sox.add "VSTCANNGRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 88, 2)
-  sox.add "VSTCANPCKNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 90, 2)
-  sox.add "VSTCANNPCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 91, 2)
-  sox.add "VSTCANINDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 93, 2)
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path2)#,true)
-
-  sox.add "VISI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 39, 2)
-  sox.add "VISIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 40, 2)
-  sox.add "NAIVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 41, 2)
-  sox.add "VISNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 21, 2)
-  sox.add "VISDMI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 133, 2)
-  sox.add "VISDMIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 134, 2)
-  sox.add "NAIVDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 135, 2)
-  sox.add "VISDMNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 115, 2)
-  sox.add "VISITI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 227, 2)
-  sox.add "VISITIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 228, 2)
-  sox.add "NAIVITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 229, 2)
-  sox.add "VISITNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 209, 2)
-  sox.add "VISUSWI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 38, 2)
-  sox.add "VISUSWIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 39, 2)
-  sox.add "NAIVUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 40, 2)
-  sox.add "VISUSWNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 20, 2)
-  sox.add "VISUSEI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 38, 2)
-  sox.add "VISUSEIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 39, 2)
-  sox.add "NAIVUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 40, 2)
-  sox.add "VISUSENS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 20, 2)
-  sox.add "VISJPI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 38, 2)
-  sox.add "VISJPIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 39, 2)
-  sox.add "NAIVJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 40, 2)
-  sox.add "VISJPNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 20, 2)
-  sox.add "VISCANI1NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 38, 2)
-  sox.add "VISCANIMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 39, 2)
-  sox.add "NAIVCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 40, 2)
-  sox.add "VISCANNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 20, 2)
-  sox.add "VDAYNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 7, 2)
-  sox.add "VISNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 8, 2)
-  sox.add "VRLSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 44, 2)
-  sox.add "VRDCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 11, 2)
-  sox.add "VDAYDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 103, 2)
-  sox.add "VISDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 104, 2)
-  sox.add "VRLSDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 138, 2)
-  sox.add "VRDCDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 105, 2)
-  sox.add "VDAYITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 197, 2)
-  sox.add "VISITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 198, 2)
-  sox.add "VRLSITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 232, 2)
-  sox.add "VRDCITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:1", 199, 2)
-  sox.add "VDAYUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 7, 2)
-  sox.add "VISUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 8, 2)
-  sox.add "VRLSUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 43, 2)
-  sox.add "VRDCUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 11, 2)
-  sox.add "VISUSWDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 9, 2)
-  sox.add "VISUSWITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:3", 10, 2)
-  sox.add "VDAYUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 7, 2)
-  sox.add "VISUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 8, 2)
-  sox.add "VRLSUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 43, 2)
-  sox.add "VRDCUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 11, 2)
-  sox.add "VISUSEDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 9, 2)
-  sox.add "VISUSEITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:4", 10, 2)
-  sox.add "VDAYJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 7, 2)
-  sox.add "VISJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 8, 2)
-  sox.add "VRLSJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 43, 2)
-  sox.add "VRDCJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 11, 2)
-  sox.add "VISJPDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 9, 2)
-  sox.add "VISJPITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:5", 10, 2)
-  sox.add "VDAYCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 7, 2)
-  sox.add "VISCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 8, 2)
-  sox.add "VRLSCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 43, 2)
-  sox.add "VRDCCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 11, 2)
-  sox.add "VISCANDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 9, 2)
-  sox.add "VISCANITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:6", 10, 2)
-  sox.add "VISNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 26, 2)
-  sox.add "VEXPNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 6, 2)
-  sox.add "VEXPPDNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 46, 2)
-  sox.add "VISDMNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 109, 2)
-  sox.add "VISITNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 203, 2)
-  sox.add "VRLSDMNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VRLSITNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VISNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 30, 2)
-  sox.add "VEXPNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 10, 2)
-  sox.add "VEXPPDNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 50, 2)
-  sox.add "VISDMNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 112, 2)
-  sox.add "VISITNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 206, 2)
-  sox.add "VRLSDMNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VRLSITNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VISNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 27, 2)
-  sox.add "VEXPNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 7, 2)
-  sox.add "VEXPPDNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 47, 2)
-  sox.add "VISDMNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 116, 2)
-  sox.add "VISITNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 210, 2)
-  sox.add "VRLSDMNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VRLSITNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VISNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 28, 2)
-  sox.add "VEXPNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 8, 2)
-  sox.add "VEXPPDNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 48, 2)
-  sox.add "VISDMNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 119, 2)
-  sox.add "VISITNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 213, 2)
-  sox.add "VRLSDMNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VRLSITNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VISNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 29, 2)
-  sox.add "VEXPNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 9, 2)
-  sox.add "VEXPPDNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 49, 2)
-  sox.add "VISDMNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 122, 2)
-  sox.add "VISITNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 216, 2)
-  sox.add "VRLSDMNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VRLSITNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VISNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 31, 2)
-  sox.add "VEXPNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 11, 2)
-  sox.add "VEXPPDNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 51, 2)
-  sox.add "VISDMNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 125, 2)
-  sox.add "VISITNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 219, 2)
-  sox.add "VRLSDMNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VRLSITNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:8", 99, 99)
-  sox.add "VDAYUSWNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 5, 2)
-  sox.add "VISUSWNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 6, 2)
-  sox.add "VRLSUSWNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 7, 2)
-  sox.add "VDAYUSENS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 9, 2)
-  sox.add "VISUSENS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 10, 2)
-  sox.add "VRLSUSENS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 11, 2)
-  sox.add "VDAYJPNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 13, 2)
-  sox.add "VISJPNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 14, 2)
-  sox.add "VRLSJPNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 15, 2)
-  sox.add "VDAYCANNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 17, 2)
-  sox.add "VISCANNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 18, 2)
-  sox.add "VRLSCANNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 19, 2)
-  sox.add "VDAYUSWNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 5, 4)
-  sox.add "VISUSWNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 6, 4)
-  sox.add "VRLSUSWNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 7, 4)
-  sox.add "VDAYUSENS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 9, 4)
-  sox.add "VISUSENS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 10, 4)
-  sox.add "VRLSUSENS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 11, 4)
-  sox.add "VDAYJPNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 13, 4)
-  sox.add "VISJPNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 14, 4)
-  sox.add "VRLSJPNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 15, 4)
-  sox.add "VDAYCANNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 17, 4)
-  sox.add "VISCANNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 18, 4)
-  sox.add "VRLSCANNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 19, 4)
-  sox.add "VDAYUSWNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 5, 6)
-  sox.add "VISUSWNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 6, 6)
-  sox.add "VRLSUSWNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 7, 6)
-  sox.add "VDAYUSENS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 9, 6)
-  sox.add "VISUSENS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 10, 6)
-  sox.add "VRLSUSENS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 11, 6)
-  sox.add "VDAYJPNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 13, 6)
-  sox.add "VISJPNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 14, 6)
-  sox.add "VRLSJPNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 15, 6)
-  sox.add "VDAYCANNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 17, 6)
-  sox.add "VISCANNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 18, 6)
-  sox.add "VRLSCANNS@MAUI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 19, 6)
-  sox.add "VDAYUSWNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 5, 8)
-  sox.add "VISUSWNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 6, 8)
-  sox.add "VRLSUSWNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 7, 8)
-  sox.add "VDAYUSENS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 9, 8)
-  sox.add "VISUSENS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 10, 8)
-  sox.add "VRLSUSENS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 11, 8)
-  sox.add "VDAYJPNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 13, 8)
-  sox.add "VISJPNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 14, 8)
-  sox.add "VRLSJPNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 15, 8)
-  sox.add "VDAYCANNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 17, 8)
-  sox.add "VISCANNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 18, 8)
-  sox.add "VRLSCANNS@MOL.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 19, 8)
-  sox.add "VDAYUSWNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 5, 10)
-  sox.add "VISUSWNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 6, 10)
-  sox.add "VRLSUSWNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 7, 10)
-  sox.add "VDAYUSENS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 9, 10)
-  sox.add "VISUSENS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 10, 10)
-  sox.add "VRLSUSENS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 11, 10)
-  sox.add "VDAYJPNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 13, 10)
-  sox.add "VISJPNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 14, 10)
-  sox.add "VRLSJPNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 15, 10)
-  sox.add "VDAYCANNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 17, 10)
-  sox.add "VISCANNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 18, 10)
-  sox.add "VRLSCANNS@LAN.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 19, 10)
-  sox.add "VDAYUSWNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 5, 12)
-  sox.add "VISUSWNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 6, 12)
-  sox.add "VRLSUSWNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 7, 12)
-  sox.add "VDAYUSENS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 9, 12)
-  sox.add "VISUSENS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 10, 12)
-  sox.add "VRLSUSENS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 11, 12)
-  sox.add "VDAYJPNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 13, 12)
-  sox.add "VISJPNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 14, 12)
-  sox.add "VRLSJPNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 15, 12)
-  sox.add "VDAYCANNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 17, 12)
-  sox.add "VISCANNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 18, 12)
-  sox.add "VRLSCANNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:9", 19, 12)
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path3)#,true)
-
-  sox.add "VSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 4, 2)
-  sox.add "VSSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 5, 2)
-  sox.add "VSCHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 6, 2)
-  sox.add "VSDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 7, 2)
-  sox.add "VSDMSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 8, 2)
-  sox.add "VSUSWSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 9, 2)
-  sox.add "VSUSESCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 10, 2)
-  sox.add "VSDMCHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 11, 2)
-  sox.add "VSITNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 12, 2)
-  sox.add "VSITSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 13, 2)
-  sox.add "VSJPSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 14, 2)
-  sox.add "VSCANSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 15, 2)
-  sox.add "VSOTASCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 16, 2)
-  sox.add "VSAUSSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 17, 2)
-  sox.add "VSOTSCHNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 18, 2)
-  sox.add "VSITCHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 19, 2)
-  sox.add "VSNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 4, 4)
-  sox.add "VSSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 5, 4)
-  sox.add "VSCHTNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 6, 4)
-  sox.add "VSDMNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 7, 4)
-  sox.add "VSDMSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 8, 4)
-  sox.add "VSUSWSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 9, 4)
-  sox.add "VSUSESCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 10, 4)
-  sox.add "VSDMCHTNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 11, 4)
-  sox.add "VSITNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 12, 4)
-  sox.add "VSITSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 13, 4)
-  sox.add "VSJPSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 14, 4)
-  sox.add "VSCANSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 15, 4)
-  sox.add "VSOTASCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 16, 4)
-  sox.add "VSAUSSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 17, 4)
-  sox.add "VSOTSCHNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 18, 4)
-  sox.add "VSITCHTNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 19, 4)
-  sox.add "VSNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 4, 6)
-  sox.add "VSSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 5, 6)
-  sox.add "VSCHTNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 6, 6)
-  sox.add "VSDMNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 7, 6)
-  sox.add "VSDMSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 8, 6)
-  sox.add "VSUSWSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 9, 6)
-  sox.add "VSUSESCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 10, 6)
-  sox.add "VSDMCHTNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 11, 6)
-  sox.add "VSITNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 12, 6)
-  sox.add "VSITSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 13, 6)
-  sox.add "VSJPSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 14, 6)
-  sox.add "VSCANSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 15, 6)
-  sox.add "VSOTASCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 16, 6)
-  sox.add "VSAUSSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 17, 6)
-  sox.add "VSOTSCHNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 18, 6)
-  sox.add "VSITCHTNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 19, 6)
-  sox.add "VSNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 4, 8)
-  sox.add "VSSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 5, 8)
-  sox.add "VSCHTNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 6, 8)
-  sox.add "VSDMNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 7, 8)
-  sox.add "VSDMSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 8, 8)
-  sox.add "VSUSWSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 9, 8)
-  sox.add "VSUSESCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 10, 8)
-  sox.add "VSDMCHTNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 11, 8)
-  sox.add "VSITNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 12, 8)
-  sox.add "VSITSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 13, 8)
-  sox.add "VSJPSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 14, 8)
-  sox.add "VSCANSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 15, 8)
-  sox.add "VSOTASCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 16, 8)
-  sox.add "VSAUSSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 17, 8)
-  sox.add "VSOTSCHNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 18, 8)
-  sox.add "VSITCHTNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 19, 8)
-  sox.add "VSNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 4, 12)
-  sox.add "VSSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 5, 12)
-  sox.add "VSCHTNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 6, 12)
-  sox.add "VSDMNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 7, 12)
-  sox.add "VSDMSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 8, 12)
-  sox.add "VSUSWSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 9, 12)
-  sox.add "VSUSESCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 10, 12)
-  sox.add "VSDMCHTNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 11, 12)
-  sox.add "VSITNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 12, 12)
-  sox.add "VSITSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 13, 12)
-  sox.add "VSJPSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 14, 12)
-  sox.add "VSCANSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 15, 12)
-  sox.add "VSOTASCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 16, 12)
-  sox.add "VSAUSSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 17, 12)
-  sox.add "VSOTSCHNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 18, 12)
-  sox.add "VSITCHTNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:12", 19, 12)
-  sox.add "VISUSDMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 7, 2)
-  sox.add "VISDMPCFNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 9, 2)
-  sox.add "VISDMCANS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 10, 2)
-  sox.add "VISDMORNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 11, 2)
-  sox.add "VISDMWANS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 12, 2)
-  sox.add "VISDMMTNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 14, 2)
-  sox.add "VISDMWNCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 16, 2)
-  sox.add "VISDMWSCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 18, 2)
-  sox.add "VISDMTXNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 19, 2)
-  sox.add "VISDMENCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 21, 2)
-  sox.add "VISDMESCNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 23, 2)
-  sox.add "VISDMNWENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 25, 2)
-  sox.add "VISDMMATNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 27, 2)
-  sox.add "VISDMNJNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 28, 2)
-  sox.add "VISDMNYNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 29, 2)
-  sox.add "VISDMSATNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 31, 2)
-  sox.add "VISDMEURNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:2", 36, 2)
-  sox.add "VEXPPDNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 41, 2)
-  sox.add "VEXPPDUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 42, 2)
-  sox.add "VEXPPDUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 43, 2)
-  sox.add "VEXPPDJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 44, 2)
-  sox.add "VEXPPDCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 45, 2)
-  sox.add "VEXPPDOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 46, 2)
-  sox.add "VEXPPTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 50, 2)
-  sox.add "VEXPPTUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 51, 2)
-  sox.add "VEXPPTUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 52, 2)
-  sox.add "VEXPPTJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 53, 2)
-  sox.add "VEXPPTCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 54, 2)
-  sox.add "VEXPPTOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 55, 2)
-  sox.add "VEXPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 5, 2)
-  sox.add "VEXPUSWNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 6, 2)
-  sox.add "VEXPUSENS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 7, 2)
-  sox.add "VEXPJPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 8, 2)
-  sox.add "VEXPCANNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 9, 2)
-  sox.add "VEXPOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 10, 2)
-  sox.add "VISOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 28, 2)
-  sox.add "VRLSOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 37, 2)
-  sox.add "VDAYOTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:7", 19, 2)
-  sox.add "VDAYCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 5, 2)
-  sox.add "VISCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 6, 2)
-  sox.add "VISCRSHPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 7, 2)
-  sox.add "VISCRAIRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 8, 2)
-  sox.add "NTCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 9, 2)
-  sox.add "VISCRNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 12, 2)
-  sox.add "VISCRNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 13, 2)
-  sox.add "VISCRNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 14, 2)
-  sox.add "VISCRNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 18, 2)
-  sox.add "VLOSCRBFNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 22, 2)
-  sox.add "VLOSCRDRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 23, 2)
-  sox.add "VLOSCRAFNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 24, 2)
-  sox.add "VLOSCRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 25, 2)
-  sox.add "VACRHTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 28, 2)
-  sox.add "VACRHTOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 29, 2)
-  sox.add "VACRCNNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 30, 2)
-  sox.add "VACRCNOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 31, 2)
-  sox.add "VACRTSNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 32, 2)
-  sox.add "VACRTSOLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 33, 2)
-  sox.add "VACRBBNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 34, 2)
-  sox.add "VACRFRNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 36, 2)
-  sox.add "VACROTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 37, 2)
-  sox.add "VACRCROLNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 39, 2)
-  sox.add "VSTCRFTNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 52, 2)
-  sox.add "VSTCRRPNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:10", 53, 2)
-  
-  sox.add "OCUP%NS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 8, 2)
-  sox.add "OCUP%NS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 10, 2)
-  sox.add "OCUP%NS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 12, 2)
-  sox.add "OCUP%NS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 14, 2)
-  sox.add "OCUP%NS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 16, 2)
-  sox.add "PRMNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 8, 6)
-  sox.add "PRMNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 10, 6)
-  sox.add "PRMNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 12, 6)
-  sox.add "PRMNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 14, 6)
-  sox.add "PRMNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 16, 6)
-  sox.add "RMRVNS@HI.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 8, 10)
-  sox.add "RMRVNS@HON.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 10, 10)
-  sox.add "RMRVNS@MAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 12, 10)
-  sox.add "RMRVNS@HAW.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 14, 10)
-  sox.add "RMRVNS@KAU.M",         Series.load_pattern("2011-02-01", "M",  path_tour , "sheet_num:13", 16, 10)
-   
-    sox.write_xls
-    
-   # NotificationMailer.deliver_new_download_notification "Tour Highlights (rake tour_upd1)", sox.output_summary
-    end
-# end
-
-
-###*******************************************************************
+	tour_3 = {
+		"VSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 4, :col => 2, :frequency => "M" }|, 
+		"VSSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 5, :col => 2, :frequency => "M" }|, 
+		"VSCHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 6, :col => 2, :frequency => "M" }|, 
+		"VSDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VSDMSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VSUSWSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VSUSESCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VSDMCHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VSITNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 12, :col => 2, :frequency => "M" }|, 
+		"VSITSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 13, :col => 2, :frequency => "M" }|, 
+		"VSJPSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 14, :col => 2, :frequency => "M" }|, 
+		"VSCANSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 15, :col => 2, :frequency => "M" }|, 
+		"VSOTASCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 16, :col => 2, :frequency => "M" }|, 
+		"VSAUSSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 17, :col => 2, :frequency => "M" }|, 
+		"VSOTSCHNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 18, :col => 2, :frequency => "M" }|, 
+		"VSITCHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 19, :col => 2, :frequency => "M" }|, 
+		"VSNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 4, :col => 4, :frequency => "M" }|, 
+		"VSSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 5, :col => 4, :frequency => "M" }|, 
+		"VSCHTNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 6, :col => 4, :frequency => "M" }|, 
+		"VSDMNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 7, :col => 4, :frequency => "M" }|, 
+		"VSDMSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 8, :col => 4, :frequency => "M" }|, 
+		"VSUSWSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 9, :col => 4, :frequency => "M" }|, 
+		"VSUSESCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 10, :col => 4, :frequency => "M" }|, 
+		"VSDMCHTNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 11, :col => 4, :frequency => "M" }|, 
+		"VSITNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 12, :col => 4, :frequency => "M" }|, 
+		"VSITSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 13, :col => 4, :frequency => "M" }|, 
+		"VSJPSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 14, :col => 4, :frequency => "M" }|, 
+		"VSCANSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 15, :col => 4, :frequency => "M" }|, 
+		"VSOTASCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 16, :col => 4, :frequency => "M" }|, 
+		"VSAUSSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 17, :col => 4, :frequency => "M" }|, 
+		"VSOTSCHNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 18, :col => 4, :frequency => "M" }|, 
+		"VSITCHTNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 19, :col => 4, :frequency => "M" }|, 
+		"VSNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 4, :col => 6, :frequency => "M" }|, 
+		"VSSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 5, :col => 6, :frequency => "M" }|, 
+		"VSCHTNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 6, :col => 6, :frequency => "M" }|, 
+		"VSDMNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 7, :col => 6, :frequency => "M" }|, 
+		"VSDMSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 8, :col => 6, :frequency => "M" }|, 
+		"VSUSWSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 9, :col => 6, :frequency => "M" }|, 
+		"VSUSESCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 10, :col => 6, :frequency => "M" }|, 
+		"VSDMCHTNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 11, :col => 6, :frequency => "M" }|, 
+		"VSITNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 12, :col => 6, :frequency => "M" }|, 
+		"VSITSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 13, :col => 6, :frequency => "M" }|, 
+		"VSJPSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 14, :col => 6, :frequency => "M" }|, 
+		"VSCANSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 15, :col => 6, :frequency => "M" }|, 
+		"VSOTASCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 16, :col => 6, :frequency => "M" }|, 
+		"VSAUSSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 17, :col => 6, :frequency => "M" }|, 
+		"VSOTSCHNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 18, :col => 6, :frequency => "M" }|, 
+		"VSITCHTNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 19, :col => 6, :frequency => "M" }|, 
+		"VSNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 4, :col => 8, :frequency => "M" }|, 
+		"VSSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 5, :col => 8, :frequency => "M" }|, 
+		"VSCHTNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 6, :col => 8, :frequency => "M" }|, 
+		"VSDMNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 7, :col => 8, :frequency => "M" }|, 
+		"VSDMSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 8, :col => 8, :frequency => "M" }|, 
+		"VSUSWSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 9, :col => 8, :frequency => "M" }|, 
+		"VSUSESCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 10, :col => 8, :frequency => "M" }|, 
+		"VSDMCHTNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 11, :col => 8, :frequency => "M" }|, 
+		"VSITNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 12, :col => 8, :frequency => "M" }|, 
+		"VSITSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 13, :col => 8, :frequency => "M" }|, 
+		"VSJPSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 14, :col => 8, :frequency => "M" }|, 
+		"VSCANSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 15, :col => 8, :frequency => "M" }|, 
+		"VSOTASCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 16, :col => 8, :frequency => "M" }|, 
+		"VSAUSSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 17, :col => 8, :frequency => "M" }|, 
+		"VSOTSCHNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 18, :col => 8, :frequency => "M" }|, 
+		"VSITCHTNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 19, :col => 8, :frequency => "M" }|, 
+		"VSNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 4, :col => 12, :frequency => "M" }|, 
+		"VSSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 5, :col => 12, :frequency => "M" }|, 
+		"VSCHTNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 6, :col => 12, :frequency => "M" }|, 
+		"VSDMNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 7, :col => 12, :frequency => "M" }|, 
+		"VSDMSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 8, :col => 12, :frequency => "M" }|, 
+		"VSUSWSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 9, :col => 12, :frequency => "M" }|, 
+		"VSUSESCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 10, :col => 12, :frequency => "M" }|, 
+		"VSDMCHTNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 11, :col => 12, :frequency => "M" }|, 
+		"VSITNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 12, :col => 12, :frequency => "M" }|, 
+		"VSITSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 13, :col => 12, :frequency => "M" }|, 
+		"VSJPSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 14, :col => 12, :frequency => "M" }|, 
+		"VSCANSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 15, :col => 12, :frequency => "M" }|, 
+		"VSOTASCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 16, :col => 12, :frequency => "M" }|, 
+		"VSAUSSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 17, :col => 12, :frequency => "M" }|, 
+		"VSOTSCHNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 18, :col => 12, :frequency => "M" }|, 
+		"VSITCHTNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:12", :row => 19, :col => 12, :frequency => "M" }|, 
+		"VISUSDMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISDMPCFNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISDMCANS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VISDMORNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 11, :col => 2, :frequency => "M" }|, 
+		"VISDMWANS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 12, :col => 2, :frequency => "M" }|, 
+		"VISDMMTNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 14, :col => 2, :frequency => "M" }|, 
+		"VISDMWNCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 16, :col => 2, :frequency => "M" }|, 
+		"VISDMWSCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 18, :col => 2, :frequency => "M" }|, 
+		"VISDMTXNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 19, :col => 2, :frequency => "M" }|, 
+		"VISDMENCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 21, :col => 2, :frequency => "M" }|, 
+		"VISDMESCNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 23, :col => 2, :frequency => "M" }|, 
+		"VISDMNWENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 25, :col => 2, :frequency => "M" }|, 
+		"VISDMMATNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 27, :col => 2, :frequency => "M" }|, 
+		"VISDMNJNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 28, :col => 2, :frequency => "M" }|, 
+		"VISDMNYNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 29, :col => 2, :frequency => "M" }|, 
+		"VISDMSATNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 31, :col => 2, :frequency => "M" }|, 
+		"VISDMEURNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:2", :row => 36, :col => 2, :frequency => "M" }|, 
+		"VEXPPDNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 41, :col => 2, :frequency => "M" }|, 
+		"VEXPPDUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 42, :col => 2, :frequency => "M" }|, 
+		"VEXPPDUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 43, :col => 2, :frequency => "M" }|, 
+		"VEXPPDJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 44, :col => 2, :frequency => "M" }|, 
+		"VEXPPDCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 45, :col => 2, :frequency => "M" }|, 
+		"VEXPPDOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 46, :col => 2, :frequency => "M" }|, 
+		"VEXPPTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 50, :col => 2, :frequency => "M" }|, 
+		"VEXPPTUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 51, :col => 2, :frequency => "M" }|, 
+		"VEXPPTUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 52, :col => 2, :frequency => "M" }|, 
+		"VEXPPTJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 53, :col => 2, :frequency => "M" }|, 
+		"VEXPPTCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 54, :col => 2, :frequency => "M" }|, 
+		"VEXPPTOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 55, :col => 2, :frequency => "M" }|, 
+		"VEXPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 5, :col => 2, :frequency => "M" }|, 
+		"VEXPUSWNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 6, :col => 2, :frequency => "M" }|, 
+		"VEXPUSENS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VEXPJPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 8, :col => 2, :frequency => "M" }|, 
+		"VEXPCANNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VEXPOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 10, :col => 2, :frequency => "M" }|, 
+		"VISOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 28, :col => 2, :frequency => "M" }|, 
+		"VRLSOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 37, :col => 2, :frequency => "M" }|, 
+		"VDAYOTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => 19, :col => 2, :frequency => "M" }|, 
+		"VDAYCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 5, :col => 2, :frequency => "M" }|, 
+		"VISCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 6, :col => 2, :frequency => "M" }|, 
+		"VISCRSHPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 7, :col => 2, :frequency => "M" }|, 
+		"VISCRAIRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 8, :col => 2, :frequency => "M" }|, 
+		"NTCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 9, :col => 2, :frequency => "M" }|, 
+		"VISCRNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 12, :col => 2, :frequency => "M" }|, 
+		"VISCRNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 13, :col => 2, :frequency => "M" }|, 
+		"VISCRNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 14, :col => 2, :frequency => "M" }|, 
+		"VISCRNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 18, :col => 2, :frequency => "M" }|, 
+		"VLOSCRBFNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 22, :col => 2, :frequency => "M" }|, 
+		"VLOSCRDRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 23, :col => 2, :frequency => "M" }|, 
+		"VLOSCRAFNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 24, :col => 2, :frequency => "M" }|, 
+		"VLOSCRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 25, :col => 2, :frequency => "M" }|, 
+		"VACRHTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 28, :col => 2, :frequency => "M" }|, 
+		"VACRHTOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 29, :col => 2, :frequency => "M" }|, 
+		"VACRCNNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 30, :col => 2, :frequency => "M" }|, 
+		"VACRCNOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 31, :col => 2, :frequency => "M" }|, 
+		"VACRTSNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 32, :col => 2, :frequency => "M" }|, 
+		"VACRTSOLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 33, :col => 2, :frequency => "M" }|, 
+		"VACRBBNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 34, :col => 2, :frequency => "M" }|, 
+		"VACRFRNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 36, :col => 2, :frequency => "M" }|, 
+		"VACROTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 37, :col => 2, :frequency => "M" }|, 
+		"VACRCROLNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 39, :col => 2, :frequency => "M" }|, 
+		"VSTCRFTNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 52, :col => 2, :frequency => "M" }|, 
+		"VSTCRRPNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:10", :row => 53, :col => 2, :frequency => "M" }|, 
+		"OCUP%NS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 8, :col => 2, :frequency => "M" }|, 
+		"OCUP%NS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 10, :col => 2, :frequency => "M" }|, 
+		"OCUP%NS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 12, :col => 2, :frequency => "M" }|, 
+		"OCUP%NS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 14, :col => 2, :frequency => "M" }|, 
+		"OCUP%NS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 16, :col => 2, :frequency => "M" }|, 
+		"PRMNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 8, :col => 6, :frequency => "M" }|, 
+		"PRMNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 10, :col => 6, :frequency => "M" }|, 
+		"PRMNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 12, :col => 6, :frequency => "M" }|, 
+		"PRMNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 14, :col => 6, :frequency => "M" }|, 
+		"PRMNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 16, :col => 6, :frequency => "M" }|, 
+		"RMRVNS@HI.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 8, :col => 10, :frequency => "M" }|, 
+		"RMRVNS@HON.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 10, :col => 10, :frequency => "M" }|, 
+		"RMRVNS@MAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 12, :col => 10, :frequency => "M" }|, 
+		"RMRVNS@HAW.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 14, :col => 10, :frequency => "M" }|, 
+		"RMRVNS@KAU.M" => %Q|Series.load_from_download  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:13", :row => 16, :col => 10, :frequency => "M" }|
+	}
+	
+	p = Packager.new
+	p.add_definitions tour_1
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_upd1_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions tour_2
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_upd2_NEW.xls"
+	
+	
+	p = Packager.new
+	p.add_definitions tour_3
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_upd3_NEW.xls"
+	
+end

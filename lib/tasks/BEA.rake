@@ -12,1533 +12,1478 @@
 
 ###*******************************************************************
 
-
 task :gsp_upd => :environment do
-  require "Spreadsheet"
-  pathGSP           = "/Volumes/UHEROwork/data/rawdata/BEA_GSP.csv"         #gross domestic products by state
-  output_path_gsp   = "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"  
-  dsd               = DataSourceDownload.get pathGSP
-  
-  if dsd.download_changed?
-    sox = SeriesOutputXls.new(output_path_gsp)
-   
-    sox.add "YS@HI.A",              Series.load_pattern("1997-01-01", "A", pathGSP, "csv",2,"increment:7:1")
-    sox.add "YS_PR@HI.A",           Series.load_pattern("1997-01-01", "A", pathGSP, "csv",3,"increment:7:1")
-    sox.add "YSAG@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",4,"increment:7:1")
-    sox.add "YSAGFA@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",5,"increment:7:1")
-    sox.add "YSAGFF@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",6,"increment:7:1")
-    sox.add "YSMI@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",7,"increment:7:1")
-    sox.add "YSMIOG@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",8,"increment:7:1")
-    sox.add "YSMIMI@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",9,"increment:7:1")
-    sox.add "YSMISP@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",10,"increment:7:1")
-    sox.add "YSUT@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",11,"increment:7:1")
-    sox.add "YSCT@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",12,"increment:7:1")
-    sox.add "YSMN@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",13,"increment:7:1")
-    sox.add "YSMNDR@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",14,"increment:7:1")
-    sox.add "YSMNDRWD@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",15,"increment:7:1")
-    sox.add "YSMNDRNM@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",16,"increment:7:1")
-    sox.add "YSMNDRPM@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",17,"increment:7:1")
-    sox.add "YSMNDRFB@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",18,"increment:7:1")
-    sox.add "YSMNDRMC@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",19,"increment:7:1")
-    sox.add "YSMNDRCM@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",20,"increment:7:1")
-    sox.add "YSMNDREL@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",21,"increment:7:1")
-    sox.add "YSMNDRMV@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",22,"increment:7:1")
-    sox.add "YSMNDRTR@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",23,"increment:7:1")
-    sox.add "YSMNDRFR@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",24,"increment:7:1")
-    sox.add "YSMNDRMS@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",25,"increment:7:1")
-    sox.add "YSMNND@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",26,"increment:7:1")
-    sox.add "YSMNNDFD@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",27,"increment:7:1")
-    sox.add "YSMNNDXX@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",28,"increment:7:1")
-    sox.add "YSMNNDAP@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",29,"increment:7:1")
-    sox.add "YSMNNDPA@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",30,"increment:7:1")
-    sox.add "YSMNNDPR@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",31,"increment:7:1")
-    sox.add "YSMNNDPT@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",32,"increment:7:1")
-    sox.add "YSMNNDCH@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",33,"increment:7:1")
-    sox.add "YSMNNDPL@HI.A",        Series.load_pattern("1997-01-01", "A", pathGSP, "csv",34,"increment:7:1")
-    sox.add "YSWT@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",35,"increment:7:1")
-    sox.add "YSRT@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",36,"increment:7:1")
-    sox.add "YSTW@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",37,"increment:7:1")
-    sox.add "YSTWTA@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",38,"increment:7:1")
-    sox.add "YSTWTR@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",39,"increment:7:1")
-    sox.add "YSTWTW@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",40,"increment:7:1")
-    sox.add "YSTWTT@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",41,"increment:7:1")
-    sox.add "YSTWTG@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",42,"increment:7:1")
-    sox.add "YSTWPL@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",43,"increment:7:1")
-    sox.add "YSTWSP@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",44,"increment:7:1")
-    sox.add "YSTWWH@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",45,"increment:7:1")
-    sox.add "YSIF@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",46,"increment:7:1")
-    sox.add "YSIFPB@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",47,"increment:7:1")
-    sox.add "YSIFMP@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",48,"increment:7:1")
-    sox.add "YSIFBC@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",49,"increment:7:1")
-    sox.add "YSIFDP@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",50,"increment:7:1")
-    sox.add "YSFI@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",51,"increment:7:1")
-    sox.add "YSFIMC@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",52,"increment:7:1")
-    sox.add "YSFISE@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",53,"increment:7:1")
-    sox.add "YSFIIN@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",54,"increment:7:1")
-    sox.add "YSFIOT@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",55,"increment:7:1")
-    sox.add "YSRE@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",56,"increment:7:1")
-    sox.add "YSRERE@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",57,"increment:7:1")
-    sox.add "YSRERL@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",58,"increment:7:1")
-    sox.add "YSPS@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",59,"increment:7:1")
-    sox.add "YSPSLS@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",60,"increment:7:1")
-    sox.add "YSPSCO@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",61,"increment:7:1")
-    sox.add "YSPSOS@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",62,"increment:7:1")
-    sox.add "YSMA@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",63,"increment:7:1")
-    sox.add "YSAD@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",64,"increment:7:1")
-    sox.add "YSADAD@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",65,"increment:7:1")
-    sox.add "YSADWM@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",66,"increment:7:1")
-    sox.add "YSED@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",67,"increment:7:1")
-    sox.add "YSHC@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",68,"increment:7:1")
-    sox.add "YSHCAM@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",69,"increment:7:1")
-    sox.add "YSHCHO@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",70,"increment:7:1")
-    sox.add "YSHCSO@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",71,"increment:7:1")
-    sox.add "YSAE@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",72,"increment:7:1")
-    sox.add "YSAEPF@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",73,"increment:7:1")
-    sox.add "YSAERE@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",74,"increment:7:1")
-    sox.add "YSAF@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",75,"increment:7:1")
-    sox.add "YSAFAC@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",76,"increment:7:1")
-    sox.add "YSAFFD@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",77,"increment:7:1")
-    sox.add "YSOS@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",78,"increment:7:1")
-    sox.add "YSGV@HI.A",            Series.load_pattern("1997-01-01", "A", pathGSP, "csv",79,"increment:7:1")
-    sox.add "YSGVFD@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",80,"increment:7:1")
-    sox.add "YSGVML@HI.A",          Series.load_pattern("1997-01-01", "A", pathGSP, "csv",81,"increment:7:1")
-    sox.add "YS_GVSL@HI.A",         Series.load_pattern("1997-01-01", "A", pathGSP, "csv",82,"increment:7:1") 
 
-    sox.write_xls
-    #NotificationMailer.deliver_new_download_notification "Gross State Product (rake gsp_upd)", sox.output_summary
-  end
+	gsp_defs = {
+		"YS@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 2, :col => "increment:7:1", :frequency => "A" }|, 
+		"YS_PR@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 3, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAG@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 4, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAGFA@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 5, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAGFF@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 6, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMI@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 7, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMIOG@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 8, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMIMI@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 9, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMISP@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 10, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSUT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 11, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSCT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 12, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMN@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 13, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDR@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 14, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRWD@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 15, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRNM@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 16, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRPM@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 17, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRFB@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 18, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRMC@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 19, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRCM@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 20, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDREL@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 21, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRMV@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 22, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRTR@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 23, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRFR@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 24, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNDRMS@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 25, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNND@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 26, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDFD@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 27, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDXX@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 28, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDAP@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 29, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDPA@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 30, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDPR@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 31, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDPT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 32, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDCH@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 33, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMNNDPL@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 34, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSWT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 35, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSRT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 36, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTW@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 37, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWTA@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 38, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWTR@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 39, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWTW@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 40, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWTT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 41, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWTG@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 42, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWPL@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 43, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWSP@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 44, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSTWWH@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 45, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSIF@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 46, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSIFPB@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 47, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSIFMP@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 48, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSIFBC@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 49, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSIFDP@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 50, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSFI@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 51, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSFIMC@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 52, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSFISE@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 53, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSFIIN@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 54, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSFIOT@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 55, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSRE@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 56, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSRERE@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 57, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSRERL@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 58, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSPS@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 59, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSPSLS@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 60, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSPSCO@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 61, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSPSOS@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 62, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSMA@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 63, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAD@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 64, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSADAD@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 65, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSADWM@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 66, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSED@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 67, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSHC@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 68, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSHCAM@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 69, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSHCHO@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 70, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSHCSO@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 71, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAE@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 72, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAEPF@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 73, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAERE@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 74, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAF@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 75, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAFAC@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 76, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSAFFD@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 77, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSOS@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 78, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSGV@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 79, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSGVFD@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 80, :col => "increment:7:1", :frequency => "A" }|, 
+		"YSGVML@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 81, :col => "increment:7:1", :frequency => "A" }|, 
+		"YS_GVSL@HI.A" => %Q|Series.load_from_download  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 82, :col => "increment:7:1", :frequency => "A" }|
+	}
+
+	p = Packager.new
+	p.add_definitions gsp_defs
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"
+
 end
-
-###*******************************************************************
-
-
 
 task :inc_upd_q => :environment do
-  require "Spreadsheet"
-  pathSQ5N          = "/Volumes/UHEROwork/data/rawdata/BEA_SQ5N.csv"        #quarterly state personal income
-  
-  output_path_inc   = "/Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"
-  dsdSQ5N           = DataSourceDownload.get pathSQ5N
+	inc_defs = {
+		"Y@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 2, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YL@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 3, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YSOCSEC@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 4, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YSOCSECPR@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 5, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YSOCSECEM@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 6, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YRESADJ@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YNETR@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 8, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YDIV@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 9, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YTRNSF@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 10, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YTRNSFUI@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 11, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YTRNSFOT@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 12, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YWAGE@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 13, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YOTLAB@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 14, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YOTLABPEN@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 15, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YOTLABSS@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 16, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YPROP@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 17, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YPROPFA@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 18, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YPROPNF@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 19, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLAGFA@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 20, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YL_NF@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 21, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YL_PR@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 22, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLAGFF@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 23, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLMI@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 24, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLUT@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 25, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLCT@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 26, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLMN@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 27, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLMNDR@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 28, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLMNND@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 29, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLWT@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 30, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLRT@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 31, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLTW@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 32, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLIF@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 33, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLFI@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 34, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLRE@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 35, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLPS@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 36, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLMA@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 37, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLAD@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 38, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLED@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 39, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLHC@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 40, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLAE@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 41, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLAF@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 42, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLOS@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 43, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLGV@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 44, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLGVFD@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 45, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YLGVML@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 46, :col => "increment:4:1", :frequency => "Q" }|, 
+		"YL_GVSL@HI.Q" => %Q|Series.load_from_download  "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 47, :col => "increment:4:1", :frequency => "Q" }|
+	}
 
-  if dsdSQ5N.download_changed?
-    sox = SeriesOutputXls.new(output_path_inc)
-    
-    sox.add "Y@HI.Q",               Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",2,"increment:4:1")
-    sox.add "YL@HI.Q",              Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",3,"increment:4:1")
-    sox.add "YSOCSEC@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",4,"increment:4:1")
-    sox.add "YSOCSECPR@HI.Q",       Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",5,"increment:4:1")
-    sox.add "YSOCSECEM@HI.Q",       Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",6,"increment:4:1")
-    sox.add "YRESADJ@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",7,"increment:4:1")
-    sox.add "YNETR@HI.Q",           Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",8,"increment:4:1")
-    sox.add "YDIV@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",9,"increment:4:1")
-    sox.add "YTRNSF@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",10,"increment:4:1")
-    sox.add "YTRNSFUI@HI.Q",        Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",11,"increment:4:1")
-    sox.add "YTRNSFOT@HI.Q",        Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",12,"increment:4:1")
-    sox.add "YWAGE@HI.Q",           Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",13,"increment:4:1")
-    sox.add "YOTLAB@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",14,"increment:4:1")
-    sox.add "YOTLABPEN@HI.Q",       Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",15,"increment:4:1")
-    sox.add "YOTLABSS@HI.Q",        Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",16,"increment:4:1")
-    sox.add "YPROP@HI.Q",           Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",17,"increment:4:1")
-    sox.add "YPROPFA@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",18,"increment:4:1")
-    sox.add "YPROPNF@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",19,"increment:4:1")
-    sox.add "YLAGFA@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",20,"increment:4:1")
-    sox.add "YL_NF@HI.Q",           Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",21,"increment:4:1")
-    sox.add "YL_PR@HI.Q",           Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",22,"increment:4:1")
-    sox.add "YLAGFF@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",23,"increment:4:1")
-    sox.add "YLMI@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",24,"increment:4:1")
-    sox.add "YLUT@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",25,"increment:4:1")
-    sox.add "YLCT@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",26,"increment:4:1")
-    sox.add "YLMN@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",27,"increment:4:1")
-    sox.add "YLMNDR@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",28,"increment:4:1")
-    sox.add "YLMNND@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",29,"increment:4:1")
-    sox.add "YLWT@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",30,"increment:4:1")
-    sox.add "YLRT@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",31,"increment:4:1")
-    sox.add "YLTW@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",32,"increment:4:1")
-    sox.add "YLIF@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",33,"increment:4:1")
-    sox.add "YLFI@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",34,"increment:4:1")
-    sox.add "YLRE@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",35,"increment:4:1")
-    sox.add "YLPS@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",36,"increment:4:1")
-    sox.add "YLMA@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",37,"increment:4:1")
-    sox.add "YLAD@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",38,"increment:4:1")
-    sox.add "YLED@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",39,"increment:4:1")
-    sox.add "YLHC@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",40,"increment:4:1")
-    sox.add "YLAE@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",41,"increment:4:1")
-    sox.add "YLAF@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",42,"increment:4:1")
-    sox.add "YLOS@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",43,"increment:4:1")
-    sox.add "YLGV@HI.Q",            Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",44,"increment:4:1")
-    sox.add "YLGVFD@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",45,"increment:4:1")
-    sox.add "YLGVML@HI.Q",          Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",46,"increment:4:1")
-    sox.add "YL_GVSL@HI.Q",         Series.load_pattern("1990-01-01", "Q", pathSQ5N, "csv",47,"increment:4:1")
-    
-    sox.write_xls
-    #NotificationMailer.deliver_new_download_notification "Quarterly State Personal Income (rake inc_upd_q)", sox.output_summary
-  end
+	p = Packager.new
+	p.add_definitions inc_defs
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"
 end
-
-
-###*******************************************************************
-
-
-
 
 task :inc_upd_a => :environment do
-  require "Spreadsheet"
-  pathSA05N         = "/Volumes/UHEROwork/data/rawdata/BEA_SA05N.csv"       #annual state personal income
-  pathCA05N         = "/Volumes/UHEROwork/data/rawdata/BEA_CA05N.csv"       #local area personal income
-  
-  output_path_HIQ     = "/Volumes/UHEROwork/data/bea/update/inc_upd_HIQ_NEW.xls"
-  output_path_HAWa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_HAWa_NEW.xls"
-  output_path_HONa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_HONa_NEW.xls"
-  output_path_KAUa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_KAUa_NEW.xls"
-  output_path_MAUa    = "/Volumes/UHEROwork/data/bea/update/inc_upd_MAUa_NEW.xls"  
-  
-  dsdSA05N          = DataSourceDownload.get pathSA05N
-  dsdCA05N          = DataSourceDownload.get pathCA05N
-  
-  if dsdSA05N.download_changed? || dsdCA05N.download_changed?
-    sox = SeriesOutputXls.new(output_path_HIQ)
-    
-    sox.add "Y@HI.A",                 Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",2,"increment:4:1")
-    sox.add "NRBEA@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",3,"increment:4:1")
-    sox.add "YPCBEA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",4,"increment:4:1")
-    sox.add "YL@HI.A",                Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",5,"increment:4:1")
-    sox.add "YSOCSEC@HI.A",           Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",6,"increment:4:1")
-    sox.add "YSOCSECPR@HI.A",         Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",7,"increment:4:1")
-    sox.add "YSOCSECEM@HI.A",         Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",8,"increment:4:1")
-    sox.add "YRESADJ@HI.A",           Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",9,"increment:4:1")
-    sox.add "YNETR@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",10,"increment:4:1")
-    sox.add "YDIV@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",11,"increment:4:1")
-    sox.add "YTRNSF@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",12,"increment:4:1")
-    sox.add "YWAGE@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",13,"increment:4:1")
-    sox.add "YOTLAB@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",14,"increment:4:1")
-    sox.add "YOTLABPEN@HI.A",         Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",15,"increment:4:1")
-    sox.add "YOTLABSS@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",16,"increment:4:1")
-    sox.add "YPROP@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",17,"increment:4:1")
-    sox.add "YPROPFA@HI.A",           Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",18,"increment:4:1")
-    sox.add "YPROPNF@HI.A",           Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",19,"increment:4:1")
-    sox.add "YLAGFA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",20,"increment:4:1")
-    sox.add "YL_NF@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",21,"increment:4:1")
-    sox.add "YL_PR@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",22,"increment:4:1")
-    sox.add "YLAGFF@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",23,"increment:4:1")
-    sox.add "YLAGFFFO@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",24,"increment:4:1")
-    sox.add "YLAGFFFS@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",25,"increment:4:1")
-    sox.add "YLAGFFSP@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",26,"increment:4:1")
-    sox.add "YLMI@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",27,"increment:4:1")
-    sox.add "YLMIOG@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",28,"increment:4:1")
-    sox.add "YLMIMI@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",29,"increment:4:1")
-    sox.add "YLMISP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",30,"increment:4:1")
-    sox.add "YLUT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",31,"increment:4:1")
-    sox.add "YLCT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",32,"increment:4:1")
-    sox.add "YLCTBL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",33,"increment:4:1")
-    sox.add "YLCTHV@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",34,"increment:4:1")
-    sox.add "YLCTSP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",35,"increment:4:1")
-    sox.add "YLMN@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",36,"increment:4:1")
-    sox.add "YLMNDR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",37,"increment:4:1")
-    sox.add "YLMNDRWD@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",38,"increment:4:1")
-    sox.add "YLMNDRNM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",39,"increment:4:1")
-    sox.add "YLMNDRPM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",40,"increment:4:1")
-    sox.add "YLMNDRFB@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",41,"increment:4:1")
-    sox.add "YLMNDRMC@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",42,"increment:4:1")
-    sox.add "YLMNDRCM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",43,"increment:4:1")
-    sox.add "YLMNDREL@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",44,"increment:4:1")
-    sox.add "YLMNDRMV@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",45,"increment:4:1")
-    sox.add "YLMNDRTR@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",46,"increment:4:1")
-    sox.add "YLMNDRFR@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",47,"increment:4:1")
-    sox.add "YLMNDRMS@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",48,"increment:4:1")
-    sox.add "YLMNND@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",49,"increment:4:1")
-    sox.add "YLMNNDFD@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",50,"increment:4:1")
-    sox.add "YLMNNDBV@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",51,"increment:4:1")
-    sox.add "YLMNNDXM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",52,"increment:4:1")
-    sox.add "YLMNNDXP@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",53,"increment:4:1")
-    sox.add "YLMNNDAP@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",54,"increment:4:1")
-    sox.add "YLMNNDLT@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",55,"increment:4:1")
-    sox.add "YLMNNDPA@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",56,"increment:4:1")
-    sox.add "YLMNNDPR@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",57,"increment:4:1")
-    sox.add "YLMNNDPT@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",58,"increment:4:1")
-    sox.add "YLMNNDCH@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",59,"increment:4:1")
-    sox.add "YLMNNDPL@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",60,"increment:4:1")
-    sox.add "YLWT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",61,"increment:4:1")
-    sox.add "YLRT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",62,"increment:4:1")
-    sox.add "YLRTMV@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",63,"increment:4:1")
-    sox.add "YLRTFR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",64,"increment:4:1")
-    sox.add "YLRTEL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",65,"increment:4:1")
-    sox.add "YLRTBL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",66,"increment:4:1")
-    sox.add "YLRTFD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",67,"increment:4:1")
-    sox.add "YLRTHC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",68,"increment:4:1")
-    sox.add "YLRTGA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",69,"increment:4:1")
-    sox.add "YLRTCL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",70,"increment:4:1")
-    sox.add "YLRTSP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",71,"increment:4:1")
-    sox.add "YLRTGM@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",72,"increment:4:1")
-    sox.add "YLRTMS@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",73,"increment:4:1")
-    sox.add "YLRTOT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",74,"increment:4:1")
-    sox.add "YLTW@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",75,"increment:4:1")
-    sox.add "YLTWTA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",76,"increment:4:1")
-    sox.add "YLTWTR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",77,"increment:4:1")
-    sox.add "YLTWTW@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",78,"increment:4:1")
-    sox.add "YLTWTT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",79,"increment:4:1")
-    sox.add "YLTWTG@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",80,"increment:4:1")
-    sox.add "YLTWPL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",81,"increment:4:1")
-    sox.add "YLTWSC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",82,"increment:4:1")
-    sox.add "YLTWSP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",83,"increment:4:1")
-    sox.add "YLTWCU@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",84,"increment:4:1")
-    sox.add "YLTWWH@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",85,"increment:4:1")
-    sox.add "YLIF@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",86,"increment:4:1")
-    sox.add "YLIFPB@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",87,"increment:4:1")
-    sox.add "YLIFMP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",88,"increment:4:1")
-    sox.add "YLIFBC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",89,"increment:4:1")
-    sox.add "YLIFIT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",90,"increment:4:1")
-    sox.add "YLIFTC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",91,"increment:4:1")
-    sox.add "YLIFDP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",92,"increment:4:1")
-    sox.add "YLIFOT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",93,"increment:4:1")
-    sox.add "YLFI@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",94,"increment:4:1")
-    sox.add "YLFIMO@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",95,"increment:4:1")
-    sox.add "YLFICR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",96,"increment:4:1")
-    sox.add "YLFISE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",97,"increment:4:1")
-    sox.add "YLFIIN@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",98,"increment:4:1")
-    sox.add "YLFIOT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",99,"increment:4:1")
-    sox.add "YLRE@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",100,"increment:4:1")
-    sox.add "YLRERE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",101,"increment:4:1")
-    sox.add "YLRERL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",102,"increment:4:1")
-    sox.add "YLRELE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",103,"increment:4:1")
-    sox.add "YLPS@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",104,"increment:4:1")
-    sox.add "YLMA@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",105,"increment:4:1")
-    sox.add "YLAD@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",106,"increment:4:1")
-    sox.add "YLADAD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",107,"increment:4:1")
-    sox.add "YLADWM@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",108,"increment:4:1")
-    sox.add "YLED@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",109,"increment:4:1")
-    sox.add "YLHC@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",110,"increment:4:1")
-    sox.add "YLHCAM@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",111,"increment:4:1")
-    sox.add "YLHCHO@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",112,"increment:4:1")
-    sox.add "YLHCNR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",113,"increment:4:1")
-    sox.add "YLHCSO@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",114,"increment:4:1")
-    sox.add "YLAE@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",115,"increment:4:1")
-    sox.add "YLAEPF@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",116,"increment:4:1")
-    sox.add "YLAEMU@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",117,"increment:4:1")
-    sox.add "YLAERE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",118,"increment:4:1")
-    sox.add "YLAF@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",119,"increment:4:1")
-    sox.add "YLAFAC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",120,"increment:4:1")
-    sox.add "YLAFFD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",121,"increment:4:1")
-    sox.add "YLOS@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",122,"increment:4:1")
-    sox.add "YLOSRP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",123,"increment:4:1")
-    sox.add "YLOSPL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",124,"increment:4:1")
-    sox.add "YLOSMA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",125,"increment:4:1")
-    sox.add "YLOSHH@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",126,"increment:4:1")
-    sox.add "YLGV@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",127,"increment:4:1")
-    sox.add "YLGVFD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",128,"increment:4:1")
-    sox.add "YLGVML@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",129,"increment:4:1")
-    sox.add "YL_GVSL@HI.A",           Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",130,"increment:4:1")
-    sox.add "YLGVST@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",131,"increment:4:1")
-    sox.add "YLGVLC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",132,"increment:4:1")
-#    sox.add "YLAGFFOT@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA05N, "csv",999,"increment:999:1")
+	inc_hi_a = {
+		"Y@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 2, :col => "increment:4:1", :frequency => "A" }|, 
+		"NRBEA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 3, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPCBEA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 4, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 5, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSEC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 6, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECPR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 7, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECEM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 8, :col => "increment:4:1", :frequency => "A" }|, 
+		"YRESADJ@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 9, :col => "increment:4:1", :frequency => "A" }|, 
+		"YNETR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 10, :col => "increment:4:1", :frequency => "A" }|, 
+		"YDIV@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 11, :col => "increment:4:1", :frequency => "A" }|, 
+		"YTRNSF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 12, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 13, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 14, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 15, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 16, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 17, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPFA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 18, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPNF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 19, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 20, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_NF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 21, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_PR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 22, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 23, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFO@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 24, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFS@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 25, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFSP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 26, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMI@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 27, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIOG@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 28, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIMI@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 29, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMISP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 30, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLUT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 31, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 32, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTBL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 33, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTHV@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 34, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTSP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 35, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMN@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 36, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 37, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRWD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 38, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRNM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 39, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRPM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 40, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFB@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 41, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 42, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRCM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 43, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDREL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 44, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMV@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 45, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRTR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 46, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 47, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMS@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 48, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNND@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 49, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDFD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 50, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDBV@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 51, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 52, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 53, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDAP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 54, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDLT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 55, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 56, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 57, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 58, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDCH@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 59, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 60, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLWT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 61, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 62, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMV@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 63, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 64, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTEL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 65, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTBL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 66, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 67, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTHC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 68, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 69, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTCL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 70, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTSP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 71, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 72, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMS@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 73, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 74, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTW@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 75, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 76, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 77, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTW@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 78, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 79, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTG@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 80, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWPL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 81, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 82, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 83, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWCU@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 84, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWWH@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 85, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 86, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFPB@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 87, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFMP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 88, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFBC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 89, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFIT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 90, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFTC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 91, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFDP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 92, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 93, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFI@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 94, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIMO@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 95, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFICR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 96, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFISE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 97, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIIN@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 98, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 99, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 100, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 101, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 102, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRELE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 103, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLPS@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 104, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 105, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 106, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADAD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 107, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADWM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 108, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLED@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 109, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 110, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCAM@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 111, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCHO@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 112, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCNR@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 113, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCSO@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 114, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 115, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEPF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 116, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEMU@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 117, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAERE@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 118, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAF@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 119, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFAC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 120, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFFD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 121, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOS@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 122, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSRP@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 123, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSPL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 124, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSMA@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 125, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSHH@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 126, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGV@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 127, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVFD@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 128, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVML@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 129, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_GVSL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 130, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVST@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 131, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVLC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 132, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
+	}
 
- sox.write_xls
+	inc_haw_a = {
+		"Y@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 134, :col => "increment:4:1", :frequency => "A" }|, 
+		"NRBEA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 135, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPCBEA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 136, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 137, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSEC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 138, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECPR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 139, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECEM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 140, :col => "increment:4:1", :frequency => "A" }|, 
+		"YRESADJ@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 141, :col => "increment:4:1", :frequency => "A" }|, 
+		"YNETR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 142, :col => "increment:4:1", :frequency => "A" }|, 
+		"YDIV@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 143, :col => "increment:4:1", :frequency => "A" }|, 
+		"YTRNSF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 144, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 145, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 146, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 147, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 148, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 149, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPFA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 150, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPNF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 151, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 152, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_NF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 153, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_PR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 154, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 155, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFO@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 156, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFS@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 157, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFSP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 158, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMI@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 159, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIOG@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 160, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIMI@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 161, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMISP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 162, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLUT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 163, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 164, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTBL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 165, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTHV@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 166, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTSP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 167, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMN@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 168, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 169, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRWD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 170, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRNM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 171, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRPM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 172, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFB@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 173, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 174, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRCM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 175, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDREL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 176, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMV@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 177, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRTR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 178, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 179, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMS@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 180, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNND@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 181, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDFD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 182, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDBV@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 183, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 184, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 185, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDAP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 186, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDLT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 187, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 188, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 189, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 190, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDCH@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 191, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 192, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLWT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 193, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 194, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMV@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 195, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 196, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTEL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 197, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTBL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 198, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 199, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTHC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 200, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 201, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTCL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 202, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTSP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 203, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 204, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMS@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 205, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTOT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 206, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTW@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 207, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 208, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 209, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTW@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 210, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 211, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTG@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 212, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWPL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 213, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 214, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 215, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWCU@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 216, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWWH@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 217, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 218, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFPB@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 219, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFMP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 220, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFBC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 221, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFIT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 222, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFTC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 223, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFDP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 224, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFOT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 225, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFI@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 226, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIMO@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 227, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFICR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 228, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFISE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 229, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIIN@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 230, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIOT@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 231, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 232, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 233, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 234, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRELE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 235, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLPS@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 236, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 237, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 238, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADAD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 239, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADWM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 240, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLED@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 241, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 242, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCAM@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 243, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCHO@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 244, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCNR@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 245, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCSO@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 246, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 247, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEPF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 248, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEMU@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 249, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAERE@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 250, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAF@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 251, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFAC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 252, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFFD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 253, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOS@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 254, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSRP@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 255, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSPL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 256, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSMA@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 257, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSHH@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 258, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGV@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 259, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVFD@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 260, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVML@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 261, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_GVSL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 262, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVST@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 263, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVLC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 264, :col => "increment:4:1", :frequency => "A" }|,
+	}
+	
+	inc_hon_a = {
+		"Y@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 266, :col => "increment:4:1", :frequency => "A" }|, 
+		"NRBEA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 267, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPCBEA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 268, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 269, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSEC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 270, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECPR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 271, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECEM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 272, :col => "increment:4:1", :frequency => "A" }|, 
+		"YRESADJ@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 273, :col => "increment:4:1", :frequency => "A" }|, 
+		"YNETR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 274, :col => "increment:4:1", :frequency => "A" }|, 
+		"YDIV@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 275, :col => "increment:4:1", :frequency => "A" }|, 
+		"YTRNSF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 276, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 277, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 278, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 279, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 280, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 281, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPFA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 282, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPNF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 283, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 284, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_NF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 285, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_PR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 286, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 287, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFO@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 288, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFS@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 289, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFSP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 290, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMI@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 291, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIOG@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 292, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIMI@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 293, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMISP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 294, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLUT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 295, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 296, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTBL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 297, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTHV@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 298, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTSP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 299, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMN@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 300, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 301, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRWD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 302, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRNM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 303, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRPM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 304, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFB@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 305, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 306, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRCM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 307, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDREL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 308, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMV@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 309, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRTR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 310, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 311, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMS@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 312, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNND@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 313, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDFD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 314, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDBV@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 315, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 316, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 317, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDAP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 318, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDLT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 319, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 320, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 321, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 322, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDCH@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 323, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 324, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLWT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 325, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 326, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMV@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 327, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 328, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTEL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 329, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTBL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 330, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 331, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTHC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 332, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 333, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTCL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 334, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTSP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 335, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 336, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMS@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 337, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTOT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 338, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTW@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 339, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 340, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 341, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTW@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 342, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 343, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTG@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 344, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWPL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 345, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 346, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 347, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWCU@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 348, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWWH@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 349, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 350, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFPB@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 351, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFMP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 352, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFBC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 353, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFIT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 354, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFTC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 355, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFDP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 356, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFOT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 357, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFI@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 358, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIMO@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 359, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFICR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 360, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFISE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 361, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIIN@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 362, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIOT@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 363, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 364, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 365, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 366, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRELE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 367, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLPS@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 368, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 369, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 370, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADAD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 371, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADWM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 372, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLED@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 373, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 374, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCAM@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 375, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCHO@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 376, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCNR@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 377, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCSO@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 378, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 379, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEPF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 380, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEMU@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 381, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAERE@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 382, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAF@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 383, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFAC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 384, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFFD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 385, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOS@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 386, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSRP@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 387, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSPL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 388, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSMA@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 389, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSHH@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 390, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGV@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 391, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVFD@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 392, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVML@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 393, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_GVSL@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 394, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVST@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 395, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVLC@HON.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 396, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	inc_kau_a = {
+		"Y@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 398, :col => "increment:4:1", :frequency => "A" }|, 
+		"NRBEA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 399, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPCBEA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 400, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 401, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSEC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 402, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECPR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 403, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECEM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 404, :col => "increment:4:1", :frequency => "A" }|, 
+		"YRESADJ@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 405, :col => "increment:4:1", :frequency => "A" }|, 
+		"YNETR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 406, :col => "increment:4:1", :frequency => "A" }|, 
+		"YDIV@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 407, :col => "increment:4:1", :frequency => "A" }|, 
+		"YTRNSF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 408, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 409, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 410, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 411, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 412, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 413, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPFA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 414, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPNF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 415, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 416, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_NF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 417, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_PR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 418, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 419, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFO@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 420, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFS@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 421, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFSP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 422, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMI@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 423, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIOG@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 424, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIMI@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 425, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMISP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 426, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLUT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 427, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 428, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTBL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 429, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTHV@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 430, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTSP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 431, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMN@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 432, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 433, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRWD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 434, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRNM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 435, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRPM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 436, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFB@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 437, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 438, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRCM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 439, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDREL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 440, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMV@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 441, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRTR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 442, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 443, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMS@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 444, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNND@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 445, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDFD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 446, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDBV@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 447, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 448, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 449, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDAP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 450, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDLT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 451, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 452, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 453, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 454, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDCH@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 455, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 456, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLWT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 457, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 458, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMV@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 459, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 460, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTEL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 461, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTBL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 462, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 463, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTHC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 464, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 465, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTCL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 466, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTSP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 467, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 468, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMS@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 469, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTOT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 470, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTW@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 471, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 472, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 473, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTW@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 474, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 475, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTG@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 476, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWPL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 477, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 478, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 479, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWCU@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 480, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWWH@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 481, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 482, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFPB@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 483, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFMP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 484, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFBC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 485, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFIT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 486, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFTC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 487, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFDP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 488, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFOT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 489, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFI@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 490, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIMO@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 491, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFICR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 492, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFISE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 493, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIIN@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 494, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIOT@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 495, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 496, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 497, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 498, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRELE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 499, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLPS@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 500, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 501, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 502, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADAD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 503, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADWM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 504, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLED@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 505, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 506, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCAM@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 507, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCHO@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 508, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCNR@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 509, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCSO@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 510, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 511, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEPF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 512, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEMU@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 513, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAERE@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 514, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAF@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 515, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFAC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 516, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFFD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 517, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOS@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 518, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSRP@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 519, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSPL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 520, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSMA@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 521, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSHH@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 522, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGV@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 523, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVFD@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 524, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVML@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 525, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_GVSL@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 526, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVST@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 527, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVLC@KAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 528, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	inc_mau_a = {
+		"Y@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 530, :col => "increment:4:1", :frequency => "A" }|, 
+		"NRBEA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 531, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPCBEA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 532, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 533, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSEC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 534, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECPR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 535, :col => "increment:4:1", :frequency => "A" }|, 
+		"YSOCSECEM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 536, :col => "increment:4:1", :frequency => "A" }|, 
+		"YRESADJ@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 537, :col => "increment:4:1", :frequency => "A" }|, 
+		"YNETR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 538, :col => "increment:4:1", :frequency => "A" }|, 
+		"YDIV@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 539, :col => "increment:4:1", :frequency => "A" }|, 
+		"YTRNSF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 540, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 541, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 542, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 543, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 544, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 545, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPFA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 546, :col => "increment:4:1", :frequency => "A" }|, 
+		"YPROPNF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 547, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 548, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_NF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 549, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_PR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 550, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 551, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFO@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 552, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFFS@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 553, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAGFFSP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 554, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMI@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 555, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIOG@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 556, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMIMI@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 557, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMISP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 558, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLUT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 559, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 560, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTBL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 561, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTHV@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 562, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLCTSP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 563, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMN@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 564, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 565, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRWD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 566, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRNM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 567, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRPM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 568, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFB@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 569, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 570, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRCM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 571, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDREL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 572, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMV@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 573, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRTR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 574, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRFR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 575, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNDRMS@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 576, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNND@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 577, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDFD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 578, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDBV@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 579, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 580, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDXP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 581, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDAP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 582, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDLT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 583, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 584, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 585, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 586, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDCH@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 587, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMNNDPL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 588, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLWT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 589, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 590, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMV@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 591, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 592, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTEL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 593, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTBL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 594, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTFD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 595, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTHC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 596, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 597, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTCL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 598, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTSP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 599, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTGM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 600, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTMS@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 601, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRTOT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 602, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTW@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 603, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 604, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 605, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTW@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 606, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 607, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWTG@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 608, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWPL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 609, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 610, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWSP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 611, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWCU@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 612, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLTWWH@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 613, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 614, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFPB@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 615, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFMP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 616, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFBC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 617, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFIT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 618, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFTC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 619, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFDP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 620, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLIFOT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 621, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFI@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 622, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIMO@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 623, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFICR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 624, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFISE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 625, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIIN@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 626, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLFIOT@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 627, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 628, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 629, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRERL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 630, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLRELE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 631, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLPS@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 632, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLMA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 633, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 634, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADAD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 635, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLADWM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 636, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLED@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 637, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 638, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCAM@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 639, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCHO@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 640, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCNR@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 641, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLHCSO@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 642, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 643, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEPF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 644, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAEMU@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 645, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAERE@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 646, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAF@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 647, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFAC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 648, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLAFFD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 649, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOS@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 650, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSRP@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 651, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSPL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 652, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSMA@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 653, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLOSHH@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 654, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGV@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 655, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVFD@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 656, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVML@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 657, :col => "increment:4:1", :frequency => "A" }|, 
+		"YL_GVSL@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 658, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVST@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 659, :col => "increment:4:1", :frequency => "A" }|, 
+		"YLGVLC@MAU.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 660, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	p = Packager.new
+	p.add_definitions inc_hi_a
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_HIQ_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions inc_haw_a
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_HAWa_NEW.xls"
 
-sox = SeriesOutputXls.new(output_path_HAWa)#,true)
+	p = Packager.new
+	p.add_definitions inc_hon_a
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_HONa_NEW.xls"
 
-    #CA05N
+	p = Packager.new
+	p.add_definitions inc_kau_a
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_KAUa_NEW.xls"
 
-    sox.add "Y@HAW.A",                Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",134,"increment:4:1")
-    sox.add "NRBEA@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",135,"increment:4:1")
-    sox.add "YPCBEA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",136,"increment:4:1")
-    sox.add "YL@HAW.A",               Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",137,"increment:4:1")
-    sox.add "YSOCSEC@HAW.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",138,"increment:4:1")
-    sox.add "YSOCSECPR@HAW.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",139,"increment:4:1")
-    sox.add "YSOCSECEM@HAW.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",140,"increment:4:1")
-    sox.add "YRESADJ@HAW.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",141,"increment:4:1")
-    sox.add "YNETR@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",142,"increment:4:1")
-    sox.add "YDIV@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",143,"increment:4:1")
-    sox.add "YTRNSF@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",144,"increment:4:1")
-    sox.add "YWAGE@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",145,"increment:4:1")
-    sox.add "YOTLAB@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",146,"increment:4:1")
-    sox.add "YOTLABPEN@HAW.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",147,"increment:4:1")
-    sox.add "YOTLABSS@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",148,"increment:4:1")
-    sox.add "YPROP@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",149,"increment:4:1")
-    sox.add "YPROPFA@HAW.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",150,"increment:4:1")
-    sox.add "YPROPNF@HAW.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",151,"increment:4:1")
-    sox.add "YLAGFA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",152,"increment:4:1")
-    sox.add "YL_NF@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",153,"increment:4:1")
-    sox.add "YL_PR@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",154,"increment:4:1")
-    sox.add "YLAGFF@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",155,"increment:4:1")
-    sox.add "YLAGFFFO@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",156,"increment:4:1")
-    sox.add "YLAGFFFS@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",157,"increment:4:1")
-    sox.add "YLAGFFSP@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",158,"increment:4:1")
-    sox.add "YLMI@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",159,"increment:4:1")
-    sox.add "YLMIOG@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",160,"increment:4:1")
-    sox.add "YLMIMI@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",161,"increment:4:1")
-    sox.add "YLMISP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",162,"increment:4:1")
-    sox.add "YLUT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",163,"increment:4:1")
-    sox.add "YLCT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",164,"increment:4:1")
-    sox.add "YLCTBL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",165,"increment:4:1")
-    sox.add "YLCTHV@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",166,"increment:4:1")
-    sox.add "YLCTSP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",167,"increment:4:1")
-    sox.add "YLMN@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",168,"increment:4:1")
-    sox.add "YLMNDR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",169,"increment:4:1")
-    sox.add "YLMNDRWD@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",170,"increment:4:1")
-    sox.add "YLMNDRNM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",171,"increment:4:1")
-    sox.add "YLMNDRPM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",172,"increment:4:1")
-    sox.add "YLMNDRFB@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",173,"increment:4:1")
-    sox.add "YLMNDRMC@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",174,"increment:4:1")
-    sox.add "YLMNDRCM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",175,"increment:4:1")
-    sox.add "YLMNDREL@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",176,"increment:4:1")
-    sox.add "YLMNDRMV@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",177,"increment:4:1")
-    sox.add "YLMNDRTR@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",178,"increment:4:1")
-    sox.add "YLMNDRFR@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",179,"increment:4:1")
-    sox.add "YLMNDRMS@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",180,"increment:4:1")
-    sox.add "YLMNND@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",181,"increment:4:1")
-    sox.add "YLMNNDFD@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",182,"increment:4:1")
-    sox.add "YLMNNDBV@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",183,"increment:4:1")
-    sox.add "YLMNNDXM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",184,"increment:4:1")
-    sox.add "YLMNNDXP@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",185,"increment:4:1")
-    sox.add "YLMNNDAP@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",186,"increment:4:1")
-    sox.add "YLMNNDLT@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",187,"increment:4:1")
-    sox.add "YLMNNDPA@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",188,"increment:4:1")
-    sox.add "YLMNNDPR@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",189,"increment:4:1")
-    sox.add "YLMNNDPT@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",190,"increment:4:1")
-    sox.add "YLMNNDCH@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",191,"increment:4:1")
-    sox.add "YLMNNDPL@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",192,"increment:4:1")
-    sox.add "YLWT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",193,"increment:4:1")
-    sox.add "YLRT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",194,"increment:4:1")
-    sox.add "YLRTMV@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",195,"increment:4:1")
-    sox.add "YLRTFR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",196,"increment:4:1")
-    sox.add "YLRTEL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",197,"increment:4:1")
-    sox.add "YLRTBL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",198,"increment:4:1")
-    sox.add "YLRTFD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",199,"increment:4:1")
-    sox.add "YLRTHC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",200,"increment:4:1")
-    sox.add "YLRTGA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",201,"increment:4:1")
-    sox.add "YLRTCL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",202,"increment:4:1")
-    sox.add "YLRTSP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",203,"increment:4:1")
-    sox.add "YLRTGM@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",204,"increment:4:1")
-    sox.add "YLRTMS@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",205,"increment:4:1")
-    sox.add "YLRTOT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",206,"increment:4:1")
-    sox.add "YLTW@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",207,"increment:4:1")
-    sox.add "YLTWTA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",208,"increment:4:1")
-    sox.add "YLTWTR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",209,"increment:4:1")
-    sox.add "YLTWTW@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",210,"increment:4:1")
-    sox.add "YLTWTT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",211,"increment:4:1")
-    sox.add "YLTWTG@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",212,"increment:4:1")
-    sox.add "YLTWPL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",213,"increment:4:1")
-    sox.add "YLTWSC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",214,"increment:4:1")
-    sox.add "YLTWSP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",215,"increment:4:1")
-    sox.add "YLTWCU@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",216,"increment:4:1")
-    sox.add "YLTWWH@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",217,"increment:4:1")
-    sox.add "YLIF@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",218,"increment:4:1")
-    sox.add "YLIFPB@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",219,"increment:4:1")
-    sox.add "YLIFMP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",220,"increment:4:1")
-    sox.add "YLIFBC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",221,"increment:4:1")
-    sox.add "YLIFIT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",222,"increment:4:1")
-    sox.add "YLIFTC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",223,"increment:4:1")
-    sox.add "YLIFDP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",224,"increment:4:1")
-    sox.add "YLIFOT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",225,"increment:4:1")
-    sox.add "YLFI@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",226,"increment:4:1")
-    sox.add "YLFIMO@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",227,"increment:4:1")
-    sox.add "YLFICR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",228,"increment:4:1")
-    sox.add "YLFISE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",229,"increment:4:1")
-    sox.add "YLFIIN@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",230,"increment:4:1")
-    sox.add "YLFIOT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",231,"increment:4:1")
-    sox.add "YLRE@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",232,"increment:4:1")
-    sox.add "YLRERE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",233,"increment:4:1")
-    sox.add "YLRERL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",234,"increment:4:1")
-    sox.add "YLRELE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",235,"increment:4:1")
-    sox.add "YLPS@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",236,"increment:4:1")
-    sox.add "YLMA@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",237,"increment:4:1")
-    sox.add "YLAD@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",238,"increment:4:1")
-    sox.add "YLADAD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",239,"increment:4:1")
-    sox.add "YLADWM@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",240,"increment:4:1")
-    sox.add "YLED@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",241,"increment:4:1")
-    sox.add "YLHC@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",242,"increment:4:1")
-    sox.add "YLHCAM@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",243,"increment:4:1")
-    sox.add "YLHCHO@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",244,"increment:4:1")
-    sox.add "YLHCNR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",245,"increment:4:1")
-    sox.add "YLHCSO@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",246,"increment:4:1")
-    sox.add "YLAE@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",247,"increment:4:1")
-    sox.add "YLAEPF@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",248,"increment:4:1")
-    sox.add "YLAEMU@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",249,"increment:4:1")
-    sox.add "YLAERE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",250,"increment:4:1")
-    sox.add "YLAF@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",251,"increment:4:1")
-    sox.add "YLAFAC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",252,"increment:4:1")
-    sox.add "YLAFFD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",253,"increment:4:1")
-    sox.add "YLOS@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",254,"increment:4:1")
-    sox.add "YLOSRP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",255,"increment:4:1")
-    sox.add "YLOSPL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",256,"increment:4:1")
-    sox.add "YLOSMA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",257,"increment:4:1")
-    sox.add "YLOSHH@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",258,"increment:4:1")
-    sox.add "YLGV@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",259,"increment:4:1")
-    sox.add "YLGVFD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",260,"increment:4:1")
-    sox.add "YLGVML@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",261,"increment:4:1")
-    sox.add "YL_GVSL@HAW.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",262,"increment:4:1")
-    sox.add "YLGVST@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",263,"increment:4:1")
-    sox.add "YLGVLC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",264,"increment:4:1")
+	p = Packager.new
+	p.add_definitions inc_mau_a
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_MAUa_NEW.xls"
 
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_HONa)#,true)
-
-    sox.add "Y@HON.A",                Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",266,"increment:4:1")
-    sox.add "NRBEA@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",267,"increment:4:1")
-    sox.add "YPCBEA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",268,"increment:4:1")
-    sox.add "YL@HON.A",               Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",269,"increment:4:1")
-    sox.add "YSOCSEC@HON.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",270,"increment:4:1")
-    sox.add "YSOCSECPR@HON.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",271,"increment:4:1")
-    sox.add "YSOCSECEM@HON.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",272,"increment:4:1")
-    sox.add "YRESADJ@HON.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",273,"increment:4:1")
-    sox.add "YNETR@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",274,"increment:4:1")
-    sox.add "YDIV@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",275,"increment:4:1")
-    sox.add "YTRNSF@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",276,"increment:4:1")
-    sox.add "YWAGE@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",277,"increment:4:1")
-    sox.add "YOTLAB@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",278,"increment:4:1")
-    sox.add "YOTLABPEN@HON.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",279,"increment:4:1")
-    sox.add "YOTLABSS@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",280,"increment:4:1")
-    sox.add "YPROP@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",281,"increment:4:1")
-    sox.add "YPROPFA@HON.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",282,"increment:4:1")
-    sox.add "YPROPNF@HON.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",283,"increment:4:1")
-    sox.add "YLAGFA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",284,"increment:4:1")
-    sox.add "YL_NF@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",285,"increment:4:1")
-    sox.add "YL_PR@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",286,"increment:4:1")
-    sox.add "YLAGFF@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",287,"increment:4:1")
-    sox.add "YLAGFFFO@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",288,"increment:4:1")
-    sox.add "YLAGFFFS@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",289,"increment:4:1")
-    sox.add "YLAGFFSP@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",290,"increment:4:1")
-    sox.add "YLMI@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",291,"increment:4:1")
-    sox.add "YLMIOG@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",292,"increment:4:1")
-    sox.add "YLMIMI@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",293,"increment:4:1")
-    sox.add "YLMISP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",294,"increment:4:1")
-    sox.add "YLUT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",295,"increment:4:1")
-    sox.add "YLCT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",296,"increment:4:1")
-    sox.add "YLCTBL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",297,"increment:4:1")
-    sox.add "YLCTHV@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",298,"increment:4:1")
-    sox.add "YLCTSP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",299,"increment:4:1")
-    sox.add "YLMN@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",300,"increment:4:1")
-    sox.add "YLMNDR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",301,"increment:4:1")
-    sox.add "YLMNDRWD@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",302,"increment:4:1")
-    sox.add "YLMNDRNM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",303,"increment:4:1")
-    sox.add "YLMNDRPM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",304,"increment:4:1")
-    sox.add "YLMNDRFB@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",305,"increment:4:1")
-    sox.add "YLMNDRMC@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",306,"increment:4:1")
-    sox.add "YLMNDRCM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",307,"increment:4:1")
-    sox.add "YLMNDREL@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",308,"increment:4:1")
-    sox.add "YLMNDRMV@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",309,"increment:4:1")
-    sox.add "YLMNDRTR@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",310,"increment:4:1")
-    sox.add "YLMNDRFR@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",311,"increment:4:1")
-    sox.add "YLMNDRMS@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",312,"increment:4:1")
-    sox.add "YLMNND@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",313,"increment:4:1")
-    sox.add "YLMNNDFD@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",314,"increment:4:1")
-    sox.add "YLMNNDBV@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",315,"increment:4:1")
-    sox.add "YLMNNDXM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",316,"increment:4:1")
-    sox.add "YLMNNDXP@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",317,"increment:4:1")
-    sox.add "YLMNNDAP@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",318,"increment:4:1")
-    sox.add "YLMNNDLT@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",319,"increment:4:1")
-    sox.add "YLMNNDPA@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",320,"increment:4:1")
-    sox.add "YLMNNDPR@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",321,"increment:4:1")
-    sox.add "YLMNNDPT@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",322,"increment:4:1")
-    sox.add "YLMNNDCH@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",323,"increment:4:1")
-    sox.add "YLMNNDPL@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",324,"increment:4:1")
-    sox.add "YLWT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",325,"increment:4:1")
-    sox.add "YLRT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",326,"increment:4:1")
-    sox.add "YLRTMV@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",327,"increment:4:1")
-    sox.add "YLRTFR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",328,"increment:4:1")
-    sox.add "YLRTEL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",329,"increment:4:1")
-    sox.add "YLRTBL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",330,"increment:4:1")
-    sox.add "YLRTFD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",331,"increment:4:1")
-    sox.add "YLRTHC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",332,"increment:4:1")
-    sox.add "YLRTGA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",333,"increment:4:1")
-    sox.add "YLRTCL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",334,"increment:4:1")
-    sox.add "YLRTSP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",335,"increment:4:1")
-    sox.add "YLRTGM@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",336,"increment:4:1")
-    sox.add "YLRTMS@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",337,"increment:4:1")
-    sox.add "YLRTOT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",338,"increment:4:1")
-    sox.add "YLTW@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",339,"increment:4:1")
-    sox.add "YLTWTA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",340,"increment:4:1")
-    sox.add "YLTWTR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",341,"increment:4:1")
-    sox.add "YLTWTW@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",342,"increment:4:1")
-    sox.add "YLTWTT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",343,"increment:4:1")
-    sox.add "YLTWTG@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",344,"increment:4:1")
-    sox.add "YLTWPL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",345,"increment:4:1")
-    sox.add "YLTWSC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",346,"increment:4:1")
-    sox.add "YLTWSP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",347,"increment:4:1")
-    sox.add "YLTWCU@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",348,"increment:4:1")
-    sox.add "YLTWWH@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",349,"increment:4:1")
-    sox.add "YLIF@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",350,"increment:4:1")
-    sox.add "YLIFPB@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",351,"increment:4:1")
-    sox.add "YLIFMP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",352,"increment:4:1")
-    sox.add "YLIFBC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",353,"increment:4:1")
-    sox.add "YLIFIT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",354,"increment:4:1")
-    sox.add "YLIFTC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",355,"increment:4:1")
-    sox.add "YLIFDP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",356,"increment:4:1")
-    sox.add "YLIFOT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",357,"increment:4:1")
-    sox.add "YLFI@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",358,"increment:4:1")
-    sox.add "YLFIMO@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",359,"increment:4:1")
-    sox.add "YLFICR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",360,"increment:4:1")
-    sox.add "YLFISE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",361,"increment:4:1")
-    sox.add "YLFIIN@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",362,"increment:4:1")
-    sox.add "YLFIOT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",363,"increment:4:1")
-    sox.add "YLRE@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",364,"increment:4:1")
-    sox.add "YLRERE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",365,"increment:4:1")
-    sox.add "YLRERL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",366,"increment:4:1")
-    sox.add "YLRELE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",367,"increment:4:1")
-    sox.add "YLPS@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",368,"increment:4:1")
-    sox.add "YLMA@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",369,"increment:4:1")
-    sox.add "YLAD@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",370,"increment:4:1")
-    sox.add "YLADAD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",371,"increment:4:1")
-    sox.add "YLADWM@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",372,"increment:4:1")
-    sox.add "YLED@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",373,"increment:4:1")
-    sox.add "YLHC@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",374,"increment:4:1")
-    sox.add "YLHCAM@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",375,"increment:4:1")
-    sox.add "YLHCHO@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",376,"increment:4:1")
-    sox.add "YLHCNR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",377,"increment:4:1")
-    sox.add "YLHCSO@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",378,"increment:4:1")
-    sox.add "YLAE@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",379,"increment:4:1")
-    sox.add "YLAEPF@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",380,"increment:4:1")
-    sox.add "YLAEMU@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",381,"increment:4:1")
-    sox.add "YLAERE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",382,"increment:4:1")
-    sox.add "YLAF@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",383,"increment:4:1")
-    sox.add "YLAFAC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",384,"increment:4:1")
-    sox.add "YLAFFD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",385,"increment:4:1")
-    sox.add "YLOS@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",386,"increment:4:1")
-    sox.add "YLOSRP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",387,"increment:4:1")
-    sox.add "YLOSPL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",388,"increment:4:1")
-    sox.add "YLOSMA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",389,"increment:4:1")
-    sox.add "YLOSHH@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",390,"increment:4:1")
-    sox.add "YLGV@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",391,"increment:4:1")
-    sox.add "YLGVFD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",392,"increment:4:1")
-    sox.add "YLGVML@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",393,"increment:4:1")
-    sox.add "YL_GVSL@HON.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",394,"increment:4:1")
-    sox.add "YLGVST@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",395,"increment:4:1")
-    sox.add "YLGVLC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",396,"increment:4:1")
-    
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_KAUa)#,true)
-
-    sox.add "Y@KAU.A",                Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",398,"increment:4:1")
-    sox.add "NRBEA@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",399,"increment:4:1")
-    sox.add "YPCBEA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",400,"increment:4:1")
-    sox.add "YL@KAU.A",               Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",401,"increment:4:1")
-    sox.add "YSOCSEC@KAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",402,"increment:4:1")
-    sox.add "YSOCSECPR@KAU.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",403,"increment:4:1")
-    sox.add "YSOCSECEM@KAU.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",404,"increment:4:1")
-    sox.add "YRESADJ@KAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",405,"increment:4:1")
-    sox.add "YNETR@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",406,"increment:4:1")
-    sox.add "YDIV@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",407,"increment:4:1")
-    sox.add "YTRNSF@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",408,"increment:4:1")
-    sox.add "YWAGE@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",409,"increment:4:1")
-    sox.add "YOTLAB@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",410,"increment:4:1")
-    sox.add "YOTLABPEN@KAU.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",411,"increment:4:1")
-    sox.add "YOTLABSS@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",412,"increment:4:1")
-    sox.add "YPROP@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",413,"increment:4:1")
-    sox.add "YPROPFA@KAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",414,"increment:4:1")
-    sox.add "YPROPNF@KAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",415,"increment:4:1")
-    sox.add "YLAGFA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",416,"increment:4:1")
-    sox.add "YL_NF@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",417,"increment:4:1")
-    sox.add "YL_PR@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",418,"increment:4:1")
-    sox.add "YLAGFF@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",419,"increment:4:1")
-    sox.add "YLAGFFFO@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",420,"increment:4:1")
-    sox.add "YLAGFFFS@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",421,"increment:4:1")
-    sox.add "YLAGFFSP@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",422,"increment:4:1")
-    sox.add "YLMI@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",423,"increment:4:1")
-    sox.add "YLMIOG@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",424,"increment:4:1")
-    sox.add "YLMIMI@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",425,"increment:4:1")
-    sox.add "YLMISP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",426,"increment:4:1")
-    sox.add "YLUT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",427,"increment:4:1")
-    sox.add "YLCT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",428,"increment:4:1")
-    sox.add "YLCTBL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",429,"increment:4:1")
-    sox.add "YLCTHV@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",430,"increment:4:1")
-    sox.add "YLCTSP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",431,"increment:4:1")
-    sox.add "YLMN@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",432,"increment:4:1")
-    sox.add "YLMNDR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",433,"increment:4:1")
-    sox.add "YLMNDRWD@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",434,"increment:4:1")
-    sox.add "YLMNDRNM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",435,"increment:4:1")
-    sox.add "YLMNDRPM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",436,"increment:4:1")
-    sox.add "YLMNDRFB@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",437,"increment:4:1")
-    sox.add "YLMNDRMC@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",438,"increment:4:1")
-    sox.add "YLMNDRCM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",439,"increment:4:1")
-    sox.add "YLMNDREL@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",440,"increment:4:1")
-    sox.add "YLMNDRMV@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",441,"increment:4:1")
-    sox.add "YLMNDRTR@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",442,"increment:4:1")
-    sox.add "YLMNDRFR@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",443,"increment:4:1")
-    sox.add "YLMNDRMS@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",444,"increment:4:1")
-    sox.add "YLMNND@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",445,"increment:4:1")
-    sox.add "YLMNNDFD@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",446,"increment:4:1")
-    sox.add "YLMNNDBV@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",447,"increment:4:1")
-    sox.add "YLMNNDXM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",448,"increment:4:1")
-    sox.add "YLMNNDXP@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",449,"increment:4:1")
-    sox.add "YLMNNDAP@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",450,"increment:4:1")
-    sox.add "YLMNNDLT@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",451,"increment:4:1")
-    sox.add "YLMNNDPA@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",452,"increment:4:1")
-    sox.add "YLMNNDPR@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",453,"increment:4:1")
-    sox.add "YLMNNDPT@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",454,"increment:4:1")
-    sox.add "YLMNNDCH@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",455,"increment:4:1")
-    sox.add "YLMNNDPL@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",456,"increment:4:1")
-    sox.add "YLWT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",457,"increment:4:1")
-    sox.add "YLRT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",458,"increment:4:1")
-    sox.add "YLRTMV@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",459,"increment:4:1")
-    sox.add "YLRTFR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",460,"increment:4:1")
-    sox.add "YLRTEL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",461,"increment:4:1")
-    sox.add "YLRTBL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",462,"increment:4:1")
-    sox.add "YLRTFD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",463,"increment:4:1")
-    sox.add "YLRTHC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",464,"increment:4:1")
-    sox.add "YLRTGA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",465,"increment:4:1")
-    sox.add "YLRTCL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",466,"increment:4:1")
-    sox.add "YLRTSP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",467,"increment:4:1")
-    sox.add "YLRTGM@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",468,"increment:4:1")
-    sox.add "YLRTMS@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",469,"increment:4:1")
-    sox.add "YLRTOT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",470,"increment:4:1")
-    sox.add "YLTW@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",471,"increment:4:1")
-    sox.add "YLTWTA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",472,"increment:4:1")
-    sox.add "YLTWTR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",473,"increment:4:1")
-    sox.add "YLTWTW@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",474,"increment:4:1")
-    sox.add "YLTWTT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",475,"increment:4:1")
-    sox.add "YLTWTG@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",476,"increment:4:1")
-    sox.add "YLTWPL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",477,"increment:4:1")
-    sox.add "YLTWSC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",478,"increment:4:1")
-    sox.add "YLTWSP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",479,"increment:4:1")
-    sox.add "YLTWCU@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",480,"increment:4:1")
-    sox.add "YLTWWH@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",481,"increment:4:1")
-    sox.add "YLIF@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",482,"increment:4:1")
-    sox.add "YLIFPB@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",483,"increment:4:1")
-    sox.add "YLIFMP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",484,"increment:4:1")
-    sox.add "YLIFBC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",485,"increment:4:1")
-    sox.add "YLIFIT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",486,"increment:4:1")
-    sox.add "YLIFTC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",487,"increment:4:1")
-    sox.add "YLIFDP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",488,"increment:4:1")
-    sox.add "YLIFOT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",489,"increment:4:1")
-    sox.add "YLFI@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",490,"increment:4:1")
-    sox.add "YLFIMO@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",491,"increment:4:1")
-    sox.add "YLFICR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",492,"increment:4:1")
-    sox.add "YLFISE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",493,"increment:4:1")
-    sox.add "YLFIIN@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",494,"increment:4:1")
-    sox.add "YLFIOT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",495,"increment:4:1")
-    sox.add "YLRE@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",496,"increment:4:1")
-    sox.add "YLRERE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",497,"increment:4:1")
-    sox.add "YLRERL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",498,"increment:4:1")
-    sox.add "YLRELE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",499,"increment:4:1")
-    sox.add "YLPS@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",500,"increment:4:1")
-    sox.add "YLMA@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",501,"increment:4:1")
-    sox.add "YLAD@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",502,"increment:4:1")
-    sox.add "YLADAD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",503,"increment:4:1")
-    sox.add "YLADWM@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",504,"increment:4:1")
-    sox.add "YLED@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",505,"increment:4:1")
-    sox.add "YLHC@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",506,"increment:4:1")
-    sox.add "YLHCAM@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",507,"increment:4:1")
-    sox.add "YLHCHO@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",508,"increment:4:1")
-    sox.add "YLHCNR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",509,"increment:4:1")
-    sox.add "YLHCSO@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",510,"increment:4:1")
-    sox.add "YLAE@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",511,"increment:4:1")
-    sox.add "YLAEPF@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",512,"increment:4:1")
-    sox.add "YLAEMU@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",513,"increment:4:1")
-    sox.add "YLAERE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",514,"increment:4:1")
-    sox.add "YLAF@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",515,"increment:4:1")
-    sox.add "YLAFAC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",516,"increment:4:1")
-    sox.add "YLAFFD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",517,"increment:4:1")
-    sox.add "YLOS@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",518,"increment:4:1")
-    sox.add "YLOSRP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",519,"increment:4:1")
-    sox.add "YLOSPL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",520,"increment:4:1")
-    sox.add "YLOSMA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",521,"increment:4:1")
-    sox.add "YLOSHH@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",522,"increment:4:1")
-    sox.add "YLGV@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",523,"increment:4:1")
-    sox.add "YLGVFD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",524,"increment:4:1")
-    sox.add "YLGVML@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",525,"increment:4:1")
-    sox.add "YL_GVSL@KAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",526,"increment:4:1")
-    sox.add "YLGVST@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",527,"increment:4:1")
-    sox.add "YLGVLC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",528,"increment:4:1")
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_MAUa)#,true)
-
-    sox.add "Y@MAU.A",                Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",530,"increment:4:1")
-    sox.add "NRBEA@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",531,"increment:4:1")
-    sox.add "YPCBEA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",532,"increment:4:1")
-    sox.add "YL@MAU.A",               Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",533,"increment:4:1")
-    sox.add "YSOCSEC@MAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",534,"increment:4:1")
-    sox.add "YSOCSECPR@MAU.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",535,"increment:4:1")
-    sox.add "YSOCSECEM@MAU.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",536,"increment:4:1")
-    sox.add "YRESADJ@MAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",537,"increment:4:1")
-    sox.add "YNETR@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",538,"increment:4:1")
-    sox.add "YDIV@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",539,"increment:4:1")
-    sox.add "YTRNSF@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",540,"increment:4:1")
-    sox.add "YWAGE@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",541,"increment:4:1")
-    sox.add "YOTLAB@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",542,"increment:4:1")
-    sox.add "YOTLABPEN@MAU.A",        Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",543,"increment:4:1")
-    sox.add "YOTLABSS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",544,"increment:4:1")
-    sox.add "YPROP@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",545,"increment:4:1")
-    sox.add "YPROPFA@MAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",546,"increment:4:1")
-    sox.add "YPROPNF@MAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",547,"increment:4:1")
-    sox.add "YLAGFA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",548,"increment:4:1")
-    sox.add "YL_NF@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",549,"increment:4:1")
-    sox.add "YL_PR@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",550,"increment:4:1")
-    sox.add "YLAGFF@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",551,"increment:4:1")
-    sox.add "YLAGFFFO@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",552,"increment:4:1")
-    sox.add "YLAGFFFS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",553,"increment:4:1")
-    sox.add "YLAGFFSP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",554,"increment:4:1")
-    sox.add "YLMI@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",555,"increment:4:1")
-    sox.add "YLMIOG@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",556,"increment:4:1")
-    sox.add "YLMIMI@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",557,"increment:4:1")
-    sox.add "YLMISP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",558,"increment:4:1")
-    sox.add "YLUT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",559,"increment:4:1")
-    sox.add "YLCT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",560,"increment:4:1")
-    sox.add "YLCTBL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",561,"increment:4:1")
-    sox.add "YLCTHV@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",562,"increment:4:1")
-    sox.add "YLCTSP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",563,"increment:4:1")
-    sox.add "YLMN@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",564,"increment:4:1")
-    sox.add "YLMNDR@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",565,"increment:4:1")
-    sox.add "YLMNDRWD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",566,"increment:4:1")
-    sox.add "YLMNDRNM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",567,"increment:4:1")
-    sox.add "YLMNDRPM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",568,"increment:4:1")
-    sox.add "YLMNDRFB@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",569,"increment:4:1")
-    sox.add "YLMNDRMC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",570,"increment:4:1")
-    sox.add "YLMNDRCM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",571,"increment:4:1")
-    sox.add "YLMNDREL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",572,"increment:4:1")
-    sox.add "YLMNDRMV@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",573,"increment:4:1")
-    sox.add "YLMNDRTR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",574,"increment:4:1")
-    sox.add "YLMNDRFR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",575,"increment:4:1")
-    sox.add "YLMNDRMS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",576,"increment:4:1")
-    sox.add "YLMNND@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",577,"increment:4:1")
-    sox.add "YLMNNDFD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",578,"increment:4:1")
-    sox.add "YLMNNDBV@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",579,"increment:4:1")
-    sox.add "YLMNNDXM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",580,"increment:4:1")
-    sox.add "YLMNNDXP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",581,"increment:4:1")
-    sox.add "YLMNNDAP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",582,"increment:4:1")
-    sox.add "YLMNNDLT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",583,"increment:4:1")
-    sox.add "YLMNNDPA@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",584,"increment:4:1")
-    sox.add "YLMNNDPR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",585,"increment:4:1")
-    sox.add "YLMNNDPT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",586,"increment:4:1")
-    sox.add "YLMNNDCH@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",587,"increment:4:1")
-    sox.add "YLMNNDPL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",588,"increment:4:1")
-    sox.add "YLWT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",589,"increment:4:1")
-    sox.add "YLRT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",590,"increment:4:1")
-    sox.add "YLRTMV@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",591,"increment:4:1")
-    sox.add "YLRTFR@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",592,"increment:4:1")
-    sox.add "YLRTEL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",593,"increment:4:1")
-    sox.add "YLRTBL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",594,"increment:4:1")
-    sox.add "YLRTFD@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",595,"increment:4:1")
-    sox.add "YLRTHC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",596,"increment:4:1")
-    sox.add "YLRTGA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",597,"increment:4:1")
-    sox.add "YLRTCL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",598,"increment:4:1")
-    sox.add "YLRTSP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",599,"increment:4:1")
-    sox.add "YLRTGM@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",600,"increment:4:1")
-    sox.add "YLRTMS@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",601,"increment:4:1")
-    sox.add "YLRTOT@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",602,"increment:4:1")
-    sox.add "YLTW@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",603,"increment:4:1")
-    sox.add "YLTWTA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",604,"increment:4:1")
-    sox.add "YLTWTR@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",605,"increment:4:1")
-    sox.add "YLTWTW@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",606,"increment:4:1")
-    sox.add "YLTWTT@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",607,"increment:4:1")
-    sox.add "YLTWTG@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",608,"increment:4:1")
-    sox.add "YLTWPL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",609,"increment:4:1")
-    sox.add "YLTWSC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",610,"increment:4:1")
-    sox.add "YLTWSP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",611,"increment:4:1")
-    sox.add "YLTWCU@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",612,"increment:4:1")
-    sox.add "YLTWWH@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",613,"increment:4:1")
-    sox.add "YLIF@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",614,"increment:4:1")
-    sox.add "YLIFPB@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",615,"increment:4:1")
-    sox.add "YLIFMP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",616,"increment:4:1")
-    sox.add "YLIFBC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",617,"increment:4:1")
-    sox.add "YLIFIT@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",618,"increment:4:1")
-    sox.add "YLIFTC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",619,"increment:4:1")
-    sox.add "YLIFDP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",620,"increment:4:1")
-    sox.add "YLIFOT@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",621,"increment:4:1")
-    sox.add "YLFI@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",622,"increment:4:1")
-    sox.add "YLFIMO@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",623,"increment:4:1")
-    sox.add "YLFICR@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",624,"increment:4:1")
-    sox.add "YLFISE@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",625,"increment:4:1")
-    sox.add "YLFIIN@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",626,"increment:4:1")
-    sox.add "YLFIOT@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",627,"increment:4:1")
-    sox.add "YLRE@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",628,"increment:4:1")
-    sox.add "YLRERE@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",629,"increment:4:1")
-    sox.add "YLRERL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",630,"increment:4:1")
-    sox.add "YLRELE@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",631,"increment:4:1")
-    sox.add "YLPS@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",632,"increment:4:1")
-    sox.add "YLMA@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",633,"increment:4:1")
-    sox.add "YLAD@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",634,"increment:4:1")
-    sox.add "YLADAD@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",635,"increment:4:1")
-    sox.add "YLADWM@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",636,"increment:4:1")
-    sox.add "YLED@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",637,"increment:4:1")
-    sox.add "YLHC@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",638,"increment:4:1")
-    sox.add "YLHCAM@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",639,"increment:4:1")
-    sox.add "YLHCHO@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",640,"increment:4:1")
-    sox.add "YLHCNR@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",641,"increment:4:1")
-    sox.add "YLHCSO@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",642,"increment:4:1")
-    sox.add "YLAE@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",643,"increment:4:1")
-    sox.add "YLAEPF@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",644,"increment:4:1")
-    sox.add "YLAEMU@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",645,"increment:4:1")
-    sox.add "YLAERE@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",646,"increment:4:1")
-    sox.add "YLAF@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",647,"increment:4:1")
-    sox.add "YLAFAC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",648,"increment:4:1")
-    sox.add "YLAFFD@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",649,"increment:4:1")
-    sox.add "YLOS@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",650,"increment:4:1")
-    sox.add "YLOSRP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",651,"increment:4:1")
-    sox.add "YLOSPL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",652,"increment:4:1")
-    sox.add "YLOSMA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",653,"increment:4:1")
-    sox.add "YLOSHH@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",654,"increment:4:1")
-    sox.add "YLGV@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",655,"increment:4:1")
-    sox.add "YLGVFD@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",656,"increment:4:1")
-    sox.add "YLGVML@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",657,"increment:4:1")
-    sox.add "YL_GVSL@MAU.A",          Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",658,"increment:4:1")
-    sox.add "YLGVST@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",659,"increment:4:1")
-    sox.add "YLGVLC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",660,"increment:4:1")
-
-    # sox.add "YLAGFFOT@HAW",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",999,"increment:999:1")
-    # sox.add "YLAGFFOT@HON",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",999,"increment:999:1")
-    # sox.add "YLAGFFOT@KAU",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",999,"increment:999:1")
-    # sox.add "YLAGFFOT@MAU",         Series.load_pattern("2001-01-01", "A", pathCA05N, "csv",999,"increment:999:1")
-    
-    sox.write_xls
-    #NotificationMailer.deliver_new_download_notification "Annual State Personal Income (rake inc_upd_a)", sox.output_summary
-  end
 end
 
-
-###*******************************************************************
-
-
-
-
 task :com_upd => :environment do
-  require "Spreadsheet"
-  pathCA06N        = "/Volumes/UHEROwork/data/rawdata/BEA_CA06N.csv"       #county compensation
-  pathSA06N        = "/Volumes/UHEROwork/data/rawdata/BEA_SA06N.csv"       #state compensation
-  
-  output_path_comHI    = "/Volumes/UHEROwork/data/bea/update/com_upd_HI_NEW.xls"
-  output_path_comHAW   = "/Volumes/UHEROwork/data/bea/update/com_upd_HAW_NEW.xls"
-  output_path_comHON   = "/Volumes/UHEROwork/data/bea/update/com_upd_HON_NEW.xls"
-  output_path_comKAU   = "/Volumes/UHEROwork/data/bea/update/com_upd_KAU_NEW.xls"
-  output_path_comMAU   = "/Volumes/UHEROwork/data/bea/update/com_upd_MAU_NEW.xls"
 
-  dsdSA06N          = DataSourceDownload.get pathSA06N
-  dsdCA06N          = DataSourceDownload.get pathCA06N
-  
-  if dsdSA06N.download_changed? || dsdCA06N.download_changed?
-    sox = SeriesOutputXls.new(output_path_comHI)
-
-   
-    #SA06N
-    sox.add "YC@HI.A",                Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",2,"increment:4:1")
-    sox.add "YWAGE@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",3,"increment:4:1")
-    sox.add "YOTLAB@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",4,"increment:4:1")
-    sox.add "YOTLABPEN@HI.A",         Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",5,"increment:4:1")
-    sox.add "YOTLABSS@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",6,"increment:4:1")
-    sox.add "YCAVR@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",7,"increment:4:1")
-    sox.add "YCAGFA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",8,"increment:4:1")
-    sox.add "YC_NF@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",9,"increment:4:1")
-    sox.add "YC_PR@HI.A",             Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",10,"increment:4:1")
-    sox.add "YCAGFF@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",11,"increment:4:1")
-    sox.add "YCAGFFFO@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",12,"increment:4:1")
-    sox.add "YCAGFFFS@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",13,"increment:4:1")
-    sox.add "YCAGFFSP@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",14,"increment:4:1")
-    sox.add "YCMI@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",15,"increment:4:1")
-    sox.add "YCMIOG@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",16,"increment:4:1")
-    sox.add "YCMIMI@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",17,"increment:4:1")
-    sox.add "YCMISP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",18,"increment:4:1")
-    sox.add "YCUT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",19,"increment:4:1")
-    sox.add "YCCT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",20,"increment:4:1")
-    sox.add "YCCTBL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",21,"increment:4:1")
-    sox.add "YCCTHV@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",22,"increment:4:1")
-    sox.add "YCCTSP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",23,"increment:4:1")
-    sox.add "YCMN@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",24,"increment:4:1")
-    sox.add "YCMNDR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",25,"increment:4:1")
-    sox.add "YCMNDRWD@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",26,"increment:4:1")
-    sox.add "YCMNDRNM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",27,"increment:4:1")
-    sox.add "YCMNDRPM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",28,"increment:4:1")
-    sox.add "YCMNDRFB@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",29,"increment:4:1")
-    sox.add "YCMNDRMC@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",30,"increment:4:1")
-    sox.add "YCMNDRCM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",31,"increment:4:1")
-    sox.add "YCMNDREL@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",32,"increment:4:1")
-    sox.add "YCMNDRMV@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",33,"increment:4:1")
-    sox.add "YCMNDRTR@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",34,"increment:4:1")
-    sox.add "YCMNDRFR@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",35,"increment:4:1")
-    sox.add "YCMNDRMS@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",36,"increment:4:1")
-    sox.add "YCMNND@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",37,"increment:4:1")
-    sox.add "YCMNNDFD@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",38,"increment:4:1")
-    sox.add "YCMNNDBV@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",39,"increment:4:1")
-    sox.add "YCMNNDXM@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",40,"increment:4:1")
-    sox.add "YCMNNDXP@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",41,"increment:4:1")
-    sox.add "YCMNNDAP@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",42,"increment:4:1")
-    sox.add "YCMNNDLT@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",43,"increment:4:1")
-    sox.add "YCMNNDPA@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",44,"increment:4:1")
-    sox.add "YCMNNDPR@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",45,"increment:4:1")
-    sox.add "YCMNNDPT@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",46,"increment:4:1")
-    sox.add "YCMNNDCH@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",47,"increment:4:1")
-    sox.add "YCMNNDPL@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",48,"increment:4:1")
-    sox.add "YCWT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",49,"increment:4:1")
-    sox.add "YCRT@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",50,"increment:4:1")
-    sox.add "YCRTMV@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",51,"increment:4:1")
-    sox.add "YCRTFR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",52,"increment:4:1")
-    sox.add "YCRTEL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",53,"increment:4:1")
-    sox.add "YCRTBL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",54,"increment:4:1")
-    sox.add "YCRTFD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",55,"increment:4:1")
-    sox.add "YCRTHC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",56,"increment:4:1")
-    sox.add "YCRTGA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",57,"increment:4:1")
-    sox.add "YCRTCL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",58,"increment:4:1")
-    sox.add "YCRTSP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",59,"increment:4:1")
-    sox.add "YCRTGM@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",60,"increment:4:1")
-    sox.add "YCRTMS@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",61,"increment:4:1")
-    sox.add "YCRTOT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",62,"increment:4:1")
-    sox.add "YCTW@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",63,"increment:4:1")
-    sox.add "YCTWTA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",64,"increment:4:1")
-    sox.add "YCTWTR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",65,"increment:4:1")
-    sox.add "YCTWTW@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",66,"increment:4:1")
-    sox.add "YCTWTT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",67,"increment:4:1")
-    sox.add "YCTWTG@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",68,"increment:4:1")
-    sox.add "YCTWPL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",69,"increment:4:1")
-    sox.add "YCTWSC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",70,"increment:4:1")
-    sox.add "YCTWSP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",71,"increment:4:1")
-    sox.add "YCTWCU@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",72,"increment:4:1")
-    sox.add "YCTWWH@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",73,"increment:4:1")
-    sox.add "YCIF@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",74,"increment:4:1")
-    sox.add "YCIFPB@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",75,"increment:4:1")
-    sox.add "YCIFMP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",76,"increment:4:1")
-    sox.add "YCIFBC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",77,"increment:4:1")
-    sox.add "YCIFIT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",78,"increment:4:1")
-    sox.add "YCIFTC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",79,"increment:4:1")
-    sox.add "YCIFDP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",80,"increment:4:1")
-    sox.add "YCIFOT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",81,"increment:4:1")
-    sox.add "YCFI@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",82,"increment:4:1")
-    sox.add "YCFIMO@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",83,"increment:4:1")
-    sox.add "YCFICR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",84,"increment:4:1")
-    sox.add "YCFISE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",85,"increment:4:1")
-    sox.add "YCFIIN@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",86,"increment:4:1")
-    sox.add "YCFIOT@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",87,"increment:4:1")
-    sox.add "YCRE@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",88,"increment:4:1")
-    sox.add "YCRERE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",89,"increment:4:1")
-    sox.add "YCRERL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",90,"increment:4:1")
-    sox.add "YCRELE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",91,"increment:4:1")
-    sox.add "YCPS@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",92,"increment:4:1")
-    sox.add "YCMA@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",93,"increment:4:1")
-    sox.add "YCAD@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",94,"increment:4:1")
-    sox.add "YCADAD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",95,"increment:4:1")
-    sox.add "YCADWM@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",96,"increment:4:1")
-    sox.add "YCED@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",97,"increment:4:1")
-    sox.add "YCHC@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",98,"increment:4:1")
-    sox.add "YCHCAM@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",99,"increment:4:1")
-    sox.add "YCHCHO@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",100,"increment:4:1")
-    sox.add "YCHCNR@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",101,"increment:4:1")
-    sox.add "YCHCSO@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",102,"increment:4:1")
-    sox.add "YCAE@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",103,"increment:4:1")
-    sox.add "YCAEPF@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",104,"increment:4:1")
-    sox.add "YCAEMU@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",105,"increment:4:1")
-    sox.add "YCAERE@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",106,"increment:4:1")
-    sox.add "YCAF@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",107,"increment:4:1")
-    sox.add "YCAFAC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",108,"increment:4:1")
-    sox.add "YCAFFD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",109,"increment:4:1")
-    sox.add "YCOS@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",110,"increment:4:1")
-    sox.add "YCOSRP@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",111,"increment:4:1")
-    sox.add "YCOSPL@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",112,"increment:4:1")
-    sox.add "YCOSMA@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",113,"increment:4:1")
-    sox.add "YCOSHH@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",114,"increment:4:1")
-    sox.add "YCGV@HI.A",              Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",115,"increment:4:1")
-    sox.add "YCGVFD@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",116,"increment:4:1")
-    sox.add "YCGVML@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",117,"increment:4:1")
-    sox.add "YC_GVSL@HI.A",           Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",118,"increment:4:1")
-    sox.add "YCGVST@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",119,"increment:4:1")
-    sox.add "YCGVLC@HI.A",            Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",120,"increment:4:1")
-#    sox.add "YCAGFFOT@HI.A",          Series.load_pattern("1990-01-01", "A", pathSA06N, "csv",999,"increment:999:1")
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_comHAW)#,true)
-
-    #CA06N
-    #using YWAGE's from inc rather than com. Can switch if necessary
-    sox.add "YC@HAW.A",               Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",122,"increment:4:1")
-    #sox.add "YWAGE@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",123,"increment:4:1")
-    sox.add "YOTLAB@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",124,"increment:4:1")
-    sox.add "YOTLABPEN@HAW.A",        Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",125,"increment:4:1")
-    sox.add "YOTLABSS@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",126,"increment:4:1")
-    sox.add "YCAVR@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",127,"increment:4:1")
-    sox.add "YCAGFA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",128,"increment:4:1")
-    sox.add "YC_NF@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",129,"increment:4:1")
-    sox.add "YC_PR@HAW.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",130,"increment:4:1")
-    sox.add "YCAGFF@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",131,"increment:4:1")
-    sox.add "YCAGFFFO@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",132,"increment:4:1")
-    sox.add "YCAGFFFS@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",133,"increment:4:1")
-    sox.add "YCAGFFSP@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",134,"increment:4:1")
-    sox.add "YCMI@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",135,"increment:4:1")
-    sox.add "YCMIOG@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",136,"increment:4:1")
-    sox.add "YCMIMI@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",137,"increment:4:1")
-    sox.add "YCMISP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",138,"increment:4:1")
-    sox.add "YCUT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",139,"increment:4:1")
-    sox.add "YCCT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",140,"increment:4:1")
-    sox.add "YCCTBL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",141,"increment:4:1")
-    sox.add "YCCTHV@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",142,"increment:4:1")
-    sox.add "YCCTSP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",143,"increment:4:1")
-    sox.add "YCMN@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",144,"increment:4:1")
-    sox.add "YCMNDR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",145,"increment:4:1")
-    sox.add "YCMNDRWD@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",146,"increment:4:1")
-    sox.add "YCMNDRNM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",147,"increment:4:1")
-    sox.add "YCMNDRPM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",148,"increment:4:1")
-    sox.add "YCMNDRFB@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",149,"increment:4:1")
-    sox.add "YCMNDRMC@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",150,"increment:4:1")
-    sox.add "YCMNDRCM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",151,"increment:4:1")
-    sox.add "YCMNDREL@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",152,"increment:4:1")
-    sox.add "YCMNDRMV@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",153,"increment:4:1")
-    sox.add "YCMNDRTR@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",154,"increment:4:1")
-    sox.add "YCMNDRFR@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",155,"increment:4:1")
-    sox.add "YCMNDRMS@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",156,"increment:4:1")
-    sox.add "YCMNND@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",157,"increment:4:1")
-    sox.add "YCMNNDFD@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",158,"increment:4:1")
-    sox.add "YCMNNDBV@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",159,"increment:4:1")
-    sox.add "YCMNNDXM@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",160,"increment:4:1")
-    sox.add "YCMNNDXP@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",161,"increment:4:1")
-    sox.add "YCMNNDAP@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",162,"increment:4:1")
-    sox.add "YCMNNDLT@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",163,"increment:4:1")
-    sox.add "YCMNNDPA@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",164,"increment:4:1")
-    sox.add "YCMNNDPR@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",165,"increment:4:1")
-    sox.add "YCMNNDPT@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",166,"increment:4:1")
-    sox.add "YCMNNDCH@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",167,"increment:4:1")
-    sox.add "YCMNNDPL@HAW.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",168,"increment:4:1")
-    sox.add "YCWT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",169,"increment:4:1")
-    sox.add "YCRT@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",170,"increment:4:1")
-    sox.add "YCRTMV@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",171,"increment:4:1")
-    sox.add "YCRTFR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",172,"increment:4:1")
-    sox.add "YCRTEL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",173,"increment:4:1")
-    sox.add "YCRTBL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",174,"increment:4:1")
-    sox.add "YCRTFD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",175,"increment:4:1")
-    sox.add "YCRTHC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",176,"increment:4:1")
-    sox.add "YCRTGA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",177,"increment:4:1")
-    sox.add "YCRTCL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",178,"increment:4:1")
-    sox.add "YCRTSP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",179,"increment:4:1")
-    sox.add "YCRTGM@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",180,"increment:4:1")
-    sox.add "YCRTMS@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",181,"increment:4:1")
-    sox.add "YCRTOT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",182,"increment:4:1")
-    sox.add "YCTW@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",183,"increment:4:1")
-    sox.add "YCTWTA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",184,"increment:4:1")
-    sox.add "YCTWTR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",185,"increment:4:1")
-    sox.add "YCTWTW@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",186,"increment:4:1")
-    sox.add "YCTWTT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",187,"increment:4:1")
-    sox.add "YCTWTG@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",188,"increment:4:1")
-    sox.add "YCTWPL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",189,"increment:4:1")
-    sox.add "YCTWSC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",190,"increment:4:1")
-    sox.add "YCTWSP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",191,"increment:4:1")
-    sox.add "YCTWCU@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",192,"increment:4:1")
-    sox.add "YCTWWH@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",193,"increment:4:1")
-    sox.add "YCIF@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",194,"increment:4:1")
-    sox.add "YCIFPB@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",195,"increment:4:1")
-    sox.add "YCIFMP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",196,"increment:4:1")
-    sox.add "YCIFBC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",197,"increment:4:1")
-    sox.add "YCIFIT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",198,"increment:4:1")
-    sox.add "YCIFTC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",199,"increment:4:1")
-    sox.add "YCIFDP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",200,"increment:4:1")
-    sox.add "YCIFOT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",201,"increment:4:1")
-    sox.add "YCFI@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",202,"increment:4:1")
-    sox.add "YCFIMO@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",203,"increment:4:1")
-    sox.add "YCFICR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",204,"increment:4:1")
-    sox.add "YCFISE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",205,"increment:4:1")
-    sox.add "YCFIIN@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",206,"increment:4:1")
-    sox.add "YCFIOT@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",207,"increment:4:1")
-    sox.add "YCRE@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",208,"increment:4:1")
-    sox.add "YCRERE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",209,"increment:4:1")
-    sox.add "YCRERL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",210,"increment:4:1")
-    sox.add "YCRELE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",211,"increment:4:1")
-    sox.add "YCPS@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",212,"increment:4:1")
-    sox.add "YCMA@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",213,"increment:4:1")
-    sox.add "YCAD@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",214,"increment:4:1")
-    sox.add "YCADAD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",215,"increment:4:1")
-    sox.add "YCADWM@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",216,"increment:4:1")
-    sox.add "YCED@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",217,"increment:4:1")
-    sox.add "YCHC@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",218,"increment:4:1")
-    sox.add "YCHCAM@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",219,"increment:4:1")
-    sox.add "YCHCHO@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",220,"increment:4:1")
-    sox.add "YCHCNR@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",221,"increment:4:1")
-    sox.add "YCHCSO@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",222,"increment:4:1")
-    sox.add "YCAE@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",223,"increment:4:1")
-    sox.add "YCAEPF@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",224,"increment:4:1")
-    sox.add "YCAEMU@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",225,"increment:4:1")
-    sox.add "YCAERE@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",226,"increment:4:1")
-    sox.add "YCAF@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",227,"increment:4:1")
-    sox.add "YCAFAC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",228,"increment:4:1")
-    sox.add "YCAFFD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",229,"increment:4:1")
-    sox.add "YCOS@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",230,"increment:4:1")
-    sox.add "YCOSRP@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",231,"increment:4:1")
-    sox.add "YCOSPL@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",232,"increment:4:1")
-    sox.add "YCOSMA@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",233,"increment:4:1")
-    sox.add "YCOSHH@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",234,"increment:4:1")
-    sox.add "YCGV@HAW.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",235,"increment:4:1")
-    sox.add "YCGVFD@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",236,"increment:4:1")
-    sox.add "YCGVML@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",237,"increment:4:1")
-    sox.add "YC_GVSL@HAW.A",          Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",238,"increment:4:1")
-    sox.add "YCGVST@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",239,"increment:4:1")
-    sox.add "YCGVLC@HAW.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",240,"increment:4:1")
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_comHON)#,true)
-
-    sox.add "YC@HON.A",               Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",242,"increment:4:1")
-    #sox.add "YWAGE@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",243,"increment:4:1")
-    sox.add "YOTLAB@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",244,"increment:4:1")
-    sox.add "YOTLABPEN@HON.A",        Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",245,"increment:4:1")
-    sox.add "YOTLABSS@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",246,"increment:4:1")
-    sox.add "YCAVR@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",247,"increment:4:1")
-    sox.add "YCAGFA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",248,"increment:4:1")
-    sox.add "YC_NF@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",249,"increment:4:1")
-    sox.add "YC_PR@HON.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",250,"increment:4:1")
-    sox.add "YCAGFF@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",251,"increment:4:1")
-    sox.add "YCAGFFFO@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",252,"increment:4:1")
-    sox.add "YCAGFFFS@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",253,"increment:4:1")
-    sox.add "YCAGFFSP@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",254,"increment:4:1")
-    sox.add "YCMI@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",255,"increment:4:1")
-    sox.add "YCMIOG@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",256,"increment:4:1")
-    sox.add "YCMIMI@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",257,"increment:4:1")
-    sox.add "YCMISP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",258,"increment:4:1")
-    sox.add "YCUT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",259,"increment:4:1")
-    sox.add "YCCT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",260,"increment:4:1")
-    sox.add "YCCTBL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",261,"increment:4:1")
-    sox.add "YCCTHV@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",262,"increment:4:1")
-    sox.add "YCCTSP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",263,"increment:4:1")
-    sox.add "YCMN@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",264,"increment:4:1")
-    sox.add "YCMNDR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",265,"increment:4:1")
-    sox.add "YCMNDRWD@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",266,"increment:4:1")
-    sox.add "YCMNDRNM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",267,"increment:4:1")
-    sox.add "YCMNDRPM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",268,"increment:4:1")
-    sox.add "YCMNDRFB@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",269,"increment:4:1")
-    sox.add "YCMNDRMC@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",270,"increment:4:1")
-    sox.add "YCMNDRCM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",271,"increment:4:1")
-    sox.add "YCMNDREL@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",272,"increment:4:1")
-    sox.add "YCMNDRMV@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",273,"increment:4:1")
-    sox.add "YCMNDRTR@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",274,"increment:4:1")
-    sox.add "YCMNDRFR@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",275,"increment:4:1")
-    sox.add "YCMNDRMS@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",276,"increment:4:1")
-    sox.add "YCMNND@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",277,"increment:4:1")
-    sox.add "YCMNNDFD@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",278,"increment:4:1")
-    sox.add "YCMNNDBV@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",279,"increment:4:1")
-    sox.add "YCMNNDXM@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",280,"increment:4:1")
-    sox.add "YCMNNDXP@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",281,"increment:4:1")
-    sox.add "YCMNNDAP@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",282,"increment:4:1")
-    sox.add "YCMNNDLT@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",283,"increment:4:1")
-    sox.add "YCMNNDPA@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",284,"increment:4:1")
-    sox.add "YCMNNDPR@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",285,"increment:4:1")
-    sox.add "YCMNNDPT@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",286,"increment:4:1")
-    sox.add "YCMNNDCH@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",287,"increment:4:1")
-    sox.add "YCMNNDPL@HON.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",288,"increment:4:1")
-    sox.add "YCWT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",289,"increment:4:1")
-    sox.add "YCRT@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",290,"increment:4:1")
-    sox.add "YCRTMV@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",291,"increment:4:1")
-    sox.add "YCRTFR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",292,"increment:4:1")
-    sox.add "YCRTEL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",293,"increment:4:1")
-    sox.add "YCRTBL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",294,"increment:4:1")
-    sox.add "YCRTFD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",295,"increment:4:1")
-    sox.add "YCRTHC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",296,"increment:4:1")
-    sox.add "YCRTGA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",297,"increment:4:1")
-    sox.add "YCRTCL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",298,"increment:4:1")
-    sox.add "YCRTSP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",299,"increment:4:1")
-    sox.add "YCRTGM@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",300,"increment:4:1")
-    sox.add "YCRTMS@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",301,"increment:4:1")
-    sox.add "YCRTOT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",302,"increment:4:1")
-    sox.add "YCTW@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",303,"increment:4:1")
-    sox.add "YCTWTA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",304,"increment:4:1")
-    sox.add "YCTWTR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",305,"increment:4:1")
-    sox.add "YCTWTW@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",306,"increment:4:1")
-    sox.add "YCTWTT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",307,"increment:4:1")
-    sox.add "YCTWTG@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",308,"increment:4:1")
-    sox.add "YCTWPL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",309,"increment:4:1")
-    sox.add "YCTWSC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",310,"increment:4:1")
-    sox.add "YCTWSP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",311,"increment:4:1")
-    sox.add "YCTWCU@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",312,"increment:4:1")
-    sox.add "YCTWWH@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",313,"increment:4:1")
-    sox.add "YCIF@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",314,"increment:4:1")
-    sox.add "YCIFPB@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",315,"increment:4:1")
-    sox.add "YCIFMP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",316,"increment:4:1")
-    sox.add "YCIFBC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",317,"increment:4:1")
-    sox.add "YCIFIT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",318,"increment:4:1")
-    sox.add "YCIFTC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",319,"increment:4:1")
-    sox.add "YCIFDP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",320,"increment:4:1")
-    sox.add "YCIFOT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",321,"increment:4:1")
-    sox.add "YCFI@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",322,"increment:4:1")
-    sox.add "YCFIMO@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",323,"increment:4:1")
-    sox.add "YCFICR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",324,"increment:4:1")
-    sox.add "YCFISE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",325,"increment:4:1")
-    sox.add "YCFIIN@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",326,"increment:4:1")
-    sox.add "YCFIOT@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",327,"increment:4:1")
-    sox.add "YCRE@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",328,"increment:4:1")
-    sox.add "YCRERE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",329,"increment:4:1")
-    sox.add "YCRERL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",330,"increment:4:1")
-    sox.add "YCRELE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",331,"increment:4:1")
-    sox.add "YCPS@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",332,"increment:4:1")
-    sox.add "YCMA@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",333,"increment:4:1")
-    sox.add "YCAD@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",334,"increment:4:1")
-    sox.add "YCADAD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",335,"increment:4:1")
-    sox.add "YCADWM@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",336,"increment:4:1")
-    sox.add "YCED@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",337,"increment:4:1")
-    sox.add "YCHC@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",338,"increment:4:1")
-    sox.add "YCHCAM@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",339,"increment:4:1")
-    sox.add "YCHCHO@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",340,"increment:4:1")
-    sox.add "YCHCNR@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",341,"increment:4:1")
-    sox.add "YCHCSO@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",342,"increment:4:1")
-    sox.add "YCAE@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",343,"increment:4:1")
-    sox.add "YCAEPF@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",344,"increment:4:1")
-    sox.add "YCAEMU@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",345,"increment:4:1")
-    sox.add "YCAERE@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",346,"increment:4:1")
-    sox.add "YCAF@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",347,"increment:4:1")
-    sox.add "YCAFAC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",348,"increment:4:1")
-    sox.add "YCAFFD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",349,"increment:4:1")
-    sox.add "YCOS@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",350,"increment:4:1")
-    sox.add "YCOSRP@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",351,"increment:4:1")
-    sox.add "YCOSPL@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",352,"increment:4:1")
-    sox.add "YCOSMA@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",353,"increment:4:1")
-    sox.add "YCOSHH@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",354,"increment:4:1")
-    sox.add "YCGV@HON.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",355,"increment:4:1")
-    sox.add "YCGVFD@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",356,"increment:4:1")
-    sox.add "YCGVML@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",357,"increment:4:1")
-    sox.add "YC_GVSL@HON.A",          Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",358,"increment:4:1")
-    sox.add "YCGVST@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",359,"increment:4:1")
-    sox.add "YCGVLC@HON.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",360,"increment:4:1")
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_comKAU)#,true)
-
-    sox.add "YC@KAU.A",               Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",362,"increment:4:1")
-    #sox.add "YWAGE@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",363,"increment:4:1")
-    sox.add "YOTLAB@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",364,"increment:4:1")
-    sox.add "YOTLABPEN@KAU.A",        Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",365,"increment:4:1")
-    sox.add "YOTLABSS@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",366,"increment:4:1")
-    sox.add "YCAVR@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",367,"increment:4:1")
-    sox.add "YCAGFA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",368,"increment:4:1")
-    sox.add "YC_NF@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",369,"increment:4:1")
-    sox.add "YC_PR@KAU.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",370,"increment:4:1")
-    sox.add "YCAGFF@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",371,"increment:4:1")
-    sox.add "YCAGFFFO@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",372,"increment:4:1")
-    sox.add "YCAGFFFS@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",373,"increment:4:1")
-    sox.add "YCAGFFSP@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",374,"increment:4:1")
-    sox.add "YCMI@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",375,"increment:4:1")
-    sox.add "YCMIOG@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",376,"increment:4:1")
-    sox.add "YCMIMI@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",377,"increment:4:1")
-    sox.add "YCMISP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",378,"increment:4:1")
-    sox.add "YCUT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",379,"increment:4:1")
-    sox.add "YCCT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",380,"increment:4:1")
-    sox.add "YCCTBL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",381,"increment:4:1")
-    sox.add "YCCTHV@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",382,"increment:4:1")
-    sox.add "YCCTSP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",383,"increment:4:1")
-    sox.add "YCMN@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",384,"increment:4:1")
-    sox.add "YCMNDR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",385,"increment:4:1")
-    sox.add "YCMNDRWD@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",386,"increment:4:1")
-    sox.add "YCMNDRNM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",387,"increment:4:1")
-    sox.add "YCMNDRPM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",388,"increment:4:1")
-    sox.add "YCMNDRFB@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",389,"increment:4:1")
-    sox.add "YCMNDRMC@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",390,"increment:4:1")
-    sox.add "YCMNDRCM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",391,"increment:4:1")
-    sox.add "YCMNDREL@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",392,"increment:4:1")
-    sox.add "YCMNDRMV@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",393,"increment:4:1")
-    sox.add "YCMNDRTR@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",394,"increment:4:1")
-    sox.add "YCMNDRFR@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",395,"increment:4:1")
-    sox.add "YCMNDRMS@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",396,"increment:4:1")
-    sox.add "YCMNND@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",397,"increment:4:1")
-    sox.add "YCMNNDFD@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",398,"increment:4:1")
-    sox.add "YCMNNDBV@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",399,"increment:4:1")
-    sox.add "YCMNNDXM@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",400,"increment:4:1")
-    sox.add "YCMNNDXP@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",401,"increment:4:1")
-    sox.add "YCMNNDAP@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",402,"increment:4:1")
-    sox.add "YCMNNDLT@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",403,"increment:4:1")
-    sox.add "YCMNNDPA@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",404,"increment:4:1")
-    sox.add "YCMNNDPR@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",405,"increment:4:1")
-    sox.add "YCMNNDPT@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",406,"increment:4:1")
-    sox.add "YCMNNDCH@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",407,"increment:4:1")
-    sox.add "YCMNNDPL@KAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",408,"increment:4:1")
-    sox.add "YCWT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",409,"increment:4:1")
-    sox.add "YCRT@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",410,"increment:4:1")
-    sox.add "YCRTMV@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",411,"increment:4:1")
-    sox.add "YCRTFR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",412,"increment:4:1")
-    sox.add "YCRTEL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",413,"increment:4:1")
-    sox.add "YCRTBL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",414,"increment:4:1")
-    sox.add "YCRTFD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",415,"increment:4:1")
-    sox.add "YCRTHC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",416,"increment:4:1")
-    sox.add "YCRTGA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",417,"increment:4:1")
-    sox.add "YCRTCL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",418,"increment:4:1")
-    sox.add "YCRTSP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",419,"increment:4:1")
-    sox.add "YCRTGM@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",420,"increment:4:1")
-    sox.add "YCRTMS@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",421,"increment:4:1")
-    sox.add "YCRTOT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",422,"increment:4:1")
-    sox.add "YCTW@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",423,"increment:4:1")
-    sox.add "YCTWTA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",424,"increment:4:1")
-    sox.add "YCTWTR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",425,"increment:4:1")
-    sox.add "YCTWTW@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",426,"increment:4:1")
-    sox.add "YCTWTT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",427,"increment:4:1")
-    sox.add "YCTWTG@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",428,"increment:4:1")
-    sox.add "YCTWPL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",429,"increment:4:1")
-    sox.add "YCTWSC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",430,"increment:4:1")
-    sox.add "YCTWSP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",431,"increment:4:1")
-    sox.add "YCTWCU@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",432,"increment:4:1")
-    sox.add "YCTWWH@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",433,"increment:4:1")
-    sox.add "YCIF@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",434,"increment:4:1")
-    sox.add "YCIFPB@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",435,"increment:4:1")
-    sox.add "YCIFMP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",436,"increment:4:1")
-    sox.add "YCIFBC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",437,"increment:4:1")
-    sox.add "YCIFIT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",438,"increment:4:1")
-    sox.add "YCIFTC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",439,"increment:4:1")
-    sox.add "YCIFDP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",440,"increment:4:1")
-    sox.add "YCIFOT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",441,"increment:4:1")
-    sox.add "YCFI@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",442,"increment:4:1")
-    sox.add "YCFIMO@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",443,"increment:4:1")
-    sox.add "YCFICR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",444,"increment:4:1")
-    sox.add "YCFISE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",445,"increment:4:1")
-    sox.add "YCFIIN@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",446,"increment:4:1")
-    sox.add "YCFIOT@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",447,"increment:4:1")
-    sox.add "YCRE@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",448,"increment:4:1")
-    sox.add "YCRERE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",449,"increment:4:1")
-    sox.add "YCRERL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",450,"increment:4:1")
-    sox.add "YCRELE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",451,"increment:4:1")
-    sox.add "YCPS@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",452,"increment:4:1")
-    sox.add "YCMA@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",453,"increment:4:1")
-    sox.add "YCAD@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",454,"increment:4:1")
-    sox.add "YCADAD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",455,"increment:4:1")
-    sox.add "YCADWM@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",456,"increment:4:1")
-    sox.add "YCED@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",457,"increment:4:1")
-    sox.add "YCHC@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",458,"increment:4:1")
-    sox.add "YCHCAM@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",459,"increment:4:1")
-    sox.add "YCHCHO@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",460,"increment:4:1")
-    sox.add "YCHCNR@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",461,"increment:4:1")
-    sox.add "YCHCSO@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",462,"increment:4:1")
-    sox.add "YCAE@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",463,"increment:4:1")
-    sox.add "YCAEPF@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",464,"increment:4:1")
-    sox.add "YCAEMU@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",465,"increment:4:1")
-    sox.add "YCAERE@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",466,"increment:4:1")
-    sox.add "YCAF@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",467,"increment:4:1")
-    sox.add "YCAFAC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",468,"increment:4:1")
-    sox.add "YCAFFD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",469,"increment:4:1")
-    sox.add "YCOS@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",470,"increment:4:1")
-    sox.add "YCOSRP@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",471,"increment:4:1")
-    sox.add "YCOSPL@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",472,"increment:4:1")
-    sox.add "YCOSMA@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",473,"increment:4:1")
-    sox.add "YCOSHH@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",474,"increment:4:1")
-    sox.add "YCGV@KAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",475,"increment:4:1")
-    sox.add "YCGVFD@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",476,"increment:4:1")
-    sox.add "YCGVML@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",477,"increment:4:1")
-    sox.add "YC_GVSL@KAU.A",          Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",478,"increment:4:1")
-    sox.add "YCGVST@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",479,"increment:4:1")
-    sox.add "YCGVLC@KAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",480,"increment:4:1")
-
- sox.write_xls
-
-sox = SeriesOutputXls.new(output_path_comMAU)#,true)
-
-    sox.add "YC@MAU.A",               Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",482,"increment:4:1")
-    #sox.add "YWAGE@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",483,"increment:4:1")
-    sox.add "YOTLAB@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",484,"increment:4:1")
-    sox.add "YOTLABPEN@MAU.A",        Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",485,"increment:4:1")
-    sox.add "YOTLABSS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",486,"increment:4:1")
-    sox.add "YCAVR@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",487,"increment:4:1")
-    sox.add "YCAGFA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",488,"increment:4:1")
-    sox.add "YC_NF@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",489,"increment:4:1")
-    sox.add "YC_PR@MAU.A",            Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",490,"increment:4:1")
-    sox.add "YCAGFF@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",491,"increment:4:1")
-    sox.add "YCAGFFFO@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",492,"increment:4:1")
-    sox.add "YCAGFFFS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",493,"increment:4:1")
-    sox.add "YCAGFFSP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",494,"increment:4:1")
-    sox.add "YCMI@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",495,"increment:4:1")
-    sox.add "YCMIOG@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",496,"increment:4:1")
-    sox.add "YCMIMI@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",497,"increment:4:1")
-    sox.add "YCMISP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",498,"increment:4:1")
-    sox.add "YCUT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",499,"increment:4:1")
-    sox.add "YCCT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",500,"increment:4:1")
-    sox.add "YCCTBL@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",501,"increment:4:1")
-    sox.add "YCCTHV@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",502,"increment:4:1")
-    sox.add "YCCTSP@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",503,"increment:4:1")
-    sox.add "YCMN@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",504,"increment:4:1")
-    sox.add "YCMNDR@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",505,"increment:4:1")
-    sox.add "YCMNDRWD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",506,"increment:4:1")
-    sox.add "YCMNDRNM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",507,"increment:4:1")
-    sox.add "YCMNDRPM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",508,"increment:4:1")
-    sox.add "YCMNDRFB@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",509,"increment:4:1")
-    sox.add "YCMNDRMC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",510,"increment:4:1")
-    sox.add "YCMNDRCM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",511,"increment:4:1")
-    sox.add "YCMNDREL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",512,"increment:4:1")
-    sox.add "YCMNDRMV@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",513,"increment:4:1")
-    sox.add "YCMNDRTR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",514,"increment:4:1")
-    sox.add "YCMNDRFR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",515,"increment:4:1")
-    sox.add "YCMNDRMS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",516,"increment:4:1")
-    sox.add "YCMNND@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",517,"increment:4:1")
-    sox.add "YCMNNDFD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",518,"increment:4:1")
-    sox.add "YCMNNDBV@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",519,"increment:4:1")
-    sox.add "YCMNNDXM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",520,"increment:4:1")
-    sox.add "YCMNNDXP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",521,"increment:4:1")
-    sox.add "YCMNNDAP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",522,"increment:4:1")
-    sox.add "YCMNNDLT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",523,"increment:4:1")
-    sox.add "YCMNNDPA@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",524,"increment:4:1")
-    sox.add "YCMNNDPR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",525,"increment:4:1")
-    sox.add "YCMNNDPT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",526,"increment:4:1")
-    sox.add "YCMNNDCH@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",527,"increment:4:1")
-    sox.add "YCMNNDPL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",528,"increment:4:1")
-    sox.add "YCWT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",529,"increment:4:1")
-    sox.add "YCRT@MAU.A",             Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",530,"increment:4:1")
-    sox.add "YCRTMV@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",531,"increment:4:1")
-    sox.add "YCRTFR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",532,"increment:4:1")
-    sox.add "YCRTEL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",533,"increment:4:1")
-    sox.add "YCRTBL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",534,"increment:4:1")
-    sox.add "YCRTFD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",535,"increment:4:1")
-    sox.add "YCRTHC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",536,"increment:4:1")
-    sox.add "YCRTGA@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",537,"increment:4:1")
-    sox.add "YCRTCL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",538,"increment:4:1")
-    sox.add "YCRTSP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",539,"increment:4:1")
-    sox.add "YCRTGM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",540,"increment:4:1")
-    sox.add "YCRTMS@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",541,"increment:4:1")
-    sox.add "YCRTOT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",542,"increment:4:1")
-    sox.add "YCTW@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",543,"increment:4:1")
-    sox.add "YCTWTA@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",544,"increment:4:1")
-    sox.add "YCTWTR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",545,"increment:4:1")
-    sox.add "YCTWTW@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",546,"increment:4:1")
-    sox.add "YCTWTT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",547,"increment:4:1")
-    sox.add "YCTWTG@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",548,"increment:4:1")
-    sox.add "YCTWPL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",549,"increment:4:1")
-    sox.add "YCTWSC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",550,"increment:4:1")
-    sox.add "YCTWSP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",551,"increment:4:1")
-    sox.add "YCTWCU@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",552,"increment:4:1")
-    sox.add "YCTWWH@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",553,"increment:4:1")
-    sox.add "YCIF@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",554,"increment:4:1")
-    sox.add "YCIFPB@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",555,"increment:4:1")
-    sox.add "YCIFMP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",556,"increment:4:1")
-    sox.add "YCIFBC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",557,"increment:4:1")
-    sox.add "YCIFIT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",558,"increment:4:1")
-    sox.add "YCIFTC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",559,"increment:4:1")
-    sox.add "YCIFDP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",560,"increment:4:1")
-    sox.add "YCIFOT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",561,"increment:4:1")
-    sox.add "YCFI@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",562,"increment:4:1")
-    sox.add "YCFIMO@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",563,"increment:4:1")
-    sox.add "YCFICR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",564,"increment:4:1")
-    sox.add "YCFISE@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",565,"increment:4:1")
-    sox.add "YCFIIN@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",566,"increment:4:1")
-    sox.add "YCFIOT@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",567,"increment:4:1")
-    sox.add "YCRE@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",568,"increment:4:1")
-    sox.add "YCRERE@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",569,"increment:4:1")
-    sox.add "YCRERL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",570,"increment:4:1")
-    sox.add "YCRELE@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",571,"increment:4:1")
-    sox.add "YCPS@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",572,"increment:4:1")
-    sox.add "YCMA@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",573,"increment:4:1")
-    sox.add "YCAD@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",574,"increment:4:1")
-    sox.add "YCADAD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",575,"increment:4:1")
-    sox.add "YCADWM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",576,"increment:4:1")
-    sox.add "YCED@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",577,"increment:4:1")
-    sox.add "YCHC@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",578,"increment:4:1")
-    sox.add "YCHCAM@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",579,"increment:4:1")
-    sox.add "YCHCHO@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",580,"increment:4:1")
-    sox.add "YCHCNR@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",581,"increment:4:1")
-    sox.add "YCHCSO@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",582,"increment:4:1")
-    sox.add "YCAE@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",583,"increment:4:1")
-    sox.add "YCAEPF@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",584,"increment:4:1")
-    sox.add "YCAEMU@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",585,"increment:4:1")
-    sox.add "YCAERE@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",586,"increment:4:1")
-    sox.add "YCAF@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",587,"increment:4:1")
-    sox.add "YCAFAC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",588,"increment:4:1")
-    sox.add "YCAFFD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",589,"increment:4:1")
-    sox.add "YCOS@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",590,"increment:4:1")
-    sox.add "YCOSRP@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",591,"increment:4:1")
-    sox.add "YCOSPL@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",592,"increment:4:1")
-    sox.add "YCOSMA@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",593,"increment:4:1")
-    sox.add "YCOSHH@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",594,"increment:4:1")
-    sox.add "YCGV@MAU.A",           Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",595,"increment:4:1")
-    sox.add "YCGVFD@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",596,"increment:4:1")
-    sox.add "YCGVML@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",597,"increment:4:1")
-    sox.add "YC_GVSL@MAU.A",        Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",598,"increment:4:1")
-    sox.add "YCGVST@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",599,"increment:4:1")
-    sox.add "YCGVLC@MAU.A",         Series.load_pattern("2001-01-01", "A", pathCA06N, "csv",600,"increment:4:1")
-
-  #sox.add "YCAGFFOT@HAW.A",         Series.load_pattern("2001-01-01", "A",  "pathCA06N", "csv", 999, "increment:999:1")
-  #sox.add "YCAGFFOT@HON.A",         Series.load_pattern("2001-01-01", "A",  "pathCA06N", "csv", 999, "increment:999:1")
-  #sox.add "YCAGFFOT@KAU.A",         Series.load_pattern("2001-01-01", "A",  "pathCA06N", "csv", 999, "increment:999:1")
-  #sox.add "YCAGFFOT@MAU.A",         Series.load_pattern("2001-01-01", "A",  "pathCA06N", "csv", 999, "increment:999:1")
-
-    
-    
-    sox.write_xls
-    #NotificationMailer.deliver_new_download_notification "Annual State and County Compensation (rake com_upd)", sox.output_summary
-  end
+	com_hi = {
+		"YC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 2, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 3, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 4, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 5, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 6, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAVR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 7, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFA@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 8, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_NF@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 9, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_PR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 10, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFF@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 11, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFO@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 12, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFS@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 13, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFSP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 14, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMI@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 15, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIOG@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 16, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIMI@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 17, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMISP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 18, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCUT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 19, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 20, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTBL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 21, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTHV@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 22, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTSP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 23, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMN@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 24, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 25, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRWD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 26, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRNM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 27, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRPM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 28, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFB@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 29, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 30, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRCM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 31, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDREL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 32, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMV@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 33, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRTR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 34, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 35, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMS@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 36, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNND@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 37, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDFD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 38, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDBV@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 39, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 40, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 41, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDAP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 42, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDLT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 43, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPA@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 44, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 45, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 46, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDCH@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 47, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 48, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCWT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 49, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 50, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMV@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 51, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 52, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTEL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 53, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTBL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 54, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 55, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTHC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 56, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGA@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 57, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTCL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 58, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTSP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 59, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 60, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMS@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 61, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTOT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 62, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTW@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 63, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTA@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 64, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 65, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTW@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 66, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 67, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTG@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 68, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWPL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 69, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 70, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 71, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWCU@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 72, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWWH@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 73, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIF@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 74, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFPB@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 75, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFMP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 76, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFBC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 77, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFIT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 78, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFTC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 79, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFDP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 80, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFOT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 81, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFI@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 82, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIMO@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 83, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFICR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 84, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFISE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 85, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIIN@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 86, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIOT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 87, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 88, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 89, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 90, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRELE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 91, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCPS@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 92, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMA@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 93, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 94, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADAD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 95, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADWM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 96, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCED@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 97, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 98, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCAM@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 99, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCHO@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 100, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCNR@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 101, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCSO@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 102, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 103, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEPF@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 104, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEMU@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 105, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAERE@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 106, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAF@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 107, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFAC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 108, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFFD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 109, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOS@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 110, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSRP@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 111, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSPL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 112, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSMA@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 113, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSHH@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 114, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGV@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 115, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVFD@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 116, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVML@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 117, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_GVSL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 118, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVST@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 119, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVLC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 120, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFOT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
+	}
+	
+	com_haw = {
+		"YC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 122, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 123, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 124, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 125, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 126, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAVR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 127, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 128, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_NF@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 129, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_PR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 130, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFF@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 131, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFO@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 132, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 133, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFSP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 134, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMI@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 135, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIOG@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 136, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIMI@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 137, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMISP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 138, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCUT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 139, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 140, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTBL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 141, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTHV@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 142, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTSP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 143, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMN@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 144, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 145, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRWD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 146, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRNM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 147, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRPM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 148, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFB@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 149, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 150, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRCM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 151, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDREL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 152, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMV@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 153, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRTR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 154, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 155, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 156, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNND@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 157, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDFD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 158, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDBV@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 159, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 160, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 161, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDAP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 162, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDLT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 163, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 164, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 165, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 166, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDCH@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 167, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 168, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCWT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 169, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 170, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMV@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 171, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 172, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTEL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 173, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTBL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 174, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 175, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTHC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 176, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 177, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTCL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 178, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTSP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 179, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 180, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 181, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTOT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 182, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTW@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 183, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 184, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 185, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTW@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 186, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 187, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTG@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 188, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWPL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 189, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 190, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 191, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWCU@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 192, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWWH@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 193, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIF@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 194, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFPB@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 195, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFMP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 196, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFBC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 197, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFIT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 198, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFTC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 199, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFDP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 200, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFOT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 201, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFI@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 202, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIMO@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 203, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFICR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 204, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFISE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 205, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIIN@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 206, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIOT@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 207, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 208, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 209, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 210, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRELE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 211, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCPS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 212, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 213, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 214, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADAD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 215, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADWM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 216, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCED@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 217, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 218, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCAM@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 219, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCHO@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 220, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCNR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 221, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCSO@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 222, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 223, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEPF@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 224, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEMU@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 225, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAERE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 226, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAF@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 227, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFAC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 228, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFFD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 229, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 230, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSRP@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 231, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSPL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 232, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSMA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 233, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSHH@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 234, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGV@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 235, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVFD@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 236, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVML@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 237, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_GVSL@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 238, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVST@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 239, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVLC@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 240, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	com_hon = {
+		"YC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 242, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 243, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 244, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 245, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 246, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAVR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 247, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFA@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 248, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_NF@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 249, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_PR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 250, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFF@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 251, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFO@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 252, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFS@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 253, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFSP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 254, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMI@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 255, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIOG@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 256, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIMI@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 257, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMISP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 258, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCUT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 259, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 260, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTBL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 261, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTHV@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 262, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTSP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 263, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMN@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 264, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 265, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRWD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 266, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRNM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 267, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRPM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 268, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFB@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 269, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 270, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRCM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 271, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDREL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 272, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMV@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 273, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRTR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 274, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 275, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMS@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 276, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNND@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 277, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDFD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 278, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDBV@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 279, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 280, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 281, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDAP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 282, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDLT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 283, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPA@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 284, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 285, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 286, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDCH@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 287, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 288, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCWT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 289, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 290, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMV@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 291, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 292, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTEL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 293, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTBL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 294, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 295, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTHC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 296, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGA@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 297, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTCL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 298, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTSP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 299, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 300, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMS@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 301, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTOT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 302, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTW@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 303, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTA@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 304, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 305, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTW@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 306, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 307, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTG@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 308, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWPL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 309, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 310, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 311, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWCU@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 312, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWWH@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 313, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIF@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 314, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFPB@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 315, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFMP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 316, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFBC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 317, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFIT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 318, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFTC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 319, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFDP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 320, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFOT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 321, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFI@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 322, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIMO@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 323, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFICR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 324, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFISE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 325, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIIN@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 326, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIOT@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 327, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 328, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 329, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 330, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRELE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 331, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCPS@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 332, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMA@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 333, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 334, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADAD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 335, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADWM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 336, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCED@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 337, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 338, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCAM@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 339, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCHO@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 340, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCNR@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 341, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCSO@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 342, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 343, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEPF@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 344, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEMU@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 345, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAERE@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 346, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAF@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 347, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFAC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 348, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFFD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 349, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOS@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 350, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSRP@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 351, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSPL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 352, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSMA@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 353, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSHH@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 354, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGV@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 355, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVFD@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 356, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVML@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 357, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_GVSL@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 358, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVST@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 359, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVLC@HON.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 360, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	com_kau = {
+		"YC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 362, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 363, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 364, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 365, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 366, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAVR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 367, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFA@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 368, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_NF@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 369, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_PR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 370, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFF@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 371, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFO@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 372, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFS@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 373, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFSP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 374, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMI@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 375, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIOG@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 376, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIMI@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 377, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMISP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 378, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCUT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 379, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 380, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTBL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 381, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTHV@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 382, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTSP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 383, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMN@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 384, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 385, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRWD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 386, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRNM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 387, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRPM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 388, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFB@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 389, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 390, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRCM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 391, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDREL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 392, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMV@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 393, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRTR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 394, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 395, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMS@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 396, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNND@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 397, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDFD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 398, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDBV@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 399, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 400, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 401, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDAP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 402, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDLT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 403, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPA@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 404, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 405, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 406, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDCH@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 407, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 408, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCWT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 409, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 410, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMV@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 411, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 412, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTEL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 413, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTBL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 414, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 415, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTHC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 416, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGA@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 417, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTCL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 418, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTSP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 419, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 420, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMS@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 421, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTOT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 422, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTW@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 423, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTA@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 424, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 425, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTW@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 426, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 427, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTG@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 428, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWPL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 429, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 430, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 431, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWCU@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 432, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWWH@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 433, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIF@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 434, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFPB@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 435, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFMP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 436, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFBC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 437, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFIT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 438, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFTC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 439, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFDP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 440, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFOT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 441, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFI@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 442, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIMO@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 443, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFICR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 444, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFISE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 445, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIIN@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 446, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIOT@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 447, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 448, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 449, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 450, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRELE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 451, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCPS@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 452, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMA@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 453, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 454, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADAD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 455, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADWM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 456, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCED@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 457, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 458, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCAM@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 459, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCHO@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 460, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCNR@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 461, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCSO@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 462, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 463, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEPF@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 464, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEMU@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 465, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAERE@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 466, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAF@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 467, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFAC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 468, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFFD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 469, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOS@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 470, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSRP@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 471, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSPL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 472, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSMA@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 473, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSHH@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 474, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGV@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 475, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVFD@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 476, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVML@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 477, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_GVSL@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 478, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVST@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 479, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVLC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 480, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	com_mau = {
+		"YC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 482, :col => "increment:4:1", :frequency => "A" }|, 
+		"YWAGE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 483, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLAB@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 484, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABPEN@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 485, :col => "increment:4:1", :frequency => "A" }|, 
+		"YOTLABSS@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 486, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAVR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 487, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFA@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 488, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_NF@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 489, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_PR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 490, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFF@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 491, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFO@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 492, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFFS@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 493, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAGFFSP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 494, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMI@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 495, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIOG@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 496, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMIMI@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 497, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMISP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 498, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCUT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 499, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 500, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTBL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 501, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTHV@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 502, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCCTSP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 503, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMN@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 504, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 505, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRWD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 506, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRNM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 507, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRPM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 508, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFB@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 509, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 510, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRCM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 511, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDREL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 512, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMV@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 513, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRTR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 514, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRFR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 515, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNDRMS@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 516, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNND@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 517, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDFD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 518, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDBV@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 519, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 520, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDXP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 521, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDAP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 522, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDLT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 523, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPA@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 524, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 525, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 526, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDCH@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 527, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMNNDPL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 528, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCWT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 529, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 530, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMV@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 531, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 532, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTEL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 533, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTBL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 534, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTFD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 535, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTHC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 536, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGA@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 537, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTCL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 538, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTSP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 539, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTGM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 540, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTMS@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 541, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRTOT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 542, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTW@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 543, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTA@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 544, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 545, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTW@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 546, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 547, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWTG@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 548, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWPL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 549, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 550, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWSP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 551, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWCU@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 552, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCTWWH@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 553, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIF@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 554, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFPB@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 555, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFMP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 556, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFBC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 557, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFIT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 558, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFTC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 559, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFDP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 560, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCIFOT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 561, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFI@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 562, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIMO@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 563, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFICR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 564, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFISE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 565, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIIN@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 566, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCFIOT@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 567, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 568, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 569, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRERL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 570, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCRELE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 571, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCPS@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 572, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCMA@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 573, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 574, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADAD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 575, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCADWM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 576, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCED@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 577, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 578, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCAM@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 579, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCHO@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 580, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCNR@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 581, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCHCSO@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 582, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 583, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEPF@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 584, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAEMU@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 585, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAERE@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 586, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAF@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 587, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFAC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 588, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCAFFD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 589, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOS@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 590, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSRP@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 591, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSPL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 592, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSMA@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 593, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCOSHH@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 594, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGV@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 595, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVFD@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 596, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVML@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 597, :col => "increment:4:1", :frequency => "A" }|, 
+		"YC_GVSL@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 598, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVST@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 599, :col => "increment:4:1", :frequency => "A" }|, 
+		"YCGVLC@MAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 600, :col => "increment:4:1", :frequency => "A" }|
+	}
+	
+	p = Packager.new
+	p.add_definitions com_hi
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_HI_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions com_haw
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_HAW_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions com_hon
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_HON_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions com_kau
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_KAU_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions com_mau
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_MAU_NEW.xls"
+	
 end

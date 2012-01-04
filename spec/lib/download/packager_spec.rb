@@ -30,11 +30,10 @@ describe Packager do
     
     p.stub(:eval).and_return(Series.create_dummy("dummy", :year, "2000-01-01",0,3))
 
-    options = %Q|{ :file_type => "xls", :start_date => "2000-01-01", :sheet => "increment_col_a", :row => 2, :col => "increment:3:1", :frequency => "A" }|
     p.add_definitions({
-      "TEST@HI.A" => %Q|"TEST@HI.A".tsn.load_from_download "HANDLE@TEST.COM", #{options}|,
-      "TEST2@HI.A" => %Q|"TEST2@HI.A".tsn.load_from_download "HANDLE@TEST.COM", #{options}|,
-      "TEST3@HI.A" => %Q|"TEST3@HI.A".tsn.load_from_download "HANDLE@TEST.COM", #{options}|
+      "TEST@HI.A" => %Q|stub eval|,
+      "TEST2@HI.A" => %Q|stub eval|,
+      "TEST3@HI.A" => %Q|stub eval|
     })
 
     dfd = p.get_data_from_definitions
@@ -53,8 +52,6 @@ describe Packager do
   it "should populate download results" do
     p = Packager.new
     
-    #p.stub(:eval).and_return(Series.create_dummy("dummy", :year, "2000-01-01",0,3))
-
     options = %Q|{ :file_type => "xls", :start_date => "2000-01-01", :sheet => "increment_col_a", :row => 2, :col => "increment:3:1", :frequency => "A" }|
     p.add_definitions({
       "TEST@HI.A" => %Q|"TEST@HI.A".tsn.load_from_download "HANDLE@TEST.COM", #{options}|,
@@ -99,7 +96,6 @@ describe Packager do
         "TEST3@HI.A" => %Q|"dummy@HI.A".ts|
       })
 
-      #s = "TEST@HI.A".ts_append_eval %Q|"TEST@HI.A".tsn.load_from_download "HANDLE@TEST.COM", #{options}|
       p.write_definitions_to "udaman"
       "TEST@HI.A".ts.data.should == {"2000-01-01" => 0, "2001-01-01" => 1, "2002-01-01" => 2, "2003-01-01" => 3 }
       "TEST2@HI.A".ts.data.should == {"2000-01-01" => 0, "2001-01-01" => 1, "2002-01-01" => 2, "2003-01-01" => 3 }

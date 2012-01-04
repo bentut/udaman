@@ -312,7 +312,7 @@ class Series < ActiveRecord::Base
     new_transformation("mean corrected against #{ns_name} and loaded from #{update_spreadsheet_path}", mean_corrected_demetra_series.data)
   end
   
-  def load_from_download(handle, options, cached_files = nil)
+  def Series.load_from_download(handle, options, cached_files = nil)
     #if smart update or other process sets a global cache object for a session, use that. Otherwise
     #download fresh
     cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
@@ -322,9 +322,17 @@ class Series < ActiveRecord::Base
     new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
-  def load_from_bls(code, frequency = nil)
+  def load_from_download(handle, options, cached_files = nil)
+    Series.load_from_download(handle, options, cached_files)
+  end
+  
+  def Series.load_from_bls(code, frequency = nil)
     series_data = DataHtmlParser.new.get_bls_series(code,frequency)
     new_transformation("loaded series code: #{code} from bls website", series_data)
+  end
+  
+  def load_from_bls(code, frequency = nil)
+    Series.load_from_bls(code, frequency)
   end
   
   def Series.open_cached_files

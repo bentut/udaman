@@ -10,7 +10,7 @@ def get_data
   load_standard_text if @options[:rows_to_skip].nil?
 end
 
-def load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
+def load_from_basic_text
   rows_skipped = 0
   while (@options[:rows_to_skip] > rows_skipped)
     @file_lines_array.slice![0]
@@ -19,7 +19,7 @@ def load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
   load_from_queued_up_file(@options[:delimiter], @options[:date_col], @options[:value_col])
 end
 
-def load_standard_text(path)
+def load_standard_text
   while line = @file_lines_array.slice![0]
     break if line.starts_with "DATE"
   end
