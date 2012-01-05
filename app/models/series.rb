@@ -260,6 +260,14 @@ class Series < ActiveRecord::Base
     #puts "#{"%.2f" % (Time.now - s_time)} : #{data_hash.count} : #{self.name} : SAVING SERIES"    
   end
   
+  def Series.new_transformation(name, data, frequency)
+    Series.new(
+      :name => name,
+      :frequency => frequency,
+      :data => data
+    )
+  end
+  
   def new_transformation(name, data)
     frequency = (self.frequency.nil? and name.split(".").count == 2 and name.split("@") == 2 and name.split(".")[1].length == 1) ? Series.frequency_from_code(name[-1]) : self.frequency
     #puts "NEW TRANFORMATION: #{name} - frequency: #{frequency}"  
@@ -311,19 +319,22 @@ class Series < ActiveRecord::Base
     mean_corrected_demetra_series = demetra_series / demetra_series.annual_sum * ns_name.ts.annual_sum
     new_transformation("mean corrected against #{ns_name} and loaded from #{update_spreadsheet_path}", mean_corrected_demetra_series.data)
   end
-  
+
+  #if smart update or other process sets a global cache object for a session, use that. Otherwise
+  #download fresh
   def Series.load_from_download(handle, options, cached_files = nil)
-    #if smart update or other process sets a global cache object for a session, use that. Otherwise
-    #download fresh
     cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)
     series_data = dp.get_data
     #puts dp.end_conditions
-    new_transformation("loaded from download #{handle} with options:#{options}", series_data)
+    Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, options[:frequency])
   end
   
   def load_from_download(handle, options, cached_files = nil)
-    Series.load_from_download(handle, options, cached_files)
+    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    dp = DownloadProcessor.new(handle, options, cached_files)
+    series_data = dp.get_data
+    new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
   def Series.load_from_bls(code, frequency = nil)

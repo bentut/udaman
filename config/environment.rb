@@ -5,5 +5,5 @@ require File.expand_path('../application', __FILE__)
 UheroDb::Application.initialize!
 ENV["DATAFILES_PATH"] = "spec"
 ENV["LOAD_UPDATE_SPREADSHEET_PATTERNS_TO_DB"] = "false"
-ENV["JON"] = "true"
+ENV["JON"] = "false"
  

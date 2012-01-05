@@ -5,6 +5,11 @@
 <div id="details_area">
 	<% form_for(@output_file) do |f| %>
 		<div class="field">
+			<%= f.label :handle %>
+			<%= f.text_field :handle, :size => 100 %>
+		</div>
+		
+		<div class="field">
 			<%= f.label :url %>
 			<div id="url_message"></div>
 			<%= f.text_field :url, :size => 100, :onchange => remote_function(:update => "url_message", :url => {:action => 'test_url'}, :with=>"'change_to='+this.value+''") %>
