@@ -4,9 +4,6 @@
 ###*******************************************************************
 ###NOTES BOX
 
-#ben's new updates
-#const_upd_m has a problem - I think it's just sheet notation handling. should test
-
 #uic_upd works and is complete
 #misc_const_upd_q works and is complete
 #misc_const_upd_m works and is complete

@@ -4,11 +4,6 @@
 ###*******************************************************************
 ###NOTES BOX
 
-#ben's new updates
-#us_upd_a has a sheet problem
-#us_upd_m needs to have all of the handles added
-#need to also define error handling in packager (or some other high level location)
-
 #be sure to use lower case for "increment" command
 #when there are non-number things in the CSV, move the location up to avoid them
 #some of the month download files seem to be downloading inconsistent time periods

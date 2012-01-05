@@ -4,7 +4,7 @@
 ###NOTES BOX
 
 #ben's new updates
-#sheet num is a problem with second two tour rakes
+#sheet num is a problem with second two tour rakes. Weird things on both. Download moved for first and potential weird end condition for second?
 
 #tour_PC_upd works
 #tour_Seats rows change every month

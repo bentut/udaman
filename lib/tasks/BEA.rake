@@ -6,6 +6,7 @@
 
 #ben's new updates
 #com_upd has a problem
+#need to also define error handling in packager (or some other high level location)
 
 #gsp_up works and is complete
 #SQ5N has extra commas, is splitting numbers unnecessarily, adding extra years to inc_upd_q  (THIS IS NOW FIXED AFTER REPORTED TO BEA)
