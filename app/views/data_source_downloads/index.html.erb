@@ -30,8 +30,11 @@
 			filename = download.save_path.nil? ? "" : download.save_path.split("/")[-1]
 			%>
 			<tr>
+					<% if download.handle.nil? %>
+					<td><strong style="color:#DDD"><%= filename %></strong></td>
+					<% else %>
 					<td><strong><%= download.handle %></strong></td>
-					<!-- <td><strong><%= filename %></strong></td> -->
+					<% end %>
 					<td><%= link_to "download" , {:action => 'download', :id => download.id}%></td>
 					<td><%= time %></td>
 					<td><%= status %></td>

@@ -3,6 +3,9 @@
 ###*******************************************************************
 ###NOTES BOX
 
+#ben's new updates
+#sheet num is a problem with second two tour rakes
+
 #tour_PC_upd works
 #tour_Seats rows change every month
 #tour_vis have blanks for IT and DM vis (from Cy Feng), and will need monthly manual processes

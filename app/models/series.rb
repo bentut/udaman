@@ -323,6 +323,7 @@ class Series < ActiveRecord::Base
   #if smart update or other process sets a global cache object for a session, use that. Otherwise
   #download fresh
   def Series.load_from_download(handle, options, cached_files = nil)
+    @@cached_files ||= nil #is this ok? will it break others?
     cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)
     series_data = dp.get_data
@@ -337,13 +338,14 @@ class Series < ActiveRecord::Base
     new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
-  def Series.load_from_bls(code, frequency = nil)
+  def Series.load_from_bls(code, frequency)
     series_data = DataHtmlParser.new.get_bls_series(code,frequency)
-    new_transformation("loaded series code: #{code} from bls website", series_data)
+    Series.new_transformation("loaded series code: #{code} from bls website", series_data, frequency)
   end
   
   def load_from_bls(code, frequency = nil)
-    Series.load_from_bls(code, frequency)
+    series_data = DataHtmlParser.new.get_bls_series(code,frequency)
+    new_transformation("loaded series code: #{code} from bls website", series_data)
   end
   
   def Series.open_cached_files

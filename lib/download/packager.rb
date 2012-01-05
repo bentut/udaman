@@ -64,6 +64,7 @@ class Packager
     Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
+      puts series_name+": "+definition
       series[series_name] = eval(definition).data
     end
     #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]

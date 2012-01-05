@@ -4,6 +4,11 @@
 ###*******************************************************************
 ###NOTES BOX
 
+#ben's new updates
+#us_upd_a has a sheet problem
+#us_upd_m needs to have all of the handles added
+#need to also define error handling in packager (or some other high level location)
+
 #be sure to use lower case for "increment" command
 #when there are non-number things in the CSV, move the location up to avoid them
 #some of the month download files seem to be downloading inconsistent time periods
@@ -132,7 +137,8 @@ task :us_upd_m => :environment do
 		"YDPI_R@US.M" => %Q|Series.load_from_download  "76M@bea.gov", { :file_type => "csv", :start_date => "1959-01-01", :row => 42, :col => "increment:3:1", :frequency => "M" }|, 
 		"YPCDPI@US.M" => %Q|Series.load_from_download  "76M@bea.gov", { :file_type => "csv", :start_date => "1959-01-01", :row => 43, :col => "increment:3:1", :frequency => "M" }|, 
 		"YPCDPI_R@US.M" => %Q|Series.load_from_download  "76M@bea.gov", { :file_type => "csv", :start_date => "1959-01-01", :row => 44, :col => "increment:3:1", :frequency => "M" }|, 
-		"N@US.M" => %Q|Series.load_from_download  "76M@bea.gov", { :file_type => "csv", :start_date => "1959-01-01", :row => 45, :col => "increment:3:1", :frequency => "M" }|, 
+		#{}"N@US.M" => %Q|Series.load_from_download  "76M@bea.gov", { :file_type => "csv", :start_date => "1959-01-01", :row => 45, :col => "increment:3:1", :frequency => "M" }|, 
+		#N@US.M is defined twice
 		"YCE_R@US.M" => %Q|Series.load_from_download  "83M@bea.gov", { :file_type => "csv", :start_date => "1995-01-01", :row => 7, :col => "increment:3:1", :frequency => "M" }|, 
 
     "E_NF@US.M" => %Q|"E_NF@US.M".tsn.load_from_bls("CES0000000001", "M")|,

@@ -4,6 +4,9 @@
 ###*******************************************************************
 ###NOTES BOX
 
+#ben's new updates
+#com_upd has a problem
+
 #gsp_up works and is complete
 #SQ5N has extra commas, is splitting numbers unnecessarily, adding extra years to inc_upd_q  (THIS IS NOW FIXED AFTER REPORTED TO BEA)
 #inc_upd_a pulls stuff now, no broken excel, broken up into multiple sheets (one per county), rather than multiple tabs
@@ -292,7 +295,7 @@ task :inc_upd_a => :environment do
 		"YL_GVSL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 130, :col => "increment:4:1", :frequency => "A" }|, 
 		"YLGVST@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 131, :col => "increment:4:1", :frequency => "A" }|, 
 		"YLGVLC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 132, :col => "increment:4:1", :frequency => "A" }|, 
-		"YLAGFFOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
+		# "YLAGFFOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
 	}
 
 	inc_haw_a = {
@@ -975,7 +978,7 @@ task :com_upd => :environment do
 		"YC_GVSL@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 118, :col => "increment:4:1", :frequency => "A" }|, 
 		"YCGVST@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 119, :col => "increment:4:1", :frequency => "A" }|, 
 		"YCGVLC@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 120, :col => "increment:4:1", :frequency => "A" }|, 
-		"YCAGFFOT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
+		# "YCAGFFOT@HI.A" => %Q|Series.load_from_download  "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
 	}
 	
 	com_haw = {
@@ -983,8 +986,8 @@ task :com_upd => :environment do
 		"YWAGE@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 123, :col => "increment:4:1", :frequency => "A" }|, 
 		"YOTLAB@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 124, :col => "increment:4:1", :frequency => "A" }|, 
 		"YOTLABPEN@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 125, :col => "increment:4:1", :frequency => "A" }|, 
-		"YOTLABSS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 126, :col => "increment:4:1", :frequency => "A" }|, 
-		"YCAVR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 127, :col => "increment:4:1", :frequency => "A" }|, 
+		#{}"YOTLABSS@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 126, :col => "increment:4:1", :frequency => "A" }|, 
+		#{}"YCAVR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 127, :col => "increment:4:1", :frequency => "A" }|, 
 		"YCAGFA@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 128, :col => "increment:4:1", :frequency => "A" }|, 
 		"YC_NF@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 129, :col => "increment:4:1", :frequency => "A" }|, 
 		"YC_PR@HAW.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 130, :col => "increment:4:1", :frequency => "A" }|, 
