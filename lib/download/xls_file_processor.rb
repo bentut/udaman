@@ -20,7 +20,13 @@ class XlsFileProcessor
     handle = @handle_processor.compute(date)
     sheet = @sheet_processor.compute(date)
 
-    worksheet = @cached_files.xls(handle, sheet)
+    begin
+      worksheet = @cached_files.xls(handle, sheet)
+    rescue RuntimeError => e
+      #date sensitive means it might look for handles that don't exist
+      return "END" if e.message[0..5] == "handle" and @handle_processor.date_sensitive?
+      raise e
+    end
   
     observation_value = parse_cell(worksheet.cell(row,col))
     return "END" if observation_value == "BREAK IN DATA"

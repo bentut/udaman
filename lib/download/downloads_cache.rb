@@ -2,6 +2,7 @@
 
 class DownloadsCache
   def xls(handle, sheet)
+    puts handle+": "+sheet
     @dsd = DataSourceDownload.get(handle)
     raise "handle '#{handle}' does not exist" if @dsd.nil?
 

@@ -10,4 +10,9 @@ class StringWithDatePatternProcessor
     return date_string.to_date.strftime(@string_format) unless subbed_path.index("%").nil?
     return subbed_path
   end
+  
+  def date_sensitive?
+    #nil is not date sensitive
+    return !@string_format.index("%").nil?
+  end
 end
