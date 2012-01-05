@@ -42,25 +42,22 @@ class DownloadsCache
   end
 
   def csv(handle)
-    puts "1"
     @dsd = DataSourceDownload.get(handle)
     raise "handle '#{handle}' does not exist" if @dsd.nil?
     
     @handle = handle
     @csv ||= {}
     if @csv[handle].nil? 
-      puts "2"
       download_handle 
-      puts "3"
       begin
-        puts "here1"
         @csv[handle] = CSV.read(@dsd.save_path_flex)
       rescue
-        puts "here rescue"
         #resolve one ugly known file formatting problem with faster csv
         alternate_csv_load = alternate_fastercsv_read(@dsd.save_path_flex) #rescue condition if this fails
         #return "READ_ERROR:CSV FORMAT OR FILE PROBLEM" if alternate_csv_load.nil? 
+        puts alternate_csv_load
         @csv[handle] = alternate_csv_load
+        puts @csv[handle]
       end
     end
     @csv[handle]
