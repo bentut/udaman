@@ -53,6 +53,18 @@ describe DownloadProcessor do
         }
         DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_q
       end
+      
+      it "should handle basic incrementing columns in xls files when first sheet is requested" do
+        options = {
+          :file_type => "xls",
+          :start_date => "2000-07-01",
+          :sheet => "sheet_num:1",
+          :row => 2,
+          :col => "increment:3:1",
+          :frequency => "Q"
+        }
+        DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_q
+      end
     end
   
     describe "csv tests" do

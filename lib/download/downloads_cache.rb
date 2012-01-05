@@ -18,7 +18,7 @@ class DownloadsCache
   def set_xls_sheet
     excel = Excel.new(@dsd.save_path_flex) 
     sheet_parts = @sheet.split(":")
-    if sheet_parts[0] == "sheet_num" and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
+    if sheet_parts[0] == "sheet_num" #and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
       excel.default_sheet = excel.sheets[sheet_parts[1].to_i - 1] 
     else
       begin
