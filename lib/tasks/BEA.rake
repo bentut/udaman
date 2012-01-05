@@ -4,10 +4,6 @@
 ###*******************************************************************
 ###NOTES BOX
 
-#ben's new updates
-#com_upd has a problem
-#need to also define error handling in packager (or some other high level location)
-
 #gsp_up works and is complete
 #SQ5N has extra commas, is splitting numbers unnecessarily, adding extra years to inc_upd_q  (THIS IS NOW FIXED AFTER REPORTED TO BEA)
 #inc_upd_a pulls stuff now, no broken excel, broken up into multiple sheets (one per county), rather than multiple tabs

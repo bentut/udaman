@@ -4,8 +4,8 @@
 ###NOTES BOX
 
 #ben's new updates
-#jp_upd_q has a problem
-#jp_upd_m has a problem
+#jp_upd_q has a problem (file gone?)
+#jp_upd_m has a problem (file changed?)
 
 #jp_upd_a works
 #jp_upd_q works

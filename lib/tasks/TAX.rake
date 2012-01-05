@@ -4,6 +4,7 @@
 ###NOTES BOX
 #ben's new updates
 #this needs to be fixed with zip files
+#need to also define error handling in packager (or some other high level location)
 
 #With the download being to a zip file, there seems to be a problem in unzipping the data to a usable form.
 
