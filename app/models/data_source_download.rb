@@ -41,6 +41,11 @@ class DataSourceDownload < ActiveRecord::Base
       return save_path.gsub("UHEROwork", "UHEROwork-1")
     end
     
+    def extract_path_flex
+      return file_to_extract unless ENV["JON"] == "true"
+      return file_to_extract.gsub("UHEROwork", "UHEROwork-1")
+    end
+    
     #this needs to be fixed
     def download_changed?
       self.download

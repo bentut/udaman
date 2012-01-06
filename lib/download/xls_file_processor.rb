@@ -8,6 +8,7 @@ class XlsFileProcessor
     @row_processor = IntegerPatternProcessor.new options[:row]
     @col_processor = IntegerPatternProcessor.new options[:col]
     @handle_processor = StringWithDatePatternProcessor.new handle
+    @path_processor = options[:path].nil? ? nil : StringWithDatePatternProcessor.new(options[:path])
     @sheet_processor = StringWithDatePatternProcessor.new options[:sheet]
     @date_processor = DatePatternProcessor.new date_info[:start], options[:frequency], date_info[:rev]
   end
@@ -19,9 +20,9 @@ class XlsFileProcessor
     col = @col_processor.compute(index)
     handle = @handle_processor.compute(date)
     sheet = @sheet_processor.compute(date)
-
+    path = @path_processor.nil? ? nil : @path_processor.compute(date)
     begin
-      worksheet = @cached_files.xls(handle, sheet)
+      worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
       #date sensitive means it might look for handles that don't exist
       return "END" if e.message[0..5] == "handle" and @handle_processor.date_sensitive?

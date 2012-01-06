@@ -1,23 +1,24 @@
 #CSV STUFF IS WEIRD... TRY TO CLEAN UP
 
 class DownloadsCache
-  def xls(handle, sheet)
-    puts handle+": "+sheet
+  def xls(handle, sheet, path = nil)
+    #puts handle+": "+sheet
     @dsd = DataSourceDownload.get(handle)
     raise "handle '#{handle}' does not exist" if @dsd.nil?
-
+    path = @dsd.extract_path_flex unless @dsd.extract_path_flex.nil?
+    @cache_handle = path.nil? ? @dsd.save_path_flex : path
     @handle = handle    
     @sheet = sheet
     @xls ||= {}
-    download_handle if @xls[handle].nil? #if handle in cache, it was downloaded recently
-    @xls[handle] ||= {}
-    set_xls_sheet if @xls[handle][sheet].nil? #if sheet not present, only other sheets were used so far
+    download_handle if @xls[@cache_handle].nil? #if handle in cache, it was downloaded recently
+    @xls[@cache_handle] ||= {}
+    set_xls_sheet if @xls[@cache_handle][sheet].nil? #if sheet not present, only other sheets were used so far
     
-    @xls[handle][sheet]
+    @xls[@cache_handle][sheet]
   end
 
   def set_xls_sheet
-    excel = Excel.new(@dsd.save_path_flex) 
+    excel = Excel.new(@cache_handle) 
     sheet_parts = @sheet.split(":")
     if sheet_parts[0] == "sheet_num" #and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
       excel.default_sheet = excel.sheets[sheet_parts[1].to_i - 1] 
@@ -28,8 +29,8 @@ class DownloadsCache
         raise "sheet '#{@sheet}' does not exist in workbook '#{@dsd.save_path_flex}' [Handle: #{@handle}]"
       end
     end
-    @xls[@handle] ||= {}
-    @xls[@handle][@sheet] = excel
+    @xls[@cache_handle] ||= {}
+    @xls[@cache_handle][@sheet] = excel
   end
 
   def download_results

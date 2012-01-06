@@ -5,6 +5,7 @@ describe DownloadProcessor do
     @data_a = {"2000-01-01" => 1, "2001-01-01" => 2, "2002-01-01" => 3, "2003-01-01" => 4 }
     @data_q = {"2000-07-01" => 1, "2000-10-01" => 2, "2001-01-01" => 3, "2001-04-01" => 4 }
     @data_m = {"2000-11-01" => 1, "2000-12-01" => 2, "2001-01-01" => 3, "2001-02-01" => 4 }
+    @data_q_alt = {"2000-07-01" => 4, "2000-10-01" => 3, "2001-01-01" => 2, "2001-04-01" => 1 }
   end
   
   describe "behavior tests" do
@@ -17,6 +18,7 @@ describe DownloadProcessor do
     describe "xls tests" do
       before(:each) do
         @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/pattern.xls")
+        @dsd.stub(:extract_path_flex).and_return(nil)
       end
       it "should handle basic incrementing columns in xls files" do
         options = {
@@ -65,6 +67,34 @@ describe DownloadProcessor do
         }
         DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_q
       end
+      
+      #this style will not be used...
+      it "should let you specify a specific download file to use in the case of a handle that downloads a zip" do
+        options = {
+          :file_type => "xls",
+          :path => "#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/alternate.xls",
+          :start_date => "2000-07-01",
+          :sheet => "increment_col_a",
+          :row => 2,
+          :col => "increment:3:1",
+          :frequency => "Q"
+        }
+        DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_q_alt
+      end
+      
+      it "should use the handle's target if it's present, to use in the case that the handle downloads a zip" do
+        @dsd.stub(:extract_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/alternate.xls")
+        options = {
+          :file_type => "xls",
+          :start_date => "2000-07-01",
+          :sheet => "increment_col_a",
+          :row => 2,
+          :col => "increment:3:1",
+          :frequency => "Q"
+        }
+        DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_q_alt
+      end
+      
     end
   
     describe "csv tests" do
@@ -87,6 +117,7 @@ describe DownloadProcessor do
     describe "comprehensive examples" do
       before(:each) do
         @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/data_mapping_samples.xls")
+        @dsd.stub(:extract_path_flex).and_return(nil)
       end
     
       it "should be able to read a start date from a spreadsheet" do
@@ -174,6 +205,7 @@ describe DownloadProcessor do
         @dsd.stub(:url).and_return("http://broken_download.com")
         DataSourceDownload.stub!(:get).and_return(@dsd)
         @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/pattern.xls")
+        @dsd.stub(:extract_path_flex).and_return(nil)
       end
       
       it "should raise an exception if download is not successful" do

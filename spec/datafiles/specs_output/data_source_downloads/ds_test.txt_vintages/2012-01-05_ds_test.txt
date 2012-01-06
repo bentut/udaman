@@ -5,8 +5,8 @@ Release:             G.5 Foreign Exchange Rates
 Seasonal Adjustment: Not Applicable
 Frequency:           Monthly
 Units:               Japanese Yen to One U.S. Dollar
-Date Range:          1971-01-01 to 2011-12-01
-Last Updated:        2012-01-04 8:18 AM CST
+Date Range:          1971-01-01 to 2011-06-01
+Last Updated:        2011-07-01 4:31 PM CDT
 Notes:               Averages of daily figures. Noon buying rates in New York City for
                      cable transfers payable in foreign currencies.
 
@@ -497,9 +497,3 @@ DATE           VALUE
 2011-04-01   83.1771
 2011-05-01   81.1257
 2011-06-01   80.4259
-2011-07-01   79.2425
-2011-08-01   76.9657
-2011-09-01   76.7957
-2011-10-01   76.6430
-2011-11-01   77.5595
-2011-12-01   77.7967
