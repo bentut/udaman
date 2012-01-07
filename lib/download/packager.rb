@@ -9,6 +9,61 @@ class Packager
     @download_results
   end
   
+  def errors
+    @errors ||= []
+    @errors
+  end
+  
+  def series
+    @series ||= {}
+    @series
+  end
+  
+  def changed?
+    download_results.each do |handle, hash|
+      return true if hash[:changed]
+    end
+    return false
+  end
+  
+  def download_results_string
+    results_string = ""
+    download_results.each do |handle, hash|
+      results_string += "#{handle} was downloaed successfully\n" if hash[:status] == 200
+      results_string += "There was an error downloading #{handle} - Status Code: #{hash[:status]}\n" unless hash[:status] == 200
+    end
+    results_string
+  end
+  
+  def errors_string
+    return "" if errors == []
+    results_string = "PROBLEMS WITH:"
+    errors.each do |error|
+      results_string += "#{error[:series]}: #{error[:error]} - (#{error[:definition]})\n"
+    end
+    results_string
+  end
+  
+  def series_summary_string
+    sorted= dates.sort
+    date1 = sorted[-1]
+    date2 = sorted[-2]
+    date3 = sorted[-3]
+    
+    puts "#{date1}, #{date2}, #{date3}"
+    results_string = ""
+    @series.each do |series, data|
+      puts data.count
+      puts data.sort[-1][0]
+      puts data[date3]
+      #results_string += "#{series.rjust(20," ")}: #{data[date3].rjust(10," ") rescue ""} | #{data[date2].rjust(10," ") rescue ""} | #{data[date1].rjust(10," ") rescue ""}\n"
+      results_string += "#{series.rjust(20," ")}: "
+      results_string += data[date3].rjust(10," ")
+      results_string += "|\n"
+    end
+    results_string
+  end
+  
   def add_definitions (definitions_hash)
     @definitions ||= {}
     @definitions.merge! definitions_hash
@@ -31,6 +86,7 @@ class Packager
     Series.close_cached_files
   end
 
+  #should fix this to only write if "changed?" resolves to true
   def write_xls
     return if @definitions.nil?
   
@@ -60,12 +116,19 @@ class Packager
     Kernel::eval definition
   end
   
+  #going to do exception handling here. broken series will not be added to hash, and thus will not show up
+  #in final spreadsheet. Thus they will have to appear in a log or something
   def get_data_from_definitions
+    @errors ||= []
     Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
       puts series_name+": "+definition
-      series[series_name] = eval(definition).data
+      begin
+        series[series_name] = eval(definition).data
+      rescue RuntimeError => e
+        @errors.push({ :series => series_name, :definition => definition, :error => e.message })
+      end
     end
     #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
     @download_results = Series.get_cached_files.download_results
