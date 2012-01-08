@@ -1,5 +1,18 @@
 class Packager
   
+  def Packager.temp
+    const_q = {
+  		"KNRSDNS@HON.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-25", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
+  		"KNRSDNS@HAW.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-26", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
+  		"PICTCONNS@HON.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-7", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|
+  	}
+
+  	p = Packager.new
+  	p.add_definitions const_q
+  	p.write_definitions_to "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_NEW.xls"
+  	nil
+  end
+  
   def definitions
     @definitions
   end
@@ -19,6 +32,13 @@ class Packager
     @series
   end
   
+  def download_problem?
+    download_results.each do |handle, hash|
+      return true if hash[:status] != 200
+    end
+    return false
+  end
+  
   def changed?
     download_results.each do |handle, hash|
       return true if hash[:changed]
@@ -27,39 +47,39 @@ class Packager
   end
   
   def download_results_string
-    results_string = ""
+    results_string = "DOWNLOAD RESULTS:\n-------------------\n"
     download_results.each do |handle, hash|
-      results_string += "#{handle} was downloaed successfully\n" if hash[:status] == 200
-      results_string += "There was an error downloading #{handle} - Status Code: #{hash[:status]}\n" unless hash[:status] == 200
+      results_string += "#{handle.rjust(30," ")} | #{hash[:changed] ? "c" : " "} | Success\n" if hash[:status] == 200
+      results_string += "#{handle.rjust(30," ")} |   | Error (#{hash[:status]})\n" unless hash[:status] == 200
+      # results_string += "#{handle} was downloaded successfully\n" if hash[:status] == 200
+      # results_string += "There was an error downloading #{handle} - Status Code: #{hash[:status]}\n" unless hash[:status] == 200
     end
     results_string
   end
   
   def errors_string
     return "" if errors == []
-    results_string = "PROBLEMS WITH:"
+    results_string = "BROKEN SERIES:\n-------------------\n"
     errors.each do |error|
-      results_string += "#{error[:series]}: #{error[:error]} - (#{error[:definition]})\n"
+      results_string += "#{error[:series]}: \n"
+      results_string += "#{error[:error]} \n"
+      results_string += "[#{error[:definition]})]\n\n"
     end
     results_string
   end
   
   def series_summary_string
     sorted= dates.sort
-    date1 = sorted[-1]
+    date3 = sorted[-1]
     date2 = sorted[-2]
-    date3 = sorted[-3]
-    
-    puts "#{date1}, #{date2}, #{date3}"
-    results_string = ""
+    date1 = sorted[-3]
+    results_string = "DOWNLOADED SERIES:\n-------------------\n"
+    results_string += "#{"".rjust(20," ")} | #{date1.rjust(10," ")} | #{date2.rjust(10," ")} | #{date3.rjust(10," ")}\n"
     @series.each do |series, data|
-      puts data.count
-      puts data.sort[-1][0]
-      puts data[date3]
-      #results_string += "#{series.rjust(20," ")}: #{data[date3].rjust(10," ") rescue ""} | #{data[date2].rjust(10," ") rescue ""} | #{data[date1].rjust(10," ") rescue ""}\n"
-      results_string += "#{series.rjust(20," ")}: "
-      results_string += data[date3].rjust(10," ")
-      results_string += "|\n"
+      d3 = data[date3].nil? ? "" : data[date3].round(3).to_s
+      d2 = data[date3].nil? ? "" : data[date2].round(3).to_s
+      d1 = data[date3].nil? ? "" : data[date1].round(3).to_s
+      results_string += "#{series.rjust(20," ")} | #{d1.rjust(10," ")} | #{d2.rjust(10," ")} | #{d3.rjust(10," ")}\n"
     end
     results_string
   end
@@ -86,15 +106,15 @@ class Packager
     Series.close_cached_files
   end
 
-  #should fix this to only write if "changed?" resolves to true
+  #this change functionality is not tested, but should be
   def write_xls
     return if @definitions.nil?
   
     @series = get_data_from_definitions
   
-    old_file = open(@output_path, "r").read if File::exists?(@output_path)
-    backup(old_file)
-  
+    old_file = File::exists?(@output_path) ? open(@output_path, "rb").read : nil
+    old_file_xls = Excel.new(@output_path) if File::exists?(@output_path)
+    
     xls = Spreadsheet::Workbook.new @output_path
     sheet1 = xls.create_worksheet
     write_dates(sheet1)
@@ -104,7 +124,22 @@ class Packager
       write_series(name, data, sheet1, col)
       col += 1
     end
+    puts download_results_string
+    puts errors_string
+    puts series_summary_string
     xls.write @output_path
+    #new_file = open(@output_path, "rb").read
+    new_file_xls = Excel.new(@output_path)
+    
+    if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
+      puts new_file_xls.to_s != old_file_xls.to_s
+      puts errors != []
+      puts download_problem?
+      backup(old_file) unless old_file.nil?
+      puts "SENDING EMAIL"
+      #email
+    end
+    
   end
 
   def backup(old_file)
@@ -123,10 +158,11 @@ class Packager
     Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
-      puts series_name+": "+definition
+      puts series_name#+": "+definition
       begin
         series[series_name] = eval(definition).data
-      rescue RuntimeError => e
+      rescue Exception => e
+        #puts "error for #{series_name}!!"
         @errors.push({ :series => series_name, :definition => definition, :error => e.message })
       end
     end
