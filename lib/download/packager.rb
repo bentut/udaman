@@ -137,7 +137,7 @@ class Packager
       puts download_problem?
       backup(old_file) unless old_file.nil?
       puts "SENDING EMAIL"
-      #email
+      PackagerMailer.rake_notification("none entered", download_results_string, errors_string, series_summary_string).deliver
     end
     
   end
