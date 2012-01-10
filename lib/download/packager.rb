@@ -54,6 +54,7 @@ class Packager
       # results_string += "#{handle} was downloaded successfully\n" if hash[:status] == 200
       # results_string += "There was an error downloading #{handle} - Status Code: #{hash[:status]}\n" unless hash[:status] == 200
     end
+    results_string += "\nFile Written: #{@output_path}\n\n"
     results_string
   end
   
