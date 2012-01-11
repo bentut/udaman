@@ -260,6 +260,14 @@ class Series < ActiveRecord::Base
     #puts "#{"%.2f" % (Time.now - s_time)} : #{data_hash.count} : #{self.name} : SAVING SERIES"    
   end
   
+  def Series.new_transformation(name, data, frequency)
+    Series.new(
+      :name => name,
+      :frequency => frequency,
+      :data => data
+    )
+  end
+  
   def new_transformation(name, data)
     frequency = (self.frequency.nil? and name.split(".").count == 2 and name.split("@") == 2 and name.split(".")[1].length == 1) ? Series.frequency_from_code(name[-1]) : self.frequency
     #puts "NEW TRANFORMATION: #{name} - frequency: #{frequency}"  
@@ -271,6 +279,7 @@ class Series < ActiveRecord::Base
   end
   
   #need to spec out tests for this
+  #this would benefit from some caching scheme
   def load_from(update_spreadsheet_path, sheet_to_load = nil)
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
     raise SeriesReloadException if update_spreadsheet.load_error?
@@ -311,78 +320,44 @@ class Series < ActiveRecord::Base
     new_transformation("mean corrected against #{ns_name} and loaded from #{update_spreadsheet_path}", mean_corrected_demetra_series.data)
   end
   
-  def Series.load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
-    path = path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
-    f = open path, "r"
-    rows_skipped = 0
-    while (rows_to_skip > rows_skipped)
-      f.gets
-      rows_skipped += 1
-    end
-    load_from_queued_up_file(f, delimiter, date_col, value_col)
+  #if smart update or other process sets a global cache object for a session, use that. Otherwise
+  #download fresh
+  def Series.load_from_download(handle, options, cached_files = nil)
+    @@cached_files ||= nil #is this ok? will it break others?
+    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    dp = DownloadProcessor.new(handle, options, cached_files)
+    series_data = dp.get_data
+    #puts dp.end_conditions
+    Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, options[:frequency])
   end
   
-  def Series.load_standard_text(path)
-    path = path.gsub("UHEROwork", "UHEROwork-1") if ENV["JON"] == "true"
-    f = open path, "r"
-    while line = f.gets
-      break if line.starts_with "DATE"
-    end
-    load_from_queued_up_file(f, " ", 0, 1)
+  def load_from_download(handle, options, cached_files = nil)
+    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    dp = DownloadProcessor.new(handle, options, cached_files)
+    series_data = dp.get_data
+    new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
-  def Series.load_from_queued_up_file(f, delimiter, date_col, value_col)
-    series_data = {}
-    while data_row = f.gets
-      data = data_row.split(delimiter)
-      begin
-        date = Date.parse(data[date_col])
-      rescue
-        break
-      end
-      series_data[date.to_s] = data[value_col].to_f
-    end
-    Series.new.new_transformation("loaded from textfile #{f.path}", series_data)
+  def Series.load_from_bls(code, frequency)
+    series_data = DataHtmlParser.new.get_bls_series(code,frequency)
+    Series.new_transformation("loaded series code: #{code} from bls website", series_data, frequency)
   end
   
-  #original version of this function returned data. Then it returned a series. now returns a pattern for later manipulation
-  def Series.load_pattern(start, freq, path, sheet, row, col)
-    DataLoadPattern.new(:col=>col, :start_date=>start, :frequency=>freq , :worksheet=>sheet, :row=>row, :path=>path)
-    #can also attempt to find duplicate of pattern.
-  end
-  
-  def load_standard_text(path)
-    Series.load_standard_text(path)
-  end
-  
-  def load_from_pattern_id(pattern_id)
-    p = DataLoadPattern.find pattern_id
-    s = load_from_pattern(p)
-    p.save
-    return s
-  end
-  
-  def load_from_pattern(p)
-    last_condition = nil
-    series_data = {}
-    index = 0
-    #t = Time.now
-    while last_condition.nil?
-      #puts index.to_s+": "+(Time.now-t).to_s
-      date_string = p.compute_date_string_for_index index
-      data_value = p.retrieve(date_string)
-      #puts "#{date_string}: #{data_value}"
-      #puts p.last_read_status if data_value == "END"
-      break if data_value == "END"
-      series_data[date_string] = data_value
-      index += 1
-    end
-    new_transformation("loaded from pattern id #{p.id}", series_data)
-  end
-
   def load_from_bls(code, frequency = nil)
     series_data = DataHtmlParser.new.get_bls_series(code,frequency)
     new_transformation("loaded series code: #{code} from bls website", series_data)
+  end
+  
+  def Series.open_cached_files
+    @@cached_files = DownloadsCache.new
+  end
+  
+  def Series.get_cached_files
+    @@cached_files
+  end
+  
+  def Series.close_cached_files
+    @@cached_files = nil
   end
   
   def at(date)

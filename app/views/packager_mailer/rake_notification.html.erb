@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Download Results</h1>
+	<table>
+		<% @download_results.each do |handle, hash| %>
+			<tr><td><%= handle %></td><td><%= hash[:changed] ? "c" : " " %></td><td><%= hash[:status] == 200 ? "Success" : "Error (#{hash[:status]})" %></td></tr>
+		<% end %>
+	</table>
+
+	<h1>File Written</h1>
+	<p><%= @output_path %></p>
+	
+	<% if @errors != [] %>
+		<h1>Broken Series</h1>
+		<% @errors.each do |error| %>
+			<p>
+				<strong><%= error[:series] %></strong><br>
+				<em><%= error[:error] %></em><br>
+				<%= error[:definition] %><br>
+			</p>
+		<% end %>
+	<% end %>
+
+	<h1>Downloaded Series</h1>
+	<%
+	sorted= @dates.sort
+    date3 = sorted[-1]
+    date2 = sorted[-2]
+    date1 = sorted[-3]
+	%>
+	
+	<table>
+		<tr><td></td><td><%= date1 %></td><td><%= date2 %></td><td><%= date3 %></td></tr>
+		<% @series.each do |series, data| %>
+			<tr><td><%= series %></td><td><%= data[date1] %></td><td><%= data[date2] %></td><td><%= data[date3] %></td></tr>
+		<% end %>
+	</table>
+  </body>
+</html>

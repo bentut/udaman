@@ -5,11 +5,15 @@ class DataSourceDownload < ActiveRecord::Base
   serialize :download_log, Array
 
     #some tight coupling to the unizipping functionality in the string extension
-    def DataSourceDownload.get(save_path)
+    def DataSourceDownload.get_by_path(save_path)
       sp = save_path.split("_extracted_files/")[0] 
       DataSourceDownload.where(:save_path => sp).first
     end
-
+    
+    def DataSourceDownload.get(handle)
+      DataSourceDownload.where(:handle => handle).first
+    end
+    
     def DataSourceDownload.test_url(url)
       dsd = DataSourceDownload.new(:url => url)
       dsd.test_url
@@ -37,6 +41,11 @@ class DataSourceDownload < ActiveRecord::Base
       return save_path.gsub("UHEROwork", "UHEROwork-1")
     end
     
+    def extract_path_flex
+      return file_to_extract unless ENV["JON"] == "true"
+      return file_to_extract.gsub("UHEROwork", "UHEROwork-1")
+    end
+    
     #this needs to be fixed
     def download_changed?
       self.download
@@ -57,13 +66,16 @@ class DataSourceDownload < ActiveRecord::Base
         resp = client.post(URI.encode(url), post_parameters) 
       end
       #puts "downloaded"
-      raise DownloadException if resp.header.status_code != 200
-      data_changed = content_changed?(resp.content)
+      #not sure why I was raising this exception. Want to note the failed downloads and continue
+      #raise DownloadException if resp.header.status_code != 200
+      if resp.header.status_code == 200 #successful download
+        data_changed = content_changed?(resp.content)
 
-      backup if data_changed
+        backup if data_changed
 
-      open(save_path_flex, "wb") { |file| file.write resp.content }
-      save_path_flex.unzip if save_path_flex[-3..-1] == "zip"
+        open(save_path_flex, "wb") { |file| file.write resp.content }
+        save_path_flex.unzip if save_path_flex[-3..-1] == "zip"
+      end
       #logging section
       download_time = Time.now
       download_url = url
@@ -72,6 +84,7 @@ class DataSourceDownload < ActiveRecord::Base
       status = resp.header.status_code
       self.download_log.push({:time => download_time, :url => download_url, :location => download_location, :type => content_type, :status => status, :changed => data_changed})
       self.save
+      self.download_log[-1]
     end
 
     def content_changed?(new_content)

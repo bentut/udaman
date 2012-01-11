@@ -4,6 +4,17 @@
 <div id="details_mask"></div>
 <div id="details_area">
 	<% form_for(@output_file) do |f| %>
+	
+		<div class="field">
+			<%= f.label :handle %>
+			<%= f.text_field :handle, :size => 100 %>
+		</div>
+		
+		<div class="field">
+			<%= f.label :file_to_extract %>
+			<%= f.text_field :file_to_extract, :size => 100 %>
+		</div>
+		
 		<div class="field">
 			<%= f.label :url %>
 			<div id="url_message"></div>

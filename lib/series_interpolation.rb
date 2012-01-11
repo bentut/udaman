@@ -4,10 +4,10 @@ module SeriesInterpolation
   end
   
   def interpolate(frequency, operation)
-#    puts "FREQUENCY: #{frequency} - #{frequency.class}"
-#    puts "SELF.FREQUENCY: #{self.frequency} - #{self.frequency.class}"
-#    puts "OPERATION: #{operation} - #{operation.class}"
-    raise InterpolationException if frequency != :quarter or self.frequency != "semi" or operation != :linear
+   # puts "FREQUENCY: #{frequency} - #{frequency.class}"
+   # puts "SELF.FREQUENCY: #{self.frequency} - #{self.frequency.class}"
+   # puts "OPERATION: #{operation} - #{operation.class}"
+    raise InterpolationException if frequency != :quarter or self.frequency != :semi or operation != :linear
     raise InterpolationException if data.count < 2
     last = nil
     last_date = nil
