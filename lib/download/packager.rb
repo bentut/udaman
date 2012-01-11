@@ -91,10 +91,15 @@ class Packager
   end
 
   def write_definitions_to(output_path = "udaman")
-    return write_to_db if output_path == "udaman"
-    @output_path = ENV["JON"] == "true" ? output_path.gsub("UHEROwork", "UHEROwork-1") : output_path
-    @output_filename = @output_path.split("/")[-1]
-    write_xls  
+    begin
+      return write_to_db if output_path == "udaman"
+      @output_path = ENV["JON"] == "true" ? output_path.gsub("UHEROwork", "UHEROwork-1") : output_path
+      @output_filename = @output_path.split("/")[-1]
+      write_xls  
+    rescue Exception => e
+      PackagerMailer.rake_error(e, output_path).deliver
+      raise e
+    end
   end
 
   def write_to_db
@@ -138,7 +143,8 @@ class Packager
       puts download_problem?
       backup(old_file) unless old_file.nil?
       puts "SENDING EMAIL"
-      PackagerMailer.rake_notification("none entered", download_results_string, errors_string, series_summary_string).deliver
+      #PackagerMailer.rake_notification("none entered", download_results_string, errors_string, series_summary_string).deliver
+      PackagerMailer.rake_notification("none entered", download_results, errors, @series, @output_path, dates).deliver
     end
     
   end
@@ -159,9 +165,10 @@ class Packager
     Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
-      puts series_name#+": "+definition
+      #puts series_name#+": "+definition
       begin
-        series[series_name] = eval(definition).data
+        def_data = eval(definition).data
+        series[series_name] = def_data.nil? ? {} : def_data
       rescue Exception => e
         #puts "error for #{series_name}!!"
         @errors.push({ :series => series_name, :definition => definition, :error => e.message })
@@ -185,6 +192,7 @@ class Packager
     dates_array = []
     return [] if @series.nil?
     @series.each do |series_name, data|
+      #puts series_name
       dates_array |= data.keys
     end
     dates_array.sort

@@ -13,6 +13,7 @@ gem 'httpclient'
 gem 'devise', '1.1.2'
 gem 'spork', '~> 0.9.0.rc'
 gem 'rubyzip', '~> 0.9.4'
+gem 'whenever', :require => false
 
 # Use unicorn as the web server
 # gem 'unicorn'

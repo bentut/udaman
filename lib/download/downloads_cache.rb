@@ -34,6 +34,7 @@ class DownloadsCache
   end
 
   def download_results
+    @download_results ||= {}
     @download_results
   end
 
