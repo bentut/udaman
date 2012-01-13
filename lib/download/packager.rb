@@ -78,8 +78,8 @@ class Packager
     results_string += "#{"".rjust(20," ")} | #{date1.rjust(10," ")} | #{date2.rjust(10," ")} | #{date3.rjust(10," ")}\n"
     @series.each do |series, data|
       d3 = data[date3].nil? ? "" : data[date3].round(3).to_s
-      d2 = data[date3].nil? ? "" : data[date2].round(3).to_s
-      d1 = data[date3].nil? ? "" : data[date1].round(3).to_s
+      d2 = data[date2].nil? ? "" : data[date2].round(3).to_s
+      d1 = data[date1].nil? ? "" : data[date1].round(3).to_s
       results_string += "#{series.rjust(20," ")} | #{d1.rjust(10," ")} | #{d2.rjust(10," ")} | #{d3.rjust(10," ")}\n"
     end
     results_string

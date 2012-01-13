@@ -95,6 +95,38 @@ describe DownloadProcessor do
         DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_q_alt
       end
       
+      
+      #process here instead of in the integer processor object since has to read from file
+      it "should let you specify a header instead of a row " do
+        options = {
+          :file_type => "xls",
+          :start_date => "2000-01-01",
+          :sheet => "increment_col_a",
+          :row => "header",
+          :col => "increment:3:1",
+          :frequency => "A"
+        }
+        DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_a
+      end
+      
+      it "should let you specify a header instead of a column" do
+        #or just create a new file
+        @dsd.stub(:save_path_flex).and_return("#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/data_mapping_samples.xls")
+        @dsd.stub(:extract_path_flex).and_return(nil)
+        
+         options = {
+            :file_type => "xls",
+            :start_row => 2,
+            :start_col => 1,
+            :rev => true, 
+            :frequency => "M" , 
+            :sheet => "JP_STKNS", 
+            :row => "increment:2:1", 
+            :col => "header"
+          }
+          data = DownloadProcessor.new("pattern@test.com", options).get_data
+      end
+            
     end
   
     describe "csv tests" do
@@ -113,6 +145,24 @@ describe DownloadProcessor do
         DownloadProcessor.new("pattern@test.com", options).get_data.should == @data_a
       end
     end
+    
+    describe "local files tests" do
+      it "should cause an error if the handle is 'manual' but no file path is specified" do
+        
+      end
+      
+      it "should be able read the same kind of files, but specify a manual download and file path" do
+        options = {
+            :path => "#{ENV["DATAFILES_PATH"]}/datafiles/specs/downloads/pattern_csv.csv",
+            :file_type => "csv",
+            :start_date => "2000-01-01",
+            :row => 2,
+            :col => "increment:3:1",
+            :frequency => "A"
+        }
+        DownloadProcessor.new("manual", options).get_data.should == @data_a
+      end
+    end #end local files test
 
     describe "comprehensive examples" do
       before(:each) do
