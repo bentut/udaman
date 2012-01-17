@@ -5,8 +5,8 @@ class XlsFileProcessor
     @cached_files = cached_files
     @handle = handle
     @options = options
-    @row_processor = IntegerPatternProcessor.new options[:row]
-    @col_processor = IntegerPatternProcessor.new options[:col]
+    @row_processor = IntegerPatternProcessor.new(DownloadPreprocessor.xls(options[:row], handle, options[:sheet], @cached_files)) #assume that sheet and handle are not dynamic
+    @col_processor = IntegerPatternProcessor.new(DownloadPreprocessor.xls(options[:col], handle, options[:sheet], @cached_files)) #assume that sheet and handle are not dynamic
     @handle_processor = StringWithDatePatternProcessor.new handle
     @path_processor = options[:path].nil? ? nil : StringWithDatePatternProcessor.new(options[:path])
     @sheet_processor = StringWithDatePatternProcessor.new options[:sheet]

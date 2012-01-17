@@ -3,14 +3,19 @@
 class DownloadsCache
   def xls(handle, sheet, path = nil)
     #puts handle+": "+sheet
-    @dsd = DataSourceDownload.get(handle)
-    raise "handle '#{handle}' does not exist" if @dsd.nil?
-    path = @dsd.extract_path_flex unless @dsd.extract_path_flex.nil?
-    @cache_handle = path.nil? ? @dsd.save_path_flex : path
+    path = DataSourceDownload.flex(path) if handle == "manual"
+    
+    if path.nil?
+      @dsd = DataSourceDownload.get(handle)
+      raise "handle '#{handle}' does not exist" if @dsd.nil?
+      path = @dsd.extract_path_flex.nil? ? @dsd.save_path_flex : @dsd.extract_path_flex 
+    end
+    
+    @cache_handle = path
     @handle = handle    
     @sheet = sheet
     @xls ||= {}
-    download_handle if @xls[@cache_handle].nil? #if handle in cache, it was downloaded recently
+    download_handle if @xls[@cache_handle].nil? and handle != "manual" #if handle in cache, it was downloaded recently... need to pull this handle logic out to make less hacky
     @xls[@cache_handle] ||= {}
     set_xls_sheet if @xls[@cache_handle][sheet].nil? #if sheet not present, only other sheets were used so far
     

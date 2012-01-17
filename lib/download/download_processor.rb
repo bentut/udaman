@@ -10,7 +10,7 @@ require 'csv'
 class DownloadProcessor
   def initialize(handle, options, cached_files = nil)
     raise "File type must be specified when initializing a Download Processor" if options[:file_type].nil?
-    
+    raise "File path must be specified when initializing a manual Download Processor" if handle == "manual" and options[:path].nil?
     @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
     @handle = handle
     @options = options
