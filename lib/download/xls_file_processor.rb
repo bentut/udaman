@@ -28,6 +28,7 @@ class XlsFileProcessor
     begin
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
+      puts e.message
       #date sensitive means it might look for handles that don't exist
       return "END" if e.message[0..5] == "handle" and @handle_processor.date_sensitive?
       raise e
