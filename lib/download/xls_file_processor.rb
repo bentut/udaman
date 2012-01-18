@@ -5,8 +5,8 @@ class XlsFileProcessor
     @cached_files = cached_files
     @handle = handle
     @options = options
-    @row_processor = IntegerPatternProcessor.new options[:row]
-    @col_processor = IntegerPatternProcessor.new options[:col]
+    @row_processor = IntegerPatternProcessor.new(options[:row]) 
+    @col_processor = IntegerPatternProcessor.new(options[:col]) 
     @handle_processor = StringWithDatePatternProcessor.new handle
     @path_processor = options[:path].nil? ? nil : StringWithDatePatternProcessor.new(options[:path])
     @sheet_processor = StringWithDatePatternProcessor.new options[:sheet]
@@ -16,11 +16,15 @@ class XlsFileProcessor
   def observation_at(index)
     date = @date_processor.compute(index)
   
-    row = @row_processor.compute(index)
-    col = @col_processor.compute(index)
     handle = @handle_processor.compute(date)
     sheet = @sheet_processor.compute(date)
+    
+    row = @row_processor.compute(index, @cached_files, handle, sheet)
+    col = @col_processor.compute(index, @cached_files, handle, sheet)
+    
     path = @path_processor.nil? ? nil : @path_processor.compute(date)
+    
+    #puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
     begin
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e

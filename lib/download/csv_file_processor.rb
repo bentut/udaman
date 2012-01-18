@@ -10,10 +10,11 @@ class CsvFileProcessor
   end
 
   def observation_at(index)
-    row = @row_processor.compute(index)
-    col = @col_processor.compute(index)
     handle = @handle_processor.compute(index)
   
+    row = @row_processor.compute(index, @cached_files, handle)
+    col = @col_processor.compute(index, @cached_files, handle)
+    
     csv_2d_array = @cached_files.csv(handle)
     date = @date_processor.compute(index)
   

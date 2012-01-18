@@ -165,6 +165,7 @@ class Packager
     Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
+      puts series_name
       #puts series_name#+": "+definition
       begin
         def_data = eval(definition).data

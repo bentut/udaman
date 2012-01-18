@@ -316,1285 +316,386 @@ end
 
 
 
+task :hiwi_upd => :environment do
+  hiwi_upd = {
+    'E_NFNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:WAGE & SALARY JOBS", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Total Private", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_GDSPRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Goods-Producing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Nat. Resources & Mining & Construction", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTBLNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Construction of Buildings", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTSPNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Special Trade Contractors", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Manufacturing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNDRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Non-Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_SVCPRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRSVCPRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Private Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TTUNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Trade, Transportation & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EWTNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Wholesale Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Retail Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Food & Beverage Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDGSNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Grocery Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTCLNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Clothing & Clothing Accessories Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:General Merchandise", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMDSNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Department Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TUNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Transportation, Warehousing & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EUTNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Utilites", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Transportation & Warehousing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWTANS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Air Transportation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Information", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFTCNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Telecommunications", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_FIRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Financial Activities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EFINS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Finance & Insurance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERENS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Real Estate & Rental & Leasing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PBSNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Professional & Business Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EPSNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Professional, Scientific & Tech. Svcs.", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMANS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Management of Companies & Enterprises", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Management & Remediation Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADESNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Employment Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_EDHCNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Educational & Health Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EEDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Educational Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EED12NS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Elementary & Secondary Schools", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Health Care & Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCAMNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Ambulatory Health Care Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCHONS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Hospitals", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNRNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Nursing & Residenial Care Facilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSONS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSOIFNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Individual & Family Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_LHNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Leisure and Hospitality", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAENS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Arts, Entertainment, & Recreation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFACNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Accommodation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDRSNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EOSNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Other Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Federal Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDDDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Department of Defense", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDSPNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Naval Shipyard", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:State Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTEDNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:State Education", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVLCNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:Local Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAGNS@HI.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "State", :row => "header:col:1:AGRICULTURE", :col => "repeat:3:14" , :frequency => "M"}|,
+  
+    'E_NFNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:WAGE & SALARY JOBS", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Total Private", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_GDSPRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Goods-Producing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Nat. Resources & Mining & Construction", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTBLNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Construction of Buildings", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTSPNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Special Trade Contractors", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Manufacturing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNDRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Non-Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_SVCPRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRSVCPRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Private Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TTUNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Trade, Transportation & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EWTNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Wholesale Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Retail Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Food & Beverage Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDGSNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Grocery Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTCLNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Clothing & Clothing Accessories Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:General Merchandise", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMDSNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Department Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TUNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Transportation, Warehousing & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EUTNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Utilites", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Transportation & Warehousing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWTANS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Air Transportation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Information", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFTCNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Telecommunications", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_FIRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Financial Activities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EFINS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Finance & Insurance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERENS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Real Estate & Rental & Leasing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PBSNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Professional & Business Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EPSNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Professional, Scientific & Tech. Svcs.", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMANS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Management of Companies & Enterprises", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Management & Remediation Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADESNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Employment Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_EDHCNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Educational & Health Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EEDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Educational Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EED12NS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Elementary & Secondary Schools", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Health Care & Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCAMNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Ambulatory Health Care Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCHONS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Hospitals", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNRNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Nursing & Residenial Care Facilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSONS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSOIFNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Individual & Family Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_LHNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Leisure and Hospitality", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAENS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Arts, Entertainment, & Recreation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFACNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Accommodation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDRSNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EOSNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Other Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Federal Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDDDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Department of Defense", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDSPNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Naval Shipyard", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:State Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTEDNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:State Education", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVLCNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:Local Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAGNS@HON.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Oahu", :row => "header:col:1:AGRICULTURE", :col => "repeat:3:14" , :frequency => "M"}|,
 
 
-###*******************************************************************
+    'E_NFNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:WAGE & SALARY JOBS", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Total Private", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_GDSPRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Goods-Producing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Nat. Resources & Mining & Construction", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTBLNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Construction of Buildings", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTSPNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Special Trade Contractors", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Manufacturing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNDRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Non-Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_SVCPRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRSVCPRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Private Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TTUNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Trade, Transportation & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EWTNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Wholesale Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Retail Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Food & Beverage Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDGSNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Grocery Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTCLNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Clothing & Clothing Accessories Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:General Merchandise", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMDSNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Department Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TUNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Transportation, Warehousing & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EUTNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Utilites", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Transportation & Warehousing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWTANS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Air Transportation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Information", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFTCNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Telecommunications", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_FIRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Financial Activities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EFINS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Finance & Insurance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERENS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Real Estate & Rental & Leasing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PBSNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Professional & Business Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EPSNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Professional, Scientific & Tech. Svcs.", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMANS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Management of Companies & Enterprises", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Management & Remediation Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADESNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Employment Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_EDHCNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Educational & Health Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EEDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Educational Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EED12NS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Elementary & Secondary Schools", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Health Care & Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCAMNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Ambulatory Health Care Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCHONS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Hospitals", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNRNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Nursing & Residenial Care Facilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSONS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSOIFNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Individual & Family Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_LHNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Leisure and Hospitality", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAENS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Arts, Entertainment, & Recreation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFACNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Accommodation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDRSNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EOSNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Other Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Federal Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDDDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Department of Defense", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDSPNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Naval Shipyard", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:State Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTEDNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:State Education", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVLCNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:Local Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAGNS@HAW.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "HCty", :row => "header:col:1:AGRICULTURE", :col => "repeat:3:14" , :frequency => "M"}|,
 
 
+    'E_NFNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:WAGE & SALARY JOBS", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Total Private", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_GDSPRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Goods-Producing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Nat. Resources & Mining & Construction", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTBLNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Construction of Buildings", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTSPNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Special Trade Contractors", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Manufacturing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNDRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Non-Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_SVCPRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRSVCPRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Private Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TTUNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Trade, Transportation & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EWTNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Wholesale Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Retail Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Food & Beverage Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDGSNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Grocery Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTCLNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Clothing & Clothing Accessories Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:General Merchandise", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMDSNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Department Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TUNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Transportation, Warehousing & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EUTNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Utilites", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Transportation & Warehousing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWTANS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Air Transportation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Information", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFTCNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Telecommunications", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_FIRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Financial Activities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EFINS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Finance & Insurance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERENS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Real Estate & Rental & Leasing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PBSNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Professional & Business Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EPSNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Professional, Scientific & Tech. Svcs.", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMANS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Management of Companies & Enterprises", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Management & Remediation Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADESNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Employment Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_EDHCNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Educational & Health Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EEDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Educational Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EED12NS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Elementary & Secondary Schools", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Health Care & Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCAMNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Ambulatory Health Care Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCHONS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Hospitals", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNRNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Nursing & Residenial Care Facilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSONS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSOIFNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Individual & Family Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_LHNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Leisure and Hospitality", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAENS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Arts, Entertainment, & Recreation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFACNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Accommodation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDRSNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EOSNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Other Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Federal Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDDDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Department of Defense", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDSPNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Naval Shipyard", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:State Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTEDNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:State Education", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVLCNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:Local Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAGNS@KAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "KCty", :row => "header:col:1:AGRICULTURE", :col => "repeat:3:14" , :frequency => "M"}|,
+
+    'E_NFNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:WAGE & SALARY JOBS", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Total Private", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_GDSPRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Goods-Producing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Nat. Resources & Mining & Construction", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTBLNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Construction of Buildings", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ECTSPNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Special Trade Contractors", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Manufacturing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNDRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMNNDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Non-Durable Goods", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_SVCPRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PRSVCPRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Private Service-Providing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TTUNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Trade, Transportation & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EWTNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Wholesale Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Retail Trade", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Food & Beverage Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTFDGSNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Grocery Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTCLNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Clothing & Clothing Accessories Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:General Merchandise", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERTGMDSNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Department Stores", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_TUNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Transportation, Warehousing & Utilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EUTNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Utilites", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Transportation & Warehousing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ETWTANS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Air Transportation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Information", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EIFTCNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Telecommunications", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_FIRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Financial Activities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EFINS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Finance & Insurance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'ERENS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Real Estate & Rental & Leasing", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_PBSNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Professional & Business Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EPSNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Professional, Scientific & Tech. Svcs.", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EMANS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Management of Companies & Enterprises", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Management & Remediation Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EADESNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Employment Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_EDHCNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Educational & Health Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EEDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Educational Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EED12NS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Elementary & Secondary Schools", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Health Care & Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCAMNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Ambulatory Health Care Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCHONS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Hospitals", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCNRNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Nursing & Residenial Care Facilities", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSONS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Social Assistance", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EHCSOIFNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Individual & Family Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'E_LHNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Leisure and Hospitality", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAENS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Arts, Entertainment, & Recreation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFACNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Accommodation", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAFFDRSNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EOSNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Other Services", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Federal Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDDDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Department of Defense", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVFDSPNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Naval Shipyard", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:State Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVSTEDNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:State Education", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EGVLCNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:Local Government", :col => "repeat:3:14" , :frequency => "M"}|,
+    'EAGNS@MAU.M' => %Q|Series.load_from_download "%Y@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "MCty", :row => "header:col:1:AGRICULTURE", :col => "repeat:3:14" , :frequency => "M"}|
+    
+  }
+  
+  # hiwi_upd_hon = {
+  #   
+  # }
+  # 
+  # hiwi_upd_haw = {
+  #   
+  # }
+  # 
+  # hiwi_upd_mau = {
+  #   
+  # }
+  # 
+  # hiwi_upd_kau = {
+  #   
+  # }
+  
+  
+  p = Packager.new
+  p.add_definitions hiwi_upd
+  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_NEW.xls"
+end
+
 # 
-# task :hiwi_upd => :environment do
-#   require "Spreadsheet"
-#   path_HIWI2011           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2011.xls"
-#   path_HIWI2010           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2010.xls"
-#   path_HIWI2009           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2009.xls"
-#   path_HIWI2008           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2008.xls"
-#   path_HIWI2007           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2007.xls"
-#   path_HIWI2006           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2006.xls"
-#   path_HIWI2005           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2005.xls"
-#   path_HIWI2004           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2004.xls"
-#   path_HIWI2003           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2003.xls"
-#   path_HIWI2002           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2002.xls"
-#   path_HIWI2001           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2001.xls"
-#   path_HIWI2000           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI2000.xls"
-#   path_HIWI1999           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1999.xls"
-#   path_HIWI1998           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1998.xls"
-#   path_HIWI1997           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1997.xls"
-#   path_HIWI1996           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1996.xls"
-#   path_HIWI1995           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1995.xls"
-#   path_HIWI1994           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1994.xls"
-#   path_HIWI1993           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1993.xls"
-#   path_HIWI1992           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1992.xls"
-#   path_HIWI1991           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1991.xls"
-#   path_HIWI1990           = "/Volumes/UHEROwork/data/rawdata/BLS_HIWI1990.xls"
 # 
-#   output_path      = "/Volumes/UHEROwork/data/misc/bls/update/HIWI_upd_m_NEW.xls"
+# 'E_NFNS' => 'WAGE & SALARY JOBS',
+# 'E_PRNS' => 'Total Private',
+# 'E_GDSPRNS' => 'Goods-Producing',
+# 'ECTNS' => 'Nat. Resources & Mining & Construction',
+# 'ECTBLNS' => 'Construction of Buildings',
+# 'ECTSPNS' => 'Special Trade Contractors',
+# 'EMNNS' => 'Manufacturing',
+# 'EMNDRNS' => 'Durable Goods',
+# 'EMNNDNS' => 'Non-Durable Goods',
+# 'E_SVCPRNS' => 'Service-Providing',
+# 'E_PRSVCPRNS' => 'Private Service-Providing',
+# 'E_TTUNS' => 'Trade, Transportation & Utilities',
+# 'EWTNS' => 'Wholesale Trade',
+# 'ERTNS' => 'Retail Trade',
+# 'ERTFDNS' => 'Food & Beverage Stores',
+# 'ERTFDGSNS' => 'Grocery Stores',
+# 'ERTCLNS' => 'Clothing & Clothing Accessories Stores',
+# 'ERTGMNS' => 'General Merchandise',
+# 'ERTGMDSNS' => 'Department Stores',
+# 'E_TUNS' => 'Transportation, Warehousing & Utilities',
+# 'EUTNS' => 'Utilites',
+# 'ETWNS' => 'Transportation & Warehousing',
+# 'ETWTANS' => 'Air Transportation',
+# 'EIFNS' => 'Information',
+# 'EIFTCNS' => 'Telecommunications',
+# 'E_FIRNS' => 'Financial Activities',
+# 'EFINS' => 'Finance & Insurance',
+# 'ERENS' => 'Real Estate & Rental & Leasing',
+# 'E_PBSNS' => 'Professional & Business Services',
+# 'EPSNS' => 'Professional, Scientific & Tech. Svcs.',
+# 'EMANS' => 'Management of Companies & Enterprises',
+# 'EADNS' => 'Management & Remediation Services',
+# 'EADESNS' => 'Employment Services',
+# 'E_EDHCNS' => 'Educational & Health Services',
+# 'EEDNS' => 'Educational Services',
+# 'EED12NS' => 'Elementary & Secondary Schools',
+# 'EHCNS' => 'Health Care & Social Assistance',
+# 'EHCAMNS' => 'Ambulatory Health Care Services',
+# 'EHCHONS' => 'Hospitals',
+# 'EHCNRNS' => 'Nursing & Residenial Care Facilities',
+# 'EHCSONS' => 'Social Assistance',
+# 'EHCSOIFNS' => 'Individual & Family Services',
+# 'E_LHNS' => 'Leisure and Hospitality',
+# 'EAENS' => 'Arts, Entertainment, & Recreation',
+# 'EAFNS' => 'Accommodation & Food Services',
+# 'EAFACNS' => 'Accommodation',
+# 'EAFFDNS' => 'Food Services & Drinking Places',
+# 'EAFFDRSNS' => 'Full-Service Restaurants',
+# 'EOSNS' => 'Other Services',
+# 'EGVNS' => 'Government',
+# 'EGVFDNS' => 'Federal Government',
+# 'EGVFDDDNS' => 'Department of Defense',
+# 'EGVFDSPNS' => 'Naval Shipyard',
+# 'EGVSTNS' => 'State Government',
+# 'EGVSTEDNS' => 'State Education',
+# 'EGVLCNS' => 'Local Government',
+# 'EAGNS' => 'AGRICULTURE',
 # 
-#   dsd_HIWI2011   = DataSourceDownload.get path_HIWI2011
-#   dsd_HIWI2010   = DataSourceDownload.get path_HIWI2010
-#   dsd_HIWI2009   = DataSourceDownload.get path_HIWI2009
-#   dsd_HIWI2008   = DataSourceDownload.get path_HIWI2008
-#   dsd_HIWI2007   = DataSourceDownload.get path_HIWI2007
-#   dsd_HIWI2006   = DataSourceDownload.get path_HIWI2006
-#   dsd_HIWI2005   = DataSourceDownload.get path_HIWI2005
-#   dsd_HIWI2004   = DataSourceDownload.get path_HIWI2004
-#   dsd_HIWI2003   = DataSourceDownload.get path_HIWI2003
-#   dsd_HIWI2002   = DataSourceDownload.get path_HIWI2002
-#   dsd_HIWI2001   = DataSourceDownload.get path_HIWI2001
-#   dsd_HIWI2000   = DataSourceDownload.get path_HIWI2000
-#   dsd_HIWI1999   = DataSourceDownload.get path_HIWI1999
-#   dsd_HIWI1998   = DataSourceDownload.get path_HIWI1998
-#   dsd_HIWI1997   = DataSourceDownload.get path_HIWI1997
-#   dsd_HIWI1996   = DataSourceDownload.get path_HIWI1996
-#   dsd_HIWI1995   = DataSourceDownload.get path_HIWI1995
-#   dsd_HIWI1994   = DataSourceDownload.get path_HIWI1994
-#   dsd_HIWI1993   = DataSourceDownload.get path_HIWI1993
-#   dsd_HIWI1992   = DataSourceDownload.get path_HIWI1992
-#   dsd_HIWI1991   = DataSourceDownload.get path_HIWI1991
-#   dsd_HIWI1990   = DataSourceDownload.get path_HIWI1990
-# 
-#   
-#   if dsd_HIWI2011.download_changed? || dsd_HIWI2010.download_changed? || dsd_HIWI2009.download_changed? || dsd_HIWI2008.download_changed?  || dsd_HIWI2007.download_changed? || dsd_HIWI2006.download_changed? 
-# # Don't check all of them for changes b/c line would be too long.  What does whitespace do here?
-#     sox = SeriesOutputXls.new(output_path)  
-#   sox.add "E_NFNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "/Volumes/UHEROwork/data/rawdata/BLS_HIWI%Y.xls", "State", 7, "repeat:2:13")
-#   sox.add "E_PRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 11, "repeat:2:13")
-#   sox.add "ECTNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 13, "repeat:2:13")
-#   sox.add "ECTBLNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 14, "repeat:2:13")
-#   sox.add "ECTSPNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 15, "repeat:2:13")
-#   sox.add "EMNNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 17, "repeat:2:13")
-#   sox.add "EMNDRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 18, "repeat:2:13")
-#   sox.add "EMNNDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 19, "repeat:2:13")
-#   sox.add "E_SVCPRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 21, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 25, "repeat:2:13")
-#   sox.add "EWTNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 26, "repeat:2:13")
-#   sox.add "ERTNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 27, "repeat:2:13")
-#   sox.add "ERTFDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 28, "repeat:2:13")
-#   sox.add "ERTFDGSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 29, "repeat:2:13")
-#   sox.add "ERTCLNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 30, "repeat:2:13")
-#   sox.add "ERTGMNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 31, "repeat:2:13")
-#   sox.add "ERTGMDSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 32, "repeat:2:13")
-#   sox.add "E_TUNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 33, "repeat:2:13")
-#   sox.add "EUTNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 34, "repeat:2:13")
-#   sox.add "ETWNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 35, "repeat:2:13")
-#   sox.add "ETWTANS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 36, "repeat:2:13")
-#   sox.add "EIFNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 38, "repeat:2:13")
-#   sox.add "EIFTCNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 39, "repeat:2:13")
-#   sox.add "E_FIRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 41, "repeat:2:13")
-#   sox.add "EFINS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 42, "repeat:2:13")
-#   sox.add "ERENS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 43, "repeat:2:13")
-#   sox.add "E_PBSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 45, "repeat:2:13")
-#   sox.add "EPSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 46, "repeat:2:13")
-#   sox.add "EMANS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 47, "repeat:2:13")
-#   sox.add "EADNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 49, "repeat:2:13")
-#   sox.add "EADESNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 50, "repeat:2:13")
-#   sox.add "E_EDHCNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 52, "repeat:2:13")
-#   sox.add "EEDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 53, "repeat:2:13")
-#   sox.add "EED12NS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 54, "repeat:2:13")
-#   sox.add "EHCNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 55, "repeat:2:13")
-#   sox.add "EHCAMNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 56, "repeat:2:13")
-#   sox.add "EHCHONS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 57, "repeat:2:13")
-#   sox.add "EHCNRNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 58, "repeat:2:13")
-#   sox.add "EHCSONS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 59, "repeat:2:13")
-#   sox.add "EHCSOIFNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 60, "repeat:2:13")
-#   sox.add "E_LHNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 62, "repeat:2:13")
-#   sox.add "EAENS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 63, "repeat:2:13")
-#   sox.add "EAFNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 64, "repeat:2:13")
-#   sox.add "EAFACNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 65, "repeat:2:13")
-#   sox.add "EAFFDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 66, "repeat:2:13")
-#   sox.add "EAFFDRSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 67, "repeat:2:13")
-#   sox.add "EOSNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 69, "repeat:2:13")
-#   sox.add "EGVNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 71, "repeat:2:13")
-#   sox.add "EGVFDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 72, "repeat:2:13")
-#   sox.add "EGVFDDDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 73, "repeat:2:13")
-#   sox.add "EGVFDSPNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 74, "repeat:2:13")
-#   sox.add "EGVSTNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 75, "repeat:2:13")
-#   sox.add "EGVSTEDNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 76, "repeat:2:13")
-#   sox.add "EGVLCNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 77, "repeat:2:13")
-#   sox.add "EAGNS@HI.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 79, "repeat:2:13")
-#   sox.add "E_NFNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 7, "repeat:2:13")
-#   sox.add "E_PRNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 11, "repeat:2:13")
-#   sox.add "ECTNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 14, "repeat:2:13")
-#   sox.add "EMNNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 24, "repeat:2:13")
-#   sox.add "EWTNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 25, "repeat:2:13")
-#   sox.add "ERTNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 31, "repeat:2:13")
-#   sox.add "E_TUNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 32, "repeat:2:13")
-#   sox.add "ETWNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 33, "repeat:2:13")
-#   sox.add "ETWTANS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 34, "repeat:2:13")
-#   sox.add "EIFNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 36, "repeat:2:13")
-#   sox.add "EIFTCNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 37, "repeat:2:13")
-#   sox.add "E_FIRNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 39, "repeat:2:13")
-#   sox.add "EFINS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 40, "repeat:2:13")
-#   sox.add "ERENS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 41, "repeat:2:13")
-#   sox.add "E_PBSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 43, "repeat:2:13")
-#   sox.add "EPSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 44, "repeat:2:13")
-#   sox.add "EMANS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 45, "repeat:2:13")
-#   sox.add "EADNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 47, "repeat:2:13")
-#   sox.add "EADESNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 48, "repeat:2:13")
-#   sox.add "E_EDHCNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 50, "repeat:2:13")
-#   sox.add "EEDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 51, "repeat:2:13")
-#   sox.add "EED12NS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 52, "repeat:2:13")
-#   sox.add "EHCNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 53, "repeat:2:13")
-#   sox.add "EHCAMNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 54, "repeat:2:13")
-#   sox.add "EHCHONS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 55, "repeat:2:13")
-#   sox.add "E_LHNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 57, "repeat:2:13")
-# #  sox.add "#EAENS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", #N/A Discontinued?, "repeat:2:13")
-#   sox.add "EAFNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 58, "repeat:2:13")
-#   sox.add "EAFACNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 59, "repeat:2:13")
-#   sox.add "EAFFDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 60, "repeat:2:13")
-#   sox.add "EAFFDRSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 61, "repeat:2:13")
-#   sox.add "EOSNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 63, "repeat:2:13")
-#   sox.add "EGVNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 65, "repeat:2:13")
-#   sox.add "EGVFDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 66, "repeat:2:13")
-#   sox.add "EGVFDDDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 67, "repeat:2:13")
-#   sox.add "EGVFDSPNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 68, "repeat:2:13")
-#   sox.add "EGVSTNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 69, "repeat:2:13")
-#   sox.add "EGVSTEDNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 70, "repeat:2:13")
-#   sox.add "EGVLCNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 71, "repeat:2:13")
-#   sox.add "EAGNS@HON.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 73, "repeat:2:13")
-#   sox.add "E_NFNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 7, "repeat:2:13")
-#   sox.add "E_PRNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 11, "repeat:2:13")
-#   sox.add "ECTNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 14, "repeat:2:13")
-#   sox.add "EMNNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 24, "repeat:2:13")
-#   sox.add "EWTNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 25, "repeat:2:13")
-#   sox.add "ERTNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 31, "repeat:2:13")
-#   sox.add "E_TUNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 32, "repeat:2:13")
-#   sox.add "ETWTANS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 33, "repeat:2:13")
-#   sox.add "EIFNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 35, "repeat:2:13")
-#   sox.add "EIFTCNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 36, "repeat:2:13")
-#   sox.add "E_FIRNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 38, "repeat:2:13")
-#   sox.add "EFINS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 39, "repeat:2:13")
-#   sox.add "E_PBSNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 41, "repeat:2:13")
-#   sox.add "EPSNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 42, "repeat:2:13")
-#   sox.add "EADNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 44, "repeat:2:13")
-#   sox.add "E_EDHCNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 46, "repeat:2:13")
-#   sox.add "EEDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 47, "repeat:2:13")
-#   sox.add "EHCNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 48, "repeat:2:13")
-#   sox.add "E_LHNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 50, "repeat:2:13")
-# #  sox.add "#EAENS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", #N/A Discontinued?, "repeat:2:13")
-#   sox.add "EAFNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 51, "repeat:2:13")
-#   sox.add "EAFACNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 52, "repeat:2:13")
-#   sox.add "EAFFDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 53, "repeat:2:13")
-#   sox.add "EAFFDRSNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 54, "repeat:2:13")
-#   sox.add "EOSNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 56, "repeat:2:13")
-#   sox.add "EGVNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 58, "repeat:2:13")
-#   sox.add "EGVFDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 59, "repeat:2:13")
-#   sox.add "EGVFDDDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 60, "repeat:2:13")
-#   sox.add "EGVSTNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 61, "repeat:2:13")
-#   sox.add "EGVSTEDNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 62, "repeat:2:13")
-#   sox.add "EGVLCNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 63, "repeat:2:13")
-#   sox.add "EAGNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 65, "repeat:2:13")
-#   sox.add "E_NFNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 7, "repeat:2:13")
-#   sox.add "E_PRNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 11, "repeat:2:13")
-#   sox.add "ECTNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 14, "repeat:2:13")
-#   sox.add "EMNNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 24, "repeat:2:13")
-#   sox.add "EWTNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 25, "repeat:2:13")
-#   sox.add "ERTNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 31, "repeat:2:13")
-#   sox.add "E_TUNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 32, "repeat:2:13")
-#   sox.add "ETWTANS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 33, "repeat:2:13")
-#   sox.add "EIFNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 35, "repeat:2:13")
-#   sox.add "EIFTCNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 36, "repeat:2:13")
-#   sox.add "E_FIRNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 38, "repeat:2:13")
-#   sox.add "EFINS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 39, "repeat:2:13")
-#   sox.add "E_PBSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 41, "repeat:2:13")
-#   sox.add "EPSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 42, "repeat:2:13")
-#   sox.add "EADNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 44, "repeat:2:13")
-#   sox.add "E_EDHCNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 46, "repeat:2:13")
-#   sox.add "EEDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 47, "repeat:2:13")
-#   sox.add "EHCNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 48, "repeat:2:13")
-#   sox.add "E_LHNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 50, "repeat:2:13")
-# #  sox.add "EAENS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", #N/A Discontinued?, "repeat:2:13")
-#   sox.add "EAFNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 51, "repeat:2:13")
-#   sox.add "EAFACNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 52, "repeat:2:13")
-#   sox.add "EAFFDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 53, "repeat:2:13")
-#   sox.add "EAFFDRSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 54, "repeat:2:13")
-#   sox.add "EOSNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 56, "repeat:2:13")
-#   sox.add "EGVNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 58, "repeat:2:13")
-#   sox.add "EGVFDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 59, "repeat:2:13")
-#   sox.add "EGVFDDDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 60, "repeat:2:13")
-#   sox.add "EGVSTNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 61, "repeat:2:13")
-#   sox.add "EGVSTEDNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 62, "repeat:2:13")
-#   sox.add "EGVLCNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 63, "repeat:2:13")
-#   sox.add "EAGNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 65, "repeat:2:13")
-#   sox.add "E_NFNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 7, "repeat:2:13")
-#   sox.add "E_PRNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 11, "repeat:2:13")
-#   sox.add "ECTNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 14, "repeat:2:13")
-#   sox.add "EMNNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 24, "repeat:2:13")
-#   sox.add "EWTNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 25, "repeat:2:13")
-#   sox.add "ERTNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 31, "repeat:2:13")
-#   sox.add "E_TUNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 32, "repeat:2:13")
-#   sox.add "ETWTANS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 33, "repeat:2:13")
-#   sox.add "EIFNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 35, "repeat:2:13")
-#   sox.add "EIFTCNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 36, "repeat:2:13")
-#   sox.add "E_FIRNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 38, "repeat:2:13")
-#   sox.add "EFINS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 39, "repeat:2:13")
-#   sox.add "E_PBSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 41, "repeat:2:13")
-#   sox.add "EPSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 42, "repeat:2:13")
-#   sox.add "EADNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 44, "repeat:2:13")
-#   sox.add "E_EDHCNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 46, "repeat:2:13")
-#   sox.add "EEDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 47, "repeat:2:13")
-#   sox.add "EHCNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 48, "repeat:2:13")
-#   sox.add "E_LHNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 50, "repeat:2:13")
-# #  sox.add "#EAENS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", #N/A Discontinued?, "repeat:2:13")
-#   sox.add "EAFNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 51, "repeat:2:13")
-#   sox.add "EAFACNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 52, "repeat:2:13")
-#   sox.add "EAFFDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 53, "repeat:2:13")
-#   sox.add "EAFFDRSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 54, "repeat:2:13")
-#   sox.add "EOSNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 56, "repeat:2:13")
-#   sox.add "EGVNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 58, "repeat:2:13")
-#   sox.add "EGVFDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 59, "repeat:2:13")
-#   sox.add "EGVFDDDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 60, "repeat:2:13")
-#   sox.add "EGVSTNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 61, "repeat:2:13")
-#   sox.add "EGVSTEDNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 62, "repeat:2:13")
-#   sox.add "EGVLCNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 63, "repeat:2:13")
-#   sox.add "EAGNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 65, "repeat:2:13")
-# #  sox.add "#E_GVSLNS@HAW.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@KAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@MAU.M",         Series.load_pattern("2011-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# 
-#   sox.add "E_NFNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 7, "repeat:2:13")
-#   sox.add "E_PRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 11, "repeat:2:13")
-#   sox.add "ECTNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 13, "repeat:2:13")
-#   sox.add "ECTBLNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 14, "repeat:2:13")
-#   sox.add "ECTSPNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 15, "repeat:2:13")
-#   sox.add "EMNNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 17, "repeat:2:13")
-#   sox.add "EMNDRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 18, "repeat:2:13")
-#   sox.add "EMNNDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 19, "repeat:2:13")
-#   sox.add "E_SVCPRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 21, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 25, "repeat:2:13")
-#   sox.add "EWTNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 26, "repeat:2:13")
-#   sox.add "ERTNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 27, "repeat:2:13")
-#   sox.add "ERTFDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 28, "repeat:2:13")
-#   sox.add "ERTFDGSNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 29, "repeat:2:13")
-#   sox.add "ERTCLNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 30, "repeat:2:13")
-#   sox.add "ERTGMNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 31, "repeat:2:13")
-#   sox.add "ERTGMDSNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 32, "repeat:2:13")
-#   sox.add "E_TUNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 33, "repeat:2:13")
-#   sox.add "EUTNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 34, "repeat:2:13")
-#   sox.add "ETWNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 35, "repeat:2:13")
-#   sox.add "ETWTANS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 36, "repeat:2:13")
-#   sox.add "EIFNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 38, "repeat:2:13")
-#   sox.add "EIFTCNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 39, "repeat:2:13")
-#   sox.add "E_FIRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 41, "repeat:2:13")
-#   sox.add "EFINS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 42, "repeat:2:13")
-#   sox.add "ERENS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 43, "repeat:2:13")
-#   sox.add "E_PBSNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 45, "repeat:2:13")
-#   sox.add "EPSNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 46, "repeat:2:13")
-#   sox.add "EMANS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 47, "repeat:2:13")
-#   sox.add "EADNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 49, "repeat:2:13")
-#   sox.add "EADESNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 50, "repeat:2:13")
-#   sox.add "E_EDHCNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 52, "repeat:2:13")
-#   sox.add "EEDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 53, "repeat:2:13")
-#   sox.add "EED12NS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 54, "repeat:2:13")
-#   sox.add "EHCNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 55, "repeat:2:13")
-#   sox.add "EHCAMNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 56, "repeat:2:13")
-#   sox.add "EHCHONS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 57, "repeat:2:13")
-#   sox.add "EHCNRNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 58, "repeat:2:13")
-#   sox.add "EHCSONS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 59, "repeat:2:13")
-#   sox.add "EHCSOIFNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 60, "repeat:2:13")
-#   sox.add "E_LHNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 62, "repeat:2:13")
-#   sox.add "EAENS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 63, "repeat:2:13")
-#   sox.add "EAFNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 64, "repeat:2:13")
-#   sox.add "EAFACNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 65, "repeat:2:13")
-#   sox.add "EAFFDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 66, "repeat:2:13")
-#   sox.add "EAFFDRSNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 67, "repeat:2:13")
-#   sox.add "EOSNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 69, "repeat:2:13")
-#   sox.add "EGVNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 71, "repeat:2:13")
-#   sox.add "EGVFDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 72, "repeat:2:13")
-#   sox.add "EGVFDDDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 73, "repeat:2:13")
-#   sox.add "EGVFDSPNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 74, "repeat:2:13")
-#   sox.add "EGVSTNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 75, "repeat:2:13")
-#   sox.add "EGVSTEDNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 76, "repeat:2:13")
-#   sox.add "EGVLCNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 77, "repeat:2:13")
-#   sox.add "EAGNS@HI.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 79, "repeat:2:13")
-#   sox.add "E_NFNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 7, "repeat:2:13")
-#   sox.add "E_PRNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 11, "repeat:2:13")
-#   sox.add "ECTNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 14, "repeat:2:13")
-#   sox.add "EMNNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 24, "repeat:2:13")
-#   sox.add "EWTNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 25, "repeat:2:13")
-#   sox.add "ERTNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 31, "repeat:2:13")
-#   sox.add "E_TUNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 32, "repeat:2:13")
-#   sox.add "ETWNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 33, "repeat:2:13")
-#   sox.add "ETWTANS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 34, "repeat:2:13")
-#   sox.add "EIFNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 36, "repeat:2:13")
-#   sox.add "EIFTCNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 37, "repeat:2:13")
-#   sox.add "E_FIRNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 39, "repeat:2:13")
-#   sox.add "EFINS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 40, "repeat:2:13")
-#   sox.add "ERENS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 41, "repeat:2:13")
-#   sox.add "E_PBSNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 43, "repeat:2:13")
-#   sox.add "EPSNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 44, "repeat:2:13")
-#   sox.add "EMANS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 45, "repeat:2:13")
-#   sox.add "EADNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 47, "repeat:2:13")
-#   sox.add "EADESNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 48, "repeat:2:13")
-#   sox.add "E_EDHCNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 50, "repeat:2:13")
-#   sox.add "EEDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 51, "repeat:2:13")
-#   sox.add "EED12NS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 52, "repeat:2:13")
-#   sox.add "EHCNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 53, "repeat:2:13")
-#   sox.add "EHCAMNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 54, "repeat:2:13")
-#   sox.add "EHCHONS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 55, "repeat:2:13")
-#   sox.add "E_LHNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 57, "repeat:2:13")
-#   sox.add "EAENS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 58, "repeat:2:13")
-#   sox.add "EAFNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 59, "repeat:2:13")
-#   sox.add "EAFACNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 60, "repeat:2:13")
-#   sox.add "EAFFDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 61, "repeat:2:13")
-#   sox.add "EAFFDRSNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 62, "repeat:2:13")
-#   sox.add "EOSNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 64, "repeat:2:13")
-#   sox.add "EGVNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 66, "repeat:2:13")
-#   sox.add "EGVFDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 67, "repeat:2:13")
-#   sox.add "EGVFDDDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 68, "repeat:2:13")
-#   sox.add "EGVFDSPNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 69, "repeat:2:13")
-#   sox.add "EGVSTNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 70, "repeat:2:13")
-#   sox.add "EGVSTEDNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 71, "repeat:2:13")
-#   sox.add "EGVLCNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 72, "repeat:2:13")
-#   sox.add "EAGNS@HON.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 74, "repeat:2:13")
-#   sox.add "E_NFNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 7, "repeat:2:13")
-#   sox.add "E_PRNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 11, "repeat:2:13")
-#   sox.add "ECTNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 14, "repeat:2:13")
-#   sox.add "EMNNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 24, "repeat:2:13")
-#   sox.add "EWTNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 25, "repeat:2:13")
-#   sox.add "ERTNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 31, "repeat:2:13")
-#   sox.add "E_TUNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 32, "repeat:2:13")
-#   sox.add "ETWTANS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 33, "repeat:2:13")
-#   sox.add "EIFNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 35, "repeat:2:13")
-#   sox.add "EIFTCNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 36, "repeat:2:13")
-#   sox.add "E_FIRNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 38, "repeat:2:13")
-#   sox.add "EFINS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 39, "repeat:2:13")
-#   sox.add "E_PBSNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 41, "repeat:2:13")
-#   sox.add "EPSNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 42, "repeat:2:13")
-#   sox.add "EADNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 44, "repeat:2:13")
-#   sox.add "E_EDHCNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 46, "repeat:2:13")
-#   sox.add "EEDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 47, "repeat:2:13")
-#   sox.add "EHCNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 48, "repeat:2:13")
-#   sox.add "E_LHNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 50, "repeat:2:13")
-#   sox.add "EAENS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 51, "repeat:2:13")
-#   sox.add "EAFNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 52, "repeat:2:13")
-#   sox.add "EAFACNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 53, "repeat:2:13")
-#   sox.add "EAFFDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 54, "repeat:2:13")
-#   sox.add "EAFFDRSNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 55, "repeat:2:13")
-#   sox.add "EOSNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 57, "repeat:2:13")
-#   sox.add "EGVNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 59, "repeat:2:13")
-#   sox.add "EGVFDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 60, "repeat:2:13")
-#   sox.add "EGVFDDDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 61, "repeat:2:13")
-#   sox.add "EGVSTNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 62, "repeat:2:13")
-#   sox.add "EGVSTEDNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 63, "repeat:2:13")
-#   sox.add "EGVLCNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 64, "repeat:2:13")
-#   sox.add "EAGNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 66, "repeat:2:13")
-#   sox.add "E_NFNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 7, "repeat:2:13")
-#   sox.add "E_PRNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 11, "repeat:2:13")
-#   sox.add "ECTNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 14, "repeat:2:13")
-#   sox.add "EMNNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 24, "repeat:2:13")
-#   sox.add "EWTNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 25, "repeat:2:13")
-#   sox.add "ERTNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 31, "repeat:2:13")
-#   sox.add "E_TUNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 32, "repeat:2:13")
-#   sox.add "ETWTANS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 33, "repeat:2:13")
-#   sox.add "EIFNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 35, "repeat:2:13")
-#   sox.add "EIFTCNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 36, "repeat:2:13")
-#   sox.add "E_FIRNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 38, "repeat:2:13")
-#   sox.add "EFINS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 39, "repeat:2:13")
-#   sox.add "E_PBSNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 41, "repeat:2:13")
-#   sox.add "EPSNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 42, "repeat:2:13")
-#   sox.add "EADNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 44, "repeat:2:13")
-#   sox.add "E_EDHCNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 46, "repeat:2:13")
-#   sox.add "EEDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 47, "repeat:2:13")
-#   sox.add "EHCNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 48, "repeat:2:13")
-#   sox.add "E_LHNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 50, "repeat:2:13")
-#   sox.add "EAENS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 51, "repeat:2:13")
-#   sox.add "EAFNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 52, "repeat:2:13")
-#   sox.add "EAFACNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 53, "repeat:2:13")
-#   sox.add "EAFFDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 54, "repeat:2:13")
-#   sox.add "EAFFDRSNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 55, "repeat:2:13")
-#   sox.add "EOSNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 57, "repeat:2:13")
-#   sox.add "EGVNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 59, "repeat:2:13")
-#   sox.add "EGVFDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 60, "repeat:2:13")
-#   sox.add "EGVFDDDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 61, "repeat:2:13")
-#   sox.add "EGVSTNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 62, "repeat:2:13")
-#   sox.add "EGVSTEDNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 63, "repeat:2:13")
-#   sox.add "EGVLCNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 64, "repeat:2:13")
-#   sox.add "EAGNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 66, "repeat:2:13")
-#   sox.add "E_NFNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 7, "repeat:2:13")
-#   sox.add "E_PRNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 9, "repeat:2:13")
-#   sox.add "E_GDSPRNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 11, "repeat:2:13")
-#   sox.add "ECTNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 13, "repeat:2:13")
-#   sox.add "ECTSPNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 14, "repeat:2:13")
-#   sox.add "EMNNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 16, "repeat:2:13")
-#   sox.add "EMNDRNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 17, "repeat:2:13")
-#   sox.add "EMNNDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 18, "repeat:2:13")
-#   sox.add "E_SVCPRNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 20, "repeat:2:13")
-#   sox.add "E_PRSVCPRNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 22, "repeat:2:13")
-#   sox.add "E_TTUNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 24, "repeat:2:13")
-#   sox.add "EWTNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 25, "repeat:2:13")
-#   sox.add "ERTNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 26, "repeat:2:13")
-#   sox.add "ERTFDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 27, "repeat:2:13")
-#   sox.add "ERTFDGSNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 28, "repeat:2:13")
-#   sox.add "ERTCLNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 29, "repeat:2:13")
-#   sox.add "ERTGMNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 30, "repeat:2:13")
-#   sox.add "ERTGMDSNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 31, "repeat:2:13")
-#   sox.add "E_TUNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 32, "repeat:2:13")
-#   sox.add "ETWTANS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 33, "repeat:2:13")
-#   sox.add "EIFNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 35, "repeat:2:13")
-#   sox.add "EIFTCNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 36, "repeat:2:13")
-#   sox.add "E_FIRNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 38, "repeat:2:13")
-#   sox.add "EFINS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 39, "repeat:2:13")
-#   sox.add "E_PBSNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 41, "repeat:2:13")
-#   sox.add "EPSNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 42, "repeat:2:13")
-#   sox.add "EADNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 44, "repeat:2:13")
-#   sox.add "E_EDHCNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 46, "repeat:2:13")
-#   sox.add "EEDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 47, "repeat:2:13")
-#   sox.add "EHCNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 48, "repeat:2:13")
-#   sox.add "E_LHNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 50, "repeat:2:13")
-#   sox.add "EAENS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 51, "repeat:2:13")
-#   sox.add "EAFNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 52, "repeat:2:13")
-#   sox.add "EAFACNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 53, "repeat:2:13")
-#   sox.add "EAFFDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 54, "repeat:2:13")
-#   sox.add "EAFFDRSNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 55, "repeat:2:13")
-#   sox.add "EOSNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 57, "repeat:2:13")
-#   sox.add "EGVNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 59, "repeat:2:13")
-#   sox.add "EGVFDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 60, "repeat:2:13")
-#   sox.add "EGVFDDDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 61, "repeat:2:13")
-#   sox.add "EGVSTNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 62, "repeat:2:13")
-#   sox.add "EGVSTEDNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 63, "repeat:2:13")
-#   sox.add "EGVLCNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 64, "repeat:2:13")
-#   sox.add "EAGNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 66, "repeat:2:13")
-# #  sox.add "#E_GVSLNS@HAW.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@KAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@MAU.M",         Series.load_pattern("2009-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# 
-#   sox.add "E_NFNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 7, "repeat:3:14")
-#   sox.add "E_PRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 11, "repeat:3:14")
-#   sox.add "ECTNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 13, "repeat:3:14")
-#   sox.add "ECTBLNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 14, "repeat:3:14")
-#   sox.add "ECTSPNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 15, "repeat:3:14")
-#   sox.add "EMNNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 17, "repeat:3:14")
-#   sox.add "EMNDRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 18, "repeat:3:14")
-#   sox.add "EMNNDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 19, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 21, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 25, "repeat:3:14")
-#   sox.add "EWTNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 26, "repeat:3:14")
-#   sox.add "ERTNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 27, "repeat:3:14")
-#   sox.add "ERTFDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 28, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 29, "repeat:3:14")
-#   sox.add "ERTCLNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 30, "repeat:3:14")
-#   sox.add "ERTGMNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 31, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 32, "repeat:3:14")
-#   sox.add "E_TUNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 33, "repeat:3:14")
-#   sox.add "EUTNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 34, "repeat:3:14")
-#   sox.add "ETWNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 35, "repeat:3:14")
-#   sox.add "ETWTANS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 36, "repeat:3:14")
-#   sox.add "EIFNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 38, "repeat:3:14")
-#   sox.add "EIFTCNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 39, "repeat:3:14")
-#   sox.add "E_FIRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 41, "repeat:3:14")
-#   sox.add "EFINS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 42, "repeat:3:14")
-#   sox.add "ERENS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 43, "repeat:3:14")
-#   sox.add "E_PBSNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 45, "repeat:3:14")
-#   sox.add "EPSNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 46, "repeat:3:14")
-#   sox.add "EMANS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 47, "repeat:3:14")
-#   sox.add "EADNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 49, "repeat:3:14")
-#   sox.add "EADESNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 50, "repeat:3:14")
-#   sox.add "E_EDHCNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 52, "repeat:3:14")
-#   sox.add "EEDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 53, "repeat:3:14")
-#   sox.add "EED12NS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 54, "repeat:3:14")
-#   sox.add "EHCNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 55, "repeat:3:14")
-#   sox.add "EHCAMNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 56, "repeat:3:14")
-#   sox.add "EHCHONS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 57, "repeat:3:14")
-#   sox.add "EHCNRNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 58, "repeat:3:14")
-#   sox.add "EHCSONS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 59, "repeat:3:14")
-#   sox.add "EHCSOIFNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 60, "repeat:3:14")
-#   sox.add "E_LHNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 62, "repeat:3:14")
-#   sox.add "EAENS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 63, "repeat:3:14")
-#   sox.add "EAFNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 64, "repeat:3:14")
-#   sox.add "EAFACNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 65, "repeat:3:14")
-#   sox.add "EAFFDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 66, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 67, "repeat:3:14")
-#   sox.add "EOSNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 69, "repeat:3:14")
-#   sox.add "EGVNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 71, "repeat:3:14")
-#   sox.add "EGVFDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 72, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 73, "repeat:3:14")
-#   sox.add "EGVFDSPNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 74, "repeat:3:14")
-#   sox.add "EGVSTNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 75, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 76, "repeat:3:14")
-#   sox.add "EGVLCNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 77, "repeat:3:14")
-#   sox.add "EAGNS@HI.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 79, "repeat:3:14")
-#   sox.add "E_NFNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 7, "repeat:3:14")
-#   sox.add "E_PRNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 11, "repeat:3:14")
-#   sox.add "ECTNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 14, "repeat:3:14")
-#   sox.add "EMNNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 24, "repeat:3:14")
-#   sox.add "EWTNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 25, "repeat:3:14")
-#   sox.add "ERTNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 31, "repeat:3:14")
-#   sox.add "E_TUNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 32, "repeat:3:14")
-#   sox.add "ETWNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 33, "repeat:3:14")
-#   sox.add "ETWTANS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 34, "repeat:3:14")
-#   sox.add "EIFNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 36, "repeat:3:14")
-#   sox.add "EIFTCNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 37, "repeat:3:14")
-#   sox.add "E_FIRNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 39, "repeat:3:14")
-#   sox.add "EFINS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 40, "repeat:3:14")
-#   sox.add "ERENS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 41, "repeat:3:14")
-#   sox.add "E_PBSNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 43, "repeat:3:14")
-#   sox.add "EPSNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 44, "repeat:3:14")
-#   sox.add "EMANS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 45, "repeat:3:14")
-#   sox.add "EADNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 47, "repeat:3:14")
-#   sox.add "EADESNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 48, "repeat:3:14")
-#   sox.add "E_EDHCNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 50, "repeat:3:14")
-#   sox.add "EEDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 51, "repeat:3:14")
-#   sox.add "EED12NS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 52, "repeat:3:14")
-#   sox.add "EHCNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 53, "repeat:3:14")
-#   sox.add "EHCAMNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 54, "repeat:3:14")
-#   sox.add "EHCHONS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 55, "repeat:3:14")
-#   sox.add "E_LHNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 57, "repeat:3:14")
-#   sox.add "EAENS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 58, "repeat:3:14")
-#   sox.add "EAFNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 59, "repeat:3:14")
-#   sox.add "EAFACNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 60, "repeat:3:14")
-#   sox.add "EAFFDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 61, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 62, "repeat:3:14")
-#   sox.add "EOSNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 64, "repeat:3:14")
-#   sox.add "EGVNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 66, "repeat:3:14")
-#   sox.add "EGVFDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 67, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 68, "repeat:3:14")
-#   sox.add "EGVFDSPNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 69, "repeat:3:14")
-#   sox.add "EGVSTNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 70, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 71, "repeat:3:14")
-#   sox.add "EGVLCNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 72, "repeat:3:14")
-#   sox.add "EAGNS@HON.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 74, "repeat:3:14")
-#   sox.add "E_NFNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 7, "repeat:3:14")
-#   sox.add "E_PRNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 11, "repeat:3:14")
-#   sox.add "ECTNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 14, "repeat:3:14")
-#   sox.add "EMNNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 24, "repeat:3:14")
-#   sox.add "EWTNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 25, "repeat:3:14")
-#   sox.add "ERTNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 31, "repeat:3:14")
-#   sox.add "E_TUNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 32, "repeat:3:14")
-#   sox.add "ETWTANS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 33, "repeat:3:14")
-#   sox.add "EIFNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 35, "repeat:3:14")
-#   sox.add "EIFTCNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 36, "repeat:3:14")
-#   sox.add "E_FIRNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 38, "repeat:3:14")
-#   sox.add "EFINS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 39, "repeat:3:14")
-#   sox.add "E_PBSNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 41, "repeat:3:14")
-#   sox.add "EPSNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 42, "repeat:3:14")
-#   sox.add "EADNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 44, "repeat:3:14")
-#   sox.add "E_EDHCNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 46, "repeat:3:14")
-#   sox.add "EEDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 47, "repeat:3:14")
-#   sox.add "EHCNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 48, "repeat:3:14")
-#   sox.add "E_LHNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 50, "repeat:3:14")
-#   sox.add "EAENS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 57, "repeat:3:14")
-#   sox.add "EGVNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 59, "repeat:3:14")
-#   sox.add "EGVFDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 60, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 61, "repeat:3:14")
-#   sox.add "EGVSTNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 62, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 63, "repeat:3:14")
-#   sox.add "EGVLCNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 64, "repeat:3:14")
-#   sox.add "EAGNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 66, "repeat:3:14")
-#   sox.add "E_NFNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 7, "repeat:3:14")
-#   sox.add "E_PRNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 11, "repeat:3:14")
-#   sox.add "ECTNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 14, "repeat:3:14")
-#   sox.add "EMNNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 24, "repeat:3:14")
-#   sox.add "EWTNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 25, "repeat:3:14")
-#   sox.add "ERTNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 31, "repeat:3:14")
-#   sox.add "E_TUNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 32, "repeat:3:14")
-#   sox.add "ETWTANS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 33, "repeat:3:14")
-#   sox.add "EIFNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 35, "repeat:3:14")
-#   sox.add "EIFTCNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 36, "repeat:3:14")
-#   sox.add "E_FIRNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 38, "repeat:3:14")
-#   sox.add "EFINS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 39, "repeat:3:14")
-#   sox.add "E_PBSNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 41, "repeat:3:14")
-#   sox.add "EPSNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 42, "repeat:3:14")
-#   sox.add "EADNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 44, "repeat:3:14")
-#   sox.add "E_EDHCNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 46, "repeat:3:14")
-#   sox.add "EEDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 47, "repeat:3:14")
-#   sox.add "EHCNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 48, "repeat:3:14")
-#   sox.add "E_LHNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 50, "repeat:3:14")
-#   sox.add "EAENS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 57, "repeat:3:14")
-#   sox.add "EGVNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 59, "repeat:3:14")
-#   sox.add "EGVFDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 60, "repeat:3:14")
-#   sox.add "EGVFDDDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 61, "repeat:3:14")
-#   sox.add "EGVSTNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 62, "repeat:3:14")
-#   sox.add "EGVSTEDNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 63, "repeat:3:14")
-#   sox.add "EGVLCNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 64, "repeat:3:14")
-#   sox.add "EAGNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 66, "repeat:3:14")
-#   sox.add "E_NFNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 7, "repeat:3:14")
-#   sox.add "E_PRNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 11, "repeat:3:14")
-#   sox.add "ECTNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 14, "repeat:3:14")
-#   sox.add "EMNNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 24, "repeat:3:14")
-#   sox.add "EWTNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 25, "repeat:3:14")
-#   sox.add "ERTNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 31, "repeat:3:14")
-#   sox.add "E_TUNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 32, "repeat:3:14")
-#   sox.add "ETWTANS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 33, "repeat:3:14")
-#   sox.add "EIFNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 35, "repeat:3:14")
-#   sox.add "EIFTCNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 36, "repeat:3:14")
-#   sox.add "E_FIRNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 38, "repeat:3:14")
-#   sox.add "EFINS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 39, "repeat:3:14")
-#   sox.add "E_PBSNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 41, "repeat:3:14")
-#   sox.add "EPSNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 42, "repeat:3:14")
-#   sox.add "EADNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 44, "repeat:3:14")
-#   sox.add "E_EDHCNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 46, "repeat:3:14")
-#   sox.add "EEDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 47, "repeat:3:14")
-#   sox.add "EHCNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 48, "repeat:3:14")
-#   sox.add "E_LHNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 50, "repeat:3:14")
-#   sox.add "EAENS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 57, "repeat:3:14")
-#   sox.add "EGVNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 59, "repeat:3:14")
-#   sox.add "EGVFDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 60, "repeat:3:14")
-#   sox.add "EGVFDDDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 61, "repeat:3:14")
-#   sox.add "EGVSTNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 62, "repeat:3:14")
-#   sox.add "EGVSTEDNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 63, "repeat:3:14")
-#   sox.add "EGVLCNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 64, "repeat:3:14")
-#   sox.add "EAGNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 66, "repeat:3:14")
-# #  sox.add "#E_GVSLNS@HAW.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@KAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@MAU.M",         Series.load_pattern("2002-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# 
-#   sox.add "E_NFNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 6, "repeat:3:14")
-#   sox.add "E_PRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 8, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 10, "repeat:3:14")
-#   sox.add "ECTNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 12, "repeat:3:14")
-#   sox.add "ECTBLNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 14, "repeat:3:14")
-#   sox.add "EMNNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 21, "repeat:3:14")
-#   sox.add "E_TTUNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 24, "repeat:3:14")
-#   sox.add "EWTNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 25, "repeat:3:14")
-#   sox.add "ERTNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 31, "repeat:3:14")
-#   sox.add "E_TUNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 32, "repeat:3:14")
-#   sox.add "EUTNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 33, "repeat:3:14")
-#   sox.add "ETWNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 34, "repeat:3:14")
-#   sox.add "ETWTANS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 35, "repeat:3:14")
-#   sox.add "EIFNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 37, "repeat:3:14")
-#   sox.add "EIFTCNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 38, "repeat:3:14")
-#   sox.add "E_FIRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 40, "repeat:3:14")
-#   sox.add "EFINS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 41, "repeat:3:14")
-#   sox.add "ERENS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 42, "repeat:3:14")
-#   sox.add "E_PBSNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 44, "repeat:3:14")
-#   sox.add "EPSNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 45, "repeat:3:14")
-#   sox.add "EMANS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 46, "repeat:3:14")
-#   sox.add "EADNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 48, "repeat:3:14")
-#   sox.add "EADESNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 49, "repeat:3:14")
-#   sox.add "E_EDHCNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 51, "repeat:3:14")
-#   sox.add "EEDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 52, "repeat:3:14")
-#   sox.add "EED12NS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 53, "repeat:3:14")
-#   sox.add "EHCNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 54, "repeat:3:14")
-#   sox.add "EHCAMNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 55, "repeat:3:14")
-#   sox.add "EHCHONS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 56, "repeat:3:14")
-#   sox.add "EHCNRNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 57, "repeat:3:14")
-#   sox.add "EHCSONS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 58, "repeat:3:14")
-#   sox.add "EHCSOIFNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 59, "repeat:3:14")
-#   sox.add "E_LHNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 61, "repeat:3:14")
-#   sox.add "EAENS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 62, "repeat:3:14")
-#   sox.add "EAFNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 63, "repeat:3:14")
-#   sox.add "EAFACNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 64, "repeat:3:14")
-#   sox.add "EAFFDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 65, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 66, "repeat:3:14")
-#   sox.add "EOSNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 68, "repeat:3:14")
-#   sox.add "EGVNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 70, "repeat:3:14")
-#   sox.add "EGVFDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 71, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 72, "repeat:3:14")
-#   sox.add "EGVFDSPNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 73, "repeat:3:14")
-#   sox.add "EGVSTNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 74, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 75, "repeat:3:14")
-#   sox.add "EGVLCNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 76, "repeat:3:14")
-#   sox.add "EAGNS@HI.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 78, "repeat:3:14")
-#   sox.add "E_NFNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 7, "repeat:3:14")
-#   sox.add "E_PRNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 11, "repeat:3:14")
-#   sox.add "ECTNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 14, "repeat:3:14")
-#   sox.add "EMNNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 24, "repeat:3:14")
-#   sox.add "EWTNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 25, "repeat:3:14")
-#   sox.add "ERTNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 31, "repeat:3:14")
-#   sox.add "E_TUNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 32, "repeat:3:14")
-#   sox.add "ETWNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 33, "repeat:3:14")
-#   sox.add "ETWTANS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 34, "repeat:3:14")
-#   sox.add "EIFNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 36, "repeat:3:14")
-#   sox.add "EIFTCNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 37, "repeat:3:14")
-#   sox.add "E_FIRNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 39, "repeat:3:14")
-#   sox.add "EFINS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 40, "repeat:3:14")
-#   sox.add "ERENS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 41, "repeat:3:14")
-#   sox.add "E_PBSNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 43, "repeat:3:14")
-#   sox.add "EPSNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 44, "repeat:3:14")
-#   sox.add "EMANS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 45, "repeat:3:14")
-#   sox.add "EADNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 47, "repeat:3:14")
-#   sox.add "EADESNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 48, "repeat:3:14")
-#   sox.add "E_EDHCNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 50, "repeat:3:14")
-#   sox.add "EEDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 51, "repeat:3:14")
-#   sox.add "EED12NS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 52, "repeat:3:14")
-#   sox.add "EHCNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 53, "repeat:3:14")
-#   sox.add "EHCAMNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 54, "repeat:3:14")
-#   sox.add "EHCHONS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 55, "repeat:3:14")
-#   sox.add "E_LHNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 57, "repeat:3:14")
-#   sox.add "EAENS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 58, "repeat:3:14")
-#   sox.add "EAFNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 59, "repeat:3:14")
-#   sox.add "EAFACNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 60, "repeat:3:14")
-#   sox.add "EAFFDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 61, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 62, "repeat:3:14")
-#   sox.add "EOSNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 64, "repeat:3:14")
-#   sox.add "EGVNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 66, "repeat:3:14")
-#   sox.add "EGVFDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 67, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 68, "repeat:3:14")
-#   sox.add "EGVFDSPNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 69, "repeat:3:14")
-#   sox.add "EGVSTNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 70, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 71, "repeat:3:14")
-#   sox.add "EGVLCNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 72, "repeat:3:14")
-#   sox.add "EAGNS@HON.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 74, "repeat:3:14")
-#   sox.add "E_NFNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 6, "repeat:3:14")
-#   sox.add "E_PRNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 8, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 10, "repeat:3:14")
-#   sox.add "ECTNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 12, "repeat:3:14")
-#   sox.add "ECTSPNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 13, "repeat:3:14")
-#   sox.add "EMNNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 15, "repeat:3:14")
-#   sox.add "EMNDRNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 16, "repeat:3:14")
-#   sox.add "EMNNDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 17, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 19, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 21, "repeat:3:14")
-#   sox.add "E_TTUNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 23, "repeat:3:14")
-#   sox.add "EWTNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 24, "repeat:3:14")
-#   sox.add "ERTNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 25, "repeat:3:14")
-#   sox.add "ERTFDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 26, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 27, "repeat:3:14")
-#   sox.add "ERTCLNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 28, "repeat:3:14")
-#   sox.add "ERTGMNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 29, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 30, "repeat:3:14")
-#   sox.add "E_TUNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 31, "repeat:3:14")
-#   sox.add "ETWTANS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 32, "repeat:3:14")
-#   sox.add "EIFNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 34, "repeat:3:14")
-#   sox.add "EIFTCNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 35, "repeat:3:14")
-#   sox.add "E_FIRNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 37, "repeat:3:14")
-#   sox.add "EFINS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 38, "repeat:3:14")
-#   sox.add "E_PBSNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 40, "repeat:3:14")
-#   sox.add "EPSNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 41, "repeat:3:14")
-#   sox.add "EADNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 43, "repeat:3:14")
-#   sox.add "E_EDHCNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 45, "repeat:3:14")
-#   sox.add "EEDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 46, "repeat:3:14")
-#   sox.add "EHCNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 47, "repeat:3:14")
-#   sox.add "E_LHNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 49, "repeat:3:14")
-#   sox.add "EAENS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 50, "repeat:3:14")
-#   sox.add "EAFNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 51, "repeat:3:14")
-#   sox.add "EAFACNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 52, "repeat:3:14")
-#   sox.add "EAFFDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 53, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 54, "repeat:3:14")
-#   sox.add "EOSNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 56, "repeat:3:14")
-#   sox.add "EGVNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 58, "repeat:3:14")
-#   sox.add "EGVFDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 59, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 60, "repeat:3:14")
-#   sox.add "EGVSTNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 61, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 62, "repeat:3:14")
-#   sox.add "EGVLCNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 63, "repeat:3:14")
-#   sox.add "EAGNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 65, "repeat:3:14")
-#   sox.add "E_NFNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 7, "repeat:3:14")
-#   sox.add "E_PRNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 11, "repeat:3:14")
-#   sox.add "ECTNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 14, "repeat:3:14")
-#   sox.add "EMNNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 24, "repeat:3:14")
-#   sox.add "EWTNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 25, "repeat:3:14")
-#   sox.add "ERTNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 31, "repeat:3:14")
-#   sox.add "E_TUNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 32, "repeat:3:14")
-#   sox.add "ETWTANS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 33, "repeat:3:14")
-#   sox.add "EIFNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 35, "repeat:3:14")
-#   sox.add "EIFTCNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 36, "repeat:3:14")
-#   sox.add "E_FIRNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 38, "repeat:3:14")
-#   sox.add "EFINS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 39, "repeat:3:14")
-#   sox.add "E_PBSNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 41, "repeat:3:14")
-#   sox.add "EPSNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 42, "repeat:3:14")
-#   sox.add "EADNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 44, "repeat:3:14")
-#   sox.add "E_EDHCNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 46, "repeat:3:14")
-#   sox.add "EEDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 47, "repeat:3:14")
-#   sox.add "EHCNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 48, "repeat:3:14")
-#   sox.add "E_LHNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 50, "repeat:3:14")
-#   sox.add "EAENS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 57, "repeat:3:14")
-#   sox.add "EGVNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 59, "repeat:3:14")
-#   sox.add "EGVFDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 60, "repeat:3:14")
-#   sox.add "EGVFDDDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 61, "repeat:3:14")
-#   sox.add "EGVSTNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 62, "repeat:3:14")
-#   sox.add "EGVSTEDNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 63, "repeat:3:14")
-#   sox.add "EGVLCNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 64, "repeat:3:14")
-#   sox.add "EAGNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 66, "repeat:3:14")
-#   sox.add "E_NFNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 7, "repeat:3:14")
-#   sox.add "E_PRNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 11, "repeat:3:14")
-#   sox.add "ECTNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 13, "repeat:3:14")
-#   sox.add "ECTSPNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 14, "repeat:3:14")
-#   sox.add "EMNNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 16, "repeat:3:14")
-#   sox.add "EMNDRNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 17, "repeat:3:14")
-#   sox.add "EMNNDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 18, "repeat:3:14")
-#   sox.add "E_SVCPRNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 20, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 24, "repeat:3:14")
-#   sox.add "EWTNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 25, "repeat:3:14")
-#   sox.add "ERTNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 26, "repeat:3:14")
-#   sox.add "ERTFDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 27, "repeat:3:14")
-#   sox.add "ERTFDGSNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 28, "repeat:3:14")
-#   sox.add "ERTCLNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 29, "repeat:3:14")
-#   sox.add "ERTGMNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 30, "repeat:3:14")
-#   sox.add "ERTGMDSNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 31, "repeat:3:14")
-#   sox.add "E_TUNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 32, "repeat:3:14")
-#   sox.add "ETWTANS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 33, "repeat:3:14")
-#   sox.add "EIFNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 35, "repeat:3:14")
-#   sox.add "EIFTCNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 36, "repeat:3:14")
-#   sox.add "E_FIRNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 38, "repeat:3:14")
-#   sox.add "EFINS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 39, "repeat:3:14")
-#   sox.add "E_PBSNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 41, "repeat:3:14")
-#   sox.add "EPSNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 42, "repeat:3:14")
-#   sox.add "EADNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 44, "repeat:3:14")
-#   sox.add "E_EDHCNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 46, "repeat:3:14")
-#   sox.add "EEDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 47, "repeat:3:14")
-#   sox.add "EHCNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 48, "repeat:3:14")
-#   sox.add "E_LHNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 50, "repeat:3:14")
-#   sox.add "EAENS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 57, "repeat:3:14")
-#   sox.add "EGVNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 59, "repeat:3:14")
-#   sox.add "EGVFDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 60, "repeat:3:14")
-#   sox.add "EGVFDDDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 61, "repeat:3:14")
-#   sox.add "EGVSTNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 62, "repeat:3:14")
-#   sox.add "EGVSTEDNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 63, "repeat:3:14")
-#   sox.add "EGVLCNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 64, "repeat:3:14")
-#   sox.add "EAGNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 66, "repeat:3:14")
-# #  sox.add "#E_GVSLNS@HAW.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@KAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@MAU.M",         Series.load_pattern("2001-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# 
-#   sox.add "E_NFNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 7, "repeat:3:14")
-#   sox.add "E_PRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 9, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 11, "repeat:3:14")
-#   sox.add "ECTNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 13, "repeat:3:14")
-#   sox.add "ECTBLNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 14, "repeat:3:14")
-#   sox.add "ECTSPNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 15, "repeat:3:14")
-#   sox.add "EMNNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 17, "repeat:3:14")
-#   sox.add "EMNDRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 18, "repeat:3:14")
-#   sox.add "EMNNDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 19, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 21, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 22, "repeat:3:14")
-#   sox.add "E_TTUNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 25, "repeat:3:14")
-#   sox.add "EWTNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 26, "repeat:3:14")
-#   sox.add "ERTNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 27, "repeat:3:14")
-#   sox.add "ERTFDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 28, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 29, "repeat:3:14")
-#   sox.add "ERTCLNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 30, "repeat:3:14")
-#   sox.add "ERTGMNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 31, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 32, "repeat:3:14")
-#   sox.add "E_TUNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 33, "repeat:3:14")
-#   sox.add "EUTNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 34, "repeat:3:14")
-#   sox.add "ETWNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 35, "repeat:3:14")
-#   sox.add "ETWTANS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 36, "repeat:3:14")
-#   sox.add "EIFNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 38, "repeat:3:14")
-#   sox.add "EIFTCNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 39, "repeat:3:14")
-#   sox.add "E_FIRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 41, "repeat:3:14")
-#   sox.add "EFINS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 42, "repeat:3:14")
-#   sox.add "ERENS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 43, "repeat:3:14")
-#   sox.add "E_PBSNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 45, "repeat:3:14")
-#   sox.add "EPSNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 46, "repeat:3:14")
-#   sox.add "EMANS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 47, "repeat:3:14")
-#   sox.add "EADNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 49, "repeat:3:14")
-#   sox.add "EADESNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 50, "repeat:3:14")
-#   sox.add "E_EDHCNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 52, "repeat:3:14")
-#   sox.add "EEDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 53, "repeat:3:14")
-#   sox.add "EED12NS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 54, "repeat:3:14")
-#   sox.add "EHCNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 55, "repeat:3:14")
-#   sox.add "EHCAMNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 56, "repeat:3:14")
-#   sox.add "EHCHONS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 57, "repeat:3:14")
-#   sox.add "EHCNRNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 58, "repeat:3:14")
-#   sox.add "EHCSONS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 59, "repeat:3:14")
-#   sox.add "EHCSOIFNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 60, "repeat:3:14")
-#   sox.add "E_LHNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 62, "repeat:3:14")
-#   sox.add "EAENS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 63, "repeat:3:14")
-#   sox.add "EAFNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 64, "repeat:3:14")
-#   sox.add "EAFACNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 65, "repeat:3:14")
-#   sox.add "EAFFDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 66, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 67, "repeat:3:14")
-#   sox.add "EOSNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 69, "repeat:3:14")
-#   sox.add "EGVNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 71, "repeat:3:14")
-#   sox.add "EGVFDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 72, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 73, "repeat:3:14")
-#   sox.add "EGVSTNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 74, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 75, "repeat:3:14")
-#   sox.add "EGVLCNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 76, "repeat:3:14")
-#   sox.add "EAGNS@HI.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "State", 78, "repeat:3:14")
-#   sox.add "E_NFNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 8, "repeat:3:14")
-#   sox.add "E_PRNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 10, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 12, "repeat:3:14")
-#   sox.add "ECTNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 14, "repeat:3:14")
-#   sox.add "ECTSPNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 15, "repeat:3:14")
-#   sox.add "EMNNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 17, "repeat:3:14")
-#   sox.add "EMNDRNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 18, "repeat:3:14")
-#   sox.add "EMNNDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 19, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 21, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 23, "repeat:3:14")
-#   sox.add "E_TTUNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 25, "repeat:3:14")
-#   sox.add "EWTNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 26, "repeat:3:14")
-#   sox.add "ERTNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 27, "repeat:3:14")
-#   sox.add "ERTFDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 28, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 29, "repeat:3:14")
-#   sox.add "ERTCLNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 30, "repeat:3:14")
-#   sox.add "ERTGMNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 31, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 32, "repeat:3:14")
-#   sox.add "E_TUNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 33, "repeat:3:14")
-#   sox.add "ETWNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 34, "repeat:3:14")
-#   sox.add "ETWTANS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 35, "repeat:3:14")
-#   sox.add "EIFNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 37, "repeat:3:14")
-#   sox.add "EIFTCNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 38, "repeat:3:14")
-#   sox.add "E_FIRNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 40, "repeat:3:14")
-#   sox.add "EFINS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 41, "repeat:3:14")
-#   sox.add "ERENS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 42, "repeat:3:14")
-#   sox.add "E_PBSNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 44, "repeat:3:14")
-#   sox.add "EPSNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 45, "repeat:3:14")
-#   sox.add "EMANS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 46, "repeat:3:14")
-#   sox.add "EADNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 48, "repeat:3:14")
-#   sox.add "EADESNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 49, "repeat:3:14")
-#   sox.add "E_EDHCNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 51, "repeat:3:14")
-#   sox.add "EEDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 52, "repeat:3:14")
-#   sox.add "EED12NS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 53, "repeat:3:14")
-#   sox.add "EHCNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 54, "repeat:3:14")
-#   sox.add "EHCAMNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 55, "repeat:3:14")
-#   sox.add "EHCHONS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 56, "repeat:3:14")
-#   sox.add "E_LHNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 58, "repeat:3:14")
-#   sox.add "EAFNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 59, "repeat:3:14")
-#   sox.add "EAFACNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 60, "repeat:3:14")
-#   sox.add "EAFFDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 61, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 62, "repeat:3:14")
-#   sox.add "EOSNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 64, "repeat:3:14")
-#   sox.add "EGVNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 66, "repeat:3:14")
-#   sox.add "EGVFDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 67, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 68, "repeat:3:14")
-#   sox.add "EGVFDSPNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 69, "repeat:3:14")
-#   sox.add "EGVSTNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 70, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 71, "repeat:3:14")
-#   sox.add "EGVLCNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 72, "repeat:3:14")
-#   sox.add "EAGNS@HON.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Oahu", 74, "repeat:3:14")
-#   sox.add "E_NFNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 8, "repeat:3:14")
-#   sox.add "E_PRNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 10, "repeat:3:14")
-#   sox.add "E_GDSPRNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 12, "repeat:3:14")
-#   sox.add "ECTNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 14, "repeat:3:14")
-#   sox.add "ECTSPNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 15, "repeat:3:14")
-#   sox.add "EMNNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 17, "repeat:3:14")
-#   sox.add "EMNDRNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 18, "repeat:3:14")
-#   sox.add "EMNNDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 19, "repeat:3:14")
-#   sox.add "E_SVCPRNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 21, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 23, "repeat:3:14")
-#   sox.add "E_TTUNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 25, "repeat:3:14")
-#   sox.add "EWTNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 26, "repeat:3:14")
-#   sox.add "ERTNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 27, "repeat:3:14")
-#   sox.add "ERTFDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 28, "repeat:3:14")
-#   sox.add "ERTFDGSNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 29, "repeat:3:14")
-#   sox.add "ERTCLNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 30, "repeat:3:14")
-#   sox.add "ERTGMNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 31, "repeat:3:14")
-#   sox.add "ERTGMDSNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 32, "repeat:3:14")
-#   sox.add "E_TUNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 33, "repeat:3:14")
-#   sox.add "ETWTANS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 34, "repeat:3:14")
-#   sox.add "EIFNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 36, "repeat:3:14")
-#   sox.add "EIFTCNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 37, "repeat:3:14")
-#   sox.add "E_FIRNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 39, "repeat:3:14")
-#   sox.add "EFINS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 40, "repeat:3:14")
-#   sox.add "E_PBSNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 42, "repeat:3:14")
-#   sox.add "EPSNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 43, "repeat:3:14")
-#   sox.add "EADNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 45, "repeat:3:14")
-#   sox.add "E_EDHCNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 47, "repeat:3:14")
-#   sox.add "EEDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 48, "repeat:3:14")
-#   sox.add "EHCNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 49, "repeat:3:14")
-#   sox.add "E_LHNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 58, "repeat:3:14")
-#   sox.add "EGVNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 60, "repeat:3:14")
-#   sox.add "EGVFDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 61, "repeat:3:14")
-#   sox.add "EGVFDDDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 62, "repeat:3:14")
-#   sox.add "EGVSTNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 63, "repeat:3:14")
-#   sox.add "EGVSTEDNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 64, "repeat:3:14")
-#   sox.add "EGVLCNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 65, "repeat:3:14")
-#   sox.add "EAGNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Hcty", 67, "repeat:3:14")
-#   sox.add "E_NFNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 8, "repeat:3:14")
-#   sox.add "E_PRNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 10, "repeat:3:14")
-#   sox.add "E_GDSPRNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 12, "repeat:3:14")
-#   sox.add "ECTNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 14, "repeat:3:14")
-#   sox.add "ECTSPNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 15, "repeat:3:14")
-#   sox.add "EMNNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 17, "repeat:3:14")
-#   sox.add "EMNDRNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 18, "repeat:3:14")
-#   sox.add "EMNNDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 19, "repeat:3:14")
-#   sox.add "E_SVCPRNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 21, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 23, "repeat:3:14")
-#   sox.add "E_TTUNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 25, "repeat:3:14")
-#   sox.add "EWTNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 26, "repeat:3:14")
-#   sox.add "ERTNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 27, "repeat:3:14")
-#   sox.add "ERTFDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 28, "repeat:3:14")
-#   sox.add "ERTFDGSNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 29, "repeat:3:14")
-#   sox.add "ERTCLNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 30, "repeat:3:14")
-#   sox.add "ERTGMNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 31, "repeat:3:14")
-#   sox.add "ERTGMDSNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 32, "repeat:3:14")
-#   sox.add "E_TUNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 33, "repeat:3:14")
-#   sox.add "ETWTANS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 34, "repeat:3:14")
-#   sox.add "EIFNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 36, "repeat:3:14")
-#   sox.add "EIFTCNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 37, "repeat:3:14")
-#   sox.add "E_FIRNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 39, "repeat:3:14")
-#   sox.add "EFINS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 40, "repeat:3:14")
-#   sox.add "E_PBSNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 42, "repeat:3:14")
-#   sox.add "EPSNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 43, "repeat:3:14")
-#   sox.add "EADNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 45, "repeat:3:14")
-#   sox.add "E_EDHCNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 47, "repeat:3:14")
-#   sox.add "EEDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 48, "repeat:3:14")
-#   sox.add "EHCNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 49, "repeat:3:14")
-#   sox.add "E_LHNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 58, "repeat:3:14")
-#   sox.add "EGVNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 60, "repeat:3:14")
-#   sox.add "EGVFDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 61, "repeat:3:14")
-#   sox.add "EGVFDDDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 62, "repeat:3:14")
-#   sox.add "EGVSTNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 63, "repeat:3:14")
-#   sox.add "EGVSTEDNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 64, "repeat:3:14")
-#   sox.add "EGVLCNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 65, "repeat:3:14")
-#   sox.add "EAGNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Kcty", 67, "repeat:3:14")
-#   sox.add "E_NFNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 8, "repeat:3:14")
-#   sox.add "E_PRNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 10, "repeat:3:14")
-#   sox.add "E_GDSPRNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 12, "repeat:3:14")
-#   sox.add "ECTNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 14, "repeat:3:14")
-#   sox.add "ECTSPNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 15, "repeat:3:14")
-#   sox.add "EMNNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 17, "repeat:3:14")
-#   sox.add "EMNDRNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 18, "repeat:3:14")
-#   sox.add "EMNNDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 19, "repeat:3:14")
-#   sox.add "E_SVCPRNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 21, "repeat:3:14")
-#   sox.add "E_PRSVCPRNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 23, "repeat:3:14")
-#   sox.add "E_TTUNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 25, "repeat:3:14")
-#   sox.add "EWTNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 26, "repeat:3:14")
-#   sox.add "ERTNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 27, "repeat:3:14")
-#   sox.add "ERTFDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 28, "repeat:3:14")
-#   sox.add "ERTFDGSNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 29, "repeat:3:14")
-#   sox.add "ERTCLNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 30, "repeat:3:14")
-#   sox.add "ERTGMNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 31, "repeat:3:14")
-#   sox.add "ERTGMDSNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 32, "repeat:3:14")
-#   sox.add "E_TUNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 33, "repeat:3:14")
-#   sox.add "ETWTANS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 34, "repeat:3:14")
-#   sox.add "EIFNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 36, "repeat:3:14")
-#   sox.add "EIFTCNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 37, "repeat:3:14")
-#   sox.add "E_FIRNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 39, "repeat:3:14")
-#   sox.add "EFINS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 40, "repeat:3:14")
-#   sox.add "E_PBSNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 42, "repeat:3:14")
-#   sox.add "EPSNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 43, "repeat:3:14")
-#   sox.add "EADNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 45, "repeat:3:14")
-#   sox.add "E_EDHCNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 47, "repeat:3:14")
-#   sox.add "EEDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 48, "repeat:3:14")
-#   sox.add "EHCNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 49, "repeat:3:14")
-#   sox.add "E_LHNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 51, "repeat:3:14")
-#   sox.add "EAFNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 52, "repeat:3:14")
-#   sox.add "EAFACNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 53, "repeat:3:14")
-#   sox.add "EAFFDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 54, "repeat:3:14")
-#   sox.add "EAFFDRSNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 55, "repeat:3:14")
-#   sox.add "EOSNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 58, "repeat:3:14")
-#   sox.add "EGVNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 60, "repeat:3:14")
-#   sox.add "EGVFDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 61, "repeat:3:14")
-#   sox.add "EGVFDDDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 62, "repeat:3:14")
-#   sox.add "EGVSTNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 63, "repeat:3:14")
-#   sox.add "EGVSTEDNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 64, "repeat:3:14")
-#   sox.add "EGVLCNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 65, "repeat:3:14")
-#   sox.add "EAGNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "Mcty", 67, "repeat:3:14")
-# #  sox.add "#E_GVSLNS@HAW.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@KAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
-# #  sox.add "#E_GVSLNS@MAU.M",         Series.load_pattern("2000-01-01", "M",  "BLS_HIWI%Y.XLS", "#N/A Calc", #N/A Calc, "#N/A Calc")
+
+
 # 
 #   
 #  #   sox.add "PICTSGFNS@US.M",       Series.load_pattern("1964-01-01", "M", pathPICT, "fixed", "block:9:1:12", "repeat_with_step:7:29:2")
