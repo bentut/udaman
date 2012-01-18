@@ -5,7 +5,7 @@ class DownloadsCache
     #puts handle+": "+sheet
     @dsd = DataSourceDownload.get(handle)
     raise "handle '#{handle}' does not exist" if @dsd.nil?
-    path = @dsd.extract_path_flex unless @dsd.extract_path_flex.nil?
+    path = @dsd.extract_path_flex unless (@dsd.extract_path_flex.nil? or @dsd.extract_path_flex == "")
     @cache_handle = path.nil? ? @dsd.save_path_flex : path
     @handle = handle    
     @sheet = sheet
@@ -18,7 +18,8 @@ class DownloadsCache
   end
 
   def set_xls_sheet
-    excel = Excel.new(@cache_handle) 
+    file_extension = @cache_handle.split(".")[-1]
+    excel = file_extension == "xlsx" ? Excelx.new(@cache_handle) : Excel.new(@cache_handle) 
     sheet_parts = @sheet.split(":")
     if sheet_parts[0] == "sheet_num" #and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
       excel.default_sheet = excel.sheets[sheet_parts[1].to_i - 1] 
