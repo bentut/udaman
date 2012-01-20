@@ -143,7 +143,7 @@ class Packager
       puts download_problem?
       backup(old_file) unless old_file.nil?
       puts "SENDING EMAIL"
-      job_name = @output_path.split("/")[-1].split["."][0]
+      job_name = @output_path.split("/")[-1].split(".")[0]
       #PackagerMailer.rake_notification("none entered", download_results_string, errors_string, series_summary_string).deliver
       PackagerMailer.rake_notification(job_name, download_results, errors, @series, @output_path, dates, (errors != [] or download_problem?)).deliver
     end
