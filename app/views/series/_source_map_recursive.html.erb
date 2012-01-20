@@ -6,7 +6,7 @@
 <% if depth <= 6 %>
 	<% components = [] %>
 	<% source.description.split(" ").each do |word| %>
-		<% components.push(word) unless word.index('@').nil? %>
+		<% components.push(word) unless word.index('@').nil? or word.split(".")[-1].length > 1 %>
 	<% end %>
   
   	<% if components.length > 0 %>

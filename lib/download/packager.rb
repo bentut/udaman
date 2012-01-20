@@ -168,7 +168,9 @@ class Packager
       puts series_name
       #puts series_name#+": "+definition
       begin
-        def_data = eval(definition).data
+        #def_data = eval(definition).data
+        series_name.ts_append_eval series_definition
+        def_data = series_name.ts.data
         series[series_name] = def_data.nil? ? {} : def_data
       rescue Exception => e
         #puts "error for #{series_name}!!"

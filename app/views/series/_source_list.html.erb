@@ -33,7 +33,8 @@
 			<%= raw linked_version(ds.description) %>
 			<br /> 
 			<%= raw eval %>
-			<%= render(:partial => 'pattern', :locals => {:pattern_id => ds.description.split(" ")[4]}) if ds.description.start_with?("loaded from pattern id")%>
+			<%= #render(:partial => 'pattern', :locals => {:pattern_id => ds.description.split(" ")[4]}) if ds.description.start_with?("loaded from pattern id")
+			%>
 		</td>
 	</tr>      
 	<% end %>

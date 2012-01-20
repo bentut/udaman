@@ -331,6 +331,17 @@ class Series < ActiveRecord::Base
     Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, options[:frequency])
   end
   
+  #the other problem with these "SERIES" style transformations is that they overwrite the units calculations. Can also build that into the 
+  #series definition as necessary
+  
+  def Series.load_from_file(file, options, cached_files = nil)
+    @@cached_files ||= nil #is this ok? will it break others?
+    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    dp = DownloadProcessor.new("manual", options.merge({ :path => file }), cached_files)
+    series_data = dp.get_data
+    Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, options[:frequency])
+  end
+  
   def load_from_download(handle, options, cached_files = nil)
     cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)

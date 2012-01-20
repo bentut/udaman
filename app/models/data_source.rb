@@ -191,9 +191,9 @@ class DataSource < ActiveRecord::Base
     end
 
     def set_dependencies
-      self.dependencies ||= []
+      self.dependencies = []
       self.description.split(" ").each do |word|
-        unless (word.index('@').nil?)
+        unless (word.index('@').nil? or word.split(".")[-1].length > 1)
           self.dependencies.push(word)
         end
       end unless self.description.nil?

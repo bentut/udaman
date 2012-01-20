@@ -15,7 +15,12 @@ module SeriesHelper
     new_words = []
     description.split(" ").each do |word|
       #new_word = word.index('@').nil? ? word : link_to(word, {:action => 'show', :id => word.ts.id})
-      new_word = word.index('@').nil? ? word : link_to(word, {:action => 'show', :id => word.ts.id}) rescue word
+      new_word = word
+      begin
+        new_word = (word.index('@').nil? or word.split(".")[-1].length > 1) ? word : link_to(word, {:action => 'show', :id => word.ts.id}) 
+      rescue
+        new_word = word
+      end
       new_words.push new_word
     end
     return new_words.join(" ")

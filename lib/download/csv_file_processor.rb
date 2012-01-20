@@ -15,17 +15,19 @@ class CsvFileProcessor
     row = @row_processor.compute(index, @cached_files, handle)
     col = @col_processor.compute(index, @cached_files, handle)
     
-    csv_2d_array = @cached_files.csv(handle)
+    csv_2d_array = @cached_files.csv(handle, @options[:path])
     date = @date_processor.compute(index)
   
-    observation_value = parse_cell(csv_2d_array[row-1][col-1])
+    #puts "trying: h:#{handle}, r:#{row}, c:#{col}, p:#{@options[:path]}"
+    observation_value = parse_cell(csv_2d_array, row, col)
     return "END" if observation_value == "BREAK IN DATA"
     {date => observation_value}
   
   end
 
-  def parse_cell(cell_value)
+  def parse_cell(csv_2d_array, row, col)
     begin
+      cell_value = csv_2d_array[row-1][col-1]
       return Float cell_value.gsub(",","") if cell_value.class == String
       return Float cell_value
     rescue    
