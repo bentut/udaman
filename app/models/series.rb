@@ -157,8 +157,9 @@ class Series < ActiveRecord::Base
     desc = "Source Series Name is blank" if desc.nil? or desc == ""
     series_to_set = Series.get_or_new series_name
     series_to_set.update_attributes(
-      :frequency => series.frequency,
-      :units => series.units,
+      :frequency => series.frequency
+#      :units => series.units, #this units issue is overwriting the calculated units. Don't think any
+#       situation would require units to be transferred BT 2012-01-19
 #      :last_updated => Time.now
     )
     source = series_name.ts.save_source(desc, eval_statement, series.data)

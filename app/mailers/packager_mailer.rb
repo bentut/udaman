@@ -8,13 +8,15 @@ class PackagerMailer < ActionMailer::Base
   #   mail(:to => ["bentut@gmail.com","btrevino@hawaii.edu"], :subject => "UDAMAN New Download or Error (#{rake_task})")
   # end
 
-  def rake_notification(rake_task, download_results, errors, series, output_path, dates)
+  def rake_notification(rake_task, download_results, errors, series, output_path, dates, is_error)
     @download_results = download_results
     @errors = errors
     @series = series
     @output_path = output_path
     @dates = dates
-    mail(:to => ["btrevino@hawaii.edu", "jchfung@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu", "bonham@hawaii.edu"], :subject => "UDAMAN New Download or Error (#{rake_task})")
+    subject = "UDAMAN Error (#{rake_task})" if is_error
+    subject = "UDAMAN New Download (#{rake_task})" unless is_error
+    mail(:to => ["btrevino@hawaii.edu", "jchfung@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu", "bonham@hawaii.edu"], :subject => subject)
   end
   
   def rake_error(e, output_path)

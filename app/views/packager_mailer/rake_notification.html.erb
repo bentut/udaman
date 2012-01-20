@@ -36,7 +36,7 @@
 	<table>
 		<tr><td></td><td><%= date1 %></td><td><%= date2 %></td><td><%= date3 %></td></tr>
 		<% @series.each do |series, data| %>
-			<tr><td><%= series %></td><td><%= data[date1] %></td><td><%= data[date2] %></td><td><%= data[date3] %></td></tr>
+			<tr><td><%= link_to (series, {:controller => "series", :action => 'show', :id => series.ts.id}, :target => "_blank") %></td><td><%= data[date1] %></td><td><%= data[date2] %></td><td><%= data[date3] %></td></tr>
 		<% end %>
 	</table>
   </body>
