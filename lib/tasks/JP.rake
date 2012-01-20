@@ -141,7 +141,7 @@ task :jp_upd_m => :environment do
 		"E_NF@JP.M" => %Q|Series.load_from_download  "LF@stat.go.jp", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Table 18", :row => "increment:11:1", :col => 14, :frequency => "M" }|, 
 		"UR@JP.M" => %Q|Series.load_from_download  "LF@stat.go.jp", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Table 18", :row => "increment:11:1", :col => 31, :frequency => "M" }|, 
 		"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
-		#{}"CPICORENS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "xls", :start_date => "2009-04-01", :sheet => "TABLE1", :row => "increment:16:1", :col => 4, :frequency => "M" }|, 
+		"CPICORENS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "xls", :start_date => "2009-04-01", :sheet => "TABLE1", :row => "increment:16:1", :col => 4, :frequency => "M" }|, 
 		"IP@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPMN@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|, 
