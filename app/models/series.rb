@@ -172,8 +172,8 @@ class Series < ActiveRecord::Base
     source = Series.store series_name, new_series, new_series.name, eval_statement
     source.update_attributes(:runtime => (Time.now - t))
     puts "#{"%.2f" % (Time.now - t)} | #{source.data.count} | #{series_name} | #{eval_statement}" 
-  rescue Exception 
-      puts "ERROR | #{series_name} | #{eval_statement}"
+  # rescue Exception 
+  #     puts "ERROR | #{series_name} | #{eval_statement}"
   end
   
   def save_source(source_desc, source_eval_statement, data, last_run = Time.now)
