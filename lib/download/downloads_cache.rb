@@ -62,7 +62,7 @@ class DownloadsCache
     @csv ||= {}
     if @csv[path].nil? 
       download_handle unless @dsd.nil?
-      puts path
+      #puts path
       begin
         @csv[path] = CSV.read(path)
       rescue

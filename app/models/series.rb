@@ -343,6 +343,10 @@ class Series < ActiveRecord::Base
     Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, options[:frequency])
   end
   
+  def load_from_pattern_id(id)
+    new_transformation("loaded from pattern id #{id}", {})
+  end
+  
   def load_from_download(handle, options, cached_files = nil)
     cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)
