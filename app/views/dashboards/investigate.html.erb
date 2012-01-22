@@ -2,12 +2,9 @@
 <a href="https://docs.google.com/spreadsheet/ccc?key=0Avab6X5RpThTdENNZTNENi1ocW1PcWRFNmVwTHA2MEE" target="_blank">Series Mismatch Investigations (Google Doc)</a>
 
 <%= @bucket_keys %>
-<% 
- @bucket_keys.each do |key| 
-	#key = @bucket_keys[0]
-%>
+<% @bucket_keys.each do |key| %>
+<h1 style="color:#066A8A">HANDLE: <%= key %></h1>
 <table>
-	<tr><td colspan=3><h2><%= key %></h2></td></tr>
 	<tr>
 		<td>
 	<%= render :partial => 'investigate_queue', :locals => {
@@ -35,6 +32,4 @@
 </tr>
 </table>
 
-<% 
-end #@bucket_keys.each 
-%>
+<% end #@bucket_keys.each %>
