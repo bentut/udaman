@@ -25,41 +25,42 @@ set :environment, "development"
 job_type :rake,    "cd :path && rake :task :output"
 #job_type :rake,    "cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
 
-every 1.day, :at => "#{hour}:37 am" do
+every 1.day, :at => "#{hour}:00 am" do
   rake "jp_upd_a"
   rake "jp_upd_q"
   rake "jp_upd_m"
 end
 
-every 1.day, :at => "#{hour}:38 am" do
+every 1.day, :at => "#{hour}:10 am" do
   rake "gsp_upd"
   rake "inc_upd_q"
   rake "inc_upd_a"
 end
 
-every 1.day, :at => "#{hour}:39 am" do
+every 1.day, :at => "#{hour}:20 am" do
   rake "bls_cpi_upd_m"
   rake "bls_job_upd_m"
   rake "bls_job_upd_s"
+  rake "hiwi_upd"
 end
 
-every 1.day, :at => "#{hour}:40 am" do
+every 1.day, :at => "#{hour}:30 am" do
   rake "uic_upd"
   rake "const_upd_q"
   rake "const_upd_m"
 end
 
-every 1.day, :at => "#{hour}:41 am" do
+every 1.day, :at => "#{hour}:35 am" do
   rake "tax_upd"
 end
 
-every 1.day, :at => "#{hour}:42 am" do
+every 1.day, :at => "#{hour}:40 am" do
   rake "tour_PC_upd"
   rake "tour_seats_upd"
   rake "tour_upd"
 end
 
-every 1.day, :at => "#{hour}:43 am" do
+every 1.day, :at => "#{hour}:50 am" do
   rake "us_upd_a"
   rake "us_upd_q"
   rake "us_upd_m"

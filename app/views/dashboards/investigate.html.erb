@@ -1,30 +1,40 @@
 <h3>Log Investigation Findings</h3>
 <a href="https://docs.google.com/spreadsheet/ccc?key=0Avab6X5RpThTdENNZTNENi1ocW1PcWRFNmVwTHA2MEE" target="_blank">Series Mismatch Investigations (Google Doc)</a>
 
+<%= @bucket_keys %>
+<% 
+ @bucket_keys.each do |key| 
+	#key = @bucket_keys[0]
+%>
 <table>
+	<tr><td colspan=3><h2><%= key %></h2></td></tr>
 	<tr>
 		<td>
 	<%= render :partial => 'investigate_queue', :locals => {
-											:title => 'Maybe OK', 
-											:count => @maybe_ok.count,
+											:title => "Maybe OK", 
+											:count => @maybe_ok_buckets[key].count,
 											:description => "No Missing Values, cumulative diff < 1.0",
-											:queue => @maybe_ok }%>	
+											:queue => @maybe_ok_buckets[key] } unless @maybe_ok_buckets[key].nil? %>	
 		</td>
 
 		<td>
 	<%= render :partial => 'investigate_queue', :locals => {
 									:title => 'Wrong', 
-									:count => @wrong.count,
+									:count => @wrong_buckets[key].count,
 									:description => "No Missing Values, cumulative diff >= 1.0",
-									:queue => @wrong }%>	
+									:queue => @wrong_buckets[key] } unless @wrong_buckets[key].nil? %>	
 		</td>
 		<td>
 <div id="missing-low-to-high">
 	<%= render :partial => 'investigate_queue', :locals => {
 									:title => 'Missing Low to High', 
-									:count => @missing_low_to_high.count,
+									:count => @missing_low_to_high_buckets[key].count,
 									:description => "Ascending Missing Values",
-									:queue => @missing_low_to_high }%>	
+									:queue => @missing_low_to_high_buckets[key] } unless @missing_low_to_high_buckets[key].nil? %>	
 		</td>
 </tr>
 </table>
+
+<% 
+end #@bucket_keys.each 
+%>

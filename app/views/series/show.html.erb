@@ -49,6 +49,8 @@ google.visualization.events.addListener(chart, 'select', function() {
 
 <div id="chart_div"></div>
 
+
+
 <%= render :partial => 'investigation_sort', :locals => {:series => @series} %>
 
 	</div>
@@ -57,7 +59,7 @@ google.visualization.events.addListener(chart, 'select', function() {
 <div id="details_area">
 	
 	<table>
-		<tr><td class="label">Aremos: </td><td><%= "#{@series.aremos_missing} missing, #{@series.aremos_diff.round(5) unless @series.aremos_diff.nil?} cumulative difference" %> [ refresh ]</td></tr>
+		
 		<tr><td class="label">Output: </td><td>
 		<%= @pdf.filename unless @pdf.nil? %></td></tr>
 		<tr><td class="label">Dependent Series: </td>
@@ -72,11 +74,12 @@ google.visualization.events.addListener(chart, 'select', function() {
 		</td><td>
 		<%= render :partial => 'source_list', :locals => { :series => @series } %>
 		</td></tr>
-		<tr><td class="label">Units: </td><td>
-		<%= @series.units.nil? ? 1 : @series.units.to_s+"(s)" %></td></tr>
-		<tr><td class="label">Data: </td><td>
-			<%= render :partial => 'data_points', :locals => {:series => @series, :as => @as}%>
-		</td></tr>
+	</table>
+	<div id= "toggle-units-div">
+		<%= render :partial => 'toggle_units', :locals => {:series => @series} %>
+	</div>
+	
+	<table>	
 		<tr><td class="label">Source Map</td><td>
 		<%= render :partial => 'source_map', :locals => {:series => @series} %>
 		</td></tr>

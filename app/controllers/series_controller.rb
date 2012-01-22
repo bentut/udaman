@@ -54,6 +54,20 @@ class SeriesController < ApplicationController
     render :partial => "replace_block"
   end
   
+  def toggle_units
+    @series = Series.find(params[:id])
+    @series.units = params[:units]
+    @series.aremos_comparison
+    @as = AremosSeries.get @series.name
+    render :partial => "toggle_units.html"
+  end
+  
+  def render_data_points
+    @series = Series.find params[:id]
+    
+    render :partial => 'data_points', :locals => {:series => @series, :as => @as}
+  end
+  
   def toggle_multiplier
     @series = Series.find(params[:id])
     @series.toggle_mult

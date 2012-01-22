@@ -10,6 +10,7 @@
 			<tr>
 				<th></th>
 				<th></th>
+				<th></th>
 				<th colspan="2">Last Attempt</th>
 				<th></th>
 				<th></th>
@@ -35,6 +36,7 @@
 					<% else %>
 					<td><strong><%= download.handle %></strong></td>
 					<% end %>
+					<td><%= link_to "show" , {:action => 'show', :id => download.id}%></td>
 					<td><%= link_to "download" , {:action => 'download', :id => download.id}%></td>
 					<td><%= time %></td>
 					<td><%= status %></td>

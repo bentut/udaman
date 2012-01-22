@@ -22,19 +22,23 @@ class DashboardsController < ApplicationController
   
   def investigate
     #@maybe_ok_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) < 0.1 AND ABS(aremos_diff) > 0.0").count
-    @maybe_ok = Series.where("aremos_missing = 0 AND ABS(aremos_diff) < 1.0 AND ABS(aremos_diff) > 0.0").order('aremos_diff DESC')
-    
-    
     #@wrong_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 0.1 AND ABS(aremos_diff) < 1000").count
-    @wrong = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 1.0").order('aremos_diff DESC')
-    
     #@way_off_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 1000").count
     #@way_off = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 1000").limit(20)
-    
     #Series.where(:aremos_missing => '> 0').count
     #@missing_count = Series.where("aremos_missing > 0").count
-    @missing_low_to_high = Series.where("aremos_missing > 0").order('aremos_missing ASC')
     #@missing_high_to_low = Series.where("aremos_missing > 0").order('aremos_missing DESC').limit(10)
+    
+    @maybe_ok = Series.where("aremos_missing = 0 AND ABS(aremos_diff) < 1.0 AND ABS(aremos_diff) > 0.0").order('aremos_diff DESC')   
+    @wrong = Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 1.0").order('aremos_diff DESC')
+    @missing_low_to_high = Series.where("aremos_missing > 0").order('aremos_missing ASC')
+    
+    handle_hash = DataSource.handle_hash
+    @maybe_ok_buckets = Series.handle_buckets(@maybe_ok, handle_hash)
+    @wrong_buckets = Series.handle_buckets(@wrong, handle_hash)
+    @missing_low_to_high_buckets = Series.handle_buckets(@missing_low_to_high, handle_hash)
+    
+    @bucket_keys = (@maybe_ok_buckets.keys + @wrong_buckets.keys + @missing_low_to_high_buckets.keys).uniq
   end
   
   def mapping

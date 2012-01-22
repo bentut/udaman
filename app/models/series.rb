@@ -21,6 +21,17 @@ class Series < ActiveRecord::Base
     return data.keys.sort[-1]
   end
   
+  def Series.handle_buckets(series_array, handle_hash)
+    series_array_buckets = {}
+    series_array.each do |s|
+      handle = handle_hash[s.id]
+      #next if handle.nil?
+      series_array_buckets[handle] ||= []
+      series_array_buckets[handle].push(s)
+    end
+    return series_array_buckets
+  end
+  
   #takes about 8 seconds to run for month, but not bad
   #chart both last updated and last observed (rebucket?)
   def Series.last_observation_buckets(frequency)
@@ -362,6 +373,22 @@ class Series < ActiveRecord::Base
   def load_from_bls(code, frequency = nil)
     series_data = DataHtmlParser.new.get_bls_series(code,frequency)
     new_transformation("loaded series code: #{code} from bls website", series_data)
+  end
+  
+  def ds_like?(string)
+    self.data_sources.each do |ds|
+      return true unless ds.eval.index(string).nil?
+    end
+    return false
+  end
+  
+  def handle
+    self.data_sources.each do |ds|
+      if !ds.eval.index("load_from_download").nil?
+        return ds.eval.split("load_from_download")[1].split("\"")[1]
+      end
+    end
+    return nil
   end
   
   def Series.open_cached_files

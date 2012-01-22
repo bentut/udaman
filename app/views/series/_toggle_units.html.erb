@@ -1,0 +1,25 @@
+	<table>
+	<tr><td class="label">
+
+	Units: <br />
+		<%= link_to "1000s", {:action => 'toggle_units', :units => 1000, :id => @series.id}, 
+					:remote => true, :class => "toggle-units"  %>
+		<%= link_to "10s", {:action => 'toggle_units', :units => 10, :id => @series.id}, 
+					:remote => true, :class => "toggle-units"  %>
+		<%= link_to "1s", {:action => 'toggle_units', :units => 1, :id => @series.id}, 
+					:remote => true, :class => "toggle-units"  %>
+
+	</td><td>
+		
+	<%= @series.units.nil? ? 1 : @series.units.to_s+"(s)" %></td></tr>
+	<tr><td class="label">Aremos: </td><td><%= "#{@series.aremos_missing} missing, #{@series.aremos_diff.round(5) unless @series.aremos_diff.nil?} cumulative difference" %> [ refresh ]</td></tr>
+	<tr><td class="label">Data: </td><td>
+		<div id="data-points"><%= render :partial => 'data_points.html', :locals => {:series => @series, :as => @as}%></div>
+	</td></tr>
+	
+	<%= javascript_tag do %>
+	  $('a.toggle-units').bind("ajax:complete", function(et, e){
+	    $("#toggle-units-div").html(e.responseText); // insert content
+	  });
+	<% end %>
+	</table>

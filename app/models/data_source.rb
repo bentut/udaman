@@ -35,6 +35,15 @@ class DataSource < ActiveRecord::Base
       all_descriptions_array
     end
 
+    def DataSource.handle_hash
+      handle_hash = {}
+      DataSource.where("eval LIKE '%load_from_download%'").select([:eval, :series_id]).all.each do |ds|
+        handle = ds.eval.split("load_from_download")[1].split("\"")[1]
+        handle_hash[ds.series_id] = handle
+      end
+      handle_hash
+    end
+    
     def DataSource.all_load_from_file_series_names
       series_names = []
       DataSource.where("eval LIKE '%load_from %'").all.each do |ds|

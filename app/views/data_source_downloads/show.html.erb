@@ -1,2 +1,52 @@
-<h1>DataSourceDownloads#show</h1>
-<p>Find me in app/views/data_source_downloads/show.html.erb</p>
+<div id="summary_area">
+	<h1><%= @output_file.handle %></h1>
+
+
+<h3>Series from this handle</h3>
+<table>	
+<% all_dependents = [] %>
+<% DataSource.where("eval LIKE '%#{@output_file.handle}%'").all.each do |ds| %>
+<% s = ds.series %>
+<% all_dependents += s.new_dependents %>
+<tr>
+	<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank")  %></td>
+	<td><%= s.aremos_diff %></td>
+	<td><%= s.aremos_missing %></td>
+</tr>
+<% end %>
+</table>
+
+<h3>Dependent Series from this handle</h3>
+<table>	
+
+<% all_dependents.each do |s| %>
+<tr>
+	<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank", :class => link_class)  %></td>
+	<td><%= s.aremos_diff %></td>
+	<td><%= s.aremos_missing %></td>
+</tr>
+<% end %>
+</table>
+
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+	
+<h2><br /><Br /><br />Download Log</h2>
+<table>
+<% 
+current_url = ""
+@output_file.download_log.each do |dl| 
+	if dl[:url] != current_url
+		current_url = dl[:url] 
+		
+%>
+	<tr><td colspan=3><strong><%= current_url %></strong></td></tr>
+<%
+	end
+%>
+	<tr><td><%= dl[:time].to_date %></td><td><%= dl[:changed] ? "changed" : "" %></td><td><%= dl[:status] %></td></tr>
+
+<% end %>
+</table>
+</div>
