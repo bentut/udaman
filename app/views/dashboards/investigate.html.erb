@@ -5,8 +5,9 @@
 @bucket_keys.each do |key| 
 	%>
 <h1 style="color:#066A8A">
+	<% dsd = DataSourceDownload.get(key) %>
 	<%= 
-		link_to "HANDLE: #{key}", {:controller => :data_source_downloads, :action => :show, :id => DataSourceDownload.get(key).id} unless key.nil? 
+		link_to "HANDLE: #{key}", {:controller => :data_source_downloads, :action => :show, :id => dsd.id} unless key.nil? or dsd.nil? 
 	%>
 	<%= "HANDLE: #{key}" unless key.nil? %>
 	<%= "NO HANDLE" if key.nil? %>
