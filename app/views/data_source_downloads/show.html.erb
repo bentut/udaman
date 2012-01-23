@@ -1,52 +1,51 @@
+<style>
+table.dl-log td {color:#999;}
+span.changed { color:#066A8A; }
+span.problem {color:red}
+h2,
+div#summary_area h2 {font-size:30px;}
+</style>
+<h1 style="font-size:45px"><%= @output_file.handle %></h1>
+<h3><%= link_to 'Edit', edit_data_source_download_path(@output_file) %></h3>
 <div id="summary_area">
-	<h1><%= @output_file.handle %></h1>
-
-
-<h3>Series from this handle</h3>
-<table>	
-<% all_dependents = [] %>
-<% DataSource.where("eval LIKE '%#{@output_file.handle}%'").all.each do |ds| %>
-<% s = ds.series %>
-<% all_dependents += s.new_dependents %>
-<tr>
-	<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank")  %></td>
-	<td><%= s.aremos_diff %></td>
-	<td><%= s.aremos_missing %></td>
-</tr>
-<% end %>
-</table>
-
-<h3>Dependent Series from this handle</h3>
-<table>	
-
-<% all_dependents.each do |s| %>
-<tr>
-	<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank", :class => link_class)  %></td>
-	<td><%= s.aremos_diff %></td>
-	<td><%= s.aremos_missing %></td>
-</tr>
-<% end %>
-</table>
-
+	<% unless @output_file.download_log.nil? %>
+	<h2 class="handle-h2">Download Log</h2>
+	<table class="dl-log">
+	<% current_url = "" %>
+	<% @output_file.download_log.each do |dl| %>
+		<% if dl[:url] != current_url %>
+			<% current_url = dl[:url] %>
+			</table>
+			<h4><%= current_url %></h4>
+			<table class="dl-log">
+		<% end %>
+		<tr><td><%= dl[:time].to_date %></td><td><span class="<%= "problem" if dl[:status] != 200 %>"><%= dl[:status] %></span></td><td><span class="<%= "changed" if dl[:changed] %>" ><%= dl[:changed] ? "changed" : "" %></span></td></tr>
+	<% end %>
+	</table>
+	<% end %>
 </div>
 <div id="details_mask"></div>
 <div id="details_area">
+	<% unless @output_file.notes.nil? %>
+	<h2>Notes</h2>
+	<p><%= @output_file.notes %></p>
+	<% end %>
 	
-<h2><br /><Br /><br />Download Log</h2>
-<table>
-<% 
-current_url = ""
-@output_file.download_log.each do |dl| 
-	if dl[:url] != current_url
-		current_url = dl[:url] 
-		
-%>
-	<tr><td colspan=3><strong><%= current_url %></strong></td></tr>
-<%
-	end
-%>
-	<tr><td><%= dl[:time].to_date %></td><td><%= dl[:changed] ? "changed" : "" %></td><td><%= dl[:status] %></td></tr>
+	<h2 class="handle-h2">Series</h2>
+	<table>	
+	<% all_dependents = [] %>
+	<% DataSource.where("eval LIKE '%#{@output_file.handle}%'").all.each do |ds| %>
+	<% s = ds.series %>
+	<% 
+	# took out this dependents stuff. Don't think it will be important yet and was slowing things down significantly
+	#all_dependents += s.new_dependents 
+	%>
+	<tr>
+		<td><%= link_to(s.name, {:controller => "series", :action => 'show', :id => s.id}, :target => "_blank")  %></td>
+		<td><%= s.aremos_diff %></td>
+		<td><%= s.aremos_missing %></td>
+	</tr>
+	<% end %>
+	</table>
 
-<% end %>
-</table>
 </div>

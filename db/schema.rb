@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120106015347) do
+ActiveRecord::Schema.define(:version => 20120123053346) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120106015347) do
     t.datetime "updated_at"
     t.string   "handle"
     t.string   "file_to_extract"
+    t.text     "notes"
   end
 
   create_table "data_sources", :force => true do |t|

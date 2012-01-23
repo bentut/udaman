@@ -34,6 +34,11 @@
 			<%= f.text_area :post_parameters, :value => (@output_file.post_param_string+" "), :size => "72x20", :onchange => remote_function(:update => "post_parameters_message", :url => {:action => 'test_post_params'}, :with=>"'change_to='+this.value+' '") %>
 		</div>
 	
+		<div class="field">
+			<%= f.label :notes %><br />
+			<%= f.text_area :notes, :size => "72x10"%>
+		</div>
+		
 		<div class="actions">
 			<%= f.submit %>
 		</div>
