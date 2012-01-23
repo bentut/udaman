@@ -4,7 +4,10 @@
 <% 
 @bucket_keys.each do |key| 
 	%>
-<h1 style="color:#066A8A">HANDLE: <%= key %></h1>
+<h1 style="color:#066A8A">
+	<%= link_to "HANDLE: #{key}", {:controller => :data_source_downloads, :action => :show, :id => DataSourceDownload.get(key).id} unless key.nil? %>
+	<%= "NO HANDLE" if key.nil? %>
+</h1>
 <table>
 	<tr>
 		<td>
