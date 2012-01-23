@@ -7,9 +7,9 @@
 <h1 style="color:#066A8A">
 	<% dsd = DataSourceDownload.get(key) %>
 	<%= 
-		link_to "HANDLE: #{key}", {:controller => :data_source_downloads, :action => :show, :id => dsd.id} unless key.nil? or dsd.nil? 
+		link_to("HANDLE: #{key}", {:controller => :data_source_downloads, :action => :show, :id => dsd.id}, :target => "_blank") unless key.nil? or dsd.nil? 
 	%>
-	<%= "HANDLE: #{key}" unless key.nil? %>
+	<%= "HANDLE: #{key}" if !key.nil? and dsd.nil? %>
 	<%= "NO HANDLE" if key.nil? %>
 </h1>
 <table>
