@@ -31,6 +31,7 @@ div#summary_area h2 {font-size:30px;}
 	<p><%= @output_file.notes %></p>
 	<% end %>
 	
+	<% unless @output_file.handle.nil? or @output_file.handle == "" %>
 	<h2 class="handle-h2">Series</h2>
 	<table>	
 	<% all_dependents = [] %>
@@ -48,4 +49,5 @@ div#summary_area h2 {font-size:30px;}
 	<% end %>
 	</table>
 
+	<% end %>
 </div>
