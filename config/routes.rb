@@ -63,6 +63,7 @@ UheroDb::Application.routes.draw do
   
   match 'investigate' => 'dashboards#investigate'
   match 'mapping' => 'dashboards#mapping'
+  match 'download_cache' => 'dashboards#download_cache'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

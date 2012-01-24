@@ -50,6 +50,14 @@ class DashboardsController < ApplicationController
     @pattern_and_load = (@pattern & @load)
   end
   
+  def download_cache
+    begin
+      @cache = Series.get_cached_files
+      @cache = Series.open_cached_files if @cache.nil?
+    rescue NameError => e
+      @cache = Series.open_cached_files
+    end
+  end
   
 end
 

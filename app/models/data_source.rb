@@ -170,7 +170,7 @@ class DataSource < ActiveRecord::Base
   #    puts "Series name: #{s.name}, Sources:#{s.data_sources_by_last_run.count}"
   
   
-      s.data_sources_by_last_run.reverse.each {|ds| ds.reload_source}
+      s.data_sources_by_last_run.each {|ds| ds.reload_source}
     end
 
 

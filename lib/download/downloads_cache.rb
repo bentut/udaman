@@ -1,6 +1,10 @@
 #CSV STUFF IS WEIRD... TRY TO CLEAN UP
 
 class DownloadsCache
+  def get_cache
+    {:csv => @csv, :xls => @xls, :text => @text}
+  end
+  
   def xls(handle, sheet, path = nil)
     #puts handle+": "+sheet
 
