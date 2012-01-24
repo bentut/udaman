@@ -16,6 +16,7 @@ module UheroDb
     # config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += Dir["#{config.root}/lib/**/"] # include all subdirectories
 
+    #config.cache_store = :memory_store, :size => 64.megabytes
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.

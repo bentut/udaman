@@ -337,7 +337,7 @@ class Series < ActiveRecord::Base
   def Series.load_from_download(handle, options, cached_files = nil)
     # @@cached_files ||= nil #is this ok? will it break others?
     # cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
-    
+    Rails.cache.write("last_row", options[:row], :time_to_live => 600.seconds)
     cached_files = Series.get_cached_files if cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)
     series_data = dp.get_data
@@ -399,7 +399,8 @@ class Series < ActiveRecord::Base
   #   @@cached_files = DownloadsCache.new
   # end
   def Series.write_cached_files(cached_files)
-    Rails.cache.write("downloads", cached_files, :time_to_live => 600)
+    puts "writing downloads to cache"
+    Rails.cache.write("downloads", cached_files, :time_to_live => 600.seconds)
   end
   
   def Series.get_cached_files

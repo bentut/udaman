@@ -15,10 +15,11 @@ class DownloadPreprocessor
   end  
 
   def DownloadPreprocessor.match(value, header)
+    
     return false if value.class != String
     #puts "looking for [#{header}] in cell with value: [#{value}]"
     #assuming BLS format with "(" for now
-    value_string = value.split("(")[0] unless value == ""
+    value = value.split("(")[0] unless value == ""
     value.strip.downcase == header.strip.downcase
   end
   
@@ -35,14 +36,14 @@ class DownloadPreprocessor
     @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
     xls = @cached_files.xls(handle, sheet)
     (1..xls.last_row).each {|row| return row if match(xls.cell(row, col_to_search).to_s, header_name) }
-    return nil 
+    raise "could not find header: '#{header_name}'" #return nil 
   end
   
   def DownloadPreprocessor.find_xls_header_col_in_row(row_to_search, header_name, handle, sheet, cached_files = nil)
     @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
     xls = @cached_files.xls(handle, sheet)
     (1..xls.last_column).each {|col| return col if match(xls.cell(row_to_search, col).to_s, header_name) }
-    return nil 
+    raise "could not find header: '#{header_name}'" #return nil 
   end
 
   def DownloadPreprocessor.get_xls_start_date(row, col, handle, sheet, cached_files = nil)
@@ -54,14 +55,14 @@ class DownloadPreprocessor
     @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
     csv = @cached_files.csv(handle)
     (1..(csv.length)).each {|row| return row if match(csv[row-1][col_to_search-1].to_s, header_name) }
-    return nil 
+    raise "could not find header: '#{header_name}'" #return nil 
   end
   
   def DownloadPreprocessor.find_csv_header_col_in_row(row_to_search, header_name, handle, cached_files = nil)
     @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
     csv = @cached_files.csv(handle)
     (1..(csv[0].length)).each {|col| return col if match(csv[row_to_search-1][col-1].to_s, header_name) }
-    return nil
+    raise "could not find header: '#{header_name}'" #return nil
   end
   
   def DownloadPreprocessor.get_csv_start_date(row, col, handle, cached_files = nil)
