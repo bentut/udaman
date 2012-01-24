@@ -335,10 +335,13 @@ class Series < ActiveRecord::Base
   #if smart update or other process sets a global cache object for a session, use that. Otherwise
   #download fresh
   def Series.load_from_download(handle, options, cached_files = nil)
-    @@cached_files ||= nil #is this ok? will it break others?
-    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    # @@cached_files ||= nil #is this ok? will it break others?
+    # cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    
+    cached_files = Series.get_cached_files if cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)
     series_data = dp.get_data
+    Series.write_cached_files cached_files
     #puts dp.end_conditions
     Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, options[:frequency])
   end
@@ -347,10 +350,10 @@ class Series < ActiveRecord::Base
   #series definition as necessary
   
   def Series.load_from_file(file, options, cached_files = nil)
-    @@cached_files ||= nil #is this ok? will it break others?
-    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    cached_files = Series.get_cached_files if cached_files.nil?
     dp = DownloadProcessor.new("manual", options.merge({ :path => file }), cached_files)
     series_data = dp.get_data
+    Series.write_cached_files cached_files
     Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, options[:frequency])
   end
   
@@ -359,9 +362,10 @@ class Series < ActiveRecord::Base
   end
   
   def load_from_download(handle, options, cached_files = nil)
-    cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
+    cached_files = Series.get_cached_files if cached_files.nil?
     dp = DownloadProcessor.new(handle, options, cached_files)
     series_data = dp.get_data
+    Series.write_cached_files cached_files
     new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
@@ -391,17 +395,23 @@ class Series < ActiveRecord::Base
     return nil
   end
   
-  def Series.open_cached_files
-    @@cached_files = DownloadsCache.new
+  # def Series.open_cached_files
+  #   @@cached_files = DownloadsCache.new
+  # end
+  def Series.write_cached_files(cached_files)
+    Rails.cache.write("downloads", cached_files, :time_to_live => 600)
   end
   
   def Series.get_cached_files
-    @@cached_files
+    cache = Rails.cache.read("downloads")
+    return DownloadsCache.new if cache.nil?
+    return cache.dup
+    #@@cached_files
   end
   
-  def Series.close_cached_files
-    @@cached_files = nil
-  end
+  # def Series.close_cached_files
+  #     @@cached_files = nil
+  #   end
   
   def at(date)
     data[date]

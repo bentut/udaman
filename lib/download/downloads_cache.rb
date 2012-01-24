@@ -41,7 +41,7 @@ class DownloadsCache
       end
     end
     @xls[@cache_handle] ||= {}
-    @xls[@cache_handle][@sheet] = excel
+    @xls[@cache_handle][@sheet] = excel.to_matrix.to_a
   end
 
   def download_results

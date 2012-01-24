@@ -103,13 +103,13 @@ class Packager
   end
 
   def write_to_db
-    Series.open_cached_files
+    #Series.open_cached_files
     @definitions.each do |series_name, series_definition|
       series_name.ts_append_eval series_definition
     end
     #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
     @download_results = Series.get_cached_files.download_results
-    Series.close_cached_files
+    #Series.close_cached_files
   end
 
   #this change functionality is not tested, but should be
@@ -163,7 +163,7 @@ class Packager
   #in final spreadsheet. Thus they will have to appear in a log or something
   def get_data_from_definitions
     @errors ||= []
-    Series.open_cached_files
+    #Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
       #puts series_name
@@ -180,7 +180,7 @@ class Packager
     end
     #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
     @download_results = Series.get_cached_files.download_results
-    Series.close_cached_files
+    #Series.close_cached_files
     series
   end
 

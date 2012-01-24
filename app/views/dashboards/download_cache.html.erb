@@ -5,4 +5,4 @@
 <li>XLS: <%= cache[:xls].nil? ? 0 : cache[:xls].count %></li>
 <li>TEXT: <%= cache[:text].nil? ? 0 : cache[:text].count %></li>
 </ul>
-<h3><%= Rails.cache.read('key') %></h3>
+<p><%= Rails.cache.read('downloads') %></p>

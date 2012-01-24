@@ -59,3 +59,17 @@ class String
   end
   
 end
+
+class Array
+  def cell(row,col)
+    self[row-1][col-1]
+  end
+  
+  def last_row
+    self.length
+  end
+  
+  def last_column
+    self[0].length
+  end
+end
