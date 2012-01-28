@@ -50,8 +50,10 @@ class DownloadsCache
   end
 
   def download_handle
+    t = Time.now
     @download_results ||= {}
     @download_results[@handle] = @dsd.download 
+    puts "#{Time.now - t} | cache miss: downloaded #{@handle}"
     raise "the download for handle '#{@handle} failed with status code #{@download_results[@handle][:status]} when attempt to reach #{@dsd.url}" if @download_results[@handle] and @download_results[@handle][:status] != 200
   end
 

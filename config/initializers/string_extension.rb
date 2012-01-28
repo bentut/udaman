@@ -58,6 +58,15 @@ class String
     }
   end
   
+  def to_ascii_iconv
+     converter = Iconv.new('ASCII//IGNORE//TRANSLIT', 'UTF-8')
+     converter.iconv(self).unpack('U*').select{ |cp| cp < 127 }.pack('U*')
+  end
+  
+  def no_okina
+    #uses generic apostrophe... assuming to_ascii_iconv above
+    self.gsub("'","")
+  end
 end
 
 class Array
@@ -73,3 +82,4 @@ class Array
     self[0].length
   end
 end
+

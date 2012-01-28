@@ -18,14 +18,15 @@ class XlsFileProcessor
   
     handle = @handle_processor.compute(date)
     sheet = @sheet_processor.compute(date)
-    
-    row = @row_processor.compute(index, @cached_files, handle, sheet)
-    col = @col_processor.compute(index, @cached_files, handle, sheet)
-    
     path = @path_processor.nil? ? nil : @path_processor.compute(date)
     
-    #puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
     begin
+      
+      row = @row_processor.compute(index, @cached_files, handle, sheet)
+      col = @col_processor.compute(index, @cached_files, handle, sheet)
+    
+      puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
+    
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
       puts e.message
@@ -35,7 +36,8 @@ class XlsFileProcessor
     end
   
     observation_value = parse_cell(worksheet.cell(row,col))
-    return "END" if observation_value == "BREAK IN DATA"
+    return "END" if observation_value == "BREAK IN DATA" unless @handle_processor.date_sensitive?
+    return {} if observation_value == "BREAK IN DATA" if @handle_processor.date_sensitive?
     {date => observation_value}
   end
 

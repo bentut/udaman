@@ -162,12 +162,13 @@ class Packager
   #going to do exception handling here. broken series will not be added to hash, and thus will not show up
   #in final spreadsheet. Thus they will have to appear in a log or something
   def get_data_from_definitions
+    puts "getting data from defs"
     @errors ||= []
     #Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
       #puts series_name
-      #puts series_name#+": "+definition
+      #puts series_name+": "+definition
       begin
         #def_data = eval(definition).data
         series_name.ts_append_eval definition

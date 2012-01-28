@@ -8,13 +8,23 @@ task :cpi => :environment do
   "CPI@HON.A".ts_eval= %Q|"PC@HON.A".ts|
   "CPI@HON.Q".ts_eval= %Q|"PC@HON.Q".ts|
 end
+
+task :CY_FENG => :environment do
+  ["HON", "KAU", "MAUI", "MOL", "LAN, "HAW"].each do |cnty|
+    "VRLSDMNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts / "VISDMNS@#{cnty}.M".ts|
+    "VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts|
+    "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VDAYUSWNS@#{cnty}.M".ts / "VISUSWNS@#{cnty}.M".ts|
+    "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VDAYUSENS@#{cnty}.M".ts / "VISUSENS@#{cnty}.M".ts|
+    "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VDAYJPNS@#{cnty}.M".ts / "VISJPNS@#{cnty}.M".ts|
+    "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VDAYCANNS@#{cnty}.M".ts / "VISCANNS@#{cnty}.M".ts|
+  end
+end
   
 task :county_visitors => :environment do
   ["HON", "HI", "KAU", "MAU", "HAW"].each do |county| 
     "VIS@#{county}.A".ts_eval= %Q|"VIS@#{county}.M".ts.aggregate(:year, :sum)|
   end
 end
-
 
 task :aggregate_occupancy => :environment do
   ["HON", "HI", "KAU", "MAU", "HAW"].each do |cnty|
