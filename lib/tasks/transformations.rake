@@ -10,7 +10,7 @@ task :cpi => :environment do
 end
 
 task :CY_FENG => :environment do
-  ["HON", "KAU", "MAUI", "MOL", "LAN, "HAW"].each do |cnty|
+  ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty|
     "VRLSDMNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts / "VISDMNS@#{cnty}.M".ts|
     "VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts|
     "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VDAYUSWNS@#{cnty}.M".ts / "VISUSWNS@#{cnty}.M".ts|

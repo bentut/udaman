@@ -13,6 +13,7 @@ module SeriesArithmetic
     new_series_data = Hash.new
     longest_series.data.keys.each do |date_string|
       new_series_data[date_string] = (self.at(date_string).nil? or other_series.at(date_string).nil?) ? nil : self.at(date_string).send(operator,other_series.at(date_string))
+      new_series_data[date_string] = nil if new_series_data[date_string].nan?
     end
     new_transformation("#{self.name} #{operator} #{other_series.name}",new_series_data)
   end
