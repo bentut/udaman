@@ -71,6 +71,7 @@ end
 
 class Array
   def cell(row,col)
+    return nil if self[row-1].nil?
     self[row-1][col-1]
   end
   

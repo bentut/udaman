@@ -31,7 +31,7 @@ class DownloadPreprocessor
     #puts "looking for [#{header}] in cell with value: [#{value}]"
     #assuming BLS format with "(" for now
     value = value.split("(")[0] unless value == ""
-    puts value.strip.downcase.to_ascii_iconv
+    #puts value.strip.downcase.to_ascii_iconv
     return value.strip.downcase.to_ascii_iconv.no_okina == header.strip.downcase if no_okina
     return value.strip.downcase.to_ascii_iconv == header.strip.downcase 
   end
@@ -95,59 +95,22 @@ class DownloadPreprocessor
     row = header_in == "col" ? elem : search_main
     col = header_in == "col" ? search_main : elem
     
-    puts "Searching for #{options[:header_name]} in row:#{row} col:#{col}"
+    #puts "Searching for #{options[:header_name]} in row:#{row} col:#{col}"
     #might not actually need this logic with the new way this is being cached...
     cell_value = spreadsheet[row-1][col-1].to_s if options[:sheet].nil?
     cell_value = spreadsheet.cell(row,col).to_s unless options[:sheet].nil?
-    
-    return match(cell_value, options[:header_name]) if match_type == :hiwi
-    return match_prefix(cell_value, options[:header_name]) if match_type == :prefix
-    return match_trim_elipsis(cell_value,options[:header_name]) if match_type == :trim_elipsis
-    return match(cell_value, options[:header_name], true) if match_type == :no_okina
-    return match_prefix(cell_value, options[:header_name], true) if match_type == :prefix_no_okina
-    return match_sub(cell_value, options[:header_name]) if match_type == :sub
-    return match_sub(cell_value, options[:header_name], true) if match_type == :sub_no_okina
-  end
-  
-  # --------XLS --------- #
-  def DownloadPreprocessor.find_xls_header_row_in_col(col_to_search, header_name, handle, sheet, cached_files = nil)
-    @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    xls = @cached_files.xls(handle, sheet)
-    (1..xls.last_row).each {|row| return row if match(xls.cell(row, col_to_search).to_s, header_name) }
-    raise "could not find header: '#{header_name}'" #return nil 
-  end
-  
-  def DownloadPreprocessor.find_xls_header_col_in_row(row_to_search, header_name, handle, sheet, cached_files = nil)
-    @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    xls = @cached_files.xls(handle, sheet)
-    (1..xls.last_column).each {|col| return col if match(xls.cell(row_to_search, col).to_s, header_name) }
-    raise "could not find header: '#{header_name}'" #return nil 
-  end
-
-  def DownloadPreprocessor.get_xls_start_date(row, col, handle, sheet, cached_files = nil)
-    @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    return @cached_files.xls(handle, sheet).cell(row, col).to_s
-  end
-  
-  # -------- CSV ----------- #
-  def DownloadPreprocessor.find_csv_header_row_in_col(col_to_search, header_name, handle, cached_files = nil)
-    @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    csv = @cached_files.csv(handle)
-    (1..(csv.length)).each {|row| return row if match(csv[row-1][col_to_search-1].to_s, header_name) }
-    raise "could not find header: '#{header_name}'" #return nil 
-  end
-  
-  def DownloadPreprocessor.find_csv_header_col_in_row(row_to_search, header_name, handle, cached_files = nil)
-    @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    csv = @cached_files.csv(handle)
-    (1..(csv[0].length)).each {|col| return col if match(csv[row_to_search-1][col-1].to_s, header_name) }
-    raise "could not find header: '#{header_name}'" #return nil
-  end
-  
-  def DownloadPreprocessor.get_csv_start_date(row, col, handle, cached_files = nil)
-    @cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    return Date.parse(@cached_files.csv(handle)[row-1][col-1]).to_s
-  end
-  
+    options[:header_name].split("[or]").each do |header|
+      #puts "Searching for #{header} in row:#{row} col:#{col}"
+      result = match(cell_value, header) if match_type == :hiwi
+      result = match_prefix(cell_value, header) if match_type == :prefix
+      result = match_trim_elipsis(cell_value,header) if match_type == :trim_elipsis
+      result = match(cell_value, header, true) if match_type == :no_okina
+      result = match_prefix(cell_value, header, true) if match_type == :prefix_no_okina
+      result = match_sub(cell_value, header) if match_type == :sub
+      result = match_sub(cell_value, header, true) if match_type == :sub_no_okina
+      return true if result
+    end
+    return false
+  end  
   
 end

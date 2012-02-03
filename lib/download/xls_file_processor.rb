@@ -31,11 +31,17 @@ class XlsFileProcessor
     rescue RuntimeError => e
       puts e.message
       #date sensitive means it might look for handles that don't exist
+      #not sure if this is the right thing to do. Will get an indication from the daily download checks, but not sure if will see if you just 
+      #load the data other than missing some values... not gonna do this just yet because it was rake that errored out not the series. might try to
+      #do a rake trace next time it breaks to check better
+      #return "END" if (e.message[0..5] == "handle" or e.message[0..22] == "the download for handle") and @handle_processor.date_sensitive?
       return "END" if e.message[0..5] == "handle" and @handle_processor.date_sensitive?
+      return {} if e.message[0..20] == "could not find header" and ["Condo only"].include? e.message.split(": ")[1][1..-2]
       raise e
     end
   
     observation_value = parse_cell(worksheet.cell(row,col))
+    
     return "END" if observation_value == "BREAK IN DATA" unless @handle_processor.date_sensitive?
     return {} if observation_value == "BREAK IN DATA" if @handle_processor.date_sensitive?
     {date => observation_value}

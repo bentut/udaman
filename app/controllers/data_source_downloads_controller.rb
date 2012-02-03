@@ -4,7 +4,8 @@ class DataSourceDownloadsController < ApplicationController
     @domain_hash = {}
     @output_files.each do |dsd|
       @domain_hash[dsd.url.split("/")[2]] ||= []
-      @domain_hash[dsd.url.split("/")[2]].push(dsd.save_path)
+      @domain_hash[dsd.url.split("/")[2]].push(dsd.save_path) if dsd.handle.nil?
+      @domain_hash[dsd.url.split("/")[2]].push(dsd.handle) unless dsd.handle.nil?
     end
   end
 

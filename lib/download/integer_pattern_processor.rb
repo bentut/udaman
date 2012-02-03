@@ -42,16 +42,16 @@ class IntegerPatternProcessor
     start + (index/repeat).truncate
   end
   
-  def pos_by_header_search(search_by, search_index, header_name, cached_files, handle, sheet)
-    #cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
-    if sheet.nil?
-      return DownloadPreprocessor.find_csv_header_row_in_col(search_index, header_name, handle, cached_files) if search_by == "col"
-      return DownloadPreprocessor.find_csv_header_col_in_row(search_index, header_name, handle, cached_files) if search_by == "row"
-    else
-      return DownloadPreprocessor.find_xls_header_row_in_col(search_index, header_name, handle, sheet, cached_files) if search_by == "col"
-      return DownloadPreprocessor.find_xls_header_col_in_row(search_index, header_name, handle, sheet, cached_files) if search_by == "row"
-    end
-  end
+  # def pos_by_header_search(search_by, search_index, header_name, cached_files, handle, sheet)
+  #   #cached_files = cached_files.nil? ? DownloadsCache.new : cached_files 
+  #   if sheet.nil?
+  #     return DownloadPreprocessor.find_csv_header_row_in_col(search_index, header_name, handle, cached_files) if search_by == "col"
+  #     return DownloadPreprocessor.find_csv_header_col_in_row(search_index, header_name, handle, cached_files) if search_by == "row"
+  #   else
+  #     return DownloadPreprocessor.find_xls_header_row_in_col(search_index, header_name, handle, sheet, cached_files) if search_by == "col"
+  #     return DownloadPreprocessor.find_xls_header_col_in_row(search_index, header_name, handle, sheet, cached_files) if search_by == "row"
+  #   end
+  # end
   
   
 end

@@ -4,7 +4,7 @@
 </div>
 <div id="details_mask"></div>
 <div id="details_area">
-	<% @domain_hash.sort.each do |domain, save_path_array| %>
+	<% @domain_hash.sort.each do |domain, handle_or_save_path_array| %>
 		<h2><%= domain %></h2>
 		<table>
 			<tr>
@@ -17,11 +17,11 @@
 				<th>Url / Path</th>
 
 			</tr>
-			<% save_path_array.sort.each do |save_path| %>
+			<% handle_or_save_path_array.sort.each do |handle_or_save_path| %>
 			<%
 			download = nil
 			@output_files.each do |dsd|
-				if dsd.save_path == save_path
+				if dsd.save_path == handle_or_save_path or dsd.handle == handle_or_save_path
 					download = dsd
 					break
 				end

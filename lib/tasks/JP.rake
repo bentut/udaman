@@ -124,8 +124,12 @@ task :jp_upd_q => :environment do
 		"GDP_IFX_RNS@JP.Q" => %Q|Series.load_from_download  "GDP_RNS_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 28, :frequency => "Q" }|, 
 		"GDPDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 2, :frequency => "Q" }|, 
 		"GNIDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 19, :frequency => "Q" }|, 
-		"CSCFNS@JP.Q" => %Q|Series.load_from_download  "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-07-01", :sheet => "original series", :row => "increment:7:1", :col => 2, :frequency => "Q" }|, 
-		"CSCF@JP.Q" => %Q|Series.load_from_download  "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-07-01", :sheet => "seasonally adjusted series", :row => "increment:7:1", :col => 2, :frequency => "Q" }|
+		"CSCFNS@JP.Q" => %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
+		"CSCFNS@JP.Q" => %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|,
+		"CSCF@JP.Q" => %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
+		"CSCF@JP.Q" => %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|
+			#we do not record CSCF for monthly even though we can
+			
 	}
 	
 	p = Packager.new
@@ -136,6 +140,7 @@ end
 task :jp_upd_m => :environment do
 
 	jp_m = {
+		"CSCFNS@JP.M" => %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:1", :col => 2, :frequency => "M" }|,
 		"LF@JP.M" => %Q|Series.load_from_download  "LF@stat.go.jp", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Table 18", :row => "increment:11:1", :col => 4, :frequency => "M" }|, 
 		"EMPL@JP.M" => %Q|Series.load_from_download  "LF@stat.go.jp", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Table 18", :row => "increment:11:1", :col => 7, :frequency => "M" }|, 
 		"E_NF@JP.M" => %Q|Series.load_from_download  "LF@stat.go.jp", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Table 18", :row => "increment:11:1", :col => 14, :frequency => "M" }|, 

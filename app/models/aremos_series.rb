@@ -17,6 +17,7 @@ class AremosSeries < ActiveRecord::Base
       data_hash = {}
       year = start_date_string[0..3].to_i
       data.each do |datapoint|
+        return data_hash if datapoint.strip == ""
         data_hash["#{year}-01-01"] = datapoint.to_f
         year += 1
       end
@@ -30,6 +31,7 @@ class AremosSeries < ActiveRecord::Base
       quarter = start_date_string[4..5].to_i
       quarter_array = ["01", "04", "07", "10"]
       data.each do |datapoint|
+        return data_hash if datapoint.strip == ""
         data_hash["#{year}-#{quarter_array[quarter-1]}-01"] = datapoint.to_f
         quarter += 1
         if (quarter > 4)
@@ -45,6 +47,7 @@ class AremosSeries < ActiveRecord::Base
       year = start_date_string[0..3].to_i
       month = start_date_string[4..5].to_i
       data.each do |datapoint|
+        return data_hash if datapoint.strip == ""
         month_filler = month < 10 ? "0" : ""
         data_hash["#{year}-#{month_filler}#{month}-01"] = datapoint.to_f
         month += 1
@@ -60,6 +63,7 @@ class AremosSeries < ActiveRecord::Base
       data_hash = {}
       date = Date.parse start_date_string
       data.each do |datapoint|
+        return data_hash if datapoint.strip == ""
         data_hash[date.to_s] = datapoint.to_f
         date += 7
       end
@@ -70,6 +74,7 @@ class AremosSeries < ActiveRecord::Base
       data_hash = {}
       date = Date.parse start_date_string
       data.each do |datapoint|
+        return data_hash if datapoint.strip == ""
         data_hash[date.to_s] = datapoint.to_f
         date += 1
       end
@@ -102,7 +107,8 @@ class AremosSeries < ActiveRecord::Base
     end
 
     def AremosSeries.read_data(line)
-      return line.split(" ")
+      #return line.split(" ")
+      return line.scan(/.{15}/)
     end
 
     def AremosSeries.save_last_series(series_hash)
