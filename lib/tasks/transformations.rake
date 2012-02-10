@@ -1,4 +1,3 @@
-
 task :cpi => :environment do
   "PC@HON.Q".ts_append_eval %Q|"PC@HON.M".ts.aggregate(:quarter, :average)|
   "PC@HON.Q".ts_append_eval %Q|"PC@HON.S".ts.interpolate :quarter, :linear|
@@ -139,22 +138,7 @@ task :shares => :environment do
   "SH_RESNS@HI.M".ts_eval= %Q|"SH_RESNS@HON.M".ts + "SH_RESNS@HAW.M".ts + "SH_RESNS@KAU".ts + "SH_RESNS@MAU".ts|
 end
 
-#some of these are overwriting read in series and need to be run after the reads
-task :expenditures_and_nbi => :environment do
-  "VISNS@NBI.M".ts_append_eval %Q|"VISNS@HI.M".ts - "VISNS@HON.M".ts|
-  "VEXPUSNS@HI.M".ts_append_eval %Q|"VEXPUSWNS@HI.M".ts + "VEXPUSENS@HI.M".ts|
-  "VEXPOTNS@HI.M".ts_append_eval %Q|"VEXPNS@HI.M".ts - "VEXPUSNS@HI.M".ts - "VEXPJPNS@HI.M".ts - "VEXPCANNS@HI.M".ts|
-  "VEXPNS@MAU.M".ts_append_eval %Q|"VEXPNS@MAUI.M".ts + "VEXPNS@LAN.M".ts + "VEXPNS@MOL.M".ts|
-  ["CAN", "JP", "USE", "USW", "US", "OT"].each do |serlist| 
-    "VEXPPD#{serlist}NS@HI.M".ts_append_eval %Q|"VEXP#{serlist}NS@HI.M".ts / "VDAY#{serlist}NS@HI.M".ts*1000|
-    "VEXPPT#{serlist}NS@HI.M".ts_append_eval %Q|"VEXP#{serlist}NS@HI.M".ts / "VIS#{serlist}NS@HI.M".ts*1000|
-  end
 
-  ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
-    "VEXPPDNS@#{cnty}.M".ts_append_eval %Q|"VEXPNS@#{cnty}.M".ts / "VDAYNS@#{cnty}.M".ts*1000|
-    "VEXPPTNS@#{cnty}.M".ts_append_eval %Q|"VEXPNS@#{cnty}.M".ts / "VISNS@#{cnty}.M".ts*1000|
-  end
-end
 
 task :vlos => :environment do
   ["CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
@@ -288,21 +272,8 @@ task :bls_2 => :environment do
   end
 end
 
-task :bls_3 => :environment do
-  "EUTNS@HON.M".ts_append_eval %Q|"E_TUNS@HON.M".ts - "ETWNS@HON.M".ts| 
-  "E_TRADE@HI.M".ts_append_eval %Q|"EWT@HI.M".ts + "ERT@HI.M".ts|
-  "E_TU@HI.M".ts_append_eval %Q|"E_TTU@HI.M".ts - "E_TRADE@HI.M".ts|
-  "EFI@HI.M".ts_append_eval %Q|"E_FIR@HI.M".ts - "ERE@HI.M".ts|
-  "E_GVSL@HI.M".ts_append_eval %Q|"EGVST@HI.M".ts + "EGVLC@HI.M".ts|
-  "E_NF@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "EIF@HI.M".ts + "E_FIR@HI.M".ts + "E_PBS@HI.M".ts + "E_EDHC@HI.M".ts + "E_LH@HI.M".ts + "EOS@HI.M".ts + "EGV@HI.M".ts|
-  "E_PR@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts - "EGV@HI.M".ts|
-  "E_GDSPR@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts|
-  "E_SVCPR@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts - "E_GDSPR@HI.M".ts|
-  "E_PRSVCPR@HI.M".ts_append_eval %Q|"E_SVCPR@HI.M".ts - "EGV@HI.M".ts|
-  "E_SV@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts - ("ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "E_FIR@HI.M".ts + "EGV@HI.M".ts)|
-  "E_ELSE@HI.M".ts_append_eval %Q|"E_SV@HI.M".ts - ("EAF@HI.M".ts + "EHC@HI.M".ts)|
-  "E@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts + "EAG@HI.M".ts|
-end
+
+
 
 task :bls_4 => :environment do
   ["HON", "HAW", "MAU", "KAU"].each do |cnty|

@@ -25,7 +25,7 @@ class XlsFileProcessor
       row = @row_processor.compute(index, @cached_files, handle, sheet)
       col = @col_processor.compute(index, @cached_files, handle, sheet)
     
-      puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
+      #puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
     
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
@@ -37,6 +37,10 @@ class XlsFileProcessor
       #return "END" if (e.message[0..5] == "handle" or e.message[0..22] == "the download for handle") and @handle_processor.date_sensitive?
       return "END" if e.message[0..5] == "handle" and @handle_processor.date_sensitive?
       return {} if e.message[0..20] == "could not find header" and ["Condo only"].include? e.message.split(": ")[1][1..-2]
+      raise e
+    rescue IOError => e
+      puts e.message
+      return "END" if e.message[0..3] == "file" and @path_processor.date_sensitive?
       raise e
     end
   

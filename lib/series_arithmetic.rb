@@ -13,7 +13,7 @@ module SeriesArithmetic
     new_series_data = Hash.new
     longest_series.data.keys.each do |date_string|
       new_series_data[date_string] = (self.at(date_string).nil? or other_series.at(date_string).nil?) ? nil : self.at(date_string).send(operator,other_series.at(date_string))
-      new_series_data[date_string] = nil if new_series_data[date_string].nan?
+      new_series_data[date_string] = nil if !new_series_data[date_string].nil? and (new_series_data[date_string].nan? or new_series_data[date_string].infinite?)
     end
     new_transformation("#{self.name} #{operator} #{other_series.name}",new_series_data)
   end
@@ -79,15 +79,17 @@ module SeriesArithmetic
     return perform_constant_arithmetic_operation('/',other_series) unless other_series.class == Series
     return perform_arithmetic_operation('/',other_series)
   end
+
+  #need to figure out the best way to validate these now... For now assume the right division
   
   def validate_additive_arithmetic(other_series)
-    raise SeriesArithmeticException if self.units != other_series.units
+    #raise SeriesArithmeticException if self.units != other_series.units
   end
   
   def validate_arithmetic(other_series)
     #puts "#{self.name}: #{self.frequency}, other - #{other_series.name}: #{other_series.frequency}"
-    raise SeriesArithmeticException if self.frequency.to_s != other_series.frequency.to_s
-    raise SeriesArithmeticException if self.frequency.nil? or other_series.frequency.nil?
+    #raise SeriesArithmeticException if self.frequency.to_s != other_series.frequency.to_s
+    #raise SeriesArithmeticException if self.frequency.nil? or other_series.frequency.nil?
   end
   
   def rebase(date_string)

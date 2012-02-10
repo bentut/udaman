@@ -19,8 +19,10 @@
 		<% cdp_val = cdp.value / series.units %>
 		
 	    <% a_value = (as.nil? or as.data[cdp.date_string].nil?) ? "-" : as.data[cdp.date_string].round(3) %>
-
-	    <% a_color = a_value - cdp_val.round(3) == 0 ? "#999999" : aremos_color(cdp_val.round(3), a_value) unless a_value.nil? or a_value.class == String %>
+		<% unless a_value.nil? or a_value.class == String %>
+		<% diff = series.a_diff(a_value, cdp_val.round(3)) %>
+	    <% a_color = diff == 0 ? "#999999" : aremos_color(diff) %>
+		<% end %>
 	    <tr>
 			<td><%= cdp.date_string %></td>
 			<td><span style='color:<%= a_color %>'><%= a_value %></span></td>

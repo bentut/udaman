@@ -126,7 +126,6 @@ class Packager
     write_dates(sheet1)
     col = 1
     @series.sort.each do |name, data|
-      #puts name
       write_series(name, data, sheet1, col)
       col += 1
     end
@@ -134,7 +133,6 @@ class Packager
     puts errors_string
     puts series_summary_string
     xls.write @output_path
-    #new_file = open(@output_path, "rb").read
     new_file_xls = Excel.new(@output_path)
     
     if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
@@ -144,7 +142,6 @@ class Packager
       backup(old_file) unless old_file.nil?
       puts "SENDING EMAIL"
       job_name = @output_path.split("/")[-1].split(".")[0]
-      #PackagerMailer.rake_notification("none entered", download_results_string, errors_string, series_summary_string).deliver
       PackagerMailer.rake_notification(job_name, download_results, errors, @series, @output_path, dates, (errors != [] or download_problem?)).deliver
     end
     
@@ -159,29 +156,27 @@ class Packager
     Kernel::eval definition
   end
   
-  #going to do exception handling here. broken series will not be added to hash, and thus will not show up
-  #in final spreadsheet. Thus they will have to appear in a log or something
   def get_data_from_definitions
-    puts "getting data from defs"
     @errors ||= []
-    #Series.open_cached_files
     series = {}
     @definitions.each do |series_name, definition|
-      #puts series_name
       #puts series_name+": "+definition
       begin
-        #def_data = eval(definition).data
-        series_name.ts_append_eval definition
+        if definition.class == Array
+          definition.each do |def_item|
+            series_name.ts_append_eval def_item
+          end
+        else
+          series_name.ts_append_eval definition
+        end
         def_data = series_name.ts.data
         series[series_name] = def_data.nil? ? {} : def_data
       rescue Exception => e
-        #puts "error for #{series_name}!!"
         @errors.push({ :series => series_name, :definition => definition, :error => e.message })
       end
     end
     #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
     @download_results = Series.get_cached_files.download_results
-    #Series.close_cached_files
     series
   end
 

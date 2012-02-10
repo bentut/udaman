@@ -64,11 +64,15 @@ class DataSourceDownload < ActiveRecord::Base
       client = HTTPClient.new
       #some will only respond to certain user agents... this may have to be updated
       client.agent_name = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0'
-      
-      if post_parameters.nil? or post_parameters.length == 0
-        resp = client.get(URI.encode(url)) 
-      else
-        resp = client.post(URI.encode(url), post_parameters) 
+      resp = nil
+      #loop seems to allow cookie to be downloaded... maybe more effective way to do this?
+      (1..2).each do |i|
+        if post_parameters.nil? or post_parameters.length == 0
+          resp = client.get(URI.encode(url)) 
+        else
+          resp = client.post(URI.encode(url), post_parameters) 
+        end
+        break if resp.header.status_code == 200
       end
       #puts "downloaded"
       #not sure why I was raising this exception. Want to note the failed downloads and continue
@@ -135,6 +139,7 @@ class DataSourceDownload < ActiveRecord::Base
     def test_url
       begin
         client = HTTPClient.new
+        client.agent_name = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0'
         resp = client.get(url)
         resp.header.status_code 
       rescue 

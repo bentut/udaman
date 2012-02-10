@@ -26,8 +26,10 @@ module SeriesHelper
     return new_words.join(" ")
   end
   
-  def aremos_color(val, aremos_val)
-    diff = (val - aremos_val).abs
+#  def aremos_color(val, aremos_val)
+  def aremos_color(diff)
+
+#    diff = (val - aremos_val).abs
     mult = 5000
     gray = "99"
     red = (gray.hex + diff * mult).to_i

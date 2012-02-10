@@ -14,7 +14,6 @@
 
 ###*******************************************************************
 
-# sox.add "N@JP",         Series.load_pattern("1950-01-01", "A", path_JP_POP, "sheet_num:1", "94", increment:6:1)
 # sox.add "R@JP.M",         Series.load_pattern("1960-01-01", "M", path_JP_R, "csv", "increment:4:1", 3)
 # sox.add "STKNS@JP.M",         Series.load_pattern("2011-08-01", "M", path_JP_STKNS, "csv", "increment:2:1", 5)
 # sox.add "CPI@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 21)
@@ -55,7 +54,10 @@ task :jp_upd_a => :environment do
 		"GNI_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 22, :frequency => "A" }|, 
 		"GDP_IFX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 28, :frequency => "A" }|, 
 		"GDPDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
-		"GNIDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 19, :frequency => "A" }|
+		"GNIDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 19, :frequency => "A" }|,
+		
+		#series that Ben added in
+		"N@JP.A" => %Q|Series.load_from_download "JP_POP@esa.un.org", {:file_type => "xls", :start_date => "1950-01-01", :sheet => "sheet_num:1", :row => "header:col:3:Japan", :col => "increment:6:1", :frequency => "A" }|
 	}
 	
 	p = Packager.new
@@ -124,17 +126,18 @@ task :jp_upd_q => :environment do
 		"GDP_IFX_RNS@JP.Q" => %Q|Series.load_from_download  "GDP_RNS_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 28, :frequency => "Q" }|, 
 		"GDPDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 2, :frequency => "Q" }|, 
 		"GNIDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 19, :frequency => "Q" }|, 
-		"CSCFNS@JP.Q" => %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
-		"CSCFNS@JP.Q" => %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|,
-		"CSCF@JP.Q" => %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
-		"CSCF@JP.Q" => %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|
-			#we do not record CSCF for monthly even though we can
-			
-	}
-	
-	p = Packager.new
-	p.add_definitions jp_q
-	p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_q_NEW.xls"
+
+"CSCFNS@JP.Q" => [%Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
+			%Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|],
+"CSCF@JP.Q" => [%Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
+			%Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }| ]
+#we do not record CSCF for monthly even though we can
+
+}
+
+p = Packager.new
+p.add_definitions jp_q
+p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_q_NEW.xls"
 end
 
 task :jp_upd_m => :environment do

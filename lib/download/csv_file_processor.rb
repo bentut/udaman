@@ -32,7 +32,7 @@ class CsvFileProcessor
       return Float cell_value
     rescue    
       #known data values that should be suppressed as nils... may need to separate these by file being read in
-      return nil if ["(D) ", "(L) ", "(N) ", "(T) "].include? cell_value
+      return nil if ["(D) ", "(L) ", "(N) ", "(T) ", " --- "].include? cell_value
       return "BREAK IN DATA"
     end
   end

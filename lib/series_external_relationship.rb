@@ -19,6 +19,23 @@ module SeriesExternalRelationship
     return set_output_series(1) if self.mult == 10
   end
   
+  def a_diff(value, series_value)
+    # diff_trunc = (value - series_value.aremos_trunc).abs  
+    # diff_round = (value - series_value.single_precision.aremos_round).abs  
+    # diff_sci = (value - series_value.single_precision.to_sci).abs
+    # return diff_sci if diff_sci < diff_round and diff_sci < diff_trunc  
+    # diff_first = diff_trunc < diff_round ? diff_trunc : diff_round
+    # diff_second = diff_first < diff_sci ? diff_first : diff_sci
+    
+    diff_trunc = (value - series_value.aremos_trunc).abs.round(3)  
+    diff_sig_5 = (value.sig_digits(5).round(3) - series_value.sig_digits(5).round(3)).abs
+    diff_sig_6 = (value.sig_digits(6).round(3) - series_value.sig_digits(6).round(3)).abs
+
+    diff_first = diff_trunc < diff_sig_5 ? diff_trunc : diff_sig_5
+    diff_second = diff_first < diff_sig_6 ? diff_first : diff_sig_6
+    
+    return diff_second
+  end
   #no test or spec for this
   def aremos_comparison
     begin
@@ -38,13 +55,18 @@ module SeriesExternalRelationship
       self.aremos_diff = 0
       #self.units ||= 1
       as.data.each do |datestring, value|
-        #have to do all the rounding because it still seems to suffer some precision errors after initial rounding
-        self.aremos_diff += (value.round(3) - self.units_at(datestring).round(3)).round(3).abs unless self.data[datestring].nil?
+        unless self.data[datestring].nil?
+          #have to do all the rounding because it still seems to suffer some precision errors after initial rounding
+          diff = a_diff(value, self.units_at(datestring))
+          self.aremos_diff +=  diff 
+          puts "#{self.name}: #{datestring}: #{value}, #{self.units_at(datestring)} diff:#{diff}" if diff != 0
+        end
       end
       self.save
       #puts "Compared #{self.name}: Missing: #{self.aremos_missing} Diff:#{self.aremos_diff}"
       return {:missing => self.aremos_missing, :diff => self.aremos_diff}
-    rescue Exception
+    rescue Exception => e
+      puts e.message
       puts "ERROR WITH \"#{self.name}\".ts.aremos_comparison"
     end
   end

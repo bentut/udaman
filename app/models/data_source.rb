@@ -159,18 +159,28 @@ class DataSource < ActiveRecord::Base
       end
     end
 
+    def delete_all_other_sources
+      s = self.series
+      s.data_sources_by_last_run.each {|ds| ds.delete unless ds.id == self.id}
+    end
+    
+    def DataSource.delete_related_sources_except(ids)
+      ds_main = DataSource.find(ids[0])
+      s = ds_main.series
+      s.data_sources_by_last_run.each {|ds| ds.delete if ids.index(ds.id).nil?}
+    end
+        
     def delete
       series_id = self.series_id
       self.data_points.each do |dp|
         dp.delete
       end    
       super
-
       s = Series.find series_id
   #    puts "Series name: #{s.name}, Sources:#{s.data_sources_by_last_run.count}"
   
-  
-      s.data_sources_by_last_run.each {|ds| ds.reload_source}
+    #put this in a separate function
+      #s.data_sources_by_last_run.each {|ds| ds.reload_source}
     end
 
 

@@ -379,6 +379,15 @@ class Series < ActiveRecord::Base
     new_transformation("loaded series code: #{code} from bls website", series_data)
   end
   
+  def Series.where_ds_like(string)
+    ds_array = DataSource.where("eval LIKE '%#{string}%'").all
+    series_array = []
+    ds_array.each do |ds|
+      series_array.push ds.series
+    end 
+    series_array
+  end
+  
   def ds_like?(string)
     self.data_sources.each do |ds|
       return true unless ds.eval.index(string).nil?
