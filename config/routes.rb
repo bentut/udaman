@@ -62,6 +62,11 @@ UheroDb::Application.routes.draw do
   resources :dashboards
   
   match 'investigate' => 'dashboards#investigate'
+  match 'construction' => 'dashboards#construction'
+  match 'construction_q' => 'dashboards#construction_quarterly'
+  match 'hbr_mbr' => 'dashboards#hbr_mbr'
+  match 'permits' => 'dashboards#permits'
+  match 'prudential' => 'dashboards#prudential'
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
   # The priority is based upon order of creation:

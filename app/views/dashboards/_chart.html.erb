@@ -1,0 +1,57 @@
+
+<% if series.nil? %>
+<div class="tile" style="position:relative"><h3 style="position:absolute; top: 100px; text-align:center; display:block; width:100%"><%= series_name %> does not exist</h3></div>
+<% else %>
+<%
+	#locals: series, start_date, end_date 
+	
+	function_name = "draw_#{series.name.gsub("@","_").gsub(".","_")}"
+	a_series = AremosSeries.get series.name
+	plot_data = end_date.nil? ? series.get_values_after(start_date) : series.get_values_after(start_date, end_date)
+%>
+<script type="text/javascript">
+	google.setOnLoadCallback(<%= function_name%>);
+	function <%= function_name %>() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', '<%= series.frequency %>');
+		data.addColumn('number', '<%= a_series.nil? ? "no aremos series": a_series.description %>');
+		
+		<% plot_data.sort.each do |date,value| %>
+		data.addRow(['<%= date %>', <%= value %>]);
+		<% end %>
+		
+		var chart = new google.visualization.LineChart(document.getElementById('chart_<%= function_name%>')).
+		draw(data, {
+			curveType: "none",
+			width: 450, 
+			height: 250,
+			//chartArea: {width: 250},
+			//vAxis: {
+				//title: 'Mil. $2010', 
+				//titleTextStyle: {fontSize: 12}, 
+				//maxValue: 16, 
+				//textStyle: {fontSize: 12}
+			//},
+			title: '<%= series.name %>: <%= a_series.nil? ? "no aremos series": a_series.description %>',
+			titleTextStyle: {color: '#297B92', fontSize: 12},
+			legend: 'none',
+			series: [{color: '#267991'}],
+			lineWidth: 4,
+			hAxis: {	
+				//showTextEvery: '5', 
+				slantedText: true, 
+				slantedTextAngle: '45', 
+				//textStyle: {fontSize: 12}
+			},
+			//backgroundColor: '#F9F9F8'
+		});
+
+		//var table = new google.visualization.Table(document.getElementById('table_vis_spending')).draw(data, { width: 500 });
+  	}
+</script>
+
+<div class="tile">
+<%= link_to(series.name, {:controller => "series", :action => 'show', :id => series.id}, :target => "_blank")  %>
+<div id="chart_<%= function_name %>">&nbsp;</div>
+</div>
+<% end %>

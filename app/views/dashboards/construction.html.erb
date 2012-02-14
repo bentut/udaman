@@ -1,0 +1,20 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("visualization", "1", {packages: ["table"]});
+	google.load("visualization", "1", {packages:["corechart"]});
+</script>
+
+<style>
+#chart-board div.tile {float:left; width:400px; height:275px;}
+</style>
+
+<div id="chart-board">
+<% @series_to_chart.each do |s| %>
+	<%= render :partial => 'chart', :locals => {
+		:series => s.ts, 
+		:series_name => s, 
+		:start_date => @start_date,
+		:end_date => @end_date
+	} %>
+<% end %>
+</div>

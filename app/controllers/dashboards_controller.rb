@@ -60,6 +60,196 @@ class DashboardsController < ApplicationController
     #end
   end
   
+  def construction
+    @series_to_chart = ['KPPRVNS@HI.M',
+    'KPPRVADDNS@HI.M',
+    'KPPRVRSDNS@HI.M',
+    'KPPRVCOMNS@HI.M',
+    'KPPRVNS@HON.M',
+    'KPPRVADDNS@HON.M',
+    'KPPRVRSDNS@HON.M',
+    'KPPRVCOMNS@HON.M',
+    'KPPRVNS@HAW.M',
+    'KPPRVADDNS@HAW.M',
+    'KPPRVRSDNS@HAW.M',
+    'KPPRVCOMNS@HAW.M',
+    'KPPRVNS@MAU.M',
+    'KPPRVADDNS@MAU.M',
+    'KPPRVRSDNS@MAU.M',
+    'KPPRVCOMNS@MAU.M',
+    'KPPRVNS@KAU.M',
+    'KPPRVADDNS@KAU.M',
+    'KPPRVRSDNS@KAU.M',
+    'KPPRVCOMNS@KAU.M',]
+    @start_date = "2010-12-01"
+    @end_date = nil
+    render "construction"
+  end
+
+  def construction_quarterly
+    @series_to_chart = [
+    'KPGOVNS@HI.Q',
+    'KPNS@HI.Q',
+    'KPGOVNS@HON.Q',
+    'KPNS@HON.Q',
+    'KPGOVNS@HAW.Q',
+    'KPNS@HAW.Q',
+    'KPGOVNS@MAU.Q',
+    'KPNS@MAU.Q',
+    'KPGOVNS@KAU.Q',
+    'KPNS@KAU.Q',
+    'PICTSGFNS@HON.Q',
+    'PICTCONNS@HON.Q',
+    'PICTSGFNS@US.Q',
+    'KNRSDNS@HI.Q',
+    'KNRSDSGFNS@HI.Q',
+    'KNRSDMLTNS@HI.Q']
+    @start_date = "2008-12-01"
+    @end_date = nil
+    render "construction"
+  end
+  
+  
+  def hbr_mbr
+    @series_to_chart = ['KBSGFNS@HON.M',
+    'KBCONNS@HON.M',
+    'PMKBSGFNS@HON.M',
+    'PMKBCONNS@HON.M',
+    'KBSGFNS@MAU.M',
+    'KBCONNS@MAU.M',
+    'PMKBSGFNS@MAU.M',
+    'PMKBCONNS@MAU.M',]
+    @start_date = "2010-12-01"
+    @end_date = nil    
+    render "construction"
+  end
+  
+  def permits
+    @series_to_chart = ['KNNSGF@HON.M',
+    'KNN2FM@HON.M',
+    'KNNAPT@HON.M',
+    'KNNHTL@HON.M',
+    'KNNAMU@HON.M',
+    'KNNCHU@HON.M',
+    'KNNIND@HON.M',
+    'KNNGPB@HON.M',
+    'KNNGPR@HON.M',
+    'KNNSER@HON.M',
+    'KNNINS@HON.M',
+    'KNNOFC@HON.M',
+    'KNNPBB@HON.M',
+    'KNNPBU@HON.M',
+    'KNNSCH@HON.M',
+    'KNNSHD@HON.M',
+    'KNNSTB@HON.M',
+    'KNNSTR@HON.M',
+    'KNNONR@HON.M',
+    'KNNOTH@HON.M',
+    'KNN@HON.M',
+    'KNASGF@HON.M',
+    'KNA2FM@HON.M',
+    'KNAAPT@HON.M',
+    'KNAHTL@HON.M',
+    'KNAAMU@HON.M',
+    'KNACHU@HON.M',
+    'KNAIND@HON.M',
+    'KNAGPB@HON.M',
+    'KNAGPR@HON.M',
+    'KNASER@HON.M',
+    'KNAINS@HON.M',
+    'KNAOFC@HON.M',
+    'KNAPBB@HON.M',
+    'KNAPBU@HON.M',
+    'KNASCH@HON.M',
+    'KNASHD@HON.M',
+    'KNASTB@HON.M',
+    'KNASTR@HON.M',
+    'KNAONR@HON.M',
+    'KNAOTH@HON.M',
+    'KNA@HON.M',
+    'KVNSGF@HON.M',
+    'KVN2FM@HON.M',
+    'KVNAPT@HON.M',
+    'KVNHTL@HON.M',
+    'KVNAMU@HON.M',
+    'KVNCHU@HON.M',
+    'KVNIND@HON.M',
+    'KVNGPB@HON.M',
+    'KVNGPR@HON.M',
+    'KVNSER@HON.M',
+    'KVNINS@HON.M',
+    'KVNOFC@HON.M',
+    'KVNPBB@HON.M',
+    'KVNPBU@HON.M',
+    'KVNSCH@HON.M',
+    'KVNSHD@HON.M',
+    'KVNSTB@HON.M',
+    'KVNSTR@HON.M',
+    'KVNONR@HON.M',
+    'KVNOTH@HON.M',
+    'KVN@HON.M',
+    'KVASGF@HON.M',
+    'KVA2FM@HON.M',
+    'KVAAPT@HON.M',
+    'KVAHTL@HON.M',
+    'KVAAMU@HON.M',
+    'KVACHU@HON.M',
+    'KVAIND@HON.M',
+    'KVAGPB@HON.M',
+    'KVAGPR@HON.M',
+    'KVASER@HON.M',
+    'KVAINS@HON.M',
+    'KVAOFC@HON.M',
+    'KVAPBB@HON.M',
+    'KVAPBU@HON.M',
+    'KVASCH@HON.M',
+    'KVASHD@HON.M',
+    'KVASTB@HON.M',
+    'KVASTR@HON.M',
+    'KVAONR@HON.M',
+    'KVAOTH@HON.M',
+    'KVA@HON.M',]
+    @start_date = "2010-12-01"
+    @end_date = nil    
+    render "construction"
+  end
+  
+  def prudential
+    @series_to_chart = ['PMKRSGF@HON.Q',
+    'PMKRCON@HON.Q',
+    'PAKRSGF@HON.Q',
+    'PAKRCON@HON.Q',
+    'KRSGFNS@HON.Q',
+    'KRCONNS@HON.Q',
+    'PMKRSGF@HI.Q',
+    'PMKRCON@HI.Q',
+    'PAKRSGF@HI.Q',
+    'PAKRCON@HI.Q',
+    'KRSGFNS@HI.Q',
+    'KRCONNS@HI.Q',
+    'PMKRSGF@HAW.Q',
+    'PMKRCON@HAW.Q',
+    'PAKRSGF@HAW.Q',
+    'PAKRCON@HAW.Q',
+    'KRSGFNS@HAW.Q',
+    'KRCONNS@HAW.Q',
+    'PMKRSGF@KAU.Q',
+    'PMKRCON@KAU.Q',
+    'PAKRSGF@KAU.Q',
+    'PAKRCON@KAU.Q',
+    'KRSGFNS@KAU.Q',
+    'KRCONNS@KAU.Q',
+    'PMKRSGF@MAU.Q',
+    'PMKRCON@MAU.Q',
+    'PAKRSGF@MAU.Q',
+    'PAKRCON@MAU.Q',
+    'KRSGFNS@MAU.Q',
+    'KRCONNS@MAU.Q',]
+    @start_date = "2008-12-01"
+    @end_date = nil    
+    render "construction"
+  end
+  
 end
 
 #kinds of series
