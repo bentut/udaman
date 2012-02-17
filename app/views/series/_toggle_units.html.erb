@@ -14,7 +14,7 @@
 	<%= @series.units.nil? ? 1 : @series.units.to_s+"(s)" %></td></tr>
 	<tr><td class="label">Aremos: </td><td><%= "#{@series.aremos_missing} missing, #{@series.aremos_diff.round(5) unless @series.aremos_diff.nil?} cumulative difference" %> [ refresh ]</td></tr>
 	<tr><td class="label">Data: </td><td>
-		<div id="data-points"><%= render :partial => 'data_points.html', :locals => {:series => @series, :as => @as}%></div>
+		<div id="data-points"><%= render :partial => 'data_points.html', :locals => {:series => @series, :as => @as, :chg => @chg}%></div>
 	</td></tr>
 	
 	<%= javascript_tag do %>

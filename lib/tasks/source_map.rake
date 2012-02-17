@@ -8,6 +8,8 @@ end
 
 task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/gsp_hist.xls"
+  
 end
 
 # fixed a problem with the semi-annual reads
