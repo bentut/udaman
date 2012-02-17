@@ -28,11 +28,12 @@ class CsvFileProcessor
   def parse_cell(csv_2d_array, row, col)
     begin
       cell_value = csv_2d_array[row-1][col-1]
+      #puts cell_value
       return Float cell_value.gsub(",","") if cell_value.class == String
       return Float cell_value
     rescue    
       #known data values that should be suppressed as nils... may need to separate these by file being read in
-      return nil if ["(D) ", "(L) ", "(N) ", "(T) ", " --- "].include? cell_value
+      return nil if ["(D) ", "(L) ", "(N) ", "(T) ", " --- ", "(L)", "(D)", "(NA)"].include? cell_value
       return "BREAK IN DATA"
     end
   end

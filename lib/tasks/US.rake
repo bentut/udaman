@@ -208,7 +208,9 @@ task :us_upd_a => :environment do
 		#"GDP_G_R@US.A" => %Q|Series.load_from_download  "6A@bea.gov", { :file_type => "csv", :start_date => "1929-01-01", :row => 27, :col => "increment:3:1", :frequency => "A" }|, 
 		"GDP@US.A" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1929-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 2, :frequency => "A" }|, 
 		"GDP_R@US.A" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1929-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 3, :frequency => "A" }|, 
-		"CPI@CA.A" => %Q|Series.load_from_download  "ca_cpi@bea.gov", { :file_type => "xls", :start_date => "1970-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 9, :frequency => "A" }|
+		# Can get more data, but our old series has more precision, so just reading the later dates
+		# "CPI@CA.A" => %Q|Series.load_from_download  "ca_cpi@bea.gov", { :file_type => "xls", :start_date => "2000-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 9, :frequency => "A" }|
+		"CPI@CA.A" => %Q|Series.load_from_download  "ca_cpi@bea.gov", { :file_type => "xls", :start_date => "2000-01-01", :sheet => "sheet_num:1", :row => "increment:37:1", :col => 9, :frequency => "A" }|,
 	}
 	
 	p = Packager.new

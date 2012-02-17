@@ -6,6 +6,10 @@ task :reload_aremos => :environment do
   #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
 end
 
+task :load_all_histories => :environment do
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls"
+end
+
 # fixed a problem with the semi-annual reads
 # DataSource.where("eval LIKE '%load_from_bls%\"S\"%'").each do |ds|
 # dsd=ds

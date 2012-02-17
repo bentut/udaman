@@ -19,7 +19,7 @@
 
 # Learn more: http://github.com/javan/whenever
 
-hour = "1"
+hour = "4"
 set :output, "~/Documents/cronlog/udaman-download.log"
 set :environment, "development"
 #job_type :rake,    "cd :path && rake :task :output"
@@ -36,6 +36,7 @@ every 1.day, :at => "#{hour}:10 am" do
   rake "gsp_upd" #has some major issues. All cache misses because of error?
   rake "inc_upd_q"
   rake "inc_upd_a"
+  rake "com_upd"
 end
 
 every 1.day, :at => "#{hour}:20 am" do
@@ -60,6 +61,7 @@ every 1.day, :at => "#{hour}:40 am" do
   rake "tour_seats_upd"
   rake "tour_upd"
   rake "tour_ocup_upd"
+  rake "tour_rev_upd"
 end
 
 every 1.day, :at => "#{hour}:50 am" do

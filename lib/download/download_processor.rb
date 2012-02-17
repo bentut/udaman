@@ -50,8 +50,12 @@ class DownloadProcessor
     #assumption is that these will not be files with dates to process. just static file and sheet strings
     #assuming that date is a recognizable format to ruby
     puts @cached_files.csv(@handle)[start_row-1][start_col-1].to_s + "is csv" if @file_type == "csv"
-    return @cached_files.csv(@handle)[start_row-1][start_col-1].to_s if @file_type == "csv"
-    return @cached_files.xls(@handle, @options[:sheet]).cell(start_row, start_col).to_s if @file_type == "xls"
+    date_cell = @cached_files.csv(@handle)[start_row-1][start_col-1] if @file_type == "csv"
+    date_cell = @cached_files.xls(@handle, @options[:sheet]).cell(start_row, start_col) if @file_type == "xls"
+    return date_cell.to_s if date_cell.class == Date
+    return Date.new(date_cell.split(".")[0].to_i, date_cell.split(".")[1].to_i,1).to_s if date_cell.class == String and !date_cell.index(".").nil?
+    return Date.new(date_cell.to_s.split(".")[0].to_i, date_cell.to_s.split(".")[1].to_i,1).to_s if date_cell.class == Float
+    return Date.parse date_cell
   end
   
   def validate_csv

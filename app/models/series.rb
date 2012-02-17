@@ -164,6 +164,7 @@ class Series < ActiveRecord::Base
   end
 
   def Series.store(series_name, series, desc=nil, eval_statement=nil)
+    puts series.frequency
     desc = series.name if desc.nil?
     desc = "Source Series Name is blank" if desc.nil? or desc == ""
     series_to_set = Series.get_or_new series_name
@@ -343,7 +344,7 @@ class Series < ActiveRecord::Base
     series_data = dp.get_data
     Series.write_cached_files cached_files
     #puts dp.end_conditions
-    Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, options[:frequency])
+    Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
   end
   
   #the other problem with these "SERIES" style transformations is that they overwrite the units calculations. Can also build that into the 
@@ -354,7 +355,7 @@ class Series < ActiveRecord::Base
     dp = DownloadProcessor.new("manual", options.merge({ :path => file }), cached_files)
     series_data = dp.get_data
     Series.write_cached_files cached_files
-    Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, options[:frequency])
+    Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
   end
   
   def load_from_pattern_id(id)
@@ -371,7 +372,7 @@ class Series < ActiveRecord::Base
   
   def Series.load_from_bls(code, frequency)
     series_data = DataHtmlParser.new.get_bls_series(code,frequency)
-    Series.new_transformation("loaded series code: #{code} from bls website", series_data, frequency)
+    Series.new_transformation("loaded series code: #{code} from bls website", series_data, Series.frequency_from_code(frequency))
   end
   
   def load_from_bls(code, frequency = nil)
