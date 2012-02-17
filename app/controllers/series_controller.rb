@@ -15,6 +15,7 @@ class SeriesController < ApplicationController
     @series = Series.find params[:id]
     @as = AremosSeries.get @series.name 
     @chg = @series.annualized_percentage_change
+    @ytd_chg = @series.ytd_percentage_change
     @desc = @as.nil? ? "No Aremos Series" : @as.description
     @pdf = PrognozDataFile.find @series.prognoz_data_file_id unless @series.prognoz_data_file_id.nil?
   end
