@@ -78,7 +78,8 @@ google.visualization.events.addListener(chart, 'select', function() {
 	<div id= "toggle-units-div">
 		<%= render :partial => 'toggle_units', :locals => {:series => @series} %>
 	</div>
-	
+	<h3><%= @series.name %></h3>
+	<p><%= @desc %></p>
 	<table>	
 		<tr><td class="label">Source Map</td><td>
 		<%= render :partial => 'source_map', :locals => {:series => @series} %>

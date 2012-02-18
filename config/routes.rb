@@ -63,10 +63,15 @@ UheroDb::Application.routes.draw do
   
   match 'investigate' => 'dashboards#investigate'
   match 'construction' => 'dashboards#construction'
+  match 'construction/years/:num_years' => 'dashboards#construction'
   match 'construction_q' => 'dashboards#construction_quarterly'
+  match 'construction_q/years/:num_years' => 'dashboards#construction_quarterly'
   match 'hbr_mbr' => 'dashboards#hbr_mbr'
+  match 'hbr_mbr/years/:num_years' => 'dashboards#hbr_mbr'
   match 'permits' => 'dashboards#permits'
+  match 'permits/years/:num_years' => 'dashboards#permits'
   match 'prudential' => 'dashboards#prudential'
+  match 'prudential/years/:num_years' => 'dashboards#prudential'
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
   # The priority is based upon order of creation:

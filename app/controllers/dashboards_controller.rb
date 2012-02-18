@@ -59,7 +59,7 @@ class DashboardsController < ApplicationController
       #@cache = Series.open_cached_files
     #end
   end
-  
+    
   def construction
     @series_to_chart = ['KPPRVNS@HI.M',
     'KPPRVADDNS@HI.M',
@@ -81,8 +81,9 @@ class DashboardsController < ApplicationController
     'KPPRVADDNS@KAU.M',
     'KPPRVRSDNS@KAU.M',
     'KPPRVCOMNS@KAU.M',]
-    @start_date = "2010-12-01"
-    @end_date = nil
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
     render "construction"
   end
 
@@ -104,8 +105,9 @@ class DashboardsController < ApplicationController
     'KNRSDNS@HI.Q',
     'KNRSDSGFNS@HI.Q',
     'KNRSDMLTNS@HI.Q']
-    @start_date = "2008-12-01"
-    @end_date = nil
+    dates = set_dates_q(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
     render "construction"
   end
   
@@ -119,8 +121,9 @@ class DashboardsController < ApplicationController
     'KBCONNS@MAU.M',
     'PMKBSGFNS@MAU.M',
     'PMKBCONNS@MAU.M',]
-    @start_date = "2010-12-01"
-    @end_date = nil    
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
     render "construction"
   end
   
@@ -209,8 +212,9 @@ class DashboardsController < ApplicationController
     'KVAONR@HON.M',
     'KVAOTH@HON.M',
     'KVA@HON.M',]
-    @start_date = "2010-12-01"
-    @end_date = nil    
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
     render "construction"
   end
   
@@ -245,11 +249,34 @@ class DashboardsController < ApplicationController
     'PAKRCON@MAU.Q',
     'KRSGFNS@MAU.Q',
     'KRCONNS@MAU.Q',]
-    @start_date = "2008-12-01"
-    @end_date = nil    
+    dates = set_dates_q(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
     render "construction"
   end
   
+private
+  def set_dates_m(params)
+    if params[:num_years].nil?
+      start_date = (Time.now.to_date << (15)).to_s
+      end_date = nil
+    else
+      start_date = (Time.now.to_date << (12 * params[:num_years].to_i + 1)).to_s
+      end_date = nil
+    end
+    return {:start_date => start_date, :end_date => end_date}
+  end
+
+  def set_dates_q(params)
+    if params[:num_years].nil?
+      start_date = (Time.now.to_date << (34)).to_s
+      end_date = nil
+    else
+      start_date = (Time.now.to_date << (12 * params[:num_years].to_i + 4)).to_s
+      end_date = nil
+    end
+    return {:start_date => start_date, :end_date => end_date}
+  end
 end
 
 #kinds of series
