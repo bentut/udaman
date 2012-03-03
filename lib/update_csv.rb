@@ -10,7 +10,9 @@ class UpdateCSV
   end
   
   def cell (row, col)
-    Float(@data[row-1][col-1]) rescue @data[row-1][col-1]
+    val = @data[row-1][col-1]
+    val = val.gsub(",","") if val.class == String
+    Float(val) rescue @data[row-1][col-1]
   end
   
   def last_column

@@ -511,6 +511,23 @@ task :inc_upd_a => :environment do
 		"YL_GVSL@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 262, :col => "increment:4:1", :frequency => "A" }|, 
 		"YLGVST@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 263, :col => "increment:4:1", :frequency => "A" }|, 
 		"YLGVLC@HAW.A" => %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 264, :col => "increment:4:1", :frequency => "A" }|,
+		"YL_TU@HI.A" => %Q|"YLTW@HI.A".ts + "YLUT@HI.A".ts|,
+		"YL_TU@HON.A" => %Q|"YLTW@HON.A".ts + "YLUT@HON.A".ts|,
+		"YL_TU@HAW.A" => %Q|"YLTW@HAW.A".ts + "YLUT@HAW.A".ts|,
+		"YL_TU@MAU.A" => %Q|"YLTW@MAU.A".ts + "YLUT@MAU.A".ts|,
+		"YL_TU@KAU.A" => %Q|"YLTW@KAU.A".ts + "YLUT@KAU.A".ts|,
+		"YL_TR@HI.A" => %Q|"YLWT@HI.A" + "YLRT@HI.A"|,
+		"YL_TR@HON.A" => %Q|"YLWT@HON.A" + "YLRT@HON.A"|,
+		"YL_TR@HAW.A" => %Q|"YLWT@HAW.A" + "YLRT@HAW.A"|,
+		"YL_TR@MAU.A" => %Q|"YLWT@MAU.A" + "YLRT@MAU.A"|,
+		"YL_TR@KAU.A" => %Q|"YLWT@KAU.A" + "YLRT@KAU.A"|,
+		"YL_OT@HI.A" => %Q|"YLMA@HI.A" + "YLAD@HI.A" + "YLED@HI.A" + "YLOS@HI.A"|,
+		"YL_OT@HON.A" => %Q|"YLMA@HON.A" + "YLAD@HON.A" + "YLED@HON.A" + "YLOS@HON.A"|,
+		"YL_OT@HAW.A" => %Q|"YLMA@HAW.A" + "YLAD@HAW.A" + "YLED@HAW.A" + "YLOS@HAW.A"|,
+		"YL_OT@MAU.A" => %Q|"YLMA@MAU.A" + "YLAD@MAU.A" + "YLED@MAU.A" + "YLOS@MAU.A"|,
+		"YL_OT@KAU.A" => %Q|"YLMA@KAU.A" + "YLAD@KAU.A" + "YLED@KAU.A" + "YLOS@KAU.A"|,
+
+	
 	}
 	
 	inc_hon_a = {
@@ -1316,8 +1333,8 @@ task :com_upd => :environment do
 	
 	com_kau = {
 		"YC@KAU.A" => %Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 362, :col => "increment:4:1", :frequency => "A" }|, 
-		"YWAGE@KAU.A" => [%Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 409, :col => "increment:4:1", :frequency => "A" }|, 
-				%Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 363, :col => "increment:4:1", :frequency => "A" }|], 
+		"YWAGE@KAU.A" => [%Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 363, :col => "increment:4:1", :frequency => "A" }|,
+		  %Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 409, :col => "increment:4:1", :frequency => "A" }|], 
 		"YOTLAB@KAU.A" => [%Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 364, :col => "increment:4:1", :frequency => "A" }|, 
 				%Q|Series.load_from_download  "CA05N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 410, :col => "increment:4:1", :frequency => "A" }|], 
 		"YOTLABPEN@KAU.A" => [%Q|Series.load_from_download  "CA06N@bea.gov", { :file_type => "csv", :start_date => "2001-01-01", :row => 365, :col => "increment:4:1", :frequency => "A" }|, 

@@ -41,6 +41,12 @@ class DashboardsController < ApplicationController
     @bucket_keys = (@maybe_ok_buckets.keys + @wrong_buckets.keys + @missing_low_to_high_buckets.keys).uniq
   end
   
+  def investigate_no_source
+    #@no_source = DataSource.where("eval NOT LIKE '%load_from_download%'").select([:eval, :series_id]).joins("JOIN series ON series.id = series_id").where("aremos_missing > 0 OR ABS(aremos_diff) > 0").group(:name).all.sort
+
+    @no_source = Series.where("aremos_missing > 0 OR ABS(aremos_diff) > 0").joins("JOIN data_sources ON series.id = series_id").where("eval NOT LIKE '%load_from_download%'").group(:name).order(:name).all
+  end
+  
   def mapping
     @exempted = DataSource.all_history_and_manual_series_names
     @pattern = DataSource.all_pattern_series_names - @exempted
@@ -120,7 +126,16 @@ class DashboardsController < ApplicationController
     'KBSGFNS@MAU.M',
     'KBCONNS@MAU.M',
     'PMKBSGFNS@MAU.M',
-    'PMKBCONNS@MAU.M',]
+    'PMKBCONNS@MAU.M',
+    'KBSGF@HON.M',
+    'KBCON@HON.M',
+    'PMKBSGF@HON.M',
+    'PMKBCON@HON.M',
+    'KBSGF@MAU.M',
+    'KBCON@MAU.M',
+    'PMKBSGF@MAU.M',
+    'PMKBCON@MAU.M',
+    ]
     dates = set_dates_m(params)
     @start_date = dates[:start_date]
     @end_date = dates[:end_date]

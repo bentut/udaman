@@ -112,29 +112,46 @@ class AremosSeries < ActiveRecord::Base
     end
 
     def AremosSeries.save_last_series(series_hash)
+      
+
       s = get("#{series_hash[:name]}.#{series_hash[:frequency]}")
 
+      
+
+      start_date = parse_date(series_hash[:start], series_hash[:frequency]) 
+      end_date = parse_date(series_hash[:end], series_hash[:frequency]),
+      data = parse_data(series_hash[:data], series_hash[:start], series_hash[:frequency])
+
+      
+     t = Time.now
       AremosSeries.create(
         :name => "#{series_hash[:name]}.#{series_hash[:frequency]}",
         :frequency => series_hash[:frequency],
         :description => series_hash[:description],
-        :start => parse_date(series_hash[:start], series_hash[:frequency]),
-        :end => parse_date(series_hash[:end], series_hash[:frequency]),
-        :aremos_data => series_hash[:data],
-        :data => parse_data(series_hash[:data], series_hash[:start], series_hash[:frequency]),
+        :start => start_date,
+#        :end => end_date,
+#        :aremos_data => series_hash[:data],
+        :data => data,
         :aremos_update_date => series_hash[:aremos_update]
       ) if s.nil?
 
       s.update_attributes(
         :frequency => series_hash[:frequency],
         :description => series_hash[:description],
-        :start => parse_date(series_hash[:start], series_hash[:frequency]),
-        :end => parse_date(series_hash[:end], series_hash[:frequency]),
-        :aremos_data => series_hash[:data],
-        :data => parse_data(series_hash[:data], series_hash[:start], series_hash[:frequency]),
+        :start => start_date,
+#        :end => end_date,
+#        :aremos_data => series_hash[:data],
+        :data => data,
         :aremos_update_date => series_hash[:aremos_update],
         :updated_at => Time.now
-      ) unless s.nil?
+      ) unless s.nil? or s.aremos_update_date == series_hash[:aremos_update]
+      
+      
+      #puts "skipped #{series_hash[:name]}.#{series_hash[:frequency]}" if s.nil? and s.aremos_update_date == series_hash[:aremos_update]
+            
+      #"#{series_hash[:name]}.#{series_hash[:frequency]}".ts.aremos_match
+      #%Q|('#{series_hash[:name]}.#{series_hash[:frequency]}', '#{series_hash[:frequency]}', '#{series_hash[:description]}', '#{start_date}', NULL, '#{YAML.dump(data).gsub(/'/, "\\\\'")}' , NULL, '#{series_hash[:aremos_update]}', '#{Time.now}', '#{Time.now}')|
+      puts "#{"%.2f" % (Time.now - t)} | wrote in db #{series_hash[:name]}.#{series_hash[:frequency]}"
     end
 
     def AremosSeries.read_series(line)
@@ -147,26 +164,39 @@ class AremosSeries < ActiveRecord::Base
       current_series = ""
       data_hash = {}
       series_hash = {}
-      while (line = file.gets)
-        if just_read_series_name
-          series_hash.merge!(read_date_info(line))
-          just_read_series_name = false
-        else
-          if line.index("@").nil?
-            series_hash[:data] ||= []
-            series_hash[:data] += read_data(line)
+      
+      inserts = []
+            
+      #AremosSeries.connection.execute "ALTER TABLE aremos_series DISABLE KEYS"
+      ActiveRecord::Base.transaction do
+        while (line = file.gets)
+          if just_read_series_name
+            series_hash.merge!(read_date_info(line))
+            just_read_series_name = false
           else
-            save_last_series(series_hash) if series_hash != {}
-            series_info = read_series(line)
-            series_hash = {}
-            series_hash[:name] = series_info[:name]
-            series_hash[:description] = series_info[:description]
-            just_read_series_name = true
+            if line.index("@").nil?
+              series_hash[:data] ||= []
+              series_hash[:data] += read_data(line)
+            else
+              #inserts.push save_last_series(series_hash) if series_hash != {}
+              save_last_series(series_hash) if series_hash != {}
+              series_info = read_series(line)
+              series_hash = {}
+              series_hash[:name] = series_info[:name]
+              series_hash[:description] = series_info[:description]
+              just_read_series_name = true
+            end
           end
         end
       end
+      
+      #AremosSeries.connection.execute "ALTER TABLE aremos_series ENABLE KEYS"
+      #inserts.push save_last_series(series_hash) if series_hash != {}
       save_last_series(series_hash) if series_hash != {}
-
+       
+      
+      #sql = "INSERT INTO `aremos_series` (`name`, `frequency`, `description`, `start`, `end`, `data`, `aremos_data`, `aremos_update_date`, `created_at`, `updated_at`) VALUES #{inserts.join(", ")}"
+      #AremosSeries.connection.execute sql
     end
 
 

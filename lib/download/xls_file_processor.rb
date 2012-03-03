@@ -26,7 +26,7 @@ class XlsFileProcessor
       col = @col_processor.compute(index, @cached_files, handle, sheet)
     
       #puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
-    
+      
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
       puts e.message

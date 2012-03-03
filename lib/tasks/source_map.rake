@@ -1,14 +1,52 @@
 task :reload_aremos => :environment do
+   t = Time.now
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/A_DATA.TSD")
+  at = Time.now
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/Q_DATA.TSD")
+  qt = Time.now 
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/M_DATA.TSD")
-  #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/W_DATA.TSD")
-  #AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
+  mt = Time.now
+   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/W_DATA.TSD")
+   wt = Time.now
+   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
+   dt = Time.now
+  
+   puts "#{"%.2f" % (dt - t)} | to write all"
+  puts "#{"%.2f" % (dt-wt)} | days"
+  puts "#{"%.2f" % (wt-mt)} | weeks"
+  puts "#{"%.2f" % (mt-qt)} | months"
+  puts "#{"%.2f" % (qt-at)} | quarters"
+  puts "#{"%.2f" % (at-t)} | years"
 end
 
 task :load_all_histories => :environment do
+  ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty|
+    #{circular reference}"VRLSDMNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts / "VISDMNS@#{cnty}.M".ts|
+    #{another circular reference}"VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts| This breaks it
+    "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VDAYUSWNS@#{cnty}.M".ts / "VISUSWNS@#{cnty}.M".ts|
+    "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VDAYUSENS@#{cnty}.M".ts / "VISUSENS@#{cnty}.M".ts|
+    "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VDAYJPNS@#{cnty}.M".ts / "VISJPNS@#{cnty}.M".ts|
+    "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VDAYCANNS@#{cnty}.M".ts / "VISCANNS@#{cnty}.M".ts|
+  end
+  
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/gsp_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_job_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sic_detail.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls" #also manual? not sure if we need both, or one one screws up the other?
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/TOUR_OCUP.xls"
+  Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
+  Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls", "sadata" 
+  Series.load_all_sa_series_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"
+  Series.load_all_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
+  
+  
+  #seasonal adjustments
+  "VDAYIT@HI.M".ts_eval= %Q|"VDAYIT@HI.M".ts.apply_seasonal_adjustment :additive|
+  #"VDAYUS@HI.M".ts.apply_seasonal_adjustment :additive 
   
 end
 

@@ -16,6 +16,16 @@ class Series < ActiveRecord::Base
   has_many :data_points
   has_many :data_sources
   
+  def as_json(options = {})
+    {
+      data: self.data,
+      frequency: self.frequency,
+      units: self.units,
+      description: AremosSeries.get(self.name).description,
+      source: self.original_url
+    }
+  end
+  
   def last_observation
     return nil if data.nil?
     return data.keys.sort[-1]
@@ -112,7 +122,7 @@ class Series < ActiveRecord::Base
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
     return {:message => "The spreadsheet could not be found", :headers => []} if update_spreadsheet.load_error?
 
-    default_sheet = sa ? "Demetra_Results_fa" : update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
+    default_sheet = sa ? "sadata" : update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? default_sheet : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     return {:message=>"The spreadsheet was not formatted properly", :headers=>[]} unless update_spreadsheet.update_formatted?
 
@@ -127,14 +137,51 @@ class Series < ActiveRecord::Base
     return {:message=>"success", :headers=>header_names, :sheets => sheets}
   end
   
-  def Series.load_all_sa_series_from(update_spreadsheet_path, output_worksheet = nil)  
-    each_spreadsheet_header(update_spreadsheet_path, output_worksheet, true) do |series_name, update_spreadsheet|
+  def Series.load_all_sa_series_from(update_spreadsheet_path, sheet_to_load = nil)  
+    each_spreadsheet_header(update_spreadsheet_path, sheet_to_load, true) do |series_name, update_spreadsheet|
       frequency_code = code_from_frequency update_spreadsheet.frequency  
       sa_base_name = series_name.sub("NS@","@")
       sa_series_name = sa_base_name+"."+frequency_code
-      Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{sa_series_name}".tsn.load_sa_from "#{update_spreadsheet_path}"^)
-      sa_series_name.ts.update_attributes(:seasonally_adjusted => true, :last_demetra_datestring => update_spreadsheet.dates.keys.sort.last)
+      Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{sa_series_name}".tsn.load_sa_from "#{update_spreadsheet_path}", "#{sheet_to_load}"^) unless sheet_to_load.nil? 
+      Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{sa_series_name}".tsn.load_sa_from "#{update_spreadsheet_path}"^) if sheet_to_load.nil?
+      #sa_series_name.ts.update_attributes(:seasonally_adjusted => true, :last_demetra_datestring => update_spreadsheet.dates.keys.sort.last)
+      
       sa_series_name
+    end
+  end
+
+  def Series.load_all_mean_corrected_sa_series_from(update_spreadsheet_path, sheet_to_load = nil)  
+    each_spreadsheet_header(update_spreadsheet_path, sheet_to_load, true) do |series_name, update_spreadsheet|
+      frequency_code = code_from_frequency update_spreadsheet.frequency  
+      sa_base_name = series_name.sub("NS@","@")
+      sa_series_name = sa_base_name+"."+frequency_code
+      ns_series_name = series_name+"."+frequency_code
+      
+      demetra_series = new_transformation("demetra series", update_spreadsheet.series(series_name), frequency_code)
+      
+      Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => demetra_series.data), update_spreadsheet_path, %Q^"#{sa_series_name}".tsn.load_sa_from "#{update_spreadsheet_path}", "#{sheet_to_load}"^) unless sheet_to_load.nil? 
+      Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => demetra_series.data), update_spreadsheet_path, %Q^"#{sa_series_name}".tsn.load_sa_from "#{update_spreadsheet_path}"^) if sheet_to_load.nil?
+
+      unless ns_series_name.ts.nil?
+        mean_corrected_demetra_series = demetra_series / demetra_series.annual_sum * ns_series_name.ts.annual_sum 
+        Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => mean_corrected_demetra_series.data), "mean corrected against #{ns_series_name} and loaded from #{update_spreadsheet_path}", %Q^"#{sa_series_name}".tsn.load_mean_corrected_sa_from "#{update_spreadsheet_path}", "#{sheet_to_load}"^) unless sheet_to_load.nil? 
+        Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => mean_corrected_demetra_series.data), "mean corrected against #{ns_series_name} and loaded from #{update_spreadsheet_path}", %Q^"#{sa_series_name}".tsn.load_mean_corrected_sa_from "#{update_spreadsheet_path}"^) if sheet_to_load.nil?
+      end
+      # sa_series_name.ts_eval=(%Q^"#{sa_series_name}".tsn.load_mean_corrected_sa_from "#{update_spreadsheet_path}", "#{sheet_to_load}"^) unless sheet_to_load.nil? 
+      # sa_series_name.ts_eval=(%Q^"#{sa_series_name}".tsn.load_mean_corrected_sa_from "#{update_spreadsheet_path}"^) if sheet_to_load.nil? 
+      #Series.store(sa_series_name, Series.new(:frequency => update_spreadsheet.frequency, :data => update_spreadsheet.series(series_name)), update_spreadsheet_path, %Q^"#{sa_series_name}".tsn.load_sa_from "#{update_spreadsheet_path}"^)
+      #sa_series_name.ts.update_attributes(:seasonally_adjusted => true, :last_demetra_datestring => update_spreadsheet.dates.keys.sort.last)
+      sa_series_name
+      
+      
+            
+      
+      # demetra_series.frequency = update_spreadsheet.frequency
+      # self.frequency = update_spreadsheet.frequency
+      # mean_corrected_demetra_series = demetra_series / demetra_series.annual_sum * ns_name.ts.annual_sum
+      # new_transformation("mean corrected against #{ns_name} and loaded from #{update_spreadsheet_path}", mean_corrected_demetra_series.data)
+      
+      
     end
   end
   
@@ -324,7 +371,7 @@ class Series < ActiveRecord::Base
 
     ns_name = self.name.sub("@", "NS@")
     default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
-    update_spreadsheet.default_sheet = sheet_to_load.nil? ? "Demetra_Results_fa" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
+    update_spreadsheet.default_sheet = sheet_to_load.nil? ? "sadata" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
     raise SeriesReloadException unless update_spreadsheet.update_formatted?
     demetra_series = new_transformation("demetra series", update_spreadsheet.series(ns_name))
     demetra_series.frequency = update_spreadsheet.frequency
@@ -405,6 +452,15 @@ class Series < ActiveRecord::Base
     return nil
   end
 
+  def original_url
+    self.data_sources.each do |ds|
+      if !ds.eval.index("load_from_download").nil?
+        return DataSourceDownload.get(ds.eval.split("load_from_download")[1].split("\"")[1]).url
+      end
+    end
+    return nil
+  end
+  
   def Series.write_cached_files(cached_files)
     t = Time.now
     Rails.cache.write("downloads", Marshal.dump(cached_files), :time_to_live => 600.seconds)

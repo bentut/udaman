@@ -62,6 +62,7 @@ UheroDb::Application.routes.draw do
   resources :dashboards
   
   match 'investigate' => 'dashboards#investigate'
+  match 'investigate_no_source' => 'dashboards#investigate_no_source'
   match 'construction' => 'dashboards#construction'
   match 'construction/years/:num_years' => 'dashboards#construction'
   match 'construction_q' => 'dashboards#construction_quarterly'

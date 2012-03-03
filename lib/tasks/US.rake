@@ -60,7 +60,7 @@ task :us_upd_q => :environment do
 	"YPCCE_R@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:13", :col => "increment:3:1", :frequency => "Q" }|,
 	"YPCDPI@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:4", :col => "increment:3:1", :frequency => "Q" }|,
 	"YPCDPI_R@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:12", :col => "increment:3:1", :frequency => "Q" }|,
-
+	"CAPUMN@US.Q" => %Q|Series.load_from_download  "US_CAPUMN_Q@research.stlouisfed.org", { :file_type => "txt" }|,
 	
 		#"GDPDEF@US.Q" => %Q|Series.load_from_download  "13Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 7, :col => "increment:3:1", :frequency => "Q" }|, 
 		#"YPC@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 11, :col => "increment:3:1", :frequency => "Q" }|, 
@@ -107,7 +107,10 @@ task :us_upd_q => :environment do
 		#"GDP_IM_R@US.Q" => %Q|Series.load_from_download  "6Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 25, :col => "increment:3:1", :frequency => "Q" }|, 
 		#"GDP_G_R@US.Q" => %Q|Series.load_from_download  "6Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 28, :col => "increment:3:1", :frequency => "Q" }|, 
 		"GDP@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 6, :frequency => "Q" }|, 
-		"GDP_R@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 7, :frequency => "Q" }|
+		"GDP_R@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 7, :frequency => "Q" }|,
+		
+		#these don't appear to be kept up in Aremos... maybe not important...
+		#{}"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1961-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q"}|
 	}
 	
 	p = Packager.new
