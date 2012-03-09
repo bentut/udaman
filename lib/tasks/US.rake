@@ -43,6 +43,7 @@ task :us_upd_q => :environment do
 	"GDP_NX@US.Q" => %Q|Series.load_from_download  "5Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:14", :col => "increment:3:1", :frequency => "Q" }|,
 	"GDP_NX_R@US.Q" => %Q|Series.load_from_download  "6Q@bea.gov", { :file_type => "csv", :start_date => "1995-01-01", :row => "header:col:1:14", :col => "increment:195:1", :frequency => "Q" }|,
 	"GDPDEF@US.Q" => %Q|Series.load_from_download  "13Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:1", :col => "increment:3:1", :frequency => "Q" }|,
+	"INFGDPDEF@US.Q" => %Q|"GDPDEF@US.Q".ts.annualized_percentage_change|,
 	"GDPPC@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:1", :col => "increment:3:1", :frequency => "Q" }|,
 	"GDPPC_R@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:10", :col => "increment:3:1", :frequency => "Q" }|,
 	"GNP@US.Q" => %Q|Series.load_from_download  "43Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:4", :col => "increment:3:1", :frequency => "Q" }|,
@@ -108,14 +109,24 @@ task :us_upd_q => :environment do
 		#"GDP_G_R@US.Q" => %Q|Series.load_from_download  "6Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 28, :col => "increment:3:1", :frequency => "Q" }|, 
 		"GDP@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 6, :frequency => "Q" }|, 
 		"GDP_R@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 7, :frequency => "Q" }|,
-		
-		#these don't appear to be kept up in Aremos... maybe not important...
-		#{}"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1961-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q"}|
+		"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1961-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q"}|
 	}
+	
+	us_q_special = {
+
+		"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1961-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q"}|
+
+	}
+
+
 	
 	p = Packager.new
 	p.add_definitions us_q
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions us_q_special
+	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q2_NEW.xls"
 	
 end
 
@@ -214,6 +225,8 @@ task :us_upd_a => :environment do
 		# Can get more data, but our old series has more precision, so just reading the later dates
 		# "CPI@CA.A" => %Q|Series.load_from_download  "ca_cpi@bea.gov", { :file_type => "xls", :start_date => "2000-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 9, :frequency => "A" }|
 		"CPI@CA.A" => %Q|Series.load_from_download  "ca_cpi@bea.gov", { :file_type => "xls", :start_date => "2000-01-01", :sheet => "sheet_num:1", :row => "increment:37:1", :col => 9, :frequency => "A" }|,
+		# Ben added this, hopefully this is where this definition goes
+		"INF@CA.A" => %Q|"CPI@CA.A".ts.annualized_percentage_change |
 	}
 	
 	p = Packager.new
@@ -348,12 +361,27 @@ task :us_upd_m => :environment do
 		"RILGFCY10@US.M" => %Q|Series.load_from_download  "US_RILGFCY10_M@research.stlouisfed.org", { :file_type => "txt" }|, 
 		"RMORT@US.M" => %Q|Series.load_from_download  "US_RMORT_M@research.stlouisfed.org", { :file_type => "txt" }|, 
 		"UMCSENT@US.M" => %Q|Series.load_from_download  "US_UMCSENT_M@research.stlouisfed.org", { :file_type => "txt" }|, 
-		"YXR@JP.M" => %Q|Series.load_from_download  "JP_YXR@research.stlouisfed.org", { :file_type => "txt" }|
+		"YXR@JP.M" => %Q|Series.load_from_download  "JP_YXR@research.stlouisfed.org", { :file_type => "txt" }|,
+	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|,
+	
+	}
+	
+	
+	us_m_special = {
+	
+	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|
+		
 	}
 	
 	p = Packager.new
 	p.add_definitions us_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_m_NEW.xls"
+
+	p = Packager.new
+	p.add_definitions us_m_special
+	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_m2_NEW.xls"
+
+
 	
 end
 

@@ -356,9 +356,9 @@ task :tax_upd => :environment do
 	
 	p = Packager.new
 	p.add_definitions collec
-	p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/tax_upd_collec_NEW.xls"
+	p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/collec_upd_NEW.xls"
 
   p = Packager.new
   p.add_definitions ge
-  p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/tax_upd_ge_NEW.xls"
+  p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/ge_upd_NEW.xls"
 end

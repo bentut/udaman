@@ -474,6 +474,14 @@ task :tour_upd => :environment do
 "VDAYOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All Others:13:20", :col => 2, :frequency => "M" })/1000|,
 "VISOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All Others:22:29", :col => 2, :frequency => "M" })/1000|,
 "VRLSOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All Others:31:38", :col => 2, :frequency => "M" })/1|,
+"VISUSNS@HON.M" => %Q|"VISUSWNS@HON.M".ts + "VISUSENS@HON.M".ts|,
+"VISUSNS@HAW.M" => %Q|"VISUSWNS@HAW.M".ts + "VISUSENS@HAW.M".ts|,
+"VISUSNS@KAU.M" => %Q|"VISUSWNS@KAU.M".ts + "VISUSENS@KAU.M".ts|,
+"VISUSNS@MAU.M" => %Q|"VISUSWNS@MAU.M".ts + "VISUSENS@MAU.M".ts|,
+"VISUSNS@HI.M" => %Q|"VISUSWNS@HI.M".ts + "VISUSENS@HI.M".ts|,
+"VISUSNS@LAN.M" => %Q|"VISUSWNS@LAN.M".ts + "VISUSENS@LAN.M".ts|,
+"VISUSNS@MOL.M" => %Q|"VISUSWNS@MOL.M".ts + "VISUSENS@MOL.M".ts|,
+"VISUSNS@MAUI.M" => %Q|"VISUSWNS@MAUI.M".ts + "VISUSENS@MAUI.M".ts|,
 "VEXPPDNS@HI.M" => %Q|"VEXPNS@HI.M".ts / "VDAYNS@HI.M".ts*1000|,
 "VEXPPDUSWNS@HI.M" => %Q|"VEXPUSWNS@HI.M".ts / "VDAYUSWNS@HI.M".ts*1000|,
 "VEXPPDUSENS@HI.M" => %Q|"VEXPUSENS@HI.M".ts / "VDAYUSENS@HI.M".ts*1000|,
@@ -707,7 +715,19 @@ task :tour_upd => :environment do
 "VISCANNS@MAUI.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:3", :row => 65, :col => "repeat:2:13", :frequency => "M" })/1000|, 
 "VISCANNS@MOL.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:3", :row => 66, :col => "repeat:2:13", :frequency => "M" })/1000|, 
 "VISCANNS@LAN.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:3", :row => 67, :col => "repeat:2:13", :frequency => "M" })/1000|, 
-"VISCANNS@HAW.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:3", :row => 68, :col => "repeat:2:13", :frequency => "M" })/1000| 
+"VISCANNS@HAW.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:3", :row => 68, :col => "repeat:2:13", :frequency => "M" })/1000|, 
+# "VRLSITNS@HON.M" => %Q|"VDAYITNS@HON.M".ts / "VISITNS@HON.M".ts|,
+# "VRLSITNS@HAW.M" => %Q|"VDAYITNS@HAW.M".ts / "VISITNS@HAW.M".ts|,
+# "VRLSITNS@MAUI.M" => %Q|"VDAYITNS@MAUI.M".ts / "VISITNS@MAUI.M".ts|,
+# "VRLSITNS@MOL.M" => %Q|"VDAYITNS@MOL.M".ts / "VISITNS@MOL.M".ts|,
+# "VRLSITNS@LAN.M" => %Q|"VDAYITNS@LAN.M".ts / "VISITNS@LAN.M".ts|,
+# "VRLSITNS@KAU.M" => %Q|"VDAYITNS@KAU.M".ts / "VISITNS@KAU.M".ts|,
+# "VRLSDMNS@HON.M" => %Q|"VDAYDMNS@HON.M".ts / "VISDMNS@HON.M".ts|,
+# "VRLSDMNS@HAW.M" => %Q|"VDAYDMNS@HAW.M".ts / "VISDMNS@HAW.M".ts|,
+# "VRLSDMNS@MAUI.M" => %Q|"VDAYDMNS@MAUI.M".ts / "VISDMNS@MAUI.M".ts|,
+# "VRLSDMNS@MOL.M" => %Q|"VDAYDMNS@MOL.M".ts / "VISDMNS@MOL.M".ts|,
+# "VRLSDMNS@LAN.M" => %Q|"VDAYDMNS@LAN.M".ts / "VISDMNS@LAN.M".ts|,
+# "VRLSDMNS@KAU.M" => %Q|"VDAYDMNS@KAU.M".ts / "VISDMNS@KAU.M".ts|
 
 
 	}

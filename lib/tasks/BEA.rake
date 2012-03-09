@@ -17,7 +17,9 @@ task :gsp_upd => :environment do
 	gsp_defs = {
 		"YS@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 6, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YS_PR@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 7, :col => "increment:5:1", :frequency => "A" })/1|, 
-		"YSAG@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 8, :col => "increment:5:1", :frequency => "A" })/1|, 
+		#"YSAG@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 8, :col => "increment:5:1", :frequency => "A" })/1|, 
+		#refer to identites in identites in bea_upd.cmd
+		"YSAG@HI.A" => %Q|"YSAGFA@HI.A".ts + "YSAGFF@HI.A".ts|,
 		"YSAGFA@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 9, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YSAGFF@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 10, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YSMI@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 11, :col => "increment:5:1", :frequency => "A" })/1|, 
@@ -376,7 +378,10 @@ task :inc_upd_a => :environment do
 		"YL_GVSL@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 130, :col => "increment:4:1", :frequency => "A" }|, 
 		"YLGVST@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 131, :col => "increment:4:1", :frequency => "A" }|, 
 		"YLGVLC@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 132, :col => "increment:4:1", :frequency => "A" }|, 
-		# "YLAGFFOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|
+		# "YLAGFFOT@HI.A" => %Q|Series.load_from_download  "SA05N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 999, :col => "increment:999:1", :frequency => "A" }|,
+		"YL_TRADE@HI.A" => %Q|"YLWT@HI.A".ts + "YLRT@HI.A".ts|,
+		"YL_TRADE@HON.A" => %Q|"YLWT@HON.A".ts + "YLRT@HON.A".ts|
+		
 	}
 
 	inc_haw_a = {
@@ -516,16 +521,16 @@ task :inc_upd_a => :environment do
 		"YL_TU@HAW.A" => %Q|"YLTW@HAW.A".ts + "YLUT@HAW.A".ts|,
 		"YL_TU@MAU.A" => %Q|"YLTW@MAU.A".ts + "YLUT@MAU.A".ts|,
 		"YL_TU@KAU.A" => %Q|"YLTW@KAU.A".ts + "YLUT@KAU.A".ts|,
-		"YL_TR@HI.A" => %Q|"YLWT@HI.A" + "YLRT@HI.A"|,
-		"YL_TR@HON.A" => %Q|"YLWT@HON.A" + "YLRT@HON.A"|,
-		"YL_TR@HAW.A" => %Q|"YLWT@HAW.A" + "YLRT@HAW.A"|,
-		"YL_TR@MAU.A" => %Q|"YLWT@MAU.A" + "YLRT@MAU.A"|,
-		"YL_TR@KAU.A" => %Q|"YLWT@KAU.A" + "YLRT@KAU.A"|,
-		"YL_OT@HI.A" => %Q|"YLMA@HI.A" + "YLAD@HI.A" + "YLED@HI.A" + "YLOS@HI.A"|,
-		"YL_OT@HON.A" => %Q|"YLMA@HON.A" + "YLAD@HON.A" + "YLED@HON.A" + "YLOS@HON.A"|,
-		"YL_OT@HAW.A" => %Q|"YLMA@HAW.A" + "YLAD@HAW.A" + "YLED@HAW.A" + "YLOS@HAW.A"|,
-		"YL_OT@MAU.A" => %Q|"YLMA@MAU.A" + "YLAD@MAU.A" + "YLED@MAU.A" + "YLOS@MAU.A"|,
-		"YL_OT@KAU.A" => %Q|"YLMA@KAU.A" + "YLAD@KAU.A" + "YLED@KAU.A" + "YLOS@KAU.A"|,
+		"YL_TR@HI.A" => %Q|"YLWT@HI.A".ts + "YLRT@HI.A".ts|,
+		"YL_TR@HON.A" => %Q|"YLWT@HON.A".ts + "YLRT@HON.A".ts|,
+		"YL_TR@HAW.A" => %Q|"YLWT@HAW.A".ts + "YLRT@HAW.A".ts|,
+		"YL_TR@MAU.A" => %Q|"YLWT@MAU.A".ts + "YLRT@MAU.A".ts|,
+		"YL_TR@KAU.A" => %Q|"YLWT@KAU.A".ts + "YLRT@KAU.A".ts|,
+		"YL_OT@HI.A" => %Q|"YLMA@HI.A".ts + "YLAD@HI.A".ts + "YLED@HI.A".ts + "YLOS@HI.A".ts|,
+		"YL_OT@HON.A" => %Q|"YLMA@HON.A".ts + "YLAD@HON.A".ts + "YLED@HON.A".ts + "YLOS@HON.A".ts|,
+		"YL_OT@HAW.A" => %Q|"YLMA@HAW.A".ts + "YLAD@HAW.A".ts + "YLED@HAW.A".ts + "YLOS@HAW.A".ts|,
+		"YL_OT@MAU.A" => %Q|"YLMA@MAU.A".ts + "YLAD@MAU.A".ts + "YLED@MAU.A".ts + "YLOS@MAU.A".ts|,
+		"YL_OT@KAU.A" => %Q|"YLMA@KAU.A".ts + "YLAD@KAU.A".ts + "YLED@KAU.A".ts + "YLOS@KAU.A".ts|,
 
 	
 	}

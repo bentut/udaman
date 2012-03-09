@@ -15,9 +15,6 @@
 ###*******************************************************************
 
 # sox.add "R@JP.M",         Series.load_pattern("1960-01-01", "M", path_JP_R, "csv", "increment:4:1", 3)
-# sox.add "STKNS@JP.M",         Series.load_pattern("2011-08-01", "M", path_JP_STKNS, "csv", "increment:2:1", 5)
-# sox.add "CPI@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 21)
-# sox.add "CPICORE@JP.M",         Series.load_pattern("2009-04-01", "M", path_JP_CPI, "TABLE1", "increment:16:1", 22)
 # sox.add "IP@JP.M",         Series.load_pattern("1978-01-01", "M", path_JP_IP_hist, "csv", "increment:6:1", 2)
 # sox.add "IPNS@JP.M",         Series.load_pattern("1978-01-01", "M", path_JP_IPNS_hist, "csv", "increment:6:1", 2)
 # sox.add "IPMN@JP.M",         Series.load_pattern("1978-01-01", "M", path_JP_IP_hist, "csv", "increment:6:1", 3)
@@ -125,6 +122,7 @@ task :jp_upd_q => :environment do
 		"GNI_RNS@JP.Q" => %Q|Series.load_from_download  "GDP_RNS_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 22, :frequency => "Q" }|, 
 		"GDP_IFX_RNS@JP.Q" => %Q|Series.load_from_download  "GDP_RNS_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 28, :frequency => "Q" }|, 
 		"GDPDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 2, :frequency => "Q" }|, 
+		"INFGDPDEF@JP.Q" => %Q|"GDPDEF@JP.Q".ts.annualized_percentage_change|,
 		"GNIDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1980-01-01", :row => "increment:8:1", :col => 19, :frequency => "Q" }|, 
 
 "CSCFNS@JP.Q" => [%Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|,
@@ -149,14 +147,33 @@ task :jp_upd_m => :environment do
 		"E_NF@JP.M" => %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 14, :frequency => "M" }) * 10|, 
 		"UR@JP.M" => %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 31, :frequency => "M" })|, 
 		"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
-		#{}"CPICORENS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "xls", :start_date => "2009-04-01", :sheet => "TABLE1", :row => "increment:16:1", :col => 4, :frequency => "M" }|, 
+		"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
+		"CPICORE@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 47, :frequency => "M" }|, 
+		"INF@JP.M" => %Q|"CPI@JP.M".ts.annualized_percentage_change|,
 		"IP@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPMN@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|, 
-		"IPMNNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|
+		"IPMNNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|,
+		"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|
+	
+	}
+	
+	jp_m_special = {
+
+	"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
+	"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
+	"CPICORE@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 47, :frequency => "M" }|, 
+	"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|
+	
 	}
 	
 	p = Packager.new
 	p.add_definitions jp_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_m_NEW.xls"
+
+	p = Packager.new
+	p.add_definitions jp_m_special
+	p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_m2_NEW.xls"
+
+
 end
