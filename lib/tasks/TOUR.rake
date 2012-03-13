@@ -93,9 +93,25 @@ tour_ocup = {
 "RMRVNS@MAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 16, :frequency => "M" })|
 }
 	
+tour_vexp = {
+
+"VEXPUS@HI.A" => %Q|"VEXPUS@HI.M".ts.aggregate(:year, :sum)|,
+"VEXPJP@HI.A" => %Q|"VEXPJP@HI.M".ts.aggregate(:year, :sum)|,
+"VXPRUS@HI.A" => %Q|"VEXPUS@HI.A".ts|,
+"VXPRJP@HI.A" => %Q|"VEXPJP@HI.A".ts|,
+"VX@HI.A" => %Q|"VXPR@HI.A".ts + "VXBU@HI.A".ts|,
+
+}	
+	
 	p = Packager.new
 	p.add_definitions tour_ocup
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_ocup_upd_NEW.xls"
+
+	p = Packager.new
+	p.add_definitions tour_vexp
+	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/tour_vexp_upd_ID.xls"
+
+
 end
 
 
@@ -228,8 +244,8 @@ task :tour_upd => :environment do
 "VSTNPCNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:No Package:62:96", :col => 2, :frequency => "M" })/1000|,
 "VSTINDNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:Net True Independent:62:96", :col => 2, :frequency => "M" })/1000|,
 "VDAYDMNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:DOMESTIC VISITOR DAYS:99:154", :col => 2, :frequency => "M" })/1000|,
-"VISDMNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:DOMESTIC VISITORS:99:154", :col => 2, :frequency => "M" })/1000|,
-"VRDCDMNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:DOMESTIC AVERAGE DAILY CENSUS:99:154", :col => 2, :frequency => "M" })/1000|,
+"VISDMNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:VISITORS:99:154:sub", :col => 2, :frequency => "M" })/1000|,
+"VRDCDMNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:AVERAGE DAILY CENSUS:99:154:sub", :col => 2, :frequency => "M" })/1000|,
 "VISDMNS@HON.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:Oahu:99:154:no_okina", :col => 2, :frequency => "M" })/1000|,
 "VISDMNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:Kauai:99:154:no_okina", :col => 2, :frequency => "M" })/1000|,
 "VISDMNS@MAU.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:1", :row => "header_range:col:1:Maui County:99:154", :col => 2, :frequency => "M" })/1000|,
@@ -744,5 +760,7 @@ task :tour_upd => :environment do
 	p = Packager.new
 	p.add_definitions tour_3
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_upd3_NEW.xls"
+	
+	
 	
 end

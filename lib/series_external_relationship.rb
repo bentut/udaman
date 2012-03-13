@@ -34,7 +34,7 @@ module SeriesExternalRelationship
     diff_first = diff_trunc < diff_sig_5 ? diff_trunc : diff_sig_5
     diff_second = diff_first < diff_sig_6 ? diff_first : diff_sig_6
     
-    return diff_second
+    return diff_second > 0.001 ? diff_second : 0
   end
   #no test or spec for this
   def aremos_comparison

@@ -103,7 +103,8 @@ end
 task :maui_vday => :environment do
   ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   #CNTY WITHOUT HI
     "VDAYDMNS@#{cnty}.M".ts_eval= %Q|"VISDMNS@#{cnty}.M".ts * "VRLSDMNS@#{cnty}.M".ts|
-    "VDAYITNS@#{cnty}.M".ts_eval= %Q|"VISITNS@#{cnty}.M".ts * "VRLSITNS@#{cnty}.M".ts|
+    #Causes circular references... do not run
+    #{}"VDAYITNS@#{cnty}.M".ts_eval= %Q|"VISITNS@#{cnty}.M".ts * "VRLSITNS@#{cnty}.M".ts|
   end
 end
 #works
@@ -566,12 +567,65 @@ end
 # end
 
 task :visitor_series => :environment do
+  
+#for 3/13/12 try  here -------------------------
+  #do the NS first (these all work now...)
+  ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   #CNTY WITHOUT HI
+    "VDAYNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts + "VDAYITNS@#{cnty}.M".ts|
+    "VDAYUSNS@#{cnty}.M".ts_eval= %Q|"VDAYUSENS@#{cnty}.M".ts + "VDAYUSWNS@#{cnty}.M".ts|
+    "VDAYRESNS@#{cnty}.M".ts_eval= %Q|"VDAYNS@#{cnty}.M".ts - ("VDAYUSNS@#{cnty}.M".ts + "VDAYJPNS@#{cnty}.M".ts)|
+  end
+  "VDAYUSNS@HI.M".ts_eval= %Q|"VDAYUSENS@HI.M".ts + "VDAYUSWNS@HI.M".ts|
+  "VDAYRESNS@HI.M".ts_eval= %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|
+  
+  
+  
+  #Not sure where this block should go
+  ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+    "VRLSDMNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts / "VISDMNS@#{cnty}.M".ts|
+    "VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts|
+    "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VDAYUSWNS@#{cnty}.M".ts / "VISUSWNS@#{cnty}.M".ts|
+    "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VDAYUSENS@#{cnty}.M".ts / "VISUSENS@#{cnty}.M".ts|
+    "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VDAYJPNS@#{cnty}.M".ts / "VISJPNS@#{cnty}.M".ts|
+    "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VDAYCANNS@#{cnty}.M".ts / "VISCANNS@#{cnty}.M".ts|
+  end
+  
+  #redundant to below
+  #{}"VRLSCANNS@MAU.M".ts_eval= %Q|("VRLSCANNS@MAUI.M".ts * "VISCANNS@MAUI.M".ts + "VRLSCANNS@MOL.M".ts * "VISCANNS@MOL.M".ts + "VRLSCANNS@LAN.M".ts * "VISCANNS@LAN.M".ts) / "VISCANNS@MAU.M".ts|
+  
+  #do the MAUI stuff here...
+  ["DM", "IT", "CAN", "JP", "USE", "USW"].each do |serlist| 
+    "VRLS#{serlist}NS@MAU.M".ts_eval= %Q|("VRLS#{serlist}NS@MAUI.M".ts * "VIS#{serlist}NS@MAUI.M".ts + "VRLS#{serlist}NS@MOL.M".ts * "VIS#{serlist}NS@MOL.M".ts + "VRLS#{serlist}NS@LAN.M".ts * "VIS#{serlist}NS@LAN.M".ts) / "VIS#{serlist}NS@MAU.M".ts|
+    #this is causing the circular reference.... don't run... actually, this is ok for Maui only. definitely for IT... not sure about others
+    "VDAY#{serlist}NS@MAU.M".ts_eval= %Q|"VRLS#{serlist}NS@MAU.M".ts * "VIS#{serlist}NS@MAU.M".ts|
+  end
+    
+  #from task vlos requires vdayNSs and visNSs and vrlsNSs
+  ["CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+    ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
+      "VLOS#{serlist}NS@#{cnty}.M".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.M".ts / "VIS#{serlist}NS@#{cnty}.M".ts|
+    end
+  end
+  
+
+  
+  ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty| 
+    "VISRESNS@#{cnty}.M".ts_eval= %Q|"VISNS@#{cnty}.M".ts - "VISUSNS@#{cnty}.M".ts - "VISJPNS@#{cnty}.M".ts|
+  end
+
+
+# to here..... finishing off all of the NS stuff
+
+
+
+
+  
   ["VISJP", "VISUS", "VISRES", "VDAYUS", "VDAYRES", "VDAYJP", "VISIT", "VISDM", "VDAYDM", "VDAYIT"].each do |s_name|
     "#{s_name}@HI.M".ts_append_eval %Q|"#{s_name}@HI.M".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls"|
     add_factors = ["VISRES", "VDAYUS", "VISUS", "VDAYRES", "VISIT", "VDAYIT", "VDAYDM"]
     mult_factors = ["VISJP",  "VDAYJP", "VISDM"]
-    "#{s_name}@HI.M".ts.apply_seasonal_adjustment :additive unless add_factors.index(s_name).nil?
-    "#{s_name}@HI.M".ts.apply_seasonal_adjustment :multiplicative unless mult_factors.index(s_name).nil?
+    "#{s_name}@HI.M".ts_eval= %Q|"#{s_name}@HI.M".ts.apply_seasonal_adjustment :additive| unless add_factors.index(s_name).nil?
+    "#{s_name}@HI.M".ts_eval= %Q|"#{s_name}@HI.M".ts.apply_seasonal_adjustment :multiplicative| unless mult_factors.index(s_name).nil?
     
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       #start_date = "#{s_name}NS@#{county}.M".ts.first_value_date

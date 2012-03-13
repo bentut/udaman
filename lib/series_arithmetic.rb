@@ -110,7 +110,7 @@ module SeriesArithmetic
     end
     new_transformation("Percentage Change of #{name}", new_series_data)
   end
-  
+
   def annualized_percentage_change
     new_series_data = {}
     last = {}
@@ -138,6 +138,17 @@ module SeriesArithmetic
       new_series_data[date_string] = ytd_sum
     end
     new_transformation("Year to Date Percentage Change of #{name}", new_series_data).annualized_percentage_change
+  end
+  
+  def annual_diff
+    new_series_data = {}
+    last = {}
+    data.sort.each do |date_string, value|
+      month = Date.parse(date_string).month
+      new_series_data[date_string] = (value-last[month]) unless last[month].nil?
+      last[Date.parse(date_string).month] = value
+    end
+    new_transformation("Year over year diff of #{name}", new_series_data)
   end
   
   def annual_sum

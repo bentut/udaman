@@ -19,15 +19,57 @@ task :reload_aremos => :environment do
   puts "#{"%.2f" % (at-t)} | years"
 end
 
-task :load_all_histories => :environment do
-  ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty|
+task :load_all_v_series => :environment do
+
+  # possible sequence
+  #VISRES?
+  #VDAY
+  #VIS These come from :visitor_series task
+  
+  # VLOS
+  # VSO
+  # VDAY
+  # VRL
+  # VISCRAIR
+  # VDAYCRAIR
+  # VDAYCRB
+  # VEXPPT
+  # 
+  # MORE VLOS
+  # MORE VEXP
+  # MOR VISDM
+  # VLOSIT
+  # MORE VLOS
+  # MORE VDAY
+  # MORE VEXP
+  # MORE VISUS
+  # MORE VRLS
+  # MORE VISRES
+  
+  
+  
+  
+  ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
     #{circular reference}"VRLSDMNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts / "VISDMNS@#{cnty}.M".ts|
     #{another circular reference}"VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts| This breaks it
+    "VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts|
     "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VDAYUSWNS@#{cnty}.M".ts / "VISUSWNS@#{cnty}.M".ts|
     "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VDAYUSENS@#{cnty}.M".ts / "VISUSENS@#{cnty}.M".ts|
     "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VDAYJPNS@#{cnty}.M".ts / "VISJPNS@#{cnty}.M".ts|
     "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VDAYCANNS@#{cnty}.M".ts / "VISCANNS@#{cnty}.M".ts|
   end
+  
+  "VRLSCANNS@MAU.M".ts_eval= %Q|("VRLSCANNS@MAUI.M".ts * "VISCANNS@MAUI.M".ts + "VRLSCANNS@MOL.M".ts * "VISCANNS@MOL.M".ts + "VRLSCANNS@LAN.M".ts * "VISCANNS@LAN.M".ts) / "VISCANNS@MAU.M".ts|
+  
+  #from task vlos requires vdayNSs and visNSs and vrlsNSs
+  ["CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+    ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
+      "VLOS#{serlist}NS@#{cnty}.M".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.M".ts / "VIS#{serlist}NS@#{cnty}.M".ts|
+    end
+  end
+end
+
+task :load_all_histories => :environment do
   
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec"
@@ -41,12 +83,17 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls" #also manual? not sure if we need both, or one one screws up the other?
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/TOUR_OCUP.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
   
   Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
   Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls", "sadata" 
   Series.load_all_sa_series_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"
   Series.load_all_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
   
+  #needs to go after census load
+  ["HI","HON","HAW","MAU","KAU"].each do |cnty|
+    "NMIG@#{cnty}.A".ts_eval= %Q|"NR@#{cnty}.A".ts.annual_diff - "NBIR@#{cnty}.A".ts + "NDEA@#{cnty}.A".ts|
+  end
   
   #seasonal adjustments
   "VDAYIT@HI.M".ts_eval= %Q|"VDAYIT@HI.M".ts.apply_seasonal_adjustment :additive|

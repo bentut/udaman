@@ -118,8 +118,20 @@ task :us_upd_q => :environment do
 
 	}
 
+	us_q_nowrite = {
 
-	
+	"YCE_R@US.Q" => %Q|"YCE_R@US.M".ts.aggregate(:quarter, :average)|,
+	"YPCDPI@US.Q" => %Q|"YPCDPI@US.M".ts.aggregate(:quarter, :average)|,
+	"YPCDPI_R@US.Q" => %Q|"YPCDPI_R@US.M".ts.aggregate(:quarter, :average)|,
+	"YDPI@US.Q" => %Q|"YDPI@US.M".ts.aggregate(:quarter, :average)|,
+	"YDPI_R@US.Q" => %Q|"YDPI_R@US.M".ts.aggregate(:quarter, :average)|,
+	"YCE@US.Q" => %Q|"YCE@US.M".ts.aggregate(:quarter, :average)|,
+	"Y@US.Q" => %Q|"Y@US.M".ts.aggregate(:quarter, :average)|,
+
+
+	}
+
+		
 	p = Packager.new
 	p.add_definitions us_q
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q_NEW.xls"
@@ -127,6 +139,10 @@ task :us_upd_q => :environment do
 	p = Packager.new
 	p.add_definitions us_q_special
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q2_NEW.xls"
+	
+	p = Packager.new
+	p.add_definitions us_q_nowrite
+	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/us_upd_q_ID.xls"
 	
 end
 
@@ -373,6 +389,7 @@ task :us_upd_m => :environment do
 		
 	}
 	
+
 	p = Packager.new
 	p.add_definitions us_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_m_NEW.xls"
