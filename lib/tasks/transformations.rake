@@ -78,7 +78,7 @@ task :cruise_visitors_2 => :environment do
   "VDAYCRAIRNS@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts / "VLOSCRAIRNS@HI.M".ts|
   
   ["HON", "HAW", "KAU", "MAU"].each do |cnty|
-    "VDAYCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRAIRNS@#{cnty}.M".ts * "VLOSCRNS@HI".ts / 4|
+    "VDAYCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRAIRNS@#{cnty}.M".ts * "VLOSCRNS@HI.M".ts / 4|
   end
 end
 
@@ -569,7 +569,7 @@ end
 task :visitor_series => :environment do
   
 #for 3/13/12 try  here -------------------------
-  #do the NS first (these all work now...)
+  #do the NS first (these all work now...) SOME SLIGHT MISMATCHING -------------------------
   ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   #CNTY WITHOUT HI
     "VDAYNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts + "VDAYITNS@#{cnty}.M".ts|
     "VDAYUSNS@#{cnty}.M".ts_eval= %Q|"VDAYUSENS@#{cnty}.M".ts + "VDAYUSWNS@#{cnty}.M".ts|
@@ -590,10 +590,27 @@ task :visitor_series => :environment do
     "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VDAYCANNS@#{cnty}.M".ts / "VISCANNS@#{cnty}.M".ts|
   end
   
+  #need to load all history
+  ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+    "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+    "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+    "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+    "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  end
+
+  #KAU is in different history sheet
+  "VRLSUSWNS@KAU.M".ts_eval= %Q|"VRLSUSWNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
+  "VRLSUSENS@KAU.M".ts_eval= %Q|"VRLSUSENS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
+  "VRLSJPNS@KAU.M".ts_eval= %Q|"VRLSJPNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
+  "VRLSCANNS@KAU.M".ts_eval= %Q|"VRLSCANNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
+  
+  
+  #need to load all history
+  
   #redundant to below
   #{}"VRLSCANNS@MAU.M".ts_eval= %Q|("VRLSCANNS@MAUI.M".ts * "VISCANNS@MAUI.M".ts + "VRLSCANNS@MOL.M".ts * "VISCANNS@MOL.M".ts + "VRLSCANNS@LAN.M".ts * "VISCANNS@LAN.M".ts) / "VISCANNS@MAU.M".ts|
   
-  #do the MAUI stuff here...
+  #do the MAUI stuff here... THESE HAVE SOME MISMATCHING --------------------------------
   ["DM", "IT", "CAN", "JP", "USE", "USW"].each do |serlist| 
     "VRLS#{serlist}NS@MAU.M".ts_eval= %Q|("VRLS#{serlist}NS@MAUI.M".ts * "VIS#{serlist}NS@MAUI.M".ts + "VRLS#{serlist}NS@MOL.M".ts * "VIS#{serlist}NS@MOL.M".ts + "VRLS#{serlist}NS@LAN.M".ts * "VIS#{serlist}NS@LAN.M".ts) / "VIS#{serlist}NS@MAU.M".ts|
     #this is causing the circular reference.... don't run... actually, this is ok for Maui only. definitely for IT... not sure about others
@@ -614,12 +631,39 @@ task :visitor_series => :environment do
   end
 
 
+
+
+  "VRLSCRAIRNS@HI.M".ts_eval= %Q|"VLOSCRDRNS@HI.M".ts|
+  "VLOSCRAIRNS@HI.M".ts_eval= %Q|"VLOSCRDRNS@HI.M".ts|
+  "VLOSCRNDNS@HI.M".ts_eval= %Q|"VLOSCRNS@HI.M".ts - "VLOSCRDRNS@HI.M".ts|
+  
+  ["HON", "HAW", "KAU", "MAU"].each do |cnty|
+    "VISCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRNS@#{cnty}.M".ts * "VISCRAIRNS@HI.M".ts / "VISCRNS@HI.M".ts|
+  end
+  
+  #this one is way off... might be a problem in AREMOS or definition could be wrong
+  "VDAYCRAIRNS@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts / "VLOSCRAIRNS@HI.M".ts|
+  
+  ["HON", "HAW", "KAU", "MAU"].each do |cnty|
+    "VDAYCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRAIRNS@#{cnty}.M".ts * "VLOSCRNS@HI.M".ts / 4|
+  end
+  
+  "VDAYCRSHPNS@HI.M".ts_eval= %Q|"VISCRSHPNS@HI.M".ts * "VLOSCRNS@HI.M".ts|
+
+  #slight mismatches in NDNS
+  ["BFNS", "DRNS", "AFNS", "NDNS"].each do |myvar|
+    "VDAYCR#{myvar}@HI.M".ts_eval= %Q|"VISCRNS@HI.M".ts * "VLOSCR#{myvar}@HI.M".ts|
+    "VDAYCRS#{myvar}@HI.M".ts_eval= %Q|"VISCRSHPNS@HI.M".ts * "VLOSCR#{myvar}@HI.M".ts|
+    "VDAYCRA#{myvar}@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts * "VLOSCR#{myvar}@HI.M".ts|
+  end
+  
+
 # to here..... finishing off all of the NS stuff
 
 
 
 
-  
+  #VDAY RES AND VISRES for MAU are slightly off, but they're the only ones
   ["VISJP", "VISUS", "VISRES", "VDAYUS", "VDAYRES", "VDAYJP", "VISIT", "VISDM", "VDAYDM", "VDAYIT"].each do |s_name|
     "#{s_name}@HI.M".ts_append_eval %Q|"#{s_name}@HI.M".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls"|
     add_factors = ["VISRES", "VDAYUS", "VISUS", "VDAYRES", "VISIT", "VDAYIT", "VDAYDM"]
@@ -634,6 +678,7 @@ task :visitor_series => :environment do
     end
   end
   
+  #VDAY AND VIS@HI aren't quite working. mismatches for both in sections
   "VDAY@HI.M".ts_append_eval %Q|"VDAY@HI.M".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls"|
   "VDAY@HI.M".ts_append_eval %Q|"VDAYJP@HI.M".ts + "VDAYUS@HI.M".ts + "VDAYRES@HI.M".ts|
   "VIS@HI.M".ts_eval= %Q|"VISJP@HI.M".ts + "VISUS@HI.M".ts + "VISRES@HI.M".ts|
@@ -663,6 +708,8 @@ task :kr_county_mean_correction => :environment do
 end
 
 task :other_share_and_mean_corrected_series => :environment do
+  #needs EMN up here....
+  
   "UR@HI.M".ts_eval= %Q|"URSA@HI.M".ts|
   "LF_MC@HI.M".ts_eval= %Q|"LFSA@HI.M".ts / "LFSA@HI.M".ts.annual_sum * "LFNS@HI.M".ts.annual_sum|
   "LF@HI.M".ts_append_eval %Q|"LFSA@HI.M".ts|
