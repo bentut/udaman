@@ -378,14 +378,15 @@ task :us_upd_m => :environment do
 		"RMORT@US.M" => %Q|Series.load_from_download  "US_RMORT_M@research.stlouisfed.org", { :file_type => "txt" }|, 
 		"UMCSENT@US.M" => %Q|Series.load_from_download  "US_UMCSENT_M@research.stlouisfed.org", { :file_type => "txt" }|, 
 		"YXR@JP.M" => %Q|Series.load_from_download  "JP_YXR@research.stlouisfed.org", { :file_type => "txt" }|,
-	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|,
+	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|,
 	
 	}
 	
 	
 	us_m_special = {
 	
-	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|
+	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|
+		#STKNS starts on row 3 rather than row 2 to capture only fully-completed months
 		
 	}
 	

@@ -154,7 +154,7 @@ task :jp_upd_m => :environment do
 		"IPNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPMN@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPMNNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|,
-		"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|
+		"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|
 	
 	}
 	
@@ -163,7 +163,8 @@ task :jp_upd_m => :environment do
 	"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
 	"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
 	"CPICORE@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 47, :frequency => "M" }|, 
-	"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 2, :start_col => 1, :rev => true , :row => "increment:2:1", :col => "7", :frequency => "M" }|
+	"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|
+		#STKNS starts on row 3 rather than row 2 to capture only fully-completed months
 	
 	}
 	
