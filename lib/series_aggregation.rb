@@ -37,6 +37,7 @@ module SeriesAggregation
       aggregated_data[date.send(frequency_method)].push self.at(date_string) unless self.at(date_string).nil?
     end
     
+    puts frequency
     # Prune out any incomplete aggregated groups
     aggregated_data.delete_if {|key,value| value.count != 6} if frequency == :semi and self.frequency == :month
     aggregated_data.delete_if {|key,value| value.count != 3} if frequency == :quarter and self.frequency == :month

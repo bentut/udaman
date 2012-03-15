@@ -102,7 +102,6 @@ class AremosSeries < ActiveRecord::Base
     end
 
     def AremosSeries.read_date_info(line)
-      puts line
       aremos_update = Date.strptime line[32..39].gsub(/ /,""), "%m/%d/%y"
       return { :aremos_update=> aremos_update, :start => line[44..51], :end => line[52..59], :frequency => line[60..60] }
     end
@@ -146,7 +145,7 @@ class AremosSeries < ActiveRecord::Base
         :aremos_update_date => series_hash[:aremos_update],
         :updated_at => Time.now
       ) unless s.nil? or s.aremos_update_date == series_hash[:aremos_update]
-      
+      #the problem with this check is that if there are multiple updates in a day, only one will be read, so entire database needs to be cleared
       
       #puts "skipped #{series_hash[:name]}.#{series_hash[:frequency]}" if s.nil? and s.aremos_update_date == series_hash[:aremos_update]
             
@@ -172,7 +171,6 @@ class AremosSeries < ActiveRecord::Base
       ActiveRecord::Base.transaction do
         while (line = file.gets)
           if just_read_series_name
-            puts "Just Read Series Name"
             series_hash.merge!(read_date_info(line))
             just_read_series_name = false
           else
