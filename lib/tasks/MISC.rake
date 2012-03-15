@@ -100,6 +100,11 @@ task :const_upd_m => :environment do
 		"KPPRVCOMNS@KAU.M" => %Q|Series.load_from_download(  "CONST_KAU@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 43, :frequency => "M" })/1000|, 
 		"KPPRVADDNS@KAU.M" => %Q|Series.load_from_download(  "CONST_KAU@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 44, :frequency => "M" })/1000|, 
 		"PICTSGFNS@US.M" => %Q|Series.load_from_download(  "CONST_PICT@census.gov", { :file_type => "xls", :start_date => "1964-01-01", :sheet => "fixed", :row => "block:7:1:12", :col => "repeat_with_step:7:29:2", :frequency => "M" })|,
+	
+	}
+	
+	
+	const_m_nowrite = {
 		"KPPRVNRSDNS@HI.M" => %Q|"KPPRVNS@HI.M".ts - "KPPRVRSDNS@HI.M".ts|,
 		"KPPRVNRSDNS@HON.M" => %Q|"KPPRVNS@HON.M".ts - "KPPRVRSDNS@HON.M".ts|,
 		"KPPRVNRSDNS@HAW.M" => %Q|"KPPRVNS@HAW.M".ts - "KPPRVRSDNS@HAW.M".ts|,
@@ -110,11 +115,17 @@ task :const_upd_m => :environment do
 		"KPPRVCOMNS@NBI.M" => %Q|"KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts + "KPPRVCOMNS@KAU.M".ts|,
 		"KPPRVADDNS@NBI.M" => %Q|"KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts + "KPPRVADDNS@KAU.M".ts|,
 		"KPPRVNRSDNS@NBI.M" => %Q|"KPPRVNRSDNS@HAW.M".ts + "KPPRVNRSDNS@MAU.M".ts + "KPPRVNRSDNS@KAU.M".ts|
-
 	
+		
 	}
+	
 	
 	p = Packager.new
 	p.add_definitions const_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"
+
+	p = Packager.new
+	p.add_definitions const_m_nowrite
+	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/const_upd_m_ID.xls"
+
 end
