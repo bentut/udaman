@@ -733,7 +733,7 @@ end
 task :other_share_and_mean_corrected_series => :environment do
   #needs EMN up here....
   
-  #ISSUES
+  #now all good except for last data point on EMPL
   "UR@HI.M".ts_eval= %Q|"URSA@HI.M".ts|
   "LF_MC@HI.M".ts_eval= %Q|"LFSA@HI.M".ts / "LFSA@HI.M".ts.annual_sum * "LFNS@HI.M".ts.annual_sum|
   "LF@HI.M".ts_append_eval %Q|"LFSA@HI.M".ts|
@@ -741,30 +741,32 @@ task :other_share_and_mean_corrected_series => :environment do
   "EMPL_MC@HI.M".ts_eval= %Q|"EMPLSA@HI.M".ts / "EMPLSA@HI.M".ts.annual_sum * "EMPLNS@HI.M".ts.annual_sum|
   "EMPL@HI.M".ts_append_eval %Q|"EMPLSA@HI.M".ts|
   "EMPL@HI.M".ts_append_eval %Q|"EMPL_MC@HI.M".ts|
-  "E_NF@HI.M".ts_append_eval %Q|"E_NFSA@HI.M".ts|
-  "E_NF@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "EIF@HI.M".ts + "E_FIR@HI.M".ts + "E_PBS@HI.M".ts + "E_EDHC@HI.M".ts + "E_LH@HI.M".ts + "EOS@HI.M".ts + "EGV@HI.M".ts|
   
-  #ISSUES All seem to start in 2010
+
+  #all good
+  ["ECT", "E_TTU", "E_EDHC", "E_LH", "EOS", "EGV", "EWT", "ERT", "E_FIR", "ERE", "E_PBS", "EPS", "EED", "EHC", "EAE", "EAF", "EGVFD", "EGVST", "EGVLC"].each do |list|
+    "#{list}@HI.M".ts_append_eval %Q|"#{list}SA@HI.M".ts|
+  end
+  
   "EAFAC@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average)|
   "EAFAC@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
   "EAFFD@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average)|
   "EAFFD@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
-  
-  #ISSUES All seem to start in 2010
+
   "EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
   "EAD@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EADNS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
 
-  #ISSUES ALL THE WAY UP
   "EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
   "EMN@HI.M".ts.apply_seasonal_adjustment :multiplicative
   "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
   "EIF@HI.M".ts.apply_seasonal_adjustment :multiplicative
   "EFI@HI.M".ts_eval= %Q|"E_FIR@HI.M".ts - "ERE@HI.M".ts|
-  "E_TU@HI.M".ts_eval= %Q|"E_TTU@HI.M".ts - "E_TRADE@HI.M".ts|
   
-  ["ECT", "E_TTU", "E_EDHC", "E_LH", "EOS", "EGV", "EWT", "ERT", "E_FIR", "ERE", "E_PBS", "EPS", "EED", "EHC", "EAE", "EAF", "EGVFD", "EGVST", "EGVLC"].each do |list|
-    "#{list}@HI.M".ts_append_eval %Q|"#{list}SA@HI.M".ts|
-  end
+  "E_TRADE@HI.M".ts_append_eval %Q|"EWT@HI.M".ts + "ERT@HI.M".ts| 
+  "E_TU@HI.M".ts_eval= %Q|"E_TTU@HI.M".ts - "E_TRADE@HI.M".ts|
+      
+  "E_NF@HI.M".ts_append_eval %Q|"E_NFSA@HI.M".ts|
+  "E_NF@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "EIF@HI.M".ts + "E_FIR@HI.M".ts + "E_PBS@HI.M".ts + "E_EDHC@HI.M".ts + "E_LH@HI.M".ts + "EOS@HI.M".ts + "EGV@HI.M".ts|
   
   #originally had EAF below, but now it seems it is totally overwritten by special identity below
   ["LF", "EMPL","ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGV", "EGVST", "EGVLC", "EGVFD", "E_LH", "E_PBS", "E_FIR", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|

@@ -75,6 +75,13 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HON"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HAW"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "MAU"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "KAU"
+  
+  
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/gsp_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_job_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
