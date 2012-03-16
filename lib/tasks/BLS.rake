@@ -126,31 +126,8 @@ task :bls_job_upd_m => :environment do
 	#because HIWI releases the data a week before BLS. 
 	#once BLS releases official values, these will be overwritten
 
-		"LFNS@HI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@HI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@HI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@HON.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@HON.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@HON.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@HAW.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Hawaii Cty", :row => "increment:36:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@HAW.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Hawaii Cty", :row => "increment:36:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@HAW.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Hawaii Cty", :row => "increment:36:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@KAU.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Kauai Cty", :row => "increment:36:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@KAU.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Kauai Cty", :row => "increment:36:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@KAU.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Kauai Cty", :row => "increment:36:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@MAU.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Maui Cty", :row => "increment:36:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@MAU.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Maui Cty", :row => "increment:36:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@MAU.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Maui Cty", :row => "increment:36:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@MAUI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Maui Isl", :row => "increment:37:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@MAUI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Maui Isl", :row => "increment:37:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@MAUI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Maui Isl", :row => "increment:37:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@MOL.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Molokai", :row => "increment:37:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@MOL.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Molokai", :row => "increment:37:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@MOL.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Molokai", :row => "increment:37:1", :col =>6, :frequency => "M' })/1|, 
-		"LFNS@LAN.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Lanai", :row => "increment:51:1", :col =>3, :frequency => "M' })/1|, 
-		"EMPLNS@LAN.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Lanai", :row => "increment:51:1", :col =>4, :frequency => "M' })/1|, 
-		"URNS@LAN.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "XLS", :start_date => "1990-01-01", :sheet => "Lanai", :row => "increment:51:1", :col =>6, :frequency => "M' })/1|, 
-
+		
+		
 
     "E_NFSA@HI.M" => %Q|Series.load_from_bls("SMS15000000000000001", "M")|,
     "ECTSA@HI.M" => %Q|Series.load_from_bls("SMS15000001500000001", "M")|,
@@ -176,24 +153,57 @@ task :bls_job_upd_m => :environment do
 
     # divide these all by 1000?
     "EMPLSA@HI.M" => %Q|Series.load_from_bls("LASST15000005", "M")|,
-    "EMPLNS@HI.M" => %Q|Series.load_from_bls("LAUST15000005", "M")|,
-    "EMPLNS@HON.M" => %Q|Series.load_from_bls("LAUPS15007005", "M")|,
-    "EMPLNS@HAW.M" => %Q|Series.load_from_bls("LAUPA15010005", "M")|,
-    "EMPLNS@MAU.M" => %Q|Series.load_from_bls("LAUPA15015005", "M")|,
-    "EMPLNS@KAU.M" => %Q|Series.load_from_bls("LAUCN15007005", "M")|,
-   "LFSA@HI.M" => %Q|Series.load_from_bls("LASST15000006", "M")|,
-    "LFNS@HI.M" => %Q|Series.load_from_bls("LAUST15000006", "M")|,
-    "LFNS@HON.M" => %Q|Series.load_from_bls("LAUPS15007006", "M")|,
-    "LFNS@HAW.M" => %Q|Series.load_from_bls("LAUPA15010006", "M")|,
-    "LFNS@MAU.M" => %Q|Series.load_from_bls("LAUPA15015006", "M")|,
-    "LFNS@KAU.M" => %Q|Series.load_from_bls("LAUCN15007006", "M")|,
+    
+    "EMPLNS@HI.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>4, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUST15000005", "M")|],
+    "EMPLNS@HON.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>4, :frequency => "M"})/1|] ,
+    	#%Q|Series.load_from_bls("LAUPS15007005", "M")|],
+    "EMPLNS@HAW.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Hawaii Cty", :row => "increment:36:1", :col =>4, :frequency => "M"})/1|] ,
+    	#%Q|Series.load_from_bls("LAUPA15010005", "M")|],
+    "EMPLNS@MAU.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Maui Cty", :row => "increment:36:1", :col =>4, :frequency => "M"})/1|],
+    	#%Q|Series.load_from_bls("LAUPA15015005", "M")|],
+    "EMPLNS@KAU.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Kauai Cty", :row => "increment:36:1", :col =>4, :frequency => "M"})/1|] ,
+    	#%Q|Series.load_from_bls("LAUCN15007005", "M")|],
+    #"EMPLNS@MAUI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Maui Isl", :row => "increment:37:1", :col =>4, :frequency => "M"})/1|, 
+    #"EMPLNS@MOL.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Molokai", :row => "increment:37:1", :col =>4, :frequency => "M"})/1|, 
+    #"EMPLNS@LAN.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Lanai", :row => "increment:51:1", :col =>4, :frequency => "M"})/1|, 
+    
+    
+    "LFSA@HI.M" => %Q|Series.load_from_bls("LASST15000006", "M")|,
+   
+    "LFNS@HI.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>3, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUST15000006", "M")|],
+    "LFNS@HON.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>3, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUPS15007006", "M")|],
+    "LFNS@HAW.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Hawaii Cty", :row => "increment:36:1", :col =>3, :frequency => "M"})/1|],
+    	#%Q|Series.load_from_bls("LAUPA15010006", "M")|],
+    "LFNS@MAU.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Maui Cty", :row => "increment:36:1", :col =>3, :frequency => "M"})/1|],
+    	#%Q|Series.load_from_bls("LAUPA15015006", "M")|],
+    "LFNS@KAU.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Kauai Cty", :row => "increment:36:1", :col =>3, :frequency => "M"})/1|],
+    	#%Q|Series.load_from_bls("LAUCN15007006", "M")|],
+    #"LFNS@MAUI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Maui Isl", :row => "increment:37:1", :col =>3, :frequency => "M"})/1|, 
+    #"LFNS@MOL.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Molokai", :row => "increment:37:1", :col =>3, :frequency => "M"})/1|, 
+    #"LFNS@LAN.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Lanai", :row => "increment:51:1", :col =>3, :frequency => "M"})/1|, 
+
+
 
    "URSA@HI.M" => %Q|Series.load_from_bls("LASST15000003", "M")|,
-    "URNS@HI.M" => %Q|Series.load_from_bls("LAUST15000003", "M")|,
-    "URNS@HON.M" => %Q|Series.load_from_bls("LAUPS15007003", "M")|,
-    "URNS@HAW.M" => %Q|Series.load_from_bls("LAUPA15010003", "M")|,
-    "URNS@MAU.M" => %Q|Series.load_from_bls("LAUPA15015003", "M")|,
-    "URNS@KAU.M" => %Q|Series.load_from_bls("LAUCN15007003", "M")|,
+   
+    "URNS@HI.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>6, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUST15000003", "M")|],
+    "URNS@HON.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>6, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUPS15007003", "M")|],
+    "URNS@HAW.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Hawaii Cty", :row => "increment:36:1", :col =>6, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUPA15010003", "M")|],
+    "URNS@MAU.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Maui Cty", :row => "increment:36:1", :col =>6, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUPA15015003", "M")|],
+    "URNS@KAU.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Kauai Cty", :row => "increment:36:1", :col =>6, :frequency => "M"})/1|], 
+    	#%Q|Series.load_from_bls("LAUCN15007003", "M")|],
+    #"URNS@MAUI.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Maui Isl", :row => "increment:37:1", :col =>6, :frequency => "M"})/1|, 
+    #"URNS@MOL.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Molokai", :row => "increment:37:1", :col =>6, :frequency => "M"})/1|, 
+    #"URNS@LAN.M" => %Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Lanai", :row => "increment:51:1", :col =>6, :frequency => "M"})/1|, 
+    
+    
     "WWCTNS@HI.M" => %Q|Series.load_from_bls("SMU15000001500000030", "M")|,
     "WHCTNS@HI.M" => %Q|Series.load_from_bls("SMU15000001500000008", "M")|,
     "WWMNNS@HI.M" => %Q|Series.load_from_bls("SMU15000003000000030", "M")|,

@@ -75,6 +75,7 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI_Q"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HON"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HAW"
@@ -91,6 +92,7 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/TOUR_OCUP.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
 
   Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
   Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls", "sadata" 

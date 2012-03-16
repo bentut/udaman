@@ -37,14 +37,13 @@ module SeriesAggregation
       aggregated_data[date.send(frequency_method)].push self.at(date_string) unless self.at(date_string).nil?
     end
     
-    puts frequency
     # Prune out any incomplete aggregated groups
-    aggregated_data.delete_if {|key,value| value.count != 6} if frequency == :semi and self.frequency == :month
-    aggregated_data.delete_if {|key,value| value.count != 3} if frequency == :quarter and self.frequency == :month
-    aggregated_data.delete_if {|key,value| value.count != 12} if frequency == :year and self.frequency == :month
-    aggregated_data.delete_if {|key,value| value.count != 4} if frequency == :year and self.frequency == :quarter
-    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :semi and self.frequency == :quarter    
-    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :year and self.frequency == :semi
+    aggregated_data.delete_if {|key,value| value.count != 6} if frequency == :semi and self.frequency == "month"
+    aggregated_data.delete_if {|key,value| value.count != 3} if frequency == :quarter and self.frequency == "month"
+    aggregated_data.delete_if {|key,value| value.count != 12} if frequency == :year and self.frequency == "month"
+    aggregated_data.delete_if {|key,value| value.count != 4} if frequency == :year and self.frequency == "quarter"
+    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :semi and self.frequency == "quarter"    
+    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :year and self.frequency == "semi"
 
     
     return aggregated_data
@@ -52,10 +51,14 @@ module SeriesAggregation
   
   def validate_aggregation(frequency)
     # The following represent invalid aggregation transitions
-    raise AggregationException.new if self.frequency == :year
-    raise AggregationException.new if self.frequency == :semi  and (frequency == :month or frequency == :quarter or frequency == :semi)
-    raise AggregationException.new if self.frequency == :quarter and (frequency == :month or frequency == :quarter)
-    raise AggregationException.new if self.frequency == :month and frequency == :month
+    # puts "self:#{self.frequency}:#{self.frequency.class}"
+    # puts "frequency:#{frequency}:#{frequency.class}"
+
+    raise AggregationException.new if ["year", "semi", "quarter", "month"].index(self.frequency).nil?
+    raise AggregationException.new if self.frequency == "year"
+    raise AggregationException.new if self.frequency == "semi"  and (frequency == :month or frequency == :quarter or frequency == :semi)
+    raise AggregationException.new if self.frequency == "quarter" and (frequency == :month or frequency == :quarter)
+    raise AggregationException.new if self.frequency == "month" and frequency == :month
   end
   
 end
