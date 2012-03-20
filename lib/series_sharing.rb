@@ -155,8 +155,8 @@ module SeriesSharing
 #    county_sum.print
     state = "#{series_prefix}NS@HI.M".ts 
 #    state.print
-    historical = "#{series_prefix}NS@#{county_abbrev}.M".ts.annual_average / county_sum.annual_average * self
-    current_year = "#{series_prefix}NS@#{county_abbrev}.M".ts.backward_looking_moving_average.get_last_incomplete_year / county_sum.backward_looking_moving_average.get_last_incomplete_year * self
+    historical = "#{series_prefix}NS@#{county_abbrev}.M".ts.annual_average / state.annual_average * self
+    current_year = "#{series_prefix}NS@#{county_abbrev}.M".ts.backward_looking_moving_average.get_last_incomplete_year / state.backward_looking_moving_average.get_last_incomplete_year * self
     new_transformation("Share of #{name} using ratio of #{series_prefix}NS@#{county_abbrev}.M over #{series_prefix}NS@HI.M , using annual averages where available and a backward looking moving average for the current year",
     historical.data.series_merge(current_year.data))
   end

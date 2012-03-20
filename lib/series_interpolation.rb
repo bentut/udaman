@@ -7,7 +7,8 @@ module SeriesInterpolation
    # puts "FREQUENCY: #{frequency} - #{frequency.class}"
    # puts "SELF.FREQUENCY: #{self.frequency} - #{self.frequency.class}"
    # puts "OPERATION: #{operation} - #{operation.class}"
-    raise InterpolationException if frequency != :quarter or self.frequency != :semi or operation != :linear
+   #also needs to be ok with frequency of annual
+    #raise InterpolationException if frequency != :quarter or self.frequency != "semi" or operation != :linear
     raise InterpolationException if data.count < 2
     last = nil
     last_date = nil

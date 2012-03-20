@@ -31,12 +31,12 @@ module SeriesSeasonalAdjustment
     self.last_demetra_datestring = self.get_last_complete_december_datestring
     last_demetra_date = Date.parse self.last_demetra_datestring
     factor_comparison_start_date = last_demetra_date << 12
-    puts factor_comparison_start_date.to_s
-    puts self.last_demetra_datestring
+    #puts factor_comparison_start_date.to_s
+    #puts self.last_demetra_datestring
     last_year_of_sa_values = get_values_after(factor_comparison_start_date.to_s, self.last_demetra_datestring)
     last_year_of_sa_values.sort.each do |datestring,sa_value|
       ns_value = ns_series.at(datestring)
-      puts "#{datestring} - ns:#{ns_value} sa:#{sa_value}"
+      #puts "#{datestring} - ns:#{ns_value} sa:#{sa_value}"
       #think can just use months for both months and quarters to keep things simple
       factor_month = Date.parse(datestring).month
       self.factors[factor_month.to_s] = ns_value - sa_value if factor_application == :additive
