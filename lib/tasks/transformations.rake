@@ -801,7 +801,9 @@ task :aggregate_affordability_series => :environment do
     "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
   end
   
+  ("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)
   
+  #PMKRSGF@KAU.Q = "PMKRSGF@HON.Q".ts.share_using("PMKRSGFNS@KAU.Q".ts.backward_looking_moving_average, "PMKRSGFNS@HON.Q".ts.backward_looking_moving_average )
 end
 
 task :other_share_and_mean_corrected_series => :environment do
@@ -873,9 +875,22 @@ task :other_share_and_mean_corrected_series => :environment do
   end
   
   "E_NF@HON.M".ts_append_eval %Q|"E_NF@HON.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/bls_sa_history.xls"|
+  "EGVFD@HON.M".ts_eval= %Q|"EGVFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EGVST@HON.M".ts_eval= %Q|"EGVST@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EGVLC@HON.M".ts_eval= %Q|"EGVLC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EMN@HON.M".ts_eval= %Q|"EMN@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "ECT@HON.M".ts_eval= %Q|"ECT@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EAFAC@HON.M".ts_eval= %Q|"EAFAC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EAFFD@HON.M".ts_eval= %Q|"EAFFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "ERE@HON.M".ts_eval= %Q|"ERE@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EFI@HON.M".ts_eval= %Q|"EFI@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "E_TU@HON.M".ts_eval= %Q|"E_TU@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EHC@HON.M".ts_eval= %Q|"EHC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   
   ["HON", "HAW", "MAU", "KAU"].each do |county|
     puts county
+    
+
     "E_GVSL@#{county}.M".ts_append_eval %Q|"EGVST@#{county}.M".ts + "EGVLC@#{county}.M".ts|     
     "EGV@#{county}.M".ts_eval= %Q|"EGV@HI.M".ts.aa_state_based_county_share_for("#{county}")|
     "EGV@#{county}.M".ts_append_eval      %Q|"EGVFD@#{county}.M".ts + "E_GVSL@#{county}.M".ts|

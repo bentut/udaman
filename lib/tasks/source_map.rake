@@ -86,6 +86,7 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"
   #-----------------------------
   
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SQ5NHistory.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/gsp_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_job_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
