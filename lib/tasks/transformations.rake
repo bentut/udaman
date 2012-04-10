@@ -75,7 +75,7 @@ task :cruise_visitors_1 => :environment do
 end
 
 task :cruise_visitors_2 => :environment do
-  "VDAYCRAIRNS@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts / "VLOSCRAIRNS@HI.M".ts|
+  "VDAYCRAIRNS@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts * "VLOSCRAIRNS@HI.M".ts|
   
   ["HON", "HAW", "KAU", "MAU"].each do |cnty|
     "VDAYCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRAIRNS@#{cnty}.M".ts * "VLOSCRNS@HI.M".ts / 4|
@@ -608,9 +608,6 @@ task :visitor_series => :environment do
     "VISRESNS@#{cnty}.M".ts_eval= %Q|"VISNS@#{cnty}.M".ts - "VISUSNS@#{cnty}.M".ts - "VISJPNS@#{cnty}.M".ts|
   end
 
-
-
-
   "VRLSCRAIRNS@HI.M".ts_eval= %Q|"VLOSCRDRNS@HI.M".ts|
   "VLOSCRAIRNS@HI.M".ts_eval= %Q|"VLOSCRDRNS@HI.M".ts|
   "VLOSCRNDNS@HI.M".ts_eval= %Q|"VLOSCRNS@HI.M".ts - "VLOSCRDRNS@HI.M".ts|
@@ -619,8 +616,7 @@ task :visitor_series => :environment do
     "VISCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRNS@#{cnty}.M".ts * "VISCRAIRNS@HI.M".ts / "VISCRNS@HI.M".ts|
   end
   
-  #this one is way off... might be a problem in AREMOS or definition could be wrong
-  "VDAYCRAIRNS@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts / "VLOSCRAIRNS@HI.M".ts|
+  "VDAYCRAIRNS@HI.M".ts_eval= %Q|"VISCRAIRNS@HI.M".ts * "VLOSCRAIRNS@HI.M".ts|
   
   ["HON", "HAW", "KAU", "MAU"].each do |cnty|
     "VDAYCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRAIRNS@#{cnty}.M".ts * "VLOSCRNS@HI.M".ts / 4|
@@ -662,8 +658,9 @@ task :visitor_series => :environment do
   end
   
   #weird one off of history? maybe ns doesn't go that far back or something
-  "VEXPPTOT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
-
+  "VEXPPTOT@HI.M".ts_eval= %Q|"VEXPPTOT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VEXPPDOT@HI.M".ts_eval= %Q|"VEXPPDOT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  
   ["VISUSW", "VISUSE", "VISCAN", "VEXPPTUSW", "VS", "VDAYCAN", "VEXPPT", "VEXPCAN", "VSDM", "VEXPPTOT", "VEXPUS", "VEXPPTUSE", "VEXP", "VEXPPDUSW", "VEXPPTJP", "VISCR", "VEXPPDUS", "VEXPOT", "VEXPPDOT", "VEXPPDOT", "VISCRAIR", "VEXPUSW", "VEXPPTCAN", 'VEXPPDUSE', "VEXPJP", "VEXPPD", "VDAYUSE", "VEXPPDCAN", "VDAYUSW", "VEXPUSE"].each do |s_name|
     "#{s_name}@HI.M".ts_append_eval %Q|"#{s_name}@HI.M".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls"|
     add_factors = ["VISUSE", "VEXPUS", "VEXPPTUSE", "VEXP", "VEXPPDUSW", "VISCR", "VEXPPDUS", "VEXPOT", "VEXPPDOT", "VEXPPDOT", "VISCRAIR", "VEXPUSW", "VEXPPTCAN", 'VEXPPDUSE', "VEXPJP", "VEXPPD", "VDAYUSE", "VEXPPDCAN", "VDAYUSW", "VEXPUSE"]
@@ -703,6 +700,36 @@ task :visitor_series => :environment do
     "VIS@#{county}.A".ts_eval= %Q|"VIS@#{county}.M".ts.aggregate(:year, :sum)|
   end
   
+  "VLOS@HI.M".ts_eval=      %Q|"VDAY@HI.M".ts / "VIS@HI.M".ts|
+  
+  "VSO@HI.M".ts_eval= %Q|"VSO@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VSO@HI.M".ts_eval= %Q|"VSO@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VSO@HI.M".ts_eval= %Q|"VSO@HI.M".ts.apply_seasonal_adjustment :multiplicative|
+  
+  "VSODM@HI.M".ts_eval= %Q|"VSODM@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VSODM@HI.M".ts_eval= %Q|"VSODM@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VSODM@HI.M".ts_eval= %Q|"VSODM@HI.M".ts.apply_seasonal_adjustment :multiplicative|
+  
+  
+  "VLOSCRAIR@HI.M".ts_eval= %Q|"VLOSCRAIR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VLOSCRAIR@HI.M".ts_eval= %Q|"VLOSCRAIR@HI.M".ts.apply_seasonal_adjustment :additive|
+  
+  "VEXPPTUS@HI.M".ts_eval= %Q|"VEXPPTUS@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VEXPPTUS@HI.M".ts_eval= %Q|"VEXPPTUS@HI.M".ts.apply_seasonal_adjustment :multiplicative|
+  
+  "VEXPPDJP@HI.M".ts_eval= %Q|"VEXPPDJP@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "VEXPPDJP@HI.M".ts_eval= %Q|"VEXPPDJP@HI.M".ts.apply_seasonal_adjustment :additive|
+  
+  #separate section for these...?
+  ["HON", "HI", "KAU", "MAU", "HAW"].each do |cnty|
+   "OCUP%NS@#{cnty}.Q".ts_eval= %Q|"OCUP%NS@#{cnty}.M".ts.aggregate(:quarter, :average)|
+   "RMRVNS@#{cnty}.Q".ts_eval= %Q|"RMRVNS@#{cnty}.M".ts.aggregate(:quarter, :average)|
+   "PRMNS@#{cnty}.Q".ts_eval= %Q|"PRMNS@#{cnty}.M".ts.aggregate(:quarter, :average)|
+  end 
+ 
+  "OCUP%@HI.Q".ts_eval= %Q|"OCUP%@HI.M".ts.aggregate(:quarter, :average)|
+  "RMRV@HI.Q".ts_eval= %Q|"RMRV@HI.M".ts.aggregate(:quarter, :average)|
+  "PRM@HI.Q".ts_eval= %Q|"PRM@HI.M".ts.aggregate(:quarter, :average)|
 end
 
 
@@ -716,9 +743,21 @@ task :kr_county_mean_correction => :environment do
   end
   
   ["KRSGFNS", "KRCONNS"].each do |s_name|
-    ["HON", "HAW", "MAU", "KAU"].each do |county|
+    ["HAW", "MAU", "KAU"].each do |county|
       "#{s_name}@#{county}.Q".ts_eval= %Q|"#{s_name}@HI.Q".ts.share_using("#{s_name}_NMC@#{county}.Q".ts, "#{s_name}_NMC@HON.Q".ts + "#{s_name}_NMC@HAW.Q".ts + "#{s_name}_NMC@MAU.Q".ts + "#{s_name}_NMC@KAU.Q".ts).round|
     end
+    "#{s_name}_SHARED@HON.Q".ts_eval= %Q|"#{s_name}@HI.Q".ts.share_using("#{s_name}_NMC@HON.Q".ts, "#{s_name}_NMC@HON.Q".ts + "#{s_name}_NMC@HAW.Q".ts + "#{s_name}_NMC@MAU.Q".ts + "#{s_name}_NMC@KAU.Q".ts).round|
+  end
+
+  ["KRSGFNS", "KRCONNS"].each do |s_name|
+    "#{s_name}_SUM@HI.Q".ts_eval= %Q|"#{s_name}_SHARED@HON.Q".ts + "#{s_name}@MAU.Q".ts + "#{s_name}@KAU.Q".ts + "#{s_name}@HAW.Q".ts|
+    "#{s_name}_ERR@HI.Q".ts_eval= %Q|"#{s_name}@HI.Q".ts - "#{s_name}_SUM@HI.Q".ts|
+    ["HAW", "MAU", "KAU"].each do |cnty|
+      "#{s_name}_TEMP@#{cnty}.Q".ts_eval= %Q|("#{s_name}@#{cnty}.Q".ts + ("#{s_name}@#{cnty}.Q".ts/"#{s_name}_SUM@HI.Q".ts)*"#{s_name}_ERR@HI.Q".ts).round|
+    end
+    "#{s_name}_TEMP@HON.Q".ts_eval= %Q|("#{s_name}_SHARED@HON.Q".ts + ("#{s_name}_SHARED@HON.Q".ts/"#{s_name}_SUM@HI.Q".ts)*"#{s_name}_ERR@HI.Q".ts).round|
+    "#{s_name}_NEWERR@HI.Q".ts_eval= %Q|"#{s_name}@HI.Q".ts - ("#{s_name}_TEMP@HON.Q".ts + "#{s_name}_TEMP@HAW.Q".ts + "#{s_name}_TEMP@MAU.Q".ts + "#{s_name}_TEMP@KAU.Q".ts)|
+    "#{s_name}@HON.Q".ts_eval= %Q|"#{s_name}_TEMP@HON.Q".ts + "#{s_name}_NEWERR@HI.Q".ts|
   end
   
 end
@@ -784,6 +823,11 @@ task :aggregate_affordability_series => :environment do
   "Y_R@HI.Q".ts_eval= %Q|"Y@HI.Q".ts / "CPI@HON.Q".ts  * 100|
   #{}"Y_R@HI.Q".ts_eval=       %Q|"Y@HI.Q".ts / "CPI@HON.Q".ts.rebase("2010-01-01") * 100|
   
+  # "YL_OT@HI.A".ts_eval= %Q|"YLMA@HI.A".ts + "YLAD@HI.A".ts + "YLOS@HI.A".ts|
+  # "YL_OT@KAU.A".ts_eval= %Q|"YLMA@KAU.A".ts + "YLAD@KAU.A".ts + "YLOS@KAU.A".ts|
+  # "YL_OT@MAU.A".ts_eval= %Q|"YLMA@MAU.A".ts + "YLAD@MAU.A".ts + "YLOS@MAU.A".ts|
+  # "YL_OT@HON.A".ts_eval= %Q|"YLMA@HON.A".ts + "YLAD@HON.A".ts + "YLOS@HON.A".ts|
+  # "YL_OT@HAW.A".ts_eval= %Q|"YLMA@HAW.A".ts + "YLAD@HAW.A".ts + "YLOS@HAW.A".ts|
   
   #these don't match
   "PAKRSGF@HI.Q".ts_eval= %Q|(("PAKRSGFNS@HON.Q".ts * "KRSGFNS@HON.Q".ts) + ("PAKRSGFNS@HAW.Q".ts * "KRSGFNS@HAW.Q".ts) + ("PAKRSGFNS@MAU.Q".ts * "KRSGFNS@MAU.Q".ts)  + ("PAKRSGFNS@KAU.Q".ts * "KRSGFNS@KAU.Q".ts))/ "KRSGFNS@HI.Q".ts|
@@ -794,8 +838,13 @@ task :aggregate_affordability_series => :environment do
   "PAKRCONNS@HI.Q".ts_eval= %Q|"PAKRCON@HI.Q".ts|
 
 
-  "YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
-
+  #{}"YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
+  "YPCBEA_R@HI.A".ts_eval="YPCBEA@HI.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@KAU.A".ts_eval="YPCBEA@KAU.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@MAU.A".ts_eval="YPCBEA@MAU.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@HAW.A".ts_eval="YPCBEA@HAW.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@HON.A".ts_eval= "YPCBEA@HON.A".ts / "CPI@HON.A".ts
+  
   ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty|
     "Y_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / "CPI@HON.A".ts|
     "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
@@ -803,6 +852,10 @@ task :aggregate_affordability_series => :environment do
   
   ("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)
   
+  
+  "PMKRCON@HON.Q".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/prud/seasadj/prud_sa.xls", "prud_sa" 
+  "PMKRSGF@HON.Q".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/prud/seasadj/prud_sa.xls", "prud_sa" 
+  # fixed these, but still can't figure the other ones out
   #PMKRSGF@KAU.Q = "PMKRSGF@HON.Q".ts.share_using("PMKRSGFNS@KAU.Q".ts.backward_looking_moving_average, "PMKRSGFNS@HON.Q".ts.backward_looking_moving_average )
 end
 
@@ -832,12 +885,29 @@ task :other_share_and_mean_corrected_series => :environment do
   "EMPL_MC@HI.M".ts_eval= %Q|"EMPLSA@HI.M".ts / "EMPLSA@HI.M".ts.annual_sum * "EMPLNS@HI.M".ts.annual_sum|
   "EMPL@HI.M".ts_append_eval %Q|"EMPLSA@HI.M".ts|
   "EMPL@HI.M".ts_append_eval %Q|"EMPL_MC@HI.M".ts|
-  
 
+  ["LF", "EMPL"].each do |s_name|
+    ["HON", "HAW", "MAU", "KAU"].each do |county|
+      puts "distributing #{s_name}, #{county}"
+      #this should work but might need to be (or might be more efficient as) a backward looking moving average SA@HI * NS@CNTY.blma / NS@
+      #{}"#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.aa_state_based_county_share_for("#{county}")| #this should work but might need to be (or might be more efficient as)
+      "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}_MC@HI.M".ts.share_using("#{s_name}NS@#{county}.M".ts, "#{s_name}NS@HI.M".ts)|
+      "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.share_using("#{s_name}NS@#{county}.M".ts.backward_looking_moving_average.trim,"#{s_name}NS@HI.M".ts.backward_looking_moving_average.trim)| 
+    end
+  end
+  
+  ["HON", "HAW", "MAU", "KAU"].each do |county|
+    puts "distributing UR, #{county}"
+    ("UR@#{county}.M".ts_eval= %Q|(("EMPL@#{county}.M".ts / "LF@#{county}.M".ts) * -1 + 1)*100|) rescue puts "problem with UR, #{county}"
+  end
+  
+  
   #all good... now EGVST is broken
   ["ECT", "E_TTU", "E_EDHC", "E_LH", "EOS", "EGV", "EWT", "ERT", "E_FIR", "ERE", "E_PBS", "EPS", "EED", "EHC", "EAE", "EAF", "EGVFD", "EGVST", "EGVLC"].each do |list|
     "#{list}@HI.M".ts_append_eval %Q|"#{list}SA@HI.M".ts|
   end
+  
+  "E_GVSL@HI.M".ts_eval= %Q|"EGVST@HI.M".ts + "EGVLC@HI.M".ts| 
   
   "EAFAC@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average)|
   "EAFAC@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
@@ -850,9 +920,9 @@ task :other_share_and_mean_corrected_series => :environment do
   "EAD@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EADNS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)|
   
   "EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
-  "EMN@HI.M".ts.apply_seasonal_adjustment :multiplicative
+  "EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.apply_seasonal_adjustment :multiplicative|
   "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
-  "EIF@HI.M".ts.apply_seasonal_adjustment :multiplicative
+  "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.apply_seasonal_adjustment :additive|
   "EFI@HI.M".ts_eval= %Q|"E_FIR@HI.M".ts - "ERE@HI.M".ts|
   
   "E_TRADE@HI.M".ts_append_eval %Q|"EWT@HI.M".ts + "ERT@HI.M".ts| 
@@ -866,7 +936,7 @@ task :other_share_and_mean_corrected_series => :environment do
 #  ["EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
 
   ["EGV", "ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
-  #["EMA", "EAD"].each do |s_name|
+  #["EIF"].each do |s_name|
     
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       puts "distributing #{s_name}, #{county}"
@@ -874,7 +944,7 @@ task :other_share_and_mean_corrected_series => :environment do
     end
   end
   
-  "E_NF@HON.M".ts_append_eval %Q|"E_NF@HON.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/bls_sa_history.xls"|
+  "E_NF@HON.M".ts_append_eval %Q|"E_NF@HON.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/bls_sa_history.xls", "Demetra_Results_fa"|
   "EGVFD@HON.M".ts_eval= %Q|"EGVFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EGVST@HON.M".ts_eval= %Q|"EGVST@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EGVLC@HON.M".ts_eval= %Q|"EGVLC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
@@ -892,8 +962,8 @@ task :other_share_and_mean_corrected_series => :environment do
     
 
     "E_GVSL@#{county}.M".ts_append_eval %Q|"EGVST@#{county}.M".ts + "EGVLC@#{county}.M".ts|     
-    "EGV@#{county}.M".ts_eval= %Q|"EGV@HI.M".ts.aa_state_based_county_share_for("#{county}")|
-    "EGV@#{county}.M".ts_append_eval      %Q|"EGVFD@#{county}.M".ts + "E_GVSL@#{county}.M".ts|
+    "EGV@#{county}.M".ts_eval= %Q|"EGV@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1959-12-01","1989-12-01")| 
+    "EGV@#{county}.M".ts_append_eval      %Q|("EGVFD@#{county}.M".ts + "E_GVSL@#{county}.M".ts).trim("1989-12-01")|
     "EAF@#{county}.M".ts_eval=            %Q|"EAFAC@#{county}.M".ts + "EAFFD@#{county}.M".ts|
     #underlying EAE has problems with new read and history
     "E_LH@#{county}.M".ts_append_eval     %Q|"EAE@#{county}.M".ts + "EAF@#{county}.M".ts|
@@ -908,7 +978,7 @@ task :other_share_and_mean_corrected_series => :environment do
 
     "E_NF@#{county}.M".ts_append_eval %Q|"E_NF@HI.M".ts.aa_county_share_for("#{county}")|
     #one of the component series is not adding up and we're not sure which one. probably need to check all of them against aremos
-    #when E_LH is fixed maybe this will work
+    #when E_LH is fixed maybe this will work #EMN needs to be fixed too
     "E_NF@#{county}.M".ts_append_eval %Q|"ECT@#{county}.M".ts + "EMN@#{county}.M".ts + "E_TTU@#{county}.M".ts + "EIF@#{county}.M".ts + "E_FIR@#{county}.M".ts + "E_PBS@#{county}.M".ts + "E_EDHC@#{county}.M".ts + "E_LH@#{county}.M".ts + "EOS@#{county}.M".ts + "EGV@#{county}.M".ts|
     
     "E_PR@#{county}.M".ts_append_eval %Q|"E_NF@#{county}.M".ts - "EGV@#{county}.M".ts| 
@@ -924,11 +994,7 @@ task :other_share_and_mean_corrected_series => :environment do
   #   end
   # end
   
-  ["HON", "HAW", "MAU", "KAU"].each do |county|
-    puts "distributing UR, #{county}"
-    ("UR@#{county}.M".ts_eval= %Q|(("EMPL@#{county}.M".ts / "LF@#{county}.M".ts) * -1 + 1)*100|) rescue puts "problem with UR, #{county}"
-  end
-  
+
 
   
   

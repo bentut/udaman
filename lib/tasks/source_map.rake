@@ -93,14 +93,18 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sic_detail.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls" #also manual? not sure if we need both, or one one screws up the other?
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hiwi_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/v_day.xls"
+  
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/TOUR_OCUP.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
 
-  Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
-  Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls", "sadata" 
-  Series.load_all_sa_series_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"
+  #3/21/12 Ben: try to replace all of these with individual calls since they change and should go in the loads in the other jobs
+  #Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
+  #Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls", "sadata" 
+  #Series.load_all_sa_series_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"
   # replacing this load with individual calls
   # Series.load_all_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
   # Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"

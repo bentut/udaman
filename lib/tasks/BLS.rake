@@ -154,6 +154,10 @@ task :bls_job_upd_m => :environment do
     # divide these all by 1000?
     "EMPLSA@HI.M" => %Q|Series.load_from_bls("LASST15000005", "M")|,
     
+    #We only need to keep the BLS EMPL, UR, LF commented out for benchmarking in the beginning of the year
+    #For the rest of the year, we want to uncomment it for the other 11 months in the year so BLS overwrites HIWI
+    #The reason is because BLS has more accuracy (HIWI rounds to 50 people) and BLS does backward revisions for 3 months
+    
     "EMPLNS@HI.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1976-01-01", :sheet => "State", :row => "increment:51:1", :col =>4, :frequency => "M"})/1|], 
     	#%Q|Series.load_from_bls("LAUST15000005", "M")|],
     "EMPLNS@HON.M" => [%Q|Series.load_from_download("LF@hiwi.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "Honolulu", :row => "increment:36:1", :col =>4, :frequency => "M"})/1|] ,
@@ -412,7 +416,8 @@ task :hiwi_upd => :environment do
     'EAFNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EAFACNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Accommodation", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EAFFDNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:2:13" , :frequency => "M"})/1000|,
-    'EAFFDRSNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:2:13" , :frequency => "M"})/1000|,
+    'EAFFDRSNS@HI.M' => [%Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:2:13" , :frequency => "M"})/1000|,
+    	%Q|Series.load_from_bls("SMU15000007072210001", "M")|],
     'EOSNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Other Services", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVFDNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Federal Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
@@ -477,7 +482,8 @@ task :hiwi_upd => :environment do
     'EAFNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Accommodation & Food Services", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EAFACNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Accommodation", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EAFFDNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Food Services & Drinking Places", :col => "repeat:2:13" , :frequency => "M"})/1000|,
-    'EAFFDRSNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:2:13" , :frequency => "M"})/1000|,
+    'EAFFDRSNS@HON.M' => [%Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Full-Service Restaurants", :col => "repeat:2:13" , :frequency => "M"})/1000|,
+    	%Q|Series.load_from_bls("SMU15261807072210001", "M")|],
     'EOSNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Other Services", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVFDNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Federal Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,

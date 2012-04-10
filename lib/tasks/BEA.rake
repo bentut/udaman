@@ -526,11 +526,11 @@ task :inc_upd_a => :environment do
 		"YL_TR@HAW.A" => %Q|"YLWT@HAW.A".ts + "YLRT@HAW.A".ts|,
 		"YL_TR@MAU.A" => %Q|"YLWT@MAU.A".ts + "YLRT@MAU.A".ts|,
 		"YL_TR@KAU.A" => %Q|"YLWT@KAU.A".ts + "YLRT@KAU.A".ts|,
-		"YL_OT@HI.A" => %Q|"YLMA@HI.A".ts + "YLAD@HI.A".ts + "YLED@HI.A".ts + "YLOS@HI.A".ts|,
-		"YL_OT@HON.A" => %Q|"YLMA@HON.A".ts + "YLAD@HON.A".ts + "YLED@HON.A".ts + "YLOS@HON.A".ts|,
-		"YL_OT@HAW.A" => %Q|"YLMA@HAW.A".ts + "YLAD@HAW.A".ts + "YLED@HAW.A".ts + "YLOS@HAW.A".ts|,
-		"YL_OT@MAU.A" => %Q|"YLMA@MAU.A".ts + "YLAD@MAU.A".ts + "YLED@MAU.A".ts + "YLOS@MAU.A".ts|,
-		"YL_OT@KAU.A" => %Q|"YLMA@KAU.A".ts + "YLAD@KAU.A".ts + "YLED@KAU.A".ts + "YLOS@KAU.A".ts|,
+		"YL_OT@HI.A" => %Q|"YLMA@HI.A".ts + "YLAD@HI.A".ts + "YLOS@HI.A".ts|,
+		"YL_OT@HON.A" => %Q|"YLMA@HON.A".ts + "YLAD@HON.A".ts + "YLOS@HON.A".ts|,
+		"YL_OT@HAW.A" => %Q|"YLMA@HAW.A".ts + "YLAD@HAW.A".ts + "YLOS@HAW.A".ts|,
+		"YL_OT@MAU.A" => %Q|"YLMA@MAU.A".ts + "YLAD@MAU.A".ts + "YLOS@MAU.A".ts|,
+		"YL_OT@KAU.A" => %Q|"YLMA@KAU.A".ts + "YLAD@KAU.A".ts + "YLOS@KAU.A".ts|,
 
 	
 	}
