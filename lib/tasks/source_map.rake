@@ -151,6 +151,10 @@ task :load_all_histories => :environment do
   "TGBSV@HI.M".ts_eval=%Q|"TGBSV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
   "TGBCT@HI.M".ts_eval=%Q|"TGBCT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
   "TGBCT@HI.M".ts_eval=%Q|"TGBCT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  
+  "TGBCTNS@HI.Q".ts_eval= %Q|"TGBCTNS@HI.M".ts.aggregate_by(:quarter, :sum)|
+  "TGBCT@HI.Q".ts_eval= %Q|"TGBCT@HI.M".ts.aggregate_by(:quarter, :sum)|  
+  
   "TGBHT@HI.M".ts_eval=%Q|"TGBHT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
   "TGBHT@HI.M".ts_eval=%Q|"TGBHT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
   "TDGF@HI.M".ts_eval=%Q|"TDGF@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|

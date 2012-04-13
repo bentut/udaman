@@ -3,140 +3,86 @@ module SeriesSharing
     self.moving_average(start_date_string,"#{(Time.now.to_date << 12).year}-12-01")
   end
   
-  def moving_average(start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
+  def ma_series_data(ma_type_string = "ma", start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
     trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
-    #trimmed_data.sort.each {|date, value| puts "#{date}: #{value}" }
     new_series_data = {}
-    last_thirteen = []
-    dates = trimmed_data.keys.sort
     position = 0
     trimmed_data.sort.each do |date_string, value|
-      position += 1 if value.nil? #have to advance position even if loop is skipped. Need to write test for this
-      next if value.nil?
-      last_thirteen.shift if last_thirteen.length == 13
-      last_thirteen.push value
-      if last_thirteen.length == 13
-        sum = 0
-        sum_with_half_ends = 0
-        lt_pos = 0
-        last_thirteen.each do |lt_value|
-          sum += lt_value
-          if (lt_pos == 0 or lt_pos == 12)
-            sum_with_half_ends += (lt_value/2.0)
-          else
-            sum_with_half_ends += lt_value
-          end
-          lt_pos += 1
-        end
-        new_series_data[dates[position]] = (sum - last_thirteen[0]) / 12.0 #gets overwritten except for last 6
-        new_series_data[dates[position-12]] = (sum - last_thirteen[12]) / 12.0 if new_series_data[dates[position-12]].nil? #writes first 6 values
-        new_series_data[dates[position-6]] = sum_with_half_ends / 12.0 #generalized moving average
-        #puts "#{dates[position]} = #{(sum - last_thirteen[0]) / 12.0} ::" + "#{dates[position-12]} = #{(sum - last_thirteen[12]) / 12.0} ::" + "#{dates[position-6]} = #{(sum - last_thirteen[0]) / 12.0} ::"
-      end
+      periods = window_size
+      start_pos = window_start(position, trimmed_data.length-1, periods, ma_type_string)
+      end_pos = window_end(position, trimmed_data.length-1, periods, ma_type_string)
+      new_series_data[date_string] = moving_window_average(start_pos, end_pos, periods, trimmed_data) unless start_pos.nil? or end_pos.nil?
       position += 1
     end
-    new_transformation("Moving Average of #{name}", new_series_data)
+    new_series_data
+    #new_transformation("Moving Average of #{name}", new_series_data)
+  end
+  
+  def ma_series(ma_type_string = "ma", start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
+    new_transformation "Moving Average of #{name}", ma_series_data(ma_type_string, start_date_string, end_date_string)
+  end
+  
+  def window_size
+    return 12 if self.frequency == "month"
+    return 4 if self.frequency == "quarter"
+  end
+  
+  def window_start(position, last, periods, ma_type_string)
+    half_window = periods / 2
+    return position                 if ma_type_string == "ma" and position < half_window #forward looking moving average
+    return position - half_window   if ma_type_string == "ma" and position >= half_window and position <= last - half_window #centered moving average
+    return position - periods + 1   if ma_type_string == "ma" and position > last - half_window #backward looking moving average
+    return position                 if ma_type_string == "forward_ma" #forward looking moving average
+    return position - periods + 1   if ma_type_string == "backward_ma" and position - periods + 1 >= 0 #backward looking moving average
+    return position + 1             if ma_type_string == "offset_forward_ma" #offset forward looking moving average
+    return position + 1             if ma_type_string == "offset_ma" and position < half_window #offset forward looking moving average
+    return position - half_window   if ma_type_string == "offset_ma" and position >= half_window and position <= last - half_window #centered moving average
+    return position - periods + 1   if ma_type_string == "offset_ma" and position > last - half_window #backward looking moving average
+    
+  end
+  
+  def window_end(position, last, periods, ma_type_string)
+    half_window = periods / 2
+    return position + periods - 1   if ma_type_string == "ma" and position < half_window #forward looking moving average
+    return position + half_window   if ma_type_string == "ma" and position >= half_window and position <= last - half_window #centered moving average
+    return position                 if ma_type_string == "ma" and position > last-half_window #backward looking moving average
+    return position + periods - 1   if ma_type_string == "forward_ma" and position + periods - 1 <= last #forward looking moving average
+    return position                 if ma_type_string == "backward_ma" #backward looking moving average
+    return position + periods       if ma_type_string == "offset_forward_ma" and position + periods <= last #offset forward looking moving average
+    return position + periods       if ma_type_string == "offset_ma" and position < half_window and position + periods <= last #offset forward looking moving average
+    return position + half_window   if ma_type_string == "offset_ma" and position >= half_window and position <= last - half_window #centered moving average
+    return position                 if ma_type_string == "offset_ma" and position > last-half_window #backward looking moving average
+  end
+  
+  def moving_window_average(start_pos, end_pos, periods, trimmed_data)
+    #puts "#{start_pos}, #{end_pos}, #{trimmed_data.length}"
+    sorted_data = trimmed_data.sort
+    sum = 0
+    (start_pos..end_pos).each do |i|
+      val = ( ( i == start_pos or i == end_pos ) and ( end_pos - start_pos ) == periods ) ? sorted_data[i][1] / 2.0 : sorted_data[i][1]
+      sum += val
+    end
+    sum / periods.to_f
+  end
+  
+  def moving_average(start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
+    new_transformation("Moving Average of #{name}", ma_series_data("ma", start_date_string, end_date_string))
   end
   
   def moving_average_offset_early(start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
-    trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
-    #trimmed_data.sort.each {|date, value| puts "#{date}: #{value}" }
-    new_series_data = {}
-    last_thirteen = []
-    dates = trimmed_data.keys.sort
-    position = 0
-    trimmed_data.sort.each do |date_string, value|
-      position += 1 if value.nil? #have to advance position even if loop is skipped. Need to write test for this
-      next if value.nil?
-      last_thirteen.shift if last_thirteen.length == 13
-      last_thirteen.push value
-      if last_thirteen.length == 13
-        sum = 0
-        sum_with_half_ends = 0
-        lt_pos = 0
-        last_thirteen.each do |lt_value|
-          sum += lt_value
-          if (lt_pos == 0 or lt_pos == 12)
-            sum_with_half_ends += (lt_value/2.0)
-          else
-            sum_with_half_ends += lt_value
-          end
-          lt_pos += 1
-        end
-        new_series_data[dates[position]] = (sum - last_thirteen[0]) / 12.0 #gets overwritten except for last 6
-        new_series_data[dates[position-13]] = (sum - last_thirteen[12]) / 12.0 if new_series_data[dates[position-13]].nil? #writes first 6 values
-        new_series_data[dates[position-6]] = sum_with_half_ends / 12.0 #generalized moving average
-        #puts "#{dates[position]} = #{(sum - last_thirteen[0]) / 12.0} ::" + "#{dates[position-12]} = #{(sum - last_thirteen[12]) / 12.0} ::" + "#{dates[position-6]} = #{(sum - last_thirteen[0]) / 12.0} ::"
-      end
-      position += 1
-    end
-    new_transformation("Moving Average of #{name}", new_series_data)
+    new_transformation("Moving Average of #{name}", ma_series_data("offset_ma", start_date_string, end_date_string))
   end
   
   def backward_looking_moving_average(start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
-    trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
-    #puts trimmed_data
-    new_series_data = {}
-    last_twelve = AggregatingArray.new
-    dates = trimmed_data.keys.sort
-    position = 0
-    trimmed_data.sort.each do |date_string, value|
-      position += 1 if value.nil?
-      next if value.nil?
-      last_twelve.shift if last_twelve.length == 12
-      last_twelve.push value 
-      if last_twelve.length == 12 
-        new_series_data[dates[position]] = last_twelve.sum / 12.to_f
-        #puts "#{dates[position]}: #{last_twelve.sum / 12.to_f}"
-      end
-      position += 1
-    end
-
-    new_transformation("Backward Looking Moving Average of #{name}", new_series_data)
+    new_transformation("Backward Looking Moving Average of #{name}", ma_series_data("backward_ma", start_date_string, end_date_string))
   end
   
   def forward_looking_moving_average(start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
-    trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
-    #puts trimmed_data
-    new_series_data = {}
-    last_twelve = AggregatingArray.new
-    dates = trimmed_data.keys.sort
-    position = 0
-    trimmed_data.sort.each do |date_string, value|
-      position += 1 if value.nil?
-      next if value.nil?
-      last_twelve.shift if last_twelve.length == 12
-      last_twelve.push value 
-      if last_twelve.length == 12 
-        new_series_data[dates[position-11]] = last_twelve.sum / 12.to_f
-        #puts "#{dates[position-11]}: #{last_twelve.sum / 12.to_f}"
-      end
-      position += 1
-    end
-
-    new_transformation("Forward Looking Moving Average of #{name}", new_series_data)
+    new_transformation("Forward Looking Moving Average of #{name}", ma_series_data("forward_ma", start_date_string, end_date_string))
   end
   
   def offset_forward_looking_moving_average(start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
-    trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
-    #puts trimmed_data
-    new_series_data = {}
-    last_twelve = AggregatingArray.new
-    dates = trimmed_data.keys.sort
-    position = 0
-    trimmed_data.sort.each do |date_string, value|
-      position += 1 if value.nil?
-      next if value.nil?
-      last_twelve.shift if last_twelve.length == 12
-      last_twelve.push value 
-      if last_twelve.length == 12 
-        new_series_data[dates[position-12]] = last_twelve.sum / 12.to_f if position-12 >= 0
-        #puts "#{dates[position-12]}: #{last_twelve.sum / 12.to_f}"
-      end
-      position += 1
-    end
-
-    new_transformation("Offset Forward Looking Moving Average of #{name}", new_series_data)
+    new_transformation("Offset Forward Looking Moving Average of #{name}", ma_series_data("offset_forward_ma", start_date_string, end_date_string))
   end
   
   
@@ -169,7 +115,17 @@ module SeriesSharing
     mean_corrected_historical = historical / historical.annual_sum * "#{series_prefix}NS@#{county_abbrev}.M".ts.annual_sum
     current_year = "#{series_prefix}NS@#{county_abbrev}.M".ts.backward_looking_moving_average.get_last_incomplete_year / "#{series_prefix}NS@HI.M".ts.backward_looking_moving_average.get_last_incomplete_year * self
     new_transformation("Share of #{name} using ratio of #{series_prefix}NS@#{county_abbrev}.M over #{series_prefix}NS@HI.M using a mean corrected moving average (offset early) and a backward looking moving average for the current year",
-      mean_corrected_historical.data.series_merge(current_year.data))
+        mean_corrected_historical.data.series_merge(current_year.data))
+  end
+  
+  def mc_price_share_for(county_abbrev)
+    series_prefix = self.name.split("@")[0]
+    self_region = self.name.split("@")[1].split(".")[0]
+    start_date = "#{series_prefix}NS@#{county_abbrev}.Q".ts.first_value_date
+    shared_series = "#{name}".ts.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.moving_average, "#{series_prefix}NS@#{self_region}.Q".ts.trim(start_date).moving_average)
+    mean_corrected_series = shared_series.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.annual_average, shared_series.annual_average)
+    new_transformation("Share of #{name} using ratio of the moving average #{series_prefix}NS@#{county_abbrev}.Q over the moving average of #{series_prefix}NS@#{self_region}.Q , mean corrected for the year",
+        mean_corrected_series.data)
   end
   
   def share_using(ratio_top, ratio_bottom)

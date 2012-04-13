@@ -43,10 +43,13 @@
 						#series.data_points.where(:current => false, 
 						#	:date_string => cdp.date_string).sort_by(&:created_at).reverse.each do |dp| 
 						previous_data_points = []
+						dp_count = 0
 						ncdps.each {|dp| previous_data_points.push(dp) if dp.date_string == cdp.date_string}
 						pdp_sort = previous_data_points.sort {|dp1, dp2| dp1.created_at <=> dp2.created_at}
 						pdp_sort.each do |dp|
 					%>
+							<% dp_count += 1 %>
+							<% break if dp_count > 7 %>
 							<% dp_val = dp.value / series.units %>
 							<% bgcolor = DataSource.find(dp.data_source_id).color rescue "FFF" %>
 							<div class='datapoint' style='background-color:#<%= bgcolor %>'>

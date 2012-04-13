@@ -6,7 +6,7 @@ module SeriesDataAdjustment
   end
         
   def trim(start_date = get_last_complete_december_datestring, end_date = Time.now.to_date.to_s)
-    new_series_data = get_values_after(start_date, end_date)
+    new_series_data = get_values_after_including(start_date, end_date)
     new_transformation("Trimmed #{name} starting at #{start_date}", new_series_data)
   end
 
@@ -29,5 +29,9 @@ module SeriesDataAdjustment
   
   def get_values_after(startdatestring, enddatestring = Time.now.to_date.to_s)
     data.reject {|datestring, value| datestring <= startdatestring or value.nil? or datestring > enddatestring}
+  end
+  
+  def get_values_after_including(startdatestring, enddatestring = Time.now.to_date.to_s)
+    data.reject {|datestring, value| datestring < startdatestring or value.nil? or datestring > enddatestring}
   end
 end
