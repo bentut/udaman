@@ -188,6 +188,9 @@ task :load_all_histories => :environment do
     "NMIG@#{cnty}.A".ts_eval= %Q|"NR@#{cnty}.A".ts.annual_diff - "NBIR@#{cnty}.A".ts + "NDEA@#{cnty}.A".ts|
   end
   
+  "NDEACNM@HI.A".ts_eval= "NDEA@HI.A".ts - "NDEAM@HI.A".ts - "NDEACMD@HI.A".ts 
+  "NMIGCNM@HI.A".ts_eval= "NRCNM@HI.A".ts.annual_diff - "NBIRCNM@HI.A".ts + "NDEACNM@HI.A".ts 
+  
   #seasonal adjustments
   "VDAYIT@HI.M".ts_eval= %Q|"VDAYIT@HI.M".ts.apply_seasonal_adjustment :additive|
   #"VDAYUS@HI.M".ts.apply_seasonal_adjustment :additive 

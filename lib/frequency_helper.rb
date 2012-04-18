@@ -10,6 +10,8 @@ module FrequencyHelper
     return :year if code == 'A' || code =="a"
     return :quarter if code == 'Q' || code =="q"
     return :month if code == 'M' || code == "m"
+    return :week if code == 'W' || code == "w"
+    return :day if code == 'D' || code == "d"
     return nil
   end
 end

@@ -27,6 +27,10 @@ class Date
   def month_i
     return strftime('%Y%m').to_i
   end
+
+  def month_s
+    return strftime('%Y-%m-01')
+  end
   
   def semi_s
     return "#{self.year}-01-01" if [1,2,3,4,5,6].include?(self.mon)

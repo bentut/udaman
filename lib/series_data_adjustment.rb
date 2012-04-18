@@ -5,11 +5,17 @@ module SeriesDataAdjustment
     end
   end
         
-  def trim(start_date = get_last_complete_december_datestring, end_date = Time.now.to_date.to_s)
+  def trim(start_date = get_last_incomplete_january_datestring, end_date = Time.now.to_date.to_s)
     new_series_data = get_values_after_including(start_date, end_date)
     new_transformation("Trimmed #{name} starting at #{start_date}", new_series_data)
   end
 
+  def get_last_incomplete_january_datestring
+    last_date = self.data.keys.sort[-1]
+    return last_date[5..6] == "12" ? "#{last_date[0..3].to_i + 1}-01-01" : "#{last_date[0..3].to_i}-01-01"
+    
+  end
+  
   def get_last_complete_december_datestring
     last_date = self.data.keys.sort[-1]
     return last_date[5..6] == "12" ? last_date : "#{last_date[0..3].to_i-1}-12-01"

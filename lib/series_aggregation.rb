@@ -37,7 +37,7 @@ module SeriesAggregation
       aggregated_data[date.send(frequency_method)].push self.at(date_string) unless self.at(date_string).nil?
     end
     
-    # Prune out any incomplete aggregated groups
+    # Prune out any incomplete aggregated groups (except days, since it's complicated to match month to day count)
     aggregated_data.delete_if {|key,value| value.count != 6} if frequency == :semi and self.frequency == "month"
     aggregated_data.delete_if {|key,value| value.count != 3} if frequency == :quarter and self.frequency == "month"
     aggregated_data.delete_if {|key,value| value.count != 12} if frequency == :year and self.frequency == "month"
@@ -54,7 +54,7 @@ module SeriesAggregation
     # puts "self:#{self.frequency}:#{self.frequency.class}"
     # puts "frequency:#{frequency}:#{frequency.class}"
 
-    raise AggregationException.new if ["year", "semi", "quarter", "month"].index(self.frequency).nil?
+    raise AggregationException.new if ["year", "semi", "quarter", "month", "day"].index(self.frequency).nil?
     raise AggregationException.new if self.frequency == "year"
     raise AggregationException.new if self.frequency == "semi"  and (frequency == :month or frequency == :quarter or frequency == :semi)
     raise AggregationException.new if self.frequency == "quarter" and (frequency == :month or frequency == :quarter)

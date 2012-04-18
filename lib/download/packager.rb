@@ -158,14 +158,15 @@ class Packager
   
   def get_data_from_definitions
     @errors ||= []
+    @run_again = {}
     series = {}
+
     @definitions.each do |series_name, definition|
+      @run_again[series_name] = definition if definition.class == String and !definition.index("load_").nil?
       #puts series_name+": "+definition
       begin
         if definition.class == Array
-          definition.each do |def_item|
-            series_name.ts_append_eval def_item
-          end
+          definition.each { |def_item| series_name.ts_append_eval def_item }
         else
           series_name.ts_append_eval definition
         end
@@ -175,6 +176,19 @@ class Packager
         @errors.push({ :series => series_name, :definition => definition, :error => e.message })
       end
     end
+    
+    #run again to make sure identies have all downloaded data.... but identities themselves can be out of order
+    #this will probably work for now, but will likely need to have an array order where order can be specified/sorted
+    @run_again.each do |series_name, definition|
+      begin
+        series_name.ts_append_eval definition
+        def_data = series_name.ts.data
+        series[series_name] = def_data.nil? ? {} : def_data
+      rescue Exception => e
+        @errors.push({ :series => series_name, :definition => definition, :error => e.message })
+      end
+    end
+      
     #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
     @download_results = Series.get_cached_files.download_results
     series

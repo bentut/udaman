@@ -675,7 +675,7 @@ task :visitor_series => :environment do
   "VDAY@HI.M".ts_append_eval %Q|"VDAYJP@HI.M".ts + "VDAYUS@HI.M".ts + "VDAYRES@HI.M".ts|
   "VIS@HI.M".ts_eval= %Q|"VISJP@HI.M".ts + "VISUS@HI.M".ts + "VISRES@HI.M".ts|
   "VISDEMETRA_MC@HI.M".ts_eval= %Q|"VIS@HI.M".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls"|
-  
+  "VISDEMETRA_MC@HI.M".ts_eval= %Q|"VIS@HI.M".ts.apply_seasonal_adjustment :additive|
   
   #intermediate share calculations... all match
   ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   #CNTY WITHOUT HI
@@ -688,12 +688,24 @@ task :visitor_series => :environment do
   "SH_RESNS@HI.M".ts_eval= %Q|"SH_RESNS@HON.M".ts + "SH_RESNS@HAW.M".ts + "SH_RESNS@KAU.M".ts + "SH_RESNS@MAU.M".ts|
   
   
-  #works except for last value
+  
+  # Does first segment
+  "VIS@HON.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("HON","VIS").trim("1990-01-01","1999-12-01")|
+  "VIS@HAW.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("HAW","VIS").trim("1990-01-01","1990-12-01")|
+  "VIS@KAU.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("KAU","VIS").trim("1990-01-01","1990-12-01")|
+  "VIS@MAU.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("MAU","VIS").trim("1990-01-01","1990-12-01")|
+  
+  #Does last segment... may get overwritten by identities below
+  "VIS@HON.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("HON","VIS").trim|
+  "VIS@HAW.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("HAW","VIS").trim|
+  "VIS@KAU.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("KAU","VIS").trim|
+  "VIS@MAU.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("MAU","VIS").trim|
+  
   ["HI","HON", "HAW", "MAU", "KAU"].each do |county|
-    "VIS@#{county}.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("#{county}","VIS")|
     "VIS@#{county}.M".ts_append_eval %Q|"VISJP@#{county}.M".ts + "VISUS@#{county}.M".ts + "VISRES@#{county}.M".ts|  
     "VDAY@#{county}.M".ts_append_eval %Q|"VDAYJP@#{county}.M".ts + "VDAYUS@#{county}.M".ts + "VDAYRES@#{county}.M".ts| 
   end
+
   
   
   ["HON", "HI", "KAU", "MAU", "HAW"].each do |county| 
@@ -839,9 +851,8 @@ task :aggregate_affordability_series => :environment do
   "PAKRSGF@HI.Q".ts_eval= %Q|(("PAKRSGFNS@HON.Q".ts * "KRSGFNS@HON.Q".ts) + ("PAKRSGFNS@HAW.Q".ts * "KRSGFNS@HAW.Q".ts) + ("PAKRSGFNS@MAU.Q".ts * "KRSGFNS@MAU.Q".ts)  + ("PAKRSGFNS@KAU.Q".ts * "KRSGFNS@KAU.Q".ts))/ "KRSGFNS@HI.Q".ts|
   "PAKRCON@HI.Q".ts_eval= %Q|(("PAKRCONNS@HON.Q".ts * "KRCONNS@HON.Q".ts) + ("PAKRCONNS@HAW.Q".ts * "KRCONNS@HAW.Q".ts) + ("PAKRCONNS@MAU.Q".ts * "KRCONNS@MAU.Q".ts)  + ("PAKRCONNS@KAU.Q".ts * "KRCONNS@KAU.Q".ts))/ "KRCONNS@HI.Q".ts|
 
-
   #{}"PAKRSGF@HI.Q".ts_eval= %Q|(("PAKRSGF@HON.Q".ts * "KRSGF@HON.Q".ts) + ("PAKRSGF@HAW.Q".ts * "KRSGF@HAW.Q".ts) + ("PAKRSGF@MAU.Q".ts * "KRSGF@MAU.Q".ts)  + ("PAKRSGF@KAU.Q".ts * "KRSGF@KAU.Q".ts))/ "KRSGF@HI.Q".ts|
-
+  
   #these are ok
   "PAKRSGFNS@HI.Q".ts_eval= %Q|"PAKRSGF@HI.Q".ts|
   "PAKRCONNS@HI.Q".ts_eval= %Q|"PAKRCON@HI.Q".ts|
@@ -859,7 +870,7 @@ task :aggregate_affordability_series => :environment do
     "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
   end
   
-  #what is this?
+  #what's this?
   ("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)
   
   
@@ -891,6 +902,7 @@ task :other_share_and_mean_corrected_series => :environment do
   end
   
   #now all good except for last data point on EMPL
+  #maybe should trim these?
   "UR@HI.M".ts_eval= %Q|"URSA@HI.M".ts|
   "LF_MC@HI.M".ts_eval= %Q|"LFSA@HI.M".ts / "LFSA@HI.M".ts.annual_sum * "LFNS@HI.M".ts.annual_sum|
   "LF@HI.M".ts_append_eval %Q|"LFSA@HI.M".ts|
@@ -942,13 +954,13 @@ task :other_share_and_mean_corrected_series => :environment do
   "E_TU@HI.M".ts_eval= %Q|"E_TTU@HI.M".ts - "E_TRADE@HI.M".ts|
       
   "E_NF@HI.M".ts_append_eval %Q|"E_NFSA@HI.M".ts.trim("1957-12-01","1989-12-01")|
-  "E_NF@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "EIF@HI.M".ts + "E_FIR@HI.M".ts + "E_PBS@HI.M".ts + "E_EDHC@HI.M".ts + "E_LH@HI.M".ts + "EOS@HI.M".ts + "EGV@HI.M".ts)|
+  "E_NF@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "EIF@HI.M".ts + "E_FIR@HI.M".ts + "E_PBS@HI.M".ts + "E_EDHC@HI.M".ts + "E_LH@HI.M".ts + "EOS@HI.M".ts + "EGV@HI.M".ts|
   
   #originally had EAF below, but now it seems it is totally overwritten by special identity below
   #["LF", "EMPL","ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGV", "EGVST", "EGVLC", "EGVFD", "E_LH", "E_PBS", "E_FIR", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
 #  ["EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
 
-  ["EGV", "ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
+  ["ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
   #["EIF"].each do |s_name|
     
     ["HON", "HAW", "MAU", "KAU"].each do |county|
@@ -958,7 +970,7 @@ task :other_share_and_mean_corrected_series => :environment do
   end
   
   #E_NF might be wrong trim point. Not matching anyway
-  "E_NF@HON.M".ts_append_eval %Q|"E_NF@HON.M".ts.load_sa_from("/Volumes/UHEROwork/data/bls/seasadj/bls_sa_history.xls", "Demetra_Results_fa").trim("1959-12-01","1971-12-01")|
+  #"E_NF@HON.M".ts_append_eval %Q|"E_NF@HON.M".ts.load_sa_from("/Volumes/UHEROwork/data/bls/seasadj/bls_sa_history.xls", "Demetra_Results_fa").trim("1959-12-01","1971-12-01")|
   "EGVFD@HON.M".ts_eval= %Q|"EGVFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EGVST@HON.M".ts_eval= %Q|"EGVST@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EGVLC@HON.M".ts_eval= %Q|"EGVLC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
@@ -979,8 +991,10 @@ task :other_share_and_mean_corrected_series => :environment do
     "E_GVSL@#{county}.M".ts_append_eval %Q|"EGVST@#{county}.M".ts + "EGVLC@#{county}.M".ts|     
     #4/11 Ben: Trim points seem to be changing... or at least different for different counties?
     #HON needs to be different for EGV... see udaman
+    #"EGV@HI.M".ts.aa_state_based_county_share_for("HON").trim("1959-12-01","1971-12-01") 
+    #"EGVFD@HON.M".ts + "E_GVSL@HON.M".ts 
     "EGV@#{county}.M".ts_eval= %Q|"EGV@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1959-12-01","1989-12-01")| 
-    "EGV@#{county}.M".ts_append_eval      %Q|("EGVFD@#{county}.M".ts + "E_GVSL@#{county}.M".ts).trim("1989-12-01")|
+    "EGV@#{county}.M".ts_append_eval      %Q|("EGVFD@#{county}.M".ts + "E_GVSL@#{county}.M".ts).trim("1990-01-01")|
     "EAF@#{county}.M".ts_eval=            %Q|"EAFAC@#{county}.M".ts + "EAFFD@#{county}.M".ts|
     #underlying EAE has problems with new read and history
     "E_LH@#{county}.M".ts_append_eval     %Q|"EAE@#{county}.M".ts + "EAF@#{county}.M".ts|
@@ -994,7 +1008,7 @@ task :other_share_and_mean_corrected_series => :environment do
     
     # HON is currently trimmed as below
     #{}"E_NF@HI.M".ts.aa_county_share_for("HON").trim("1971-12-01","1989-12-01")
-    "E_NF@#{county}.M".ts_append_eval %Q|"E_NF@HI.M".ts.aa_county_share_for("#{county}")|
+    "E_NF@#{county}.M".ts_append_eval %Q|"E_NF@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1971-12-01","1989-12-01")|
     #one of the component series is not adding up and we're not sure which one. probably need to check all of them against aremos
     #when E_LH is fixed maybe this will work #EMN needs to be fixed too
     "E_NF@#{county}.M".ts_append_eval %Q|"ECT@#{county}.M".ts + "EMN@#{county}.M".ts + "E_TTU@#{county}.M".ts + "EIF@#{county}.M".ts + "E_FIR@#{county}.M".ts + "E_PBS@#{county}.M".ts + "E_EDHC@#{county}.M".ts + "E_LH@#{county}.M".ts + "EOS@#{county}.M".ts + "EGV@#{county}.M".ts|
