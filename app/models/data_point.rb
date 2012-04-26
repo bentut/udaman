@@ -31,6 +31,8 @@ class DataPoint < ActiveRecord::Base
   end
   
   def same_value_as?(value)
+    #this is a problem, because there are some scenarios where rounding to 3 gives different values
+    #that should actually be stored. This thing needs to be redesigned
     return self.value.round(3) == value.round(3)
   end
   

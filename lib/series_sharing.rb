@@ -109,12 +109,15 @@ module SeriesSharing
 
   def mc_ma_county_share_for(county_abbrev, series_prefix = self.name.split("@")[0])
     #series_prefix = self.name.split("@")[0]
-    start_date = "#{series_prefix}NS@#{county_abbrev}.M".ts.first_value_date
-    end_date = "#{series_prefix}NS@#{county_abbrev}.M".ts.get_last_complete_december_datestring     
-    historical = "#{series_prefix}NS@#{county_abbrev}.M".ts.moving_average_offset_early(start_date,end_date) /  "#{series_prefix}NS@HI.M".ts.moving_average_offset_early(start_date,end_date) * self
-    mean_corrected_historical = historical / historical.annual_sum * "#{series_prefix}NS@#{county_abbrev}.M".ts.annual_sum
-    current_year = "#{series_prefix}NS@#{county_abbrev}.M".ts.backward_looking_moving_average.get_last_incomplete_year / "#{series_prefix}NS@HI.M".ts.backward_looking_moving_average.get_last_incomplete_year * self
-    new_transformation("Share of #{name} using ratio of #{series_prefix}NS@#{county_abbrev}.M over #{series_prefix}NS@HI.M using a mean corrected moving average (offset early) and a backward looking moving average for the current year",
+    f = self.name.split(".")[1]
+    start_date = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.first_value_date
+    end_date = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.get_last_complete_december_datestring     
+    historical = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.moving_average_offset_early(start_date,end_date) /  "#{series_prefix}NS@HI.#{f}".ts.moving_average_offset_early(start_date,end_date) * self
+    historical.print
+    mean_corrected_historical = historical / historical.annual_sum * "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.annual_sum
+    mean_corrected_historical.print
+    current_year = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.backward_looking_moving_average.get_last_incomplete_year / "#{series_prefix}NS@HI.#{f}".ts.backward_looking_moving_average.get_last_incomplete_year * self
+    new_transformation("Share of #{name} using ratio of #{series_prefix}NS@#{county_abbrev}.#{f} over #{series_prefix}NS@HI.#{f} using a mean corrected moving average (offset early) and a backward looking moving average for the current year",
         mean_corrected_historical.data.series_merge(current_year.data))
   end
   
@@ -127,6 +130,16 @@ module SeriesSharing
     new_transformation("Share of #{name} using ratio of the moving average #{series_prefix}NS@#{county_abbrev}.Q over the moving average of #{series_prefix}NS@#{self_region}.Q , mean corrected for the year",
         mean_corrected_series.data)
   end
+  
+  # def mc_offset_price_share_for(county_abbrev)
+  #   series_prefix = self.name.split("@")[0]
+  #   self_region = self.name.split("@")[1].split(".")[0]
+  #   start_date = "#{series_prefix}NS@#{county_abbrev}.Q".ts.first_value_date
+  #   shared_series = "#{name}".ts.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.moving_average_offset_early, "#{series_prefix}NS@#{self_region}.Q".ts.trim(start_date).moving_average_offset_early)
+  #   mean_corrected_series = shared_series.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.annual_average, shared_series.annual_average)
+  #   new_transformation("Share of #{name} using ratio of the moving average #{series_prefix}NS@#{county_abbrev}.Q over the moving average of #{series_prefix}NS@#{self_region}.Q , mean corrected for the year",
+  #       mean_corrected_series.data)
+  # end
   
   def share_using(ratio_top, ratio_bottom)
     new_series = ratio_top / ratio_bottom * self

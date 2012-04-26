@@ -109,7 +109,7 @@ task :load_all_histories => :environment do
   # Series.load_all_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
   # Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
   #maybe should put this in tax section? (but these need to run AFTER all the tax are read in)
-  
+
     
   "TRINNS@HI.M".ts_eval= %Q|"TRINESNS@HI.M".ts + "TRINPRNS@HI.M".ts + "TRINWHNS@HI.M".ts + "TRINRFNS@HI.M".ts|
   "TRCONS@HI.M".ts_eval= %Q|"TRCOESNS@HI.M".ts + "TRCOPRNS@HI.M".ts + "TRCORFNS@HI.M".ts|

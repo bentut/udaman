@@ -107,14 +107,20 @@ class Series < ActiveRecord::Base
     return 'Q' if frequency == :quarter || frequency == "quarter" || frequency == "quarterly"
     return 'M' if frequency == :month || frequency == "month" || frequency == "monthly"
     return 'S' if frequency == :semi || frequency == "semi" || frequency == "semi-annually"
+    return 'W' if frequency == :week || frequency == "week" || frequency == "weekly"
+    return 'D' if frequency == :day || frequency == "day" || frequency == "daily"
+    
     return ""
   end
   
+  #There are duplicates of these in other file... non series version 
   def Series.frequency_from_code(code)
     return :year if code == 'A' || code =="a"
     return :quarter if code == 'Q' || code =="q"
     return :month if code == 'M' || code == "m"
     return :semi if code == 'S' || code == "s"
+    return :week if code == 'W' || code == "w"
+    return :day if code == 'D' || code == "d"
     return nil
   end
   
@@ -391,6 +397,9 @@ class Series < ActiveRecord::Base
     series_data = dp.get_data
     Series.write_cached_files cached_files
     #puts dp.end_conditions
+    puts options[:frequency]
+    puts "hi!"
+    puts Series.frequency_from_code(options[:frequency])
     Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
   end
   
@@ -534,6 +543,21 @@ class Series < ActiveRecord::Base
       puts "#{datestring}: #{value_array.sort.join}"
     end
     puts name
+  end
+  
+  
+  #["ERE", "EGVLC", "EGVST", "EGVFD", "EAFFD", "EAFAC", "EAE", "EHC", "EED", "EPS", "EAD", "EMA","E_TU","EWT","ERT","ECT","EMN","EIF", "EOS", "E_TTU", "E_TRADE", "E_FIR", "E_PBS","E_EDHC", "E_LH", "EAF", "EGV", "E_GVSL", "E_NF"].each do |pre|
+  
+  def refresh_all_datapoints
+    unique_ds = {} #this is actually used ds
+    current_data_points.each {|dp| unique_ds[dp.data_source_id] = 1}
+    puts unique_ds
+    eval_statements = []
+    self.data_sources_by_last_run.each do |ds| 
+      eval_statements.push(ds.get_eval_statement) unless unique_ds.keys.index(ds.id).nil?
+      ds.delete
+    end
+    eval_statements.each {|es| eval(es)}
   end
   
   def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )

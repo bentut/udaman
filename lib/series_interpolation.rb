@@ -26,7 +26,33 @@ module SeriesInterpolation
     quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/4.0
     quarterly_data
     new_series = new_transformation("Interpolated from #{self.name}", quarterly_data)
-    new_series.update_attributes(:frequency=>frequency)
+    new_series.update_attributes(:frequency=>frequency) #may not want to do this... probably saving series unintentionally
     new_series
   end
+  
+  def interpolate_missing_months_and_aggregate(frequency, operation)
+    last_val = nil
+    last_date = nil
+    monthly_series_data = {}
+    data.sort.each do |key, val|
+      next if val.nil?
+      monthly_series_data[key] = val
+      unless last_val.nil?
+        val_diff = val - last_val
+        d1 = Date.parse key
+        d2 = Date.parse last_date
+        month_diff = (d1.year - d2.year) * 12 + (d1.month - d2.month)
+        #puts "#{key}: #{month_diff}"
+        (1..month_diff-1).each { |offset| monthly_series_data[(d2 >> offset).to_s] = last_val + (val_diff / month_diff) * offset }
+      end
+      last_val = val
+      last_date = key
+    end
+    monthly_series = new_transformation("Interpolated Monthly Series from #{self.name}", monthly_series_data)
+    monthly_series.frequency = "month"
+    monthly_series.aggregate(frequency, operation)
+
+  end
+  
+  
 end

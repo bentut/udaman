@@ -199,14 +199,18 @@ class DataSource < ActiveRecord::Base
       Series.find self.series_id
     end
 
+    def get_eval_statement
+      "\"#{self.series.name}\".ts_eval= %Q|#{self.eval}|"
+    end
+    
     def print_eval_statement
       #might not need to do something different for seasonal adjustment anymore
-      if self.eval.index("apply_seasonal_adjustment").nil?
+      #if self.eval.index("apply_seasonal_adjustment").nil?
         #puts "\"#{self.series.name}\".ts_append_eval %Q|#{self.eval}|" if self.mode == "append"
         puts "\"#{self.series.name}\".ts_eval= %Q|#{self.eval}|" #if self.mode == "set"
-      else
-        puts self.eval
-      end
+      # else
+      #         puts self.eval
+      #       end
     end
 
     def set_dependencies

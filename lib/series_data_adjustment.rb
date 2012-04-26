@@ -27,7 +27,7 @@ module SeriesDataAdjustment
       new_series_data = {} 
       return new_transformation("No Data since no incomplete year", new_series_data)
     else
-      start_date = "#{last_date[0..3].to_i-1}-12-01" 
+      start_date = "#{last_date[0..3].to_i}-01-01" 
       end_date = Time.now.to_date.to_s
       return trim(start_date, end_date)
     end
