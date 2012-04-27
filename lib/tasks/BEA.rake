@@ -1609,3 +1609,36 @@ task :com_upd => :environment do
 	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_MAU_NEW.xls"
 	
 end
+
+task :bea_identities => :environment do
+  #some of the Y's rely on a manul file read in another process...
+  
+  #these are all slightly off
+  "YPCBEA_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / ("CPI@HON.A".ts * "NR@HI.A".ts)|
+  "YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
+  "YPCBEA_R@HAW.A".ts_eval= %Q|"Y@HAW.A".ts / ("CPI@HON.A".ts * "NR@HAW.A".ts)|
+  "YPCBEA_R@KAU.A".ts_eval= %Q|"Y@KAU.A".ts / ("CPI@HON.A".ts * "NR@KAU.A".ts)|
+  "YPCBEA_R@MAU.A".ts_eval= %Q|"Y@MAU.A".ts / ("CPI@HON.A".ts * "NR@MAU.A".ts)|
+
+  "Y_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / "CPI@HON.A".ts  |
+  "Y_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / "CPI@HON.A".ts |
+  "Y_R@HAW.A".ts_eval= %Q|"Y@HAW.A".ts / "CPI@HON.A".ts |
+  "Y_R@KAU.A".ts_eval= %Q|"Y@KAU.A".ts / "CPI@HON.A".ts |
+  "Y_R@MAU.A".ts_eval= %Q|"Y@MAU.A".ts / "CPI@HON.A".ts |
+
+  #works, but might need to be overwritten by rebased version if carl says
+  "Y_R@HI.Q".ts_eval= %Q|"Y@HI.Q".ts / "CPI@HON.Q".ts  * 100|
+
+  #{}"YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
+  "YPCBEA_R@HI.A".ts_eval="YPCBEA@HI.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@KAU.A".ts_eval="YPCBEA@KAU.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@MAU.A".ts_eval="YPCBEA@MAU.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@HAW.A".ts_eval="YPCBEA@HAW.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@HON.A".ts_eval= "YPCBEA@HON.A".ts / "CPI@HON.A".ts
+  
+  ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty|
+    "Y_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / "CPI@HON.A".ts|
+    "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
+  end  
+
+end

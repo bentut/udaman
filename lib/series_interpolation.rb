@@ -16,15 +16,21 @@ module SeriesInterpolation
     quarterly_data = {}
     data.sort.each do |key, value|
       next if value.nil?
-      interval = value - last unless last.nil?
-      quarterly_data[last_date] = last - interval/4.0 unless last.nil?
-      quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/4.0 unless last.nil?
+      unless last.nil?
+        d1 = Date.parse key
+        d2 = Date.parse last_date
+        quarter_diff = ((d1.year - d2.year) * 12 + (d1.month - d2.month))/3
+        interval = value - last 
+        quarterly_data[last_date] = last - interval/(quarter_diff*2) 
+        quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/(quarter_diff*2) 
+      end
       last = value
       last_date = key
     end
-    quarterly_data[last_date] = last - interval/4.0
-    quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/4.0
-    quarterly_data
+    #not sure why this one is needed... but using the default 4 for here instead of 2*quarter_diff
+    quarterly_data[last_date] = last - interval/4
+    quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/4
+    #quarterly_data
     new_series = new_transformation("Interpolated from #{self.name}", quarterly_data)
     new_series.update_attributes(:frequency=>frequency) #may not want to do this... probably saving series unintentionally
     new_series

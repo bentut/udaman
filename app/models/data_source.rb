@@ -170,6 +170,14 @@ class DataSource < ActiveRecord::Base
       s.data_sources_by_last_run.each {|ds| ds.delete if ids.index(ds.id).nil?}
     end
         
+        
+    def current?
+      self.series.current_data_points.each { |dp| return true if dp.data_source_id == self.id }
+      return false
+    rescue
+      return false
+    end
+    
     def delete
       series_id = self.series_id
       self.data_points.each do |dp|

@@ -303,6 +303,22 @@ task :tour_rev_upd => :environment do
 "VSTITINDNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:Net True Independent:186:300", :col => "repeat:2:13", :frequency => "M" })/1000| 
         }
 
+    tour_rev3_pre = {
+"VEXPOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All others:1:12", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VDAYOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:8", :row => "header_range:col:1:All others:1:10", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+"VEXPNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:Total :1:12", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPNS@HON.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:9", :row => "header_range:col:1:Oahu:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPNS@MAUI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:9", :row => "header_range:col:1:Maui:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPNS@MOL.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:9", :row => "header_range:col:1:Molokai:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPNS@LAN.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:9", :row => "header_range:col:1:Lanai:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:9", :row => "header_range:col:1:Kauai:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPNS@HAW.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:9", :row => "header_range:col:1:Hawaii Island:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VISNS@HON.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Oahu:13:23:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+"VISNS@MAUI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Maui:13:23:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+"VISNS@MOL.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Molokai:13:23:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+"VISNS@LAN.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Lanai:13:23:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+"VISNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Kauai:13:23:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+      }
 	tour_rev3 = {
 "VEXPUSWNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:US West:1:12", :col => "repeat:2:13", :frequency => "M" })/1|, 
 "VEXPUSENS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:US East:1:12", :col => "repeat:2:13", :frequency => "M" })/1|, 
@@ -314,7 +330,8 @@ task :tour_rev_upd => :environment do
 "VEXPPDUSENS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:US East:13:22", :col => "repeat:2:13", :frequency => "M" })/1|, 
 "VEXPPDJPNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:Japan:13:22", :col => "repeat:2:13", :frequency => "M" })/1|, 
 "VEXPPDCANNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:Canada:13:22", :col => "repeat:2:13", :frequency => "M" })/1|, 
-"VEXPPDOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All others:13:22", :col => "repeat:2:13", :frequency => "M" })/1|, 
+#"VEXPPDOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All others:13:22", :col => "repeat:2:13", :frequency => "M" })/1|, 
+"VEXPPDOTNS@HI.M" => %Q|"VEXPOTNS@HI.M".ts / "VDAYOTNS@HI.M".ts*1000|,
 #"VEXPPDNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:Total :13:22", :col => "repeat:2:13", :frequency => "M" })/1|, 
 "VEXPPTUSWNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:US West:23:32", :col => "repeat:2:13", :frequency => "M" })/1|, 
 "VEXPPTUSENS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:7", :row => "header_range:col:1:US East:23:32", :col => "repeat:2:13", :frequency => "M" })/1|, 
@@ -370,6 +387,7 @@ task :tour_rev_upd => :environment do
 #"VDAYNS@LAN.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Lanai:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
 #"VDAYNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Kauai:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
 #"VDAYNS@HAW.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "sheet_num:10", :row => "header_range:col:1:Hawaii Island:1:12:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+#DMNS need to come from CY FENG
 "VDAYNS@HON.M" => %Q|"VDAYDMNS@HON.M".ts + "VDAYITNS@HON.M".ts|,
 "VDAYNS@MAUI.M" => %Q|"VDAYDMNS@MAUI.M".ts + "VDAYITNS@MAUI.M".ts|,
 "VDAYNS@MOL.M" => %Q|"VDAYDMNS@MOL.M".ts + "VDAYITNS@MOL.M".ts|,
@@ -506,6 +524,10 @@ task :tour_rev_upd => :environment do
 	p = Packager.new
 	p.add_definitions tour_rev2
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_rev_upd2.xls"
+
+	p = Packager.new
+	p.add_definitions tour_rev3
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_rev_upd3_pre_dummy.xls"
 	
 	
 	p = Packager.new
