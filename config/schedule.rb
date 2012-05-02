@@ -69,3 +69,10 @@ every 1.day, :at => "#{hour}:50 am" do
   rake "us_upd_q"
   rake "us_upd_m"
 end
+
+every 1.day, :at => "#{hour.to_i+2}:00 am" do
+  rake "bls_identities"
+  rake "expenditures_and_nbi"
+  rake "visitor_identities"
+  rake "const_identities"
+end
