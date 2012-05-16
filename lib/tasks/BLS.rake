@@ -681,10 +681,6 @@ task :hiwi_upd => :environment do
   p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HI_NEW.xls"
   
   p = Packager.new
-  p.add_definitions hiwi_upd_hon_pre
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HON_PRE.xls"
-  
-  p = Packager.new
   p.add_definitions hiwi_upd_hon
   p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HON_NEW.xls"
   

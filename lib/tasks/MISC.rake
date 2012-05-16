@@ -60,15 +60,6 @@ task :const_upd_q => :environment do
 		"KNRSDMLTNS@HI.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-5", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"PICTSGFNS@HON.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-6", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"PICTCONNS@HON.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-7", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|,
-	#PRUD identities included here
-		"PAKRCON@HAW.Q" => %Q|"PAKRCONNS@HAW.Q".ts|,
-		"PAKRCON@HON.Q" => %Q|"PAKRCONNS@HON.Q".ts|,
-		"PAKRCON@KAU.Q" => %Q|"PAKRCONNS@KAU.Q".ts|,
-		"PAKRCON@MAU.Q" => %Q|"PAKRCONNS@MAU.Q".ts|,
-		"PAKRSGF@HAW.Q" => %Q|"PAKRSGFNS@HAW.Q".ts|,
-		"PAKRSGF@HON.Q" => %Q|"PAKRSGFNS@HON.Q".ts|,
-		"PAKRSGF@KAU.Q" => %Q|"PAKRSGFNS@KAU.Q".ts|,
-		"PAKRSGF@MAU.Q" => %Q|"PAKRSGFNS@MAU.Q".ts|
 	
 	}
 	
@@ -131,6 +122,18 @@ task :const_upd_m => :environment do
 end
 
 task :const_identities => :environment do
+  
+  #PRUD identities included here
+		"PAKRCON@HAW.Q".ts_eval= %Q|"PAKRCONNS@HAW.Q".ts|
+		"PAKRCON@HON.Q".ts_eval= %Q|"PAKRCONNS@HON.Q".ts|
+		"PAKRCON@KAU.Q".ts_eval= %Q|"PAKRCONNS@KAU.Q".ts|
+		"PAKRCON@MAU.Q".ts_eval= %Q|"PAKRCONNS@MAU.Q".ts|
+		"PAKRSGF@HAW.Q".ts_eval= %Q|"PAKRSGFNS@HAW.Q".ts|
+		"PAKRSGF@HON.Q".ts_eval= %Q|"PAKRSGFNS@HON.Q".ts|
+		"PAKRSGF@KAU.Q".ts_eval= %Q|"PAKRSGFNS@KAU.Q".ts|
+		"PAKRSGF@MAU.Q".ts_eval= %Q|"PAKRSGFNS@MAU.Q".ts|
+	
+  
   ["KRSGFNS", "KRCONNS"].each do |s_name|
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       "#{s_name}_NMC@#{county}.Q".ts_append_eval %Q|"#{s_name}@#{county}.Q".ts.load_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls"|
