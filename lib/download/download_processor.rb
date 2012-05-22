@@ -42,10 +42,19 @@ class DownloadProcessor
     date_info = {}
     date_info[:start] = @options[:start_date] unless @options[:start_date].nil?
     date_info[:start] = read_date_from_file(@options[:start_row], @options[:start_col]) if @options[:start_date].nil?
+    date_info[:start] = adjust_for_frequency(date_info[:start])
     date_info[:rev] = @options[:rev] == true ? true : false
     date_info
   end
 
+  def adjust_for_frequency(date_string)
+    date_parts = date_string.split("-")
+    #need cases for annual and quarterly too. For now just doing monthly
+    #this should be written in as tests
+    return "#{date_parts[0]}-#{date_parts[1]}-01" if @options[:frequency] == "M"
+    return date_string
+  end
+  
   def read_date_from_file(start_row, start_col)
     #assumption is that these will not be files with dates to process. just static file and sheet strings
     #assuming that date is a recognizable format to ruby
@@ -55,7 +64,7 @@ class DownloadProcessor
     return date_cell.to_s if date_cell.class == Date
     return Date.new(date_cell.split(".")[0].to_i, date_cell.split(".")[1].to_i,1).to_s if date_cell.class == String and !date_cell.index(".").nil?
     return Date.new(date_cell.to_s.split(".")[0].to_i, date_cell.to_s.split(".")[1].to_i,1).to_s if date_cell.class == Float
-    return Date.parse date_cell
+    return Date.parse(date_cell).to_s
   end
   
   def validate_csv
