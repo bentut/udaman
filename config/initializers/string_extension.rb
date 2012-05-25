@@ -12,11 +12,11 @@ class String
   end
   
   def ts_eval=(eval_statement)
-    #begin
+    # begin
       Series.eval self, eval_statement
-    # rescue Exception
-    #    puts "ERROR | #{self} | #{eval_statement}"
-    # end
+     # rescue Exception
+     #    puts "ERROR | #{self} | #{eval_statement}"
+     # end
   end
     
   def ts_append(series)

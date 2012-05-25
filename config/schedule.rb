@@ -19,11 +19,11 @@
 
 # Learn more: http://github.com/javan/whenever
 
-hour = "4"
+hour = "2"
 set :output, "~/Documents/cronlog/udaman-download.log"
 set :environment, "development"
 #job_type :rake,    "cd :path && rake :task :output"
-job_type :rake,    "cd :path && rake :task"
+job_type :rake,    "cd :path && rake :task :output"
 #job_type :rake,    "cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
 
 every 1.day, :at => "#{hour}:00 am" do

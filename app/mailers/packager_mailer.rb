@@ -16,7 +16,8 @@ class PackagerMailer < ActionMailer::Base
     @dates = dates
     subject = "UDAMAN Error (#{rake_task})" if is_error
     subject = "UDAMAN New Download (#{rake_task})" unless is_error
-    mail(:to => ["btrevino@hawaii.edu", "jchfung@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu", "bonham@hawaii.edu"], :subject => subject)
+    #"jchfung@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu", "bonham@hawaii.edu"
+    mail(:to => ["btrevino@hawaii.edu"], :subject => subject)
   end
   
   def rake_error(e, output_path)

@@ -679,11 +679,7 @@ task :hiwi_upd => :environment do
   p = Packager.new
   p.add_definitions hiwi_upd
   p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HI_NEW.xls"
-  
-  p = Packager.new
-  p.add_definitions hiwi_upd_hon_pre
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HON_PRE.xls"
-  
+    
   p = Packager.new
   p.add_definitions hiwi_upd_hon
   p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HON_NEW.xls"
@@ -713,6 +709,56 @@ task :bls_identities => :environment do
   "CPI@HON.S".ts_eval= %Q|"PC@HON.S".ts|
   "CPI@HON.A".ts_eval= %Q|"PC@HON.A".ts|
   "CPI@HON.Q".ts_eval= %Q|"PC@HON.Q".ts|
+  
+  'PC_EN@HON.Q'.ts_eval=      %Q|'PC_EN@HON.S'.ts.interpolate :quarter, :linear|
+  'PC_FDEN@HON.Q'.ts_eval=    %Q|'PC_FDEN@HON.S'.ts.interpolate :quarter, :linear|
+  'PC_MD@HON.Q'.ts_eval=      %Q|'PC_MD@HON.S'.ts.interpolate :quarter, :linear|
+  'PC_SH@HON.Q'.ts_eval=      %Q|'PC_SH@HON.S'.ts.interpolate :quarter, :linear|
+  'PCAP@HON.Q'.ts_eval=       %Q|'PCAP@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCM@HON.Q'.ts_eval=       %Q|'PCCM@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCM_FB@HON.Q'.ts_eval=    %Q|'PCCM_FB@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCM_FD@HON.Q'.ts_eval=    %Q|'PCCM_FD@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCMDR@HON.Q'.ts_eval=     %Q|'PCCMDR@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCMND@HON.Q'.ts_eval=     %Q|'PCCMND@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCMND_FB@HON.Q'.ts_eval=  %Q|'PCCMND_FB@HON.S'.ts.interpolate :quarter, :linear|
+  'PCCMND_FD@HON.Q'.ts_eval=  %Q|'PCCMND_FD@HON.S'.ts.interpolate :quarter, :linear|
+  'PCED@HON.Q'.ts_eval=       %Q|'PCED@HON.S'.ts.interpolate :quarter, :linear|
+  'PCEN@HON.Q'.ts_eval=       %Q|'PCEN@HON.S'.ts.interpolate :quarter, :linear|
+  'PCFB@HON.Q'.ts_eval=       %Q|'PCFB@HON.S'.ts.interpolate :quarter, :linear|
+  'PCFBFD@HON.Q'.ts_eval=     %Q|'PCFBFD@HON.S'.ts.interpolate :quarter, :linear|
+  'PCFBFDAW@HON.Q'.ts_eval=   %Q|'PCFBFDAW@HON.S'.ts.interpolate :quarter, :linear|
+  'PCFBFDBV@HON.Q'.ts_eval=   %Q|'PCFBFDBV@HON.S'.ts.interpolate :quarter, :linear|
+  'PCFBFDHM@HON.Q'.ts_eval=   %Q|'PCFBFDHM@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHS@HON.Q'.ts_eval=       %Q|'PCHS@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSFU@HON.Q'.ts_eval=     %Q|'PCHSFU@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSFUEL@HON.Q'.ts_eval=   %Q|'PCHSFUEL@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSFUGS@HON.Q'.ts_eval=   %Q|'PCHSFUGS@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSFUGSE@HON.Q'.ts_eval=  %Q|'PCHSFUGSE@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSFUGSU@HON.Q'.ts_eval=  %Q|'PCHSFUGSU@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSHF@HON.Q'.ts_eval=     %Q|'PCHSHF@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSSH@HON.Q'.ts_eval=     %Q|'PCHSSH@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSSHOW@HON.Q'.ts_eval=   %Q|'PCHSSHOW@HON.S'.ts.interpolate :quarter, :linear|
+  'PCHSSHRT@HON.Q'.ts_eval=   %Q|'PCHSSHRT@HON.S'.ts.interpolate :quarter, :linear|
+  'PCMD@HON.Q'.ts_eval=       %Q|'PCMD@HON.S'.ts.interpolate :quarter, :linear|
+  'PCOT@HON.Q'.ts_eval=       %Q|'PCOT@HON.S'.ts.interpolate :quarter, :linear|
+  'PCRE@HON.Q'.ts_eval=       %Q|'PCRE@HON.S'.ts.interpolate :quarter, :linear|
+  'PCSV@HON.Q'.ts_eval=       %Q|'PCSV@HON.S'.ts.interpolate :quarter, :linear|
+  'PCSV_MD@HON.Q'.ts_eval=    %Q|'PCSV_MD@HON.S'.ts.interpolate :quarter, :linear|
+  'PCSV_RN@HON.Q'.ts_eval=    %Q|'PCSV_RN@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTR@HON.Q'.ts_eval=       %Q|'PCTR@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTRGS@HON.Q'.ts_eval=     %Q|'PCTRGS@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTRGSMD@HON.Q'.ts_eval=   %Q|'PCTRGSMD@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTRGSPR@HON.Q'.ts_eval=   %Q|'PCTRGSPR@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTRGSRG@HON.Q'.ts_eval=   %Q|'PCTRGSRG@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTRMF@HON.Q'.ts_eval=     %Q|'PCTRMF@HON.S'.ts.interpolate :quarter, :linear|
+  'PCTRPR@HON.Q'.ts_eval=     %Q|'PCTRPR@HON.S'.ts.interpolate :quarter, :linear|
+
+  #special cases with more frequent data
+  "PCHSFUEL@HON.Q".ts_append_eval %Q|"PCHSFUEL@HON.M".ts.aggregate(:quarter, :average)|
+  "PCHSFUGSE@HON.Q".ts_append_eval %Q|"PCHSFUGSE@HON.M".ts.aggregate(:quarter, :average)|
+  "PCHSFUGS@HON.Q".ts_append_eval %Q|"PCHSFUGS@HON.M".ts.aggregate(:quarter, :average)|
+  
+  
   
   #needs EMN up here....
   

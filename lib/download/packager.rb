@@ -1,18 +1,5 @@
 class Packager
   
-  def Packager.temp
-    const_q = {
-  		"KNRSDNS@HON.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-25", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
-  		"KNRSDNS@HAW.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-26", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
-  		"PICTCONNS@HON.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-7", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|
-  	}
-
-  	p = Packager.new
-  	p.add_definitions const_q
-  	p.write_definitions_to "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_NEW.xls"
-  	nil
-  end
-  
   def definitions
     @definitions
   end
@@ -117,33 +104,36 @@ class Packager
     return if @definitions.nil?
   
     @series = get_data_from_definitions
-  
-    old_file = File::exists?(@output_path) ? open(@output_path, "rb").read : nil
-    old_file_xls = Excel.new(@output_path) if File::exists?(@output_path)
-    
-    xls = Spreadsheet::Workbook.new @output_path
-    sheet1 = xls.create_worksheet
-    write_dates(sheet1)
-    col = 1
-    @series.sort.each do |name, data|
-      write_series(name, data, sheet1, col)
-      col += 1
-    end
+
+    # uncomment to get back to development version or do different branch
+    # old_file = File::exists?(@output_path) ? open(@output_path, "rb").read : nil
+    # old_file_xls = Excel.new(@output_path) if File::exists?(@output_path)
+    # 
+    # xls = Spreadsheet::Workbook.new @output_path
+    # sheet1 = xls.create_worksheet
+    # write_dates(sheet1)
+    # col = 1
+    # @series.sort.each do |name, data|
+    #   write_series(name, data, sheet1, col)
+    #   col += 1
+    # end
+
     puts download_results_string
     puts errors_string
     puts series_summary_string
-    xls.write @output_path
-    new_file_xls = Excel.new(@output_path)
+    # xls.write @output_path
+    # new_file_xls = Excel.new(@output_path)
     
-    if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
-      puts new_file_xls.to_s != old_file_xls.to_s
+#    if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
+#      puts new_file_xls.to_s != old_file_xls.to_s
       puts errors != []
       puts download_problem?
-      backup(old_file) unless old_file.nil?
+#uncomment this one too
+#      backup(old_file) unless old_file.nil?
       puts "SENDING EMAIL"
       job_name = @output_path.split("/")[-1].split(".")[0]
       PackagerMailer.rake_notification(job_name, download_results, errors, @series, @output_path, dates, (errors != [] or download_problem?)).deliver
-    end
+#    end
     
   end
 

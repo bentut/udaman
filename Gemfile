@@ -42,7 +42,7 @@ gem 'nokogiri'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'watchr'
   gem 'database_cleaner'
   gem 'test-unit', '1.2.3'
