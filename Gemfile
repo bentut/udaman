@@ -13,7 +13,7 @@ gem 'httpclient'
 gem 'devise', '1.1.2'
 gem 'spork', '~> 0.9.0.rc'
 gem 'rubyzip', '~> 0.9.4'
-gem 'firewatir'
+#gem 'firewatir'
 gem 'whenever', :require => false
 
 
@@ -42,7 +42,7 @@ gem 'nokogiri'
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'watchr'
   gem 'database_cleaner'
   gem 'test-unit', '1.2.3'
