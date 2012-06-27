@@ -1,0 +1,41 @@
+<%= form_for(@data_list) do |f| %>
+  <% if @data_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@data_list.errors.count, "error") %> prohibited this data_list from being saved:</h2>
+
+      <ul>
+      <% @data_list.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :list %><br />
+    <%= f.text_area :list %>
+  </div>
+  <div class="field">
+    <%= f.label :startyear %><br />
+    <%= f.text_field :startyear %>
+  </div>
+  <!-- <div class="field">
+    <%= f.label :endyear %><br />
+    <%= f.text_field :endyear %>
+  </div>
+  <div class="field">
+    <%= f.label :startdate %><br />
+    <%= f.text_field :startdate %>
+  </div>
+  <div class="field">
+    <%= f.label :enddate %><br />
+    <%= f.text_field :enddate %>
+  </div> -->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

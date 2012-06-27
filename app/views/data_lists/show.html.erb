@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @data_list.name %>
+</p>
+
+<p>
+  <b>List:</b>
+  <%= @data_list.list %>
+</p>
+
+<p>
+  <b>Startyear:</b>
+  <%= @data_list.startyear %>
+</p>
+
+<p>
+  <b>Endyear:</b>
+  <%= @data_list.endyear %>
+</p>
+
+<p>
+  <b>Startdate:</b>
+  <%= @data_list.startdate %>
+</p>
+
+<p>
+  <b>Enddate:</b>
+  <%= @data_list.enddate %>
+</p>
+
+
+<%= link_to 'Edit', edit_data_list_path(@data_list) %> |
+<%= link_to 'Back', data_lists_path %>

@@ -1,0 +1,34 @@
+<h1>Listing data_lists</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>List</th>
+    <th>Startyear</th>
+    <th>Endyear</th>
+    <th>Startdate</th>
+    <th>Enddate</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @data_lists.each do |data_list| %>
+  <tr>
+    <td><%= data_list.name %></td>
+    <td><%= dl_linked_version(data_list.list).html_safe %></td>
+    <td><%= data_list.startyear %></td>
+    <td><%= data_list.endyear %></td>
+    <td><%= data_list.startdate %></td>
+    <td><%= data_list.enddate %></td>
+	<td><%= link_to 'CSV', :action => 'show', :id => data_list, :format => 'csv' %></td>
+    <td><%= link_to 'Show', data_list %></td>
+    <td><%= link_to 'Edit', edit_data_list_path(data_list) %></td>
+    <td><%= link_to 'Destroy', data_list, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Data list', new_data_list_path %>
