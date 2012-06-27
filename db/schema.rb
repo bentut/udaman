@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120123053346) do
+ActiveRecord::Schema.define(:version => 20120620190933) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -26,6 +26,17 @@ ActiveRecord::Schema.define(:version => 20120123053346) do
   end
 
   add_index "aremos_series", ["name"], :name => "index_aremos_series_on_name"
+
+  create_table "data_lists", :force => true do |t|
+    t.string   "name"
+    t.text     "list"
+    t.integer  "startyear"
+    t.integer  "endyear"
+    t.string   "startdate"
+    t.string   "enddate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "data_load_patterns", :force => true do |t|
     t.string   "start_date"

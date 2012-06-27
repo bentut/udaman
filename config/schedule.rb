@@ -26,6 +26,15 @@ set :environment, "development"
 job_type :rake,    "cd :path && rake :task"
 #job_type :rake,    "cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
 
+
+# every 1.day, :at => "#{hour}:20 am" do
+#   rake "bls_job_upd_m"
+# end
+# 
+# every 1.day, :at => "#{hour}:35 am" do 
+#   rake "bls_identities"
+# end
+
 every 1.day, :at => "#{hour}:00 am" do
   rake "jp_upd_a"
   rake "jp_upd_q"

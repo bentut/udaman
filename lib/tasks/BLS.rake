@@ -782,6 +782,8 @@ task :bls_identities => :environment do
   "E_NF@HI.M".ts_append_eval %Q|"E_NFSA@HI.M".ts.trim("1957-12-01","1989-12-01")|
   "E_NF@HI.M".ts_append_eval %Q|"ECT@HI.M".ts + "EMN@HI.M".ts + "E_TTU@HI.M".ts + "EIF@HI.M".ts + "E_FIR@HI.M".ts + "E_PBS@HI.M".ts + "E_EDHC@HI.M".ts + "E_LH@HI.M".ts + "EOS@HI.M".ts + "EGV@HI.M".ts|
   
+  "E_PR@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts - "EGV@HI.M".ts|
+   
   ["ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       puts "distributing #{s_name}, #{county}"

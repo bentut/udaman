@@ -397,9 +397,9 @@ class Series < ActiveRecord::Base
     series_data = dp.get_data
     Series.write_cached_files cached_files
     #puts dp.end_conditions
-    puts options[:frequency]
-    puts "hi!"
-    puts Series.frequency_from_code(options[:frequency])
+    #puts options[:frequency]
+    #puts "hi!"
+    #puts Series.frequency_from_code(options[:frequency])
     Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
   end
   

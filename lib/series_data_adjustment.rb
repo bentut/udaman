@@ -21,6 +21,11 @@ module SeriesDataAdjustment
     return last_date[5..6] == "12" ? last_date : "#{last_date[0..3].to_i-1}-12-01"
   end
   
+  def get_last_complete_4th_quarter_datestring
+    last_date = self.data.keys.sort[-1]
+    return last_date[5..6] == "10" ? last_date : "#{last_date[0..3].to_i-1}-10-01"
+  end
+  
   def get_last_incomplete_year
     last_date = self.data.keys.sort[-1]
     if last_date[5..6] == "12"

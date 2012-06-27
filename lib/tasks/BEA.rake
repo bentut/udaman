@@ -17,9 +17,9 @@ task :gsp_upd => :environment do
 	gsp_defs = {
 		"YS@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 6, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YS_PR@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 7, :col => "increment:5:1", :frequency => "A" })/1|, 
-		#"YSAG@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 8, :col => "increment:5:1", :frequency => "A" })/1|, 
-		#refer to identites in identites in bea_upd.cmd
-		"YSAG@HI.A" => %Q|"YSAGFA@HI.A".ts + "YSAGFF@HI.A".ts|,
+		"YSAG@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 8, :col => "increment:5:1", :frequency => "A" })/1|, 
+
+		
 		"YSAGFA@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 9, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YSAGFF@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 10, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YSMI@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 11, :col => "increment:5:1", :frequency => "A" })/1|, 
@@ -1612,7 +1612,10 @@ end
 
 task :bea_identities => :environment do
   #some of the Y's rely on a manul file read in another process...
-  
+
+  #refer to identites in identites in bea_upd.cmd
+	"YSAG@HI.A".ts_eval= %Q|"YSAGFA@HI.A".ts + "YSAGFF@HI.A".ts|
+	  
   #these are all slightly off
   "YPCBEA_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / ("CPI@HON.A".ts * "NR@HI.A".ts)|
   "YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|

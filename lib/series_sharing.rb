@@ -125,7 +125,7 @@ module SeriesSharing
     series_prefix = self.name.split("@")[0]
     self_region = self.name.split("@")[1].split(".")[0]
     start_date = "#{series_prefix}NS@#{county_abbrev}.Q".ts.first_value_date
-    shared_series = "#{name}".ts.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.moving_average, "#{series_prefix}NS@#{self_region}.Q".ts.trim(start_date).moving_average)
+    shared_series = "#{name}".ts.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.trim(start_date,get_last_complete_4th_quarter_datestring).moving_average, "#{series_prefix}NS@#{self_region}.Q".ts.trim(start_date,get_last_complete_4th_quarter_datestring).moving_average)
     mean_corrected_series = shared_series.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.annual_average, shared_series.annual_average)
     new_transformation("Share of #{name} using ratio of the moving average #{series_prefix}NS@#{county_abbrev}.Q over the moving average of #{series_prefix}NS@#{self_region}.Q , mean corrected for the year",
         mean_corrected_series.data)

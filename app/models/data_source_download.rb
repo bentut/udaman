@@ -91,9 +91,24 @@ class DataSourceDownload < ActiveRecord::Base
       download_location = resp.header["Location"]
       content_type = resp.header["Content-Type"]
       status = resp.header.status_code
-      self.download_log.push({:time => download_time, :url => download_url, :location => download_location, :type => content_type, :status => status, :changed => data_changed})
-      self.save
+      last_log = self.download_log[-1]
+      
+      unless !last_log.nil? and last_log[:url] == download_url and last_log[:time].to_date == download_time.to_date and last_log[:status] == status
+        self.download_log.push({:time => download_time, :url => download_url, :location => download_location, :type => content_type, :status => status, :changed => data_changed}) 
+        self.save
+      end
+      
+      #this return might be a little misleading since it isn't always the exact results of the last download, just an indication that they were mostly the same
       self.download_log[-1]
+    end
+
+    
+    #use this if more packet issues... should also check which ones are getting out of hand
+    def clean_log
+      rollup = dsd.download_log.group_by {|entry| "#{entry[:time].to_date}#{entry[:url]}"};
+      new_log = rollup.sort.map {|elem| elem[1][0] };
+      self.download_log = new_log
+      self.save
     end
 
     def content_changed?(new_content)

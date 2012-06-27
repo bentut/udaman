@@ -1,4 +1,6 @@
 UheroDb::Application.routes.draw do
+  
+
   root :to => "series#index"
   
   devise_for :users
@@ -60,6 +62,7 @@ UheroDb::Application.routes.draw do
   resources :prognoz_data_files
   resources :series_data_files
   resources :dashboards
+  resources :data_lists
   
   match 'investigate' => 'dashboards#investigate'
   match 'investigate_no_source' => 'dashboards#investigate_no_source'
@@ -73,6 +76,8 @@ UheroDb::Application.routes.draw do
   match 'permits/years/:num_years' => 'dashboards#permits'
   match 'prudential' => 'dashboards#prudential'
   match 'prudential/years/:num_years' => 'dashboards#prudential'
+  match 'employment' => 'dashboards#employment'
+  match 'employment/years/:num_years' => 'dashboards#employment'
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
   # The priority is based upon order of creation:

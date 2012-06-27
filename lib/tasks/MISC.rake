@@ -123,6 +123,8 @@ end
 
 task :const_identities => :environment do
   
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls"
+  
   #PRUD identities included here
 		"PAKRCON@HAW.Q".ts_eval= %Q|"PAKRCONNS@HAW.Q".ts|
 		"PAKRCON@HON.Q".ts_eval= %Q|"PAKRCONNS@HON.Q".ts|
@@ -196,7 +198,7 @@ task :const_identities => :environment do
     "PMKRSGFNS@#{cnty}.A".ts_eval= %Q|"PMKRSGFNS@#{cnty}.Q".ts.aggregate(:year, :average)|
     "PMKRCONNS@#{cnty}.A".ts_eval= %Q|"PMKRCONNS@#{cnty}.Q".ts.aggregate(:year, :average)|
    end
-   
+      
    #these RMORTS are from US, but that's ok
    "RMORT@US.Q".ts_eval= %Q|"RMORT@US.M".ts.aggregate(:quarter, :average)|
    "RMORT@US.A".ts_eval= %Q|"RMORT@US.M".ts.aggregate(:year, :average)|

@@ -45,7 +45,8 @@ google.visualization.events.addListener(chart, 'select', function() {
 	<div id="navigation">
 		<%= link_to 'Edit', edit_series_path(@series) %> |
 		<%= link_to 'Delete', @series, :method => :delete %> | 
-		<%= link_to 'Back', :action => 'index' %>
+		<%= link_to 'Back', :action => 'index' %> |
+		<%= link_to 'Blog Chart', :action => 'blog_graph', :id => @series %> 
 
 <div id="chart_div"></div>
 

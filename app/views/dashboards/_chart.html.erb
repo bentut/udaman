@@ -14,7 +14,7 @@
 	function <%= function_name %>() {
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', '<%= series.frequency %>');
-		data.addColumn('number', '<%= a_series.nil? ? "no aremos series": a_series.description %>');
+		data.addColumn('number', 'Jobs (000)');
 		
 		<% plot_data.sort.each do |date,value| %>
 		data.addRow(['<%= date %>', <%= value %>]);
@@ -23,9 +23,9 @@
 		var chart = new google.visualization.LineChart(document.getElementById('chart_<%= function_name%>')).
 		draw(data, {
 			curveType: "none",
-			width: 450, 
+			width: 400, 
 			height: 250,
-			//chartArea: {width: 250},
+			chartArea: {height: 125},
 			//vAxis: {
 				//title: 'Mil. $2010', 
 				//titleTextStyle: {fontSize: 12}, 

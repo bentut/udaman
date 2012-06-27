@@ -47,6 +47,10 @@ class SeriesController < ApplicationController
     redirect_to :action => 'index'
   end
   
+  def blog_graph
+    @series = Series.find params[:id]
+  end
+  
   def validate
     @series = Series.find(params[:id])
     @prognoz_data_results = @series.prognoz_data_results

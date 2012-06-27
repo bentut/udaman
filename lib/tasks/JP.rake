@@ -156,6 +156,10 @@ task :jp_upd_m => :environment do
 		"IPMNNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|,
 		"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|
 	
+	  #CPICORENS
+	  #INFCORE
+	  #R
+	  #YXR
 	}
 	
 	jp_m_special = {
