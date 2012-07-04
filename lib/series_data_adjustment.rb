@@ -45,4 +45,10 @@ module SeriesDataAdjustment
   def get_values_after_including(startdatestring, enddatestring = Time.now.to_date.to_s)
     data.reject {|datestring, value| datestring < startdatestring or value.nil? or datestring > enddatestring}
   end
+  
+  def compressed_date_range_data(compressed_date_array = Date.compressed_date_range)
+    compressed_date_range_data = {}
+    compressed_date_array.each { |date| compressed_date_range_data[date] = data[date] }
+    compressed_date_range_data
+  end
 end
