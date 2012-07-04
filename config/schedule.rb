@@ -84,4 +84,5 @@ every 1.day, :at => "#{hour.to_i+2}:00 am" do
   rake "expenditures_and_nbi"
   rake "visitor_identities"
   rake "const_identities"
+  rake "bea_identities"
 end

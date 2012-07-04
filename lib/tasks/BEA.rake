@@ -1616,12 +1616,12 @@ task :bea_identities => :environment do
   #refer to identites in identites in bea_upd.cmd
 	"YSAG@HI.A".ts_eval= %Q|"YSAGFA@HI.A".ts + "YSAGFF@HI.A".ts|
 	  
-  #these are all slightly off
-  "YPCBEA_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / ("CPI@HON.A".ts * "NR@HI.A".ts)|
-  "YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
-  "YPCBEA_R@HAW.A".ts_eval= %Q|"Y@HAW.A".ts / ("CPI@HON.A".ts * "NR@HAW.A".ts)|
-  "YPCBEA_R@KAU.A".ts_eval= %Q|"Y@KAU.A".ts / ("CPI@HON.A".ts * "NR@KAU.A".ts)|
-  "YPCBEA_R@MAU.A".ts_eval= %Q|"Y@MAU.A".ts / ("CPI@HON.A".ts * "NR@MAU.A".ts)|
+  #these are all slightly off... same as below, not needed and wrong anyway 6/28/11
+  # "YPCBEA_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / ("CPI@HON.A".ts * "NR@HI.A".ts)|
+  # "YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
+  # "YPCBEA_R@HAW.A".ts_eval= %Q|"Y@HAW.A".ts / ("CPI@HON.A".ts * "NR@HAW.A".ts)|
+  # "YPCBEA_R@KAU.A".ts_eval= %Q|"Y@KAU.A".ts / ("CPI@HON.A".ts * "NR@KAU.A".ts)|
+  # "YPCBEA_R@MAU.A".ts_eval= %Q|"Y@MAU.A".ts / ("CPI@HON.A".ts * "NR@MAU.A".ts)|
 
   "Y_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / "CPI@HON.A".ts  |
   "Y_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / "CPI@HON.A".ts |
@@ -1633,15 +1633,15 @@ task :bea_identities => :environment do
   "Y_R@HI.Q".ts_eval= %Q|"Y@HI.Q".ts / "CPI@HON.Q".ts  * 100|
 
   #{}"YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
-  "YPCBEA_R@HI.A".ts_eval="YPCBEA@HI.A".ts / "CPI@HON.A".ts
-  "YPCBEA_R@KAU.A".ts_eval="YPCBEA@KAU.A".ts / "CPI@HON.A".ts
-  "YPCBEA_R@MAU.A".ts_eval="YPCBEA@MAU.A".ts / "CPI@HON.A".ts
-  "YPCBEA_R@HAW.A".ts_eval="YPCBEA@HAW.A".ts / "CPI@HON.A".ts
-  "YPCBEA_R@HON.A".ts_eval= "YPCBEA@HON.A".ts / "CPI@HON.A".ts
+  "YPCBEA_R@HI.A".ts_eval=%Q|"YPCBEA@HI.A".ts / "CPI@HON.A".ts|
+  "YPCBEA_R@KAU.A".ts_eval=%Q|"YPCBEA@KAU.A".ts / "CPI@HON.A".ts|
+  "YPCBEA_R@MAU.A".ts_eval=%Q|"YPCBEA@MAU.A".ts / "CPI@HON.A".ts|
+  "YPCBEA_R@HAW.A".ts_eval=%Q|"YPCBEA@HAW.A".ts / "CPI@HON.A".ts|
+  "YPCBEA_R@HON.A".ts_eval= %Q|"YPCBEA@HON.A".ts / "CPI@HON.A".ts|
   
-  ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty|
-    "Y_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / "CPI@HON.A".ts|
-    "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
-  end  
+  # ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty|
+  #   "Y_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / "CPI@HON.A".ts|
+  #   "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
+  # end  
 
 end
