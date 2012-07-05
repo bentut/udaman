@@ -1,14 +1,38 @@
 <%
- start_date = (Time.now.to_date << (15)).to_s
- plot_data = @series.get_values_after(start_date)
+ start_date = @start_date.nil? ? (Time.now.to_date << (15)).to_s : @start_date.to_s
+ end_date = @end_date.nil? ? Time.now.to_date.to_s : @end_date.to_s
+ plot_data = @series.get_values_after(start_date,end_date)
  a_series = AremosSeries.get(@series.name)
  #//should add some other identifier in here too
  chart_id = Date.today.to_s
+
+ chg = @series.annualized_percentage_change
+ ytd_chg = @series.ytd_percentage_change
+ yoy_data = chg.data
+ ytd_data = ytd_chg.data
 %>
 
 
 
 <h1><%= @series.name %></h1>
+<form  accept-charset="UTF-8" action="/series/blog_graph/<%= @series.id %>" method="get">
+	
+<label for="start_date">Start Date</label>
+<select id="start_date" name="start_date" onchange="this.form.submit();">
+	<% @series.data.sort.reverse.each do |pair| %>
+		<option value="<%= pair[0] %>" <%= "selected" if pair[0] == start_date %> ><%= pair[0] %></option>
+	<% end %>
+</select>
+
+
+<label for="end_date">End Date</label>
+<select name="end_date" id="end_date" onchange="this.form.submit();">
+	<% @series.data.sort.reverse.each do |pair| %>
+		<option value="<%= pair[0] %>" <%= "selected" if pair[0] == end_date %> ><%= pair[0] %></option>
+	<% end %>
+</select>
+</form>
+
 <script type="text/javascript"
 src="https://www.google.com/jsapi"></script>  <script type="text/javascript">
 
@@ -39,8 +63,6 @@ draw(data, {curveType: "none",
 				height: 300,
                 //chartArea: {width: 224},
                vAxis: {
-			//title: 'Mil. $2010', 
-			//titleTextStyle: {fontSize: 12}, 
 			//maxValue: 16, 
 		     textStyle: {fontSize: 11}
 		     },
@@ -57,13 +79,93 @@ draw(data, {curveType: "none",
 			},
                backgroundColor: '#F9F9F8'
 	});
+
+
+
+var data_yoy = new google.visualization.DataTable();
+
+data_yoy.addColumn('string', 'Year');
+data_yoy.addColumn('number', 'Level');
+data_yoy.addColumn('number', 'YOY % Change');
+
+<% plot_data.sort.each do |date,value| %>
+	data_yoy.addRow(['<%= date %>', <%= value %>, <%= yoy_data[date] %>]);
+<% end %>
+
+var chart_yoy = new google.visualization.ComboChart(document.getElementById('chart_yoy_<%= chart_id %>')).
+draw(data_yoy, {curveType: "none",
+                width: 500, 
+				height: 350,
+                chartArea: { height: 200},
+               vAxis: {
+			//maxValue: 16, 
+		     textStyle: {fontSize: 11}
+		     },
+                title: '<%= a_series.description %>',
+                titleTextStyle: {color: '#297B92', fontSize: 14},
+                legend: {position:"bottom", textStyle:{color:'#555555'}},
+                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#EEEEEE' , targetAxisIndex: 1, type:'bars'}],
+                lineWidth: 2,
+             	hAxis: {	
+//			showTextEvery: '2', 
+			slantedText: true, 
+			slantedTextAngle: '45', 
+			textStyle: {fontSize: 10}
+			},
+               backgroundColor: '#F9F9F8'
+	});
+
+
+	var data_ytd = new google.visualization.DataTable();
+
+	data_ytd.addColumn('string', 'Year');
+	data_ytd.addColumn('number', 'Level');
+	data_ytd.addColumn('number', 'YTD % Change');
+
+	<% plot_data.sort.each do |date,value| %>
+		data_ytd.addRow(['<%= date %>', <%= value %>, <%= ytd_data[date] %>]);
+	<% end %>
+
+	var chart_ytd = new google.visualization.ComboChart(document.getElementById('chart_ytd_<%= chart_id %>')).
+	draw(data_ytd, {curveType: "none",
+	                width: 500, 
+					height: 350,
+	                chartArea: { height: 200},
+	               vAxis: {
+				//maxValue: 16, 
+			     textStyle: {fontSize: 11}
+			     },
+	                title: '<%= a_series.description %>',
+	                titleTextStyle: {color: '#297B92', fontSize: 14},
+	                legend: {position:"bottom", textStyle:{color:'#555555'}},
+	                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#AAAAAA' , targetAxisIndex: 1, type:'bars'}],
+	                lineWidth: 2,
+	             	hAxis: {	
+	//			showTextEvery: '2', 
+				slantedText: true, 
+				slantedTextAngle: '45', 
+				textStyle: {fontSize: 10}
+				},
+	               backgroundColor: '#F9F9F8'
+		});
+
 }
+
+
+
+
+
 
     </script>
 
+
+<style>
+div.col {width:500px; float:left; margin-right:15px;}
+</style>
+<div style="width:1550px">
+
+<div class="col" id="col1">
 <div id="chart_<%= chart_id %>"></div>
-
-
 <pre>
 
 &lt;script type="text/javascript"
@@ -125,3 +227,136 @@ draw(data, {curveType: "none",
 &lt;div id="chart_<%= chart_id %>"&gt;
 &lt;/div&gt;
 </pre>
+</div>
+
+
+
+
+<div class="col" id="col2">
+<div id="chart_yoy_<%= chart_id %>"></div>
+
+<pre>
+
+&lt;script type="text/javascript"
+src="https://www.google.com/jsapi"&gt;
+
+&lt;/script&gt;  
+&lt;script type="text/javascript"&gt;
+
+google.load("visualization", "1", {packages: ["table"]});
+google.load("visualization", "1", {packages:["corechart"]});
+
+
+//////////////////////////////////////////////////////////
+google.setOnLoadCallback(draw_charts);
+
+///////////////////////////////////////////////////////////
+
+function draw_charts() {
+
+var data_yoy = new google.visualization.DataTable();
+
+data_yoy.addColumn('string', 'Year');
+data_yoy.addColumn('number', 'Level');
+data_yoy.addColumn('number', 'YOY % Change');
+
+<% plot_data.sort.each do |date,value| %>
+	data_yoy.addRow(['<%= date %>', <%= value %>, <%= yoy_data[date] %>]);
+<% end %>
+
+var chart_yoy = new google.visualization.ComboChart(document.getElementById('chart_yoy_<%= chart_id %>')).
+draw(data_yoy, {curveType: "none",
+                width: 500, 
+				height: 350,
+                chartArea: { height: 200},
+               vAxis: {
+			//maxValue: 16, 
+		     textStyle: {fontSize: 11}
+		     },
+                title: '<%= a_series.description %>',
+                titleTextStyle: {color: '#297B92', fontSize: 14},
+                legend: {position:"bottom", textStyle:{color:'#555555'}},
+                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#EEEEEE' , targetAxisIndex: 1, type:'bars'}],
+                lineWidth: 2,
+             	hAxis: {	
+//			showTextEvery: '2', 
+			slantedText: true, 
+			slantedTextAngle: '45', 
+			textStyle: {fontSize: 10}
+			},
+               backgroundColor: '#F9F9F8'
+	});
+	
+}
+
+&lt;/script&gt;
+
+&lt;div id="chart_yoy_<%= chart_id %>"&gt;
+&lt;/div&gt;
+</pre>
+
+
+
+</div>
+
+<div class="col" id="col3">
+<div id="chart_ytd_<%= chart_id %>"></div>
+
+<pre>
+
+&lt;script type="text/javascript"
+src="https://www.google.com/jsapi"&gt;
+
+&lt;/script&gt;  
+&lt;script type="text/javascript"&gt;
+
+google.load("visualization", "1", {packages: ["table"]});
+google.load("visualization", "1", {packages:["corechart"]});
+
+
+//////////////////////////////////////////////////////////
+google.setOnLoadCallback(draw_charts);
+
+///////////////////////////////////////////////////////////
+function draw_charts() {
+
+var data_ytd = new google.visualization.DataTable();
+
+data_ytd.addColumn('string', 'Year');
+data_ytd.addColumn('number', 'Level');
+data_ytd.addColumn('number', 'YTD % Change');
+
+<% plot_data.sort.each do |date,value| %>
+	data_ytd.addRow(['<%= date %>', <%= value %>, <%= ytd_data[date] %>]);
+<% end %>
+
+var chart_ytd = new google.visualization.ComboChart(document.getElementById('chart_ytd_<%= chart_id %>')).
+draw(data_ytd, {curveType: "none",
+                width: 500, 
+				height: 350,
+                chartArea: { height: 200},
+               vAxis: {
+			//maxValue: 16, 
+		     textStyle: {fontSize: 11}
+		     },
+                title: '<%= a_series.description %>',
+                titleTextStyle: {color: '#297B92', fontSize: 14},
+                legend: {position:"bottom", textStyle:{color:'#555555'}},
+                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#AAAAAA' , targetAxisIndex: 1, type:'bars'}],
+                lineWidth: 2,
+             	hAxis: {	
+//			showTextEvery: '2', 
+			slantedText: true, 
+			slantedTextAngle: '45', 
+			textStyle: {fontSize: 10}
+			},
+               backgroundColor: '#F9F9F8'
+	});
+}
+&lt;/script&gt;
+
+&lt;div id="chart_ytd_<%= chart_id %>"&gt;
+&lt;/div&gt;
+</pre>
+
+</div>

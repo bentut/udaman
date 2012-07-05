@@ -49,6 +49,8 @@ class SeriesController < ApplicationController
   
   def blog_graph
     @series = Series.find params[:id]
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
   end
   
   def validate
