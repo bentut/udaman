@@ -114,6 +114,7 @@ class Packager
 
   #this change functionality is not tested, but should be
   def write_xls
+    require 'iconv'
     return if @definitions.nil?
   
     @series = get_data_from_definitions

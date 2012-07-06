@@ -22,7 +22,7 @@ class TextFileProcessor
 
   def load_standard_text
     while line = @file_lines_array.slice!(0)
-      break if line.starts_with "DATE"
+      break if line.start_with? "DATE"
     end
     load_from_queued_up_file(" ", 0, 1)
   end
