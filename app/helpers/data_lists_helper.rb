@@ -42,7 +42,7 @@ module DataListsHelper
     
     rs += "');\ndata.addRows(["
     dates_array.each {|date| rs += "['"+ date +"'," + sorted_names.map {|s| series_data[s][date]}.join(", ") +"],\n"}
-    rs += "])\n"
+    rs += "]);\n"
     rs
   end
 
