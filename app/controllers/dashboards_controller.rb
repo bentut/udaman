@@ -41,6 +41,15 @@ class DashboardsController < ApplicationController
     @bucket_keys = (@maybe_ok_buckets.keys + @wrong_buckets.keys + @missing_low_to_high_buckets.keys).uniq
   end
   
+  def investigate_visual
+    @diff_data = []
+    @to_investigate = Series.where("aremos_missing > 0 OR ABS(aremos_diff) > 0.0").order('name ASC')
+    @to_investigate.each do |ts| 
+      aremos_series = AremosSeries.get ts.name
+      @diff_data.push({:id => ts.id, :name => ts.name, :display_array => ts.aremos_comparison_display_array})
+    end
+  end
+  
   def investigate_no_source
     #@no_source = DataSource.where("eval NOT LIKE '%load_from_download%'").select([:eval, :series_id]).joins("JOIN series ON series.id = series_id").where("aremos_missing > 0 OR ABS(aremos_diff) > 0").group(:name).all.sort
 

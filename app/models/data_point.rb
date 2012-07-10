@@ -46,6 +46,19 @@ class DataPoint < ActiveRecord::Base
     next_of_kin.update_attributes(:current => true) unless next_of_kin.nil?        
   end
   
+  def source_type
+    source_eval = self.data_source.eval
+    case 
+    when source_eval.index("load_from_bls")
+      return :download
+    when source_eval.index("load_from_download")
+      return :download
+    when source_eval.index("load_from")
+      return :static_file
+    else
+      return :identity
+    end
+  end
   # in the KEEP scenario, have to update the data source id because 
   # the practice is to delete previous versions 
   # of the source. The eval statement is cached with each datapoint

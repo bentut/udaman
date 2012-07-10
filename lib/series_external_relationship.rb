@@ -71,6 +71,57 @@ module SeriesExternalRelationship
     end
   end
   
+  
+  def aremos_comparison_display_array
+    
+    results = []
+    begin
+      as = AremosSeries.get self.name
+      if as.nil?
+        return []
+      end
+      
+      as.data.each do |datestring, value|
+        unless self.data[datestring].nil?
+          diff = a_diff(value, self.units_at(datestring))
+          dp = DataPoint.where(:series_id => self.id, :date_string => datestring, :current=>true)[0]
+          source_code = case dp.source_type
+          when :download
+            10
+          when :static_file
+            20
+          when :identity
+            30
+          else
+            40
+          end
+          puts "#{self.name}: #{datestring}: #{value}, #{self.units_at(datestring)} diff:#{diff}" if diff != 0
+          results.push(0+source_code) if diff == 0
+          results.push(1+source_code) if diff > 0 and diff <= 1.0
+          results.push(2+source_code) if diff > 1.0 and diff  <= 10.0
+          results.push(3+source_code) if diff > 10.0          
+          next #need this. otherwise might add two array elements per diff
+        end
+        
+        if self.data[datestring].nil? and value == 1000000000000000.0
+          results.push(0)
+        else
+          results.push(-1)
+        end
+      end
+      results
+    rescue Exception => e
+      puts e.message
+      puts "ERROR WITH \"#{self.name}\".ts.aremos_comparison"
+    end
+    
+  end
+  
+  
+  
+  
+  
+  
   def find_units
     begin
       unit_options = [1,10,100,1000]
