@@ -1,5 +1,23 @@
 class DataHtmlParser
 
+  def get_fred_series(code)
+    @url = "http://api.stlouisfed.org/fred/series/observations"
+    @post_parameters = {
+      'api_key' => '1030292ef115ba08c1778a606eb7a6cc',
+      'series_id' => code
+    }
+    @doc = self.download
+    return self.get_fred_data
+  end
+  
+  def get_fred_data
+    data_hash ||= {}
+    @doc.css('observation').each do |obs|
+      data_hash[obs[:date]]= obs[:value].to_f unless obs[:value] == "."
+    end
+    data_hash
+  end
+  
   def get_bls_series(code, frequency = nil)
     @code = code
     @url = 'http://data.bls.gov/pdq/SurveyOutputServlet'

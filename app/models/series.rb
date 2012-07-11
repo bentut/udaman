@@ -436,6 +436,18 @@ class Series < ActiveRecord::Base
     new_transformation("loaded series code: #{code} from bls website", series_data)
   end
   
+  #it seems like these should need frequencies...
+  def load_from_fred(code)
+    series_data = DataHtmlParser.new.get_fred_series(code)
+    new_transformation("loaded series : #{code} from FRED website", series_data)
+  end
+  
+  def Series.load_from_fred(code, frequency)
+    series_data = DataHtmlParser.new.get_fred_series(code)
+    Series.new_transformation("loaded series : #{code} from FRED website", series_data, Series.frequency_from_code(frequency))
+  end
+  
+  
   def Series.where_ds_like(string)
     ds_array = DataSource.where("eval LIKE '%#{string}%'").all
     series_array = []

@@ -1,1 +1,7 @@
+<%
+@to_investigate.each do |ts| 
+  aremos_series = AremosSeries.get ts.name
+  @diff_data.push({:id => ts.id, :name => ts.name, :display_array => ts.aremos_comparison_display_array})
+end
+%>
 <%= investigate_csv_helper.html_safe %>

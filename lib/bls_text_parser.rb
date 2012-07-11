@@ -39,6 +39,11 @@ class BlsTextParser
   end
 end
   
+  
+#need a fred_parser
+#FRED API KEY: 1030292ef115ba08c1778a606eb7a6cc
+  
+  
 # def Series.load_from_basic_text(path, rows_to_skip, delimiter, date_col, value_col)
 #   f = open path, "r"
 #   rows_skipped = 0
