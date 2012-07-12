@@ -36,8 +36,8 @@ module DataListsHelper
     dates_array = @data_list.data_dates
     series_data_arrays = {}
     sorted_names.each {|s| series_data_arrays[s] = dates_array.map {|date| series_data[s][date].to_s} }
-    rs = "var data = new google.visualization.DataTable();\n"
-    rs += "data.addColumn('String', 'date');\ndata.addColumn('number','"
+    rs = "data = new google.visualization.DataTable();\n"
+    rs += "data.addColumn('string', 'date');\ndata.addColumn('number','"
     rs += sorted_names.join("');\n data.addColumn('number','")
     
     rs += "');\ndata.addRows(["
@@ -54,7 +54,7 @@ module DataListsHelper
       new_word = word
       begin
         new_word = (word.index('@').nil? or word.split(".")[-1].length > 1) ? word : link_to(word, :controller => 'series', :action => 'show', :id => word.ts.id) 
-      rescue
+      rescue Exception
         new_word = word
       end
       new_words.push new_word
