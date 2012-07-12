@@ -1,0 +1,22 @@
+<div id="summary_area">
+	<h1>Search Results</h1>
+	<h2>Total: <%= @search_results.count %></h2>
+	<div id="navigation">
+		<%= raw navigation_by_frequency %>
+		<%= raw navigation_by_letter %>
+	</div>
+</div>
+<div id="details_mask"></div>
+<div id="details_area">
+		<table id='search_results'>
+		<% @search_results.each do |result| %>
+			<tr><td>
+				<% if result[:series_id].nil? %>
+					<%= result[:name] %>
+				<% else %>
+					<%= link_to result[:name], {:action => 'show', :id => result[:series_id]}, :target => "_blank" %></td>
+				<% end %>
+			<td><%= result[:description]%></td></tr>
+		<% end %>
+		</table>
+</div>

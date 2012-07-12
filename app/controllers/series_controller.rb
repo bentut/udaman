@@ -47,6 +47,10 @@ class SeriesController < ApplicationController
     redirect_to :action => 'index'
   end
   
+  def search
+    @search_results = AremosSeries.web_search(params[:search])
+  end
+  
   def blog_graph
     @series = Series.find params[:id]
     @start_date = params[:start_date]

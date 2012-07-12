@@ -13,6 +13,21 @@ class AremosSeries < ActiveRecord::Base
       AremosSeries.first(:conditions => {:name => name})
     end
 
+    def AremosSeries.search(search)      
+      search_condition = "%" + search + "%"
+      find(:all, :conditions => ['name LIKE ? OR description LIKE ?', search_condition, search_condition], :order =>:name)
+    end
+    
+    def AremosSeries.web_search(search)
+      results = self.search(search)
+      results.map do |as| 
+        series = as.name.ts
+        series_id = series.nil? ? nil : series.id
+        { :name => as.name, :description => as.description, :series_id => series_id }
+      end
+      
+    end
+    
     def AremosSeries.parse_annual_data(data, start_date_string)
       data_hash = {}
       year = start_date_string[0..3].to_i

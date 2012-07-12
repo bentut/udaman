@@ -101,3 +101,9 @@ th.fade{text-align:right;}
 td.fade {color:#BBB; text-align:right;}
 
 span.per-chg {color:#999; font-size:10px;}
+div#search {display:inline;}
+div#search form {display:inline}
+div#search input {font-size:10px; /**/ }
+#search_field {border-style:solid}
+#submit_search {border: 1px solid;}
+table#search_results td {border:none;}
