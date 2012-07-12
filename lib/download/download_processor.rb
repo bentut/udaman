@@ -1,3 +1,4 @@
+require 'iconv'
 require 'roo'
 require 'csv'
 

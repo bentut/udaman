@@ -86,3 +86,7 @@ every 1.day, :at => "#{hour.to_i+2}:00 am" do
   rake "const_identities"
   rake "bea_identities"
 end
+
+every 1.day, :at => "#{hour.to_i+3}:30 am" do
+  rake "gen_investigate_csv"
+end
