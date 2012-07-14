@@ -69,7 +69,6 @@ google.setOnLoadCallback(draw_charts);
 $(document).ready(function() {
 	
 <%= google_charts_data_table.html_safe %>
-alert("doc ready!");
 chart = new google.visualization.LineChart(document.getElementById('chart_2012-07-06'));
 });
 
@@ -112,11 +111,14 @@ chart.draw(myView, options);
 <div id="chart_2012-07-06">
 </div>
 <form id="series_selector">
-	<% sorted_names.each do |name| %>
+	<% sorted_names.each do |name| 
+	left_checked = name == sorted_names[0] ? "checked" : ""
+	hide_checked = name == sorted_names[0] ? "" : "checked"
+	%>
 	<label for='<%= name %>'><%= name %></label>
-	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='left'  checked/> left
+	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='left'  <%= left_checked %> /> left
 	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='right' /> right
-	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='hide'  /> hide
+	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='hide'  <%= hide_checked %> /> hide
 	<br />
 	<% end %>
 </form>

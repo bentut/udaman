@@ -939,7 +939,7 @@ task :inc_upd_a => :environment do
 	
 	p = Packager.new
 	p.add_definitions inc_hi_a
-	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_HIQ_NEW.xls"
+	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_HIa_NEW.xls"
 	
 	p = Packager.new
 	p.add_definitions inc_haw_a

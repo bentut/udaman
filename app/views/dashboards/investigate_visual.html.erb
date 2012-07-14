@@ -74,7 +74,7 @@
 		
 		
 		var svg = d3.select("svg#dataviz")
-			.attr("height", function(d) {return params.h * params.scale * formatted_data.length})
+			.attr("height", function(d) {return (params.h+params.space) * params.scale * (3+formatted_data.length)})
 			.attr("width", (max_length * params.unitw + params.left_margin) * params.scale);
 			//.attr("fill", "#444444");
 		

@@ -298,7 +298,8 @@ class Series < ActiveRecord::Base
     #puts "#{"%.2f" % (Time.now - od_time)} : #{observation_dates.count} : #{self.name} : CREATING MISSING OBSERVATION DATES"
     
     #mh_time = Time.now
-    source.mark_history
+    #skip this... should just use the update time information in datapoints
+    #source.mark_history
     #puts "#{"%.2f" % (Time.now - mh_time)} : #{data_points.count} : #{self.name} : MARKING HISTORY FOR SERIES (ALL DATA POINTS)"
     
     update_data_hash

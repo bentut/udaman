@@ -162,9 +162,11 @@ task :const_identities => :environment do
   end
   
   #maybe the line below is already handled in a historical load...
+  "KBCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_upd_m.csv" 
   "KBCON@HON.M".ts_eval= %Q|"KBCON@HON.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls"|
   "KBCON@HON.M".ts_eval= %Q|"KBCON@HON.M".ts.apply_seasonal_adjustment :multiplicative|
   
+  "KBSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_upd_m.csv" 
   "KBSGF@HON.M".ts_eval= %Q|"KBSGF@HON.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls"|
   "KBSGF@HON.M".ts_eval= %Q|"KBSGF@HON.M".ts.apply_seasonal_adjustment :multiplicative|
   

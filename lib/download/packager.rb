@@ -114,10 +114,11 @@ class Packager
 
   #this change functionality is not tested, but should be
   def write_xls
+    require 'iconv'
     return if @definitions.nil?
   
     @series = get_data_from_definitions
-  
+    
     old_file = File::exists?(@output_path) ? open(@output_path, "rb").read : nil
     old_file_xls = Excel.new(@output_path) if File::exists?(@output_path)
     

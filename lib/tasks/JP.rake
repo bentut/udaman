@@ -24,38 +24,48 @@
 
 task :jp_upd_a => :environment do
 	jp_a = {
-		"GDP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
-		"GDP_CP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 3, :frequency => "A" }|, 
-		"GDP_IRSP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 6, :frequency => "A" }|, 
-		"GDP_INRP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 7, :frequency => "A" }|, 
-		"GDP_IIVP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 8, :frequency => "A" }|, 
-		"GDP_CG@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 9, :frequency => "A" }|, 
-		"GDP_IFXG@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 10, :frequency => "A" }|, 
-		"GDP_IIVG@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 11, :frequency => "A" }|, 
-		"GDP_NX@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 12, :frequency => "A" }|, 
-		"GDP_EX@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 13, :frequency => "A" }|, 
-		"GDP_IM@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 14, :frequency => "A" }|, 
-		"GNI@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 19, :frequency => "A" }|, 
-		"GDP_IFX@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 25, :frequency => "A" }|, 
-		"GDP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
-		"GDP_CP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 3, :frequency => "A" }|, 
-		"GDP_IRSP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 6, :frequency => "A" }|, 
-		"GDP_INRP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 7, :frequency => "A" }|, 
-		"GDP_IIVP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 8, :frequency => "A" }|, 
-		"GDP_CG_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 9, :frequency => "A" }|, 
-		"GDP_IFXG_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 10, :frequency => "A" }|, 
-		"GDP_IIVG_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 11, :frequency => "A" }|, 
-		"GDP_NX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 12, :frequency => "A" }|, 
-		"GDP_EX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 13, :frequency => "A" }|, 
-		"GDP_IM_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 14, :frequency => "A" }|, 
-		"GNI_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 22, :frequency => "A" }|, 
-		"GDP_IFX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 28, :frequency => "A" }|, 
-		"GDPDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
-		"GNIDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 19, :frequency => "A" }|,
-		
-		#series that Ben added in
-		"N@JP.A" => %Q|Series.load_from_download "JP_POP@esa.un.org", {:file_type => "xls", :start_date => "1950-01-01", :sheet => "sheet_num:1", :row => "header:col:3:Japan", :col => "increment:6:1", :frequency => "A" }|
+    # "GDP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
+    # "GDP_CP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 3, :frequency => "A" }|, 
+    # "GDP_IRSP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 6, :frequency => "A" }|, 
+    # "GDP_INRP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 7, :frequency => "A" }|, 
+    # "GDP_IIVP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 8, :frequency => "A" }|, 
+    # "GDP_CG@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 9, :frequency => "A" }|, 
+    # "GDP_IFXG@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 10, :frequency => "A" }|, 
+    # "GDP_IIVG@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 11, :frequency => "A" }|, 
+    # "GDP_NX@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 12, :frequency => "A" }|, 
+    # "GDP_EX@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 13, :frequency => "A" }|, 
+    # "GDP_IM@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 14, :frequency => "A" }|, 
+    # "GNI@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 19, :frequency => "A" }|, 
+    # "GDP_IFX@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 25, :frequency => "A" }|, 
+    # "GDP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
+    # "GDP_CP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 3, :frequency => "A" }|, 
+    # "GDP_IRSP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 6, :frequency => "A" }|, 
+    # "GDP_INRP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 7, :frequency => "A" }|, 
+    # "GDP_IIVP_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 8, :frequency => "A" }|, 
+    # "GDP_CG_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 9, :frequency => "A" }|, 
+    # "GDP_IFXG_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 10, :frequency => "A" }|, 
+    # "GDP_IIVG_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 11, :frequency => "A" }|, 
+    # "GDP_NX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 12, :frequency => "A" }|, 
+    # "GDP_EX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 13, :frequency => "A" }|, 
+    # "GDP_IM_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 14, :frequency => "A" }|, 
+    # "GNI_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 22, :frequency => "A" }|, 
+    # "GDP_IFX_R@JP.A" => %Q|Series.load_from_download  "GDP_R_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 28, :frequency => "A" }|, 
+    # "GDPDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
+    # "GNIDEF@JP.A" => %Q|Series.load_from_download  "GDPDEF_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 19, :frequency => "A" }|,
+    # 
+    # #series that Ben added in
+    "N@JP.A" => %Q|Series.load_from_download "JP_POP@esa.un.org", {:file_type => "xls", :start_date => "1950-01-01", :sheet => "sheet_num:1", :row => "header:col:3:Japan", :col => "increment:6:1", :frequency => "A" }|,
 		#JPNPOPL
+		
+		
+		"GDP@JP.A" => %Q|Series.load_from_fred("JPNGDPNADSMEI", "A")/ 1000000000 |	,	
+    "GDP_CP@JP.A" => %Q|Series.load_from_fred("JPNPFCEADSMEI", "A") / 1000000000 |,
+		"GDP_CG@JP.A" => %Q|Series.load_from_fred("JPNGFCEADSMEI", "A") / 1000000000 |,
+		"GDP_EX@JP.A" => %Q|Series.load_from_fred("JPNEXPORTADSMEI", "A") / 1000000000 |,
+		"GDP_IM@JP.A" => %Q|Series.load_from_fred("JPNIMPORTADSMEI", "A") / 1000000000 |,
+		"GDP_IFX@JP.A" => %Q|Series.load_from_fred("JPNGFCFADSMEI", "A") / 1000000000 |,
+		
+    #"N@JP.A" => %Q|Series.load_from_fred("JPNPOPL", "A") * 1000|	,	
 	}
 	
 	p = Packager.new
