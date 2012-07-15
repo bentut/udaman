@@ -3,37 +3,59 @@ class DataPoint < ActiveRecord::Base
   belongs_to :data_source
   
   def upd(value, data_source)
-    #right now only doing comparisons to 3 digits. Still storing full floats. 
-    #puts "#{date_string} - SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
-    new_dp = self
-    
-    #no changes at all
-    return self if value.nil? and !self.value.nil?
-    #timestamps only, 
-    #puts "SCEN1: #{self.date_string}" if same_value_as?(value) and self.data_source_id == data_source.object_id
-    self.update_attributes(:updated_at => Time.now) if same_value_as?(value) and self.data_source_id == data_source.object_id
-    
-    #data source and timestamps
-    #puts "SCEN2: #{self.date_string}" if same_value_as?(value) and self.data_source_id != data_source.id
-    self.update_attributes( :data_source_id => data_source.id, :value => value ) if same_value_as?(value) and self.data_source_id != data_source.id
-    
+    return self                                     if trying_to_replace_current_value_with_nil?(value) #scen 0
+    return update_timestamp                         if same_as_current_data_point?(value, data_source) #scen 1
+    prior_dp = restore_prior_dp(value, data_source) if value_or_data_source_has_changed?(value, data_source) #scen 2
+    return prior_dp                                 unless prior_dp.nil?
+    return create_new_dp(value, data_source)         #scen 3
+  end
+  
+  def value_or_data_source_has_changed?(value, data_source)
+    !same_value_as?(value) or self.data_source_id != data_source.id
+  end
+  
+  def same_as_current_data_point?(value,data_source)
+    #oddly this used to be data_source.object_id. which makes me think I was dealing with a nil problem
+    #in some cases. Hopefully won't crop up.
+    same_value_as?(value) and self.data_source_id == data_source.id
+  end
+  
+  def trying_to_replace_current_value_with_nil?(value)
+     value.nil? and !self.value.nil?
+  end
+  
+  def debug(value)
+    puts "#{date_string} - SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
+  end
+  
+  def create_new_dp(value, data_source)
     #create a new datapoint because value changed
     #need to understand how to control the rounding...not sure what sets this
     #rounding doesnt work, looks like there's some kind of truncation too.
-    if !same_value_as?(value)
-      #puts "SCEN3: #{self.date_string}"
-      #puts "SELF.VALUE: #{self.value} / #{self.value.class} VALUE: #{value} / #{value.class}"
-      self.update_attributes(:current => false)
-      new_dp = self.clone
-      new_dp.update_attributes(:data_source_id => data_source.id, :value => value, :current => true, :created_at => Time.now, :updated_at => Time.now)
-    end
-    new_dp
+    self.update_attributes(:current => false)
+    new_dp = self.clone
+    new_dp.update_attributes(:data_source_id => data_source.id, :value => value, :current => true, :created_at => Time.now, :updated_at => Time.now)
+  end
+  
+  def restore_prior_dp(value, data_source)
+    prior_dp = DataPoint.where(:date_string => date_string, :series_id => series_id, :value => value, :data_source_id => data_source.id).first
+    return nil if prior_dp.nil?
+    self.update_attributes(:current => false)
+    prior_dp.increment :restore_counter
+    prior_dp.current = true
+    prior_dp.save
+    return prior_dp
+  end
+  
+  def update_timestamp
+    #i wonder why this wouldnt work automatically (timestamp update)
+    self.update_attributes(:updated_at => Time.now)
+    self
   end
   
   def same_value_as?(value)
-    #this is a problem, because there are some scenarios where rounding to 3 gives different values
-    #that should actually be stored. This thing needs to be redesigned
-    return self.value.round(3) == value.round(3)
+    #used to round to 3 digits but not doing that anymore. May need to revert
+    self.value == value
   end
   
   def delete

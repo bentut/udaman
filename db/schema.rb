@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120620190933) do
+ActiveRecord::Schema.define(:version => 20120715004040) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(:version => 20120620190933) do
     t.datetime "history"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "restore_counter", :default => 0
   end
 
   add_index "data_points", ["series_id", "date_string"], :name => "index_data_points_on_series_id_and_date_string"
