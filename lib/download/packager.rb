@@ -134,7 +134,17 @@ class Packager
     puts errors_string
     puts series_summary_string
     xls.write @output_path
+
+    po = PackagerOutput.where(:path => @output_path).first
+    if po.nil?
+      po = PackagerOutput.create(:path => @output_path) 
+    else
+      po.touch
+    end
+    
     new_file_xls = Excel.new(@output_path)
+    
+    po.update_attributes(:last_new_data => Time.now) if new_file_xls.to_s != old_file_xls.to_s
     
     if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
       puts new_file_xls.to_s != old_file_xls.to_s

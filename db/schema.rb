@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120715004040) do
+ActiveRecord::Schema.define(:version => 20120716113825) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -93,6 +93,13 @@ ActiveRecord::Schema.define(:version => 20120715004040) do
   end
 
   add_index "data_sources", ["series_id"], :name => "index_data_sources_on_series_id"
+
+  create_table "packager_outputs", :force => true do |t|
+    t.string   "path"
+    t.date     "last_new_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "prognoz_data_files", :force => true do |t|
     t.string   "name"
