@@ -40,22 +40,26 @@ class DataPoint < ActiveRecord::Base
   def restore_prior_dp(value, data_source)
     prior_dp = DataPoint.where(:date_string => date_string, :series_id => series_id, :value => value, :data_source_id => data_source.id).first
     return nil if prior_dp.nil?
-    self.update_attributes(:current => false)
+    self.update_attributes(:current => false) unless self.id == prior_dp.id #this screws up... if equality is off a little
     prior_dp.increment :restore_counter
     prior_dp.current = true
     prior_dp.save
+    prior_dp = DataPoint.where(:date_string => date_string, :series_id => series_id, :value => value, :data_source_id => data_source.id).first
     return prior_dp
   end
   
   def update_timestamp
     #i wonder why this wouldnt work automatically (timestamp update)
+    #updating only is slightly faster than prioring. Over 269 data points the difference is 3.28 v 3.50 seconds
     self.update_attributes(:updated_at => Time.now)
     self
   end
   
   def same_value_as?(value)
     #used to round to 3 digits but not doing that anymore. May need to revert
-    self.value == value
+    #equality at very last digit (somewhere like 12 or 15) is off if rounding is not used. The find seems to work in MysQL but ruby equality fails
+    self.value.round(10) == value.round(10)
+    #self.value == value
   end
   
   def delete

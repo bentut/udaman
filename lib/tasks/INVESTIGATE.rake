@@ -17,3 +17,31 @@ task :gen_investigate_csv => :environment do
   end
   
 end
+
+task :gen_daily_summary => :environment do
+  dps = DataPoint.where("created_at > FROM_DAYS(TO_DAYS(NOW()))").count(:all, :group=> :series_id)
+  CSV.open("public/dp_added.csv", "wb") do |csv|        
+    csv << ["series_name", "series_id", "new_datapoints_added"]
+    dps.each do |series_id,count| 
+      csv << [Series.find(series_id).name, series_id, count]
+    end
+  end
+  
+  CSV.open("public/download_results.csv", "wb") do |csv|
+    csv << ["id", "handle", "time", "status", "changed", "url"]
+    DataSourceDownload.all.each do |dsd|
+      puts dsd.handle
+      next if dsd.download_log.nil?
+      last_log = dsd.download_log[-1] 
+      csv << [dsd.id, dsd.handle, last_log[:time], last_log[:status], last_log[:changed], last_log[:url] ] if dsd.download_log[-1][:time] > Time.now.to_date - 1
+    end
+  end
+  
+  CSV.open("public/packager_output.csv", "wb") do |csv|
+    csv << []
+    PackagerOutput.all.each do |po| 
+      path_parts = po.path.split("/")
+      csv << [po.last_new_data == Time.now.to_date, path_parts[4], path_parts[-1].gsub(".xls","").gsub("_NEW","")]
+    end
+  end
+end

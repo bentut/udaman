@@ -58,13 +58,13 @@ task :jp_upd_a => :environment do
 		#JPNPOPL
 		
 		
-		"GDP@JP.A" => %Q|Series.load_from_fred("JPNGDPNADSMEI", "A")/ 1000000000 |	,	
-    "GDP_CP@JP.A" => %Q|Series.load_from_fred("JPNPFCEADSMEI", "A") / 1000000000 |,
-		"GDP_CG@JP.A" => %Q|Series.load_from_fred("JPNGFCEADSMEI", "A") / 1000000000 |,
-		"GDP_EX@JP.A" => %Q|Series.load_from_fred("JPNEXPORTADSMEI", "A") / 1000000000 |,
-		"GDP_IM@JP.A" => %Q|Series.load_from_fred("JPNIMPORTADSMEI", "A") / 1000000000 |,
-		"GDP_IFX@JP.A" => %Q|Series.load_from_fred("JPNGFCFADSMEI", "A") / 1000000000 |,
-		
+		"GDP@JP.A" => %Q|Series.load_from_fred("JPNGDPNADSMEI", "A") * 1000 |	,	
+    "GDP_CP@JP.A" => %Q|Series.load_from_fred("JPNPFCEADSMEI", "A") * 1000 |,
+		"GDP_CG@JP.A" => %Q|Series.load_from_fred("JPNGFCEADSMEI", "A") * 1000 |,
+		"GDP_EX@JP.A" => %Q|Series.load_from_fred("JPNEXPORTADSMEI", "A") * 1000 |,
+		"GDP_IM@JP.A" => %Q|Series.load_from_fred("JPNIMPORTADSMEI", "A") * 1000 |,
+		"GDP_IFX@JP.A" => %Q|Series.load_from_fred("JPNGFCFADSMEI", "A") * 1000 |,
+		"GDPDEF@JP.A" => %Q|Series.load_from_fred("JPNGDPDEFAISMEI", "A") |, 
     #"N@JP.A" => %Q|Series.load_from_fred("JPNPOPL", "A") * 1000|	,	
 	}
 	

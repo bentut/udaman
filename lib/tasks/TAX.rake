@@ -354,6 +354,9 @@ task :tax_upd => :environment do
 		"TGRNS@KAU.M" => %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 5, :frequency => "M" })/1000|
 	}
 	
+	#to load in preliminary data. This is a manual file that must be manually updated... may eventually want to take this out and run manually as well
+	Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/dotax_preliminary_data.xls"
+	
 	p = Packager.new
 	p.add_definitions collec
 	p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/collec_upd_NEW.xls"

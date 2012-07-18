@@ -38,6 +38,7 @@
 		default: return "#888888";
 		}
 	}
+	
 	function assign_colors(data_array) {
 		data_array.splice(0,2);
 		var color_size_array = [];
@@ -56,10 +57,10 @@
 			}
 		}
 		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
-		//return data_array.map(convert_to_color);
 		return color_size_array;
 	}
-	function viz1(text) {
+	
+	function matching_diffs(text) {
 		params.viz_data = text;
 		max_length = 0;
 		var data = d3.csv.parseRows(text);
@@ -67,13 +68,8 @@
 			max_length = elem.length > max_length ? elem.length : max_length;
 			return { name:elem[0], id:elem[1], data: assign_colors(elem) }
 		});
-		// = formatted_data;
-
-		//alert(formatted_data.toSource());
-
 		
-		
-		var svg = d3.select("svg#dataviz")
+		var svg = d3.select("svg#matching_diffs")
 			.attr("height", function(d) {return (params.h+params.space) * params.scale * (3+formatted_data.length)})
 			.attr("width", (max_length * params.unitw + params.left_margin) * params.scale);
 			//.attr("fill", "#444444");
@@ -106,37 +102,79 @@
 			.attr("x", function(d) {return ((d.end_pos-d.size) * params.unitw + params.left_margin) * params.scale})
 			.attr("y", params.h * params.scale)
 			.attr("fill", function(d) {return d.color});
-
-
-
 	}		
 
-
-	//to get this to generate dynamically, remove the file from the public directory
-	d3.text('/investigate_visual.csv', 'text/csv', viz1); 
+	function new_data_points(csv) {
 		
-	</script>
-	<style>
-	h2 { text-align:center; color:gray; font-family:verdana; font-weight:100; font-size:20px; padding-right:50px; }
-	/*body { width: 2200px; }*/
-	.budget_svg {float:left; }
-	/*table#datacells td {position:relative;}*/
-	table#datacells td svg {margin: 0 auto;}
-	
-	.line {
-	  fill: none;
-	  stroke: steelblue;
-	  stroke-width: 1.5px;
+		var series_count = csv.length;
+		var datapoint_count = d3.sum(csv, function(d) { return d.new_datapoints_added });
+		var largest_count = 0;
+		var letter_counts = d3.nest()
+			.key(function(d) {return d.series_name.slice(0,1)})
+			.rollup(function(leaves) { return d3.sum(leaves, function(d) { return d.new_datapoints_added})})
+			.map(csv);
+		var all_letters_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		var all_letters_counts = all_letters_string.split("").map(function(letter){
+			if (letter_counts[letter] > largest_count)
+				largest_count = letter_counts[letter];
+			return [letter, letter_counts[letter]]; 
+		});
+		
+		var dp_scale = d3.scale.linear().domain([0,largest_count]).range([0,250]);
+		
+		var svg = d3.select("svg#new_data_points")
+			.attr("height", 300)
+			.attr("width", 800);
+		
+		var dp_bars = svg.selectAll("rect.dp")
+			.data(all_letters_counts)
+			.enter()
+			.append("rect")
+			.attr("class", "dp")
+			.attr("x", function(d,i) { return i * 20 })
+			.attr("y", function(d) {return 265 - dp_scale(d[1])})
+			.attr("width", 10)
+			.attr("height", function(d) {return dp_scale(d[1])})
+			.attr("fill", "green");
+			
+		var letter_labels = svg.selectAll("text")
+			.data(all_letters_counts)
+			.enter()
+			.append("text")
+			.attr("x", function (d,i) {return i * 20})
+			.attr("y", 280)
+			.text(function(d){return d[0]});
+//		alert(all_letters_counts.toSource());
 	}
-	.label-text {font-size:8px; font-family:Arial, sans-serif; color: #888888;}
-	svg {border-bottom: 1px solid gray;}
-	#svgexport {font-size:8px; color: gray; font:courier;}
+	
+	function download_results(csv) {
+		alert(csv.toSource());
+	}
+	
+	function packager_output(csv) {
+		alert(csv.toSource());
+	}
+	
+	//to get this to generate dynamically, remove the file from the public directory
+	d3.text('/investigate_visual.csv', 'text/csv', matching_diffs); 
+	d3.csv('/dp_added.csv', new_data_points);
+	//d3.csv('/download_results.csv', download_results);
+	//d3.csv('/packager_output.csv', packager_output);
+	 
+	</script>
+	
+	<style>
+		h2 { text-align:center; color:gray; font-family:verdana; font-weight:100; font-size:20px; padding-right:50px; }
+		table#datacells td svg {margin: 0 auto;}
+		.budget_svg {float:left; }
+		.line { fill: none; stroke: steelblue; stroke-width: 1.5px; }
+		.label-text {font-size:8px; font-family:Arial, sans-serif; color: #888888;}
 	</style>
 	
-	<div id="svgexport"></div>
 	
 	<div>
-		<svg id="dataviz"></svg>
+		<svg id="matching_diffs"></svg>
+		<svg id="new_data_points"></svg>
 	</div>
 	
 
