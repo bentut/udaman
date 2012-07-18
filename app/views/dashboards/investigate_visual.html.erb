@@ -148,7 +148,43 @@
 	}
 	
 	function download_results(csv) {
-		alert(csv.toSource());
+		var nested_downloads = d3.nest()
+			.key(function(d) {return d.handle.split("@")[1]})
+			//.rollup(function(leaves) { return leaves.length})
+			.map(csv);
+
+		var svg = d3.select("svg#download_results")
+			.attr("height", (d3.keys(nested_downloads).length + 10) * 20)
+			.attr("width", 2000);		
+		
+		svg.selectAll("text")
+			.data(d3.entries(nested_downloads))
+			.enter()
+			.append("text")
+			.attr("x", 10)
+			.attr("y", function(d,i) {return (i+1) * 20})
+			.text(function(d) { return d.key });
+			
+		var rows = svg.selectAll("g")
+			.data(d3.entries(nested_downloads))
+			.enter()
+			.append("g")
+			.attr("transform", function(d, i) {return "translate(200," +  ((i+0.5) * 20).toString() + ")"});
+	
+		var downloads = rows.selectAll("rect")
+			.data(function(d) { return d.value})
+			.enter()
+			.append("rect")
+			.attr("height", 10)
+			.attr("width", 10)
+			.attr("y", 0)
+			.attr("x", function(d,i) { return i * 20})
+			.attr("fill", function (d) {
+				if (d.status != "200") return "red";
+				if (d.changed == "true") return "green";
+				else return "#BBB"; 
+			});
+		//alert(nested_downloads.toSource());
 	}
 	
 	function packager_output(csv) {
@@ -158,7 +194,7 @@
 	//to get this to generate dynamically, remove the file from the public directory
 	d3.text('/investigate_visual.csv', 'text/csv', matching_diffs); 
 	d3.csv('/dp_added.csv', new_data_points);
-	//d3.csv('/download_results.csv', download_results);
+	d3.csv('/download_results.csv', download_results);
 	//d3.csv('/packager_output.csv', packager_output);
 	 
 	</script>
@@ -175,6 +211,7 @@
 	<div>
 		<svg id="matching_diffs"></svg>
 		<svg id="new_data_points"></svg>
+		<svg id="download_results"></svg>
 	</div>
 	
 
