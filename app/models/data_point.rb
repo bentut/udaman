@@ -79,6 +79,8 @@ class DataPoint < ActiveRecord::Base
       return :download
     when source_eval.index("load_from_download")
       return :download
+    when source_eval.index("load_from_fred")
+      return :download
     when source_eval.index("load_from")
       return :static_file
     else

@@ -111,97 +111,190 @@
 		var largest_count = 0;
 		var letter_counts = d3.nest()
 			.key(function(d) {return d.series_name.slice(0,1)})
-			.rollup(function(leaves) { return d3.sum(leaves, function(d) { return d.new_datapoints_added})})
+			.rollup(function(leaves) { return [d3.sum(leaves, function(d) { return d.new_datapoints_added}), leaves.length]   })
 			.map(csv);
 		var all_letters_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		var all_letters_counts = all_letters_string.split("").map(function(letter){
-			if (letter_counts[letter] > largest_count)
-				largest_count = letter_counts[letter];
-			return [letter, letter_counts[letter]]; 
+			if (letter_counts[letter] === undefined) return [letter, 0 , 0];
+			else {
+				if (letter_counts[letter][0] > largest_count)
+					largest_count = letter_counts[letter][0];	
+				return [letter, letter_counts[letter][0], letter_counts[letter][1]]; 
+			}
 		});
 		
-		var dp_scale = d3.scale.linear().domain([0,largest_count]).range([0,250]);
+		var dp_scale = d3.scale.linear().domain([0,largest_count]).range([0,200]);
 		
 		var svg = d3.select("svg#new_data_points")
-			.attr("height", 300)
-			.attr("width", 800);
+			.attr("height", 250)
+			.attr("width", 550);
+		
+		svg.append("text")
+			.attr("x", 0)
+			.attr("y", 10)
+			.text(series_count + " Series Updated");
+
+		svg.append("text")
+			.attr("x", 0)
+			.attr("y", 25)
+			.text(datapoint_count + " New Datapoints");
 		
 		var dp_bars = svg.selectAll("rect.dp")
 			.data(all_letters_counts)
 			.enter()
 			.append("rect")
 			.attr("class", "dp")
-			.attr("x", function(d,i) { return i * 20 })
-			.attr("y", function(d) {return 265 - dp_scale(d[1])})
+			.attr("x", function(d,i) {  return i * 20 })
+			.attr("y", function(d) {return 205 - dp_scale(d[1])})
 			.attr("width", 10)
 			.attr("height", function(d) {return dp_scale(d[1])})
-			.attr("fill", "green");
+			.attr("fill", "#D3E4D0");
+
+		var series_bars = svg.selectAll("rect.series")
+			.data(all_letters_counts)
+			.enter()
+			.append("rect")
+			.attr("class", "series")
+			.attr("x", function(d,i) { return i * 20;  })
+			.attr("y", function(d) {return 205 - dp_scale(d[2])})
+			.attr("width", 10)
+			.attr("height", function(d) {return dp_scale(d[2])})
+			.attr("fill", "#119F49");
 			
-		var letter_labels = svg.selectAll("text")
+		var letter_labels = svg.selectAll("text.label")
 			.data(all_letters_counts)
 			.enter()
 			.append("text")
+			.attr("class", "label")
 			.attr("x", function (d,i) {return i * 20})
-			.attr("y", 280)
+			.attr("y", 220)
+			.attr("fill", "#BBB")
 			.text(function(d){return d[0]});
 //		alert(all_letters_counts.toSource());
 	}
 	
 	function download_results(csv) {
+		var box = 7;
+		var space = 3;
+		var indent = 140;
 		var nested_downloads = d3.nest()
 			.key(function(d) {return d.handle.split("@")[1]})
 			//.rollup(function(leaves) { return leaves.length})
 			.map(csv);
 
 		var svg = d3.select("svg#download_results")
-			.attr("height", (d3.keys(nested_downloads).length + 10) * 20)
-			.attr("width", 2000);		
+			.attr("height", (d3.keys(nested_downloads).length + 1) * 15)
+			.attr("width", 600);
 		
 		svg.selectAll("text")
 			.data(d3.entries(nested_downloads))
 			.enter()
 			.append("text")
 			.attr("x", 10)
-			.attr("y", function(d,i) {return (i+1) * 20})
+			.attr("y", function(d,i) {return (i+1) * 15})
+			.attr("fill", "#777")
 			.text(function(d) { return d.key });
 			
 		var rows = svg.selectAll("g")
 			.data(d3.entries(nested_downloads))
 			.enter()
 			.append("g")
-			.attr("transform", function(d, i) {return "translate(200," +  ((i+0.5) * 20).toString() + ")"});
+			.attr("transform", function(d, i) {return "translate(" + indent + "," +  ((i+0.5) * 15).toString() + ")"});
 	
 		var downloads = rows.selectAll("rect")
 			.data(function(d) { return d.value})
 			.enter()
 			.append("rect")
-			.attr("height", 10)
-			.attr("width", 10)
+			.attr("height", box)
+			.attr("width", box)
 			.attr("y", 0)
-			.attr("x", function(d,i) { return i * 20})
+			.attr("x", function(d,i) { return i * (box+space)})
 			.attr("fill", function (d) {
 				if (d.status != "200") return "red";
-				if (d.changed == "true") return "green";
-				else return "#BBB"; 
+				if (d.changed == "true") return "#119F49";
+				else return "#D3E4D0"; 
 			});
 		//alert(nested_downloads.toSource());
 	}
 	
 	function packager_output(csv) {
-		alert(csv.toSource());
+		var num_per_row = 16;
+		var width_of_box = 60;
+		var space = 5;
+		var height_of_box = 40;
+		var text_space = 25;
+		
+		var nested_pos = d3.nest()
+			.key(function(d) {return d.group; })
+			.map(csv);
+		for (key in d3.keys(nested_pos)) {
+			csv.push({"changed":"false", "group":d3.keys(nested_pos)[key], "label":"A"});
+		}
+		csv.sort(function(a,b) {
+			return d3.ascending(a.group+a.label,b.group+b.label);
+		})
+		
+		var svg = d3.select("svg#update_spreadsheets")
+			.attr("width", num_per_row * (width_of_box+space))
+			.attr("height", (csv.length / num_per_row + 1) * (height_of_box+space));
+			
+		svg.selectAll("rects")
+			.data(csv)
+			.enter()
+			.append("rect")
+			.attr("class", function(d) {
+				if (d.label == "A") return "group_label";
+				if (d.changed == "true") return "changed";
+				else return "not_changed";
+			})
+			.attr("height", height_of_box)
+			.attr("width", width_of_box)
+			.attr("x", function(d,i) { return (i % num_per_row) * (width_of_box+space) })
+			.attr("y", function(d,i) { return Math.floor(i / num_per_row) * (height_of_box+space)});
+		
+		svg.selectAll("text")
+			.data(csv)
+			.enter()
+			.append("g")
+			.attr("class", function(d) {
+				if (d.label == "A") return "group_label";
+				if (d.changed == "true") return "changed";
+				else return "not_changed";				
+			})
+			.append("text")
+			.attr("x", function(d,i) { return (i % num_per_row) * (width_of_box+space) + 4})
+			.attr("y", function(d,i) { return Math.floor(i / num_per_row) * (height_of_box+space) + text_space})
+			//.attr("xml:space","preserve")
+			.text(function(d){ 
+				if (d.label == "A") return d.group;
+				return d.label.replace("_upd","").split("_").join(" ");
+			});
+		
+		// svg.selectAll("g.group_label")
+		// 	.attr("transform","rotate(90, 50, 50)");
+		//alert(csv.toSource());
 	}
 	
 	//to get this to generate dynamically, remove the file from the public directory
 	d3.text('/investigate_visual.csv', 'text/csv', matching_diffs); 
 	d3.csv('/dp_added.csv', new_data_points);
 	d3.csv('/download_results.csv', download_results);
-	//d3.csv('/packager_output.csv', packager_output);
+	d3.csv('/packager_output.csv', packager_output);
 	 
 	</script>
 	
 	<style>
-		h2 { text-align:center; color:gray; font-family:verdana; font-weight:100; font-size:20px; padding-right:50px; }
+		h2 {font-weight:normal;}
+		/*h2 { text-align:center; color:gray; font-family:verdana; font-weight:100; font-size:20px; padding-right:50px; }*/
 		table#datacells td svg {margin: 0 auto;}
+		svg#download_results text {font-size:9px;}
+		svg#update_spreadsheets text {font-size:8px;}
+		svg#update_spreadsheets rect.group_label {fill:white}
+		svg#update_spreadsheets rect.changed {fill:#119F49}
+		svg#update_spreadsheets rect.not_changed {fill:#D3E4D0}
+		svg#update_spreadsheets g.changed text {font-weight:bold; fill:white}
+		svg#update_spreadsheets g.not_changed text { fill:white}
+		svg#update_spreadsheets g.group_label text {font-weight:bold; font-size:10px; fill:#CCC}
 		.budget_svg {float:left; }
 		.line { fill: none; stroke: steelblue; stroke-width: 1.5px; }
 		.label-text {font-size:8px; font-family:Arial, sans-serif; color: #888888;}
@@ -209,9 +302,27 @@
 	
 	
 	<div>
-		<svg id="matching_diffs"></svg>
+		<table>
+			<tr>
+				<td>
+		<h2>New Data Points and Updated Series</h2>
 		<svg id="new_data_points"></svg>
-		<svg id="download_results"></svg>
+		</td>
+		<td>
+			<h2>Downloads / Raw Data</h2>
+			<svg id="download_results"></svg>
+		</td>
+		</tr>
+		<td colspan=2>
+			<h2>Update Spreadsheets</h2>
+			<svg id="update_spreadsheets"></svg>
+
+		</td>
+		</tr>
+
+		</table>
+		<h2>Series Mismatches with Aremos</h2>
+		<svg id="matching_diffs"></svg>
 	</div>
 	
 
