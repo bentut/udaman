@@ -111,15 +111,19 @@
 		var largest_count = 0;
 		var letter_counts = d3.nest()
 			.key(function(d) {return d.series_name.slice(0,1)})
-			.rollup(function(leaves) { return [d3.sum(leaves, function(d) { return d.new_datapoints_added}), leaves.length]   })
+			.rollup(function(leaves) { return [
+													d3.sum(leaves, function(d) { return d.new_datapoints_added}), 
+													leaves.length, 
+													leaves.sort(function(a,b) {return d3.descending(parseInt(a.new_datapoints_added), parseInt(b.new_datapoints_added))}).map(function(d) {return d.series_name+" ("+ d.new_datapoints_added +")"}).join(", ") 
+											]   })
 			.map(csv);
 		var all_letters_string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		var all_letters_counts = all_letters_string.split("").map(function(letter){
-			if (letter_counts[letter] === undefined) return [letter, 0 , 0];
+			if (letter_counts[letter] === undefined) return [letter, 0 , 0, 0 ];
 			else {
 				if (letter_counts[letter][0] > largest_count)
 					largest_count = letter_counts[letter][0];	
-				return [letter, letter_counts[letter][0], letter_counts[letter][1]]; 
+				return [letter, letter_counts[letter][0], letter_counts[letter][1], letter_counts[letter][2] ]; 
 			}
 		});
 		
@@ -148,7 +152,10 @@
 			.attr("y", function(d) {return 205 - dp_scale(d[1])})
 			.attr("width", 10)
 			.attr("height", function(d) {return dp_scale(d[1])})
-			.attr("fill", "#D3E4D0");
+			.attr("fill", "#D3E4D0")
+			.append("svg:title")
+			.text(function(d){return d[2] + ": " + d[3]} );
+			;
 
 		var series_bars = svg.selectAll("rect.series")
 			.data(all_letters_counts)
@@ -159,7 +166,10 @@
 			.attr("y", function(d) {return 205 - dp_scale(d[2])})
 			.attr("width", 10)
 			.attr("height", function(d) {return dp_scale(d[2])})
-			.attr("fill", "#119F49");
+			.attr("fill", "#119F49")
+			.append("svg:title")
+			.text(function(d){return d[2] + ":" + d[3]} );
+			;
 			
 		var letter_labels = svg.selectAll("text.label")
 			.data(all_letters_counts)
@@ -201,9 +211,12 @@
 			.append("g")
 			.attr("transform", function(d, i) {return "translate(" + indent + "," +  ((i+0.5) * 15).toString() + ")"});
 	
-		var downloads = rows.selectAll("rect")
+		var downloads = rows.selectAll("rect") //this should maybe be text instead
 			.data(function(d) { return d.value})
 			.enter()
+			.append("a")
+			.attr("xlink:href", function(d) {return "/data_source_downloads/" + d.id })
+			.attr("target", "_blank")
 			.append("rect")
 			.attr("height", box)
 			.attr("width", box)
@@ -213,8 +226,12 @@
 				if (d.status != "200") return "red";
 				if (d.changed == "true") return "#119F49";
 				else return "#D3E4D0"; 
-			});
-		//alert(nested_downloads.toSource());
+			})
+			.append("svg:title")
+			.text(function(d){return d.handle} );
+			// .on("mouseover", function(d,i) {
+			// 	mc = d3.mouse(svg[0][0]);
+			// });
 	}
 	
 	function packager_output(csv) {

@@ -184,6 +184,7 @@ class Packager
         series[series_name] = def_data.nil? ? {} : def_data
       rescue Exception => e
         puts "THERE WAS AN ERROR FOR #{series_name}: #{definition}"
+        series[series_name] = {}
         @errors.push({ :series => series_name, :definition => definition, :error => e.message })
       end
     end

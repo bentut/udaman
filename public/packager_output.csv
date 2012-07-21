@@ -17,7 +17,7 @@ false,bea,inc_upd_MAUa
 false,bls,bls_cpi_upd_s
 false,bls,bls_cpi_upd_m
 true,bls,hiwi_upd_HI
-false,bls,hiwi_upd_HON
+true,bls,hiwi_upd_HON
 false,bls,hiwi_upd_HAW
 false,misc,const_upd_q
 false,bls,hiwi_upd_KAU
@@ -25,7 +25,7 @@ false,misc,const_upd_m
 false,rawdata,const_upd_m_ID
 false,bls,hiwi_upd_MAU
 true,bls,bls_job_upd_m
-false,misc,UIC_upd
+true,misc,UIC_upd
 false,tax,collec_upd
 false,tour,tour_ocup_upd
 false,rawdata,tour_vexp_upd_ID
@@ -43,5 +43,5 @@ false,us,us_upd_q
 false,us,us_upd_q2
 false,rawdata,us_upd_q_ID
 false,tour,tour_upd3
-false,us,us_upd_m
+true,us,us_upd_m
 false,us,us_upd_m2
