@@ -3,7 +3,7 @@
 
 ###*******************************************************************
 ###NOTES BOX
-
+#Interesting load issue... length of data sources is approaching the limit of the field and when they get cut off, other things break
 
 
 
@@ -263,7 +263,7 @@ task :tour_rev_upd => :environment do
 "VSTDMNPCNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:No Package:92:188", :col => "repeat:2:13", :frequency => "M" })/1000|, 
 "VSTDMINDNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:Net True Independent:92:188", :col => "repeat:2:13", :frequency => "M" })/1000|, 
 "VDAYITNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:INTERNATIONAL VISITOR DAYS*:184:300", :col => "repeat:2:13", :frequency => "M" })/1000|, 
-"VRDCITNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:INTERNATIONAL AVERAGE DAILY CENSUS*:184:300", :col => "repeat:2:13", :frequency => "M" })/1000|, 
+"VRDCITNS@HI.M" => %Q|Series.load_from_download("TOUR_HIST%y@hawaiitourismauthority.org",{:file_type=>"xls",:start_date=>"2010-01-01",:sheet=>"HL",:row =>"header_range:col:1:INTERNATIONAL AVERAGE DAILY CENSUS*:184:300",:col=>"repeat:2:13",:frequency=>"M"})/1000|, 
 "VSITNS@HI.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:INTERNATIONAL AIR SEATS:184:300", :col => "repeat:2:13", :frequency => "M" })/1000|, 
 "VISITNS@HON.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:Oahu:184:300:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 
 "VISITNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2010-01-01", :sheet => "HL", :row => "header_range:col:1:Kauai:184:300:no_okina", :col => "repeat:2:13", :frequency => "M" })/1000|, 

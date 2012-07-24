@@ -16,6 +16,8 @@ task :gen_investigate_csv => :environment do
     end
   end
   
+  downloads = 0
+  changed_files = 0
   dps = DataPoint.where("created_at > FROM_DAYS(TO_DAYS(NOW()))").count(:all, :group=> :series_id)
   CSV.open("public/dp_added.csv", "wb") do |csv|        
     csv << ["series_name", "series_id", "new_datapoints_added"]
@@ -31,6 +33,7 @@ task :gen_investigate_csv => :environment do
       next if dsd.download_log.nil?
       last_log = dsd.download_log[-1] 
       csv << [dsd.id, dsd.handle, last_log[:time], last_log[:status], last_log[:changed], last_log[:url] ] if dsd.download_log[-1][:time] > Time.now.to_date - 1
+      downloads += 1 if last_log[:changed] and dsd.download_log[-1][:time] > Time.now.to_date - 1
     end
   end
   
@@ -39,12 +42,18 @@ task :gen_investigate_csv => :environment do
     PackagerOutput.all.each do |po| 
       path_parts = po.path.split("/")
       csv << [po.last_new_data == Time.now.to_date, path_parts[4], path_parts[-1].gsub(".xls","").gsub("_NEW","")]
+      downloads += 1 if po.last_new_data == Time.now.to_date
     end
   end
+  system 'cd /Users/Shared/Dev/udaman/public && casperjs rasterize.js'
+  puts "finished this now sending"
+  PackagerMailer.visual_notification(dps.count, changed_files, downloads).deliver
   
 end
 
 task :gen_daily_summary => :environment do
+  downloads = 0
+  changed_files = 0
   dps = DataPoint.where("created_at > FROM_DAYS(TO_DAYS(NOW()))").count(:all, :group=> :series_id)
   CSV.open("public/dp_added.csv", "wb") do |csv|        
     csv << ["series_name", "series_id", "new_datapoints_added"]
@@ -60,6 +69,7 @@ task :gen_daily_summary => :environment do
       next if dsd.download_log.nil?
       last_log = dsd.download_log[-1] 
       csv << [dsd.id, dsd.handle, last_log[:time], last_log[:status], last_log[:changed], last_log[:url] ] if dsd.download_log[-1][:time] > Time.now.to_date - 1
+      downloads += 1 if last_log[:changed] and dsd.download_log[-1][:time] > Time.now.to_date - 1
     end
   end
   
@@ -68,6 +78,12 @@ task :gen_daily_summary => :environment do
     PackagerOutput.all.each do |po| 
       path_parts = po.path.split("/")
       csv << [po.last_new_data == Time.now.to_date, path_parts[4], path_parts[-1].gsub(".xls","").gsub("_NEW","")]
+      changed_files += 1 if po.last_new_data == Time.now.to_date
     end
   end
+  system 'cd /Users/Shared/Dev/udaman/public && casperjs rasterize.js'
+  puts "finished this now sending"
+  
+  PackagerMailer.visual_notification(dps.count, changed_files, downloads).deliver
+  
 end
