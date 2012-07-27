@@ -51,6 +51,37 @@ class SeriesController < ApplicationController
     @search_results = AremosSeries.web_search(params[:search])
   end
   
+  def website_post
+    @series = Series.find params[:id]
+    @start_date = params[:start_date]
+    @end_date = params[:end_date]
+
+    start_date = @start_date.nil? ? (Time.now.to_date << (15)).to_s : @start_date.to_s
+    end_date = @end_date.nil? ? Time.now.to_date.to_s : @end_date.to_s
+    plot_data = @series.get_values_after(start_date,end_date)
+    a_series = AremosSeries.get(@series.name)
+    chart_id = @series.id.to_s+"_"+Date.today.to_s
+    
+    if params[:bar_type] == "yoy"
+      bar_data = @series.annualized_percentage_change.data
+      bar_id_label = "yoy"
+      bar_color = "#AAAAAA"
+      bar_label = "YOY % Change"
+      render :partial => 'blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>bar_id_label, :bar_label => bar_label, :bar_color => bar_color, :bar_data => bar_data }
+    elsif params[:bar_type] == "ytd"
+      bar_data = @series.ytd_percentage_change.data 
+      bar_id_label = "ytd"
+      bar_color = "#AAAAAA"
+      bar_label = "YTD % Change"
+      render :partial => 'blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>bar_id_label, :bar_label => bar_label, :bar_color => bar_color, :bar_data => bar_data }
+    else
+      render :partial => 'blog_chart_line', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id}
+    end    
+    
+    
+    #render :partial => "data_points", :locals => {:series => @series, :as => @as, :chg => @chg, :ytd_chg => @ytd_chg}
+  end
+  
   def blog_graph
     @series = Series.find params[:id]
     @start_date = params[:start_date]

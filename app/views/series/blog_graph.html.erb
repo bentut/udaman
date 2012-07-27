@@ -4,7 +4,7 @@
  plot_data = @series.get_values_after(start_date,end_date)
  a_series = AremosSeries.get(@series.name)
  #//should add some other identifier in here too
- chart_id = Date.today.to_s
+ chart_id = @series.id.to_s+"_"+Date.today.to_s
 
  chg = @series.annualized_percentage_change
  ytd_chg = @series.ytd_percentage_change
@@ -166,197 +166,16 @@ div.col {width:500px; float:left; margin-right:15px;}
 
 <div class="col" id="col1">
 <div id="chart_<%= chart_id %>"></div>
-<pre>
-
-&lt;script type="text/javascript"
-src="https://www.google.com/jsapi"&gt;
-
-&lt;/script&gt;  
-&lt;script type="text/javascript"&gt;
-
-google.load("visualization", "1", {packages: ["table"]});
-google.load("visualization", "1", {packages:["corechart"]});
-
-
-//////////////////////////////////////////////////////////
-google.setOnLoadCallback(draw_charts);
-
-///////////////////////////////////////////////////////////
-
-
-
-function draw_charts() {
-var data = new google.visualization.DataTable();
-
-data.addColumn('string', 'Year');
-data.addColumn('number', 'Value');
-
-<% plot_data.sort.each do |date,value| %>
-	data.addRow(['<%= date %>', <%= value %>]);
-<% end %>
-
-var chart = new google.visualization.LineChart(document.getElementById('chart_<%= chart_id %>')).
-draw(data, {curveType: "none",
-                width: 500, 
-				height: 300,
-                //chartArea: {width: 224},
-               vAxis: {
-			//title: 'Mil. $2010', 
-			//titleTextStyle: {fontSize: 12}, 
-			//maxValue: 16, 
-		     textStyle: {fontSize: 11}
-		     },
-                title: '<%= a_series.description %>',
-                titleTextStyle: {color: '#297B92', fontSize: 14},
-                legend: 'none',
-                series: [{color: '#267991'}],
-                lineWidth: 2,
-             	hAxis: {	
-//			showTextEvery: '2', 
-			slantedText: true, 
-			slantedTextAngle: '45', 
-			textStyle: {fontSize: 10}
-			},
-               backgroundColor: '#F9F9F8'
-	});
-}
-
-
-&lt;/script&gt;
-
-&lt;div id="chart_<%= chart_id %>"&gt;
-&lt;/div&gt;
-</pre>
+<%= render :partial => 'pre_blog_chart_line', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id} %>
 </div>
-
-
-
 
 <div class="col" id="col2">
 <div id="chart_yoy_<%= chart_id %>"></div>
-
-<pre>
-
-&lt;script type="text/javascript"
-src="https://www.google.com/jsapi"&gt;
-
-&lt;/script&gt;  
-&lt;script type="text/javascript"&gt;
-
-google.load("visualization", "1", {packages: ["table"]});
-google.load("visualization", "1", {packages:["corechart"]});
-
-
-//////////////////////////////////////////////////////////
-google.setOnLoadCallback(draw_charts);
-
-///////////////////////////////////////////////////////////
-
-function draw_charts() {
-
-var data_yoy = new google.visualization.DataTable();
-
-data_yoy.addColumn('string', 'Year');
-data_yoy.addColumn('number', 'Level');
-data_yoy.addColumn('number', 'YOY % Change');
-
-<% plot_data.sort.each do |date,value| %>
-	data_yoy.addRow(['<%= date %>', <%= value %>, <%= yoy_data[date] %>]);
-<% end %>
-
-var chart_yoy = new google.visualization.ComboChart(document.getElementById('chart_yoy_<%= chart_id %>')).
-draw(data_yoy, {curveType: "none",
-                width: 500, 
-				height: 350,
-                chartArea: { height: 200},
-               vAxis: {
-			//maxValue: 16, 
-		     textStyle: {fontSize: 11}
-		     },
-                title: '<%= a_series.description %>',
-                titleTextStyle: {color: '#297B92', fontSize: 14},
-                legend: {position:"bottom", textStyle:{color:'#555555'}},
-                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#EEEEEE' , targetAxisIndex: 1, type:'bars'}],
-                lineWidth: 2,
-             	hAxis: {	
-//			showTextEvery: '2', 
-			slantedText: true, 
-			slantedTextAngle: '45', 
-			textStyle: {fontSize: 10}
-			},
-               backgroundColor: '#F9F9F8'
-	});
-	
-}
-
-&lt;/script&gt;
-
-&lt;div id="chart_yoy_<%= chart_id %>"&gt;
-&lt;/div&gt;
-</pre>
-
-
-
+<%= render :partial => 'pre_blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>"yoy", :bar_label => 'YOY % Change', :bar_color => '#EEEEEE', :bar_data => yoy_data } %>
 </div>
 
 <div class="col" id="col3">
 <div id="chart_ytd_<%= chart_id %>"></div>
-
+<%= render :partial => 'pre_blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>"ytd", :bar_label => 'YTD % Change', :bar_color => '#888888', :bar_data => ytd_data } %>
 <pre>
-
-&lt;script type="text/javascript"
-src="https://www.google.com/jsapi"&gt;
-
-&lt;/script&gt;  
-&lt;script type="text/javascript"&gt;
-
-google.load("visualization", "1", {packages: ["table"]});
-google.load("visualization", "1", {packages:["corechart"]});
-
-
-//////////////////////////////////////////////////////////
-google.setOnLoadCallback(draw_charts);
-
-///////////////////////////////////////////////////////////
-function draw_charts() {
-
-var data_ytd = new google.visualization.DataTable();
-
-data_ytd.addColumn('string', 'Year');
-data_ytd.addColumn('number', 'Level');
-data_ytd.addColumn('number', 'YTD % Change');
-
-<% plot_data.sort.each do |date,value| %>
-	data_ytd.addRow(['<%= date %>', <%= value %>, <%= ytd_data[date] %>]);
-<% end %>
-
-var chart_ytd = new google.visualization.ComboChart(document.getElementById('chart_ytd_<%= chart_id %>')).
-draw(data_ytd, {curveType: "none",
-                width: 500, 
-				height: 350,
-                chartArea: { height: 200},
-               vAxis: {
-			//maxValue: 16, 
-		     textStyle: {fontSize: 11}
-		     },
-                title: '<%= a_series.description %>',
-                titleTextStyle: {color: '#297B92', fontSize: 14},
-                legend: {position:"bottom", textStyle:{color:'#555555'}},
-                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#AAAAAA' , targetAxisIndex: 1, type:'bars'}],
-                lineWidth: 2,
-             	hAxis: {	
-//			showTextEvery: '2', 
-			slantedText: true, 
-			slantedTextAngle: '45', 
-			textStyle: {fontSize: 10}
-			},
-               backgroundColor: '#F9F9F8'
-	});
-}
-&lt;/script&gt;
-
-&lt;div id="chart_ytd_<%= chart_id %>"&gt;
-&lt;/div&gt;
-</pre>
-
 </div>

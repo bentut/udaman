@@ -1,0 +1,61 @@
+<pre>
+
+&lt;script type="text/javascript"
+src="https://www.google.com/jsapi"&gt;
+
+&lt;/script&gt;  
+&lt;script type="text/javascript"&gt;
+
+google.load("visualization", "1", {packages: ["table"]});
+google.load("visualization", "1", {packages:["corechart"]});
+
+
+//////////////////////////////////////////////////////////
+google.setOnLoadCallback(draw_charts);
+
+///////////////////////////////////////////////////////////
+
+
+
+function draw_charts() {
+var data = new google.visualization.DataTable();
+
+data.addColumn('string', 'Year');
+data.addColumn('number', 'Value');
+
+<% plot_data.sort.each do |date,value| %>
+	data.addRow(['<%= date %>', <%= value %>]);
+<% end %>
+
+var chart = new google.visualization.LineChart(document.getElementById('chart_<%= chart_id %>')).
+draw(data, {curveType: "none",
+                width: 500, 
+				height: 300,
+                //chartArea: {width: 224},
+               vAxis: {
+			//title: 'Mil. $2010', 
+			//titleTextStyle: {fontSize: 12}, 
+			//maxValue: 16, 
+		     textStyle: {fontSize: 11}
+		     },
+                title: '<%= a_series.description %>',
+                titleTextStyle: {color: '#297B92', fontSize: 14},
+                legend: 'none',
+                series: [{color: '#267991'}],
+                lineWidth: 2,
+             	hAxis: {	
+//			showTextEvery: '2', 
+			slantedText: true, 
+			slantedTextAngle: '45', 
+			textStyle: {fontSize: 10}
+			},
+               backgroundColor: '#F9F9F8'
+	});
+}
+
+
+&lt;/script&gt;
+
+&lt;div id="chart_<%= chart_id %>"&gt;
+&lt;/div&gt;
+</pre>

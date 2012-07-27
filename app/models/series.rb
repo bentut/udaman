@@ -541,6 +541,46 @@ class Series < ActiveRecord::Base
     puts name
   end
   
+  def create_blog_post(bar = nil, start_date = nil, end_date = nil)
+    start_date = start_date.nil? ? (Time.now.to_date << (15)).to_s : start_date.to_s
+    end_date = end_date.nil? ? Time.now.to_date.to_s : end_date.to_s
+    bar_param = bar.nil? ? "" : "&bar_type=#{bar}"
+
+    a_series = AremosSeries.get(self.name)
+    
+    app.post '/users/sign_in', "user[email]" => 'btrevino@hawaii.edu', "user[password]" => '331Clipper'
+    app.get "/series/website_post/#{self.id}?start_date=#{start_date}&end_date=#{end_date}"+bar_param
+    puts "/series/website_post/#{self.id}?start_date=#{start_date}&end_date=#{end_date}"+bar_param
+    response = app.response
+    post_body = response.body 
+    
+    require 'mechanize'
+    agent = Mechanize.new
+    login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
+    
+    dashboard = login_page.form_with(:action => '/admin/login') do |f|
+    	f.send("data[User][login]=", "mechanize")
+    	f.send("data[User][pass]=", "uher0")
+    end.click_button
+    
+    new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/product/add')
+    
+    conf_page = new_product_page.form_with(:action => '/admin/product/add') do |f|
+      
+    	f.send("data[ProductPost][title]=", "#{a_series.description} (#{self.name})")
+    	f.send("data[ProductPost][content]=", post_body)
+    	#f.checkbox_with(:value => '2').check
+      
+    end.click_button
+
+    product_posts = Array.new
+    conf_page.links.each do |link|
+    	product_posts.push link.href unless link.href['admin/product/edit'].nil?
+    end
+    product_posts.sort.reverse[0]
+    
+  end
+  
   def print_data_points
     data_hash = {}
     source_array = []
