@@ -541,19 +541,41 @@ class Series < ActiveRecord::Base
     puts name
   end
   
+  def Series.show_post_creator
+    PostCreatorController.new.show
+  end
+  
+  #used to use app.get trick
   def create_blog_post(bar = nil, start_date = nil, end_date = nil)
     start_date = start_date.nil? ? (Time.now.to_date << (15)).to_s : start_date.to_s
     end_date = end_date.nil? ? Time.now.to_date.to_s : end_date.to_s
-    bar_param = bar.nil? ? "" : "&bar_type=#{bar}"
-
+    plot_data = self.get_values_after(start_date,end_date)
+    chart_id = self.id.to_s+"_"+Date.today.to_s
     a_series = AremosSeries.get(self.name)
+    view = ActionView::Base.new(ActionController::Base.view_paths, {}) 
     
-    app.post '/users/sign_in', "user[email]" => 'btrevino@hawaii.edu', "user[password]" => '331Clipper'
-    app.get "/series/website_post/#{self.id}?start_date=#{start_date}&end_date=#{end_date}"+bar_param
-    puts "/series/website_post/#{self.id}?start_date=#{start_date}&end_date=#{end_date}"+bar_param
-    response = app.response
-    post_body = response.body 
     
+    if bar == "yoy"
+      bar_data = self.annualized_percentage_change.data
+      bar_id_label = "yoy"
+      bar_color = "#AAAAAA"
+      bar_label = "YOY % Change"
+      template_path = "app/views/series/_blog_chart_line_bar"
+      post_body = '' + view.render(:file=> "#{template_path}.html.erb", :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>bar_id_label, :bar_label => bar_label, :bar_color => bar_color, :bar_data => bar_data })
+    elsif bar == "ytd"
+      bar_data = self.ytd_percentage_change.data 
+      bar_id_label = "ytd"
+      bar_color = "#AAAAAA"
+      bar_label = "YTD % Change"
+      template_path = "app/views/series/_blog_chart_line_bar"
+      post_body = '' + view.render(:file=> "#{template_path}.html.erb", :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>bar_id_label, :bar_label => bar_label, :bar_color => bar_color, :bar_data => bar_data })
+    else
+      template_path = "app/views/series/_blog_chart_line"
+      post_body = '' + view.render(:file=> "#{template_path}.html.erb", :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id})
+    end
+
+
+
     require 'mechanize'
     agent = Mechanize.new
     login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')

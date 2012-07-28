@@ -3,6 +3,10 @@
  end_date = @end_date.nil? ? Time.now.to_date.to_s : @end_date.to_s
  plot_data = @series.get_values_after(start_date,end_date)
  a_series = AremosSeries.get(@series.name)
+
+ #calibrate start and end dates to actual plot_data
+ start_date = plot_data.keys.sort[0]
+ end_date = plot_data.keys.sort[-1]
  #//should add some other identifier in here too
  chart_id = @series.id.to_s+"_"+Date.today.to_s
 
@@ -10,28 +14,12 @@
  ytd_chg = @series.ytd_percentage_change
  yoy_data = chg.data
  ytd_data = ytd_chg.data
+
+ unless @chart_made.nil?
+ 	edit_link = "https://www.uhero.hawaii.edu" + @link
+	preview_link = "http://www.uhero.hawaii.edu/products/view/" + @link.split("/")[-1]
+ end
 %>
-
-
-
-<h1><%= @series.name %></h1>
-<form  accept-charset="UTF-8" action="/series/blog_graph/<%= @series.id %>" method="get">
-	
-<label for="start_date">Start Date</label>
-<select id="start_date" name="start_date" onchange="this.form.submit();">
-	<% @series.data.sort.reverse.each do |pair| %>
-		<option value="<%= pair[0] %>" <%= "selected" if pair[0] == start_date %> ><%= pair[0] %></option>
-	<% end %>
-</select>
-
-
-<label for="end_date">End Date</label>
-<select name="end_date" id="end_date" onchange="this.form.submit();">
-	<% @series.data.sort.reverse.each do |pair| %>
-		<option value="<%= pair[0] %>" <%= "selected" if pair[0] == end_date %> ><%= pair[0] %></option>
-	<% end %>
-</select>
-</form>
 
 <script type="text/javascript"
 src="https://www.google.com/jsapi"></script>  <script type="text/javascript">
@@ -162,20 +150,72 @@ draw(data_yoy, {curveType: "none",
 <style>
 div.col {width:500px; float:left; margin-right:15px;}
 </style>
+
+<form  accept-charset="UTF-8" action="/series/blog_graph/<%= @series.id %>" method="get">
+
+<h1><%= @series.name %></h1>
+	
+<label for="start_date">Start Date</label>
+<select id="start_date" name="start_date" onchange="this.form.submit();">
+	<% @series.data.sort.reverse.each do |pair| %>
+		<option value="<%= pair[0] %>" <%= "selected" if pair[0] == start_date %> ><%= pair[0] %></option>
+	<% end %>
+</select>
+
+
+<label for="end_date">End Date</label>
+<select name="end_date" id="end_date" onchange="this.form.submit();">
+	<% @series.data.sort.reverse.each do |pair| %>
+		<option value="<%= pair[0] %>" <%= "selected" if pair[0] == end_date %> ><%= pair[0] %></option>
+	<% end %>
+</select>
+
 <div style="width:1550px">
 
 <div class="col" id="col1">
 <div id="chart_<%= chart_id %>"></div>
+
+<p>
+<% if @chart_made == "line" %>
+	Preview Post: <a href='<%= preview_link %>' target = '_blank'><%= preview_link %></a><br>
+	Edit Post: <a href='<%= edit_link %>' target = '_blank'><%= edit_link %></a>
+<% else %>
+	<button type="submit" name="create_post" value="line">Create Post with Line Chart</button>
+<% end %>
+</p>
+
 <%= render :partial => 'pre_blog_chart_line', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id} %>
 </div>
 
 <div class="col" id="col2">
 <div id="chart_yoy_<%= chart_id %>"></div>
+
+<p>
+<% if @chart_made == "yoy" %>
+	Preview Post: <a href='<%= preview_link %>' target = '_blank'><%= preview_link %></a><br>
+	Edit Post: <a href='<%= edit_link %>' target = '_blank'><%= edit_link %></a>
+<% else %>
+	<button type="submit" name="create_post" value="yoy">Create Post with Line + YOY</button>
+<% end %>
+</p>
+
 <%= render :partial => 'pre_blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>"yoy", :bar_label => 'YOY % Change', :bar_color => '#EEEEEE', :bar_data => yoy_data } %>
 </div>
 
 <div class="col" id="col3">
 <div id="chart_ytd_<%= chart_id %>"></div>
+
+<p>
+<% if @chart_made == "ytd" %>
+	Preview Post: <a href='<%= preview_link %>' target = '_blank'><%= preview_link %></a><br>
+	Edit Post: <a href='<%= edit_link %>' target = '_blank'><%= edit_link %></a>
+<% else %>
+	<button type="submit" name="create_post" value="ytd">Create Post with Line + YTD</button>
+<% end %>
+</p>
+
 <%= render :partial => 'pre_blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>"ytd", :bar_label => 'YTD % Change', :bar_color => '#888888', :bar_data => ytd_data } %>
 <pre>
 </div>
+
+</form>

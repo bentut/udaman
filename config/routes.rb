@@ -62,7 +62,7 @@ UheroDb::Application.routes.draw do
   resources :prognoz_data_files
   resources :series_data_files
   resources :dashboards
-  resources :data_lists
+  resources :data_lists 
   
   match 'investigate' => 'dashboards#investigate'
   match 'investigate_visual' => 'dashboards#investigate_visual'
