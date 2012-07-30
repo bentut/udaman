@@ -146,7 +146,8 @@ class Packager
     
     po.update_attributes(:last_new_data => Time.now) if new_file_xls.to_s != old_file_xls.to_s
     
-    if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
+    #if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
+    if errors != [] or download_problem?
       puts new_file_xls.to_s != old_file_xls.to_s
       puts errors != []
       puts download_problem?

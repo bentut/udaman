@@ -27,9 +27,10 @@ class PackagerMailer < ActionMailer::Base
 
   def visual_notification(new_dps = 0, changed_files = 0, new_downloads = 0)
     attachments.inline['photo.png'] = File.read('/Users/Shared/Dev/udaman/public/investigate_visual.png')
+    attachments['photo.png'] = File.read('/Users/Shared/Dev/udaman/public/investigate_visual.png')
     subject = "Udaman Download Report: #{new_dps.to_s + " new data points / " unless new_dps == 0} #{new_downloads.to_s + " updated downloads / " unless new_downloads == 0} #{changed_files.to_s + " modified update spreadsheets" unless changed_files == 0}"
-    #mail(:to => ["btrevino@hawaii.edu", "jchfung@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu", "bonham@hawaii.edu"], :subject => subject)
-    mail(:to => ["bentut@gmail.com"], :subject => subject)
+    mail(:to => ["btrevino@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu", "bonham@hawaii.edu","ar657@drexel.edu", "qianxue@hawaii.edu", "atsushis@hawaii.edu"], :subject => subject)
+    #mail(:to => ["bentut@gmail.com"], :subject => subject)
   end
   
   
