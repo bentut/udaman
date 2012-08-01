@@ -16,7 +16,7 @@ gem 'rubyzip', '~> 0.9.4'
 #gem 'firewatir'
 gem 'whenever', :require => false
 gem 'mechanize'
-
+gem 'net-sftp'
 # Use unicorn as the web server
 # gem 'unicorn'
 

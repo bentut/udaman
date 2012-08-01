@@ -41,7 +41,7 @@ module DataListsHelper
     rs += sorted_names.join("');\n data.addColumn('number','")
     
     rs += "');\ndata.addRows(["
-    dates_array.each {|date| rs += "['"+ date +"'," + sorted_names.map {|s| series_data[s][date]}.join(", ") +"],\n"}
+    dates_array.each {|date| rs += "['"+ date +"'," + sorted_names.map {|s| series_data[s][date].nil? ? 0 : series_data[s][date] }.join(", ") +"],\n"}
     rs += "]);\n"
     rs
   end

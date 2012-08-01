@@ -98,6 +98,9 @@ GEM
     mysql2 (0.2.18)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.5.2)
     nokogiri (1.5.2)
     ntlm-http (0.1.1)
     oauth (0.4.6)
@@ -191,6 +194,7 @@ DEPENDENCIES
   httpclient
   mechanize
   mysql2 (< 0.3)
+  net-sftp
   nokogiri
   rails (= 3.0.9)
   roo
