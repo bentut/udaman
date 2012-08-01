@@ -178,6 +178,13 @@ class DataSource < ActiveRecord::Base
       return false
     end
     
+    def delete_no_series
+      self.data_points.each do |dp|
+        dp.delete
+      end    
+      super
+    end
+    
     def delete
       series_id = self.series_id
       self.data_points.each do |dp|

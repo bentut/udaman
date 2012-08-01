@@ -1,13 +1,13 @@
 module SeriesAggregation
   def aggregate(frequency, operation, override_prune = false)
     new_series = new_transformation("Aggregated from #{self.name}", aggregate_data_by(frequency, operation, override_prune))
-    new_series.update_attributes(:frequency=>frequency)
+    new_series.frequency = frequency
     new_series
   end
   
-  def aggregate_to(frequency, operation, series_to_store_name)
-    series_to_store_name.ts= aggregate frequency, operation
-  end
+  # def aggregate_to(frequency, operation, series_to_store_name)
+  #   series_to_store_name.ts= aggregate frequency, operation
+  # end
   
   def aggregate_data_by(frequency,operation, override_prune = false)
     validate_aggregation(frequency)
