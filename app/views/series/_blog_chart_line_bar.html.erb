@@ -8,6 +8,12 @@ src="https://www.google.com/jsapi">
 google.load("visualization", "1", {packages: ["table"]});
 google.load("visualization", "1", {packages:["corechart"]});
 
+function gdata_to_csv(data) {
+	datajson = eval("("+data.toJSON()+")");
+	var csv_string = datajson.cols.map(function(elem){return elem.label; }).join() + "\n";
+	datajson.rows.map(function(row) { csv_string += row.c.map(function(cell){ return cell.v; }).join() + "\n"; });
+	return csv_string;
+}
 
 //////////////////////////////////////////////////////////
 google.setOnLoadCallback(draw_charts);
@@ -19,7 +25,7 @@ function draw_charts() {
 var data_yoy = new google.visualization.DataTable();
 
 data_yoy.addColumn('string', 'Year');
-data_yoy.addColumn('number', 'Level');
+data_yoy.addColumn('number', '<%= a_series.description[0..20].gsub(",","") %>');
 data_yoy.addColumn('number', '<%= bar_label %>');
 
 <% plot_data.sort.each do |date,value| %>
@@ -49,6 +55,12 @@ draw(data_yoy, {curveType: "none",
 			},
                backgroundColor: '#F9F9F8'
 	});
+
+	$('#data_<%=bar_id_label %>_<%= chart_id %>').click(function() {
+		    var href = '/csv.php?csv=';
+			href += encodeURIComponent(gdata_to_csv(data_yoy));
+			$(this).attr('href', href);
+	});
 	
 }
 
@@ -56,3 +68,4 @@ draw(data_yoy, {curveType: "none",
 
 <div id="chart_<%=bar_id_label %>_<%= chart_id %>">
 </div>
+<a class="createbutton" id="data_<%=bar_id_label %>_<%= chart_id %>" href="#">download data</a>

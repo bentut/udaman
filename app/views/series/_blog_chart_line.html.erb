@@ -14,13 +14,18 @@ google.setOnLoadCallback(draw_charts);
 
 ///////////////////////////////////////////////////////////
 
-
+function gdata_to_csv(data) {
+	datajson = eval("("+data.toJSON()+")");
+	var csv_string = datajson.cols.map(function(elem){return elem.label; }).join() + "\n";
+	datajson.rows.map(function(row) { csv_string += row.c.map(function(cell){ return cell.v; }).join() + "\n"; });
+	return csv_string;
+}
 
 function draw_charts() {
 var data = new google.visualization.DataTable();
 
 data.addColumn('string', 'Year');
-data.addColumn('number', 'Value');
+data.addColumn('number', '<%= a_series.description[0..20].gsub(",","") %>');
 
 <% plot_data.sort.each do |date,value| %>
 	data.addRow(['<%= date %>', <%= value %>]);
@@ -50,9 +55,17 @@ draw(data, {curveType: "none",
 			},
                backgroundColor: '#F9F9F8'
 	});
+	
+	$('#data_<%= chart_id %>').click(function() {
+		    var href = '/csv.php?csv=';
+			href += encodeURIComponent(gdata_to_csv(data));
+			$(this).attr('href', href);
+	});
+	
 }
 
 </script>
 
 <div id="chart_<%= chart_id %>">
 </div>
+<a class="createbutton" id="data_<%= chart_id %>" href="#">download data</a>

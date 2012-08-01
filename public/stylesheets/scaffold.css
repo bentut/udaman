@@ -107,5 +107,6 @@ div#search {display:inline;}
 div#search form {display:inline}
 div#search input {font-size:10px; /**/ }
 #search_field {border-style:solid}
+form button,
 #submit_search {border: 1px solid;}
 table#search_results td {border:none;}
