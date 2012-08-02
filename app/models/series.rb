@@ -585,19 +585,19 @@ class Series < ActiveRecord::Base
     	f.send("data[User][pass]=", "uher0")
     end.click_button
     
-    new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/product/add')
+    new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/news/add')
     
-    conf_page = new_product_page.form_with(:action => '/admin/product/add') do |f|
+    conf_page = new_product_page.form_with(:action => '/admin/news/add') do |f|
       
-    	f.send("data[ProductPost][title]=", "#{a_series.description} (#{self.name})")
-    	f.send("data[ProductPost][content]=", post_body)
+    	f.send("data[NewsPost][title]=", "#{a_series.description} (#{self.name})")
+    	f.send("data[NewsPost][content]=", post_body)
     	#f.checkbox_with(:value => '2').check
       
     end.click_button
 
     product_posts = Array.new
     conf_page.links.each do |link|
-    	product_posts.push link.href unless link.href['admin/product/edit'].nil?
+    	product_posts.push link.href unless link.href['admin/news/edit'].nil?
     end
     product_posts.sort.reverse[0]
     
