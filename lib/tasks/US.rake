@@ -109,14 +109,14 @@ task :us_upd_q => :environment do
 		#"GDP_G_R@US.Q" => %Q|Series.load_from_download  "6Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 28, :col => "increment:3:1", :frequency => "Q" }|, 
 		"GDP@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 6, :frequency => "Q" }|, 
 		"GDP_R@US.Q" => %Q|Series.load_from_download  "us_gdp@bea.gov", { :file_type => "xls", :start_date => "1947-01-01", :sheet => "sheet_num:1", :row => "increment:9:1", :col => 7, :frequency => "Q" }|,
-		"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1969-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q"}|
+		"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1948-01-01", :row => 6, :col => "increment:3:1", :frequency => "Q"}|
 	}
 	
-	us_q_special = {
-
-		"YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1961-01-01", :row => 7, :col => "increment:4:1", :frequency => "Q"}|
-
-	}
+  us_q_special = {
+  
+    "YP@CA.Q" => %Q|Series.load_from_download "CA_YP@bea.gov", {:file_type => "csv", :start_date => "1948-01-01", :row => 6, :col => "increment:3:1", :frequency => "Q"}|
+  
+  }
 
 	us_q_nowrite = {
 
@@ -136,9 +136,9 @@ task :us_upd_q => :environment do
 	p.add_definitions us_q
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q_NEW.xls"
 	
-	p = Packager.new
-	p.add_definitions us_q_special
-	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q2_NEW.xls"
+  p = Packager.new
+  p.add_definitions us_q_special
+  p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_q2_NEW.xls"
 	
 	p = Packager.new
 	p.add_definitions us_q_nowrite

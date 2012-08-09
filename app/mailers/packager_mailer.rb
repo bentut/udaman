@@ -33,5 +33,12 @@ class PackagerMailer < ActionMailer::Base
     #mail(:to => ["bentut@gmail.com"], :subject => subject)
   end
   
-  
+  def download_link_notification(handle = nil, url = nil, save_path = nil, created = false)
+    subject = "Udaman found and created a new download link for #{handle}" if created
+    subject = "Udaman tried but failed to create a new download link for #{handle}" unless created
+    @handle = handle
+    @url = url
+    @save_path = save_path
+    mail(:to => ["btrevino@hawaii.edu"], :subject => subject)
+  end
 end

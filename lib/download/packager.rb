@@ -74,6 +74,7 @@ class Packager
     date3 = sorted[-1]
     date2 = sorted[-2]
     date1 = sorted[-3]
+    return "Not enough data to display" if date1.nil? or date2.nil? or date3.nil?
     results_string = "DOWNLOADED SERIES:\n-------------------\n"
     results_string += "#{"".rjust(20," ")} | #{date1.rjust(10," ")} | #{date2.rjust(10," ")} | #{date3.rjust(10," ")}\n"
     @series.each do |series, data|
