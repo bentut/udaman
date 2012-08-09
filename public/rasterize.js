@@ -3,7 +3,7 @@
 
 var casper = require('casper').create();
 
-casper.start('http://s199n112.soc.hawaii.edu:3000/users/sign_in', function() {
+casper.start('http://s200n211.soc.hawaii.edu:3000/users/sign_in', function() {
 	console.log("starting");
     this.fill('form#user_new', {
         'user[email]':    'btrevino@hawaii.edu',
@@ -17,7 +17,7 @@ casper.then(function() {
     }, 'logging in failed');
 });
 
-casper.thenOpen("http://s199n112.soc.hawaii.edu:3000/investigate_visual", function(){
+casper.thenOpen("http://s200n211.soc.hawaii.edu:3000/investigate_visual", function(){
 	console.log("opening investigate visual");
 	this.captureSelector('investigate_visual.png', 'body');
 	//console.log(this.captureBase64('png'));

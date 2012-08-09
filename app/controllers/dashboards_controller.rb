@@ -307,6 +307,38 @@ class DashboardsController < ApplicationController
     render "tableview"
   end
   
+  def employment_us
+    @series_to_chart = [
+    'E_NF@US.M',
+    'E_PR@US.M',
+    'ECT@US.M',
+    'EMN@US.M',
+    'EWT@US.M',
+    'ERT@US.M',
+    'E_TU@US.M',
+    'EIF@US.M',
+    'EFI@US.M',
+    'ERE@US.M',
+    'EPS@US.M',
+    'EMA@US.M',
+    'EAD@US.M',
+    'EED@US.M',
+    'EHC@US.M',
+    'EAF@US.M',
+    'EAFAC@US.M',
+    'EAFFD@US.M',
+    'EOS@US.M',
+    'EGV@US.M',
+    'EGVFD@US.M',
+    'EGVST@US.M',
+    'EGVLC@US.M',
+    ]
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
 private
   def set_dates_m(params)
     if params[:num_years].nil?

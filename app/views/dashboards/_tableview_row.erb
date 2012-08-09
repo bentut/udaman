@@ -18,17 +18,26 @@
 	a_series = series_table_data[:a_series]
 	plot_data = series_table_data[:plot_data]
 	chg_data = series_table_data[:s_chg_data]
+	abs_chg_data = series_table_data[:a_chg_data]
 	sorted_plot_data = plot_data.sort
 	ytd = series_table_data[:ytd]
+	ytd_abs = series_table_data[:ytd_abs]
+	d1 = date_keys[-1]
+	d2 = date_keys[-2]
+	d3 = date_keys[-3]
 %>
 
 <td><%= link_to(series.name, {:controller => "series", :action => 'show', :id => series.id}, :target => "_blank")  %>
 	<br>
 	<%= a_series.description %>
 </td>
-<td><%= "%.1f" % plot_data[date_keys[-3]] unless plot_data[date_keys[-3]].nil? %><br/>(<%= "%.1f" % chg_data[date_keys[-1]] unless chg_data[date_keys[-1]].nil? %>%)</td>
-<td><%= "%.1f" % plot_data[date_keys[-2]] unless plot_data[date_keys[-2]].nil? %><br/>(<%= "%.1f" % chg_data[date_keys[-1]] unless chg_data[date_keys[-1]].nil? %>%)</td>
-<td><%= "%.1f" % plot_data[date_keys[-1]] unless plot_data[date_keys[-1]].nil? %><br/>(<%= "%.1f" % chg_data[date_keys[-1]] unless chg_data[date_keys[-1]].nil? %>%)</td>
+<% [d3,d2,d1].each do |d| %>
+<% abs = abs_chg_data[d].nil? ? "" : abs_chg_data[d] %>
+<td>
+	<%= "%.1f" % plot_data[d] unless plot_data[d].nil? %> (<%= "+" if abs > 0 %><%= "%.1f" % abs %>)<br/>
+	<span class="lighten"><%= "%.1f" % chg_data[d] unless chg_data[d].nil? %>% YOY</span>
+</td>
+<% end %>
 
 
 <script type="text/javascript">
@@ -50,23 +59,6 @@
 			series: [{color: '#267991'}],
 			chartArea: {height: 40},
 		});
-		
-		// var data = new google.visualization.DataTable();
-		// data.addColumn('string', '<%= series.frequency %>');
-		// data.addColumn('number', 'Jobs (000)');
-		// 
-		// <% plot_data.sort.each do |date,value| %>
-		// 	data.addRow(['<%= date %>', <%= value %>]);
-		// <% end %>
-		// 
-		// var chart = new google.visualization.LineChart(document.getElementById('piece_<%= function_name%>')).
-		// draw(data, {
-		// 	curveType: "none", lineWidth: 2, vAxis: { textColor: '#FFFFFF'}, hAxis: { textColor: '#FFFFFF'}, legend: 'none',
-		// 	width: 150, 
-		// 	height: 15,
-		// 	series: [{color: '#117991'}],
-		// 	chartArea: {height: 15},
-		// });
 		
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'volume');
@@ -102,14 +94,9 @@
   	}
 </script>
 
-
-
-
-<!--
-<td>out of <%= "%.1f" % highest_level %><div id="piece_<%= function_name %>">&nbsp;</div></td>
--->
-
-<td><%= "%.1f" % series_table_data[:ytd] %>%<div id="ytd_<%= function_name %>">&nbsp;</div></td>
+<td><%= "%.1f" % series_table_data[:ytd] %>% (<%= "+" if ytd_abs > 0 %><%= "%.2f" % ytd_abs %>)
+	<div id="ytd_<%= function_name %>">&nbsp;</div>
+</td>
 <td><div id="chart_<%= function_name %>">&nbsp;</div></td>
 <% end %>
 </tr>

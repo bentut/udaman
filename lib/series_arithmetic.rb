@@ -105,10 +105,20 @@ module SeriesArithmetic
     new_series_data = {}
     last = nil
     data.sort.each do |date_string, value|
-      new_series_data[date_string] = (last-value)/last*100 unless last.nil?
+      new_series_data[date_string] = (value-last)/last*100 unless last.nil?
       last = value
     end
     new_transformation("Percentage Change of #{name}", new_series_data)
+  end
+  
+  def absolute_change
+    new_series_data = {}
+    last = nil
+    data.sort.each do |date_string, value|
+      new_series_data[date_string] = value - last unless last.nil?
+      last = value
+    end
+    new_transformation("Absolute Change of #{name}", new_series_data)
   end
 
   def annualized_percentage_change

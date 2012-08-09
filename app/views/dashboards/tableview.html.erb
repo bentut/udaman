@@ -6,10 +6,11 @@
 
 <style>
 /*#chart-board div.tile {float:left; width:400px; height:275px;}*/
+span.lighten {color:#AAA;}
 </style>
 
 <%
-	summary_series = "E_NF@HI.M"
+	#summary_series = "E_NF@HI.M"
 	series_table_data = {}
 	date_keys = []
 	ytd_chg_vals = []
@@ -22,10 +23,14 @@
 		next if series.nil?
 		plot_data = series.get_values_after(@start_date)
 		ytd = series.ytd_percentage_change.get_values_after(@start_date).sort[-1][1]
+ 		dates = plot_data.keys.sort
+		ytd_abs = plot_data[dates[-1]] - plot_data["#{dates[-1][0..3]}-01-01"]
 		series_table_data[s] = {
 			:series => s.ts,
 			:s_chg_data => series.annualized_percentage_change.get_values_after(@start_date),
+			:a_chg_data => series.absolute_change.get_values_after(@start_date),
 	    	:ytd => ytd,
+			:ytd_abs => ytd_abs,
 			:a_series => AremosSeries.get(s),
 			:plot_data => plot_data,
 		}
@@ -45,7 +50,7 @@
 <% @series_to_chart.each do |s| %>
 	<%
 		next if s.ts.nil?
-		highest_level = summary_series.ts.data[date_keys[-1]]
+		#highest_level = summary_series.ts.data[date_keys[-1]]
 		max_ytd = all_series_ytd.sort[-1]
 		min_ytd = all_series_ytd.sort[0]
 	%>
@@ -53,7 +58,7 @@
 		:series_table_data => series_table_data[s], 
 		:series_name => s, 
 		:date_keys => date_keys,
-		:highest_level => highest_level,
+		#:highest_level => highest_level,
 		:max_ytd => max_ytd,
 		:min_ytd => min_ytd,
 	} %>
