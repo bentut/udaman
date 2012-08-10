@@ -574,15 +574,15 @@ class Series < ActiveRecord::Base
       post_body = '' + view.render(:file=> "#{template_path}.html.erb", :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id})
     end
 
-
-
     require 'mechanize'
     agent = Mechanize.new
     login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
     
+    raise "config/site.yml needs to be set up with 'cms_user'/'cms_pass'" if SITE['cms_user'].nil? or SITE['cms_pass'].nil?
+    
     dashboard = login_page.form_with(:action => '/admin/login') do |f|
-    	f.send("data[User][login]=", "")
-    	f.send("data[User][pass]=", "")
+    	f.send("data[User][login]=", SITE['cms_user'])
+    	f.send("data[User][pass]=", SITE['cms_pass'])
     end.click_button
     
     new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/news/add')
