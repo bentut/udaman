@@ -581,8 +581,8 @@ class Series < ActiveRecord::Base
     login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
     
     dashboard = login_page.form_with(:action => '/admin/login') do |f|
-    	f.send("data[User][login]=", "mechanize")
-    	f.send("data[User][pass]=", "uher0")
+    	f.send("data[User][login]=", "")
+    	f.send("data[User][pass]=", "")
     end.click_button
     
     new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/news/add')
