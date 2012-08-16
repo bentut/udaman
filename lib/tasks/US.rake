@@ -377,7 +377,7 @@ task :us_upd_m => :environment do
 		"RILGFCY10@US.M" => %Q|Series.load_from_download  "US_RILGFCY10_M@research.stlouisfed.org", { :file_type => "txt", :frequency => "M" }|, 
 		"RMORT@US.M" => %Q|Series.load_from_download  "US_RMORT_M@research.stlouisfed.org", { :file_type => "txt", :frequency => "M" }|, 
 		"UMCSENT@US.M" => %Q|Series.load_from_download  "US_UMCSENT_M@research.stlouisfed.org", { :file_type => "txt", :frequency => "M" }|, 
-		"YXR@JP.M" => %Q|Series.load_from_download  "JP_YXR@research.stlouisfed.org", { :file_type => "txt", :frequency => "M" }|,
+		"YXR@JP.M" => %Q|Series.load_from_fred("EXJPUS", "M")|,
 	"STKNS@US.M" => %Q| Series.load_from_download  "US_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|,
 	
 	}

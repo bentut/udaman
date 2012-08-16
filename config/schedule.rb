@@ -40,6 +40,7 @@ end
 
 every 1.day, :at => "#{hour.to_i-1}:00 am" do
   rake "update_seats_links"
+  rake "update_vis_history_links"
 end
 
 every 1.day, :at => "#{hour}:00 am" do

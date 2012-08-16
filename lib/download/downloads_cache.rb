@@ -87,7 +87,9 @@ class DownloadsCache
     csv_file = open path, "r"
     while line = csv_file.gets
       next unless line.index("HYPERLINK").nil?
-      csv_data.push(CSV.parse_line(line.strip))
+      # valid encoding solution is to deal with xA0 characters from this stack overflow post
+      # http://stackoverflow.com/questions/8710444/is-there-a-way-in-ruby-1-9-to-remove-invalid-byte-sequences-from-strings
+      csv_data.push(CSV.parse_line(line.strip.chars.select{|i| i.valid_encoding?}.join))
     end
     csv_file.close
     return csv_data 

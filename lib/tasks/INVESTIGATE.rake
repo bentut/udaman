@@ -45,7 +45,7 @@ task :gen_investigate_csv => :environment do
       downloads += 1 if po.last_new_data == Time.now.to_date
     end
   end
-  system 'cd /Users/Shared/Dev/udaman/public && casperjs rasterize.js'
+  system 'cd /Users/Shared/Dev/udaman/script && casperjs rasterize.js'
   puts "finished this now sending"
   PackagerMailer.visual_notification(dps.count, changed_files, downloads).deliver
   

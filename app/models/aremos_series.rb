@@ -40,6 +40,23 @@ class AremosSeries < ActiveRecord::Base
     end
 
 
+    def AremosSeries.parse_semi_annual_data(data, start_date_string)
+      data_hash = {}
+      year = start_date_string[0..3].to_i
+      semi = start_date_string[4..5].to_i
+      semi_array = ["01", "07"]
+      data.each do |datapoint|
+        return data_hash if datapoint.strip == ""
+        data_hash["#{year}-#{semi_array[semi-1]}-01"] = datapoint.to_f
+        semi += 1
+        if (semi > 2)
+          semi = 1
+          year += 1
+        end
+      end
+      return data_hash
+    end
+    
     def AremosSeries.parse_quarterly_data(data, start_date_string)
       data_hash = {}
       year = start_date_string[0..3].to_i
@@ -98,6 +115,7 @@ class AremosSeries < ActiveRecord::Base
 
     def AremosSeries.parse_data(data, start_date_string, frequency)
       return parse_annual_data(data, start_date_string) if frequency == "A"
+      return parse_semi_annual_data(data, start_date_string) if frequency == "S"
       return parse_quarterly_data(data, start_date_string) if frequency == "Q"
       return parse_monthly_data(data, start_date_string) if frequency == "M"
       return parse_weekly_data(data, start_date_string) if frequency == "W"
@@ -134,7 +152,7 @@ class AremosSeries < ActiveRecord::Base
       
 
       start_date = parse_date(series_hash[:start], series_hash[:frequency]) 
-      end_date = parse_date(series_hash[:end], series_hash[:frequency]),
+      end_date = parse_date(series_hash[:end], series_hash[:frequency])
       data = parse_data(series_hash[:data], series_hash[:start], series_hash[:frequency])
 
       

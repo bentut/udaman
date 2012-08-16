@@ -9,8 +9,8 @@
 	</tr>
 	<%
 		date_hash = {}
-		missing_dates = as.data.keys - series.data.keys unless as.nil?
-		missing_dates.each {|md| date_hash[md] = as.data[md]} unless as.nil?
+		missing_dates = as.data.keys - series.data.keys unless as.nil? or as.data.nil?
+		missing_dates.each {|md| date_hash[md] = as.data[md]} unless as.nil? or as.data.nil?
 		ncdps = series.data_points.where(:current => false) 
 		series.current_data_points.sort_by(&:date_string).each {|cdp| date_hash[cdp.date_string] = cdp}
 	%>
@@ -20,7 +20,7 @@
 		<% series.units ||= 1 %>
 		<% cdp_val = cdp.value / series.units %>
 		
-	    <% a_value = (as.nil? or as.data[cdp.date_string].nil?) ? "-" : as.data[cdp.date_string].round(3) %>
+	    <% a_value = (as.nil? or as.data.nil? or as.data[cdp.date_string].nil?) ? "-" : as.data[cdp.date_string].round(3) %>
 		<% chg_value = (chg.nil? or chg.data[cdp.date_string].nil?) ? "-" : chg.data[cdp.date_string].round(1) rescue "-" %>
 		<% ytd_chg_value = (ytd_chg.nil? or ytd_chg.data[cdp.date_string].nil?) ? "-" : ytd_chg.data[cdp.date_string].round(1) rescue "-" %>
 		<% unless a_value.nil? or a_value.class == String %>

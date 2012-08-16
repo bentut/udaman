@@ -2,6 +2,8 @@ task :reload_aremos => :environment do
    t = Time.now
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/A_DATA.TSD")
   at = Time.now
+  AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/S_DATA.TSD")
+  st = Time.now
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/Q_DATA.TSD")
   qt = Time.now 
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/M_DATA.TSD")
@@ -10,12 +12,15 @@ task :reload_aremos => :environment do
    wt = Time.now
    AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
    dt = Time.now
+   
+   
   
    puts "#{"%.2f" % (dt - t)} | to write all"
   puts "#{"%.2f" % (dt-wt)} | days"
   puts "#{"%.2f" % (wt-mt)} | weeks"
   puts "#{"%.2f" % (mt-qt)} | months"
-  puts "#{"%.2f" % (qt-at)} | quarters"
+  puts "#{"%.2f" % (qt-st)} | quarters"
+  puts "#{"%.2f" % (st-at)} | half-years"
   puts "#{"%.2f" % (at-t)} | years"
 end
 
@@ -70,6 +75,8 @@ task :load_all_v_series => :environment do
 end
 
 task :load_all_histories => :environment do
+  
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_cpi_int_m.XLS"
   
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec"

@@ -1,3 +1,5 @@
+<% desc = a_series.nil? ? "" : a_series.description[0..20].gsub(",","") %>
+<% full_desc = a_series.nil? ? "" : a_series.description %>
 
 <script type="text/javascript"
 src="https://www.google.com/jsapi">
@@ -22,14 +24,17 @@ function gdata_to_csv(data) {
 }
 
 function draw_charts() {
-var data = new google.visualization.DataTable();
 
-data.addColumn('string', 'Year');
-data.addColumn('number', '<%= a_series.description[0..20].gsub(",","") %>');
+var data = new google.visualization.DataTable({cols: [ 
+	{ label: 'Year',   type: 'string' },
+	{ label: '<%= desc %>',  type: 'number' }
+]});
 
+data.addRows([
 <% plot_data.sort.each do |date,value| %>
-	data.addRow(['<%= date %>', <%= value %>]);
+	['<%= date %>', <%= value.round(3) %>],
 <% end %>
+]);
 
 var chart = new google.visualization.LineChart(document.getElementById('chart_<%= chart_id %>')).
 draw(data, {curveType: "none",
@@ -42,7 +47,7 @@ draw(data, {curveType: "none",
 			//maxValue: 16, 
 		     textStyle: {fontSize: 11}
 		     },
-                title: '<%= a_series.description %>',
+                title: '<%= full_desc %>',
                 titleTextStyle: {color: '#297B92', fontSize: 14},
                 legend: 'none',
                 series: [{color: '#267991'}],

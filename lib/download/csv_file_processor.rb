@@ -31,7 +31,7 @@ class CsvFileProcessor
       #puts cell_value
       return Float cell_value.gsub(",","") if cell_value.class == String
       return Float cell_value
-    rescue    
+    rescue   
       #known data values that should be suppressed as nils... may need to separate these by file being read in
       return nil if ["(D) ", "(L) ", "(N) ", "(T) ", " --- ", "(L)", "(D)", "(NA)"].include? cell_value
       return "BREAK IN DATA"

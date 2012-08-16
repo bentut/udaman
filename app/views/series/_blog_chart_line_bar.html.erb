@@ -1,4 +1,7 @@
 
+<% desc = a_series.nil? ? "" : a_series.description[0..20].gsub(",","") %>
+<% full_desc = a_series.nil? ? "" : a_series.description %>
+
 <script type="text/javascript"
 src="https://www.google.com/jsapi">
 
@@ -22,15 +25,17 @@ google.setOnLoadCallback(draw_charts);
 
 function draw_charts() {
 
-var data_yoy = new google.visualization.DataTable();
+var data_yoy = new google.visualization.DataTable({cols: [ 
+	{ label: 'Year',   type: 'string' },
+	{ label: '<%= desc %>',  type: 'number' },
+	{ label: '<%= bar_label %>',  type: 'number' }
+]});
 
-data_yoy.addColumn('string', 'Year');
-data_yoy.addColumn('number', '<%= a_series.description[0..20].gsub(",","") %>');
-data_yoy.addColumn('number', '<%= bar_label %>');
-
+data_yoy.addRows([
 <% plot_data.sort.each do |date,value| %>
-	data_yoy.addRow(['<%= date %>', <%= value %>, <%= bar_data[date] %>]);
+	['<%= date %>', <%= value.round(3) %>, <%= bar_data[date].round(3) %>],
 <% end %>
+]);
 
 var chart_yoy = new google.visualization.ComboChart(document.getElementById('chart_<%=bar_id_label %>_<%= chart_id %>')).
 draw(data_yoy, {curveType: "none",
@@ -42,7 +47,7 @@ draw(data_yoy, {curveType: "none",
 			//maxValue: 16, 
 		     textStyle: {fontSize: 11}
 		     },
-                title: '<%= a_series.description %>',
+                title: '<%= full_desc %>',
                 titleTextStyle: {color: '#297B92', fontSize: 14},
                 legend: {position:"bottom", textStyle:{color:'#555555'}},
                 series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '<%= bar_color %>' , targetAxisIndex: 1, type:'bars'}],

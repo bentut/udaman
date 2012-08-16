@@ -180,8 +180,11 @@ task :jp_upd_m => :environment do
 		"IPNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPMN@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|, 
 		"IPMNNS@JP.M" => %Q|Series.load_from_download  "IPNS@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "5", :col => "increment:4:1", :frequency => "M" }|,
-		"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|
+		"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|,
 	
+	  "YXR@JP.M" => %Q|Series.load_from_fred("EXJPUS", "M")|,
+
+    "R@JP.M" => %Q|Series.load_from_download  "R@www.stat-search.boj.or.jp", { :file_type => "csv", :start_row => 4, :start_col => 1, :rev => false , :row => "increment:4:1", :col => "2", :frequency => "M" }|,
 	  #CPICORENS
 	  #INFCORE
 	  #R
