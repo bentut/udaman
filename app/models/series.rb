@@ -465,6 +465,7 @@ class Series < ActiveRecord::Base
     return false
   end
   
+  
   def handle
     self.data_sources.each do |ds|
       if !ds.eval.index("load_from_download").nil?
@@ -582,7 +583,7 @@ class Series < ActiveRecord::Base
     
     dashboard = login_page.form_with(:action => '/admin/login') do |f|
     	f.send("data[User][login]=", "mechanize")
-    	f.send("data[User][pass]=", "uher0")
+    	f.send("data[User][pass]=", "uh3r0n3t")
     end.click_button
     
     new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/product/add')
