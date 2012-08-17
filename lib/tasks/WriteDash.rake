@@ -14,8 +14,8 @@ task :write_empl_dash => :environment do
   login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
   
   dashboard = login_page.form_with(:action => '/admin/login') do |f|
-    f.send("data[User][login]=", "mechanize")
-    f.send("data[User][pass]=", "uh3r0n3t")
+    f.send("data[User][login]=", SITE['cms_user'])
+    f.send("data[User][pass]=", SITE['cms_pass'])
   end.click_button
   
   new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/pages/edit/124')
@@ -27,7 +27,7 @@ task :write_empl_dash => :environment do
   #   
   end.click_button
   # 
-  puts conf_page
+  #puts conf_page
 end
 
 
@@ -48,8 +48,8 @@ task :write_ur_dash => :environment do
   login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
   
   dashboard = login_page.form_with(:action => '/admin/login') do |f|
-  	f.send("data[User][login]=", "mechanize")
-  	f.send("data[User][pass]=", "uh3r0n3t")
+  	f.send("data[User][login]=", SITE['cms_user'])
+  	f.send("data[User][pass]=", SITE['cms_pass'])
   end.click_button
   
   new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/pages/edit/123')
@@ -62,6 +62,6 @@ task :write_ur_dash => :environment do
     
   end.click_button
   
-  puts conf_page.content
+  #puts conf_page.content
 end
   
