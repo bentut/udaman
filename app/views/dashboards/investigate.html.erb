@@ -1,9 +1,47 @@
-<%= render :partial => 'jobs_chart' %>
+<h3>Log Investigation Findings</h3>
+<a href="https://docs.google.com/spreadsheet/ccc?key=0Avab6X5RpThTdENNZTNENi1ocW1PcWRFNmVwTHA2MEE" target="_blank">Series Mismatch Investigations (Google Doc)</a>
 
+<% 
+@bucket_keys.each do |key| 
+	%>
+<h1 style="color:#066A8A">
+	<% dsd = DataSourceDownload.get(key) %>
+	<%= 
+		link_to("HANDLE: #{key}", {:controller => :data_source_downloads, :action => :show, :id => dsd.id}, :target => "_blank") unless key.nil? or dsd.nil? 
+	%>
+	<%= "HANDLE: #{key}" if !key.nil? and dsd.nil? %>
+	<%= "NO HANDLE" if key.nil? %>
+</h1>
 
+<table>
+	<tr>
+		<td>
+	<%= render :partial => 'investigate_queue', :locals => {
+											:title => "Maybe OK", 
+											:count => @maybe_ok_buckets[key].count,
+											:description => "No Missing Values, cumulative diff < 1.0",
+											:queue => @maybe_ok_buckets[key] } unless @maybe_ok_buckets[key].nil? %>	
+		</td>
 
+		<td>
+	<%= render :partial => 'investigate_queue', :locals => {
+									:title => 'Wrong', 
+									:count => @wrong_buckets[key].count,
+									:description => "No Missing Values, cumulative diff >= 1.0",
+									:queue => @wrong_buckets[key] } unless @wrong_buckets[key].nil? %>	
+		</td>
+		<td>
+<div id="missing-low-to-high">
+	<%= render :partial => 'investigate_queue', :locals => {
+									:title => 'Missing Low to High', 
+									:count => @missing_low_to_high_buckets[key].count,
+									:description => "Ascending Missing Values",
+									:queue => @missing_low_to_high_buckets[key] } unless @missing_low_to_high_buckets[key].nil? %>	
+		</td>
+</tr>
+</table>
 
-
-
-
-
+<% 
+end 
+#@bucket_keys.each 
+%>
