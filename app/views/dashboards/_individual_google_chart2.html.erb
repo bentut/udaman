@@ -1,0 +1,28 @@
+
+var data<%= indicator %> = new google.visualization.DataTable({cols: [ 
+	{ label: 'Year',   type: 'string' },
+	{ label: 'Unemployment Rate - <%= chart_title %>',  type: 'number' }
+]});
+
+
+data<%= indicator %>.addRows([
+<% plot_data.each do | date, value| %>
+	['<%= date %>', <%= value %>],
+<% end %>
+]);
+
+all_props["title"] = '<%= chart_title %>';
+<% if width != nil && height != nil && chart_area != nil %>
+all_props["width"] = <%= width %>;
+all_props["height"] = <%= height %>;
+all_props["chartArea"]["height"] = <%= chart_area %>;
+<% end %>	
+	
+var chart_yoy = new google.visualization.ComboChart(document.getElementById('<%= div_label %>')).draw(data<%= indicator %>, all_props);
+
+var data<%= indicator %> = jQuery.extend(true, {}, data<%= indicator %>);
+$('#data<%= indicator %>').click(function() {
+  var href = '/csv.php?csv=';
+  href += encodeURIComponent(gdata_to_csv(data<%= indicator %>));
+  $(this).attr('href', href);
+});
