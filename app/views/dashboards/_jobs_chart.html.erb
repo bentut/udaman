@@ -1,0 +1,127 @@
+<p><script type="text/javascript"
+src="https://www.google.com/jsapi">
+
+</script>   <script type="text/javascript">
+
+google.load("visualization", "1", {packages: ["table"]});
+google.load("visualization", "1", {packages:["corechart"]});
+
+
+function gdata_to_csv(data) {
+	datajson = eval("("+data.toJSON()+")");
+	var csv_string = datajson.cols.map(function(elem){return elem.label; }).join() + "\n";
+	datajson.rows.map(function(row) { csv_string += row.c.map(function(cell){ return cell.v; }).join() + "\n"; });
+	return csv_string;
+}
+
+
+//YYYY-MM-DD "2008-01-01".."2009-01-01"
+//////////////////////////////////////////////////////////
+google.setOnLoadCallback(draw_charts);
+
+///////////////////////////////////////////////////////////
+
+function draw_charts() {
+
+	var all_props = { curveType: "none",
+		                width: 750, 
+				height: 475,
+		                chartArea: { height: "80%", width: "85%"},
+		               vAxis: {
+				     textStyle: {fontSize: 11}
+				     },
+		                titleTextStyle: {color: '#297B92', fontSize: 14},
+		                legend: {position:"none", textStyle:{color:'#555555'}},
+		                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}, {color: '#BBBBBB' , targetAxisIndex: 1, type:'bars'}],
+		                lineWidth: 2,
+		             	hAxis: {	
+		//			showTextEvery: '2', 
+					slantedText: true, 
+					slantedTextAngle: '45', 
+					showTextEvery: 12,
+					textStyle: {fontSize: 10},
+					format: 'y'
+					},
+		               backgroundColor: '#F9F9F8'
+			};
+		
+		
+ 
+
+
+<% 
+loop_data = [ 
+{:plot_data => "ENS@HI.M", :div_label => "chart1", :chart_title => nil, :width => nil, :height => nil, :chartArea => nil, :indicator => "1"},
+{:plot_data => "LF@HI.M", :div_label => "chart2", :chart_title => nil, :width => nil, :height => nil, :chartArea => nil, :indicator => "2"},
+{:plot_data => "EMPL@HON.M", :div_label => "chart4", :chart_title => "HONOLULU COUNTY", :width => "350", :height => "250", :chart_area => "{ height: 140, width: 250}", :h_axis => "{ showTextEvery: 12, format: 'y', slantedText: true, slantedTextAngle: '45'}", :indicator => "3"},
+{:plot_data => "EMPL@HAW.M", :div_label => "chart3", :chart_title => "HAWAII COUNTY", :width => "350", :height => "250", :chart_area => "{ height: 140, width: 250}", :h_axis => "{ showTextEvery: 12, format: 'y', slantedText: true, slantedTextAngle: '45'}", :indicator => "4"},
+{:plot_data => "EMPL@KAU.M", :div_label => "chart5", :chart_title => "KAUAI COUNTY", :width => "350", :height => "250", :chart_area => "{ height: 140, width: 250}", :h_axis => "{ showTextEvery: 12, format: 'y', slantedText: true, slantedTextAngle: '45'}", :indicator => "5"},
+{:plot_data => "EMPL@MAU.M", :div_label => "chart6", :chart_title => "MAUI COUNTY", :width => "350", :height => "250", :chart_area => "{ height: 140, width: 250}", :h_axis => "{ showTextEvery: 12, format: 'y', slantedText: true, slantedTextAngle: '45'}", :indicator => "6"}
+#Switch to "E_NF@HI.M" for production environment
+].each do |iteration_data| %>
+
+	<%= render :file => 'app/views/dashboards/_individual_google_chart.html.erb', :locals => {
+			:plot_data => iteration_data[:plot_data].ts.get_values_after_including("2000-01-01").sort, 
+			:chart_title => iteration_data[:chart_title], 
+			:div_label => iteration_data[:div_label], 
+			:width => iteration_data[:width],
+			:height => iteration_data[:height],
+			:chart_area => iteration_data[:chart_area],
+			:h_axis => iteration_data[:h_axis],
+			:indicator => iteration_data[:indicator]
+	} %>
+
+<% end %>
+
+}
+</script></p>
+
+
+<p><style type="text/css">
+div#chartlist div.cnty a.createbutton {clear:both; margin-left:15px; margin-top:10px; float:left; }
+div#chartlist div.state a.createbutton {clear:both; margin-left:15px; margin-top:10px; float:left; }
+div#chartlist div.state {float:left; }
+div#chartlist div.cnty {display:inline; float:left; }
+h3 {display:block; clear:both;}
+p {clear:both;}
+div#chart1 {float:left; }
+div#chart2 {clear:both; float:left; }
+div#chart3 {clear:both; float:left; }
+div#chart4 {float:left; }
+div#chart5 {clear:both; float:left; }
+div#chart6 {float:left; }
+
+</style></p>
+
+<div id="chartlist">
+<strong>Seasonally adjusted by UHERO</strong> <br />
+<p>Source: U.S. Dept. of Labor, Bureau of Labor Statistics</p>
+<h2><br />Total Non-Farm Payrolls, Statewide</h2>
+<div class="state">
+<div id="chart1">&nbsp;</div>
+<a class="createbutton" id="data1" href="#">download data</a></div>
+<h3><br />Recent Trends...</h3>
+<p>Total non-farm payrolls have rebounded since late 2009, but have been in decline for much of the current year. To get a sector-by-sector look at employment growth, <a href="edit link">click here</a>.</p>
+<h2><br />Total Employment By County</h2>
+<div class="cnty">
+<div id="chart3">&nbsp;</div>
+<a class="createbutton" id="data3" href="#">download data</a></div>
+<div class="cnty">
+<div id="chart4">&nbsp;</div>
+<a class="createbutton" id="data4" href="#">download data</a></div>
+<div class="cnty">
+<div id="chart5">&nbsp;</div>
+<a class="createbutton" id="data5" href="#">download data</a></div>
+<div class="cnty">
+<div id="chart6">&nbsp;</div>
+<a class="createbutton" id="data6" href="#">download data</a></div>
+<h3><br />Recent Trends...</h3>
+<p>Total employment by county has traveled roughly in tandem, though Honolulu county has been notably volatile. However, Honolulu county has been the only to return to pre-recession employment levels. Hawaii county's recovery has evidently been the most moderate, likely due to their relatively smaller share of visitor arrivals and expenditures.</p>
+<h2><br />Total Labor Force, Statewide</h2>
+<div class="state">
+<div id="chart2">&nbsp;</div>
+<a class="createbutton" id="data2" href="#">download data</a></div>
+<h3><br />Recent Trends...</h3>
+<p>Levels wise, the labor force statewide has grown steadily since 2000, despite undergoing a contractionary period during the 2008 recession and resulting recovery.  However, 2012 has been the year of the shrinking labor force in Hawaii, but the gains made  between 2010 - 2011 still leave the labor force larger in magnitude than before the recession. It is key to note that to be counted as a participant in the labor force, as specified by the Bureau of Labor Statistics, you must either have a job, or be unemployed AND actively seeking employment in the past four weeks. Thus, the significant number of labor force exits since the beginning of 2012 may be a sign of a discouraged workforce, rather than a truly shrinking body of "able" workers.</p>
+</div>
+<p>&nbsp;</p>
