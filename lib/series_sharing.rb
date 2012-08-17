@@ -127,8 +127,10 @@ module SeriesSharing
     start_date = "#{series_prefix}NS@#{county_abbrev}.Q".ts.first_value_date
     shared_series = "#{name}".ts.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.trim(start_date,get_last_complete_4th_quarter_datestring).moving_average, "#{series_prefix}NS@#{self_region}.Q".ts.trim(start_date,get_last_complete_4th_quarter_datestring).moving_average)
     mean_corrected_series = shared_series.share_using("#{series_prefix}NS@#{county_abbrev}.Q".ts.annual_average, shared_series.annual_average)
+    current_year = "#{series_prefix}NS@#{county_abbrev}.Q".ts.backward_looking_moving_average.get_last_incomplete_year / "#{series_prefix}NS@#{self_region}.Q".ts.backward_looking_moving_average.get_last_incomplete_year * self
+    
     new_transformation("Share of #{name} using ratio of the moving average #{series_prefix}NS@#{county_abbrev}.Q over the moving average of #{series_prefix}NS@#{self_region}.Q , mean corrected for the year",
-        mean_corrected_series.data)
+        mean_corrected_series.data.series_merge(current_year.data))
   end
   
   # def mc_offset_price_share_for(county_abbrev)

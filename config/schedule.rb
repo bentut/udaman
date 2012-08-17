@@ -19,7 +19,8 @@
 
 # Learn more: http://github.com/javan/whenever
 
-hour = "4"
+hour = "1"
+bls_hour = "4"
 set :output, "~/Documents/cronlog/udaman-download.log"
 set :environment, "development"
 #job_type :rake,    "cd :path && rake :task :output"
@@ -56,11 +57,15 @@ every 1.day, :at => "#{hour}:10 am" do
   rake "com_upd"
 end
 
-every 1.day, :at => "#{hour}:20 am" do
+every 1.day, :at => "#{bls_hour}:15 am" do
   rake "bls_cpi_upd_m"
   rake "bls_job_upd_m"
   rake "bls_cpi_upd_s"
   rake "hiwi_upd"
+end
+
+every 1.day, :at => "#{bls_hour}:55 am" do
+  rake "bls_identities"
 end
 
 every 1.day, :at => "#{hour}:30 am" do
@@ -88,7 +93,6 @@ every 1.day, :at => "#{hour}:50 am" do
 end
 
 every 1.day, :at => "#{hour.to_i+2}:00 am" do
-  rake "bls_identities"
   rake "expenditures_and_nbi"
   rake "visitor_identities"
   rake "const_identities"

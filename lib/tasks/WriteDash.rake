@@ -14,8 +14,8 @@ task :write_empl_dash => :environment do
   login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
   
   dashboard = login_page.form_with(:action => '/admin/login') do |f|
-    f.send("data[User][login]=", SITE['cms_user'])
-    f.send("data[User][pass]=", SITE['cms_pass'])
+    f.send("data[User][login]=", SITE['pub_user'])
+    f.send("data[User][pass]=", SITE['pub_pass'])
   end.click_button
   
   new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/pages/edit/124')
@@ -23,11 +23,8 @@ task :write_empl_dash => :environment do
   conf_page = new_product_page.form_with(:action => "/admin/pages/edit/124") do |f|
     f.send("data[Page][title]=", "Employment Levels in Hawaii")
     f.send("data[Page][content]=", post_body)
-  #   #f.checkbox_with(:value => '2').check
-  #   
+    f.send("action=", '/admin/pages/edit/124/autoPublish:1')    
   end.click_button
-  # 
-  #puts conf_page
 end
 
 
@@ -48,20 +45,17 @@ task :write_ur_dash => :environment do
   login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
   
   dashboard = login_page.form_with(:action => '/admin/login') do |f|
-  	f.send("data[User][login]=", SITE['cms_user'])
-  	f.send("data[User][pass]=", SITE['cms_pass'])
+  	f.send("data[User][login]=", SITE['pub_user'])
+  	f.send("data[User][pass]=", SITE['pub_pass'])
   end.click_button
   
   new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/pages/edit/123')
   
-  conf_page = new_product_page.form_with(:action => '/admin/pages/edit/123') do |f|
-    
+  
+  conf_page = new_product_page.form_with(:action => '/admin/pages/edit/123') do |f|    
   	f.send("data[Page][title]=", "Unemployment Rates in Hawaii (Seasonally Adjusted)")
   	f.send("data[Page][content]=", post_body)
-  	#f.checkbox_with(:value => '2').check
-    
+  	f.send("action=", '/admin/pages/edit/123/autoPublish:1')    
   end.click_button
-  
-  #puts conf_page.content
 end
   

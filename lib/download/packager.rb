@@ -143,6 +143,10 @@ class Packager
       po.touch
     end
     
+    File.open(@output_path + ".txt", 'w') do |f|
+      @series.keys.each {|s| f.puts(s.split(".")[0]) }
+    end
+    
     new_file_xls = Excel.new(@output_path)
     
     po.update_attributes(:last_new_data => Time.now) if new_file_xls.to_s != old_file_xls.to_s
