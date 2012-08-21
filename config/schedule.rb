@@ -51,10 +51,10 @@ every 1.day, :at => "#{hour}:00 am" do
 end
 
 every 1.day, :at => "#{hour}:10 am" do
-  rake "gsp_upd" #has some major issues. All cache misses because of error?
-  rake "inc_upd_q"
-  rake "inc_upd_a"
-  rake "com_upd"
+  rake "tour_PC_upd"
+  rake "tour_seats_upd"
+  rake "tour_upd"
+  rake "tour_ocup_upd"
 end
 
 every 1.day, :at => "#{bls_hour}:15 am" do
@@ -79,10 +79,10 @@ every 1.day, :at => "#{hour}:35 am" do
 end
 
 every 1.day, :at => "#{hour}:40 am" do
-  rake "tour_PC_upd"
-  rake "tour_seats_upd"
-  rake "tour_upd"
-  rake "tour_ocup_upd"
+  rake "gsp_upd" #has some major issues. All cache misses because of error?
+  rake "inc_upd_q"
+  rake "inc_upd_a"
+  rake "com_upd"
   rake "tour_rev_upd"
 end
 
