@@ -9,6 +9,7 @@ class Series < ActiveRecord::Base
   include SeriesExternalRelationship
   include SeriesRelationship
   include SeriesSpecCreation
+  include SeriesDataLists
   
   serialize :data, Hash
   serialize :factors, Hash

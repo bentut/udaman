@@ -32,3 +32,6 @@ class DataList < ActiveRecord::Base
   end
   
 end
+
+
+

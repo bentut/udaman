@@ -91,82 +91,56 @@ class Packager
     @definitions.merge! definitions_hash
   end
 
-  def write_definitions_to(output_path = "udaman")
+  # def write_to_db
+  #   #Series.open_cached_files
+  #   @definitions.each do |series_name, series_definition|
+  #     series_name.ts_append_eval series_definition
+  #   end
+  #   #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
+  #   @download_results = Series.get_cached_files.download_results
+  #   #Series.close_cached_files
+  # end
+
+
+  def write_definitions_to(output_path)# = "udaman")
     begin
-      return write_to_db if output_path == "udaman"
-      @output_path = ENV["JON"] == "true" ? output_path.gsub("UHEROwork", "UHEROwork-1") : output_path
-      @output_filename = @output_path.split("/")[-1]
-      write_xls  
+      #return write_to_db if output_path == "udaman"
+      #@output_path = ENV["JON"] == "true" ? output_path.gsub("UHEROwork", "UHEROwork-1") : output_path
+      @output_path = output_path
+      @series = get_data_from_definitions #this runs all definitions
+      send_output_email if errors != [] or download_problem?
+      changed = Series.write_data_list @series.keys, @output_path unless @definitions.nil?
+          
+      packager_output.update_attributes(:last_new_data => Time.now) if changed
+      
     rescue Exception => e
       PackagerMailer.rake_error(e, output_path).deliver
       raise e
     end
   end
 
-  def write_to_db
-    #Series.open_cached_files
-    @definitions.each do |series_name, series_definition|
-      series_name.ts_append_eval series_definition
-    end
-    #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
-    @download_results = Series.get_cached_files.download_results
-    #Series.close_cached_files
-  end
-
-  #this change functionality is not tested, but should be
-  def write_xls
-    require 'iconv'
-    return if @definitions.nil?
   
-    @series = get_data_from_definitions
-    
-    old_file = File::exists?(@output_path) ? open(@output_path, "rb").read : nil
-    old_file_xls = Excel.new(@output_path) if File::exists?(@output_path)
-    
-    xls = Spreadsheet::Workbook.new @output_path
-    sheet1 = xls.create_worksheet
-    write_dates(sheet1)
-    col = 1
-    @series.sort.each do |name, data|
-      write_series(name, data, sheet1, col)
-      col += 1
-    end
+  def write_console_output
     puts download_results_string
     puts errors_string
     puts series_summary_string
-    xls.write @output_path
-
+  end
+  
+  def send_output_email
+    puts "SENDING EMAIL"
+    job_name = @output_path.split("/")[-1].split(".")[0]
+    PackagerMailer.rake_notification(job_name, download_results, errors, @series, @output_path, (errors != [] or download_problem?)).deliver
+  end
+  
+  
+  def packager_output
     po = PackagerOutput.where(:path => @output_path).first
     if po.nil?
       po = PackagerOutput.create(:path => @output_path) 
     else
       po.touch
     end
-    
-    File.open(@output_path + ".txt", 'w') do |f|
-      @series.keys.each {|s| f.puts(s.split(".")[0]) }
-    end
-    
-    new_file_xls = Excel.new(@output_path)
-    
-    po.update_attributes(:last_new_data => Time.now) if new_file_xls.to_s != old_file_xls.to_s
-    
-    #if new_file_xls.to_s != old_file_xls.to_s or errors != [] or download_problem?
-    if errors != [] or download_problem?
-      puts new_file_xls.to_s != old_file_xls.to_s
-      puts errors != []
-      puts download_problem?
-      backup(old_file) unless old_file.nil?
-      puts "SENDING EMAIL"
-      job_name = @output_path.split("/")[-1].split(".")[0]
-      PackagerMailer.rake_notification(job_name, download_results, errors, @series, @output_path, dates, (errors != [] or download_problem?)).deliver
-    end
-    
-  end
-
-  def backup(old_file)
-    Dir.mkdir @output_path+"_vintages" unless File::directory?(@output_path+"_vintages")
-    open(@output_path+"_vintages/#{Date.today}_"+@output_filename, "wb") { |file| file.write old_file }
+    return po
   end
 
   def eval(definition)
@@ -200,30 +174,4 @@ class Packager
     series
   end
 
-  def write_dates(sheet)
-    count=1
-    dates.each do |date|
-      sheet[count,0] = date.dup
-      count += 1
-    end
-  end
-
-  def dates
-    dates_array = []
-    return [] if @series.nil?
-    @series.each do |series_name, data|
-      #puts series_name
-      dates_array |= data.keys
-    end
-    dates_array.sort
-  end
-
-  def write_series(series_name, data, sheet, col)
-    sheet[0,col] = series_name.dup
-    count = 1
-    dates.each do |date|
-      sheet[count,col] = data[date] unless data[date].nil?
-      count += 1
-    end
-  end
 end
