@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716113825) do
+ActiveRecord::Schema.define(:version => 20120822094928) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -83,7 +83,6 @@ ActiveRecord::Schema.define(:version => 20120716113825) do
     t.integer  "series_id"
     t.string   "description"
     t.string   "eval"
-    t.text     "data",         :limit => 2147483647
     t.datetime "last_run"
     t.text     "dependencies"
     t.string   "color"
@@ -127,7 +126,6 @@ ActiveRecord::Schema.define(:version => 20120716113825) do
     t.integer  "aremos_missing"
     t.float    "aremos_diff"
     t.integer  "mult"
-    t.text     "data",                    :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "investigation_notes"

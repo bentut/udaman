@@ -11,7 +11,7 @@ class Series < ActiveRecord::Base
   include SeriesSpecCreation
   include SeriesDataLists
   
-  serialize :data, Hash
+  #serialize :data, Hash
   serialize :factors, Hash
   
   has_many :data_points
@@ -26,6 +26,8 @@ class Series < ActiveRecord::Base
       source: self.original_url
     }
   end
+  
+
   
   def last_observation
     return nil if data.nil?
@@ -338,7 +340,15 @@ class Series < ActiveRecord::Base
     #puts "#{"%.2f" % (Time.now - s_time)} : #{data_hash.count} : #{self.name} : SAVING SERIES"    
   end
   
-  def data2
+  def data
+    @data ||= data_from_datapoints
+  end
+  
+  def data=(data_hash)
+    @data = data_hash
+  end
+  
+  def data_from_datapoints
     data_hash = {}
     data_points.each do |dp|
       data_hash[dp.date_string] = dp.value if dp.current
