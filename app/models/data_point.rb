@@ -51,7 +51,9 @@ class DataPoint < ActiveRecord::Base
   def update_timestamp
     #i wonder why this wouldnt work automatically (timestamp update)
     #updating only is slightly faster than prioring. Over 269 data points the difference is 3.28 v 3.50 seconds
-    self.update_attributes(:updated_at => Time.now)
+    #this update is not worth it. Just to update the timestamp adds a lot of time to the calculation. It's the 
+    #model saving that is expensive
+    #self.update_attributes(:updated_at => Time.now)
     self
   end
   

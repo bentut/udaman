@@ -106,7 +106,7 @@ class SeriesController < ApplicationController
     @series = Series.find(params[:id])
     @series.units = params[:units]
     #@series.save
-    @series.aremos_comparison
+    @series.aremos_comparison(true)
     @as = AremosSeries.get @series.name
     render :partial => "toggle_units.html"
   end
@@ -120,7 +120,7 @@ class SeriesController < ApplicationController
   def toggle_multiplier
     @series = Series.find(params[:id])
     @series.toggle_mult
-    @series.save
+    #@series.save
     @output_file = PrognozDataFile.find @series.prognoz_data_file_id
     @output_file.update_series_validated_for @series
     render :partial => "validate_row"

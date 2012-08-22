@@ -32,7 +32,7 @@ class XlsFileProcessor
       
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
-      puts e.message
+      puts e.message unless @handle_processor.date_sensitive?
       #date sensitive means it might look for handles that don't exist
       #not sure if this is the right thing to do. Will get an indication from the daily download checks, but not sure if will see if you just 
       #load the data other than missing some values... not gonna do this just yet because it was rake that errored out not the series. might try to

@@ -218,25 +218,28 @@ class Series < ActiveRecord::Base
   end
 
   def Series.store(series_name, series, desc=nil, eval_statement=nil)
-    puts series.frequency
+    #t = Time.now
+    #puts series.frequency
     desc = series.name if desc.nil?
     desc = "Source Series Name is blank" if desc.nil? or desc == ""
-    series_to_set = Series.get_or_new series_name
-    series_to_set.update_attributes(
-      :frequency => series.frequency
-#      :units => series.units, #this units issue is overwriting the calculated units. Don't think any
-#       situation would require units to be transferred BT 2012-01-19
-#      :last_updated => Time.now
-    )
-    source = series_name.ts.save_source(desc, eval_statement, series.data)
+    # series_to_set = Series.get_or_new series_name
+    # series_to_set.update_attributes(
+    #   :frequency => series.frequency
+    # )
+    series_to_set = series_name.tsn
+    series_to_set.frequency = series.frequency
+    #puts "#{"%.2f" % (Time.now - t)} :  : #{self.name} : SETTING UP STORE"
+    source = series_to_set.save_source(desc, eval_statement, series.data)
     source
   end
 
   def Series.eval(series_name, eval_statement)
     t = Time.now
     new_series = Kernel::eval eval_statement
+    #puts "#{"%.2f" % (Time.now - t)} :  : #{self.name} : EVAL TIME"
     source = Series.store series_name, new_series, new_series.name, eval_statement
-    source.update_attributes(:runtime => (Time.now - t))
+    #taking this out as well... not worth it to run
+    #source.update_attributes(:runtime => (Time.now - t))
     puts "#{"%.2f" % (Time.now - t)} | #{source.data.count} | #{series_name} | #{eval_statement}" 
   # rescue Exception 
   #     puts "ERROR | #{series_name} | #{eval_statement}"
@@ -244,11 +247,12 @@ class Series < ActiveRecord::Base
   
   def save_source(source_desc, source_eval_statement, data, last_run = Time.now)
     source = nil
-    # ss_time = Time.now          #timer
-    # data_count = data.count     #timer
+    #ss_time = Time.now          #timer
+    #data_count = data.count     #timer
     data_sources.each do |ds|
       if !source_eval_statement.nil? and !ds.eval.nil? and source_eval_statement.strip == ds.eval.strip
-        ds.update_attributes(:data => data, :last_run => Time.now) 
+        #ds.update_attributes(:data => data, :last_run => Time.now) 
+        ds.update_attributes(:last_run => Time.now, :data => {}) 
         source = ds 
       end
     end
@@ -257,17 +261,19 @@ class Series < ActiveRecord::Base
       data_sources.create(
         :description => source_desc, 
         :eval => source_eval_statement, 
-        :data => data,
+        #:data => data,
         :last_run => last_run
       )
     
       source = data_sources_by_last_run[-1]
       source.setup
     end
+    #puts "#{"%.2f" % (Time.now - ss_time)} : #{data.count} : #{self.name} : EVERYTHING BEFORE UPDATE DATA\n"
 
     update_data(data, source)
-    source
     #puts "#{"%.2f" % (Time.now - ss_time)} : #{data.count} : #{self.name} : #{data_count} original data points SAVING SOURCE #{source_eval_statement}\n"
+    
+    source
   end
   
   #probably going to want tests
@@ -276,18 +282,20 @@ class Series < ActiveRecord::Base
     #removing nil dates because they incur a cost but no benefit.
     #have to do this here because there are some direct calls to update data that could include nils
     #instead of calling in save_source
+    #p_time = Time.now
     data.delete_if {|key,value| value.nil?}
     
     observation_dates = data.keys
+    #puts "#{"%.2f" % (Time.now - p_time)} : #{current_data_points.count} : #{self.name} : PRUNING DATAPOINTS"
     
-    #cdp_time = Time.now         #timer
+    cdp_time = Time.now         #timer
     current_data_points.each do |dp|
       dp.upd(data[dp.date_string], source)
       observation_dates.delete dp.date_string
     end
     #puts "#{"%.2f" % (Time.now - cdp_time)} : #{current_data_points.count} : #{self.name} : UPDATING CURRENT DATAPOINTS"
 
-    #od_time = Time.now             #timer
+    od_time = Time.now             #timer
     observation_dates.each do |date_string|
       data_points.create(
         :date_string => date_string,
@@ -297,14 +305,12 @@ class Series < ActiveRecord::Base
       )
     end
     #puts "#{"%.2f" % (Time.now - od_time)} : #{observation_dates.count} : #{self.name} : CREATING MISSING OBSERVATION DATES"
-    
-    #mh_time = Time.now
-    #skip this... should just use the update time information in datapoints
-    #source.mark_history
-    #puts "#{"%.2f" % (Time.now - mh_time)} : #{data_points.count} : #{self.name} : MARKING HISTORY FOR SERIES (ALL DATA POINTS)"
-    
+        
     update_data_hash
+
+    #a_time = Time.now
     aremos_comparison
+    #puts "#{"%.2f" % (Time.now - a_time)} : #{observation_dates.count} : #{self.name} : AREMOS COMPARISON"
   end
   
   def update_data_hash
@@ -320,12 +326,24 @@ class Series < ActiveRecord::Base
       #puts "#{dp.date_string}: #{dp.value} (#{dp.current})"
       data_hash[dp.date_string] = dp.value if dp.current
     end
-    #puts "#{"%.2f" % (Time.now - dh_time)} : #{data_points.count} : #{self.name} : UPDATING DATA HASH FROM (ALL DATA POINTS)"
+    #figure out how to get this save out. constructing the hash from datapoints is just as fast as
+    #pulling those data points out of the db. Saving is MUCH faster
+    #also figure out where to do the save. And generally clean up
+    #could pull AREMOS comparison. or have it make saving optional
     self.data = data_hash
+    #puts "#{"%.2f" % (Time.now - dh_time)} : #{data_points.count} : #{self.name} : UPDATING DATA HASH FROM (ALL DATA POINTS)"
     
     #s_time = Time.now
     self.save
     #puts "#{"%.2f" % (Time.now - s_time)} : #{data_hash.count} : #{self.name} : SAVING SERIES"    
+  end
+  
+  def data2
+    data_hash = {}
+    data_points.each do |dp|
+      data_hash[dp.date_string] = dp.value if dp.current
+    end
+    data_hash
   end
   
   def Series.new_transformation(name, data, frequency)
@@ -391,17 +409,16 @@ class Series < ActiveRecord::Base
   #if smart update or other process sets a global cache object for a session, use that. Otherwise
   #download fresh
   def Series.load_from_download(handle, options, cached_files = nil)
-    # @@cached_files ||= nil #is this ok? will it break others?
-    # cached_files = @@cached_files if cached_files.nil? and !@@cached_files.nil?
-    Rails.cache.write("last_row", options[:row], :time_to_live => 600.seconds)
-    cached_files = Series.get_cached_files if cached_files.nil?
-    dp = DownloadProcessor.new(handle, options, cached_files)
-    series_data = dp.get_data
-    Series.write_cached_files cached_files
-    #puts dp.end_conditions
-    #puts options[:frequency]
-    #puts "hi!"
-    #puts Series.frequency_from_code(options[:frequency])
+    begin
+      cached_files = Series.get_cached_files if cached_files.nil?
+      dp = DownloadProcessor.new(handle, options, cached_files)
+      series_data = dp.get_data
+    rescue => e
+      Series.write_cached_files cached_files if cached_files.new_data?
+      raise e
+    end
+    Series.write_cached_files cached_files if cached_files.new_data?
+
     Series.new_transformation("loaded from download #{handle} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
   end
   
@@ -409,11 +426,16 @@ class Series < ActiveRecord::Base
   #series definition as necessary
   
   def Series.load_from_file(file, options, cached_files = nil)
-    cached_files = Series.get_cached_files if cached_files.nil?
-    dp = DownloadProcessor.new("manual", options.merge({ :path => file }), cached_files)
-    series_data = dp.get_data
-    Series.write_cached_files cached_files
-    Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
+    begin
+      cached_files = Series.get_cached_files if cached_files.nil?
+      dp = DownloadProcessor.new("manual", options.merge({ :path => file }), cached_files)
+      series_data = dp.get_data
+    rescue => e
+      Series.write_cached_files cached_files if cached_files.new_data?
+      raise e
+    end
+      Series.write_cached_files cached_files if cached_files.new_data?
+      Series.new_transformation("loaded from file #{file} with options:#{options}", series_data, Series.frequency_from_code(options[:frequency]))
   end
   
   def load_from_pattern_id(id)
@@ -421,10 +443,15 @@ class Series < ActiveRecord::Base
   end
   
   def load_from_download(handle, options, cached_files = nil)
-    cached_files = Series.get_cached_files if cached_files.nil?
-    dp = DownloadProcessor.new(handle, options, cached_files)
-    series_data = dp.get_data
-    Series.write_cached_files cached_files
+    begin
+      cached_files = Series.get_cached_files if cached_files.nil?
+      dp = DownloadProcessor.new(handle, options, cached_files)
+      series_data = dp.get_data
+    rescue => e
+      Series.write_cached_files cached_files if cached_files.new_data?
+      raise e
+    end
+    Series.write_cached_files cached_files if cached_files.new_data?
     new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
@@ -486,6 +513,7 @@ class Series < ActiveRecord::Base
   
   def Series.write_cached_files(cached_files)
     t = Time.now
+    cached_files.reset_new_data
     Rails.cache.write("downloads", Marshal.dump(cached_files), :time_to_live => 600.seconds)
     puts "#{Time.now - t} | Wrote downloads to cache"
     #Rails.cache.write("downloads", cached_files, :time_to_live => 600.seconds)
@@ -502,7 +530,7 @@ class Series < ActiveRecord::Base
     #may also be able to dump directly now that Marshal knows about the classes? 
     #also that class logic will work by itself. 
     cache = Rails.cache.read("downloads")
-    puts "#{Time.now - t} | Got Downloads from Cache " unless cache.nil?
+    #puts "#{Time.now - t} | Got Downloads from Cache " unless cache.nil?
     return DownloadsCache.new if cache.nil?
     return Marshal.load(cache)
   end

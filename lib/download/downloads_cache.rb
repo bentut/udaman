@@ -5,6 +5,15 @@ class DownloadsCache
     {:csv => @csv, :xls => @xls, :text => @text}
   end
   
+  def new_data?
+    return false if @new_data.nil?
+    return true
+  end
+  
+  def reset_new_data
+    @new_data = nil
+  end
+  
   def xls(handle, sheet, path = nil)
     #puts handle+": "+sheet
 
@@ -28,6 +37,7 @@ class DownloadsCache
   end
 
   def set_xls_sheet
+    @new_data = true
     file_extension = @cache_handle.split(".")[-1]
     excel = file_extension == "xlsx" ? Excelx.new(@cache_handle) : Excel.new(@cache_handle) 
     sheet_parts = @sheet.split(":")
@@ -71,6 +81,7 @@ class DownloadsCache
       #puts path
       begin
         @csv[path] = CSV.read(path)
+        @new_data = true
       rescue
         #resolve one ugly known file formatting problem with faster csv
         alternate_csv_load = alternate_fastercsv_read(path) #rescue condition if this fails
@@ -108,6 +119,7 @@ class DownloadsCache
     if @text[handle].nil?
       download_handle
       @text[handle] = get_text_rows
+      @new_data = true
     end
     @text[handle]
   end

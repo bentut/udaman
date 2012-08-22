@@ -145,19 +145,21 @@ class DataSource < ActiveRecord::Base
       t = Time.now
       s = Kernel::eval self.eval
       self.series.update_data(s.data, self)
-      self.update_attributes(:description => s.name, :last_run => Time.now, :data => s.data, :runtime => (Time.now - t))
+      #self.update_attributes(:description => s.name, :last_run => Time.now, :data => s.data, :runtime => (Time.now - t))
+      #runtime is only updated here. could probably leave out of schema as well
+      self.update_attributes(:description => s.name, :last_run => Time.now, :data => {}, :runtime => (Time.now - t))
     end
 
-    def mark_history
-      #puts "SOURCE HISTORY-----------------------"
-      dates = data.keys
-      #puts dates.sort
-      self.data_points.each do |dp| 
-        #puts "history: #{dp.history}, date: #{dp.date_string}"
-        dp.update_attributes(:history => nil) if (!dp.history.nil? and !dates.index(dp.date_string).nil?) 
-        dp.update_attributes(:history => Time.now) if (dp.history.nil? and dates.index(dp.date_string).nil?)
-      end
-    end
+    # def mark_history
+    #   #puts "SOURCE HISTORY-----------------------"
+    #   dates = data.keys
+    #   #puts dates.sort
+    #   self.data_points.each do |dp| 
+    #     #puts "history: #{dp.history}, date: #{dp.date_string}"
+    #     dp.update_attributes(:history => nil) if (!dp.history.nil? and !dates.index(dp.date_string).nil?) 
+    #     dp.update_attributes(:history => Time.now) if (dp.history.nil? and dates.index(dp.date_string).nil?)
+    #   end
+    # end
 
     def delete_all_other_sources
       s = self.series
@@ -239,7 +241,7 @@ class DataSource < ActiveRecord::Base
       self.save
     end
 
-    def at(date_string)
-      data[date_string]
-    end
+    # def at(date_string)
+    #   data[date_string]
+    # end
 end

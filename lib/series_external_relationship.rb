@@ -37,13 +37,13 @@ module SeriesExternalRelationship
     return diff_second > 0.001 ? diff_second : 0
   end
   #no test or spec for this
-  def aremos_comparison
+  def aremos_comparison(save_series = false)
     begin
       as = AremosSeries.get self.name
       if as.nil?
         #puts "NO MATCH: #{self.name}"
         self.aremos_missing = "-1"
-        self.save
+        self.save if save_series
         return {:missing => "No Matching Aremos Series", :diff => "No Matching Aremos Series"}
       end
       missing_keys = (as.data.keys - self.data.keys)
@@ -62,7 +62,7 @@ module SeriesExternalRelationship
           puts "#{self.name}: #{datestring}: #{value}, #{self.units_at(datestring)} diff:#{diff}" if diff != 0
         end
       end
-      self.save
+      self.save if save_series
       #puts "Compared #{self.name}: Missing: #{self.aremos_missing} Diff:#{self.aremos_diff}"
       return {:missing => self.aremos_missing, :diff => self.aremos_diff}
     rescue Exception => e

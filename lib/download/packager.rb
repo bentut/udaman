@@ -70,6 +70,7 @@ class Packager
   end
   
   def series_summary_string
+    dates = Series.get_all_dates_from_data(@series)
     sorted= dates.sort
     date3 = sorted[-1]
     date2 = sorted[-2]
@@ -91,26 +92,15 @@ class Packager
     @definitions.merge! definitions_hash
   end
 
-  # def write_to_db
-  #   #Series.open_cached_files
-  #   @definitions.each do |series_name, series_definition|
-  #     series_name.ts_append_eval series_definition
-  #   end
-  #   #@download_results hash: key-handle name value-hash[:time,:url,:location,:type,:status,:changed]
-  #   @download_results = Series.get_cached_files.download_results
-  #   #Series.close_cached_files
-  # end
-
-
   def write_definitions_to(output_path)# = "udaman")
     begin
-      #return write_to_db if output_path == "udaman"
-      #@output_path = ENV["JON"] == "true" ? output_path.gsub("UHEROwork", "UHEROwork-1") : output_path
       @output_path = output_path
       @series = get_data_from_definitions #this runs all definitions
+  
+      write_console_output
       send_output_email if errors != [] or download_problem?
-      changed = Series.write_data_list @series.keys, @output_path unless @definitions.nil?
-          
+      
+      changed = Series.write_data_list @series.keys, @output_path unless @definitions.nil?        
       packager_output.update_attributes(:last_new_data => Time.now) if changed
       
     rescue Exception => e
