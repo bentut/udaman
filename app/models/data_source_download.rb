@@ -4,14 +4,15 @@ class DataSourceDownload < ActiveRecord::Base
   serialize :post_parameters, Hash
   serialize :download_log, Array
 
+  has_many :dsd_log_entries
+  
     #some tight coupling to the unizipping functionality in the string extension
     def DataSourceDownload.get_by_path(save_path)
       sp = save_path.split("_extracted_files/")[0] 
       DataSourceDownload.where(:save_path => sp).first
     end
     
-    def DataSourceDownload.get(handle, no_log = false)
-      return DataSourceDownload.where(:handle => handle).select("url, save_path, file_to_extract, handle").first if no_log
+    def DataSourceDownload.get(handle)
       DataSourceDownload.where(:handle => handle).first
     end
     
@@ -61,7 +62,7 @@ class DataSourceDownload < ActiveRecord::Base
     end
 
     def download
-      self.download_log ||= []
+      #self.download_log ||= []
       client = HTTPClient.new
       #some will only respond to certain user agents... this may have to be updated
       client.agent_name = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0'
@@ -92,26 +93,16 @@ class DataSourceDownload < ActiveRecord::Base
       download_location = resp.header["Location"]
       content_type = resp.header["Content-Type"]
       status = resp.header.status_code
-      last_log = self.download_log[-1]
+      last_log = dsd_log_entries.order(:time).last
       
-      unless !last_log.nil? and last_log[:url] == download_url and last_log[:time].to_date == download_time.to_date and last_log[:status] == status
-        self.download_log.push({:time => download_time, :url => download_url, :location => download_location, :type => content_type, :status => status, :changed => data_changed}) 
-        self.save
+      if last_log.nil? or !(last_log.url == download_url and last_log.time.to_date == download_time.to_date and last_log.status == status)
+        self.dsd_log_entries.create(:time => download_time, :url => download_url, :location => download_location, :type => content_type, :status => status, :dl_changed => data_changed)
       end
       
       #this return might be a little misleading since it isn't always the exact results of the last download, just an indication that they were mostly the same
-      self.download_log[-1]
+      dsd_log_entries.order(:time).last
     end
-
     
-    #use this if more packet issues... should also check which ones are getting out of hand
-    def clean_log
-      rollup = dsd.download_log.group_by {|entry| "#{entry[:time].to_date}#{entry[:url]}"};
-      new_log = rollup.sort.map {|elem| elem[1][0] };
-      self.download_log = new_log
-      self.save
-    end
-
     def content_changed?(new_content)
       return true unless File::exists? save_path_flex
       previous_download = open(save_path_flex, "rb").read

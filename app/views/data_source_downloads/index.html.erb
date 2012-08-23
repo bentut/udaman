@@ -11,10 +11,10 @@
 				<th></th>
 				<th></th>
 				<th></th>
-				<th colspan="2">Last Attempt</th>
+				<!-- <th colspan="2">Last Attempt</th> -->
 				<th></th>
 				<th></th>
-				<th>Url / Path</th>
+				<!-- <th>Url / Path</th> -->
 
 			</tr>
 			<% handle_or_save_path_array.sort.each do |handle_or_save_path| %>
@@ -26,8 +26,11 @@
 					break
 				end
 			end
-			time = ( download.download_log.nil? or download.download_log.count == 0) ? raw("<span style='color:red'>never downloaded</span>") : raw(download.download_log[-1][:time].strftime("%m/%d&nbsp;<span style=\"color:#999\">%H:%M</span>"))
-			status = ( download.download_log.nil? or download.download_log.count == 0) ? raw("<span style='color:red'>never downloaded</span>") : download.download_log[-1][:status]
+			#this needs to be cached in the record
+			#last_attempt = download.dsd_log_entries.order(:time).last
+			
+			time = ""#last_attempt.nil? ? raw("<span style='color:red'>never downloaded</span>") : raw(last_attempt.time.strftime("%m/%d&nbsp;<span style=\"color:#999\">%H:%M</span>"))
+			status = ""#last_attempt.nil? ? raw("<span style='color:red'>never downloaded</span>") : last_attempt.status
 			filename = download.save_path.nil? ? "" : download.save_path.split("/")[-1]
 			%>
 			<tr>
@@ -38,11 +41,11 @@
 					<% end %>
 					<td><%= link_to "show" , {:action => 'show', :id => download.id}%></td>
 					<td><%= link_to "download" , {:action => 'download', :id => download.id}%></td>
-					<td><%= time %></td>
-					<td><%= status %></td>
+<!-- 					<td><%= time %></td>
+					<td><%= status %></td> -->
 					<td><%= link_to "edit" , {:action => 'edit', :id => download.id} %></td>
-					<td><%= link_to "delete" ,  download, :method => :delete %></td>
-					<td><span style="color:#999"><%= download.url %></span></td>
+					<td><%= link_to "delete", download, :method => :delete, :confirm => "Are you sure you want to delete this?"  %></td>
+<!-- 					<td><span style="color:#999"><%= download.url %></span></td> -->
 			</tr>
 			<% end %>
 		</table>

@@ -20,7 +20,7 @@ class DownloadsCache
     path = DataSourceDownload.flex(path) if handle == "manual"
     
     if path.nil?
-      @dsd = DataSourceDownload.get(handle, true)
+      @dsd = DataSourceDownload.get(handle)
       raise "handle '#{handle}' does not exist" if @dsd.nil?
       path = (@dsd.extract_path_flex.nil? or @dsd.extract_path_flex == "") ? @dsd.save_path_flex : @dsd.extract_path_flex 
     end

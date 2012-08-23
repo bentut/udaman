@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822094928) do
+ActiveRecord::Schema.define(:version => 20120823023412) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(:version => 20120822094928) do
     t.string   "url"
     t.text     "post_parameters"
     t.string   "save_path"
-    t.text     "download_log",    :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "handle"
@@ -92,6 +91,18 @@ ActiveRecord::Schema.define(:version => 20120822094928) do
   end
 
   add_index "data_sources", ["series_id"], :name => "index_data_sources_on_series_id"
+
+  create_table "dsd_log_entries", :force => true do |t|
+    t.integer  "data_source_download_id"
+    t.datetime "time"
+    t.string   "url"
+    t.string   "location"
+    t.string   "type"
+    t.integer  "status"
+    t.boolean  "dl_changed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "packager_outputs", :force => true do |t|
     t.string   "path"

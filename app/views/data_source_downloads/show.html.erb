@@ -8,18 +8,18 @@ div#summary_area h2 {font-size:30px;}
 <h1 style="font-size:45px"><%= @output_file.handle %></h1>
 <h3><%= link_to 'Edit', edit_data_source_download_path(@output_file) %></h3>
 <div id="summary_area">
-	<% unless @output_file.download_log.nil? %>
+	<% unless @output_file.dsd_log_entries.nil? %>
 	<h2 class="handle-h2">Download Log</h2>
 	<table class="dl-log">
 	<% current_url = "" %>
-	<% @output_file.download_log.each do |dl| %>
-		<% if dl[:url] != current_url %>
-			<% current_url = dl[:url] %>
+	<% @output_file.dsd_log_entries.order(:time).each do |dl| %>
+		<% if dl.url != current_url %>
+			<% current_url = dl.url %>
 			</table>
 			<h4><%= current_url %></h4>
 			<table class="dl-log">
 		<% end %>
-		<tr><td><%= dl[:time].to_date %></td><td><span class="<%= "problem" if dl[:status] != 200 %>"><%= dl[:status] %></span></td><td><span class="<%= "changed" if dl[:changed] %>" ><%= dl[:changed] ? "changed" : "" %></span></td></tr>
+		<tr><td><%= dl.time.to_date %></td><td><span class="<%= "problem" if dl.status != 200 %>"><%= dl.status %></span></td><td><span class="<%= "changed" if dl.dl_changed %>" ><%= dl.dl_changed ? "changed" : "" %></span></td></tr>
 	<% end %>
 	</table>
 	<% end %>
