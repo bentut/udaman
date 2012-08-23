@@ -14,6 +14,7 @@ class XlsFileProcessor
   end
 
   def observation_at(index)
+    
     date = @date_processor.compute(index)
   
     handle = @handle_processor.compute(date)
@@ -24,12 +25,11 @@ class XlsFileProcessor
     # puts path
     # puts sheet
     begin
-      
       row = @row_processor.compute(index, @cached_files, handle, sheet)
+      
       col = @col_processor.compute(index, @cached_files, handle, sheet)
 #      puts "#{row}, #{col}"
       #puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
-      
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
       puts e.message unless @handle_processor.date_sensitive?

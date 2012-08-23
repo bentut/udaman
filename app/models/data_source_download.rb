@@ -10,7 +10,8 @@ class DataSourceDownload < ActiveRecord::Base
       DataSourceDownload.where(:save_path => sp).first
     end
     
-    def DataSourceDownload.get(handle)
+    def DataSourceDownload.get(handle, no_log = false)
+      return DataSourceDownload.where(:handle => handle).select("url, save_path, file_to_extract, handle").first if no_log
       DataSourceDownload.where(:handle => handle).first
     end
     

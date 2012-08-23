@@ -1,5 +1,5 @@
 class DataSource < ActiveRecord::Base
-  serialize :data, Hash
+  #serialize :data, Hash
   serialize :dependencies, Array
   
   belongs_to :series
@@ -147,7 +147,7 @@ class DataSource < ActiveRecord::Base
       self.series.update_data(s.data, self)
       #self.update_attributes(:description => s.name, :last_run => Time.now, :data => s.data, :runtime => (Time.now - t))
       #runtime is only updated here. could probably leave out of schema as well
-      self.update_attributes(:description => s.name, :last_run => Time.now, :data => {}, :runtime => (Time.now - t))
+      self.update_attributes(:description => s.name, :last_run => Time.now, :runtime => (Time.now - t))
     end
 
     # def mark_history

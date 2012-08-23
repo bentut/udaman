@@ -232,6 +232,7 @@ class Series < ActiveRecord::Base
     series_to_set.frequency = series.frequency
     #puts "#{"%.2f" % (Time.now - t)} :  : #{self.name} : SETTING UP STORE"
     source = series_to_set.save_source(desc, eval_statement, series.data)
+    #puts "#{"%.2f" % (Time.now - t)} :  : #{self.name} : DURATION OF STORE"
     source
   end
 
@@ -242,7 +243,7 @@ class Series < ActiveRecord::Base
     source = Series.store series_name, new_series, new_series.name, eval_statement
     #taking this out as well... not worth it to run
     #source.update_attributes(:runtime => (Time.now - t))
-    puts "#{"%.2f" % (Time.now - t)} | #{source.data.count} | #{series_name} | #{eval_statement}" 
+    puts "#{"%.2f" % (Time.now - t)} | #{series_name} | #{eval_statement}" 
   # rescue Exception 
   #     puts "ERROR | #{series_name} | #{eval_statement}"
   end
@@ -250,11 +251,11 @@ class Series < ActiveRecord::Base
   def save_source(source_desc, source_eval_statement, data, last_run = Time.now)
     source = nil
     #ss_time = Time.now          #timer
-    #data_count = data.count     #timer
+    data_count = data.count     #timer
     data_sources.each do |ds|
       if !source_eval_statement.nil? and !ds.eval.nil? and source_eval_statement.strip == ds.eval.strip
         #ds.update_attributes(:data => data, :last_run => Time.now) 
-        ds.update_attributes(:last_run => Time.now, :data => {}) 
+        ds.update_attributes(:last_run => Time.now) 
         source = ds 
       end
     end
@@ -290,14 +291,14 @@ class Series < ActiveRecord::Base
     observation_dates = data.keys
     #puts "#{"%.2f" % (Time.now - p_time)} : #{current_data_points.count} : #{self.name} : PRUNING DATAPOINTS"
     
-    cdp_time = Time.now         #timer
+    #cdp_time = Time.now         #timer
     current_data_points.each do |dp|
       dp.upd(data[dp.date_string], source)
       observation_dates.delete dp.date_string
     end
     #puts "#{"%.2f" % (Time.now - cdp_time)} : #{current_data_points.count} : #{self.name} : UPDATING CURRENT DATAPOINTS"
 
-    od_time = Time.now             #timer
+    #od_time = Time.now             #timer
     observation_dates.each do |date_string|
       data_points.create(
         :date_string => date_string,
@@ -534,7 +535,7 @@ class Series < ActiveRecord::Base
     #won't need these two series invocations in productions
     DownloadsCache
     DataSourceDownload
-    t = Time.now
+    #t = Time.now
     #this is pretty good for now. Will eventually want to redo cache strategy to write directly to cache with individual keys
     #the larger file sizes really slow the system down, even though this is still a performance boost
     #may also be able to dump directly now that Marshal knows about the classes? 
