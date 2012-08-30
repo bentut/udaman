@@ -33,7 +33,7 @@ class DataList < ActiveRecord::Base
   
   def DataList.write(name, path, start_date = "1900-01-01")
     t = Time.now
-    names = DataList.where(:name => "tour_rev_upd3").first.series_names
+    names = DataList.where(:name => name).first.series_names
     Series.write_data_list names, path, start_date
     puts "#{ "%.2f" % (Time.now - t) } | #{ names.count } | #{ path }"
   end

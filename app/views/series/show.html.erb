@@ -63,6 +63,8 @@ google.visualization.events.addListener(chart, 'select', function() {
 		
 		<tr><td class="label">Output: </td><td>
 		<%= @pdf.filename unless @pdf.nil? %></td></tr>
+
+
 		<tr><td class="label">Dependent Series: </td>
 			<td>
 				<%= "None" if @series.new_dependents.count == 0 %>
@@ -71,11 +73,15 @@ google.visualization.events.addListener(chart, 'select', function() {
 				<% end %>
 			</td>
 		</tr>
+
+
 		<tr><td class="label">Sources: <br />	<%= link_to 'Add', :controller => :data_sources, :action => :new, :series_id => @series.id %>
 		</td><td>
 		<%= render :partial => 'source_list', :locals => { :series => @series } %>
 		</td></tr>
 	</table>
+	
+	
 	<div id= "toggle-units-div">
 		<%= render :partial => 'toggle_units', :locals => {:series => @series} %>
 	</div>

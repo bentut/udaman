@@ -37,7 +37,7 @@ module SeriesExternalRelationship
     return diff_second > 0.001 ? diff_second : 0
   end
   #no test or spec for this
-  def aremos_comparison(save_series = false)
+  def aremos_comparison(save_series = true)
     begin
       as = AremosSeries.get self.name
       if as.nil?
@@ -82,7 +82,8 @@ module SeriesExternalRelationship
       end
       
       as.data.each do |datestring, value|
-        unless self.data[datestring].nil?
+        data = self.data
+        unless data[datestring].nil?
           diff = a_diff(value, self.units_at(datestring))
           dp = DataPoint.where(:series_id => self.id, :date_string => datestring, :current=>true)[0]
           source_code = case dp.source_type
@@ -103,7 +104,7 @@ module SeriesExternalRelationship
           next #need this. otherwise might add two array elements per diff
         end
         
-        if self.data[datestring].nil? and value == 1000000000000000.0
+        if data[datestring].nil? and value == 1000000000000000.0
           results.push(0)
         else
           results.push(-1)

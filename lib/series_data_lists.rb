@@ -78,7 +78,7 @@ module SeriesDataLists
   
   def Series.write_xls_text(series_data, output_path)
     File.open(output_path + ".txt", 'w') do |f|
-      series_data.keys.each {|s| f.puts(s.split(".")[0]) }
+      series_data.keys.sort.each {|s| f.print(s.split(".")[0] + "\r\n") }
     end
   end
   

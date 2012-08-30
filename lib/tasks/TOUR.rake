@@ -73,6 +73,13 @@ end
 
 #not reading into the database.
 
+
+# "OCUP%NS@HI.M"
+# <Series id: 7829, name: "OCUP%NS@HI.M", frequency: "month", description: nil, units: 1, seasonally_adjusted: nil, last_demetra_datestring: nil, factors: nil, factor_application: nil, prognoz_data_file_id: nil, aremos_missing: 7, aremos_diff: 0.0, mult: nil, created_at: "2011-08-11 01:00:17", updated_at: "2012-08-29 11:10:09", investigation_notes: nil> 
+# 21302 | 2012-02-01 04:12:55 UTC | "OCUP%NS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"
+# 25414 | 2012-02-25 00:58:30 UTC | "OCUP%NS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/Manual/TOUR_OCUP.xls"
+# 25481 | 2012-08-29 11:10:09 UTC | Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 2, :frequency => "M" })
+
 task :tour_ocup_upd => :environment do
 
 tour_ocup = {
@@ -115,6 +122,19 @@ tour_vexp = {
 	p.add_definitions tour_vexp
 	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/tour_vexp_upd_ID.xls"
 
+
+  "OCUP%NS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2004-01-04", :sheet => "sheet_num:1", :row => "increment:4:1", :col => 2, :frequency => "W" })|
+  "PRMNS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2004-01-04", :sheet => "sheet_num:1", :row => "increment:4:1", :col => 3, :frequency => "W" })|
+  "OCUP%NS@HON.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 4, :frequency => "W" })|
+  "PRMNS@HON.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 5, :frequency => "W" })|
+  "OCUP%NS@MAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 6, :frequency => "W" })|
+  "PRMNS@MAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 7, :frequency => "W" })|
+  "OCUP%NS@KAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 8, :frequency => "W" })|
+  "PRMNS@KAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 9, :frequency => "W" })|
+  "OCUP%NS@HAW.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 10, :frequency => "W" })|
+  "PRMNS@HAW.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 11, :frequency => "W" })|
+  "OCUP%NS@US.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 12, :frequency => "W" })|
+  "PRMNS@US.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 13, :frequency => "W" })|
 
 end
 
@@ -494,26 +514,6 @@ task :tour_upd => :environment do
 "VDAYOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All Others:13:20", :col => 2, :frequency => "M" })/1000|,
 "VISOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All Others:22:29", :col => 2, :frequency => "M" })/1000|,
 "VRLSOTNS@HI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:7", :row => "header_range:col:1:All Others:31:38", :col => 2, :frequency => "M" })/1|,
-"VISUSNS@HON.M" => %Q|"VISUSWNS@HON.M".ts + "VISUSENS@HON.M".ts|,
-"VISUSNS@HAW.M" => %Q|"VISUSWNS@HAW.M".ts + "VISUSENS@HAW.M".ts|,
-"VISUSNS@KAU.M" => %Q|"VISUSWNS@KAU.M".ts + "VISUSENS@KAU.M".ts|,
-"VISUSNS@MAU.M" => %Q|"VISUSWNS@MAU.M".ts + "VISUSENS@MAU.M".ts|,
-"VISUSNS@HI.M" => %Q|"VISUSWNS@HI.M".ts + "VISUSENS@HI.M".ts|,
-"VISUSNS@LAN.M" => %Q|"VISUSWNS@LAN.M".ts + "VISUSENS@LAN.M".ts|,
-"VISUSNS@MOL.M" => %Q|"VISUSWNS@MOL.M".ts + "VISUSENS@MOL.M".ts|,
-"VISUSNS@MAUI.M" => %Q|"VISUSWNS@MAUI.M".ts + "VISUSENS@MAUI.M".ts|,
-"VEXPPDNS@HI.M" => %Q|"VEXPNS@HI.M".ts / "VDAYNS@HI.M".ts*1000|,
-"VEXPPDUSWNS@HI.M" => %Q|"VEXPUSWNS@HI.M".ts / "VDAYUSWNS@HI.M".ts*1000|,
-"VEXPPDUSENS@HI.M" => %Q|"VEXPUSENS@HI.M".ts / "VDAYUSENS@HI.M".ts*1000|,
-"VEXPPDJPNS@HI.M" => %Q|"VEXPJPNS@HI.M".ts / "VDAYJPNS@HI.M".ts*1000|,
-"VEXPPDCANNS@HI.M" => %Q|"VEXPCANNS@HI.M".ts / "VDAYCANNS@HI.M".ts*1000|,
-"VEXPPDOTNS@HI.M" => %Q|"VEXPOTNS@HI.M".ts / "VDAYOTNS@HI.M".ts*1000|,
-"VEXPPTNS@HI.M" => %Q|"VEXPNS@HI.M".ts / "VISNS@HI.M".ts*1000|,
-"VEXPPTUSWNS@HI.M" => %Q|"VEXPUSWNS@HI.M".ts / "VISUSWNS@HI.M".ts*1000|,
-"VEXPPTUSENS@HI.M" => %Q|"VEXPUSENS@HI.M".ts / "VISUSENS@HI.M".ts*1000|,
-"VEXPPTJPNS@HI.M" => %Q|"VEXPJPNS@HI.M".ts / "VISJPNS@HI.M".ts*1000|,
-"VEXPPTCANNS@HI.M" => %Q|"VEXPCANNS@HI.M".ts / "VISCANNS@HI.M".ts*1000|,
-"VEXPPTOTNS@HI.M" => %Q|"VEXPOTNS@HI.M".ts / "VISOTNS@HI.M".ts*1000|,
 "VEXPNS@HON.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Oahu:4:12:no_okina", :col => 2, :frequency => "M" })/1|,
 "VEXPNS@MAUI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Maui:4:12:no_okina", :col => 2, :frequency => "M" })/1|,
 "VEXPNS@MOL.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Molokai:4:12:no_okina", :col => 2, :frequency => "M" })/1|,
@@ -526,41 +526,13 @@ task :tour_upd => :environment do
 "VISNS@LAN.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Lanai:24:32:no_okina", :col => 2, :frequency => "M" })/1000|,
 "VISNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Kauai:24:32:no_okina", :col => 2, :frequency => "M" })/1000|,
 "VISNS@HAW.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Big Island[or]hawaii island:24:32:no_okina", :col => 2, :frequency => "M" })/1000|,
-"VEXPPDNS@HON.M" => [%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Oahu:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
-	%Q|"VEXPNS@HON.M".ts / "VDAYNS@HON.M".ts*1000|],
-"VEXPPDNS@MAUI.M" => [%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Maui:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
-	%Q|"VEXPNS@MAUI.M".ts / "VDAYNS@MAUI.M".ts*1000|],
-"VEXPPDNS@MOL.M" => [%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Molokai:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
-	%Q|"VEXPNS@MOL.M".ts / "VDAYNS@MOL.M".ts*1000|],
-"VEXPPDNS@LAN.M" => [%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Lanai:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
-	%Q|"VEXPNS@LAN.M".ts / "VDAYNS@LAN.M".ts*1000|],
-"VEXPPDNS@KAU.M" => [%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Kauai:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
-	%Q|"VEXPNS@KAU.M".ts / "VDAYNS@KAU.M".ts*1000|],
-"VEXPPDNS@HAW.M" => [%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Big Island[or]hawaii island:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
-	%Q|"VEXPNS@HAW.M".ts / "VDAYNS@HAW.M".ts*1000|],
-"VISNS@NBI.M" => %Q|"VISNS@HI.M".ts - "VISNS@HON.M".ts|,
-"VEXPUSNS@HI.M" => %Q|"VEXPUSWNS@HI.M".ts + "VEXPUSENS@HI.M".ts|,
-"VEXPOTNS@HI.M" => %Q|"VEXPNS@HI.M".ts - "VEXPUSNS@HI.M".ts - "VEXPJPNS@HI.M".ts - "VEXPCANNS@HI.M".ts|,
-"VEXPNS@MAU.M" => %Q|"VEXPNS@MAUI.M".ts + "VEXPNS@LAN.M".ts + "VEXPNS@MOL.M".ts|,
-"VEXPPDNS@MAU.M" => %Q|"VEXPNS@MAU.M".ts / "VDAYNS@MAU.M".ts*1000|,
-"VDAYUSNS@HON.M" => %Q|"VDAYUSENS@HON.M".ts + "VDAYUSWNS@HON.M".ts|,
-"VDAYUSNS@HAW.M" => %Q|"VDAYUSENS@HAW.M".ts + "VDAYUSWNS@HAW.M".ts|,
-"VDAYUSNS@KAU.M" => %Q|"VDAYUSENS@KAU.M".ts + "VDAYUSWNS@KAU.M".ts|,
-"VDAYUSNS@MAU.M" => %Q|"VDAYUSENS@MAU.M".ts + "VDAYUSWNS@MAU.M".ts|,
-"VDAYUSNS@MAUI.M" => %Q|"VDAYUSENS@MAUI.M".ts + "VDAYUSWNS@MAUI.M".ts|,
-"VDAYUSNS@MOL.M" => %Q|"VDAYUSENS@MOL.M".ts + "VDAYUSWNS@MOL.M".ts|,
-"VDAYUSNS@LAN.M" => %Q|"VDAYUSENS@LAN.M".ts + "VDAYUSWNS@LAN.M".ts|,
-"VDAYRESNS@HON.M" => %Q|"VDAYNS@HON.M".ts - ("VDAYUSNS@HON.M".ts + "VDAYJPNS@HON.M".ts)|,
-"VDAYRESNS@HAW.M" => %Q|"VDAYNS@HAW.M".ts - ("VDAYUSNS@HAW.M".ts + "VDAYJPNS@HAW.M".ts)|,
-"VDAYRESNS@KAU.M" => %Q|"VDAYNS@KAU.M".ts - ("VDAYUSNS@KAU.M".ts + "VDAYJPNS@KAU.M".ts)|,
-"VDAYRESNS@MAU.M" => %Q|"VDAYNS@MAU.M".ts - ("VDAYUSNS@MAU.M".ts + "VDAYJPNS@MAU.M".ts)|,
-"VDAYRESNS@MAUI.M" => %Q|"VDAYNS@MAUI.M".ts - ("VDAYUSNS@MAUI.M".ts + "VDAYJPNS@MAUI.M".ts)|,
-"VDAYRESNS@MOL.M" => %Q|"VDAYNS@MOL.M".ts - ("VDAYUSNS@MOL.M".ts + "VDAYJPNS@MOL.M".ts)|,
-"VDAYRESNS@LAN.M" => %Q|"VDAYNS@LAN.M".ts - ("VDAYUSNS@LAN.M".ts + "VDAYJPNS@LAN.M".ts)|,
-"VDAYUSNS@HI.M" => %Q|"VDAYUSENS@HI.M".ts + "VDAYUSWNS@HI.M".ts|,
-"VDAYRESNS@HI.M" => %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|,
-"VEXPPDUSNS@HI.M" => %Q|"VEXPUSNS@HI.M".ts / "VDAYUSNS@HI.M".ts*1000|,
-"VEXPPTUSNS@HI.M" => %Q|"VEXPUSNS@HI.M".ts / "VISUSNS@HI.M".ts*1000|,
+"VEXPPDNS@HON.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Oahu:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
+"VEXPPDNS@MAUI.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Maui:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
+"VEXPPDNS@MOL.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Molokai:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
+"VEXPPDNS@LAN.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Lanai:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
+"VEXPPDNS@KAU.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Kauai:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
+"VEXPPDNS@HAW.M" => %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "2011-02-01", :sheet => "sheet_num:8", :row => "header_range:col:1:Big Island[or]hawaii island:44:52:no_okina", :col => 2, :frequency => "M" })/1|,
+
 
 }
 
@@ -990,11 +962,71 @@ task :vis_test => :environment do
 end
 task :visitor_identities => :environment do
   
+  "VISUSNS@HON.M".ts_eval= %Q|"VISUSWNS@HON.M".ts + "VISUSENS@HON.M".ts|
+  "VISUSNS@HAW.M".ts_eval= %Q|"VISUSWNS@HAW.M".ts + "VISUSENS@HAW.M".ts|
+  "VISUSNS@KAU.M".ts_eval= %Q|"VISUSWNS@KAU.M".ts + "VISUSENS@KAU.M".ts|
+  "VISUSNS@MAU.M".ts_eval= %Q|"VISUSWNS@MAU.M".ts + "VISUSENS@MAU.M".ts|
+  "VISUSNS@HI.M".ts_eval= %Q|"VISUSWNS@HI.M".ts + "VISUSENS@HI.M".ts|
+  "VISUSNS@LAN.M".ts_eval= %Q|"VISUSWNS@LAN.M".ts + "VISUSENS@LAN.M".ts|
+  "VISUSNS@MOL.M".ts_eval= %Q|"VISUSWNS@MOL.M".ts + "VISUSENS@MOL.M".ts|
+  "VISUSNS@MAUI.M".ts_eval= %Q|"VISUSWNS@MAUI.M".ts + "VISUSENS@MAUI.M".ts|
+  "VEXPPDNS@HI.M".ts_eval= %Q|"VEXPNS@HI.M".ts / "VDAYNS@HI.M".ts*1000|
+  "VEXPPDUSWNS@HI.M".ts_eval= %Q|"VEXPUSWNS@HI.M".ts / "VDAYUSWNS@HI.M".ts*1000|
+  "VEXPPDUSENS@HI.M".ts_eval= %Q|"VEXPUSENS@HI.M".ts / "VDAYUSENS@HI.M".ts*1000|
+  "VEXPPDJPNS@HI.M".ts_eval= %Q|"VEXPJPNS@HI.M".ts / "VDAYJPNS@HI.M".ts*1000|
+  "VEXPPDCANNS@HI.M".ts_eval= %Q|"VEXPCANNS@HI.M".ts / "VDAYCANNS@HI.M".ts*1000|
+  "VEXPPDOTNS@HI.M".ts_eval= %Q|"VEXPOTNS@HI.M".ts / "VDAYOTNS@HI.M".ts*1000|
+  "VEXPPTNS@HI.M".ts_eval= %Q|"VEXPNS@HI.M".ts / "VISNS@HI.M".ts*1000|
+  "VEXPPTUSWNS@HI.M".ts_eval= %Q|"VEXPUSWNS@HI.M".ts / "VISUSWNS@HI.M".ts*1000|
+  "VEXPPTUSENS@HI.M".ts_eval= %Q|"VEXPUSENS@HI.M".ts / "VISUSENS@HI.M".ts*1000|
+  "VEXPPTJPNS@HI.M".ts_eval= %Q|"VEXPJPNS@HI.M".ts / "VISJPNS@HI.M".ts*1000|
+  "VEXPPTCANNS@HI.M".ts_eval= %Q|"VEXPCANNS@HI.M".ts / "VISCANNS@HI.M".ts*1000|
+  "VEXPPTOTNS@HI.M".ts_eval= %Q|"VEXPOTNS@HI.M".ts / "VISOTNS@HI.M".ts*1000|  
+  "VEXPPDNS@HON.M".ts_eval= %Q|"VEXPNS@HON.M".ts / "VDAYNS@HON.M".ts*1000|
+  "VEXPPDNS@MAUI.M".ts_eval= %Q|"VEXPNS@MAUI.M".ts / "VDAYNS@MAUI.M".ts*1000|
+  "VEXPPDNS@MOL.M".ts_eval= %Q|"VEXPNS@MOL.M".ts / "VDAYNS@MOL.M".ts*1000|
+  "VEXPPDNS@LAN.M".ts_eval= %Q|"VEXPNS@LAN.M".ts / "VDAYNS@LAN.M".ts*1000|
+  "VEXPPDNS@KAU.M".ts_eval= %Q|"VEXPNS@KAU.M".ts / "VDAYNS@KAU.M".ts*1000|
+  "VEXPPDNS@HAW.M".ts_eval= %Q|"VEXPNS@HAW.M".ts / "VDAYNS@HAW.M".ts*1000|
+  "VISNS@NBI.M".ts_eval= %Q|"VISNS@HI.M".ts - "VISNS@HON.M".ts|
+  "VEXPUSNS@HI.M".ts_eval= %Q|"VEXPUSWNS@HI.M".ts + "VEXPUSENS@HI.M".ts|
+  "VEXPOTNS@HI.M".ts_eval= %Q|"VEXPNS@HI.M".ts - "VEXPUSNS@HI.M".ts - "VEXPJPNS@HI.M".ts - "VEXPCANNS@HI.M".ts|
+  "VEXPNS@MAU.M".ts_eval= %Q|"VEXPNS@MAUI.M".ts + "VEXPNS@LAN.M".ts + "VEXPNS@MOL.M".ts|
+  "VEXPPDNS@MAU.M".ts_eval= %Q|"VEXPNS@MAU.M".ts / "VDAYNS@MAU.M".ts*1000|
+  "VDAYUSNS@HON.M".ts_eval= %Q|"VDAYUSENS@HON.M".ts + "VDAYUSWNS@HON.M".ts|
+  "VDAYUSNS@HAW.M".ts_eval= %Q|"VDAYUSENS@HAW.M".ts + "VDAYUSWNS@HAW.M".ts|
+  "VDAYUSNS@KAU.M".ts_eval= %Q|"VDAYUSENS@KAU.M".ts + "VDAYUSWNS@KAU.M".ts|
+  "VDAYUSNS@MAU.M".ts_eval= %Q|"VDAYUSENS@MAU.M".ts + "VDAYUSWNS@MAU.M".ts|
+  "VDAYUSNS@MAUI.M".ts_eval= %Q|"VDAYUSENS@MAUI.M".ts + "VDAYUSWNS@MAUI.M".ts|
+  "VDAYUSNS@MOL.M".ts_eval= %Q|"VDAYUSENS@MOL.M".ts + "VDAYUSWNS@MOL.M".ts|
+  "VDAYUSNS@LAN.M".ts_eval= %Q|"VDAYUSENS@LAN.M".ts + "VDAYUSWNS@LAN.M".ts|
+  "VDAYRESNS@HON.M".ts_eval= %Q|"VDAYNS@HON.M".ts - ("VDAYUSNS@HON.M".ts + "VDAYJPNS@HON.M".ts)|
+  "VDAYRESNS@HAW.M".ts_eval= %Q|"VDAYNS@HAW.M".ts - ("VDAYUSNS@HAW.M".ts + "VDAYJPNS@HAW.M".ts)|
+  "VDAYRESNS@KAU.M".ts_eval= %Q|"VDAYNS@KAU.M".ts - ("VDAYUSNS@KAU.M".ts + "VDAYJPNS@KAU.M".ts)|
+  "VDAYRESNS@MAU.M".ts_eval= %Q|"VDAYNS@MAU.M".ts - ("VDAYUSNS@MAU.M".ts + "VDAYJPNS@MAU.M".ts)|
+  "VDAYRESNS@MAUI.M".ts_eval= %Q|"VDAYNS@MAUI.M".ts - ("VDAYUSNS@MAUI.M".ts + "VDAYJPNS@MAUI.M".ts)|
+  "VDAYRESNS@MOL.M".ts_eval= %Q|"VDAYNS@MOL.M".ts - ("VDAYUSNS@MOL.M".ts + "VDAYJPNS@MOL.M".ts)|
+  "VDAYRESNS@LAN.M".ts_eval= %Q|"VDAYNS@LAN.M".ts - ("VDAYUSNS@LAN.M".ts + "VDAYJPNS@LAN.M".ts)|
+  "VDAYUSNS@HI.M".ts_eval= %Q|"VDAYUSENS@HI.M".ts + "VDAYUSWNS@HI.M".ts|
+  "VDAYRESNS@HI.M".ts_eval= %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|
+  "VEXPPDUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VDAYUSNS@HI.M".ts*1000|
+  "VEXPPTUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VISUSNS@HI.M".ts*1000|
+  
+  
   ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   
     #surprising this is not done in tour.rake considering so many definitions require it there.
     "VDAYNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts + "VDAYITNS@#{cnty}.M".ts|
   end
-  
+
+  # don't seem to need these histories... BT 8/29/12
+  # #need to load all history identities seem to take full precedence
+  # ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+  #   "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  #   "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  #   "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  #   "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  # end
+    
   ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
     "VRLSDMNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts / "VISDMNS@#{cnty}.M".ts|
     "VRLSITNS@#{cnty}.M".ts_eval= %Q|"VDAYITNS@#{cnty}.M".ts / "VISITNS@#{cnty}.M".ts|
@@ -1004,13 +1036,13 @@ task :visitor_identities => :environment do
     "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VDAYCANNS@#{cnty}.M".ts / "VISCANNS@#{cnty}.M".ts|
   end
   
-  #need to load all history
-  ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
-    "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-    "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-    "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-    "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  end
+  #need to load all history identities seem to take full precedence
+  # ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+  #   "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  #   "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  #   "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  #   "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  # end
 
   #KAU is in different history sheet
   "VRLSUSWNS@KAU.M".ts_eval= %Q|"VRLSUSWNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|

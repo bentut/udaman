@@ -215,7 +215,7 @@ class Series < ActiveRecord::Base
   
   def Series.get_or_new(series_name)
     series_to_store = Series.get series_name
-    series_to_store = Series.new(:name => series_name) if series_to_store.nil?
+    series_to_store = Series.create(:name => series_name) if series_to_store.nil?
     return series_to_store
   end
 
@@ -309,10 +309,10 @@ class Series < ActiveRecord::Base
     end
     #puts "#{"%.2f" % (Time.now - od_time)} : #{observation_dates.count} : #{self.name} : CREATING MISSING OBSERVATION DATES"
         
-    update_data_hash
+    #update_data_hash
 
     #a_time = Time.now
-    aremos_comparison
+    aremos_comparison #if we can take out this save, might speed things up a little
     #puts "#{"%.2f" % (Time.now - a_time)} : #{observation_dates.count} : #{self.name} : AREMOS COMPARISON"
   end
   
@@ -333,7 +333,7 @@ class Series < ActiveRecord::Base
     #pulling those data points out of the db. Saving is MUCH faster
     #also figure out where to do the save. And generally clean up
     #could pull AREMOS comparison. or have it make saving optional
-    self.data = data_hash
+    #self.data = data_hash
     #puts "#{"%.2f" % (Time.now - dh_time)} : #{data_points.count} : #{self.name} : UPDATING DATA HASH FROM (ALL DATA POINTS)"
     
     #s_time = Time.now

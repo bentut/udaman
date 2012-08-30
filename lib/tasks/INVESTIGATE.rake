@@ -29,11 +29,11 @@ task :gen_investigate_csv => :environment do
   CSV.open("public/download_results.csv", "wb") do |csv|
     csv << ["id", "handle", "time", "status", "changed", "url"]
     DataSourceDownload.all.each do |dsd|
-      puts dsd.handle
-      next if dsd.download_log.nil?
-      last_log = dsd.download_log[-1] 
-      csv << [dsd.id, dsd.handle, last_log[:time], last_log[:status], last_log[:changed], last_log[:url] ] if dsd.download_log[-1][:time] > Time.now.to_date - 1
-      downloads += 1 if last_log[:changed] and dsd.download_log[-1][:time] > Time.now.to_date - 1
+      puts dsd.handle.to_s
+      next if dsd.dsd_log_entries == []
+      last_log = dsd.dsd_log_entries.order(:time).last
+      csv << [dsd.id, dsd.handle, last_log.time, last_log.status, last_log.changed, last_log.url] if last_log.time > Time.now.to_date - 1
+      downloads += 1 if last_log.changed and last_log.time > Time.now.to_date - 1
     end
   end
   
@@ -66,10 +66,10 @@ task :gen_daily_summary => :environment do
     csv << ["id", "handle", "time", "status", "changed", "url"]
     DataSourceDownload.all.each do |dsd|
       puts dsd.handle
-      next if dsd.download_log.nil?
-      last_log = dsd.download_log[-1] 
-      csv << [dsd.id, dsd.handle, last_log[:time], last_log[:status], last_log[:changed], last_log[:url] ] if dsd.download_log[-1][:time] > Time.now.to_date - 1
-      downloads += 1 if last_log[:changed] and dsd.download_log[-1][:time] > Time.now.to_date - 1
+      next if dsd.dsd_log_entries.nil?
+      last_log = dsd.dsd_log_entries.order(:time).last
+      csv << [dsd.id, dsd.handle, dsd.time, dsd.status, dsd.changed, dsd.url] if last_log.time > Time.now.to_date - 1
+      downloads += 1 if last_log.changed and dsd.download_log.time > Time.now.to_date - 1
     end
   end
   

@@ -55,9 +55,10 @@ module SeriesRelationship
   
   def new_dependents
     results = []
-    DataSource.all(:conditions => ["description LIKE ?", "%#{self.name}%"]).each do |ds|
+    DataSource.all(:conditions => ["description LIKE ?", "%#{self.name.gsub("%", "\\%")}%"]).each do |ds|
 #      puts ds.description
       s = Series.find(ds.series_id)
+      #puts self.name + " : " +  s.name + " : " + ds.id.to_s
       results.push s.name
       results += s.new_dependents
     end
