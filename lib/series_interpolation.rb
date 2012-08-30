@@ -3,6 +3,17 @@ module SeriesInterpolation
     series_to_store_name.ts= interpolate frequency,operation
   end
   
+  def fill_days_interpolation
+    daily_data = {}
+    raise InterpolationException if frequency != "week" and frequency != "W"
+    self.data.each do |date, val|
+      (6.downto 0).each { |days_back| daily_data[(Date.parse(date) - days_back).to_s] = val }
+    end 
+    new_series = new_transformation("Interpolated Days (filled) from #{self.name}", daily_data)
+    new_series.frequency = "day"
+    new_series
+  end
+  
   def interpolate(frequency, operation)
    # puts "FREQUENCY: #{frequency} - #{frequency.class}"
    # puts "SELF.FREQUENCY: #{self.frequency} - #{self.frequency.class}"
@@ -32,7 +43,7 @@ module SeriesInterpolation
     quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/4
     #quarterly_data
     new_series = new_transformation("Interpolated from #{self.name}", quarterly_data)
-    new_series.update_attributes(:frequency=>frequency) #may not want to do this... probably saving series unintentionally
+    new_series.frequency = frequency #may not want to do this... probably saving series unintentionally
     new_series
   end
   

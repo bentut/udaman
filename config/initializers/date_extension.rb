@@ -37,6 +37,10 @@ class Date
     return "#{self.year}-07-01" if [7,8,9,10,11,12].include?(self.mon)
   end
   
+  def days_in_month
+    Time.days_in_month(self.month, self.year)
+  end
+  
   def Date.last_7_days
     last_7 = []
     (0..6).each { |index| last_7[index] = (today - index).to_s }
