@@ -37,6 +37,13 @@ class DataList < ActiveRecord::Base
     Series.write_data_list names, path, start_date
     puts "#{ "%.2f" % (Time.now - t) } | #{ names.count } | #{ path }"
   end
+  
+  def DataList.write_tsd(name, path)
+    t = Time.now
+    names = DataList.where(:name => name).first.series_names
+    Series.write_data_list_tsd names, path
+    puts "#{ "%.2f" % (Time.now - t) } | #{ names.count } | #{ path }"
+  end
 end
 
 

@@ -33,6 +33,14 @@ module SeriesDataLists
     write_xls_text(series_data, output_path)
     return write_xls xls, output_path
   end
+  
+  def Series.write_data_list_tsd(list, output_path)
+    open(output_path, "w") do |f|
+      list.each do |name|
+        f.puts name.ts.tsd_string
+      end
+    end
+  end
 
   private
 

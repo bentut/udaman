@@ -660,6 +660,21 @@ class Series < ActiveRecord::Base
     puts name
   end
   
+  def tsd_string
+    data_string = ""
+    lm = data_points.order(:updated_at).last.updated_at
+    as = AremosSeries.get name
+    dps = data
+    dates = dps.keys.sort
+    sci_data = dps.sort.map {|elem| ("%.6E" % elem[1]).insert(10,"00")}
+    data_string+= "#{name.split(".")[0].to_s.ljust(16," ")}#{as.description}\r\n"
+    data_string+= "#{lm.month.to_s.rjust(34," ")}/#{lm.day.to_s.rjust(2," ")}/#{lm.year.to_s[2..4]}0800#{dates[0].to_date.tsd_start(frequency)}#{dates[-1].to_date.tsd_end(frequency)}#{Series.code_from_frequency frequency}  0\r\n"
+    sci_data.each_index do |i| 
+      data_string += " "+sci_data[i]
+      data_string += "\r\n" if (i+1)%5==0
+    end
+    data_string
+  end
   
   #["ERE", "EGVLC", "EGVST", "EGVFD", "EAFFD", "EAFAC", "EAE", "EHC", "EED", "EPS", "EAD", "EMA","E_TU","EWT","ERT","ECT","EMN","EIF", "EOS", "E_TTU", "E_TRADE", "E_FIR", "E_PBS","E_EDHC", "E_LH", "EAF", "EGV", "E_GVSL", "E_NF"].each do |pre|
   

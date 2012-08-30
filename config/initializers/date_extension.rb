@@ -20,6 +20,24 @@ class Date
     return "#{self.year}-10-01" if [10,11,12].include?(self.mon)
   end
   
+  def semi_i
+    return "#{self.year}01" if [1,2,3,4,5,6].include?(self.mon)
+    return "#{self.year}02" if [7,8,9,10,11,12].include?(self.mon)
+  end
+  
+  def tsd_start(f)
+    return "#{self.year}0100"             if f == "year"
+    return semi_i.to_s+"00"               if f == "semi"
+    return quarter_i.to_s+"00"            if f == "quarter"
+    return month_i.to_s+"00"              if f == "month"
+    return Date.parse(self).gsub("-","")  if f == "week"
+    return Date.parse(self).gsub("-","")  if f == "day"
+  end
+  
+  def tsd_end(f)
+    tsd_start(f)
+  end
+  
   def year_s
     return year.to_s+"-01-01"
   end
