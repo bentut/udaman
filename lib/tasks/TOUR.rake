@@ -82,23 +82,49 @@ end
 
 task :tour_ocup_upd => :environment do
 
-tour_ocup = {
-"OCUP%NS@HI.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 2, :frequency => "M" })|, 
-"OCUP%NS@HON.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 3, :frequency => "M" })|, 
-"OCUP%NS@HAW.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 4, :frequency => "M" })|, 
-"OCUP%NS@KAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 5, :frequency => "M" })|, 
-"OCUP%NS@MAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 6, :frequency => "M" })|, 
-"PRMNS@HI.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 7, :frequency => "M" })|, 
-"PRMNS@HON.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 8, :frequency => "M" })|, 
-"PRMNS@HAW.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 9, :frequency => "M" })|, 
-"PRMNS@KAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 10, :frequency => "M" })|, 
-"PRMNS@MAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 11, :frequency => "M" })|, 
-"RMRVNS@HI.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 12, :frequency => "M" })|, 
-"RMRVNS@HON.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 13, :frequency => "M" })|, 
-"RMRVNS@HAW.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 14, :frequency => "M" })|, 
-"RMRVNS@KAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 15, :frequency => "M" })|, 
-"RMRVNS@MAU.M" => %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 16, :frequency => "M" })|
-}
+
+  "OCUP%NS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2004-01-04", :sheet => "sheet_num:1", :row => "increment:4:1", :col => 2, :frequency => "W" })|
+  "PRMNS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2004-01-04", :sheet => "sheet_num:1", :row => "increment:4:1", :col => 3, :frequency => "W" })|
+  "OCUP%NS@HON.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 4, :frequency => "W" })|
+  "PRMNS@HON.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 5, :frequency => "W" })|
+  "OCUP%NS@MAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 6, :frequency => "W" })|
+  "PRMNS@MAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 7, :frequency => "W" })|
+  "OCUP%NS@KAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 8, :frequency => "W" })|
+  "PRMNS@KAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 9, :frequency => "W" })|
+  "OCUP%NS@HAW.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 10, :frequency => "W" })|
+  "PRMNS@HAW.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 11, :frequency => "W" })|
+  "OCUP%NS@US.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 12, :frequency => "W" })|
+  "PRMNS@US.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 13, :frequency => "W" })|
+
+  "OCUP%NS@HI.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 2, :frequency => "M" })| 
+  "OCUP%NS@HON.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 3, :frequency => "M" })| 
+  "OCUP%NS@HAW.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 4, :frequency => "M" })| 
+  "OCUP%NS@KAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 5, :frequency => "M" })| 
+  "OCUP%NS@MAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 6, :frequency => "M" })|
+  "PRMNS@HI.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 7, :frequency => "M" })| 
+  "PRMNS@HON.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 8, :frequency => "M" })| 
+  "PRMNS@HAW.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 9, :frequency => "M" })| 
+  "PRMNS@KAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 10, :frequency => "M" })| 
+  "PRMNS@MAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 11, :frequency => "M" })| 
+  "RMRVNS@HI.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 12, :frequency => "M" })| 
+  "RMRVNS@HON.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 13, :frequency => "M" })| 
+  "RMRVNS@HAW.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 14, :frequency => "M" })| 
+  "RMRVNS@KAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 15, :frequency => "M" })| 
+  "RMRVNS@MAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 16, :frequency => "M" })|
+
+  "OCUP%NS@HI.M".ts_eval= %Q|"OCUP%NS@HI.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "OCUP%NS@HON.M".ts_eval= %Q|"OCUP%NS@HON.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "OCUP%NS@HAW.M".ts_eval= %Q|"OCUP%NS@HAW.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "OCUP%NS@KAU.M".ts_eval= %Q|"OCUP%NS@KAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "OCUP%NS@MAU.M".ts_eval= %Q|"OCUP%NS@MAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "PRMNS@HI.M".ts_eval= %Q|"PRMNS@HI.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "PRMNS@HON.M".ts_eval= %Q|"PRMNS@HON.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "PRMNS@HAW.M".ts_eval= %Q|"PRMNS@HAW.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "PRMNS@KAU.M".ts_eval= %Q|"PRMNS@KAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "PRMNS@MAU.M".ts_eval= %Q|"PRMNS@MAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+
+
+
 	
 tour_vexp = {
 
@@ -114,27 +140,15 @@ tour_vexp = {
 #add in VX things here
 }	
 	
-	p = Packager.new
-	p.add_definitions tour_ocup
-	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_ocup_upd_NEW.xls"
+  # p = Packager.new
+  # p.add_definitions tour_ocup
+  # p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_ocup_upd_NEW.xls"
 
 	p = Packager.new
 	p.add_definitions tour_vexp
 	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/tour_vexp_upd_ID.xls"
 
 
-  "OCUP%NS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2004-01-04", :sheet => "sheet_num:1", :row => "increment:4:1", :col => 2, :frequency => "W" })|
-  "PRMNS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2004-01-04", :sheet => "sheet_num:1", :row => "increment:4:1", :col => 3, :frequency => "W" })|
-  "OCUP%NS@HON.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 4, :frequency => "W" })|
-  "PRMNS@HON.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 5, :frequency => "W" })|
-  "OCUP%NS@MAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 6, :frequency => "W" })|
-  "PRMNS@MAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 7, :frequency => "W" })|
-  "OCUP%NS@KAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 8, :frequency => "W" })|
-  "PRMNS@KAU.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 9, :frequency => "W" })|
-  "OCUP%NS@HAW.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 10, :frequency => "W" })|
-  "PRMNS@HAW.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 11, :frequency => "W" })|
-  "OCUP%NS@US.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 12, :frequency => "W" })|
-  "PRMNS@US.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type => "xls", :start_date => "2006-12-31", :sheet => "sheet_num:1", :row => "increment:160:1", :col => 13, :frequency => "W" })|
 
 end
 
