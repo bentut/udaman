@@ -9,12 +9,41 @@ class Series < ActiveRecord::Base
   include SeriesExternalRelationship
   include SeriesRelationship
   include SeriesSpecCreation
+  include Statistics
   
   serialize :data, Hash
   serialize :factors, Hash
   
   has_many :data_points
   has_many :data_sources
+  
+  def outlier
+    self.data.moving_average_test("backwards_ma")
+    residual_data = self.data.residuals
+    a = residual_data.moving_average_residuals
+    b = residual_data.moving_standard_deviation
+    #plus_2half_sigma = a.merge(b) { |date_string, value, value2| value + ( 2.5 * value2 ) } 
+    #minus_2half_sigma = a.merge(b) { |date_string, value, value2| value - ( 2.5 * value2 ) } 
+    outlier_hash = {}
+    a.each do |date_string, residual|
+      std_dev = b[date_string]
+      outlier_hash[date_string] = data[date_string] if (Math.abs(residual) > 2.5 * std_dev)
+    end
+    return outlier_hash
+  end
+  
+  # def outlier
+  #     num_array = self.data.sort.map { |a| a[1] }
+  #     outlier_array = {}
+  #     index = num_array.each_with_index { |a,i| puts i,a }
+  #     
+  #     self.data.each do |date_string, value|
+  #       moving_average_test = {}
+  #     
+  #     end      
+  #     return outlier_array
+  #   end
+  
   
   def as_json(options = {})
     {
