@@ -150,7 +150,8 @@ task :bls_job_upd_m => :environment do
     "EGVFDSA@HI.M" => %Q|Series.load_from_bls("SMS15000009091000001", "M")|,
     "EGVSTSA@HI.M" => %Q|Series.load_from_bls("SMS15000009092000001", "M")|,
     "EGVLCSA@HI.M" => %Q|Series.load_from_bls("SMS15000009093000001", "M")|,
-
+    "EMNSA@HI.M" => %Q|Series.load_from_bls("SMS15000003000000001", "M")|,
+    "EMA@HI.M" => %Q|Series.load_from_bls("SMS15000006055000001", "M")|,
     # divide these all by 1000?
     "EMPLSA@HI.M" => %Q|Series.load_from_bls("LASST15000005", "M")|,
     
@@ -354,7 +355,8 @@ task :bls_job_upd_m => :environment do
     	#we are going to use EGVFDDDNS@HON.M from BLS because that is what AREMOS is using...although HIWI has more data"
 		"EGVSTNS@HON.M" => %Q|Series.load_from_bls("SMU15261809092000001", "M")|,
 		"EGVSTEDNS@HON.M" => %Q|Series.load_from_bls("SMU15261809092161101", "M")|,
-		"EGVLCNS@HON.M" => %Q|Series.load_from_bls("SMU15261809093000001", "M")|
+		"EGVLCNS@HON.M" => %Q|Series.load_from_bls("SMU15261809093000001", "M")|,
+		
 	}
 	
 	p = Packager.new
@@ -702,10 +704,10 @@ end
 
 
 task :bls_identities => :environment do
+  "PC@HON.Q".ts_append_eval %Q|"PC@HON.S".ts.interpolate(:quarter, :linear).trim("1985-01-01")|
   "PC@HON.Q".ts_append_eval %Q|"PC@HON.M".ts.aggregate(:quarter, :average)|
-  "PC@HON.Q".ts_append_eval %Q|"PC@HON.S".ts.interpolate :quarter, :linear|
-  "PC@HON.A".ts_append_eval %Q|"PC@HON.M".ts.aggregate(:year, :average)|
   "PC@HON.A".ts_append_eval %Q|"PC@HON.S".ts.aggregate(:year, :average)|
+  "PC@HON.A".ts_append_eval %Q|"PC@HON.M".ts.aggregate(:year, :average)|
   "CPI@HON.S".ts_eval= %Q|"PC@HON.S".ts|
   "CPI@HON.A".ts_eval= %Q|"PC@HON.A".ts|
   "CPI@HON.Q".ts_eval= %Q|"PC@HON.Q".ts|
@@ -765,13 +767,15 @@ task :bls_identities => :environment do
   "EAFFD@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average)|
   "EAFFD@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
 
-  "EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
-  "EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)|
-  "EAD@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EADNS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
-  "EAD@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EADNS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)|
+  #{}"EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
+  #{}"#EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)|
+  #{}"EAD@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EADNS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
+  #{}"EAD@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EADNS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)|
+  "EAD@HI.M".ts_eval = %Q|"E_PBS@HI.M".ts - "EPS@HI.M".ts - "EMA@HI.M".ts|
   
-  "EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
-  "EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.apply_seasonal_adjustment :multiplicative|
+  "EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.load_sa_from("/Volumes/UHEROwork/data/bls/seasadj/sadata.xls").trim("1990-01-01","2006-12-01")|
+  "EMN@HI.M".ts_eval= %Q|"EMNSA@HI.M".ts|
+  #"EMN@HI.M".ts_eval= %Q|"EMN@HI.M".ts.apply_seasonal_adjustment :multiplicative|
   "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
   "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.apply_seasonal_adjustment :additive|
   "EFI@HI.M".ts_eval= %Q|"E_FIR@HI.M".ts - "ERE@HI.M".ts|

@@ -112,16 +112,16 @@ task :tour_ocup_upd => :environment do
   "RMRVNS@KAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 15, :frequency => "M" })| 
   "RMRVNS@MAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type => "xls", :start_date => "1998-01-01", :sheet => "sheet_num:1", :row => "increment:2:1", :col => 16, :frequency => "M" })|
 
-  "OCUP%NS@HI.M".ts_eval= %Q|"OCUP%NS@HI.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "OCUP%NS@HON.M".ts_eval= %Q|"OCUP%NS@HON.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "OCUP%NS@HAW.M".ts_eval= %Q|"OCUP%NS@HAW.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "OCUP%NS@KAU.M".ts_eval= %Q|"OCUP%NS@KAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "OCUP%NS@MAU.M".ts_eval= %Q|"OCUP%NS@MAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "PRMNS@HI.M".ts_eval= %Q|"PRMNS@HI.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "PRMNS@HON.M".ts_eval= %Q|"PRMNS@HON.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "PRMNS@HAW.M".ts_eval= %Q|"PRMNS@HAW.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "PRMNS@KAU.M".ts_eval= %Q|"PRMNS@KAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
-  "PRMNS@MAU.M".ts_eval= %Q|"PRMNS@MAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGOCUP%NS@HI.M".ts_eval= %Q|"OCUP%NS@HI.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGOCUP%NS@HON.M".ts_eval= %Q|"OCUP%NS@HON.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGOCUP%NS@HAW.M".ts_eval= %Q|"OCUP%NS@HAW.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGOCUP%NS@KAU.M".ts_eval= %Q|"OCUP%NS@KAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGOCUP%NS@MAU.M".ts_eval= %Q|"OCUP%NS@MAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGPRMNS@HI.M".ts_eval= %Q|"PRMNS@HI.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGPRMNS@HON.M".ts_eval= %Q|"PRMNS@HON.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGPRMNS@HAW.M".ts_eval= %Q|"PRMNS@HAW.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGPRMNS@KAU.M".ts_eval= %Q|"PRMNS@KAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
+  "WAGPRMNS@MAU.M".ts_eval= %Q|"PRMNS@MAU.W".ts.fill_days_interpolation.aggregate_by(:month, :average).trim("2012-01-01")| 
 
 
 

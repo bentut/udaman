@@ -13,7 +13,7 @@ module SeriesDataLists
   
   def Series.grab_data(list, start_date = "1900-01-01")
     series_data = {}
-    list.each do |s| 
+    list.each do |s|
       series = s.ts
       series_data[s] = series.nil? ? {} : series.get_values_after_including(start_date)
     end

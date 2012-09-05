@@ -39,7 +39,7 @@ every 1.day, :at => "10:00 pm" do
   rake "reload_aremos"
 end
 
-every 1.day, :at => "#{hour.to_i-1}:00 am" do
+every 1.day, :at => "#{hour}:00 am" do
   rake "update_seats_links"
   rake "update_vis_history_links"
 end
