@@ -1,4 +1,6 @@
 task :reload_aremos => :environment do
+  #this currently runs in 5 minutes even with the complete delete
+  AremosSeries.delete_all
    t = Time.now
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/A_DATA.TSD")
   at = Time.now
@@ -13,9 +15,7 @@ task :reload_aremos => :environment do
    AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/D_DATA.TSD")
    dt = Time.now
    
-   
-  
-   puts "#{"%.2f" % (dt - t)} | to write all"
+  puts "#{"%.2f" % (dt - t)} | to write all"
   puts "#{"%.2f" % (dt-wt)} | days"
   puts "#{"%.2f" % (wt-mt)} | weeks"
   puts "#{"%.2f" % (mt-qt)} | months"
@@ -23,6 +23,8 @@ task :reload_aremos => :environment do
   puts "#{"%.2f" % (st-at)} | half-years"
   puts "#{"%.2f" % (at-t)} | years"
 end
+
+
 
 task :load_all_v_series => :environment do
 
