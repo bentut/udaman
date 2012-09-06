@@ -37,7 +37,8 @@ module SeriesDataLists
   def Series.write_data_list_tsd(list, output_path)
     open(output_path, "w") do |f|
       list.each do |name|
-        f.puts name.ts.tsd_string
+        #if series doesn't exist .ts returns nil
+        f.puts name.ts.tsd_string rescue ""
       end
     end
   end
