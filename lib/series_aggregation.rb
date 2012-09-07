@@ -21,7 +21,8 @@ module SeriesAggregation
   end
   
   def aggregate_by(frequency,operation, override_prune = false)
-    Series.new(:data=>aggregate_data_by(frequency, operation, override_prune), :frequency=>frequency)
+    aggregate(frequency, operation, override_prune)
+    #Series.new(:data=>aggregate_data_by(frequency, operation, override_prune), :frequency=>frequency)
   end
   
   # Only returns complete groups
@@ -49,7 +50,7 @@ module SeriesAggregation
     aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :semi and self.frequency == "quarter"    
     aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :year and self.frequency == "semi"
     aggregated_data.delete_if {|key,value| value.count != Date.parse(key).days_in_month} if frequency == :month and self.frequency == "day"
-    
+    #puts key+" "+value.count.to_s + " " + Date.parse(key).days_in_month.to_s;
     #month check for days is more complicated because need to check for number of days in each month
 
     

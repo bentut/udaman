@@ -15,7 +15,8 @@ task :tsd_exports => :environment do
     "bea_s", "bls_s", 
     "bea_q", "bls_q", "census_q", "jp_q", "misc_q", "tax_q", "tour_q", "us_q",
     "bls_m", "jp_m", "misc_m", "tax_m", "tour_m", "us_m",
-    "tour_w", "tour_d" ].each do |bank|
+   "tour_w", "tour_d" ].each do |bank|
+    #["us_a"].each 
     t = Time.now
     frequency_code = bank.split("_")[1].upcase
     filename = path + bank + ".txt"

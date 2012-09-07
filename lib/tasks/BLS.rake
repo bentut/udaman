@@ -794,12 +794,13 @@ task :bls_identities => :environment do
       "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.aa_state_based_county_share_for("#{county}")|
     end
   end
-  
+
+  "EGVST@HI.M".ts_eval= %Q|"EGVST@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|  
+  "EGVFD@HI.M".ts_eval= %Q|"EGVFD@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|  
   "EGVFD@HON.M".ts_eval= %Q|"EGVFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EGVST@HON.M".ts_eval= %Q|"EGVST@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EGVLC@HON.M".ts_eval= %Q|"EGVLC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
-  #Udaman doesn't appear to need this EMN definition so removing... but may need to put back in later
-  #"EMN@HON.M".ts_eval= %Q|"EMN@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
+  "EMN@HON.M".ts_eval= %Q|"EMN@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "ECT@HON.M".ts_eval= %Q|"ECT@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EAFAC@HON.M".ts_eval= %Q|"EAFAC@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
   "EAFFD@HON.M".ts_eval= %Q|"EAFFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|

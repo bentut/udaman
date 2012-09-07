@@ -1051,12 +1051,12 @@ task :visitor_identities => :environment do
   end
   
   #need to load all history identities seem to take full precedence
-  # ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
-  #   "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  #   "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  #   "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  #   "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  # end
+  ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+    "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+    "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+    "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+    "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
+  end
 
   #KAU is in different history sheet
   "VRLSUSWNS@KAU.M".ts_eval= %Q|"VRLSUSWNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|

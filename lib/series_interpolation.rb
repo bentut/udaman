@@ -7,7 +7,7 @@ module SeriesInterpolation
     daily_data = {}
     raise InterpolationException if frequency != "week" and frequency != "W"
     self.data.each do |date, val|
-      (6.downto 0).each { |days_back| daily_data[(Date.parse(date) - days_back).to_s] = val }
+      (0..6).each { |days_forward| daily_data[(Date.parse(date) + days_forward).to_s] = val }
     end 
     new_series = new_transformation("Interpolated Days (filled) from #{self.name}", daily_data)
     new_series.frequency = "day"
