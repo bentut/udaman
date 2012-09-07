@@ -17,33 +17,52 @@ class Series < ActiveRecord::Base
   has_many :data_points
   has_many :data_sources
   
+  def mark_outliers
+    begin
+     outlier_dp = self.outlier
+     outlier_dp.each do |date_string|
+       mark_dp = self.data_points.where(:date_string => date_string, :current => true)[0]
+       mark_dp.update_attributes(:outlier => true)
+     end
+    rescue Exception => exc
+      puts exc.message 
+      puts self.name
+    end
+  end
+  
   def outlier
-    self.data.moving_average_test("backwards_ma")
-    residual_data = self.data.residuals
-    a = residual_data.moving_average_residuals
-    b = residual_data.moving_standard_deviation
+    # self.data.moving_average_test("backwards_ma")
+    # residual_data = self.residuals
+    a_residuals = self.average_residuals
+    # a_residuals = self.average_residuals
+    ma_residuals_sigma = self.standard_deviation_residuals
+    actual_residual = self.residuals
     #plus_2half_sigma = a.merge(b) { |date_string, value, value2| value + ( 2.5 * value2 ) } 
     #minus_2half_sigma = a.merge(b) { |date_string, value, value2| value - ( 2.5 * value2 ) } 
     outlier_hash = {}
-    a.each do |date_string, residual|
-      std_dev = b[date_string]
-      outlier_hash[date_string] = data[date_string] if (Math.abs(residual) > 2.5 * std_dev)
+    a_residuals.each do |date_string, residual|
+      std_dev = ma_residuals_sigma
+      # puts "#{date_string}:#{residual} > 2.5 * #{std_dev}"
+      upper_limit = (2.5 * std_dev) + residual
+      lower_limit = residual - (2.5 * std_dev) 
+      outlier_hash[date_string] = self.data[date_string] if actual_residual[date_string] > upper_limit or actual_residual[date_string] < lower_limit
     end
     return outlier_hash
   end
-  
-  # def outlier
-  #     num_array = self.data.sort.map { |a| a[1] }
-  #     outlier_array = {}
-  #     index = num_array.each_with_index { |a,i| puts i,a }
-  #     
-  #     self.data.each do |date_string, value|
-  #       moving_average_test = {}
-  #     
-  #     end      
-  #     return outlier_array
-  #   end
-  
+ 
+  def outlier2
+    actual_value = self.data
+    ma = self.moving_average_test("backward_ma")
+    ma_sigma = self.standard_deviation
+    outlier_hash = {}
+    ma.each do |date_string, value|
+      std_dev = ma_sigma
+      upper_limit = (2.5 * std_dev) + value
+      lower_limit = value - (2.5 * std_dev)
+      outlier_hash[date_string] = self.data[date_string] if actual_value[date_string] > upper_limit or actual_value[date_string] < lower_limit
+    end
+    return outlier_hash
+  end
   
   def as_json(options = {})
     {

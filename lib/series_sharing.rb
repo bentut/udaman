@@ -18,23 +18,16 @@ module SeriesSharing
     #new_transformation("Moving Average of #{name}", new_series_data)
   end
   
-  def residuals
-    moving_average_data = self.moving_average_test("backward_ma")
-    start_date_string = self.data.keys.sort[3] if self.frequency == "quarter" or self.frequency == "year" 
-    start_date_string = self.data.keys.sort[11] if self.frequency == "month"
-    end_date_string = self.data.keys.sort[-1]
-    residual_data = {}
-    trimmed_data = self.get_values_after_including((Date.parse(start_date_string)).to_s, end_date_string)
-    trimmed_data.merge(moving_average_data) { |date_string, value, value2| value2 - value } 
+  def first_differences
+  
+  
+  end
     
-    return residual_data
-      
-  end 
     
   def moving_average_test(ma_type_string = self)
     start_date_string = self.data.keys.sort[0]
     end_date_string = self.data.keys.sort[-1]
-    trimmed_data = get_values_after_including((Date.parse(start_date_string)).to_s, end_date_string)
+    trimmed_data = get_values_after_including(start_date_string, end_date_string)
     moving_average_data = {}
     position = 0
     trimmed_data.sort.each do |date_string, value|
@@ -48,28 +41,73 @@ module SeriesSharing
     #new_transformation("Moving Average of #{name}", new_series_data)
   end
   
-  
+  def residuals
+     moving_average_data = self.moving_average_test("backward_ma")
+     start_date_string = self.data.keys.sort[3] if self.frequency == "quarter" or self.frequency == "year" 
+     start_date_string = self.data.keys.sort[11] if self.frequency == "month"
+     end_date_string = self.data.keys.sort[-1]
+     residual_data = {}
+     trimmed_data = self.get_values_after_including(start_date_string, end_date_string)
+     residual_data = trimmed_data.merge(moving_average_data) { |date_string, value, value2| value - value2 } 
+
+     return residual_data
+
+   end
+   
+  def average_residuals
+    residual_data = self.residuals
+    num_array = residual_data.sort.map { |a| a[1]}
+    sum = num_array.inject(0, :+){ | sum, x | sum + x }
+    average_residual_data = {}
+    average_calc = sum / num_array.count
+    keys = self.moving_average_test("backward_ma").keys
+    number = keys.count
+    n = [average_calc] * number
+    final_array = keys.zip(n).flatten.compact
+    average_residual_data = Hash[*final_array]
+    return average_residual_data
+  end
   
   def moving_average_residuals(ma_type_string = self)
-    start_date_string = residual_data.data.keys.sort[0]
-    end_date_string = residual_data.data.keys.sort[-1]
-    trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
+    residual_data = self.residuals
+    start_date_string = residual_data.keys.sort[0]
+    end_date_string = residual_data.keys.sort[-1]
     moving_average_residual_data = {}
     position = 0
-    trimmed_data.sort.each do |date_string, value|
+    residual_data.sort.each do |date_string, value|
       periods = window_size
-      start_pos = window_start_test(position, trimmed_data.length-1, periods, ma_type_string)
-      end_pos = window_end_test(position, trimmed_data.length-1, periods, ma_type_string)
-      moving_average_data[date_string] = moving_window_average(start_pos, end_pos, periods, trimmed_data) unless start_pos.nil? or end_pos.nil?
+      start_pos = window_start_test(position, residual_data.length-1, periods, ma_type_string)
+      end_pos = window_end_test(position, residual_data.length-1, periods, ma_type_string)
+      moving_average_residual_data[date_string] = moving_window_average(start_pos, end_pos, periods, residual_data) unless start_pos.nil? or end_pos.nil?
       position += 1
     end
     moving_average_residual_data
     #new_transformation("Moving Average of #{name}", new_series_data)
   end
   
+  def standard_deviation_residuals
+  residual_data = self.residuals
+  num_array = residual_data.sort.map { |a| a[1]}
+  sum = num_array.inject(0, :+){ | sum, x | sum + x }
+  average = sum / num_array.count
+  sum_var = num_array.inject(0){ | sum, x | sum + (x - average) ** 2 }
+  var = sum_var / (residual_data.count - 1 )
+  std_deviation = Math.sqrt(var)
+end
+
+  def standard_deviation
+  num_array = self.sort.map { |a| a[1]}
+  sum = num_array.inject(0, :+){ | sum, x | sum + x }
+  average = sum / num_array.count
+  sum_var = num_array.inject(0){ | sum, x | sum + (x - average) ** 2 }
+  var = sum_var / (self.count - 1 )
+  std_deviation = Math.sqrt(var)
+end
+
   def moving_standard_deviation(ma_type_string = self)
-  start_date_string = residual_data.data.keys.sort[0]
-  end_date_string = residual_data.data.keys.sort[-1]
+  residual_data = self.residuals
+  start_date_string = residual_data.keys.sort[0]
+  end_date_string = residual_data.keys.sort[-1]
   trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
   moving_standard_deviation_data = {}
   position = 0
@@ -79,7 +117,7 @@ module SeriesSharing
     end_pos = window_end_test(position, trimmed_data.length-1, periods, ma_type_string)
     moving_standard_deviation_data[date_string] = moving_window_standard_deviation(start_pos, end_pos, periods, trimmed_data) unless start_pos.nil? or end_pos.nil?
     position += 1
-  end
+    end
   moving_standard_deviation_data
   #new_transformation("Moving Average of #{name}", new_series_data)
   end
@@ -92,8 +130,8 @@ module SeriesSharing
     val = ( ( i == start_pos or i == end_pos ) and ( end_pos - start_pos ) == periods ) ? sorted_data[i][1] / 2.0 : sorted_data[i][1]
     sum += val
     sum_var = sorted_data.inject(0){ | sum, x | sum + (x - average) ** 2 }
-    variance = sum_var / 
-  end
+    variance = sum_var / (start_pos..end_pos).observation_count
+    end
   Math.sqrt(self.variance)
   end
   
@@ -127,7 +165,7 @@ module SeriesSharing
   
   def window_size
     return 12 if self.frequency == "month"
-    return 4 if self.frequency == "quarter"
+    return 4 if self.frequency == "quarter" or self.frequency == "year"
   end
   
   
