@@ -1,0 +1,33 @@
+
+var data = new google.visualization.DataTable();
+data.addColumn('date', 'Date');
+data.addColumn('number', 'Construction and Mining Jobs');
+data.addColumn('number', 'Wholesale Trade Jobs');
+data.addColumn('number', 'Retail Trade Jobs');
+data.addColumn('number', 'Transportation and Utilities Jobs');
+data.addColumn('number', 'Finance and Insurance Jobs');
+data.addColumn('number', 'Real Estate and Rental Jobs');
+data.addColumn('number', 'Professional, Scientific, and Technical Jobs');
+data.addColumn('number', 'Management Jobs');
+data.addColumn('number', 'Admin. and Waste Management Jobs');
+data.addColumn('number', 'Educational Services Jobs');
+data.addColumn('number', 'Health Care and Social Assistance Jobs');
+data.addColumn('number', 'Accomodation and Food Services Jobs');
+data.addColumn('number', 'Accomodation Jobs');
+data.addColumn('number', 'Food Services Jobs');
+data.addColumn('number', 'Other Services Jobs');
+
+data.addRows([
+<% date_strings.each do |date_string| %>
+	<%
+	  date = Date.parse date_string
+	  year = date.year
+	  month = date.month - 1
+	  day = date.day
+	%>
+[new Date(<%= year %>, <%= month %> , <%= day %>), <%= indicators["Construction and Mining Jobs"][date_string] %>, <%= indicators["Wholesale Trade Jobs"][date_string] %>, <%= indicators["Retail Trade Jobs"][date_string] %>, <%= indicators["Transportation and Utilities Jobs"][date_string] %>, <%= indicators["Finance and Insurance Jobs"][date_string] %>, <%= indicators["Real Estate and Rental Jobs"][date_string] %>, <%= indicators["Professional, Scientific, and Technical Jobs"][date_string] %>, <%= indicators["Management Jobs"][date_string] %>, <%= indicators["Admin. and Waste Management Jobs"][date_string] %>, <%= indicators["Educational Services Jobs"][date_string] %>, <%= indicators["Health Care and Social Assistance Jobs"][date_string] %>, <%= indicators["Accomodation and Food Services Jobs"][date_string] %>, <%= indicators["Accomodation Jobs"][date_string] %>, <%= indicators["Food Services Jobs"][date_string] %>, <%= indicators["Other Services Jobs"][date_string] %>],
+<% end %>
+]);
+
+
+

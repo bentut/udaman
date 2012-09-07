@@ -18,14 +18,118 @@ module SeriesSharing
     #new_transformation("Moving Average of #{name}", new_series_data)
   end
   
+  def residuals
+    moving_average_data = self.moving_average_test("backward_ma")
+    start_date_string = self.data.keys.sort[3] if self.frequency == "quarter" or self.frequency == "year" 
+    start_date_string = self.data.keys.sort[11] if self.frequency == "month"
+    end_date_string = self.data.keys.sort[-1]
+    residual_data = {}
+    trimmed_data = self.get_values_after_including((Date.parse(start_date_string)).to_s, end_date_string)
+    trimmed_data.merge(moving_average_data) { |date_string, value, value2| value2 - value } 
+    
+    return residual_data
+      
+  end 
+    
+  def moving_average_test(ma_type_string = self)
+    start_date_string = self.data.keys.sort[0]
+    end_date_string = self.data.keys.sort[-1]
+    trimmed_data = get_values_after_including((Date.parse(start_date_string)).to_s, end_date_string)
+    moving_average_data = {}
+    position = 0
+    trimmed_data.sort.each do |date_string, value|
+      periods = window_size
+      start_pos = window_start_test(position, trimmed_data.length-1, periods, ma_type_string)
+      end_pos = window_end_test(position, trimmed_data.length-1, periods, ma_type_string)
+      moving_average_data[date_string] = moving_window_average(start_pos, end_pos, periods, trimmed_data) unless start_pos.nil? or end_pos.nil?
+      position += 1
+    end
+    moving_average_data
+    #new_transformation("Moving Average of #{name}", new_series_data)
+  end
+  
+  
+  
+  def moving_average_residuals(ma_type_string = self)
+    start_date_string = residual_data.data.keys.sort[0]
+    end_date_string = residual_data.data.keys.sort[-1]
+    trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
+    moving_average_residual_data = {}
+    position = 0
+    trimmed_data.sort.each do |date_string, value|
+      periods = window_size
+      start_pos = window_start_test(position, trimmed_data.length-1, periods, ma_type_string)
+      end_pos = window_end_test(position, trimmed_data.length-1, periods, ma_type_string)
+      moving_average_data[date_string] = moving_window_average(start_pos, end_pos, periods, trimmed_data) unless start_pos.nil? or end_pos.nil?
+      position += 1
+    end
+    moving_average_residual_data
+    #new_transformation("Moving Average of #{name}", new_series_data)
+  end
+  
+  def moving_standard_deviation(ma_type_string = self)
+  start_date_string = residual_data.data.keys.sort[0]
+  end_date_string = residual_data.data.keys.sort[-1]
+  trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
+  moving_standard_deviation_data = {}
+  position = 0
+  trimmed_data.sort.each do |date_string, value|
+    periods = window_size
+    start_pos = window_start_test(position, trimmed_data.length-1, periods, ma_type_string)
+    end_pos = window_end_test(position, trimmed_data.length-1, periods, ma_type_string)
+    moving_standard_deviation_data[date_string] = moving_window_standard_deviation(start_pos, end_pos, periods, trimmed_data) unless start_pos.nil? or end_pos.nil?
+    position += 1
+  end
+  moving_standard_deviation_data
+  #new_transformation("Moving Average of #{name}", new_series_data)
+  end
+
+  def moving_window_standard_deviation(start_pos, end_pos, periods, trimmed_data)
+  #puts "#{start_pos}, #{end_pos}, #{trimmed_data.length}"
+  sorted_data = trimmed_data.sort
+  sum = 0
+  (start_pos..end_pos).each do |i|
+    val = ( ( i == start_pos or i == end_pos ) and ( end_pos - start_pos ) == periods ) ? sorted_data[i][1] / 2.0 : sorted_data[i][1]
+    sum += val
+    sum_var = sorted_data.inject(0){ | sum, x | sum + (x - average) ** 2 }
+    variance = sum_var / 
+  end
+  Math.sqrt(self.variance)
+  end
+  
+  def variance
+    # m = self.mean
+    num_array = self.data.sort.map { |a| a[1]}
+    sum_var = num_array.inject(0){ | sum, x | sum + (x - average) ** 2 }
+    return sum_var / (self.observation_count - 1 )
+  end
+  
+  def window_start_test(position, last, periods, ma_type_string)
+    half_window = periods / 2
+    # puts "#{position} #{last} #{periods} #{ma_type_string}"
+    return position - periods + 1   if ma_type_string == "backward_ma" and position - periods + 1 >= 0 #backward looking moving average
+    
+  end
+  
+  def window_end_test(position, last, periods, ma_type_string)
+    half_window = periods / 2
+    return position                 if ma_type_string == "backward_ma" #backward looking moving average
+
+  end
+  
+  
+  
+  
   def ma_series(ma_type_string = "ma", start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
     new_transformation "Moving Average of #{name}", ma_series_data(ma_type_string, start_date_string, end_date_string)
   end
+  
   
   def window_size
     return 12 if self.frequency == "month"
     return 4 if self.frequency == "quarter"
   end
+  
   
   def window_start(position, last, periods, ma_type_string)
     half_window = periods / 2

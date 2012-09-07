@@ -1,0 +1,252 @@
+<p>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+google.load('visualization', '1.1', {packages: ['controls', 'corechart']});
+
+google.setOnLoadCallback(drawChart);
+
+function drawChart() {
+		
+<% 
+dates = "EWT@HI.M".ts.data.keys.sort	
+indicators = {
+			"Construction and Mining" => "ECT@HI.M".ts.data,
+			"Wholesale Trade" => "EWT@HI.M".ts.data,
+			"Retail Trade" => "ERT@HI.M".ts.data,
+			"Transportation and Utilities" => "E_TU@HI.M".ts.data,
+			"Finance and Insurance" => "EFI@HI.M".ts.data,
+			"Real Estate and Rental" => "ERE@HI.M".ts.data,
+			"Professional, Scientific, and Technical" => "EPS@HI.M".ts.data,
+			"Management" => "EMA@HI.M".ts.data,
+			"Admin. and Waste Management" => "EAD@HI.M".ts.data,
+			"Educational Services" => "EED@HI.M".ts.data,
+			"Health Care and Social Assistance" => "EHC@HI.M".ts.data,
+			"Accomodation and Food Services" => "EAF@HI.M".ts.data,
+			"Accomodation" => "EAFAC@HI.M".ts.data,
+			"Food Services" => "EAFFD@HI.M".ts.data,
+			"Other Services" => "EOS@HI.M".ts.data
+			}
+%>
+		
+<%= render :file => 'app/views/dashboards/_individual_google_chart_sector.html.erb', :locals => {
+					:indicators => indicators, 
+					:date_strings => dates
+}
+%>
+					
+				var columnsMap = {
+						        1: {
+						            color: 'A64C10'
+						        },
+						        2: {
+						            color: 'C55A13'
+						        },
+						        3: {
+						            color: 'E06716'
+						        },
+						        4: {
+						            color: 'EB7B31'
+						        },
+						        5: {
+						            color: 'EF975D'
+						        },
+						        6: {
+						            color: 'F4B48A'
+						        },
+						        7: {
+						            color: 'F8D4BC'
+						        },
+						        8: {
+						            color: '297B92'
+						        },
+						        9: {
+						            color: '61BBD0'
+						        },
+						        10: {
+						            color: 'E92F2D'
+						        },
+						        11: {
+						            color: '927BAF'
+						        },
+						        12: {
+						            color: 'ABC473'
+						        },
+						        13: {
+						            color: '92CED3'
+						        },
+						        14: {
+						            color: 'F5AE3B'
+						        },
+						        15: {
+						            color: '636364'
+						        }
+						    };
+
+				var columnsTable = new google.visualization.DataTable();
+						    columnsTable.addColumn('number', 'colIndex');
+						    columnsTable.addColumn('string', 'colLabel');
+						    // put the columns into this data table (skip column 0)
+						    for (var i = 1; i < data.getNumberOfColumns(); i++) {
+						        columnsTable.addRow([i, data.getColumnLabel(i)]);
+						    }
+
+				var initState = {
+						        selectedValues: ["Transportation and Utilities", "Accomodation and Food Services", "Management"]
+						    };
+
+				var chartDash = new google.visualization.Dashboard(document.getElementById('chartDash'));
+
+				var chart = new google.visualization.ChartWrapper({
+								        chartType: 'LineChart',
+								        containerId: 'chart_div',
+								        options: {
+								            title: 'Relative Job Sector Performance in Hawaii',
+											titleTextStyle: {color: '#297B92'},
+								            width: 775, // make sure this is the same for the chart and control so the axes align right
+									    hAxis: {gridlines: {color: 'transparent'}, baseline: 'transparent'},
+										lineWidth: '2',
+								        height: 500,
+									    backgroundColor: 'F9F9F8',
+									    legend: {position: 'bottom', alignment: 'center'},
+								        chartArea: {
+								                width: '80%', // make sure this is the same for the chart and control so the axes align right
+								                height: '80%'
+								            },
+								        animation: {
+								                duration: 750,
+								                easing: 'out',
+								            },
+									    focusTarget: 'category'
+								        }
+								    });
+
+				var rangeFilter = new google.visualization.ControlWrapper({
+						        controlType: 'ChartRangeFilter',
+						        containerId: 'range_div',
+						        options: {
+						            filterColumnIndex: 0,
+						            ui: {
+						                chartOptions: {
+						                    chartType: 'LineChart',
+						                    height: 50,
+											colors: ['transparent'],
+						                    width: 775, // make sure this is the same for the chart and control so the axes align right
+											backgroundColor: 'F9F9F8',
+						                    chartArea: {
+						                        width: '80%' // make sure this is the same for the chart and control so the axes align right
+						                    },
+						                    hAxis: {
+						                        baselineColor: 'none'
+						                    }
+						                },
+						                chartView: {
+						                    columns: [0, 1] // use column 1 to draw the range chart
+						                },
+						                minRangeSize: 86400000 // 1 day in milliseconds = 24 * 60 * 60 * 1000 = 86,400,000
+						            }
+						        },
+						        // set the initial range to 1/1/2012 to 1/10/2012
+						        state: {
+						            range: {
+						                start: new Date(1990, 0, 1),
+						                end: new Date(2012, 6, 1) //Ben -- update manually every month or two
+						            }
+						        }
+						    });
+
+				var columnFilter = new google.visualization.ControlWrapper({
+						        controlType: 'CategoryFilter',
+						        containerId: 'colFilter_div',
+						        dataTable: columnsTable,
+						        options: {
+						            filterColumnLabel: 'colLabel',
+						            ui: {
+						                label: 'Sort',
+										caption: 'Choose a sector...',
+						                allowTyping: true,
+						                allowMultiple: true,
+						                selectedValuesLayout: 'below'
+						            }
+						        },
+						        state: initState
+						    });
+
+						    google.visualization.events.addListener(columnFilter, 'statechange', function() {
+						        setChartColumns();
+						        chart.draw();
+						    });
+
+							columnFilter.draw();
+
+						    // bind the chartRangeFilter control to the actual chart and draw chartDash
+						    chartDash.bind([rangeFilter], [chart]);
+						    // set the chart columns before drawing
+						    setChartColumns();
+						    chartDash.draw(data);
+						
+		function roundNumber(num, dec) {
+								var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+								return result;
+							}
+
+		function setChartColumns () {
+						        var state = columnFilter.getState();
+						        var row;
+						        var columnIndices = [];
+						        for (var i = 0; i < state.selectedValues.length; i++) {
+						            row = columnsTable.getFilteredRows([{
+						                column: 1,
+						                value: state.selectedValues[i]}])[0];
+						            columnIndices.push(columnsTable.getValue(row, 0));
+						        }
+						        // sort the indices into their original order
+						        columnIndices.sort(function(a, b) {
+						            return (a - b);
+						        });
+
+						        var viewColumns = [0];
+						        var colors = [];
+						        for (var i = 0; i < columnIndices.length; i++) {
+						            viewColumns.push({
+						                label: data.getColumnLabel(columnIndices[i]),
+						                type: 'number',
+						                calc: (function (x) {
+						                    // use a closure here to lock the value of i to each column
+						                    return function (dt, row) {
+						                        // return the value normalized to the first row in the view
+						                        return roundNumber((dt.getValue(row, columnIndices[x]) / dt.getValue(0, columnIndices[x])), 3);
+						                    };
+						                })(i)
+						            });
+						            colors.push(columnsMap[columnIndices[i]].color);
+						        }
+
+						        chart.setView({
+						            columns: viewColumns
+						        });
+						        chart.setOption('colors', colors);
+					}
+					}
+
+
+
+    </script>
+
+
+<p><style type="text/css">
+p {clear:both;}
+div#colFilter_div {clear:both; float:left; padding:40px; }
+
+</style></p>
+<div id="chartDash">
+	  <div style="float: left;" id="chart_div"></div>
+	  <div style="float: left;" id="range_div"></div>
+</div>
+<div id="controlDash">
+	  <div style="float: left;" id="colFilter_div"></div>
+</div>   
+<p><i>Employment figures are seasonally adjusted by UHERO and indexed to 1 to allow direct comparison.</i></p>
+<p><b>Source:</b> Bureau of Labor Statistics</p>
+
+<p>&nbsp;</p>
