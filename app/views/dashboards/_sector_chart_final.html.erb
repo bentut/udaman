@@ -3,6 +3,7 @@
 <script type="text/javascript">
 
 google.load('visualization', '1.1', {packages: ['controls', 'corechart']});
+
 google.setOnLoadCallback(drawChart);
 
 function drawChart() {
@@ -10,25 +11,25 @@ function drawChart() {
 <% 
 dates = "EWT@HI.M".ts.data.keys.sort	
 indicators = {
-			"Construction and Mining Jobs" => "ECT@HI.M".ts.data,
-			"Wholesale Trade Jobs" => "EWT@HI.M".ts.data,
-			"Retail Trade Jobs" => "ERT@HI.M".ts.data,
-			"Transportation and Utilities Jobs" => "E_TU@HI.M".ts.data,
-			"Finance and Insurance Jobs" => "EFI@HI.M".ts.data,
-			"Real Estate and Rental Jobs" => "ERE@HI.M".ts.data,
-			"Professional, Scientific, and Technical Jobs" => "EPS@HI.M".ts.data,
-			"Management Jobs" => "EMA@HI.M".ts.data,
-			"Admin. and Waste Management Jobs" => "EAD@HI.M".ts.data,
-			"Educational Services Jobs" => "EED@HI.M".ts.data,
-			"Health Care and Social Assistance Jobs" => "EHC@HI.M".ts.data,
-			"Accomodation and Food Services Jobs" => "EAF@HI.M".ts.data,
-			"Accomodation Jobs" => "EAFAC@HI.M".ts.data,
-			"Food Services Jobs" => "EAFFD@HI.M".ts.data,
-			"Other Services Jobs" => "EOS@HI.M".ts.data
+			"Construction and Mining" => "ECT@HI.M".ts.data,
+			"Wholesale Trade" => "EWT@HI.M".ts.data,
+			"Retail Trade" => "ERT@HI.M".ts.data,
+			"Transportation and Utilities" => "E_TU@HI.M".ts.data,
+			"Finance and Insurance" => "EFI@HI.M".ts.data,
+			"Real Estate and Rental" => "ERE@HI.M".ts.data,
+			"Professional, Scientific, and Technical" => "EPS@HI.M".ts.data,
+			"Management" => "EMA@HI.M".ts.data,
+			"Admin. and Waste Management" => "EAD@HI.M".ts.data,
+			"Educational Services" => "EED@HI.M".ts.data,
+			"Health Care and Social Assistance" => "EHC@HI.M".ts.data,
+			"Accomodation and Food Services" => "EAF@HI.M".ts.data,
+			"Accomodation" => "EAFAC@HI.M".ts.data,
+			"Food Services" => "EAFFD@HI.M".ts.data,
+			"Other Services" => "EOS@HI.M".ts.data
 			}
 %>
 		
-<%= render :file => 'app/views/dashboards/_individual_google_chart4.html.erb', :locals => {
+<%= render :file => 'app/views/dashboards/_individual_google_chart_sector.html.erb', :locals => {
 					:indicators => indicators, 
 					:date_strings => dates
 }
@@ -91,7 +92,7 @@ indicators = {
 						    }
 
 				var initState = {
-						        selectedValues: ["Transportation and Utilities Jobs", "Accomodation and Food Services Jobs", "Management Jobs"]
+						        selectedValues: ["Transportation and Utilities", "Accomodation and Food Services", "Management"]
 						    };
 
 				var chartDash = new google.visualization.Dashboard(document.getElementById('chartDash'));
@@ -100,11 +101,11 @@ indicators = {
 								        chartType: 'LineChart',
 								        containerId: 'chart_div',
 								        options: {
-								            title: 'Employment Figures in Hawaii By Sector',
+								            title: 'Relative Job Sector Performance in Hawaii',
 											titleTextStyle: {color: '#297B92'},
 								            width: 775, // make sure this is the same for the chart and control so the axes align right
 									    hAxis: {gridlines: {color: 'transparent'}, baseline: 'transparent'},
-										lineWidth: '4',
+										lineWidth: '2',
 								        height: 500,
 									    backgroundColor: 'F9F9F8',
 									    legend: {position: 'bottom', alignment: 'center'},
@@ -149,7 +150,7 @@ indicators = {
 						        state: {
 						            range: {
 						                start: new Date(1990, 0, 1),
-						                end: new Date(2012, 5, 1)
+						                end: new Date(2012, 6, 1) //Ben -- update manually every month or two
 						            }
 						        }
 						    });
@@ -183,6 +184,11 @@ indicators = {
 						    // set the chart columns before drawing
 						    setChartColumns();
 						    chartDash.draw(data);
+						
+		function roundNumber(num, dec) {
+								var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+								return result;
+							}
 
 		function setChartColumns () {
 						        var state = columnFilter.getState();
@@ -209,7 +215,7 @@ indicators = {
 						                    // use a closure here to lock the value of i to each column
 						                    return function (dt, row) {
 						                        // return the value normalized to the first row in the view
-						                        return dt.getValue(row, columnIndices[x]) / dt.getValue(0, columnIndices[x]);
+						                        return roundNumber((dt.getValue(row, columnIndices[x]) / dt.getValue(0, columnIndices[x])), 3);
 						                    };
 						                })(i)
 						            });
@@ -240,7 +246,7 @@ div#colFilter_div {clear:both; float:left; padding:40px; }
 <div id="controlDash">
 	  <div style="float: left;" id="colFilter_div"></div>
 </div>   
-<p><i>Employment figures are seasonally adjusted by UHERO and indexed to 1 to allow direct comparison. To view this series in levels, <a href="/129/jobs-data-by-sector-levels">click here</a>.</i></p>
+<p><i>Employment figures are seasonally adjusted by UHERO and indexed to 1 to allow direct comparison.</i></p>
 <p><b>Source:</b> Bureau of Labor Statistics</p>
 
 <p>&nbsp;</p>
