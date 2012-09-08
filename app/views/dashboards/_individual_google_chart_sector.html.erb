@@ -7,7 +7,7 @@ data.addColumn('number', 'Retail Trade');
 data.addColumn('number', 'Transportation and Utilities');
 data.addColumn('number', 'Finance and Insurance');
 data.addColumn('number', 'Real Estate and Rental');
-data.addColumn('number', 'Professional, Scientific, and Technical');
+data.addColumn('number', 'Prof., Scientific, and Technical');
 data.addColumn('number', 'Management');
 data.addColumn('number', 'Admin. and Waste Management');
 data.addColumn('number', 'Educational Services');
@@ -16,9 +16,9 @@ data.addColumn('number', 'Accomodation and Food Services');
 data.addColumn('number', 'Accomodation');
 data.addColumn('number', 'Food Services');
 data.addColumn('number', 'Other Services');
-data.addColumn('number', 'Information Jobs');
-data.addColumn('number', 'Manufacturing Jobs');
-data.addColumn('number', 'Government Jobs');
+data.addColumn('number', 'Information');
+data.addColumn('number', 'Manufacturing');
+data.addColumn('number', 'Government');
 
 data.addRows([
 <% date_strings.each do |date_string| %>
@@ -28,7 +28,7 @@ data.addRows([
 	  month = date.month - 1
 	  day = date.day
 	%>
-[new Date(<%= year %>, <%= month %> , <%= day %>), <%= indicators["Construction and Mining"][date_string] %>, <%= indicators["Wholesale Trade"][date_string] %>, <%= indicators["Retail Trade"][date_string] %>, <%= indicators["Transportation and Utilities"][date_string] %>, <%= indicators["Finance and Insurance"][date_string] %>, <%= indicators["Real Estate and Rental"][date_string] %>, <%= indicators["Professional, Scientific, and Technical"][date_string] %>, <%= indicators["Management"][date_string] %>, <%= indicators["Admin. and Waste Management"][date_string] %>, <%= indicators["Educational Services"][date_string] %>, <%= indicators["Health Care and Social Assistance"][date_string] %>, <%= indicators["Accomodation and Food Services"][date_string] %>, <%= indicators["Accomodation"][date_string] %>, <%= indicators["Food Services"][date_string] %>, <%= indicators["Other Services"][date_string] %>, <%= indicators["Information Jobs"][date_string] %>,<%= indicators["Manufacturing Jobs"][date_string] %>,<%= indicators["Government Jobs"][date_string] %>], 
+[new Date(<%= year %>, <%= month %> , <%= day %>), <%= indicators["Construction and Mining"][date_string] %>, <%= indicators["Wholesale Trade"][date_string] %>, <%= indicators["Retail Trade"][date_string] %>, <%= indicators["Transportation and Utilities"][date_string] %>, <%= indicators["Finance and Insurance"][date_string] %>, <%= indicators["Real Estate and Rental"][date_string] %>, <%= indicators["Prof., Scientific, and Technical"][date_string] %>, <%= indicators["Management"][date_string] %>, <%= indicators["Admin. and Waste Management"][date_string] %>, <%= indicators["Educational Services"][date_string] %>, <%= indicators["Health Care and Social Assistance"][date_string] %>, <%= indicators["Accomodation and Food Services"][date_string] %>, <%= indicators["Accomodation"][date_string] %>, <%= indicators["Food Services"][date_string] %>, <%= indicators["Other Services"][date_string] %>, <%= indicators["Information"][date_string] %>,<%= indicators["Manufacturing"][date_string] %>,<%= indicators["Government"][date_string] %>], 
 <% end %>
 ]);
 
