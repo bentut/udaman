@@ -1,4 +1,5 @@
 module SeriesSharing
+
   def moving_average_for_sa(start_date_string = self.data.keys.sort[0])
     self.moving_average(start_date_string,"#{(Time.now.to_date << 12).year}-12-01")
   end
@@ -17,12 +18,6 @@ module SeriesSharing
     new_series_data
     #new_transformation("Moving Average of #{name}", new_series_data)
   end
-  
-  def first_differences
-  
-  
-  end
-    
     
   def moving_average_test(ma_type_string = self)
     start_date_string = self.data.keys.sort[0]
@@ -121,19 +116,6 @@ end
   moving_standard_deviation_data
   #new_transformation("Moving Average of #{name}", new_series_data)
   end
-
-  def moving_window_standard_deviation(start_pos, end_pos, periods, trimmed_data)
-  #puts "#{start_pos}, #{end_pos}, #{trimmed_data.length}"
-  sorted_data = trimmed_data.sort
-  sum = 0
-  (start_pos..end_pos).each do |i|
-    val = ( ( i == start_pos or i == end_pos ) and ( end_pos - start_pos ) == periods ) ? sorted_data[i][1] / 2.0 : sorted_data[i][1]
-    sum += val
-    sum_var = sorted_data.inject(0){ | sum, x | sum + (x - average) ** 2 }
-    variance = sum_var / (start_pos..end_pos).observation_count
-    end
-  Math.sqrt(self.variance)
-  end
   
   def variance
     # m = self.mean
@@ -155,19 +137,14 @@ end
 
   end
   
-  
-  
-  
   def ma_series(ma_type_string = "ma", start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
     new_transformation "Moving Average of #{name}", ma_series_data(ma_type_string, start_date_string, end_date_string)
   end
-  
   
   def window_size
     return 12 if self.frequency == "month"
     return 4 if self.frequency == "quarter" or self.frequency == "year"
   end
-  
   
   def window_start(position, last, periods, ma_type_string)
     half_window = periods / 2
