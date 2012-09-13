@@ -13,7 +13,8 @@ class UpdateSpreadsheet < Excel
   def initialize(update_spreadsheet_name)
     begin
       super update_spreadsheet_name 
-    rescue
+    rescue => e
+      puts e.message
       @load_error = true
     end
   end  

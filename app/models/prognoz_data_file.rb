@@ -17,11 +17,20 @@ class PrognozDataFile < ActiveRecord::Base
     return {:notice=>"success", :headers => @output_spreadsheet.headers_with_frequency_code, :frequency => @output_spreadsheet.frequency}
   end
 
-
-  # ruby-1.9.2-p290 :073 > os.headers_with_frequency_code.each do |header|
-  # ruby-1.9.2-p290 :074 >     puts header+"|"+header.ts.data_diff(os.series(header.split(".")[0]), 3).to_s
-  # ruby-1.9.2-p290 :075?>   end
-
+  def udaman_diffs
+    os = UpdateSpreadsheet.new filename
+    return {:notice=>"problem loading spreadsheet", :headers=>[]} if os.load_error?
+    diffs = {}
+    os.headers_with_frequency_code.each do |header|
+      if header.ts.nil?
+        diffs[header] = nil
+        next
+      end
+      diff_hash = header.ts.data_diff(os.series(header.split(".")[0]), 3)
+      diffs[header] = diff_hash if diff_hash.count > 0
+    end
+    diffs
+  end
     
   def get_data_for(series_name, output_spreadsheet = nil)    
     output_spreadsheet = UpdateSpreadsheet.new filename if output_spreadsheet.nil?
