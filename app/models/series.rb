@@ -660,6 +660,15 @@ class Series < ActiveRecord::Base
     puts name
   end
   
+  def data_diff(comparison_data, digits_to_round)
+    diff_hash = {}
+    comparison_data.each do |date_string, value|
+      diff = units_at(date_string) - value unless data[date_string].nil? or value.nil?
+      diff_hash[date_string] = diff if (diff.nil? and !data[date_string].nil?) or (!diff.nil? and diff > 10**-digits_to_round)
+    end
+    diff_hash
+  end
+  
   def tsd_string
     data_string = ""
     lm = data_points.order(:updated_at).last.updated_at

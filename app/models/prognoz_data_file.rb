@@ -1,15 +1,5 @@
 class PrognozDataFile < ActiveRecord::Base
   serialize :series_loaded, Hash
-  # serialize :series_validated, Array
-  # serialize :output_series, Hash
-  # serialize :series_covered, Hash
-  
-  def PrognozDataFile.change_all_export_folders_to(new_folder_name)
-    pdfs = PrognozDataFile.all
-    pdfs.each do |pdf|
-      pdf.change_export_folder_to(new_folder_name)
-    end
-  end
   
   def load
     @output_spreadsheet = UpdateSpreadsheet.new filename
@@ -18,21 +8,21 @@ class PrognozDataFile < ActiveRecord::Base
 
     self.frequency = @output_spreadsheet.frequency
     self.output_start_date = @output_spreadsheet.dates.keys.sort[0]
-    self.series_loaded ||= {}
-    @output_spreadsheet.headers_with_frequency_code.each do |series|
-      self.series_loaded[series] = @output_spreadsheet.series series.split(".")[0] 
-    end
+    # self.series_loaded ||= {}
+    # @output_spreadsheet.headers_with_frequency_code.each do |series|
+    #   self.series_loaded[series] = @output_spreadsheet.series series.split(".")[0] 
+    # end
     self.save
 
     return {:notice=>"success", :headers => @output_spreadsheet.headers_with_frequency_code, :frequency => @output_spreadsheet.frequency}
   end
-  
-  def parse_series_name(series_name)
-    series_name_parts = series_name.split(".")
-    raise SeriesNameException.new unless series_name_parts.count == 2
-    return {:base_name => series_name_parts[0], :frequency_code => series_name_parts[1]}
-  end
-  
+
+
+  # ruby-1.9.2-p290 :073 > os.headers_with_frequency_code.each do |header|
+  # ruby-1.9.2-p290 :074 >     puts header+"|"+header.ts.data_diff(os.series(header.split(".")[0]), 3).to_s
+  # ruby-1.9.2-p290 :075?>   end
+
+    
   def get_data_for(series_name, output_spreadsheet = nil)    
     output_spreadsheet = UpdateSpreadsheet.new filename if output_spreadsheet.nil?
     s = parse_series_name series_name
@@ -41,17 +31,7 @@ class PrognozDataFile < ActiveRecord::Base
     raise PrognozDataFindException unless output_spreadsheet.headers.include? s[:base_name]
     return output_spreadsheet.series s[:base_name]
   end
-  
-  #this is extremely implementation specific. Generalized version can still be accessed from front end, but unless path is same, this is useless
-  def change_export_folder_to(new_export_folder)
-    puts "changing #{self.filename} to #{new_export_folder}"
-    self.filename = "/Volumes/UHEROwork/eis/data/#{new_export_folder}/#{self.filename.split("/")[-1]}" 
-    self.save
-    self.load
-  rescue 
-    puts "there seems to be a problem with your folder or folder name. Make sure it is an existing folder WITHOUT leading or trailing /"
-  end
-  
+    
   def output_folder_name_for_date(date)
     "#{date.to_s[2..3]}M#{date.to_s[5..6]}"
   end

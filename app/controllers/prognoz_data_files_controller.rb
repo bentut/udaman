@@ -49,7 +49,7 @@ class PrognozDataFilesController < ApplicationController
   def load_from_file
     @output_file = PrognozDataFile.find params[:id]
     results = @output_file.load
-    @output_file.load_series_validated
+    #@output_file.load_series_validated
     redirect_to(:action => 'index', :notice => results[:notice])
   end
   

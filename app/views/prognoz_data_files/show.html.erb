@@ -15,6 +15,6 @@
 		<tr><td class="label">Path: </td><td><%= @output_file.filename %></td></tr>
 		<tr><td class="label">Frequency: </td><td><%= @output_file.frequency %></td></tr>
 		<tr><td class="label">View Doc: </td><td></td></tr>
-		<tr><td class="label">Series: </td><td><%= series_table @output_file %></td></tr>
+		<tr><td class="label">Series: </td><td><%= series_table(@output_file).html_safe %></td></tr>
 	</table>
 </div>
