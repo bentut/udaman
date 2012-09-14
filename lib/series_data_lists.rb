@@ -10,6 +10,15 @@ module SeriesDataLists
   #     )
   #   
   # end
+
+  def Series.grab_scaled_data_no_pseudo_history(list, start_date = "1900-01-01")
+    series_data = {}
+    list.each do |s|
+      series = s.ts
+      series_data[s] = series.nil? ? {} : series.get_scaled_no_pseudo_history_values_after_including(start_date)
+    end
+    series_data
+  end
   
   def Series.grab_data(list, start_date = "1900-01-01")
     series_data = {}
@@ -20,10 +29,18 @@ module SeriesDataLists
     series_data
   end
   
+  
   def Series.get_all_dates_from_data(data)
     dates_array = []
     data.each {|series_name, data| dates_array |= data.keys}
     dates_array.sort
+  end
+  
+  def Series.write_prognoz_output_file(list, output_path, worksheet_name, sheet_dates)
+    require 'iconv'
+    series_data = grab_scaled_data_no_pseudo_history(list, sheet_dates[0])
+    xls = prep_prognoz_xls list, series_data, output_path, worksheet_name, sheet_dates
+    return write_xls xls, output_path
   end
   
   def Series.write_data_list(list, output_path, start_date = "1900-01-01")
@@ -45,6 +62,22 @@ module SeriesDataLists
 
   private
 
+  def Series.prep_prognoz_xls(series_order, series_data, output_path, worksheet_name, sheet_dates)
+    xls = Spreadsheet::Workbook.new output_path
+    sheet1 = xls.create_worksheet :name => worksheet_name
+    dates = (get_all_dates_from_data(series_data) + sheet_dates).uniq.sort
+
+    write_dates convert_dates_to_prognoz(dates), sheet1
+    
+    col = 1
+    series_order.each do |name|
+      data = series_data[name]
+      write_series(name, data, sheet1, col, dates)
+      col += 1
+    end
+    return xls
+  end
+  
   def Series.prep_xls(series_data, output_path)
     xls = Spreadsheet::Workbook.new output_path
     sheet1 = xls.create_worksheet
@@ -60,6 +93,7 @@ module SeriesDataLists
   
   def Series.write_series(series_name, data, sheet, col, dates)
     sheet[0,col] = series_name.dup
+    return if data.nil?
     count = 1
     dates.each do |date|
       sheet[count,col] = data[date] unless data[date].nil?
@@ -67,7 +101,20 @@ module SeriesDataLists
     end
   end
   
+  def Series.convert_dates_to_prognoz(dates)
+     
+    date1 = Date.parse dates[0]
+    date2 = Date.parse dates[1]
+    date_interval = (date2-date1).to_i
+
+    return dates.map {|elem| elem[0..3].to_i} if (365..366) === date_interval #year
+    return dates.map {|elem| (elem[0..3]+((elem[5..6].to_i - 1 )/ 3).to_s).to_i} if (84..93) === date_interval #quarter
+    return dates.map {|elem| (elem[0..3]+elem[5..6]).to_i} if (28..31) === date_interval #month
+
+  end
+  
   def Series.write_dates(dates, sheet)
+    sheet[0,0] = "DATE"
     count=1
     dates.each do |date|
       sheet[count,0] = date.dup

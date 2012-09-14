@@ -318,24 +318,12 @@ class Series < ActiveRecord::Base
   
   def update_data_hash
     data_hash = {}
-    # I have no idea why, but data_points
-    # requires the sort to get anything to happen
-    # both data_points and data_points.sort evaluate
-    # to arrays with the same count, but for some reason
-    # They're not being created. Definitely an issue
-
     #dh_time = Time.now            #timer
     data_points.each do |dp|
       #puts "#{dp.date_string}: #{dp.value} (#{dp.current})"
       data_hash[dp.date_string] = dp.value if dp.current
     end
-    #figure out how to get this save out. constructing the hash from datapoints is just as fast as
-    #pulling those data points out of the db. Saving is MUCH faster
-    #also figure out where to do the save. And generally clean up
-    #could pull AREMOS comparison. or have it make saving optional
-    #self.data = data_hash
-    #puts "#{"%.2f" % (Time.now - dh_time)} : #{data_points.count} : #{self.name} : UPDATING DATA HASH FROM (ALL DATA POINTS)"
-    
+    #puts "#{"%.2f" % (Time.now - dh_time)} : #{data_points.count} : #{self.name} : UPDATING DATA HASH FROM (ALL DATA POINTS)"    
     #s_time = Time.now
     self.save
     #puts "#{"%.2f" % (Time.now - s_time)} : #{data_hash.count} : #{self.name} : SAVING SERIES"    
@@ -349,10 +337,20 @@ class Series < ActiveRecord::Base
     @data = data_hash
   end
   
+  #doesn't scale data yet
   def data_from_datapoints
     data_hash = {}
     data_points.each do |dp|
       data_hash[dp.date_string] = dp.value if dp.current
+    end
+    data_hash
+  end
+  
+  def scaled_data_no_pseudo_history(round_to = 3)
+    data_hash = {}
+    self.units ||= 1
+    data_points.each do |dp|
+      data_hash[dp.date_string] = (dp.value / self.units).round(round_to) if dp.current and !dp.is_pseudo_history?
     end
     data_hash
   end
@@ -658,15 +656,6 @@ class Series < ActiveRecord::Base
       puts "#{datestring}: #{value_array.sort.join}"
     end
     puts name
-  end
-  
-  def data_diff(comparison_data, digits_to_round)
-    diff_hash = {}
-    comparison_data.each do |date_string, value|
-      diff = units_at(date_string) - value unless data[date_string].nil? or value.nil?
-      diff_hash[date_string] = diff if (diff.nil? and !data[date_string].nil?) or (!diff.nil? and diff > 10**-digits_to_round)
-    end
-    diff_hash
   end
   
   def tsd_string

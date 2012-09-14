@@ -1,6 +1,12 @@
 class PrognozDataFile < ActiveRecord::Base
   serialize :series_loaded, Hash
   
+  
+  def update_spreadsheet
+    os = UpdateSpreadsheet.new filename
+    return os
+  end
+  
   def load
     @output_spreadsheet = UpdateSpreadsheet.new filename
     return {:notice=>"problem loading spreadsheet", :headers=>[]} if @output_spreadsheet.load_error?    
@@ -41,6 +47,16 @@ class PrognozDataFile < ActiveRecord::Base
     return output_spreadsheet.series s[:base_name]
   end
     
+  def output_path
+    output_filename = filename.split("/")[-1]
+    "/Volumes/UHEROwork/data/prognoz_export/exports/" + output_filename
+  end
+  
+  def write_export
+    os = update_spreadsheet    
+    Series.write_prognoz_output_file(os.headers_with_frequency_code, output_path, os.sheets.first, os.dates.keys)
+  end
+  
   def output_folder_name_for_date(date)
     "#{date.to_s[2..3]}M#{date.to_s[5..6]}"
   end
@@ -67,7 +83,10 @@ class PrognozDataFile < ActiveRecord::Base
     return dates
   end
   
+
+  
   def write_dates(sheet,dates = output_dates)
+    sheet[0,0] = "DATE"
     count=1
     dates.sort.each do |date|
 #      sheet[count,0] = ""

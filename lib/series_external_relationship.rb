@@ -86,16 +86,7 @@ module SeriesExternalRelationship
         unless data[datestring].nil?
           diff = a_diff(value, self.units_at(datestring))
           dp = DataPoint.where(:series_id => self.id, :date_string => datestring, :current=>true)[0]
-          source_code = case dp.source_type
-          when :download
-            10
-          when :static_file
-            20
-          when :identity
-            30
-          else
-            40
-          end
+          source_code = dp.source_type_code
           puts "#{self.name}: #{datestring}: #{value}, #{self.units_at(datestring)} diff:#{diff}" if diff != 0
           results.push(0+source_code) if diff == 0
           results.push(1+source_code) if diff > 0 and diff <= 1.0
@@ -118,8 +109,46 @@ module SeriesExternalRelationship
     
   end
   
+  def data_diff_display_array(comparison_data, digits_to_round)
+    results = []
+    comparison_data.each do |date_string, value|
+      dp = DataPoint.where(:series_id => self.id, :date_string => date_string, :current=>true)[0]
+      
+      if dp.nil? and !value.nil?
+        results.push(-1)
+        next
+      end
+
+      if (dp.nil? and value.nil?) or dp.is_pseudo_history?
+        results.push(0)
+        next
+      end
+      
+      source_code = dp.source_type_code
+      diff = (units_at(date_string) - value).abs unless data[date_string].nil? or value.nil?
+      
+      unless diff.nil?
+        results.push(0+source_code) if diff < 10**-digits_to_round
+        results.push(1+source_code) if diff > 10**-digits_to_round and diff <= 1
+        results.push(2+source_code) if diff > 1.0 and diff  <= 10.0
+        results.push(3+source_code) if diff > 10.0          
+        next
+      end
+      
+      
+    end
+    results
+  end
   
-  
+  def data_diff(comparison_data, digits_to_round)
+    diff_hash = {}
+    comparison_data.each do |date_string, value|
+      dp = DataPoint.where(:series_id => self.id, :date_string => date_string, :current=>true)[0] # only used for pseudo_history_check
+      diff = units_at(date_string) - value unless data[date_string].nil? or value.nil?
+      diff_hash[date_string] = diff if (diff.nil? and !data[date_string].nil?) or (!diff.nil? and diff > 10**-digits_to_round) unless (dp and dp.is_pseudo_history?)
+    end
+    diff_hash
+  end
   
   
   

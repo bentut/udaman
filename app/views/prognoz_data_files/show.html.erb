@@ -16,5 +16,24 @@
 		<tr><td class="label">Frequency: </td><td><%= @output_file.frequency %></td></tr>
 		<tr><td class="label">View Doc: </td><td></td></tr>
 		<tr><td class="label">Series: </td><td><%= series_table(@output_file).html_safe %></td></tr>
+		<tr><td class="label">Diffs: </td>
+			<td>
+			<% if @diffs.nil? %>
+				<p>All Matching</p>
+			<% else %>
+				<% @diffs.each do |series, diffs| %>
+				<p><%= series %>
+					<ul>
+					<% unless diffs.nil? %>
+						<% diffs.each do |date, diff| %>
+							<li><%= date %> <%= diff %></li>
+						<% end %>
+					<% end %>
+					</ul>
+				</p>
+				<% end %>
+			<% end %>
+			</td>
+		</tr>
 	</table>
 </div>

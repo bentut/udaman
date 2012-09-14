@@ -18,6 +18,30 @@ task :update_diffs => :environment do
   end
 end
 
+
+task :gen_prognoz_diffs => :environment do
+  diff_data = []
+  
+  PrognozDataFile.all.each do |pdf| 
+    os = UpdateSpreadsheet.new pdf.filename    
+    os.headers_with_frequency_code.each do |header|
+      puts "checking #{header}"
+      diff_data.push({:pdf_id => pdf.id, :id => 0, :name => header, :display_array => [-1]}) if header.ts.nil?
+      next if header.ts.nil?
+      next if header.ts.data_diff(os.series(header.split(".")[0]), 3).count == 0
+      diff_hash = header.ts.data_diff_display_array(os.series(header.split(".")[0]), 3)
+      diff_data.push({:pdf_id => pdf.id, :id => header.ts.id, :name => header, :display_array => diff_hash}) if diff_hash.count > 0
+    end    
+  end 
+    
+  CSV.open("public/prognoz_diffs.csv", "wb") do |csv|        
+    diff_data.each do |dd|
+      csv << [dd[:name]] + [dd[:id]] + dd[:display_array]
+    end
+  end
+
+end
+
 task :gen_investigate_csv => :environment do
   
   # diff_data = [{:id => 1, :name => "he", :display_array => [1,2,2,2] }]

@@ -9,6 +9,7 @@ class PrognozDataFilesController < ApplicationController
 
   def show
     @output_file = PrognozDataFile.find params[:id]
+    @diffs = @output_file.udaman_diffs
   end
 
   def edit

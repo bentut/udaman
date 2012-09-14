@@ -46,6 +46,10 @@ module SeriesDataAdjustment
     data.reject {|datestring, value| datestring < startdatestring or value.nil? or datestring > enddatestring}
   end
   
+  def get_scaled_no_pseudo_history_values_after_including(startdatestring, enddatestring = Time.now.to_date.to_s, round_to = 3)
+    scaled_data_no_pseudo_history(round_to).reject {|datestring, value| datestring < startdatestring or value.nil? or datestring > enddatestring}
+  end
+  
   def compressed_date_range_data(compressed_date_array = Date.compressed_date_range)
     compressed_date_range_data = {}
     compressed_date_array.each { |date| compressed_date_range_data[date] = data[date] }
