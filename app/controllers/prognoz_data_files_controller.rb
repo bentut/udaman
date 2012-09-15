@@ -56,7 +56,7 @@ class PrognozDataFilesController < ApplicationController
   
   def write_xls
     @output_file = PrognozDataFile.find params[:id]
-    @output_file.write_xls
+    @output_file.write_export
     redirect_to :action => 'index'
   end
 

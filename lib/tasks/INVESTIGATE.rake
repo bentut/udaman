@@ -40,6 +40,9 @@ task :gen_prognoz_diffs => :environment do
     end
   end
 
+  PrognozDataFile.all.each do |pdf|
+    pdf.write_export
+  end
 end
 
 task :gen_investigate_csv => :environment do

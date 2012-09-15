@@ -117,7 +117,7 @@ module SeriesDataLists
     sheet[0,0] = "DATE"
     count=1
     dates.each do |date|
-      sheet[count,0] = date.dup
+      sheet[count,0] = date
       count += 1
     end
   end

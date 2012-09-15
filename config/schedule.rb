@@ -102,3 +102,7 @@ end
 every 1.day, :at => "#{hour.to_i+3}:30 am" do
   rake "gen_investigate_csv"
 end
+
+every 1.day, :at => "#{hour.to_i+4}:30 am" do
+  rake "gen_prognoz_diffs"
+end
