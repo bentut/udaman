@@ -36,6 +36,18 @@ module SeriesExternalRelationship
     
     return diff_second > 0.001 ? diff_second : 0
   end
+  
+  def Series.a_diff(value, series_value)    
+    diff_trunc = (value - series_value.aremos_trunc).abs.round(3)  
+    diff_sig_5 = (value.sig_digits(5).round(3) - series_value.sig_digits(5).round(3)).abs
+    diff_sig_6 = (value.sig_digits(6).round(3) - series_value.sig_digits(6).round(3)).abs
+
+    diff_first = diff_trunc < diff_sig_5 ? diff_trunc : diff_sig_5
+    diff_second = diff_first < diff_sig_6 ? diff_first : diff_sig_6
+    
+    return diff_second > 0.001 ? diff_second : 0
+  end
+  
   #no test or spec for this
   def aremos_comparison(save_series = true)
     begin
@@ -71,6 +83,21 @@ module SeriesExternalRelationship
     end
   end
   
+  def Series.aremos_quick_diff(name, data)
+    as = AremosSeries.get name
+    aremos_diff = 0
+    a_data = as.data
+    data.each do |date_string, val|
+      
+      a_val = a_data[date_string]
+      s_val = val #could use units at... might screw up with scale
+      #puts "#{name}: #{date_string}: #{a_val}, #{s_val} "
+      next if a_val.nil?
+      diff = a_diff(a_val, s_val)
+      aremos_diff += diff
+    end
+    return aremos_diff
+  end
   
   def aremos_comparison_display_array
     

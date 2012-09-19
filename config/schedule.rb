@@ -106,3 +106,15 @@ end
 every 1.day, :at => "#{hour.to_i+4}:30 am" do
   rake "gen_prognoz_diffs"
 end
+
+every 1.day, :at => "#{hour.to_i+4}:45 am" do
+  rake "aremos_exports"
+end
+
+every 1.day, :at => "#{hour.to_i+4}:50 am" do
+  rake "tsd_exports"
+end
+
+every 1.day, :at => "#{hour.to_i+4}:59 am" do
+  rake "prognoz_exports"
+end

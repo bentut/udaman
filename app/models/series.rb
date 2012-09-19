@@ -658,19 +658,62 @@ class Series < ActiveRecord::Base
     puts name
   end
   
+  
+  def month_mult
+    return 1 if frequency == "month"
+    return 3 if frequency == "quarter"
+    return 6 if frequency == "semi"
+    return 12 if frequency == "year"
+  end
+  
+  def date_range
+    
+    return self.data.keys.sort if frequency == "day" or frequency == "week"
+      
+    data_dates = self.data.keys.sort
+    start_date = Date.parse data_dates[0]
+    end_date = Date.parse data_dates[-1]
+    curr_date = start_date
+    
+    dates = []
+    offset = 0
+    month_multiplier = month_mult
+    
+    while curr_date < end_date
+      curr_date = start_date>>offset*month_multiplier
+      dates.push(curr_date.to_s)
+      offset += 1
+    end
+    dates
+  end
+
   def tsd_string
     data_string = ""
     lm = data_points.order(:updated_at).last.updated_at
+
     as = AremosSeries.get name
+
     dps = data
     dates = dps.keys.sort
-    sci_data = dps.sort.map {|elem| ("%.6E" % elem[1]).insert(-2,"00")}
+    
     data_string+= "#{name.split(".")[0].to_s.ljust(16," ")}#{as.description.ljust(64, " ")}\r\n"
     data_string+= "#{lm.month.to_s.rjust(34," ")}/#{lm.day.to_s.rjust(2," ")}/#{lm.year.to_s[2..4]}0800#{dates[0].to_date.tsd_start(frequency)}#{dates[-1].to_date.tsd_end(frequency)}#{Series.code_from_frequency frequency}  0                \r\n"
-    sci_data.each_index do |i| 
-      data_string += sci_data[i].rjust(15, " ")
-      data_string += "     \r\n" if (i+1)%5==0
+    
+    sci_data = {}
+    
+    dps.each do |date_string, val|
+      sci_data[date_string] = ("%.6E" % val).insert(-3,"00")
     end
+    
+    
+    dates = date_range
+    dates.each_index do |i|
+    # sci_data.each_index do |i|
+      date = dates[i]
+      dp_string = sci_data[date].nil? ? "1.000000E+0015".rjust(15, " ") : sci_data[date].rjust(15, " ")
+      data_string += dp_string
+      data_string += "     \r\n" if (i+1)%5==0
+    end    
     space_padding = 80 - data_string.split("\r\n")[-1].length
     return space_padding == 0 ? data_string : data_string + " " * space_padding + "\r\n"
   end

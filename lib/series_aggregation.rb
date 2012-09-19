@@ -60,6 +60,7 @@ module SeriesAggregation
   
   def validate_aggregation(frequency)
     # The following represent invalid aggregation transitions
+    # puts self.name
     # puts "self:#{self.frequency}:#{self.frequency.class}"
     # puts "frequency:#{frequency}:#{frequency.class}"
 

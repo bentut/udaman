@@ -1,6 +1,6 @@
 task :reload_aremos => :environment do
   #this currently runs in 5 minutes even with the complete delete
-  #AremosSeries.delete_all
+  AremosSeries.delete_all
    t = Time.now
   AremosSeries.load_tsd("/Volumes/UHEROwork/data/EXPORT/A_DATA.TSD")
   at = Time.now
