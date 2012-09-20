@@ -679,11 +679,11 @@ class Series < ActiveRecord::Base
     offset = 0
     month_multiplier = month_mult
     
-    while curr_date < end_date
+    begin
       curr_date = start_date>>offset*month_multiplier
       dates.push(curr_date.to_s)
       offset += 1
-    end
+    end while curr_date < end_date
     dates
   end
 
