@@ -57,15 +57,19 @@ every 1.day, :at => "#{hour}:10 am" do
   rake "tour_ocup_upd"
 end
 
-every 1.day, :at => "#{bls_hour}:15 am" do
+every 1.day, :at => "#{bls_hour}:45 am" do
   rake "bls_cpi_upd_m"
   rake "bls_job_upd_m"
   rake "bls_cpi_upd_s"
   rake "hiwi_upd"
 end
 
-every 1.day, :at => "#{bls_hour}:55 am" do
+every 1.day, :at => "#{bls_hour.to_i+1}:00 am" do
   rake "bls_identities"
+end
+
+every 1.day, :at => "#{bls_hour.to_i+1}:15 am" do
+  rake "write_ur_dash"
 end
 
 every 1.day, :at => "#{hour}:30 am" do

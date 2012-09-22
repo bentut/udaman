@@ -68,6 +68,7 @@ module UpdateCore
     #puts "#{cell_data.class}: #{cell_data} row - #{row}"
     return nil if cell_data.nil? or metadata_header(cell_data)
     if cell_data.class == Float
+      return Date.parse cell_data.to_s.split(".")[0]+"-01-01" if cell_data < 2100 and cell_data > 1900 and cell_data.to_s.split(".")[1] == 0
       return Date.parse cell_data.to_s[0..3]+"-"+cell_data.to_s[4..5]+"-01" if cell_data > 9999
       
       quarter_info = (cell_data - cell_data.to_i).round 1
@@ -176,6 +177,10 @@ module UpdateCore
   end
   
   def update_formatted?
+    # puts "columns have series: #{columns_have_series?}"
+    # puts "rows have dates: #{rows_have_dates?}"
+    # puts "rows have series: #{rows_have_series?}"
+    # puts "columns have dates: #{columns_have_dates?}"
     return true if columns_have_series? and rows_have_dates?
     return true if columns_have_dates? and rows_have_series?
     return false
@@ -203,6 +208,7 @@ module UpdateCore
       begin
         cell_to_date(row,1)
       rescue ArgumentError
+        #puts "returning false for row #{row}"
         return false
       rescue TypeError
       end

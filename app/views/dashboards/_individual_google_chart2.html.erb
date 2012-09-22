@@ -1,13 +1,11 @@
-
 var data<%= indicator %> = new google.visualization.DataTable({cols: [ 
 	{ label: 'Year',   type: 'string' },
 	{ label: 'Unemployment Rate - <%= chart_title %>',  type: 'number' }
 ]});
 
-
 data<%= indicator %>.addRows([
 <% plot_data.each do | date, value| %>
-	['<%= date %>', <%= value %>],
+	['<%= date %>', <%= value.round(1) %>],
 <% end %>
 ]);
 

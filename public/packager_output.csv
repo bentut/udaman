@@ -24,8 +24,8 @@ false,bls,hiwi_upd_KAU
 false,misc,const_upd_m
 false,rawdata,const_upd_m_ID
 false,bls,hiwi_upd_MAU
-false,bls,bls_job_upd_m
-false,misc,UIC_upd
+true,bls,bls_job_upd_m
+true,misc,UIC_upd
 false,tax,collec_upd
 false,tour,tour_ocup_upd
 false,rawdata,tour_vexp_upd_ID

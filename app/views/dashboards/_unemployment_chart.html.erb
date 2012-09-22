@@ -41,31 +41,28 @@ function draw_charts() {
 		               backgroundColor: '#F9F9F8'
 			};
 		
-		
 
+			<% 
+			loop_data = [ 
+			{:bar_data => "UR@HON.M", :plot_data => "UR@HON.M", :div_label => "chart2", :chart_title => "Honolulu County", :width => "375", :height => "320", :chart_area => "160", :indicator => "2"},
+			{:bar_data => "UR@HAW.M", :plot_data => "UR@HAW.M", :div_label => "chart3", :chart_title => "Hawaii County", :width => "375", :height => "320", :chart_area => "160", :indicator => "3"},
+			{:bar_data => "UR@MAU.M", :plot_data => "UR@MAU.M", :div_label => "chart4", :chart_title => "Maui County", :width => "375", :height => "320", :chart_area => "160", :indicator => "4"},
+			{:bar_data => "UR@KAU.M", :plot_data => "UR@KAU.M", :div_label => "chart5", :chart_title => "Kauai County", :width => "375", :height => "320", :chart_area => "160", :indicator => "5"},
+			{:bar_data => "UR@HI.M", :plot_data => "UR@HI.M", :div_label => "chart1", :chart_title => "State of Hawaii", :width => "750", :height => "500", :chart_area => "300", :indicator => "1"},
+			].each do |iteration_data| %>
 
+			<%= render :file => 'app/views/dashboards/_individual_google_chart2.html.erb', :locals => {
+				:plot_data => iteration_data[:plot_data].ts.get_values_after_including("2006-01-01").sort, 
+				:chart_title => iteration_data[:chart_title], 
+				:div_label => iteration_data[:div_label], 
+				:width => iteration_data[:width],
+				:height => iteration_data[:height],
+				:chart_area => iteration_data[:chart_area],
+				:indicator => iteration_data[:indicator]
+				}
+				%>
 
-<% 
-loop_data = [ 
-{:bar_data => "UR@HI.M", :plot_data => "UR@HI.M", :div_label => "chart1", :chart_title => "State of Hawaii", :width => "750", :height => "500", :chart_area => "300", :indicator => "1"},
-{:bar_data => "UR@HON.M", :plot_data => "UR@HON.M", :div_label => "chart2", :chart_title => "Honolulu County", :width => "375", :height => "320", :chart_area => "160", :indicator => "2"},
-{:bar_data => "UR@HAW.M", :plot_data => "UR@HAW.M", :div_label => "chart3", :chart_title => "Hawaii County", :width => "375", :height => "320", :chart_area => "160", :indicator => "3"},
-{:bar_data => "UR@MAU.M", :plot_data => "UR@MAU.M", :div_label => "chart4", :chart_title => "Maui County", :width => "375", :height => "320", :chart_area => "160", :indicator => "4"},
-{:bar_data => "UR@KAU.M", :plot_data => "UR@KAU.M", :div_label => "chart5", :chart_title => "Kauai County", :width => "375", :height => "320", :chart_area => "160", :indicator => "5"},
-].each do |iteration_data| %>
-
-<%= render :file => 'app/views/dashboards/_individual_google_chart2.html.erb', :locals => {
-	:plot_data => iteration_data[:plot_data].ts.get_values_after_including("2006-01-01").sort, 
-	:chart_title => iteration_data[:chart_title], 
-	:div_label => iteration_data[:div_label], 
-	:width => iteration_data[:width],
-	:height => iteration_data[:height],
-	:chart_area => iteration_data[:chart_area],
-	:indicator => iteration_data[:indicator]
-	}
-	%>
-
-<% end %>
+			<% end %>
 
 }
 </script></p>

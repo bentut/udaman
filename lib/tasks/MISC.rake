@@ -124,8 +124,12 @@ end
 
 task :const_identities => :environment do
   
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
+  #not sure if these should go in misc or what...
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls", "Q"
+
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls"
-  
   #PRUD identities included here
 		"PAKRCON@HAW.Q".ts_eval= %Q|"PAKRCONNS@HAW.Q".ts|
 		"PAKRCON@HON.Q".ts_eval= %Q|"PAKRCONNS@HON.Q".ts|

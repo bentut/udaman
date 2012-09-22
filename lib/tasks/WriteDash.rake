@@ -62,32 +62,44 @@ end
 
 
 task :write_ur_dash => :environment do
+  post_name = "Unemployment Rates in Hawaii (Seasonally Adjusted)"
+  post_address ='http://www.uhero.hawaii.edu/123'
+  new_data_series = {}
+  ["UR@HI.M".ts, "UR@HON.M".ts, "UR@HAW.M".ts, "UR@KAU.M".ts, "UR@MAU.M".ts].each {|series| new_data_series[series.name] = series.id if series.new_data?}
   
-  desc "writes unemployment rate charts to website"
+  #exit the task and skip writing to the website
+  next if new_data_series.count == 0
   
-  view = ActionView::Base.new(ActionController::Base.view_paths, {})
+  begin  
+    desc "writes unemployment rate charts to website"
   
-  post_body = '' + view.render(:file=> "/dashboards/_unemployment_chart.html.erb")
-  #post_body = "Hello World"
+    view = ActionView::Base.new(ActionController::Base.view_paths, {})
   
-  require 'mechanize'
-  agent = Mechanize.new do |a|
-    a.keep_alive = false
+    post_body = '' + view.render(:file=> "/dashboards/_unemployment_chart.html.erb")
+    #post_body = "Hello World"
+  
+    require 'mechanize'
+    agent = Mechanize.new do |a|
+      a.keep_alive = false
+    end
+  
+    login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
+  
+    dashboard = login_page.form_with(:action => '/admin/login') do |f|
+     f.send("data[User][login]=", SITE['pub_user'])
+     f.send("data[User][pass]=", SITE['pub_pass'])
+    end.click_button
+  
+    new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/pages/edit/123')
+  
+  
+    conf_page = new_product_page.form_with(:action => '/admin/pages/edit/123') do |f|
+     f.send("data[Page][title]=", post_name)
+     f.send("data[Page][content]=", post_body)
+     f.send("action=", '/admin/pages/edit/123/autoPublish:1')
+    end.click_button
+    PackagerMailer.website_post_notification(post_name, post_address, new_data_series, true).deliver
+  rescue Exception => e
+    PackagerMailer.website_post_notification(post_name, post_address, new_data_series, false).deliver
   end
-  
-  login_page = agent.get('http://www.uhero.hawaii.edu/admin/login')
-  
-  dashboard = login_page.form_with(:action => '/admin/login') do |f|
-   f.send("data[User][login]=", SITE['pub_user'])
-   f.send("data[User][pass]=", SITE['pub_pass'])
-  end.click_button
-  
-  new_product_page = agent.get('http://www.uhero.hawaii.edu/admin/pages/edit/123')
-  
-  
-  conf_page = new_product_page.form_with(:action => '/admin/pages/edit/123') do |f|
-   f.send("data[Page][title]=", "Unemployment Rates in Hawaii (Seasonally Adjusted)")
-   f.send("data[Page][content]=", post_body)
-   f.send("action=", '/admin/pages/edit/123/autoPublish:1')
-  end.click_button
 end

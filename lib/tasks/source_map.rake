@@ -107,7 +107,7 @@ task :load_all_histories => :environment do
   
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/TOUR_OCUP.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
+  
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
 
   #3/21/12 Ben: try to replace all of these with individual calls since they change and should go in the loads in the other jobs

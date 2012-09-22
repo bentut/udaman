@@ -41,4 +41,12 @@ class PackagerMailer < ActionMailer::Base
     @save_path = save_path
     mail(:to => ["btrevino@hawaii.edu"], :subject => subject)
   end
+  
+  def website_post_notification(post_name, post_address, new_data_series, created)
+    subject = "New data for #{post_name} posted to the UHERO website" if created
+    subject = "Udaman tried but failed to post new data for #{post_name} to the UHERO website" unless created
+    @post_address = post_address
+    @new_data_series = new_data_series
+    mail(:to => ["btrevino@hawaii.edu","james29@hawaii.edu", "icintina@gmail.com", "bonham@hawaii.edu"], :subject => subject) #{})
+  end
 end

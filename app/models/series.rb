@@ -579,8 +579,8 @@ class Series < ActiveRecord::Base
     puts name
   end
   
-  def Series.show_post_creator
-    PostCreatorController.new.show
+  def new_data?
+    data_points.where("created_at > FROM_DAYS(TO_DAYS(NOW()))").count > 0
   end
   
   #used to use app.get trick
