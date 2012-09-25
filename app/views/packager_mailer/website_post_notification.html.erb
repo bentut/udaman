@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h3>Website</h3>
+	<p><a href="<%= @post_address %>"><%= @post_address %></a></p>
+
+    <h3>Series with new data</h3>
+	<p><em>look for the data points with the "-1" superscript. These are probably at the bottom, the newest data points</em></p>
+	<ul>
+	<% @new_data_series.each do |name, id| %>
+	<li><a href="http://udaman.uhero.hawaii.edu/series/<%= id %>">http://udaman.uhero.hawaii.edu/series/<%= id %> : <%= name %></li>
+	<% end %>
+	</ul>
+  </body>
+</html>
