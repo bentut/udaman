@@ -103,6 +103,12 @@ every 1.day, :at => "#{hour.to_i+2}:00 am" do
   rake "bea_identities"
 end
 
+every 1.day, :at => "#{hour.to_i+2}:45 am" do
+  rake "run_aggregations"
+  rake "run_aggregations2"
+  rake "run_aggregations3"
+end
+
 every 1.day, :at => "#{hour.to_i+3}:30 am" do
   rake "gen_investigate_csv"
 end

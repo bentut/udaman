@@ -1,4 +1,81 @@
+task :find_new_aggregations => :environment do
+  missing = AremosSeries.all.map {|as| as.name if as.name.ts.nil?}; 0
+  missing.reject! {|elem| elem.nil?}
+  puts "Missing:#{missing.count}"
+
+  annual_series = missing.select {|elem| elem.split(".")[1] == "A"} 
+  quarterly_series = missing.select {|elem| elem.split(".")[1] == "Q"}
+  puts "Annual:#{annual_series.count} | Quarterly:#{quarterly_series.count}"
+
+  a_has_q = annual_series.select {|e| !"#{e.split(".")[0]}.Q".ts.nil?}
+  a_has_m = annual_series.select {|e| !"#{e.split(".")[0]}.Q".ts.nil?}
+  q_has_m = quarterly_series.select {|e| !"#{e.split(".")[0]}.M".ts.nil?}
+  puts "Annual With Quarterly: #{a_has_q.count}"
+  puts "Annual With Monthly: #{a_has_m.count}"
+  puts "Quarterly With Monthly: #{q_has_m.count}"
+  
+  [ {:series_list => a_has_q, :aggregate_frequency => ".Q", :freq => "year"},
+    {:series_list => a_has_m, :aggregate_frequency => ".M", :freq => "year"},
+    {:series_list => q_has_m, :aggregate_frequency => ".M", :freq => "quarter"} ].each do |loop_hash|
+    puts "#{loop_hash[:aggregate_frequency]} -> #{loop_hash[:freq]}"
+    puts "--------------------------------------------------------------------------------------------------------------------------------"
+    results_map = loop_hash[:series_list].sort.map do |s|
+      begin
+        m_series = s.split(".")[0] + loop_hash[:aggregate_frequency]
+        avg_diff = Series.aremos_quick_diff s, m_series.ts.aggregate(:year, :average).data
+        sum_diff = Series.aremos_quick_diff s, m_series.ts.aggregate(:year, :sum).data 
+      rescue Exception
+        puts "broke on series #{s}"
+        avg_diff = nil
+        sum_diff = nil
+      end
+      {:series => s, :aggregate_from => ":quarter", :sum_diff => sum_diff, :avg_diff => avg_diff}
+    end
+    puts results_map.count
+    (results_map.select {|s| s[:sum_diff] == 0}).each {|s| puts %Q+"#{s[:series]}".ts_eval=%Q|"#{s[:series].split(".")[0]+loop_hash[:aggregate_frequency]}".ts.aggregate(:#{loop_hash[:freq]}, :sum)|+}
+    (results_map.select {|s| s[:avg_diff] == 0}).each {|s| puts %Q+"#{s[:series]}".ts_eval=%Q|"#{s[:series].split(".")[0]+loop_hash[:aggregate_frequency]}".ts.aggregate(:#{loop_hash[:freq]}, :average)|+}
+  end
+end
+
 task :run_aggregations3 => :environment do
+  
+  "PCAP@HON.A".ts_eval=%Q|"PCAP@HON.M".ts.aggregate(:year, :average)|
+  "PCCM@HON.A".ts_eval=%Q|"PCCM@HON.M".ts.aggregate(:year, :average)|
+  "PCCMDR@HON.A".ts_eval=%Q|"PCCMDR@HON.M".ts.aggregate(:year, :average)|
+  "PCCMND@HON.A".ts_eval=%Q|"PCCMND@HON.M".ts.aggregate(:year, :average)|
+  "PCCMND_FB@HON.A".ts_eval=%Q|"PCCMND_FB@HON.M".ts.aggregate(:year, :average)|
+  "PCCMND_FD@HON.A".ts_eval=%Q|"PCCMND_FD@HON.M".ts.aggregate(:year, :average)|
+  "PCCM_FB@HON.A".ts_eval=%Q|"PCCM_FB@HON.M".ts.aggregate(:year, :average)|
+  "PCCM_FD@HON.A".ts_eval=%Q|"PCCM_FD@HON.M".ts.aggregate(:year, :average)|
+  "PCEN@HON.A".ts_eval=%Q|"PCEN@HON.M".ts.aggregate(:year, :average)|
+  "PCFB@HON.A".ts_eval=%Q|"PCFB@HON.M".ts.aggregate(:year, :average)|
+  "PCFBFD@HON.A".ts_eval=%Q|"PCFBFD@HON.M".ts.aggregate(:year, :average)|
+  "PCFBFDAW@HON.A".ts_eval=%Q|"PCFBFDAW@HON.M".ts.aggregate(:year, :average)|
+  "PCFBFDBV@HON.A".ts_eval=%Q|"PCFBFDBV@HON.M".ts.aggregate(:year, :average)|
+  "PCFBFDHM@HON.A".ts_eval=%Q|"PCFBFDHM@HON.M".ts.aggregate(:year, :average)|
+  "PCHS@HON.A".ts_eval=%Q|"PCHS@HON.M".ts.aggregate(:year, :average)|
+  "PCHSFU@HON.A".ts_eval=%Q|"PCHSFU@HON.M".ts.aggregate(:year, :average)|
+  "PCHSFUGSU@HON.A".ts_eval=%Q|"PCHSFUGSU@HON.M".ts.aggregate(:year, :average)|
+  "PCHSHF@HON.A".ts_eval=%Q|"PCHSHF@HON.M".ts.aggregate(:year, :average)|
+  "PCHSSH@HON.A".ts_eval=%Q|"PCHSSH@HON.M".ts.aggregate(:year, :average)|
+  "PCHSSHOW@HON.A".ts_eval=%Q|"PCHSSHOW@HON.M".ts.aggregate(:year, :average)|
+  "PCHSSHRT@HON.A".ts_eval=%Q|"PCHSSHRT@HON.M".ts.aggregate(:year, :average)|
+  "PCMD@HON.A".ts_eval=%Q|"PCMD@HON.M".ts.aggregate(:year, :average)|
+  "PCOT@HON.A".ts_eval=%Q|"PCOT@HON.M".ts.aggregate(:year, :average)|
+  "PCSV@HON.A".ts_eval=%Q|"PCSV@HON.M".ts.aggregate(:year, :average)|
+  "PCSV_MD@HON.A".ts_eval=%Q|"PCSV_MD@HON.M".ts.aggregate(:year, :average)|
+  "PCSV_RN@HON.A".ts_eval=%Q|"PCSV_RN@HON.M".ts.aggregate(:year, :average)|
+  "PCTR@HON.A".ts_eval=%Q|"PCTR@HON.M".ts.aggregate(:year, :average)|
+  "PCTRGS@HON.A".ts_eval=%Q|"PCTRGS@HON.M".ts.aggregate(:year, :average)|
+  "PCTRGSPR@HON.A".ts_eval=%Q|"PCTRGSPR@HON.M".ts.aggregate(:year, :average)|
+  "PCTRGSRG@HON.A".ts_eval=%Q|"PCTRGSRG@HON.M".ts.aggregate(:year, :average)|
+  "PCTRMF@HON.A".ts_eval=%Q|"PCTRMF@HON.M".ts.aggregate(:year, :average)|
+  "PCTRPR@HON.A".ts_eval=%Q|"PCTRPR@HON.M".ts.aggregate(:year, :average)|
+  "PC_EN@HON.A".ts_eval=%Q|"PC_EN@HON.M".ts.aggregate(:year, :average)|
+  "PC_FDEN@HON.A".ts_eval=%Q|"PC_FDEN@HON.M".ts.aggregate(:year, :average)|
+  "PC_MD@HON.A".ts_eval=%Q|"PC_MD@HON.M".ts.aggregate(:year, :average)|
+  
+  
   "KBCON@HON.A".ts_eval=%Q|"KBCON@HON.Q".ts.aggregate(:year, :sum)|
   "KBCON@MAU.A".ts_eval=%Q|"KBCON@MAU.Q".ts.aggregate(:year, :sum)|
   "KBSGF@HON.A".ts_eval=%Q|"KBSGF@HON.Q".ts.aggregate(:year, :sum)|
@@ -82,8 +159,6 @@ task :run_aggregations3 => :environment do
   "VS@HI.A".ts_eval=%Q|"VS@HI.Q".ts.aggregate(:year, :sum)|
   "VSDM@HI.A".ts_eval=%Q|"VSDM@HI.Q".ts.aggregate(:year, :sum)|
 
-
-# These all seem to be bad, somehow....
   "CAPU@US.A".ts_eval=%Q|"CAPU@US.Q".ts.aggregate(:year, :average)|
   "EED@KAU.A".ts_eval=%Q|"EED@KAU.Q".ts.aggregate(:year, :average)|
   "EED@MAU.A".ts_eval=%Q|"EED@MAU.Q".ts.aggregate(:year, :average)|
@@ -110,7 +185,6 @@ task :run_aggregations3 => :environment do
   "INF@US.A".ts_eval=%Q|"INF@US.Q".ts.aggregate(:year, :average)|
   "INFCORE@JP.A".ts_eval=%Q|"INFCORE@JP.Q".ts.aggregate(:year, :average)|
   "INFCORE@US.A".ts_eval=%Q|"INFCORE@US.Q".ts.aggregate(:year, :average)|
-#breaks here
   "INFGDPDEF@JP.A".ts_eval=%Q|"INFGDPDEF@JP.Q".ts.aggregate(:year, :average)|
   "INFGDPDEF@US.A".ts_eval=%Q|"INFGDPDEF@US.Q".ts.aggregate(:year, :average)|
   "IP@US.A".ts_eval=%Q|"IP@US.Q".ts.aggregate(:year, :average)|

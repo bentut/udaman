@@ -75,6 +75,37 @@ module SeriesRelationship
     results |= second_order_results
   end
   
+  def first_order_dependencies
+    results = []
+    self.data_sources.each do |ds|
+      results |= ds.dependencies 
+    end
+    results
+  end
+  
+  def Series.find_first_order_circular
+    circular_series = []
+    Series.all.each do |series|
+      #puts series.name
+      fod = series.first_order_dependencies
+      fod.each do |dependent_series|
+        circular_series.push(dependent_series) unless dependent_series.ts.first_order_dependencies.index(series.name).nil?
+      end
+    end
+
+    potential_problem_ds = []
+    circular_series.each do|s_name|
+      s_name.ts.data_sources.each do |ds|
+        potential_problem_ds.push ds
+        puts "#{s_name}: #{ds.id} : #{ds.eval}"
+      end
+    end
+    potential_problem_ds.each do |ppd|
+      puts "#{ppd.id} : #{ppd.eval}"
+    end
+    circular_series
+  end
+  
   def Series.print_prioritization_info
     Series.where("aremos_missing = 0 AND ABS(aremos_diff) >= 10").order('ABS(aremos_diff) DESC').each {|s| puts "#{s.id} - #{s.name}: #{s.new_dependents.count} / #{s.new_dependencies.count} : #{s.aremos_diff}" if s.new_dependents.count > 0 }
   end
