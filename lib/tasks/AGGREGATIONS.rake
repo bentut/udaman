@@ -39,42 +39,7 @@ end
 
 task :run_aggregations3 => :environment do
   
-  "PCAP@HON.A".ts_eval=%Q|"PCAP@HON.M".ts.aggregate(:year, :average)|
-  "PCCM@HON.A".ts_eval=%Q|"PCCM@HON.M".ts.aggregate(:year, :average)|
-  "PCCMDR@HON.A".ts_eval=%Q|"PCCMDR@HON.M".ts.aggregate(:year, :average)|
-  "PCCMND@HON.A".ts_eval=%Q|"PCCMND@HON.M".ts.aggregate(:year, :average)|
-  "PCCMND_FB@HON.A".ts_eval=%Q|"PCCMND_FB@HON.M".ts.aggregate(:year, :average)|
-  "PCCMND_FD@HON.A".ts_eval=%Q|"PCCMND_FD@HON.M".ts.aggregate(:year, :average)|
-  "PCCM_FB@HON.A".ts_eval=%Q|"PCCM_FB@HON.M".ts.aggregate(:year, :average)|
-  "PCCM_FD@HON.A".ts_eval=%Q|"PCCM_FD@HON.M".ts.aggregate(:year, :average)|
-  "PCEN@HON.A".ts_eval=%Q|"PCEN@HON.M".ts.aggregate(:year, :average)|
-  "PCFB@HON.A".ts_eval=%Q|"PCFB@HON.M".ts.aggregate(:year, :average)|
-  "PCFBFD@HON.A".ts_eval=%Q|"PCFBFD@HON.M".ts.aggregate(:year, :average)|
-  "PCFBFDAW@HON.A".ts_eval=%Q|"PCFBFDAW@HON.M".ts.aggregate(:year, :average)|
-  "PCFBFDBV@HON.A".ts_eval=%Q|"PCFBFDBV@HON.M".ts.aggregate(:year, :average)|
-  "PCFBFDHM@HON.A".ts_eval=%Q|"PCFBFDHM@HON.M".ts.aggregate(:year, :average)|
-  "PCHS@HON.A".ts_eval=%Q|"PCHS@HON.M".ts.aggregate(:year, :average)|
-  "PCHSFU@HON.A".ts_eval=%Q|"PCHSFU@HON.M".ts.aggregate(:year, :average)|
-  "PCHSFUGSU@HON.A".ts_eval=%Q|"PCHSFUGSU@HON.M".ts.aggregate(:year, :average)|
-  "PCHSHF@HON.A".ts_eval=%Q|"PCHSHF@HON.M".ts.aggregate(:year, :average)|
-  "PCHSSH@HON.A".ts_eval=%Q|"PCHSSH@HON.M".ts.aggregate(:year, :average)|
-  "PCHSSHOW@HON.A".ts_eval=%Q|"PCHSSHOW@HON.M".ts.aggregate(:year, :average)|
-  "PCHSSHRT@HON.A".ts_eval=%Q|"PCHSSHRT@HON.M".ts.aggregate(:year, :average)|
-  "PCMD@HON.A".ts_eval=%Q|"PCMD@HON.M".ts.aggregate(:year, :average)|
-  "PCOT@HON.A".ts_eval=%Q|"PCOT@HON.M".ts.aggregate(:year, :average)|
-  "PCSV@HON.A".ts_eval=%Q|"PCSV@HON.M".ts.aggregate(:year, :average)|
-  "PCSV_MD@HON.A".ts_eval=%Q|"PCSV_MD@HON.M".ts.aggregate(:year, :average)|
-  "PCSV_RN@HON.A".ts_eval=%Q|"PCSV_RN@HON.M".ts.aggregate(:year, :average)|
-  "PCTR@HON.A".ts_eval=%Q|"PCTR@HON.M".ts.aggregate(:year, :average)|
-  "PCTRGS@HON.A".ts_eval=%Q|"PCTRGS@HON.M".ts.aggregate(:year, :average)|
-  "PCTRGSPR@HON.A".ts_eval=%Q|"PCTRGSPR@HON.M".ts.aggregate(:year, :average)|
-  "PCTRGSRG@HON.A".ts_eval=%Q|"PCTRGSRG@HON.M".ts.aggregate(:year, :average)|
-  "PCTRMF@HON.A".ts_eval=%Q|"PCTRMF@HON.M".ts.aggregate(:year, :average)|
-  "PCTRPR@HON.A".ts_eval=%Q|"PCTRPR@HON.M".ts.aggregate(:year, :average)|
-  "PC_EN@HON.A".ts_eval=%Q|"PC_EN@HON.M".ts.aggregate(:year, :average)|
-  "PC_FDEN@HON.A".ts_eval=%Q|"PC_FDEN@HON.M".ts.aggregate(:year, :average)|
-  "PC_MD@HON.A".ts_eval=%Q|"PC_MD@HON.M".ts.aggregate(:year, :average)|
-  
+
   
   "KBCON@HON.A".ts_eval=%Q|"KBCON@HON.Q".ts.aggregate(:year, :sum)|
   "KBCON@MAU.A".ts_eval=%Q|"KBCON@MAU.Q".ts.aggregate(:year, :sum)|
@@ -189,15 +154,7 @@ task :run_aggregations3 => :environment do
   "INFGDPDEF@US.A".ts_eval=%Q|"INFGDPDEF@US.Q".ts.aggregate(:year, :average)|
   "IP@US.A".ts_eval=%Q|"IP@US.Q".ts.aggregate(:year, :average)|
   "LF@JP.A".ts_eval=%Q|"LF@JP.Q".ts.aggregate(:year, :average)|
-  "PCE@US.A".ts_eval=%Q|"PCE@US.Q".ts.aggregate(:year, :average)|
-  "PCECORE@US.A".ts_eval=%Q|"PCECORE@US.Q".ts.aggregate(:year, :average)|
-  "PCED@HON.A".ts_eval=%Q|"PCED@HON.Q".ts.aggregate(:year, :average)|
-  "PCHSFUEL@HON.A".ts_eval=%Q|"PCHSFUEL@HON.Q".ts.aggregate(:year, :average)|
-  "PCHSFUGS@HON.A".ts_eval=%Q|"PCHSFUGS@HON.Q".ts.aggregate(:year, :average)|
-  "PCHSFUGSE@HON.A".ts_eval=%Q|"PCHSFUGSE@HON.Q".ts.aggregate(:year, :average)|
-  "PCRE@HON.A".ts_eval=%Q|"PCRE@HON.Q".ts.aggregate(:year, :average)|
-  "PCTRGSMD@HON.A".ts_eval=%Q|"PCTRGSMD@HON.Q".ts.aggregate(:year, :average)|
-  "PC_SH@HON.A".ts_eval=%Q|"PC_SH@HON.Q".ts.aggregate(:year, :average)|
+
   "POIL@US.A".ts_eval=%Q|"POIL@US.Q".ts.aggregate(:year, :average)|
   "R@JP.A".ts_eval=%Q|"R@JP.Q".ts.aggregate(:year, :average)|
   "RFED@US.A".ts_eval=%Q|"RFED@US.Q".ts.aggregate(:year, :average)|
@@ -227,10 +184,7 @@ task :run_aggregations => :environment do
   #"EGVFDDDNS@MAU.Q".ts_eval=%Q|"EGVFDDDNS@MAU.M".ts.aggregate(:quarter, :sum)| #this one 0s out.
   "NTCRNS@HI.Q".ts_eval=%Q|"NTCRNS@HI.M".ts.aggregate(:quarter, :sum)|
   "NTTOURNS@HI.Q".ts_eval=%Q|"NTTOURNS@HI.M".ts.aggregate(:quarter, :sum)|
-  "PCDMNS@HI.Q".ts_eval=%Q|"PCDMNS@HI.M".ts.aggregate(:quarter, :sum)|
-  "PCITJPNS@HI.Q".ts_eval=%Q|"PCITJPNS@HI.M".ts.aggregate(:quarter, :sum)|
-  "PCITOTNS@HI.Q".ts_eval=%Q|"PCITOTNS@HI.M".ts.aggregate(:quarter, :sum)|
-  "PCNS@HI.Q".ts_eval=%Q|"PCNS@HI.M".ts.aggregate(:quarter, :sum)|
+
   "VABBNS@HI.Q".ts_eval=%Q|"VABBNS@HI.M".ts.aggregate(:quarter, :sum)|
   "VACANBBNS@HI.Q".ts_eval=%Q|"VACANBBNS@HI.M".ts.aggregate(:quarter, :sum)|
   "VACANCNNS@HI.Q".ts_eval=%Q|"VACANCNNS@HI.M".ts.aggregate(:quarter, :sum)|
@@ -1876,8 +1830,7 @@ task :run_aggregations2 => :environment do
   "LFNS@US.Q".ts_eval=%Q|"LFNS@US.M".ts.aggregate(:quarter, :average)|
   "M2@US.Q".ts_eval=%Q|"M2@US.M".ts.aggregate(:quarter, :average)|
   "M2NS@US.Q".ts_eval=%Q|"M2NS@US.M".ts.aggregate(:quarter, :average)|
-  "PCE@US.Q".ts_eval=%Q|"PCE@US.M".ts.aggregate(:quarter, :average)|
-  "PCECORE@US.Q".ts_eval=%Q|"PCECORE@US.M".ts.aggregate(:quarter, :average)|
+
   "POIL@US.Q".ts_eval=%Q|"POIL@US.M".ts.aggregate(:quarter, :average)|
   "RAAANS@US.Q".ts_eval=%Q|"RAAANS@US.M".ts.aggregate(:quarter, :average)|
   "RFED@US.Q".ts_eval=%Q|"RFED@US.M".ts.aggregate(:quarter, :average)|

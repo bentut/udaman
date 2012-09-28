@@ -712,6 +712,29 @@ task :bls_identities => :environment do
   "CPI@HON.A".ts_eval= %Q|"PC@HON.A".ts|
   "CPI@HON.Q".ts_eval= %Q|"PC@HON.Q".ts|
   
+  "PCDMNS@HI.Q".ts_eval=%Q|"PCDMNS@HI.M".ts.aggregate(:quarter, :sum)|
+  "PCITJPNS@HI.Q".ts_eval=%Q|"PCITJPNS@HI.M".ts.aggregate(:quarter, :sum)|
+  "PCITOTNS@HI.Q".ts_eval=%Q|"PCITOTNS@HI.M".ts.aggregate(:quarter, :sum)|
+  "PCNS@HI.Q".ts_eval=%Q|"PCNS@HI.M".ts.aggregate(:quarter, :sum)|
+  
+  "PCE@US.Q".ts_eval=%Q|"PCE@US.M".ts.aggregate(:quarter, :average)|
+  "PCECORE@US.Q".ts_eval=%Q|"PCECORE@US.M".ts.aggregate(:quarter, :average)|
+  "PCE@US.A".ts_eval=%Q|"PCE@US.Q".ts.aggregate(:year, :average)|
+  "PCECORE@US.A".ts_eval=%Q|"PCECORE@US.Q".ts.aggregate(:year, :average)|
+
+  
+  ["PC_FDEN",  "PC_MD",  "PC_SH",  "PCAP",  "PCCM_FB", "PCCM_FD","PCCM", "PCCMDR", "PCCMND_FB","PCCMND_FD","PCCMND", "PCED", 
+  "PCEN", "PCFB", "PCFBFD", "PCFBFDAW", "PCFBFDBV", "PCFBFDHM", "PCHS", "PCHSFU", "PCHSFUEL", "PCHSFUGS", "PCHSFUGSE","PCHSFUGSU",
+  "PCHSHF","PCHSSH","PCHSSHOW", "PCHSSHRT", "PCMD", "PCOT", "PCRE", "PCSV_MD","PCSV_RN","PCSV", "PCTR", "PCTRGS", "PCTRGSMD", "PCTRGSPR",
+  "PCTRGSRG", "PCTRMF",  "PCTRPR",  "PC_EN"].each do |prefix|
+    "#{prefix}@HON.Q".ts_eval=      %Q|"#{prefix}@HON.M".ts.aggregate(:quarter, :average)|
+    "#{prefix}@HON.Q".ts_eval=      %Q|"#{prefix}@HON.S".ts.interpolate(:quarter, :linear).trim("1987-01-01")|
+    "#{prefix}@HON.A".ts_eval=      %Q|"#{prefix}@HON.Q".ts.aggregate(:year, :average)|
+  end
+  
+  #Series loaded from this history sheet... may not need to load every day. But relatively fast...
+  #["E_FIR@HI.M", "E_FIR@HON.M", "E_GDSPR@HON.M", "E_GVSL@HON.M", "E_TTU@HAW.M", "E_TTU@HON.M", "E_TTU@KAU.M", "E_TTU@MAU.M", "E_TU@HI.M", "E_TU@HON.M", "EAF@HI.M", "EAF@HON.M", "EAFAC@HI.M", "EAFAC@HON.M", "EAFFD@HI.M", "EAFFD@HON.M", "ECT@HI.M", "ECT@HON.M", "EFI@HI.M", "EFI@HON.M", "EGVFD@HI.M", "EGVFD@HON.M", "EGVLC@HI.M", "EGVLC@HON.M", "EGVST@HI.M", "EGVST@HON.M", "EHC@HI.M", "EHC@HON.M", "EMN@HI.M", "EMN@HON.M", "ERE@HI.M", "ERE@HON.M"]  
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"
   #needs EMN up here....
   
   ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
@@ -762,9 +785,9 @@ task :bls_identities => :environment do
   
   "E_GVSL@HI.M".ts_eval= %Q|"EGVST@HI.M".ts + "EGVLC@HI.M".ts| 
   
-  "EAFAC@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average)|
+  "EAFAC@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average).trim("1990-01-01")|
   "EAFAC@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
-  "EAFFD@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average)|
+  "EAFFD@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average).trim("1990-01-01")|
   "EAFFD@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
 
   #{}"EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
@@ -791,10 +814,11 @@ task :bls_identities => :environment do
   ["ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       puts "distributing #{s_name}, #{county}"
-      "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.aa_state_based_county_share_for("#{county}")|
+      "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1990-01-01")|
     end
   end
 
+  #this might repeat what's above?
   "EGVST@HI.M".ts_eval= %Q|"EGVST@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|  
   "EGVFD@HI.M".ts_eval= %Q|"EGVFD@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|  
   "EGVFD@HON.M".ts_eval= %Q|"EGVFD@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"|
@@ -840,23 +864,27 @@ task :bls_identities => :environment do
   
   # EAF@HI.M
   # Before 1990 calculate with identity  
-  "EAF@HI.M".ts_eval= %Q|("EAFAC@HI.M".ts + "EAFFD@HI.M".ts).trim("1972-01-01","1989-12-01")|
+  #circular reference
+  #"EAF@HI.M".ts_eval= %Q|("EAFAC@HI.M".ts + "EAFFD@HI.M".ts).trim("1972-01-01","1989-12-01")|
 
   # E_FIR@HI.M
   # Before 1990 calculate with identity:
+  #circular reference
   "E_FIR@HI.M".ts_eval= %Q|("EFI@HI.M".ts + "ERE@HI.M".ts).trim("1958-01-01","1989-12-01")|
 
   # E_TTU@cnty
   # Before 1990 distribute HI to CNTY
-  ["HON", "HAW", "MAU", "KAU"].each do |county| 
-    "E_TTU@#{county}.M".ts_eval= %Q|"E_TU@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1972-01-01","1989-12-01")|
-  end 
+  # circular refs
+  # ["HON", "HAW", "MAU", "KAU"].each do |county| 
+  #   "E_TTU@#{county}.M".ts_eval= %Q|"E_TU@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1972-01-01","1989-12-01")|
+  # end 
 
   # E_trade/tradens @hi/cnty
   # Before 1990 calculate with identity
   ["HI", "HON", "HAW", "MAU", "KAU"].each do |county|
     "E_TRADENS@#{county}.M".ts_eval= %Q|("E_TTUNS@#{county}.M".ts - "E_TUNS@#{county}.M".ts).trim("1972-01-01","1989-12-01")|
-    "E_TRADE@#{county}.M".ts_eval= %Q|("E_TTU@#{county}.M".ts - "E_TU@#{county}.M".ts).trim("1972-01-01","1989-12-01")|
+    #circular reference
+    #"E_TRADE@#{county}.M".ts_eval= %Q|("E_TTU@#{county}.M".ts - "E_TU@#{county}.M".ts).trim("1972-01-01","1989-12-01")|
   end
   
 end

@@ -76,20 +76,76 @@ task :load_all_v_series => :environment do
   end
 end
 
+task :daily_history_load => :environment do
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/AgricultureForNewDB.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/Kauai.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/permits_upd.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICDATA1.xls" #creates diffs, SIC History might be better
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICDATA2.xls" #creates diffs for LFNS, WH, WWs etc
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICHistory.xls" #this might fix the two above. NO DIFFS
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hiwi_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hon" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "haw" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "mau" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "kau" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" #diffs starting in 2011
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls" #diffs mostly in 2011, some in 2010. runs fast
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd3_hist.xls" #diffs starting in 2011, some in 2012 also runs fast
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_histextend_date_format_correct.xls" #Diffs for EMPLNS@HI, EMPLSA@HI, EOSNS@HON, LFNS@HI, LFSA@HI, URSA@HI, WWAFFDNS@HI, WHAFFDNS@HI, EGVNS@HON and EAFFDNS@HON (but could be from other things)
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/const_hist_m.xls" #one big diff KPPRVNR... couls be something else... not sure which is correct?
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/pc_upd_hist.xls" #2012 diffs. could probably just revisions. This one is amazingly up to date. Jimmy must be updating
+  
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sic_detail.xls" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_cpi_int_m.XLS" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI_Q" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HON" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HAW" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "MAU" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "KAU" #moved up from below
+  # ---------------------------------------------------------
+end
+
 task :load_all_histories => :environment do
+  # Added after inspecting current, but not updated sources
+  # these are slower than doing cached versions, I think
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/AgricultureForNewDB.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/Kauai.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/permits_upd.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICDATA1.xls" #creates diffs, SIC History might be better
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICDATA2.xls" #creates diffs for LFNS, WH, WWs etc
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICHistory.xls" #this might fix the two above. NO DIFFS
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hiwi_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hon" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "haw" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "mau" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "kau" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" #diffs starting in 2011
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls" #diffs mostly in 2011, some in 2010. runs fast
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd3_hist.xls" #diffs starting in 2011, some in 2012 also runs fast
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_histextend_date_format_correct.xls" #Diffs for EMPLNS@HI, EMPLSA@HI, EOSNS@HON, LFNS@HI, LFSA@HI, URSA@HI, WWAFFDNS@HI, WHAFFDNS@HI, EGVNS@HON and EAFFDNS@HON (but could be from other things)
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/const_hist_m.xls" #one big diff KPPRVNR... couls be something else... not sure which is correct?
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/pc_upd_hist.xls" #2012 diffs. could probably just revisions. This one is amazingly up to date. Jimmy must be updating
   
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_cpi_int_m.XLS"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sic_detail.xls" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_cpi_int_m.XLS" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI_Q" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HON" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HAW" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "MAU" #moved up from below
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "KAU" #moved up from below
+  # ---------------------------------------------------------
   
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "collec"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" 
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI_Q"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HON"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HAW"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "MAU"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "KAU"
+
   
   #not all of these are matching
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"
@@ -98,8 +154,6 @@ task :load_all_histories => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SQ5NHistory.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/gsp_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_job_hist.xls"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sic_detail.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls" #also manual? not sure if we need both, or one one screws up the other?
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hiwi_hist.xls"

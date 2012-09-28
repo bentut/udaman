@@ -57,6 +57,23 @@ every 1.day, :at => "#{hour}:10 am" do
   rake "tour_ocup_upd"
 end
 
+every 1.day, :at => "#{bls_hour}:00 am" do
+  rake "update_bea_links"
+end
+
+every 1.day, :at => "#{bls_hour}:05 am" do
+  rake "gsp_upd" 
+  rake "inc_upd_q"
+  rake "inc_upd_a"
+  rake "com_upd"
+end
+
+every 1.day, :at => "#{bls_hour}:30 am" do
+  rake "us_upd_a"
+  rake "us_upd_q"
+  rake "us_upd_m"
+end
+
 every 1.day, :at => "#{bls_hour}:45 am" do
   rake "bls_cpi_upd_m"
   rake "bls_job_upd_m"
@@ -66,11 +83,13 @@ end
 
 every 1.day, :at => "#{bls_hour.to_i+1}:00 am" do
   rake "bls_identities"
+  rake "bea_identities"
 end
 
 every 1.day, :at => "#{bls_hour.to_i+1}:15 am" do
   rake "write_ur_dash"
 end
+
 
 every 1.day, :at => "#{hour}:30 am" do
   rake "uic_upd"
@@ -83,17 +102,7 @@ every 1.day, :at => "#{hour}:35 am" do
 end
 
 every 1.day, :at => "#{hour}:40 am" do
-  rake "gsp_upd" #has some major issues. All cache misses because of error?
-  rake "inc_upd_q"
-  rake "inc_upd_a"
-  rake "com_upd"
   rake "tour_rev_upd"
-end
-
-every 1.day, :at => "#{hour}:50 am" do
-  rake "us_upd_a"
-  rake "us_upd_q"
-  rake "us_upd_m"
 end
 
 every 1.day, :at => "#{hour.to_i+2}:00 am" do
@@ -125,6 +134,6 @@ every 1.day, :at => "#{hour.to_i+4}:50 am" do
   rake "tsd_exports"
 end
 
-every 1.day, :at => "#{hour.to_i+4}:59 am" do
-  rake "prognoz_exports"
-end
+#every 1.day, :at => "#{hour.to_i+4}:59 am" do
+#  rake "prognoz_exports"
+#end

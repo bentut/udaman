@@ -100,7 +100,7 @@ module SeriesRelationship
         puts "#{s_name}: #{ds.id} : #{ds.eval}"
       end
     end
-    potential_problem_ds.each do |ppd|
+    (potential_problem_ds.sort {|a,b| a.id <=> b.id}).each do |ppd|
       puts "#{ppd.id} : #{ppd.eval}"
     end
     circular_series

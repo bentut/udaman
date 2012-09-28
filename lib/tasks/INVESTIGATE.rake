@@ -133,3 +133,59 @@ task :gen_daily_summary => :environment do
   PackagerMailer.visual_notification(dps.count, changed_files, downloads).deliver
   
 end
+
+
+
+task :clean_data_sources => :environment do
+
+  active_ds = DataSource.where("last_run > FROM_DAYS(TO_DAYS(NOW()))").order(:last_run); 0
+  inactive_ds = DataSource.where("last_run <= FROM_DAYS(TO_DAYS(NOW()))").order(:last_run); 0
+
+# active_but_not_current = active_ds.reject {|elem| elem.current? }
+# active_current = active_ds.reject {|elem| !elem.current? }
+# inactive_not_current = inactive_ds.reject {|elem| elem.current? }
+# inactive_but_current = inactive_ds.reject {|elem| !elem.current? }
+
+  active_but_not_current = []
+  active_current = []
+  inactive_not_current = []
+  inactive_but_current = []
+
+  t = Time.now
+  active_ds.each do |ds|
+    if ds.current?
+      active_current.push(ds)
+    else
+      active_but_not_current.push(ds)
+    end
+  end; 0
+  puts "#{ "%.2f" % (Time.now - t) } |  Active but not Current | #{ active_but_not_current.count } | Active Current | #{ active_current.count } |"
+  
+  t = Time.now
+  inactive_ds.each do |ds|
+    if ds.current?
+      inactive_but_current.push(ds)
+    else
+      inactive_not_current.push(ds)
+    end  
+  end; 0
+  puts "#{ "%.2f" % (Time.now - t) } |  Inactive not Current | #{ inactive_not_current.count } | Inactive but Current | #{ inactive_but_current.count } |"
+  
+  # active_but_not_current.count #delete and pull out of definitions INVESTIGATE - 390
+  # active_current.count #leave alone - 6301
+  # inactive_not_current.count #delete. Store all deleted ones - 11840
+  # inactive_but_current.count #make current / flag ones that need to be replaced - 3255
+
+  puts "COPY THESE INTO AN ARCHIVE"
+  inactive_not_current.each do |ds|
+    ds.print_eval_statement
+    begin
+      ds.delete
+    rescue
+      puts "ERROR!"
+    end
+  end; 0
+  puts "COPY THESE INTO AN ARCHIVE"
+end
+#Maybe should move circular diffs in here
+
