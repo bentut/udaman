@@ -39,6 +39,10 @@ every 1.day, :at => "10:00 pm" do
   rake "reload_aremos"
 end
 
+every 1.day, :at => "12:00 am" do
+  rake "daily_history_load"
+end
+
 every 1.day, :at => "#{hour}:00 am" do
   rake "update_seats_links"
   rake "update_vis_history_links"
@@ -105,11 +109,15 @@ every 1.day, :at => "#{hour}:40 am" do
   rake "tour_rev_upd"
 end
 
-every 1.day, :at => "#{hour.to_i+2}:00 am" do
+every 1.day, :at => "#{bls_hour.to_i+2}:00 am" do
   rake "expenditures_and_nbi"
   rake "visitor_identities"
   rake "const_identities"
-  rake "bea_identities"
+  #rake "bea_identities"
+end
+
+every 1.day, :at => "#{hour.to_i+1}:30 am" do
+  rake "tax_identities"
 end
 
 every 1.day, :at => "#{hour.to_i+2}:45 am" do
@@ -118,19 +126,19 @@ every 1.day, :at => "#{hour.to_i+2}:45 am" do
   rake "run_aggregations3"
 end
 
-every 1.day, :at => "#{hour.to_i+3}:30 am" do
+every 1.day, :at => "#{hour.to_i+5}:30 am" do
   rake "gen_investigate_csv"
 end
 
-every 1.day, :at => "#{hour.to_i+4}:30 am" do
+every 1.day, :at => "#{hour.to_i+5}:40 am" do
   rake "gen_prognoz_diffs"
 end
 
-every 1.day, :at => "#{hour.to_i+4}:45 am" do
+every 1.day, :at => "#{hour.to_i+5}:50 am" do
   rake "aremos_exports"
 end
 
-every 1.day, :at => "#{hour.to_i+4}:50 am" do
+every 1.day, :at => "#{hour.to_i+5}:55 am" do
   rake "tsd_exports"
 end
 

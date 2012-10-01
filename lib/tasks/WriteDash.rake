@@ -1,6 +1,6 @@
 
 task :write_sector_dash => :environment do
-  
+  t = Time.now
   desc "writes interactive job sector chart to website"
   
   view = ActionView::Base.new(ActionController::Base.view_paths, {})
@@ -28,11 +28,11 @@ task :write_sector_dash => :environment do
   end.click_button
   
   puts conf_page
-  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["write_sector_dash", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :write_empl_dash => :environment do
-  
+  t = Time.now
   desc "writes employment level charts to website"
   
   view = ActionView::Base.new(ActionController::Base.view_paths, {})
@@ -58,10 +58,12 @@ task :write_empl_dash => :environment do
     f.send("data[Page][content]=", post_body)
     f.send("action=", '/admin/pages/edit/124/autoPublish:1')
   end.click_button
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["write_empl_dash", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 task :write_ur_dash => :environment do
+  t = Time.now
   post_name = "Unemployment Rates in Hawaii (Seasonally Adjusted)"
   post_address ='http://www.uhero.hawaii.edu/123'
   new_data_series = {}
@@ -102,4 +104,5 @@ task :write_ur_dash => :environment do
   rescue Exception => e
     PackagerMailer.website_post_notification(post_name, post_address, new_data_series, false).deliver
   end
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["write_ur_dash", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

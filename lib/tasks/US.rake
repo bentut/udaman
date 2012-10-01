@@ -13,7 +13,7 @@
 
 
 task :us_upd_q => :environment do
-
+  t = Time.now
 	us_q = {
 	
 	"GDP_C@US.Q" => %Q|Series.load_from_download  "5Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:2", :col => "increment:3:1", :frequency => "Q" }|,
@@ -143,11 +143,11 @@ task :us_upd_q => :environment do
 	p = Packager.new
 	p.add_definitions us_q_nowrite
 	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/us_upd_q_ID.xls"
-	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["us_upd_q", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :us_upd_a => :environment do
-
+  t = Time.now
 	us_a = {
 		"GDP_C@US.A" => %Q|Series.load_from_download  "5A@bea.gov", { :file_type => "csv", :start_date => "1929-01-01", :row => "header:col:1:2", :col => "increment:3:1", :frequency => "A" }|,
 		"GDP_C_R@US.A" => %Q|Series.load_from_download  "6A@bea.gov", { :file_type => "csv", :start_date => "1929-01-01", :row => "header:col:1:2", :col => "increment:3:1", :frequency => "A" }|,
@@ -248,11 +248,11 @@ task :us_upd_a => :environment do
 	p = Packager.new
 	p.add_definitions us_a
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_a_NEW.xls"
-	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["us_upd_a", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :us_upd_m => :environment do
-
+  t = Time.now
 	us_m = {
 		###"N@US.M"" => %Q|Series.load_from_download  "76M@bea.gov", { :file_type => "csv", :start_date => "1959-01-01", :row => "header:col:1:40", :col => "increment:3:1", :frequency => "M" }|,
 		#N@US.M is defined twice
@@ -400,6 +400,6 @@ task :us_upd_m => :environment do
 	p.write_definitions_to "/Volumes/UHEROwork/data/us/update/us_upd_m2_NEW.xls"
 
 
-	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["us_upd_m", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 

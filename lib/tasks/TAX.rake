@@ -11,7 +11,7 @@
 
 
 task :tax_upd => :environment do
-
+  t = Time.now
 	collec = {
 		"TRFINS@HI.M" => %Q|Series.load_from_download(  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 5, :col => 6, :frequency => "M" })/1000|, 
 		"TRCVNS@HI.M" => %Q|Series.load_from_download(  "tax_collec%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-01-01", :sheet => "sheet_num:1", :row => 6, :col => 6, :frequency => "M" })/1000|, 
@@ -364,4 +364,92 @@ task :tax_upd => :environment do
   p = Packager.new
   p.add_definitions ge
   p.write_definitions_to "/Volumes/UHEROwork/data/tax/update/ge_upd_NEW.xls"
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tax_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
+end
+
+task :tax_identities => :environment do
+  t = Time.now
+  #3/21/12 Ben: try to replace all of these with individual calls since they change and should go in the loads in the other jobs
+  #Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata" 
+  #Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls", "sadata" 
+  #Series.load_all_sa_series_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls", "sadata"
+  # replacing this load with individual calls
+  # Series.load_all_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
+  # Series.load_all_mean_corrected_sa_series_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"
+  #maybe should put this in tax section? (but these need to run AFTER all the tax are read in)
+
+  #9/28/12
+  #would be nice if this load could be made more efficient. Not sure why the grouped call isn't working well right now...
+    
+  "TRINNS@HI.M".ts_eval= %Q|"TRINESNS@HI.M".ts + "TRINPRNS@HI.M".ts + "TRINWHNS@HI.M".ts + "TRINRFNS@HI.M".ts|
+  "TRCONS@HI.M".ts_eval= %Q|"TRCOESNS@HI.M".ts + "TRCOPRNS@HI.M".ts + "TRCORFNS@HI.M".ts|
+  "TR@HI.M".ts_eval=%Q|"TR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TR@HI.M".ts_eval=%Q|"TR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRFU@HI.M".ts_eval=%Q|"TRFU@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRFU@HI.M".ts_eval=%Q|"TRFU@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRGT@HI.M".ts_eval=%Q|"TRGT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRGT@HI.M".ts_eval=%Q|"TRGT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRCOES@HI.M".ts_eval=%Q|"TRCOES@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRCOES@HI.M".ts_eval=%Q|"TRCOES@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRCOPR@HI.M".ts_eval=%Q|"TRCOPR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRCOPR@HI.M".ts_eval=%Q|"TRCOPR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRCORF@HI.M".ts_eval=%Q|"TRCORF@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRCORF@HI.M".ts_eval=%Q|"TRCORF@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRINES@HI.M".ts_eval=%Q|"TRINES@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRINES@HI.M".ts_eval=%Q|"TRINES@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRINPR@HI.M".ts_eval=%Q|"TRINPR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRINPR@HI.M".ts_eval=%Q|"TRINPR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRINWH@HI.M".ts_eval=%Q|"TRINWH@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRINWH@HI.M".ts_eval=%Q|"TRINWH@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRINRF@HI.M".ts_eval=%Q|"TRINRF@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRINRF@HI.M".ts_eval=%Q|"TRINRF@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRTT@HI.M".ts_eval=%Q|"TRTT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRTT@HI.M".ts_eval=%Q|"TRTT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim("1987-02-01","1987-12-01")|
+  "TRTT@HI.M".ts_eval=%Q|"TRTT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGR@HI.M".ts_eval=%Q|"TGR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGR@HI.M".ts_eval=%Q|"TGR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGRRT@HI.M".ts_eval=%Q|"TGRRT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGRRT@HI.M".ts_eval=%Q|"TGRRT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGRCT@HI.M".ts_eval=%Q|"TGRCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGRCT@HI.M".ts_eval=%Q|"TGRCT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGRHT@HI.M".ts_eval=%Q|"TGRHT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGRHT@HI.M".ts_eval=%Q|"TGRHT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGB@HI.M".ts_eval=%Q|"TGB@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGB@HI.M".ts_eval=%Q| "TGB@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGBRT@HI.M".ts_eval=%Q|"TGBRT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGBRT@HI.M".ts_eval=%Q|"TGBRT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGBSV@HI.M".ts_eval=%Q|"TGBSV@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGBSV@HI.M".ts_eval=%Q|"TGBSV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGBCT@HI.M".ts_eval=%Q|"TGBCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGBCT@HI.M".ts_eval=%Q|"TGBCT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  
+  "TGBCTNS@HI.Q".ts_eval= %Q|"TGBCTNS@HI.M".ts.aggregate_by(:quarter, :sum)|
+  "TGBCT@HI.Q".ts_eval= %Q|"TGBCT@HI.M".ts.aggregate_by(:quarter, :sum)|  
+  
+  "TGBHT@HI.M".ts_eval=%Q|"TGBHT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGBHT@HI.M".ts_eval=%Q|"TGBHT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDGF@HI.M".ts_eval=%Q|"TDGF@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDGF@HI.M".ts_eval=%Q|"TDGF@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDHW@HI.M".ts_eval=%Q|"TDHW@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDHW@HI.M".ts_eval=%Q|"TDHW@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDAP@HI.M".ts_eval=%Q|"TDAP@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDAP@HI.M".ts_eval=%Q|"TDAP@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDTS@HI.M".ts_eval=%Q|"TDTS@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDTS@HI.M".ts_eval=%Q|"TDTS@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDCT@HI.M".ts_eval=%Q|"TDCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDCT@HI.M".ts_eval=%Q|"TDCT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDCTFU@HI.M".ts_eval=%Q|"TDCTFU@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDCTFU@HI.M".ts_eval=%Q|"TDCTFU@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TDCTTT@HI.M".ts_eval=%Q|"TDCTTT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TDCTTT@HI.M".ts_eval=%Q|"TDCTTT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim("1990-08-01","1990-12-01")|
+  "TDCTTT@HI.M".ts_eval=%Q|"TDCTTT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TGRSV@HI.M".ts_eval=%Q|"TGRSV@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TGRSV@HI.M".ts_eval=%Q|"TGRSV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRCO@HI.M".ts_eval=%Q|"TRCO@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRCO@HI.M".ts_eval=%Q|"TRCO@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  "TRIN@HI.M".ts_eval=%Q|"TRIN@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
+  "TRIN@HI.M".ts_eval=%Q|"TRIN@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tax_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

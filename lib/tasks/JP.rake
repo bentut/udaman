@@ -23,6 +23,7 @@
 
 
 task :jp_upd_a => :environment do
+  t = Time.now
 	jp_a = {
     # "GDP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "A" }|, 
     # "GDP_CP@JP.A" => %Q|Series.load_from_download  "GDP_A@esri.cao.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 3, :frequency => "A" }|, 
@@ -74,13 +75,15 @@ task :jp_upd_a => :environment do
 	p.add_definitions jp_a
 	p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_a_NEW.xls"
 
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["jp_upd_a", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 
 
 task :jp_upd_q => :environment do
-
+  t = Time.now
+  
 	jp_q = {
     # "GDP@JP.Q" => %Q|Series.load_from_download  "GDP_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 2, :frequency => "Q" }|, 
     # "GDP_CP@JP.Q" => %Q|Series.load_from_download  "GDP_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 3, :frequency => "Q" }|, 
@@ -162,10 +165,12 @@ task :jp_upd_q => :environment do
 p = Packager.new
 p.add_definitions jp_q
 p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_q_NEW.xls"
+
+CSV.open("public/rake_time.csv", "a") {|csv| csv << ["jp_upd_q", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :jp_upd_m => :environment do
-
+  t = Time.now
 	jp_m = {
 		"CSCFNS@JP.M" => %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:95:1", :col => 2, :frequency => "M" }|,
 		"LF@JP.M" => %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 4, :frequency => "M" }) * 10|, 
@@ -209,5 +214,5 @@ task :jp_upd_m => :environment do
 	p.add_definitions jp_m_special
 	p.write_definitions_to "/Volumes/UHEROwork/data/japan/update/jp_upd_m2_NEW.xls"
 
-
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["jp_upd_m", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

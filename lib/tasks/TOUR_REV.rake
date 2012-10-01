@@ -12,7 +12,7 @@
 
 
 task :tour_rev_upd=>:environment do
-
+  t = Time.now
 	tour_rev1 = {
 "VISCANNS@HI.M"=>%Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"Canada", :row=>"header:col:1:TOTAL VISITORS", :col=>"repeat:2:13", :frequency=>"M" })/1000|, 
 "VISCANDMNS@HI.M"=>%Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"Canada", :row=>"header:col:1:Domestic", :col=>"repeat:2:13", :frequency=>"M" })/1000|, 
@@ -500,5 +500,6 @@ task :tour_rev_upd=>:environment do
 	p.add_definitions tour_rev3
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_rev_upd3.xls"
 
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tour_rev_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 
 end

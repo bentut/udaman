@@ -20,6 +20,7 @@ end
 
 
 task :gen_prognoz_diffs => :environment do
+  t = Time.now
   diff_data = []
   
   PrognozDataFile.all.each do |pdf| 
@@ -43,10 +44,11 @@ task :gen_prognoz_diffs => :environment do
   PrognozDataFile.all.each do |pdf|
     pdf.write_export
   end
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["gen_prognoz_diffs", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :gen_investigate_csv => :environment do
-  
+  t = Time.now
   # diff_data = [{:id => 1, :name => "he", :display_array => [1,2,2,2] }]
   diff_data = []
   to_investigate = Series.where("aremos_missing > 0 OR ABS(aremos_diff) > 0.0").order('frequency, name ASC')
@@ -94,10 +96,11 @@ task :gen_investigate_csv => :environment do
   system 'cd /Users/Shared/Dev/udaman/script && casperjs rasterize.js'
   puts "finished this now sending"
   PackagerMailer.visual_notification(dps.count, changed_files, downloads).deliver
-  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["gen_investigate_csv", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :gen_daily_summary => :environment do
+  t = Time.now
   downloads = 0
   changed_files = 0
   dps = DataPoint.where("created_at > FROM_DAYS(TO_DAYS(NOW()))").count(:all, :group=> :series_id)
@@ -131,7 +134,7 @@ task :gen_daily_summary => :environment do
   puts "finished this now sending"
   
   PackagerMailer.visual_notification(dps.count, changed_files, downloads).deliver
-  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["gen_daily_summary", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
@@ -178,8 +181,8 @@ task :clean_data_sources => :environment do
 
   puts "COPY THESE INTO AN ARCHIVE"
   inactive_not_current.each do |ds|
-    ds.print_eval_statement
     begin
+      ds.print_eval_statement
       ds.delete
     rescue
       puts "ERROR!"

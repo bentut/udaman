@@ -1,4 +1,5 @@
 task :update_bea_links => :environment do
+  t = Time.now
   bea_table_links = {
     #{}"SA05N@bea.gov" => 'http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=2&7023=0&7024=NAICS&7025=0&7026=15000&7027=-1&7001=42&7029=28&7090=70&7033=-1'
     "SQ5N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=0&7023=0&7024=NAICS&7025=0&7026=00000&7027=-1&7001=30&7029=34&7090=70&7033=-1&form=7&7090=70&7024=NAICS&7026=15000&7028=-1&7083=Levels&7027=-1&7033=-1&7040=-1&step=30&7090=70&7024=NAICS&7026=15000&7028=-1&7083=Levels&7027=-1&7033=-1&7040=-1",
@@ -34,9 +35,11 @@ task :update_bea_links => :environment do
   end
    #"http://www.bea.gov/iTable/download.cfm?ext=csv&fid=0E386BB9F144E39E27116629223749DCC50FB6ED6A5971812E268A5BE984E29D81649D287CDF61113A6FA4754050E98C629157B57B353AAC6DB94578D6DADA6C" 
    b.close
+   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["update_bea_links", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :update_seats_links => :environment do  
+  t = Time.now
   seats_links = DataSourceDownload.where("handle LIKE 'SEATS%'").map { |dsd| dsd.url.gsub("http://www.hawaiitourismauthority.org","") }
 
   require 'mechanize'
@@ -74,11 +77,12 @@ task :update_seats_links => :environment do
       end
     end
   end
-  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["update_seat_links", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 task :update_vis_history_links => :environment do
+  t = Time.now
   handle_fragment = "TOUR_HIST"
   search_page = "http://www.hawaiitourismauthority.org/research/reports/historical-visitor-statistics/"
   link_search_string = "Monthly Final"
@@ -121,4 +125,5 @@ task :update_vis_history_links => :environment do
       end
     end
   end
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["update_vis_history_links", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

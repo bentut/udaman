@@ -39,6 +39,7 @@
 
 #some of these are overwriting read in series and need to be run after the reads
 task :expenditures_and_nbi=>:environment do
+  t = Time.now
   "VISNS@NBI.M".ts_append_eval %Q|"VISNS@HI.M".ts - "VISNS@HON.M".ts|
   "VEXPUSNS@HI.M".ts_append_eval %Q|"VEXPUSWNS@HI.M".ts + "VEXPUSENS@HI.M".ts|
   "VEXPOTNS@HI.M".ts_append_eval %Q|"VEXPNS@HI.M".ts - "VEXPUSNS@HI.M".ts - "VEXPJPNS@HI.M".ts - "VEXPCANNS@HI.M".ts|
@@ -52,9 +53,12 @@ task :expenditures_and_nbi=>:environment do
     "VEXPPDNS@#{cnty}.M".ts_append_eval %Q|"VEXPNS@#{cnty}.M".ts / "VDAYNS@#{cnty}.M".ts*1000|
     "VEXPPTNS@#{cnty}.M".ts_append_eval %Q|"VEXPNS@#{cnty}.M".ts / "VISNS@#{cnty}.M".ts*1000|
   end
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["expenditures_and_nbi", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :bls_3=>:environment do
+  t = Time.now
   "EUTNS@HON.M".ts_append_eval %Q|"E_TUNS@HON.M".ts - "ETWNS@HON.M".ts| 
   "E_TRADE@HI.M".ts_append_eval %Q|"EWT@HI.M".ts + "ERT@HI.M".ts|
   "E_TU@HI.M".ts_append_eval %Q|"E_TTU@HI.M".ts - "E_TRADE@HI.M".ts|
@@ -69,6 +73,7 @@ task :bls_3=>:environment do
   "E_ELSE@HI.M".ts_append_eval %Q|"E_SV@HI.M".ts - ("EAF@HI.M".ts + "EHC@HI.M".ts)|
   "E@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts + "EAG@HI.M".ts|
   "EAENS@HON.M".ts_append_eval %Q|"E_LHNS@HON.M".ts - "EAFNS@HON.M".ts| 
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bls_3", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 #not reading into the database.
@@ -81,7 +86,7 @@ end
 # 25481 | 2012-08-29 11:10:09 UTC | Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/TOUR_OCUP.xls", {:file_type=>"xls", :start_date=>"1998-01-01", :sheet=>"sheet_num:1", :row=>"increment:2:1", :col=>2, :frequency=>"M" })
 
 task :tour_ocup_upd=>:environment do
-
+  t = Time.now
 
   "OCUP%NS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type=>"xls", :start_date=>"2004-01-10", :sheet=>"sheet_num:1", :row=>"increment:4:1", :col=>2, :frequency=>"W" })|
   "PRMNS@HI.W".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/ocupwkly.xls", {:file_type=>"xls", :start_date=>"2004-01-10", :sheet=>"sheet_num:1", :row=>"increment:4:1", :col=>3, :frequency=>"W" })|
@@ -149,13 +154,13 @@ tour_vexp = {
 	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/tour_vexp_upd_ID.xls"
 
 
-
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tour_ocup_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 
 task :tour_PC_upd=>:environment do
-
+t = Time.now
 tour_PC = {
 "PCDMNS@HAW.D"=>%Q|Series.load_from_download(  "tour_PC@hawaii.gov", { :file_type=>"xls", :start_date=>"2009-08-31", :sheet=>"Domestic", :row=>"increment:5:1", :col=>6, :frequency=>"D" })/1|, 
 "PCDMNS@HI.D"=>%Q|Series.load_from_download(  "tour_PC@hawaii.gov", { :file_type=>"xls", :start_date=>"2009-08-31", :sheet=>"Domestic", :row=>"increment:5:1", :col=>3, :frequency=>"D" })/1|, 
@@ -171,11 +176,14 @@ tour_PC = {
 	p = Packager.new
 	p.add_definitions tour_PC
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_PC_upd_NEW.xls"
+	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tour_PC_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
  
 task :tour_seats_upd=>:environment do
 
+  t = Time.now
 	tour_seats = {
 "VSONS@HI.M"=>%Q|Series.load_from_download(  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-09-01", :sheet=>"sheet_num:1", :row=>"header:col:1:TOTAL:prefix", :col=>2, :frequency=>"M" })/1000|,
 "VSODMNS@HI.M"=>%Q|Series.load_from_download(  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-09-01", :sheet=>"sheet_num:1", :row=>"header:col:1:US TOTAL", :col=>2, :frequency=>"M" })/1000|,
@@ -243,10 +251,12 @@ task :tour_seats_upd=>:environment do
 	p = Packager.new
 	p.add_definitions tour_seats
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_seats_upd_NEW.xls"
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tour_seats_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 task :tour_upd=>:environment do
+  t = Time.now
 	tour_1 = {
 "VDAYNS@HI.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:VISITOR DAYS:1:59", :col=>2, :frequency=>"M" })/1000|,
 "VISNS@HI.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:TOTAL VISITORS:1:59", :col=>2, :frequency=>"M" })/1000|,
@@ -786,7 +796,7 @@ task :tour_upd=>:environment do
 	p.add_definitions tour_3
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_upd3_NEW.xls"
 	
-	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tour_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 	
 end
 
@@ -975,6 +985,7 @@ task :vis_test=>:environment do
 	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_upd1_NEW.xls"  
 end
 task :visitor_identities=>:environment do
+  t = Time.now
   
   "VISUSNS@HON.M".ts_eval= %Q|"VISUSWNS@HON.M".ts + "VISUSENS@HON.M".ts|
   "VISUSNS@HAW.M".ts_eval= %Q|"VISUSWNS@HAW.M".ts + "VISUSENS@HAW.M".ts|
@@ -1239,4 +1250,5 @@ task :visitor_identities=>:environment do
   "TRMS@KAU.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 5, :frequency => "A" })|
   "TRMS@MAU.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 6, :frequency => "A" })|
   
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["visitor_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

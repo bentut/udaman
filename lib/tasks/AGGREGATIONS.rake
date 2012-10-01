@@ -39,7 +39,7 @@ end
 
 task :run_aggregations3 => :environment do
   
-
+  t = Time.now
   
   "KBCON@HON.A".ts_eval=%Q|"KBCON@HON.Q".ts.aggregate(:year, :sum)|
   "KBCON@MAU.A".ts_eval=%Q|"KBCON@MAU.Q".ts.aggregate(:year, :sum)|
@@ -178,9 +178,12 @@ task :run_aggregations3 => :environment do
   "VSO@HI.A".ts_eval=%Q|"VSO@HI.Q".ts.aggregate(:year, :average)|
   "VSODM@HI.A".ts_eval=%Q|"VSODM@HI.Q".ts.aggregate(:year, :average)|
   "YXR@JP.A".ts_eval=%Q|"YXR@JP.Q".ts.aggregate(:year, :average)|
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["run_aggregations3", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :run_aggregations => :environment do
+  t = Time.now
   #"EGVFDDDNS@MAU.Q".ts_eval=%Q|"EGVFDDDNS@MAU.M".ts.aggregate(:quarter, :sum)| #this one 0s out.
   "NTCRNS@HI.Q".ts_eval=%Q|"NTCRNS@HI.M".ts.aggregate(:quarter, :sum)|
   "NTTOURNS@HI.Q".ts_eval=%Q|"NTTOURNS@HI.M".ts.aggregate(:quarter, :sum)|
@@ -1112,10 +1115,11 @@ task :run_aggregations => :environment do
   "TRTTNS@HON.Q".ts_eval=%Q|"TRTTNS@HON.M".ts.aggregate(:quarter, :sum)|
   "TRTTNS@KAU.Q".ts_eval=%Q|"TRTTNS@KAU.M".ts.aggregate(:quarter, :sum)|
   "TRTTNS@MAU.Q".ts_eval=%Q|"TRTTNS@MAU.M".ts.aggregate(:quarter, :sum)|
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["run_aggregations", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 task :run_aggregations2 => :environment do
 
-
+  t = Time.now
   "EAD@HAW.Q".ts_eval=%Q|"EAD@HAW.M".ts.aggregate(:quarter, :average)|
   "EAD@HI.Q".ts_eval=%Q|"EAD@HI.M".ts.aggregate(:quarter, :average)|
   "EAD@HON.Q".ts_eval=%Q|"EAD@HON.M".ts.aggregate(:quarter, :average)|
@@ -2179,4 +2183,5 @@ task :run_aggregations2 => :environment do
   "TRISNS@HAW.Q".ts_eval=%Q|"TRISNS@HAW.M".ts.aggregate(:quarter, :average)|
   "TRISNS@KAU.Q".ts_eval=%Q|"TRISNS@KAU.M".ts.aggregate(:quarter, :average)|
   "TRISNS@MAU.Q".ts_eval=%Q|"TRISNS@MAU.M".ts.aggregate(:quarter, :average)|
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["run_aggregations2", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

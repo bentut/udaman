@@ -1,4 +1,5 @@
 task :aremos_exports => :environment do
+  t = Time.now
   #TOUR
   DataList.write "tour1", "/Volumes/UHEROwork/data/udaman/tour1_UDA.xls" #8.9s
   DataList.write "tour2", "/Volumes/UHEROwork/data/udaman/tour2_UDA.xls" #9.2s
@@ -8,9 +9,11 @@ task :aremos_exports => :environment do
   
   #BLS
   DataList.write "bls_job_m", "/Volumes/UHEROwork/data/udaman/bls_job_m_UDA.xls" #25.5
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["aremos_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :tsd_exports => :environment do
+  t = Time.now
   path = "/Volumes/UHEROwork/data/BnkLists/"
   [ "bea_a", "bls_a", "census_a", "jp_a", "misc_a", "tax_a", "tour_a", "us_a", 
     "bea_s", "bls_s", 
@@ -29,9 +32,11 @@ task :tsd_exports => :environment do
     puts "#{ "%.2f" % (Time.now - t) } | #{ list.count } | #{ bank }"
     
   end
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tsd_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :prognoz_exports => :environment do
+  t = Time.now
   DataList.write "prognoz_month1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month1.xls"
   DataList.write "prognoz_month2", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month2.xls"
   DataList.write "prognoz_month3", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month3.xls"
@@ -42,6 +47,7 @@ task :prognoz_exports => :environment do
   DataList.write "prognoz_annual1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_annual1.xls"
   DataList.write "prognoz_annual2", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_annual2.xls"
   DataList.write "prognoz_quarter1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_quarter1.xls"
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["prognoz_expots", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 #23.93 | 200 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month1.xls21.10 | 200 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month2.xls20.30 | 200 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month3.xls18.74 | 199 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month4.xls11.65 | 130 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month5.xls10.29 | 149 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month6.xls14.09 | 56 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month7.xlsrake aborted!SeriesNameException

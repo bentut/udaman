@@ -13,7 +13,7 @@
 
 
 task :uic_upd => :environment do
-
+  t=  Time.now
 	uic = {
 		"UICININS@HONO.W" => %Q|Series.load_from_download(  "UIC@hawaii.gov", { :file_type => "xls", :start_date => "2000-08-19", :sheet => "icweekly", :row => "increment:7:1", :col => 2, :frequency => "W" })/1000|, 
 		"UICININS@KANE.W" => %Q|Series.load_from_download(  "UIC@hawaii.gov", { :file_type => "xls", :start_date => "2000-08-19", :sheet => "icweekly", :row => "increment:7:1", :col => 3, :frequency => "W" })/1000|, 
@@ -47,9 +47,11 @@ task :uic_upd => :environment do
 	p = Packager.new
 	p.add_definitions uic
 	p.write_definitions_to "/Volumes/UHEROwork/data/misc/uiclaims/update/UIC_upd_NEW.xls"
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["uic_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :const_upd_q => :environment do
+  t = Time.now
 	const_q = {
 		"KNRSDNS@HON.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-25", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"KNRSDNS@HAW.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-26", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
@@ -67,9 +69,11 @@ task :const_upd_q => :environment do
 	p = Packager.new
 	p.add_definitions const_q
 	p.write_definitions_to "/Volumes/UHEROwork/data/misc/const/update/const_upd_q_NEW.xls"
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["const_upd_q", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :const_upd_m => :environment do
+  t = Time.now
 	const_m = {
 		"KPPRVNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 41, :frequency => "M" })/1000|, 
 		"KPPRVRSDNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 42, :frequency => "M" })/1000|, 
@@ -120,16 +124,20 @@ task :const_upd_m => :environment do
 	p.add_definitions const_m_nowrite
 	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/const_upd_m_ID.xls"
 
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["const_upd_m", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :const_identities => :environment do
-  
+  t= Time.now
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
   #not sure if these should go in misc or what...
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls", "Q"
 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
+  
   #PRUD identities included here
 		"PAKRCON@HAW.Q".ts_eval= %Q|"PAKRCONNS@HAW.Q".ts|
 		"PAKRCON@HON.Q".ts_eval= %Q|"PAKRCONNS@HON.Q".ts|
@@ -239,5 +247,5 @@ task :const_identities => :environment do
     "HYQUALCON@#{cnty}.A".ts_eval= %Q|"HPMTCON@#{cnty}.A".ts*10/3*12.0|
     "HAICON@#{cnty}.A".ts_eval= %Q|"YMED@#{cnty}.A".ts / "HYQUALCON@#{cnty}.A".ts*100.0|
    end
-   
+   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["const_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

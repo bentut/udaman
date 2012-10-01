@@ -13,7 +13,7 @@
 ###*******************************************************************
 
 task :gsp_upd => :environment do
-
+  t = Time.now
 	gsp_defs = {
 		"YS@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 6, :col => "increment:5:1", :frequency => "A" })/1|, 
 		"YS_PR@HI.A" => %Q|Series.load_from_download(  "GSP@bea.gov", { :file_type => "csv", :start_date => "1997-01-01", :row => 7, :col => "increment:5:1", :frequency => "A" })/1|, 
@@ -187,9 +187,11 @@ task :gsp_upd => :environment do
 	p.add_definitions gsp_defs
 	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/gsp_upd_NEW.xls"
 
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["gsp_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :inc_upd_q => :environment do
+  t = Time.now
 	inc_defs = {
 "Y@HI.Q" => %Q|Series.load_from_download "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 7, :col => "increment:5:1", :frequency => "Q" }|,
 "YL@HI.Q" => %Q|Series.load_from_download "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 9, :col => "increment:5:1", :frequency => "Q" }|,
@@ -243,10 +245,12 @@ task :inc_upd_q => :environment do
 	p = Packager.new
 	p.add_definitions inc_defs
 	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_q_NEW.xls"
+	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["inc_upd_q", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :inc_upd_a => :environment do
-
+  t = Time.now
 	inc_hi_a = {
 	  "Y@HI.A" => %Q|Series.load_from_download "SA04@bea.gov", { :file_type => "csv", :start_date => "1929-01-01", :row => 7, :col => "increment:5:1", :frequency => "A" }|,
     "NRBEA@HI.A" => %Q|Series.load_from_download "SA04@bea.gov", { :file_type => "csv", :start_date => "1929-01-01", :row => 10, :col => "increment:5:1", :frequency => "A" }|,
@@ -1061,10 +1065,12 @@ task :inc_upd_a => :environment do
 	p.add_definitions inc_mau_a
 	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/inc_upd_MAUa_NEW.xls"
 
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["inc_upd_a", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :com_upd => :environment do
 
+  t = Time.now
 	com_hi = {
 "YCTWTA@HI.A" => %Q|Series.load_from_download "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 70, :col => "increment:5:1", :frequency => "A" }|,
 "YCTWTR@HI.A" => %Q|Series.load_from_download "SA06N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 71, :col => "increment:5:1", :frequency => "A" }|,
@@ -1651,9 +1657,11 @@ task :com_upd => :environment do
 	p.add_definitions com_mau
 	p.write_definitions_to "/Volumes/UHEROwork/data/bea/update/com_upd_MAU_NEW.xls"
 	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["com_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :bea_identities => :environment do
+  t = Time.now
   #some of the Y's rely on a manul file read in another process...
 
   #refer to identites in identites in bea_upd.cmd
@@ -1686,5 +1694,7 @@ task :bea_identities => :environment do
   #   "Y_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / "CPI@HON.A".ts|
   #   "YPCBEA_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / ("CPI@HON.A".ts * "NR@#{cnty}.A".ts)|
   # end  
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bea_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 
 end

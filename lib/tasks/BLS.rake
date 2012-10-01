@@ -13,7 +13,7 @@
 
 
 task :bls_cpi_upd_m => :environment do
-
+  t = Time.now
 	bls_cpi_m = {
 		"PC@HON.M" => %Q|Series.load_from_bls("CUURA426SA0", "M")|,
 		"PCFB@HON.M" => %Q|Series.load_from_bls("CUURA426SAF", "M")|,
@@ -63,9 +63,11 @@ task :bls_cpi_upd_m => :environment do
 	p.add_definitions bls_cpi_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_m_NEW.xls"
 	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bls_cpi_upd_m", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :bls_cpi_upd_s => :environment do
+  t = Time.now
 	bls_cpi_s = {
 		"PC@HON.S" => %Q|Series.load_from_bls("CUUSA426SA0", "S")|,
 		"PCFB@HON.S" => %Q|Series.load_from_bls("CUUSA426SAF", "S")|,
@@ -115,11 +117,11 @@ task :bls_cpi_upd_s => :environment do
 	p = Packager.new
 	p.add_definitions bls_cpi_s
 	p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/bls_cpi_upd_s_NEW.xls"
-	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bls_cpi_upd_s", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 task :bls_job_upd_m => :environment do
-
+  t = Time.now
 	bls_job_m = {
 	
 	#These top several lines pull EMPL, LF, and UR data from HIWI as a temporary placeholder
@@ -229,6 +231,8 @@ task :bls_job_upd_m => :environment do
      #"WHAFACNS@HI.M" => %Q|Series.load_from_bls("SMU15000007072100008", "M")|,
 #   "WWAFFDNS@HI.M" => %Q|Series.load_from_bls("SMU15000007072200030", "M")|,
 #   "WHAFFDNS@HI.M" => %Q|Series.load_from_bls("SMU15000007072200008", "M")|,
+    "WHAFFDNS@HI.M" => %Q|Series.load_from_bls("SMU15000007072200008", "M")|,
+    "WWAFFDNS@HI.M" => %Q|Series.load_from_bls("SMU15000007072200030", "M")|,
     "WWCTNS@HON.M" => %Q|Series.load_from_bls("SMU15261801500000030", "M")|,
     "WHCTNS@HON.M" => %Q|Series.load_from_bls("SMU15261801500000008", "M")|,
     "WWMNNS@HON.M" => %Q|Series.load_from_bls("SMU15261803000000030", "M")|,
@@ -363,12 +367,15 @@ task :bls_job_upd_m => :environment do
 	p.add_definitions bls_job_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/bls_job_upd_m_NEW.xls"
 	
+	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bls_job_upd_m", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 
 task :hiwi_upd => :environment do
 
+  t = Time.now
+  
   hiwi_upd = {
     
     'E_NFNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:WAGE & SALARY JOBS", :col => "repeat:2:13" , :frequency => "M"})/1000|,
@@ -700,10 +707,12 @@ task :hiwi_upd => :environment do
   p.add_definitions hiwi_upd_mau
   p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_MAU_NEW.xls"
   
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["hiwi_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
 
 task :bls_identities => :environment do
+  t= Time.now
   "PC@HON.Q".ts_append_eval %Q|"PC@HON.S".ts.interpolate(:quarter, :linear).trim("1985-01-01")|
   "PC@HON.Q".ts_append_eval %Q|"PC@HON.M".ts.aggregate(:quarter, :average)|
   "PC@HON.A".ts_append_eval %Q|"PC@HON.S".ts.aggregate(:year, :average)|
@@ -882,9 +891,11 @@ task :bls_identities => :environment do
   # E_trade/tradens @hi/cnty
   # Before 1990 calculate with identity
   ["HI", "HON", "HAW", "MAU", "KAU"].each do |county|
-    "E_TRADENS@#{county}.M".ts_eval= %Q|("E_TTUNS@#{county}.M".ts - "E_TUNS@#{county}.M".ts).trim("1972-01-01","1989-12-01")|
+    #causes mismatches (but not circular references... though there does seem to be weird related slowdowns)
+    #{}"E_TRADENS@#{county}.M".ts_eval= %Q|("E_TTUNS@#{county}.M".ts - "E_TUNS@#{county}.M".ts).trim("1972-01-01","1989-12-01")|
     #circular reference
     #"E_TRADE@#{county}.M".ts_eval= %Q|("E_TTU@#{county}.M".ts - "E_TU@#{county}.M".ts).trim("1972-01-01","1989-12-01")|
   end
   
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bls_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
