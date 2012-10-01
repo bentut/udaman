@@ -129,7 +129,7 @@ end
 
 task :const_identities => :environment do
   t= Time.now
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_upd.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_imp.xls"
   #not sure if these should go in misc or what...
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls", "Q"
@@ -138,6 +138,42 @@ task :const_identities => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
   
+  "NRCNM@HI.A".ts_eval = %Q|"NR@HI.A".ts - "NRM@HI.A".ts - "NRCMD@HI.A".ts| #replaces the census data completely
+  "NRC@HI.A".ts_eval = %Q|"NR@HI.A".ts - "NRM@HI.A".ts|
+  "NBIRCNM@HI.A".ts_eval = %Q|"NBIR@HI.A".ts - "NBIRCMD@HI.A".ts|
+  "NDEACNM@HI.A".ts_eval= %Q|"NDEA@HI.A".ts - "NDEAM@HI.A".ts - "NDEACMD@HI.A".ts|
+  "NMIGCNM@HI.A".ts_eval = %Q|"NRCNM@HI.A".ts.absolute_change - "NBIRCNM@HI.A".ts + "NDEACNM@HI.A".ts|
+  "NRC@HON.A".ts_eval = %Q|"NR@HON.A".ts - "NRM@HI.A".ts|
+  "NRCNM@HON.A".ts_eval = %Q|"NR@HON.A".ts - "NRM@HI.A".ts - "NRCMD@HI.A".ts|
+  "NR@NBI.A".ts_eval = %Q|"NR@HI.A".ts - "NR@HON.A".ts| 
+  "NRC@NBI.A".ts_eval = %Q|"NRC@HI.A".ts - "NRC@HON.A".ts|
+  "NRCNM@NBI.A".ts_eval = %Q|"NRCNM@HI.A".ts - "NRCNM@HON.A".ts|
+
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
+    "NMIG@#{cnty}.A".ts_eval= %Q|"NR@#{cnty}.A".ts.absolute_change - "NBIR@#{cnty}.A".ts + "NDEA@#{cnty}.A".ts|
+    "NBIRR@#{cnty}.A".ts_eval = %Q|"NBIR@#{cnty}.A".ts / "NR@#{cnty}.A".ts * 1000|
+    "NDEAR@#{cnty}.A".ts_eval = %Q|"NDEA@#{cnty}.A".ts / "NR@#{cnty}.A".ts * 1000|
+    "NMIGR@#{cnty}.A".ts_eval = %Q|"NMIG@#{cnty}.A".ts / "NR@#{cnty}.A".ts * 1000|
+  end
+
+  "NBIRRCMD@HI.A".ts_eval = %Q|"NBIRCMD@HI.A".ts / "NRCMD@HI.A".ts * 1000|
+  "NBIRRCNM@HI.A".ts_eval = %Q|"NBIRCNM@HI.A".ts / "NRCNM@HI.A".ts * 1000|
+
+  "NDEARCNM@HI.A".ts_eval = %Q|"NDEACNM@HI.A".ts / "NRCNM@HI.A".ts * 1000| 
+
+  "NDEARM@HI.A".ts_eval = %Q|"NDEAM@HI.A".ts / "NRM@HI.A".ts * 1000|
+  "NDEARCMD@HI.A".ts_eval = %Q|"NDEACMD@HI.A".ts / "NRCMD@HI.A".ts * 1000|
+  "NMIGRCNM@HI.A".ts_eval = %Q|"NMIGCNM@HI.A".ts / "NRCNM@HI.A".ts * 1000|
+
+  #works for HON, but other counties are not defined
+  #["HON", "HAW", "MAU", "KAU"].each do |cnty| 
+  ["HON"].each do |cnty| 
+    "SH_NRCNM@#{cnty}.A".ts_eval = %Q|"NRCNM@#{cnty}.A".ts / "NRCNM@HI.A".ts|
+    "SH_NR@#{cnty}.A".ts_eval = %Q|"NR@#{cnty}.A".ts / "NR@HI.A".ts|
+  end
+
+  "SH_MD@HI.A".ts_eval = %Q|"NRCMD@HI.A".ts / "NRM@HI.A".ts|
+    
   #PRUD identities included here
 		"PAKRCON@HAW.Q".ts_eval= %Q|"PAKRCONNS@HAW.Q".ts|
 		"PAKRCON@HON.Q".ts_eval= %Q|"PAKRCONNS@HON.Q".ts|

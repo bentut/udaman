@@ -120,7 +120,7 @@ every 1.day, :at => "#{hour.to_i+1}:30 am" do
   rake "tax_identities"
 end
 
-every 1.day, :at => "#{hour.to_i+2}:45 am" do
+every 1.day, :at => "#{bls_hour.to_i+2}:15 am" do
   rake "run_aggregations"
   rake "run_aggregations2"
   rake "run_aggregations3"
