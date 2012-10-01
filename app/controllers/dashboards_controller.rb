@@ -46,6 +46,9 @@ class DashboardsController < ApplicationController
     @to_investigate = Series.where("aremos_missing > 0 OR ABS(aremos_diff) > 0.0").order('name ASC')
   end
   
+  def rake_report
+  end
+  
   def investigate_no_source
     #@no_source = DataSource.where("eval NOT LIKE '%load_from_download%'").select([:eval, :series_id]).joins("JOIN series ON series.id = series_id").where("aremos_missing > 0 OR ABS(aremos_diff) > 0").group(:name).all.sort
 
