@@ -735,6 +735,15 @@ class Series < ActiveRecord::Base
     eval_statements.each {|es| eval(es)}
   end
   
+  def delete_with_data
+    puts "deleting #{name}"
+    data_sources.each do |ds|
+      puts "deleting: #{ds.id}" + ds.eval 
+      ds.delete
+    end
+    self.delete
+  end
+  
   def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )
     return series_to_finish if series_to_finish.count == 0 or depth == 25
     series_to_finish_new = []

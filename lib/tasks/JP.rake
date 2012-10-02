@@ -197,7 +197,7 @@ task :jp_upd_m => :environment do
 	}
 	
 	jp_m_special = {
-
+  
 	"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
 	"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
 	"CPICORE@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 47, :frequency => "M" }|, 
@@ -205,6 +205,8 @@ task :jp_upd_m => :environment do
 		#STKNS starts on row 3 rather than row 2 to capture only fully-completed months
 	
 	}
+	
+	"INFCORE@JP.M".ts_eval= %Q|"CPICORE@JP.M".ts.annualized_percentage_change|
 	
 	p = Packager.new
 	p.add_definitions jp_m

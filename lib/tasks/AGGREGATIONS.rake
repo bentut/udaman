@@ -184,6 +184,17 @@ end
 
 task :run_aggregations => :environment do
   t = Time.now
+  
+  #collection not from automated process... already in the system from earlier
+  "EMPL@HI.A".ts_eval= %Q|"EMPL@HI.M".ts.aggregate(:year, :average)|
+  "UR@HI.A".ts_eval= %Q|"URNS@HI.M".ts.aggregate(:year, :average)|
+  "VISUS@HI.A".ts_eval= %Q|"VISUS@HI.M".ts.aggregate(:year, :sum)|
+  "VISJP@HI.A".ts_eval= %Q|"VISJP@HI.M".ts.aggregate(:year, :sum)|
+  "VISRES@HI.A".ts_eval= %Q|"VISRES@HI.M".ts.aggregate(:year, :sum)|
+  "E_NF@HI.A".ts_eval= %Q|"E_NFNS@HI.M".ts.aggregate(:year, :average)|
+  "VIS@HI.Q".ts_eval= %Q| "VIS@HI.M".ts.aggregate(:quarter, :sum) |
+  #-------------------------------------------------------------------------------
+  
   #"EGVFDDDNS@MAU.Q".ts_eval=%Q|"EGVFDDDNS@MAU.M".ts.aggregate(:quarter, :sum)| #this one 0s out.
   "NTCRNS@HI.Q".ts_eval=%Q|"NTCRNS@HI.M".ts.aggregate(:quarter, :sum)|
   "NTTOURNS@HI.Q".ts_eval=%Q|"NTTOURNS@HI.M".ts.aggregate(:quarter, :sum)|

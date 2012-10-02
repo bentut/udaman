@@ -1036,7 +1036,12 @@ task :visitor_identities=>:environment do
   "VDAYRESNS@HI.M".ts_eval= %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|
   "VEXPPDUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VDAYUSNS@HI.M".ts*1000|
   "VEXPPTUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VISUSNS@HI.M".ts*1000|
-  
+  "VSONS@HAW.M".ts_eval= %Q|"VSONS@HAWH.M".ts + "VSONS@HAWK.M".ts|
+  "VSODMNS@HAW.M".ts_eval= %Q|"VSODMNS@HAWH.M".ts + "VSODMNS@HAWK.M".ts|
+  "VSOUSWNS@HAW.M".ts_eval= %Q|"VSOUSWNS@HAWH.M".ts + "VSOUSWNS@HAWK.M".ts|
+  "VSOITNS@HAW.M".ts_eval= %Q|"VSOITNS@HAWH.M".ts.zero_add "VSOITNS@HAWK.M".ts|
+  "VSOJPNS@HAW.M".ts_eval= %Q|"VSOJPNS@HAWH.M".ts.zero_add "VSOJPNS@HAWK.M".ts|
+  "VSOCANNS@HAW.M".ts_eval= %Q|"VSOCANNS@HAWH.M".ts + "VSOCANNS@HAWK.M".ts|
   
   ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   
     #surprising this is not done in tour.rake considering so many definitions require it there.

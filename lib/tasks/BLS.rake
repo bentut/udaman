@@ -430,7 +430,7 @@ task :hiwi_upd => :environment do
     'EOSNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Other Services", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVFDNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Federal Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
-    #'EGVFDDDNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Department of Defense", :col => "repeat:2:13" , :frequency => "M"})/1000|,
+    'EGVFDDDNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Department of Defense", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVFDSPNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:Naval Shipyard", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVSTNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:State Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVSTEDNS@HI.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "State", :row => "header:col:1:State Education", :col => "repeat:2:13" , :frequency => "M"})/1000|,
@@ -491,7 +491,7 @@ task :hiwi_upd => :environment do
     'EOSNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Other Services", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVFDNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Federal Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
-    #'EGVFDDDNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Department of Defense", :col => "repeat:2:13" , :frequency => "M"})/1000|,
+    'EGVFDDDNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Department of Defense", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVFDSPNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:Naval Shipyard", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVSTNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:State Government", :col => "repeat:2:13" , :frequency => "M"})/1000|,
     'EGVSTEDNS@HON.M' => %Q|Series.load_from_download( "%Y@hiwi.org", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "Oahu", :row => "header:col:1:State Education", :col => "repeat:2:13" , :frequency => "M"})/1000|,
@@ -741,10 +741,34 @@ task :bls_identities => :environment do
     "#{prefix}@HON.A".ts_eval=      %Q|"#{prefix}@HON.Q".ts.aggregate(:year, :average)|
   end
   
+  "INF@HON.Q".ts_eval= %Q|"CPI@HON.Q".ts.rebase("2010-01-01").annualized_percentage_change|
+  "INFCORE@HON.Q".ts_eval= %Q|"PC_FDEN@HON.Q".ts.annualized_percentage_change|
+  "INF_SH@HON.Q".ts_eval= %Q|"PC_SH@HON.Q".ts.annualized_percentage_change|
+  
   #Series loaded from this history sheet... may not need to load every day. But relatively fast...
   #["E_FIR@HI.M", "E_FIR@HON.M", "E_GDSPR@HON.M", "E_GVSL@HON.M", "E_TTU@HAW.M", "E_TTU@HON.M", "E_TTU@KAU.M", "E_TTU@MAU.M", "E_TU@HI.M", "E_TU@HON.M", "EAF@HI.M", "EAF@HON.M", "EAFAC@HI.M", "EAFAC@HON.M", "EAFFD@HI.M", "EAFFD@HON.M", "ECT@HI.M", "ECT@HON.M", "EFI@HI.M", "EFI@HON.M", "EGVFD@HI.M", "EGVFD@HON.M", "EGVLC@HI.M", "EGVLC@HON.M", "EGVST@HI.M", "EGVST@HON.M", "EHC@HI.M", "EHC@HON.M", "EMN@HI.M", "EMN@HON.M", "ERE@HI.M", "ERE@HON.M"]  
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_sa_history.xls"
   #needs EMN up here....
+  
+  "PC@HI.M".ts_eval= %Q|"PC@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
+  "PC@HI.M".ts_eval= %Q| "PC@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata")|
+  "PC@HI.M".ts_eval= %Q|"PC@HI.M".ts.apply_seasonal_adjustment :additive|
+
+  "PCITJP@HI.M".ts_eval= %Q|"PCITJP@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
+  "PCITJP@HI.M".ts_eval= %Q| "PCITJP@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata") |
+  "PCITJP@HI.M".ts_eval= %Q| "PCITJP@HI.M".ts.apply_seasonal_adjustment :additive|
+
+  "PCITOT@HI.M".ts_eval= %Q|"PCITOT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
+  "PCITOT@HI.M".ts_eval= %Q|   "PCITOT@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata") |
+  "PCITOT@HI.M".ts_eval= %Q| "PCITOT@HI.M".ts.apply_seasonal_adjustment :additive |
+
+  "PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
+  "PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata")|
+  "PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".ts.apply_seasonal_adjustment :additive|
+
+  "OCUP%@HI.M".ts_eval= %Q|"OCUP%@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "PRM@HI.M".ts_eval= %Q|"PRM@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
+  "RMRV@HI.M".ts_eval= %Q|"RMRV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
   
   ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
     "ENS@#{cnty}.M".ts_append_eval %Q|"E_NFNS@#{cnty}.M".ts + "EAGNS@#{cnty}.M".ts| 
@@ -811,6 +835,8 @@ task :bls_identities => :environment do
   "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
   "EIF@HI.M".ts_eval= %Q|"EIF@HI.M".ts.apply_seasonal_adjustment :additive|
   "EFI@HI.M".ts_eval= %Q|"E_FIR@HI.M".ts - "ERE@HI.M".ts|
+  
+  "EAG@HI.M".ts_eval= %Q|"EAG@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/bls/seasadj/sadata.xls"|
   
   "E_TRADE@HI.M".ts_append_eval %Q|"EWT@HI.M".ts + "ERT@HI.M".ts| 
   "E_TU@HI.M".ts_eval= %Q|"E_TTU@HI.M".ts - "E_TRADE@HI.M".ts|

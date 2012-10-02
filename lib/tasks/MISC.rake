@@ -250,6 +250,11 @@ task :const_identities => :environment do
     "KRSGF@#{cnty}.Q".ts_eval= %Q|"KRSGF@HI.Q".ts.mc_price_share_for("#{cnty}")|
   end
 
+  "PMKRCON@HON.Q".ts_eval= %Q| "PMKRCON@HON.Q".ts.apply_seasonal_adjustment :multiplicative  |
+  "KRCON@HI.Q".ts_eval= %Q|  "KRCON@HI.Q".ts.apply_seasonal_adjustment :multiplicative|
+  "KRSGF@HI.Q".ts_eval= %Q| "KRSGF@HI.Q".ts.apply_seasonal_adjustment :multiplicative|
+  "PMKRSGF@HON.Q".ts_eval= %Q|  "PMKRSGF@HON.Q".ts.apply_seasonal_adjustment :multiplicative |
+
   #these don't match
    "PAKRSGF@HI.Q".ts_eval= %Q|(("PAKRSGF@HON.Q".ts * "KRSGF@HON.Q".ts) + ("PAKRSGF@HAW.Q".ts * "KRSGF@HAW.Q".ts) + ("PAKRSGF@MAU.Q".ts * "KRSGF@MAU.Q".ts)  + ("PAKRSGF@KAU.Q".ts * "KRSGF@KAU.Q".ts))/ "KRSGF@HI.Q".ts|
    "PAKRCON@HI.Q".ts_eval= %Q|(("PAKRCON@HON.Q".ts * "KRCON@HON.Q".ts) + ("PAKRCON@HAW.Q".ts * "KRCON@HAW.Q".ts) + ("PAKRCON@MAU.Q".ts * "KRCON@MAU.Q".ts)  + ("PAKRCON@KAU.Q".ts * "KRCON@KAU.Q".ts))/ "KRCON@HI.Q".ts|
