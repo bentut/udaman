@@ -136,45 +136,84 @@ module SeriesExternalRelationship
     
   end
   
-  def data_diff_display_array(comparison_data, digits_to_round)
-    results = []
-    comparison_data.each do |date_string, value|
-      dp = DataPoint.where(:series_id => self.id, :date_string => date_string, :current=>true)[0]
-      
-      if dp.nil? and !value.nil?
-        results.push(-1)
-        next
-      end
-
-      if (dp.nil? and value.nil?) or dp.is_pseudo_history?
-        results.push(0)
-        next
-      end
-      
-      source_code = dp.source_type_code
-      diff = (units_at(date_string) - value).abs unless data[date_string].nil? or value.nil?
-      
-      unless diff.nil?
-        results.push(0+source_code) if diff < 10**-digits_to_round
-        results.push(1+source_code) if diff > 10**-digits_to_round and diff <= 1
-        results.push(2+source_code) if diff > 1.0 and diff  <= 10.0
-        results.push(3+source_code) if diff > 10.0          
-        next
-      end
-      
-      
-    end
-    results
-  end
+  # def data_diff_display_array(comparison_data, digits_to_round)
+  #   results = []
+  #   cdp = current_data_points
+  #   comparison_data.each do |date_string, value|
+  #     dp = cdp.select {|dp| dp.date_string == date_string}[0]
+  #     #dp = DataPoint.where(:series_id => self.id, :date_string => date_string, :current=>true)[0]
+  #     
+  #     if dp.nil? and !value.nil?
+  #       results.push(-1)
+  #       next
+  #     end
+  # 
+  #     if (dp.nil? and value.nil?) or dp.pseudo_history
+  #       results.push(0)
+  #       next
+  #     end
+  #     
+  #     source_code = dp.source_type_code
+  #     diff = (units_at(date_string) - value).abs unless data[date_string].nil? or value.nil?
+  #     
+  #     unless diff.nil?
+  #       results.push(0+source_code) if diff < 10**-digits_to_round
+  #       results.push(1+source_code) if diff > 10**-digits_to_round and diff <= 1
+  #       results.push(2+source_code) if diff > 1.0 and diff  <= 10.0
+  #       results.push(3+source_code) if diff > 10.0          
+  #       next
+  #     end
+  #     
+  #     
+  #   end
+  #   results
+  # end
   
   def data_diff(comparison_data, digits_to_round)
+    cdp = current_data_points
     diff_hash = {}
-    comparison_data.each do |date_string, value|
-      dp = DataPoint.where(:series_id => self.id, :date_string => date_string, :current=>true)[0] # only used for pseudo_history_check
-      diff = units_at(date_string) - value unless data[date_string].nil? or value.nil?
-      diff_hash[date_string] = diff if (diff.nil? and !data[date_string].nil?) or (!diff.nil? and diff > 10**-digits_to_round) unless (dp and dp.is_pseudo_history?)
+    results = []
+    comparison_data.each do |date_string, value|      
+      # dp = cdp.reject! {|dp| dp.date_string == date_string} # only used for pseudo_history_check
+      # dp = dp[0] if dp.class == Array
+      dp_val = units_at(date_string)
+      
+      if dp_val.nil?
+        if value.nil?         #no data in series - no data in spreadsheet
+          results.push 0
+          next
+        else                  #data in spreadsheet, but not in series
+          results.push 3
+          diff_hash[date_string] = nil
+          next
+        end
+      end
+            
+      dp_idx = cdp.index {|dp| dp.date_string == date_string }
+      dp = dp_idx.nil? ? dp_idx : cdp.delete_at(dp_idx)
+      
+      if !dp_val.nil? and value.nil? #data in series, no data in spreadsheet
+        if dp.pseudo_history
+          results.push 0
+        else
+          results.push 2
+        end
+        next
+      end
+      
+      diff = dp_val - value
+      
+      if diff < 10**-digits_to_round #same data in series and spreadsheet
+        results.push 1
+      elsif diff <= 0.05 * value #small difference in data in series and spreadsheet 
+        results.push 2
+        diff_hash[date_string] = diff
+      else #large data difference in data in series and spreadsheet | 
+        results.push 3
+        diff_hash[date_string] = diff
+      end
     end
-    diff_hash
+    {:diffs => diff_hash, :display_array => results}
   end
   
   

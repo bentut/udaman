@@ -353,7 +353,7 @@ class Series < ActiveRecord::Base
     data_hash = {}
     self.units ||= 1
     data_points.each do |dp|
-      data_hash[dp.date_string] = (dp.value / self.units).round(round_to) if dp.current and !dp.is_pseudo_history?
+      data_hash[dp.date_string] = (dp.value / self.units).round(round_to) if dp.current and !dp.pseudo_history
     end
     data_hash
   end
@@ -552,8 +552,10 @@ class Series < ActiveRecord::Base
   end
   
   def units_at(date)
+    dd = data[date]
+    return nil if dd.nil?
     self.units ||= 1
-    data[date] / self.units
+    dd / self.units
   end
   
   def new_at(date)

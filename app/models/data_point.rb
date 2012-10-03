@@ -101,6 +101,19 @@ class DataPoint < ActiveRecord::Base
     return false
   end
   
+  def DataPoint.set_pseudo_history
+    DataPoint.all.each do |dp|
+      begin
+        ph = dp.is_pseudo_history?
+        dp.update_attributes(:pseudo_history => true) if ph and !dp.pseudo_history
+        dp.update_attributes(:pseudo_history => false) if !ph and dp.pseudo_history
+      rescue
+        puts "error for dp #{dp.id}"
+      end
+    end
+    0
+  end
+  
   def source_type_code
     case source_type
     when :download

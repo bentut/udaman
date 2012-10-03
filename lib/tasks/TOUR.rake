@@ -1025,15 +1025,7 @@ task :visitor_identities=>:environment do
   "VDAYUSNS@MAUI.M".ts_eval= %Q|"VDAYUSENS@MAUI.M".ts + "VDAYUSWNS@MAUI.M".ts|
   "VDAYUSNS@MOL.M".ts_eval= %Q|"VDAYUSENS@MOL.M".ts + "VDAYUSWNS@MOL.M".ts|
   "VDAYUSNS@LAN.M".ts_eval= %Q|"VDAYUSENS@LAN.M".ts + "VDAYUSWNS@LAN.M".ts|
-  "VDAYRESNS@HON.M".ts_eval= %Q|"VDAYNS@HON.M".ts - ("VDAYUSNS@HON.M".ts + "VDAYJPNS@HON.M".ts)|
-  "VDAYRESNS@HAW.M".ts_eval= %Q|"VDAYNS@HAW.M".ts - ("VDAYUSNS@HAW.M".ts + "VDAYJPNS@HAW.M".ts)|
-  "VDAYRESNS@KAU.M".ts_eval= %Q|"VDAYNS@KAU.M".ts - ("VDAYUSNS@KAU.M".ts + "VDAYJPNS@KAU.M".ts)|
-  "VDAYRESNS@MAU.M".ts_eval= %Q|"VDAYNS@MAU.M".ts - ("VDAYUSNS@MAU.M".ts + "VDAYJPNS@MAU.M".ts)|
-  "VDAYRESNS@MAUI.M".ts_eval= %Q|"VDAYNS@MAUI.M".ts - ("VDAYUSNS@MAUI.M".ts + "VDAYJPNS@MAUI.M".ts)|
-  "VDAYRESNS@MOL.M".ts_eval= %Q|"VDAYNS@MOL.M".ts - ("VDAYUSNS@MOL.M".ts + "VDAYJPNS@MOL.M".ts)|
-  "VDAYRESNS@LAN.M".ts_eval= %Q|"VDAYNS@LAN.M".ts - ("VDAYUSNS@LAN.M".ts + "VDAYJPNS@LAN.M".ts)|
   "VDAYUSNS@HI.M".ts_eval= %Q|"VDAYUSENS@HI.M".ts + "VDAYUSWNS@HI.M".ts|
-  "VDAYRESNS@HI.M".ts_eval= %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|
   "VEXPPDUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VDAYUSNS@HI.M".ts*1000|
   "VEXPPTUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VISUSNS@HI.M".ts*1000|
   "VSONS@HAW.M".ts_eval= %Q|"VSONS@HAWH.M".ts + "VSONS@HAWK.M".ts|
@@ -1047,6 +1039,15 @@ task :visitor_identities=>:environment do
     #surprising this is not done in tour.rake considering so many definitions require it there.
     "VDAYNS@#{cnty}.M".ts_eval= %Q|"VDAYDMNS@#{cnty}.M".ts + "VDAYITNS@#{cnty}.M".ts|
   end
+
+  "VDAYRESNS@HON.M".ts_eval= %Q|"VDAYNS@HON.M".ts - ("VDAYUSNS@HON.M".ts + "VDAYJPNS@HON.M".ts)|
+  "VDAYRESNS@HAW.M".ts_eval= %Q|"VDAYNS@HAW.M".ts - ("VDAYUSNS@HAW.M".ts + "VDAYJPNS@HAW.M".ts)|
+  "VDAYRESNS@KAU.M".ts_eval= %Q|"VDAYNS@KAU.M".ts - ("VDAYUSNS@KAU.M".ts + "VDAYJPNS@KAU.M".ts)|
+  "VDAYRESNS@MAU.M".ts_eval= %Q|"VDAYNS@MAU.M".ts - ("VDAYUSNS@MAU.M".ts + "VDAYJPNS@MAU.M".ts)|
+  "VDAYRESNS@MAUI.M".ts_eval= %Q|"VDAYNS@MAUI.M".ts - ("VDAYUSNS@MAUI.M".ts + "VDAYJPNS@MAUI.M".ts)|
+  "VDAYRESNS@MOL.M".ts_eval= %Q|"VDAYNS@MOL.M".ts - ("VDAYUSNS@MOL.M".ts + "VDAYJPNS@MOL.M".ts)|
+  "VDAYRESNS@LAN.M".ts_eval= %Q|"VDAYNS@LAN.M".ts - ("VDAYUSNS@LAN.M".ts + "VDAYJPNS@LAN.M".ts)|
+  "VDAYRESNS@HI.M".ts_eval= %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|
 
   # don't seem to need these histories... BT 8/29/12
   # #need to load all history identities seem to take full precedence

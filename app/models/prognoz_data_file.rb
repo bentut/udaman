@@ -24,17 +24,26 @@ class PrognozDataFile < ActiveRecord::Base
   end
 
   def udaman_diffs
+    t = Time.now
     os = UpdateSpreadsheet.new filename
+#    puts "#{"%.2f" %(Time.now - t)} | loading spreadsheet"
     return {:notice=>"problem loading spreadsheet", :headers=>[]} if os.load_error?
     diffs = {}
     os.headers_with_frequency_code.each do |header|
+#      t = Time.now
       if header.ts.nil?
         diffs[header] = nil
         next
       end
+#      puts "#{"%.2f" %(Time.now - t)} | looking up #{header}"
+#      t = Time.now
       diff_hash = header.ts.data_diff(os.series(header.split(".")[0]), 3)
+#      puts "#{"%.2f" %(Time.now - t)} | data_diff for #{header}"
+#      t = Time.now
       diffs[header] = diff_hash if diff_hash.count > 0
+#      puts "#{"%.2f" %(Time.now - t)} | #{ filename}"
     end
+    puts "#{"%.2f" %(Time.now - t)} | #{ filename}"
     diffs
   end
     
@@ -53,8 +62,10 @@ class PrognozDataFile < ActiveRecord::Base
   end
   
   def write_export
+    t = Time.now
     os = update_spreadsheet    
     Series.write_prognoz_output_file(os.headers_with_frequency_code, output_path, os.sheets.first, os.dates.keys)
+    puts "#{"%.2f" %(Time.now - t)} | #{ output_path}"
   end
   
   def output_folder_name_for_date(date)
