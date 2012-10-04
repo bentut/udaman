@@ -1,3 +1,23 @@
+
+<style>
+	h2 {font-weight:normal;}
+	table#datacells td svg {margin: 0 auto;}
+	.budget_svg {float:left; }
+	.line { fill: none; stroke: steelblue; stroke-width: 1.5px; }
+	.label-text {font-size:8px; font-family:Arial, sans-serif; color: #888888;}
+	body {width:1200px;}
+	div#all_charts {clear:both;}
+</style>
+
+
+<div id="all_charts">
+	<table>
+		<tr>
+			<td>
+	<h2>Prognoz Diffs</h2>
+	<svg id="matching_diffs"></svg>
+</div>
+
 <p class="notice"><%= notice %></p>
 
 <div id="summary_area">
@@ -16,24 +36,96 @@
 		<tr><td class="label">Frequency: </td><td><%= @output_file.frequency %></td></tr>
 		<tr><td class="label">View Doc: </td><td></td></tr>
 		<tr><td class="label">Series: </td><td><%= series_table(@output_file).html_safe %></td></tr>
-		<tr><td class="label">Diffs: </td>
-			<td>
-			<% if @diffs.nil? %>
-				<p>All Matching</p>
-			<% else %>
-				<% @diffs.each do |series, diffs| %>
-				<p><%= series %>
-					<ul>
-					<% unless diffs.nil? %>
-						<% diffs.each do |date, diff| %>
-							<li><%= date %> <%= diff %></li>
-						<% end %>
-					<% end %>
-					</ul>
-				</p>
-				<% end %>
-			<% end %>
-			</td>
-		</tr>
 	</table>
 </div>
+
+<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+<script type="text/javascript">
+
+	var params = {
+		scale: 1,
+		viz_data: [],
+		unitw: 4,
+		unith: 1,
+		h: 10,
+		left_margin: 100,
+		space: 1,
+		export: function () {},
+	};
+
+	function pf(num) {
+		//if (num === "") return 0;
+		return parseFloat(num.replace(",", ""));
+	}
+
+	function convert_to_color(num) {
+		switch(parseInt(num))
+		{
+		case -1: return "#111111";
+		case 0: return "#EEE";
+		case 1: return "#CCC";
+		case 2: return "#00FF00";
+		case 3: return "#FF0000";
+		default: return "#111111";
+		}
+	}
+
+	function assign_colors(data_array) {
+		data_array.splice(0,3);
+		//return data_array.map(function(elem) {return convert_to_color(elem)});
+		var color_size_array = [];
+		var current_val = data_array[0];
+		var current_size = 0;
+		var i=0;
+		var length = data_array.length
+		for (i=0; i < length; i++) {
+			check_val = data_array.shift();
+			if (check_val != current_val) {
+				color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+				current_val = check_val;
+				current_size = 1;
+			} else {
+				current_size+=1;
+			}
+		}
+		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+		return color_size_array;
+	}
+
+	function matching_diffs(text) {
+		params.viz_data = text;
+		max_length = 0;
+		var data = d3.csv.parseRows(text);
+		var formatted_data = data.map(function(elem) {
+			max_length = elem.length > max_length ? elem.length : max_length;
+			return { pdf_id: elem[0], name:elem[1], id:elem[2], data: assign_colors(elem) }
+		}).filter(function(elem) {return elem.pdf_id === "<%= @output_file.id %>"});
+
+		var svg = d3.select("svg#matching_diffs")
+			.attr("height", function(d) {return (params.unith) * (max_length)})
+			.attr("width", (params.unitw + params.space) * formatted_data.length);
+			//.attr("fill", "#444444");
+
+		var rows = svg.selectAll("g")
+			.data(formatted_data)
+			.enter()
+			.append("g")
+			.attr("transform", function(d, i) {return "translate(" +  (i * (params.unitw+params.space) ).toString() + ",0)"})
+			.append("a")
+			.attr("xlink:href", function(d) {return "/series/" + d.id })
+			.attr("target", "_blank");
+			//.attr("y", function(d, i) {return i * params.h * params.scale});
+		
+		var datapoints = rows.selectAll("rect")
+			.data(function(d) {return d.data})
+			.enter()
+			.append("rect")
+			.attr("height", function(d) {return (d.size * (params.unith))})
+			.attr("width", params.unitw)
+			.attr("y", function(d) {return ((d.end_pos-d.size) * (params.unith))})
+			.attr("x", 0)
+			.attr("fill", function(d) {return d.color});
+	}		
+
+	d3.text('/prognoz_diffs.csv', 'text/csv', matching_diffs); 
+</script>

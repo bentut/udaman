@@ -1,16 +1,7 @@
 
 <style>
 	h2 {font-weight:normal;}
-	/*h2 { text-align:center; color:gray; font-family:verdana; font-weight:100; font-size:20px; padding-right:50px; }*/
 	table#datacells td svg {margin: 0 auto;}
-	svg#download_results text {font-size:9px;}
-	svg#update_spreadsheets text {font-size:8px;}
-	svg#update_spreadsheets rect.group_label {fill:white}
-	svg#update_spreadsheets rect.changed {fill:#119F49}
-	svg#update_spreadsheets rect.not_changed {fill:#D3E4D0}
-	svg#update_spreadsheets g.changed text {font-weight:bold; fill:white}
-	svg#update_spreadsheets g.not_changed text { fill:white}
-	svg#update_spreadsheets g.group_label text {font-weight:bold; font-size:10px; fill:#CCC}
 	.budget_svg {float:left; }
 	.line { fill: none; stroke: steelblue; stroke-width: 1.5px; }
 	.label-text {font-size:8px; font-family:Arial, sans-serif; color: #888888;}
@@ -60,119 +51,95 @@
 
 	
 
-	    <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+<script type="text/javascript">
 
-	    <script type="text/javascript">
+	var params = {
+		scale: 1,
+		viz_data: [],
+		unitw: 1,
+		h: 10,
+		left_margin: 100,
+		space: 0,
+		export: function () {},
+	};
 
-		var params = {
-			scale: 1,
-			viz_data: [],
-			unitw: 1,
-			h: 10,
-			left_margin: 100,
-			space: 1,
-			export: function () {},
-		};
+	function pf(num) {
+		//if (num === "") return 0;
+		return parseFloat(num.replace(",", ""));
+	}
 
-		function pf(num) {
-			//if (num === "") return 0;
-			return parseFloat(num.replace(",", ""));
+	function convert_to_color(num) {
+		switch(parseInt(num))
+		{
+		case -1: return "#111111";
+		case 0: return "#EEE";
+		case 1: return "#CCC";
+		case 2: return "#00FF00";
+		case 3: return "#FF0000";
+		default: return "#111111";
 		}
+	}
 
-		function convert_to_color(num) {
-			switch(parseInt(num))
-			{
-			case -1: return "#111111";
-			case 0: return "#888888";
-			case 13: return "#5D8DA2";
-			case 12: return "#82A3B5";
-			case 11: return "#A8BDC9";
-			case 10: return "#CFDAE2";
-			case 23: return "#96C5CC";
-			case 22: return "#AFD2D7";
-			case 21: return "#C8E0E4";
-			case 20: return "#E2EEF1";
-			case 33: return "#F7B056";
-			case 32: return "#F9C37D";
-			case 31: return "#FCD5A4";
-			case 30: return "#FDE9CE";
-			default: return "#888888";
+	function assign_colors(data_array) {
+		data_array.splice(0,3);
+		//return data_array.map(function(elem) {return convert_to_color(elem)});
+		var color_size_array = [];
+		var current_val = data_array[0];
+		var current_size = 0;
+		var i=0;
+		var length = data_array.length
+		for (i=0; i < length; i++) {
+			check_val = data_array.shift();
+			if (check_val != current_val) {
+				color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+				current_val = check_val;
+				current_size = 1;
+			} else {
+				current_size+=1;
 			}
 		}
+		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+		return color_size_array;
+	}
 
-		function assign_colors(data_array) {
-			data_array.splice(0,2);
-			var color_size_array = [];
-			var current_val = data_array[0];
-			var current_size = 0;
-			var i=0;
-			var length = data_array.length
-			for (i=0; i < length; i++) {
-				check_val = data_array.shift();
-				if (check_val != current_val) {
-					color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
-					current_val = check_val;
-					current_size = 1;
-				} else {
-					current_size+=1;
-				}
-			}
-			color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
-			return color_size_array;
-		}
+	function matching_diffs(text) {
+		params.viz_data = text;
+		max_length = 0;
+		var data = d3.csv.parseRows(text);
+		var formatted_data = data.map(function(elem) {
+			max_length = elem.length > max_length ? elem.length : max_length;
+			return { pdf_id: elem[0], name:elem[1], id:elem[2], data: assign_colors(elem) }
+		});//.filter(function(elem) {return elem.sheet === "4"});
 
-		function matching_diffs(text) {
-			params.viz_data = text;
-			max_length = 0;
-			var data = d3.csv.parseRows(text);
-			var formatted_data = data.map(function(elem) {
-				max_length = elem.length > max_length ? elem.length : max_length;
-				return { name:elem[0], id:elem[1], data: assign_colors(elem) }
-			});
+		var svg = d3.select("svg#matching_diffs")
+			.attr("height", function(d) {return (params.unitw+params.space) * (max_length)})
+			.attr("width", (params.unitw*3 + params.space) * formatted_data.length);
+			//.attr("fill", "#444444");
 
-			var svg = d3.select("svg#matching_diffs")
-				.attr("height", function(d) {return (params.h+params.space) * params.scale * (3+formatted_data.length)})
-				.attr("width", (max_length * params.unitw + params.left_margin) * params.scale);
-				//.attr("fill", "#444444");
+		var rows = svg.selectAll("g")
+			.data(formatted_data)
+			.enter()
+			.append("g")
+			.attr("transform", function(d, i) {return "translate(" +  (i * (params.unitw+params.space) ).toString() + ",0)"})
+			.append("a")
+			.attr("xlink:href", function(d) {return "/prognoz_data_files/" + d.pdf_id })
+			.attr("target", "_blank");
+			//.attr("y", function(d, i) {return i * params.h * params.scale});
+		
+		var datapoints = rows.selectAll("rect")
+			.data(function(d) {return d.data})
+			.enter()
+			.append("rect")
+			.attr("height", function(d) {return (d.size * (params.unitw+params.space))})
+			.attr("width", params.unitw)
+			.attr("y", function(d) {return ((d.end_pos-d.size) * (params.unitw+params.space))})
+			.attr("x", 0)
+			.attr("fill", function(d) {return d.color});
+	}		
 
-			var rows = svg.selectAll("g")
-				.data(formatted_data)
-				.enter()
-				.append("g")
-				.attr("transform", function(d, i) {return "translate(0," +  (i * (params.h+params.space) * params.scale).toString() + ")"});
-				//.attr("y", function(d, i) {return i * params.h * params.scale});
-
-			var series_labels = rows.selectAll("text")
-				.data(function(d) {return [d]})
-				.enter()
-				.append("a")
-				.attr("xlink:href", function(d) {return "/series/" + d.id })
-				.attr("target", "_blank")
-				.append("text")
-				.attr("class", "label-text")
-				.attr("x", 0)
-				.attr("y", (8+params.h) * params.scale)
-				.text(function(d) { return d.name;});
-
-			var datapoints = rows.selectAll("rect")
-				.data(function(d) {return d.data})
-				.enter()
-				.append("rect")
-				.attr("width", function(d) {return (d.size * params.unitw * params.scale)})
-				.attr("height", params.h * params.scale)
-				.attr("x", function(d) {return ((d.end_pos-d.size) * params.unitw + params.left_margin) * params.scale})
-				.attr("y", params.h * params.scale)
-				.attr("fill", function(d) {return d.color});
-		}		
-
-
-
-
-
-		//to get this to generate dynamically, remove the file from the public directory
-		d3.text('/prognoz_diffs.csv', 'text/csv', matching_diffs); 
-
-		</script>
+	d3.text('/prognoz_diffs.csv', 'text/csv', matching_diffs); 
+</script>
 
 
 
