@@ -10,50 +10,29 @@
 </style>
 
 
+<p class="notice"><%= notice %></p>
+<h1>Prognoz Output Files</h2>
+<p>
+<% @output_files.each do |data_file| %>
+	<%= link_to data_file.name , {:action => 'show', :id => data_file.id} %> | 
+<% end %>
+</p>
 <div id="all_charts">
-	<table>
-		<tr>
-			<td>
-	<h2>Prognoz Diffs</h2>
 	<svg id="matching_diffs"></svg>
 </div>
 
-
-
-
-	<p class="notice"><%= notice %></p>
-<div id="summary_area">
-	<h1>Prognoz Output Files</h1>
-	<div id="navigation"><%= link_to "Add Data File", {:action => 'new' }%></div>
-</div>
-<div id="details_mask"></div>
-<div id="details_area">
-	<table>
-		<tr>
-			<th>Frequency</th>
-			<th>Name</th>
-			<th>Path</th>
-			<th></th>
-			<th></th>
-		</tr>
-		<% @output_files.each do |data_file| %>
-
-		<tr>
-			<td><%= data_file.frequency %></td>
-			<td><%= link_to data_file.name , {:action => 'show', :id => data_file.id} %></td>
-			<td><%= short_path data_file.filename %><br /><%= link_to "output to xls", {:action => 'write_xls', :id => data_file.id} %></td>
-			<td><%= link_to "load file", {:action => 'load_from_file', :id => data_file.id} %></td>
-			<td><%= link_to "refresh matches", {:action => 'refresh_matching_series', :id => data_file.id} %></td>
-		</tr>
-		<% end %>
-	</table>
-</div>
+		
 
 	
 
 <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
 <script type="text/javascript">
 
+	var pdf_labels = {
+		<%@output_files.each do |data_file|%>
+		<%= data_file.id%>:"<%=data_file.name%>",
+		<%end%>	
+	};
 	var params = {
 		scale: 1,
 		viz_data: [],
@@ -75,14 +54,15 @@
 		case -1: return "#111111";
 		case 0: return "#EEE";
 		case 1: return "#CCC";
-		case 2: return "#00FF00";
+		case 2: return "#88BB88";
 		case 3: return "#FF0000";
+		case 4: return "#00FF00";
 		default: return "#111111";
 		}
 	}
 
 	function assign_colors(data_array) {
-		data_array.splice(0,3);
+		da = data_array.splice(0,3);
 		//return data_array.map(function(elem) {return convert_to_color(elem)});
 		var color_size_array = [];
 		var current_val = data_array[0];
@@ -92,14 +72,14 @@
 		for (i=0; i < length; i++) {
 			check_val = data_array.shift();
 			if (check_val != current_val) {
-				color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+				color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i, id:da[0] });
 				current_val = check_val;
 				current_size = 1;
 			} else {
 				current_size+=1;
 			}
 		}
-		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i, id:da[0] });
 		return color_size_array;
 	}
 
@@ -114,7 +94,7 @@
 
 		var svg = d3.select("svg#matching_diffs")
 			.attr("height", function(d) {return (params.unitw+params.space) * (max_length)})
-			.attr("width", (params.unitw*3 + params.space) * formatted_data.length);
+			.attr("width", (params.unitw + params.space) * formatted_data.length);
 			//.attr("fill", "#444444");
 
 		var rows = svg.selectAll("g")
@@ -135,7 +115,9 @@
 			.attr("width", params.unitw)
 			.attr("y", function(d) {return ((d.end_pos-d.size) * (params.unitw+params.space))})
 			.attr("x", 0)
-			.attr("fill", function(d) {return d.color});
+			.attr("fill", function(d) {return d.color})
+			.append("svg:title")
+			.text(function(d){ return pdf_labels[d.id]} );
 	}		
 
 	d3.text('/prognoz_diffs.csv', 'text/csv', matching_diffs); 

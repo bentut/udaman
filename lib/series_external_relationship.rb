@@ -196,7 +196,7 @@ module SeriesExternalRelationship
         if dp.pseudo_history
           results.push 0
         else
-          results.push 2
+          results.push 4
         end
         next
       end

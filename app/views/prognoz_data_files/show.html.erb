@@ -9,39 +9,32 @@
 	div#all_charts {clear:both;}
 </style>
 
+<p class="notice"><%= notice %></p>
+<h1>Prognoz Export File: <%= @output_file.name %></h1>
+<p>
+	<%= link_to 'Edit', edit_prognoz_data_file_path(@output_file) %> |
+	<%= link_to 'Delete', @output_file, :method => :delete %> | 
+	<%= link_to 'Back', :action => 'index' %> | 
+	Path: </td><td><%= @output_file.filename %></td></tr>
+</p>
 
 <div id="all_charts">
-	<table>
-		<tr>
-			<td>
-	<h2>Prognoz Diffs</h2>
 	<svg id="matching_diffs"></svg>
-</div>
-
-<p class="notice"><%= notice %></p>
-
-<div id="summary_area">
-	<h2>Prognoz Output File</h2>
-	<h1><%= @output_file.name %></h1>
-	<div id="navigation">
-		<%= link_to 'Edit', edit_prognoz_data_file_path(@output_file) %> |
-		<%= link_to 'Delete', @output_file, :method => :delete %> | 
-		<%= link_to 'Back', :action => 'index' %>
-	</div>
-</div>
-<div id="details_mask"></div>
-<div id="details_area">
-	<table>
-		<tr><td class="label">Path: </td><td><%= @output_file.filename %></td></tr>
-		<tr><td class="label">Frequency: </td><td><%= @output_file.frequency %></td></tr>
-		<tr><td class="label">View Doc: </td><td></td></tr>
-		<tr><td class="label">Series: </td><td><%= series_table(@output_file).html_safe %></td></tr>
-	</table>
 </div>
 
 <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
 <script type="text/javascript">
 
+	var s_labels = {
+	<%@diffs.each do |s_name, diff|%>
+	"<%= s_name%>":
+		<% if diff.nil? %>
+			"Series: <%= s_name %> is missing",
+		<% else %>
+			"<%= s_name%>\n<% diff[:diffs].each do |date, difference| %> <%= date %>: <%= difference.nil? ? 'no udaman value' : difference.round(3) %>\n <%end%>",
+		<%end%>
+	<%end%>	
+	};
 	var params = {
 		scale: 1,
 		viz_data: [],
@@ -64,14 +57,15 @@
 		case -1: return "#111111";
 		case 0: return "#EEE";
 		case 1: return "#CCC";
-		case 2: return "#00FF00";
+		case 2: return "#88BB88";
 		case 3: return "#FF0000";
+		case 4: return "#00FF00";
 		default: return "#111111";
 		}
 	}
 
 	function assign_colors(data_array) {
-		data_array.splice(0,3);
+		da = data_array.splice(0,3);
 		//return data_array.map(function(elem) {return convert_to_color(elem)});
 		var color_size_array = [];
 		var current_val = data_array[0];
@@ -81,14 +75,18 @@
 		for (i=0; i < length; i++) {
 			check_val = data_array.shift();
 			if (check_val != current_val) {
-				color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+				color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i, name: da[1]});
 				current_val = check_val;
 				current_size = 1;
 			} else {
 				current_size+=1;
 			}
 		}
-		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i });
+		if (current_val === "-1") {
+			current_size = 10;
+			i = 9;
+		}
+		color_size_array.push({color: convert_to_color(current_val), size: current_size, end_pos: i, name: da[1] });
 		return color_size_array;
 	}
 
@@ -113,7 +111,10 @@
 			.attr("transform", function(d, i) {return "translate(" +  (i * (params.unitw+params.space) ).toString() + ",0)"})
 			.append("a")
 			.attr("xlink:href", function(d) {return "/series/" + d.id })
-			.attr("target", "_blank");
+			.attr("target", "_blank")
+
+			;
+			
 			//.attr("y", function(d, i) {return i * params.h * params.scale});
 		
 		var datapoints = rows.selectAll("rect")
@@ -124,7 +125,10 @@
 			.attr("width", params.unitw)
 			.attr("y", function(d) {return ((d.end_pos-d.size) * (params.unith))})
 			.attr("x", 0)
-			.attr("fill", function(d) {return d.color});
+			.attr("fill", function(d) {return d.color})
+			.append("svg:title")
+			.text(function(d){return s_labels[d.name]} )
+			;
 	}		
 
 	d3.text('/prognoz_diffs.csv', 'text/csv', matching_diffs); 
