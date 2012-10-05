@@ -1,4 +1,5 @@
 module SeriesInterpolation
+  
   def interpolate_to (frequency, operation, series_to_store_name)
     series_to_store_name.ts= interpolate frequency,operation
   end
@@ -11,6 +12,32 @@ module SeriesInterpolation
     end 
     new_series = new_transformation("Interpolated Days (filled) from #{self.name}", daily_data)
     new_series.frequency = "day"
+    new_series
+  end
+  def census_interpolate(frequency)
+    raise AggregationError if frequency != :quarter and self.frequency != "year"
+    quarterly_data = {}
+    last = nil
+    started_interpolation = false
+    data.sort.each do |key, value|
+      unless last.nil?
+        year = key.to_date.year
+        step = (value - last) / 4
+        quarterly_data["#{year-1}-10-01"] = value - 3 * step
+        quarterly_data["#{year}-01-01"]   = value - 2 * step
+        quarterly_data["#{year}-04-01"]   = value - 1 * step
+        quarterly_data["#{year}-07-01"]   = value
+        unless started_interpolation
+          quarterly_data["#{year-1}-01-01"]   = last - 2 * step
+          quarterly_data["#{year-1}-04-01"]   = last - 1 * step
+          quarterly_data["#{year-1}-07-01"]   = last
+          started_interpolation = true
+        end
+      end
+      last = value
+    end
+    new_series = new_transformation("Interpolated with Census method from #{self.name}", quarterly_data)
+    new_series.frequency = frequency 
     new_series
   end
   
@@ -43,7 +70,7 @@ module SeriesInterpolation
     quarterly_data[(Date.parse(last_date) >> 3).to_s] = last + interval/4
     #quarterly_data
     new_series = new_transformation("Interpolated from #{self.name}", quarterly_data)
-    new_series.frequency = frequency #may not want to do this... probably saving series unintentionally
+    new_series.frequency = frequency 
     new_series
   end
   
