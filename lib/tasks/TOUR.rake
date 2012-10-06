@@ -1098,9 +1098,34 @@ task :visitor_identities=>:environment do
   end
     
   #from task vlos requires vdayNSs and visNSs and vrlsNSs
-  ["CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+  ["","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
     ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
-      "VLOS#{serlist}NS@#{cnty}.M".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.M".ts / "VIS#{serlist}NS@#{cnty}.M".ts|
+        "VLOS#{serlist}NS@#{cnty}.M".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.M".ts / "VIS#{serlist}NS@#{cnty}.M".ts|
+        "VLOS#{serlist}NS@#{cnty}.Q".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.Q".ts / "VIS#{serlist}NS@#{cnty}.Q".ts|        
+    end
+  end
+
+  ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty| #no .MAUI .MOL or .LAN ... missing components
+    ["M", "Q", "A"].each do |f|
+      "VLOS@#{cnty}.#{f}".ts_eval= %Q|"VDAY@#{cnty}.#{f}".ts / "VIS@#{cnty}.#{f}".ts|
+      "VLOSJP@#{cnty}.#{f}".ts_eval= %Q|"VDAYJP@#{cnty}.#{f}".ts / "VISJP@#{cnty}.#{f}".ts|
+      #"VLOSCAN@#{cnty}.#{f}".ts_eval= %Q|"VDAYCAN@#{cnty}.#{f}".ts / "VISCAN@#{cnty}.#{f}".ts| #missing components
+      #"VLOSUSE@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSE@#{cnty}.#{f}".ts / "VISUSE@#{cnty}.#{f}".ts| #missing components
+      #"VLOSUSW@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSW@#{cnty}.#{f}".ts / "VISUSW@#{cnty}.#{f}".ts| #missing components
+      "VLOSDM@#{cnty}.#{f}".ts_eval= %Q|"VDAYDM@#{cnty}.#{f}".ts / "VISDM@#{cnty}.#{f}".ts|
+      "VLOSIT@#{cnty}.#{f}".ts_eval= %Q|"VDAYIT@#{cnty}.#{f}".ts / "VISIT@#{cnty}.#{f}".ts|
+    end
+  end
+  
+  ["","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+    ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
+      ["M", "Q"].each do |f|
+        begin
+          "VADC#{serlist}NS@#{cnty}.#{f}".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.#{f}".ts / "VDAY#{serlist}NS@#{cnty}.#{f}".ts.days_in_period|
+        rescue
+          puts "ERROR: #{serlist}NS, #{cnty}, #{f}"
+        end
+      end
     end
   end
   
@@ -1185,16 +1210,10 @@ task :visitor_identities=>:environment do
   "VIS@HAW.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("HAW","VIS").trim|
   "VIS@KAU.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("KAU","VIS").trim|
   "VIS@MAU.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("MAU","VIS").trim|
-  
-  ["HI","HON", "HAW", "MAU", "KAU"].each do |county|
-    "VIS@#{county}.M".ts_append_eval %Q|"VISJP@#{county}.M".ts + "VISUS@#{county}.M".ts + "VISRES@#{county}.M".ts|  
-    "VDAY@#{county}.M".ts_append_eval %Q|"VDAYJP@#{county}.M".ts + "VDAYUS@#{county}.M".ts + "VDAYRES@#{county}.M".ts| 
-  end
-  
-  ["HON", "HI", "KAU", "MAU", "HAW"].each do |county| 
-    "VIS@#{county}.A".ts_eval= %Q|"VIS@#{county}.M".ts.aggregate(:year, :sum)|
-  end
-  
+  "VIS@MAUI.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("MAUI","VIS").trim|
+  "VIS@MOL.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("MOL","VIS").trim|
+  "VIS@LAN.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("LAN","VIS").trim|
+
   "VLOS@HI.M".ts_eval=      %Q|"VDAY@HI.M".ts / "VIS@HI.M".ts|
   
   "VSO@HI.M".ts_eval= %Q|"VSO@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
@@ -1214,6 +1233,53 @@ task :visitor_identities=>:environment do
   
   "VEXPPDJP@HI.M".ts_eval= %Q|"VEXPPDJP@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
   "VEXPPDJP@HI.M".ts_eval= %Q|"VEXPPDJP@HI.M".ts.apply_seasonal_adjustment :additive|
+
+  ["HON", "HAW", "KAU", "MAU"].each do |cnty| #MAUI / MOL / LAN?
+    ser = ""
+    "VSO#{ser}@#{cnty}.M".ts_eval= %Q|"VSO#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VSO#{ser}")| 
+    "VSODM#{ser}@#{cnty}.M".ts_eval= %Q|"VSODM#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VSODM#{ser}")|
+    "VEXP#{ser}@#{cnty}.M".ts_eval= %Q|"VEXP#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXP#{ser}")|
+    "VEXPPD#{ser}@#{cnty}.M".ts_eval= %Q|"VEXPPD#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXPPD#{ser}")|
+    "VEXPPT#{ser}@#{cnty}.M".ts_eval= %Q|"VEXPPT#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXPPT#{ser}")|
+    
+  end
+
+  ["CAN", "JP", "USE", "USW"].each do |ser|
+    ["HON", "HAW", "KAU", "MAU","MAUI","MOL","LAN"].each do |cnty|
+      "VIS#{ser}@#{cnty}.M".ts_eval= %Q|"VIS#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VIS#{ser}")|
+      "VDAY#{ser}@#{cnty}.M".ts_eval= %Q|"VDAY#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VDAY#{ser}")|
+      "VLOS#{ser}@#{cnty}.M".ts_eval= %Q|"VLOS#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VLOS#{ser}")| #only works for MOL / Maui / LAN
+      "VIS#{ser}@#{cnty}.Q".ts_eval= %Q|"VIS#{ser}@#{cnty}.M".ts.aggregate(:quarter, :sum)|
+      "VIS#{ser}@#{cnty}.A".ts_eval= %Q|"VIS#{ser}@#{cnty}.M".ts.aggregate(:year, :sum)|
+      "VDAY#{ser}@#{cnty}.Q".ts_eval= %Q|"VDAY#{ser}@#{cnty}.M".ts.aggregate(:quarter, :sum)|
+      "VDAY#{ser}@#{cnty}.A".ts_eval= %Q|"VDAY#{ser}@#{cnty}.M".ts.aggregate(:year, :sum)|
+    end
+  end
+  
+  ["HI","HON", "HAW", "MAU", "KAU"].each do |county| #think I need to add MAUI, MOL, LAN but need to figure out VIS / VDAYRES
+    "VIS@#{county}.M".ts_append_eval %Q|"VISJP@#{county}.M".ts + "VISUS@#{county}.M".ts + "VISRES@#{county}.M".ts|  
+    "VDAY@#{county}.M".ts_append_eval %Q|"VDAYJP@#{county}.M".ts + "VDAYUS@#{county}.M".ts + "VDAYRES@#{county}.M".ts| 
+  end
+  
+  ["HON", "HI", "KAU", "MAU", "HAW", "MAUI", "MOL", "LAN"].each do |county| 
+    "VIS@#{county}.A".ts_eval= %Q|"VIS@#{county}.M".ts.aggregate(:year, :sum)|
+  end
+  
+  
+  ["","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+    ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
+      ["M", "Q", "A"].each do |f|
+        begin
+          #next unless ["MAUI", "MOL", "LAN"].index(cnty).nil? # think these all eventually need to be in, though
+          "VADC#{serlist}@#{cnty}.#{f}".ts_eval= %Q|"VDAY#{serlist}@#{cnty}.#{f}".ts / "VDAY#{serlist}@#{cnty}.#{f}".ts.days_in_period|
+        rescue
+          puts "ERROR: #{serlist}, #{cnty}, #{f}"
+        end
+      end
+    end
+  end
+  
+  
   
   #separate section for these...?
   ["HON", "HI", "KAU", "MAU", "HAW"].each do |cnty|
@@ -1258,6 +1324,19 @@ task :visitor_identities=>:environment do
   "RMRV@HI.M".ts_eval= %Q|"RMRV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
   "RMRV@HI.M".ts_eval= %Q|"RMRV@HI.M".ts.apply_seasonal_adjustment :additive|
   
+  
+  ["HON", "KAU", "MAU", "HAW"].each do |cnty|
+    "OCUP%@#{cnty}.M".ts_eval= %Q|"OCUP%@HI.M".ts.mc_ma_county_share_for("#{cnty}","OCUP%")|
+    "RMRV@#{cnty}.M".ts_eval= %Q|"RMRV@HI.M".ts.mc_ma_county_share_for("#{cnty}","RMRV")|
+    "PRM@#{cnty}.M".ts_eval= %Q|"PRM@HI.M".ts.mc_ma_county_share_for("#{cnty}","PRM")|
+    "OCUP%@#{cnty}.Q".ts_eval= %Q|"OCUP%@#{cnty}.M".ts.aggregate(:quarter, :average)|
+    "RMRV@#{cnty}.Q".ts_eval= %Q|"RMRV@#{cnty}.M".ts.aggregate(:quarter, :average)|
+    "PRM@#{cnty}.Q".ts_eval= %Q|"PRM@#{cnty}.M".ts.aggregate(:quarter, :average)|
+    "OCUP%@#{cnty}.A".ts_eval= %Q|"OCUP%@#{cnty}.M".ts.aggregate(:year, :average)|
+    "RMRV@#{cnty}.A".ts_eval= %Q|"RMRV@#{cnty}.M".ts.aggregate(:year, :average)|
+    "PRM@#{cnty}.A".ts_eval= %Q|"PRM@#{cnty}.M".ts.aggregate(:year, :average)|
+  end
+
 
   "TRMS@HI.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 2, :frequency => "A" })|
   "TRMS@HON.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 3, :frequency => "A" })|

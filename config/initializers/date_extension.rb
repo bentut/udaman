@@ -55,6 +55,12 @@ class Date
     return "#{self.year}-07-01" if [7,8,9,10,11,12].include?(self.mon)
   end
   
+  def days_in_period(frequency)
+    return (self.leap? ? 366 : 365) if frequency == "year"
+    return self.days_in_month + (self >> 1).days_in_month + (self >> 2).days_in_month if frequency == "quarter"
+    return self.days_in_month if frequency == "month"
+  end
+  
   def days_in_month
     Time.days_in_month(self.month, self.year)
   end

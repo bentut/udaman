@@ -131,8 +131,10 @@ task :const_identities => :environment do
   t= Time.now
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/census_imp.xls"
   #not sure if these should go in misc or what...
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls"
-  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls", "Q"
+  #Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls"
+  #Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltUnemplStats.xls", "Q"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltURA.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/AltURQ.xls"
 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"

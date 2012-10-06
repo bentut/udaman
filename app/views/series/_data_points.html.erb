@@ -38,7 +38,7 @@
 				<span class='current-datapoint'>
 					<% bgcolor = DataSource.find(cdp.data_source_id).color rescue "FFF" %>
 					<div class='datapoint current-datapoint' style='background-color:#<%= bgcolor %>'>
-						<%= "%.3f" % cdp_val %><sup><%= (Time.now.to_date - cdp.created_at.to_date).to_i %></sup>
+						<%= "%.3f" % cdp_val %><sup><%= (Time.now.to_date - cdp.created_at.to_date).to_i %><%="(ph)" if cdp.pseudo_history %></sup>
 					</div>
 					<% 
 						#series.data_points.where(:current => false, 
@@ -54,7 +54,7 @@
 							<% dp_val = dp.value / series.units %>
 							<% bgcolor = DataSource.find(dp.data_source_id).color rescue "FFF" %>
 							<div class='datapoint' style='background-color:#<%= bgcolor %>'>
-								<%= "%.3f" % dp_val %><sup><%= (Time.now.to_date - dp.created_at.to_date).to_i %></sup>
+								<%= "%.3f" % dp_val %><sup><%= (Time.now.to_date - dp.created_at.to_date).to_i %><%="(ph)" if dp.pseudo_history %></sup>
 							</div>
 					<% end %>
 				</span>

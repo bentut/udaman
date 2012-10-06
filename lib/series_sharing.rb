@@ -115,9 +115,9 @@ module SeriesSharing
     start_date = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.first_value_date
     end_date = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.get_last_complete_december_datestring     
     historical = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.moving_average_offset_early(start_date,end_date) /  "#{series_prefix}NS@HI.#{f}".ts.moving_average_offset_early(start_date,end_date) * self
-    historical.print
+    #historical.print
     mean_corrected_historical = historical / historical.annual_sum * "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.annual_sum
-    mean_corrected_historical.print
+    #mean_corrected_historical.print
     current_year = "#{series_prefix}NS@#{county_abbrev}.#{f}".ts.backward_looking_moving_average.get_last_incomplete_year / "#{series_prefix}NS@HI.#{f}".ts.backward_looking_moving_average.get_last_incomplete_year * self
     new_transformation("Share of #{name} using ratio of #{series_prefix}NS@#{county_abbrev}.#{f} over #{series_prefix}NS@HI.#{f} using a mean corrected moving average (offset early) and a backward looking moving average for the current year",
         mean_corrected_historical.data.series_merge(current_year.data))

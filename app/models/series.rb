@@ -352,6 +352,7 @@ class Series < ActiveRecord::Base
   def scaled_data_no_pseudo_history(round_to = 3)
     data_hash = {}
     self.units ||= 1
+    self.units = 1000 if name[0..2] == "TGB" #hack for the tax scaling. Should not save units
     data_points.each do |dp|
       data_hash[dp.date_string] = (dp.value / self.units).round(round_to) if dp.current and !dp.pseudo_history
     end
@@ -481,6 +482,12 @@ class Series < ActiveRecord::Base
   def load_from_fred(code)
     series_data = DataHtmlParser.new.get_fred_series(code)
     new_transformation("loaded series : #{code} from FRED website", series_data)
+  end
+  
+  def days_in_period
+    series_data = {}
+    data.each {|date_string, val| series_data[date_string] = date_string.to_date.days_in_period(self.frequency) }
+    Series.new_transformation("days in time periods", series_data, Series.frequency_from_code(frequency))
   end
   
   def Series.load_from_fred(code, frequency)
