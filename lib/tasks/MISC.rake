@@ -75,10 +75,10 @@ end
 task :const_upd_m => :environment do
   t = Time.now
 	const_m = {
-		"KPPRVNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 41, :frequency => "M" })/1000|, 
-		"KPPRVRSDNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 42, :frequency => "M" })/1000|, 
-		"KPPRVCOMNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 43, :frequency => "M" })/1000|, 
-		"KPPRVADDNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 44, :frequency => "M" })/1000|, 
+		"KPPRVNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:6:1", :col => 41, :frequency => "M" })/1000|, 
+		"KPPRVRSDNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:6:1", :col => 42, :frequency => "M" })/1000|, 
+		"KPPRVCOMNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:6:1", :col => 43, :frequency => "M" })/1000|, 
+		"KPPRVADDNS@HI.M" => %Q|Series.load_from_download(  "CONST_HI@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:6:1", :col => 44, :frequency => "M" })/1000|, 
 		"KPPRVNS@HON.M" => %Q|Series.load_from_download(  "CONST_HON@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 41, :frequency => "M" })/1000|, 
 		"KPPRVRSDNS@HON.M" => %Q|Series.load_from_download(  "CONST_HON@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 42, :frequency => "M" })/1000|, 
 		"KPPRVCOMNS@HON.M" => %Q|Series.load_from_download(  "CONST_HON@hawaii.gov", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "sheet_num:1", :row => "increment:5:1", :col => 43, :frequency => "M" })/1000|, 
@@ -99,30 +99,30 @@ task :const_upd_m => :environment do
 	
 	}
 	
-	
-	const_m_nowrite = {
-		"KPPRVNRSDNS@HI.M" => %Q|"KPPRVNS@HI.M".ts - "KPPRVRSDNS@HI.M".ts|,
-		"KPPRVNRSDNS@HON.M" => %Q|"KPPRVNS@HON.M".ts - "KPPRVRSDNS@HON.M".ts|,
-		"KPPRVNRSDNS@HAW.M" => %Q|"KPPRVNS@HAW.M".ts - "KPPRVRSDNS@HAW.M".ts|,
-		"KPPRVNRSDNS@MAU.M" => %Q|"KPPRVNS@MAU.M".ts - "KPPRVRSDNS@MAU.M".ts|,
-		"KPPRVNRSDNS@KAU.M" => %Q|"KPPRVNS@KAU.M".ts - "KPPRVRSDNS@KAU.M".ts|,	
-		"KPPRVNS@NBI.M" => %Q|"KPPRVNS@HAW.M".ts + "KPPRVNS@MAU.M".ts + "KPPRVNS@KAU.M".ts|,
-		"KPPRVRSDNS@NBI.M" => %Q|"KPPRVRSDNS@HAW.M".ts + "KPPRVRSDNS@MAU.M".ts + "KPPRVRSDNS@KAU.M".ts|,
-		"KPPRVCOMNS@NBI.M" => %Q|"KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts + "KPPRVCOMNS@KAU.M".ts|,
-		"KPPRVADDNS@NBI.M" => %Q|"KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts + "KPPRVADDNS@KAU.M".ts|,
-		"KPPRVNRSDNS@NBI.M" => %Q|"KPPRVNRSDNS@HAW.M".ts + "KPPRVNRSDNS@MAU.M".ts + "KPPRVNRSDNS@KAU.M".ts|
-	
+
+#move these and remove other	
+  # const_m_nowrite = {
+  #   "KPPRVNRSDNS@HI.M" => %Q|"KPPRVNS@HI.M".ts - "KPPRVRSDNS@HI.M".ts|,
+  #   "KPPRVNRSDNS@HON.M" => %Q|"KPPRVNS@HON.M".ts - "KPPRVRSDNS@HON.M".ts|,
+  #   "KPPRVNRSDNS@HAW.M" => %Q|"KPPRVNS@HAW.M".ts - "KPPRVRSDNS@HAW.M".ts|,
+  #   "KPPRVNRSDNS@MAU.M" => %Q|"KPPRVNS@MAU.M".ts - "KPPRVRSDNS@MAU.M".ts|,
+  #   "KPPRVNRSDNS@KAU.M" => %Q|"KPPRVNS@KAU.M".ts - "KPPRVRSDNS@KAU.M".ts|,  
+  #   "KPPRVNS@NBI.M" => %Q|"KPPRVNS@HAW.M".ts + "KPPRVNS@MAU.M".ts + "KPPRVNS@KAU.M".ts|,
+  #   "KPPRVRSDNS@NBI.M" => %Q|"KPPRVRSDNS@HAW.M".ts + "KPPRVRSDNS@MAU.M".ts + "KPPRVRSDNS@KAU.M".ts|,
+  #   "KPPRVCOMNS@NBI.M" => %Q|"KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts + "KPPRVCOMNS@KAU.M".ts|,
+  #   "KPPRVADDNS@NBI.M" => %Q|"KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts + "KPPRVADDNS@KAU.M".ts|,
+  #   "KPPRVNRSDNS@NBI.M" => %Q|"KPPRVNRSDNS@HAW.M".ts + "KPPRVNRSDNS@MAU.M".ts + "KPPRVNRSDNS@KAU.M".ts|
+  # 
+  #   
+  # }
 		
-	}
-	
-	
 	p = Packager.new
 	p.add_definitions const_m
 	p.write_definitions_to "/Volumes/UHEROwork/data/misc/const/update/const_upd_m_NEW.xls"
 
-	p = Packager.new
-	p.add_definitions const_m_nowrite
-	p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/const_upd_m_ID.xls"
+  # p = Packager.new
+  # p.add_definitions const_m_nowrite
+  # p.write_definitions_to "/Volumes/UHEROwork/data/rawdata/trash/const_upd_m_ID.xls"
 
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["const_upd_m", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
@@ -139,6 +139,27 @@ task :const_identities => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/prud_upd.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hbr_upd_m.csv"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/manual/HAWpermits.xls"
+
+  ["KPPRVNS", "KPPRVRSDNS"].each do |s_name|
+    "#{s_name}@HI.M".ts_eval= %Q|("#{s_name}@HAW.M".ts + "#{s_name}@MAU.M".ts + "#{s_name}@KAU.M".ts + "#{s_name}@HON.M".ts).trim("2012-04-01")|
+  end
+  
+  ["KPPRVCOMNS", "KPPRVADDNS"].each do |s_name|
+    "#{s_name}@HI.M".ts_eval= %Q|("#{s_name}@HAW.M".ts + "#{s_name}@MAU.M".ts + "#{s_name}@HON.M".ts).trim("2012-04-01")|
+  end
+  
+  "KPPRVNRSDNS@HI.M".ts_eval= %Q|"KPPRVNS@HI.M".ts - "KPPRVRSDNS@HI.M".ts|
+  "KPPRVNRSDNS@HON.M".ts_eval= %Q|"KPPRVNS@HON.M".ts - "KPPRVRSDNS@HON.M".ts|
+  "KPPRVNRSDNS@HAW.M".ts_eval= %Q|"KPPRVNS@HAW.M".ts - "KPPRVRSDNS@HAW.M".ts|
+  "KPPRVNRSDNS@MAU.M".ts_eval= %Q|"KPPRVNS@MAU.M".ts - "KPPRVRSDNS@MAU.M".ts|
+  "KPPRVNRSDNS@KAU.M".ts_eval= %Q|"KPPRVNS@KAU.M".ts - "KPPRVRSDNS@KAU.M".ts|  
+  "KPPRVNS@NBI.M".ts_eval= %Q|"KPPRVNS@HAW.M".ts + "KPPRVNS@MAU.M".ts + "KPPRVNS@KAU.M".ts|
+  "KPPRVRSDNS@NBI.M".ts_eval= %Q|"KPPRVRSDNS@HAW.M".ts + "KPPRVRSDNS@MAU.M".ts + "KPPRVRSDNS@KAU.M".ts|
+  "KPPRVCOMNS@NBI.M".ts_eval= %Q|"KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts + "KPPRVCOMNS@KAU.M".ts|
+  "KPPRVADDNS@NBI.M".ts_eval= %Q|"KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts + "KPPRVADDNS@KAU.M".ts|
+  "KPPRVNRSDNS@NBI.M".ts_eval= %Q|"KPPRVNRSDNS@HAW.M".ts + "KPPRVNRSDNS@MAU.M".ts + "KPPRVNRSDNS@KAU.M".ts|
+
   
   "NRCNM@HI.A".ts_eval = %Q|"NR@HI.A".ts - "NRM@HI.A".ts - "NRCMD@HI.A".ts| #replaces the census data completely
   "NRC@HI.A".ts_eval = %Q|"NR@HI.A".ts - "NRM@HI.A".ts|
@@ -167,6 +188,11 @@ task :const_identities => :environment do
   "NDEARCMD@HI.A".ts_eval = %Q|"NDEACMD@HI.A".ts / "NRCMD@HI.A".ts * 1000|
   "NMIGRCNM@HI.A".ts_eval = %Q|"NMIGCNM@HI.A".ts / "NRCNM@HI.A".ts * 1000|
 
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |county|
+      "NNAT@#{county}.A".ts_eval = %Q|"NBIR@#{county}.A".ts - "NDEA@#{county}.A".ts|
+      "NCHG@#{county}.A".ts_eval = %Q|"NNAT@#{county}.A".ts + "NMIG@#{county}.A".ts|
+  end
+  
   #works for HON, but other counties are not defined
   #["HON", "HAW", "MAU", "KAU"].each do |cnty| 
   ["HON"].each do |cnty| 
@@ -235,6 +261,10 @@ task :const_identities => :environment do
   "PMKBSGF@MAU.M".ts_eval= %Q|"PMKBSGF@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/mbr_upd_m.csv"|
   "PMKBCON@MAU.M".ts_eval= %Q|"PMKBCON@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/mbr_upd_m.csv"|
 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hbr_histQ.xls"
+  
+  "PMKBSGF@HON.Q".ts_eval= %Q|"PMKBSGF@HON.M".ts.aggregate(:quarter, :average)|
+  "PMKBCON@HON.Q".ts_eval= %Q|"PMKBCON@HON.M".ts.aggregate(:quarter, :average)|
   
   "PMKRCON@HON.Q".ts_eval=%Q|"PMKRCON@HON.Q".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/prud/seasadj/prud_sa.xls", "prud_sa" | 
   "PMKRSGF@HON.Q".ts_eval=%Q|"PMKRSGF@HON.Q".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/prud/seasadj/prud_sa.xls", "prud_sa" |

@@ -6,6 +6,7 @@ task :aremos_exports => :environment do
   DataList.write "tour3", "/Volumes/UHEROwork/data/udaman/tour3_UDA.xls" #6.7s
   DataList.write "tour_vrls", "/Volumes/UHEROwork/data/udaman/tour_vrls_UDA.xls" #6.7s
   DataList.write "tour_ocup", "/Volumes/UHEROwork/data/udaman/ocup_UDA.xls" 
+  DataList.write "tour_vso", "/Volumes/UHEROwork/data/udaman/vso_UDA.xls" 
   
   #BLS
   DataList.write "bls_job_m", "/Volumes/UHEROwork/data/udaman/bls_job_m_UDA.xls" #25.5
@@ -35,19 +36,19 @@ task :tsd_exports => :environment do
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tsd_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
-task :prognoz_exports => :environment do
-  t = Time.now
-  DataList.write "prognoz_month1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month1.xls"
-  DataList.write "prognoz_month2", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month2.xls"
-  DataList.write "prognoz_month3", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month3.xls"
-  DataList.write "prognoz_month4", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month4.xls"
-  DataList.write "prognoz_month5", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month5.xls"
-  DataList.write "prognoz_month6", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month6.xls"
-  DataList.write "prognoz_month7", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month7.xls"
-  DataList.write "prognoz_annual1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_annual1.xls"
-  DataList.write "prognoz_annual2", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_annual2.xls"
-  DataList.write "prognoz_quarter1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_quarter1.xls"
-  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["prognoz_expots", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
-end
+# task :prognoz_exports => :environment do
+#   t = Time.now
+#   DataList.write "prognoz_month1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month1.xls"
+#   DataList.write "prognoz_month2", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month2.xls"
+#   DataList.write "prognoz_month3", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month3.xls"
+#   DataList.write "prognoz_month4", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month4.xls"
+#   DataList.write "prognoz_month5", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month5.xls"
+#   DataList.write "prognoz_month6", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month6.xls"
+#   DataList.write "prognoz_month7", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month7.xls"
+#   DataList.write "prognoz_annual1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_annual1.xls"
+#   DataList.write "prognoz_annual2", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_annual2.xls"
+#   DataList.write "prognoz_quarter1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_quarter1.xls"
+#   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["prognoz_expots", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
+# end
 
 #23.93 | 200 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month1.xls21.10 | 200 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month2.xls20.30 | 200 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month3.xls18.74 | 199 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month4.xls11.65 | 130 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month5.xls10.29 | 149 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month6.xls14.09 | 56 | /Volumes/UHEROwork/eis/data/12M09Atest/Data_month7.xlsrake aborted!SeriesNameException

@@ -1028,12 +1028,14 @@ task :visitor_identities=>:environment do
   "VDAYUSNS@HI.M".ts_eval= %Q|"VDAYUSENS@HI.M".ts + "VDAYUSWNS@HI.M".ts|
   "VEXPPDUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VDAYUSNS@HI.M".ts*1000|
   "VEXPPTUSNS@HI.M".ts_eval= %Q|"VEXPUSNS@HI.M".ts / "VISUSNS@HI.M".ts*1000|
-  "VSONS@HAW.M".ts_eval= %Q|"VSONS@HAWH.M".ts + "VSONS@HAWK.M".ts|
-  "VSODMNS@HAW.M".ts_eval= %Q|"VSODMNS@HAWH.M".ts + "VSODMNS@HAWK.M".ts|
-  "VSOUSWNS@HAW.M".ts_eval= %Q|"VSOUSWNS@HAWH.M".ts + "VSOUSWNS@HAWK.M".ts|
+
+  "VSONS@HAW.M".ts_eval= %Q|"VSONS@HAWH.M".ts.zero_add "VSONS@HAWK.M".ts|
+  "VSODMNS@HAW.M".ts_eval= %Q|"VSODMNS@HAWH.M".ts.zero_add "VSODMNS@HAWK.M".ts|
+  "VSOUSENS@HAW.M".ts_eval= %Q|"VSOUSENS@HAWH.M".ts.zero_add "VSOUSENS@HAWK.M".ts|
+  "VSOUSWNS@HAW.M".ts_eval= %Q|"VSOUSWNS@HAWH.M".ts.zero_add "VSOUSWNS@HAWK.M".ts|
   "VSOITNS@HAW.M".ts_eval= %Q|"VSOITNS@HAWH.M".ts.zero_add "VSOITNS@HAWK.M".ts|
   "VSOJPNS@HAW.M".ts_eval= %Q|"VSOJPNS@HAWH.M".ts.zero_add "VSOJPNS@HAWK.M".ts|
-  "VSOCANNS@HAW.M".ts_eval= %Q|"VSOCANNS@HAWH.M".ts + "VSOCANNS@HAWK.M".ts|
+  "VSOCANNS@HAW.M".ts_eval= %Q|"VSOCANNS@HAWH.M".ts.zero_add "VSOCANNS@HAWK.M".ts|
   
   ["HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|   
     #surprising this is not done in tour.rake considering so many definitions require it there.
@@ -1049,6 +1051,14 @@ task :visitor_identities=>:environment do
   "VDAYRESNS@LAN.M".ts_eval= %Q|"VDAYNS@LAN.M".ts - ("VDAYUSNS@LAN.M".ts + "VDAYJPNS@LAN.M".ts)|
   "VDAYRESNS@HI.M".ts_eval= %Q|"VDAYNS@HI.M".ts - "VDAYUSNS@HI.M".ts - "VDAYJPNS@HI.M".ts|
 
+  ["MOL", "LAN", "MAUI"].each do |cnty|
+    ["DM", "IT", "US", "RES"].each do |ser|
+      "VIS#{ser}@#{cnty}.A".ts_eval= %Q|"VIS#{ser}NS@#{cnty}.M".ts.aggregate(:year, :sum)|
+    end
+    "VIS@#{cnty}.A".ts_eval= %Q|"VISNS@#{cnty}.M".ts.aggregate(:year, :sum)|
+  end
+  
+  
   # don't seem to need these histories... BT 8/29/12
   # #need to load all history identities seem to take full precedence
   # ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
@@ -1109,15 +1119,16 @@ task :visitor_identities=>:environment do
     ["M", "Q", "A"].each do |f|
       "VLOS@#{cnty}.#{f}".ts_eval= %Q|"VDAY@#{cnty}.#{f}".ts / "VIS@#{cnty}.#{f}".ts|
       "VLOSJP@#{cnty}.#{f}".ts_eval= %Q|"VDAYJP@#{cnty}.#{f}".ts / "VISJP@#{cnty}.#{f}".ts|
-      #"VLOSCAN@#{cnty}.#{f}".ts_eval= %Q|"VDAYCAN@#{cnty}.#{f}".ts / "VISCAN@#{cnty}.#{f}".ts| #missing components
-      #"VLOSUSE@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSE@#{cnty}.#{f}".ts / "VISUSE@#{cnty}.#{f}".ts| #missing components
-      #"VLOSUSW@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSW@#{cnty}.#{f}".ts / "VISUSW@#{cnty}.#{f}".ts| #missing components
+      "VLOSCAN@#{cnty}.#{f}".ts_eval= %Q|"VDAYCAN@#{cnty}.#{f}".ts / "VISCAN@#{cnty}.#{f}".ts| #missing components
+      "VLOSUSE@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSE@#{cnty}.#{f}".ts / "VISUSE@#{cnty}.#{f}".ts| #missing components
+      "VLOSUSW@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSW@#{cnty}.#{f}".ts / "VISUSW@#{cnty}.#{f}".ts| #missing components
       "VLOSDM@#{cnty}.#{f}".ts_eval= %Q|"VDAYDM@#{cnty}.#{f}".ts / "VISDM@#{cnty}.#{f}".ts|
       "VLOSIT@#{cnty}.#{f}".ts_eval= %Q|"VDAYIT@#{cnty}.#{f}".ts / "VISIT@#{cnty}.#{f}".ts|
     end
   end
   
-  ["","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+  
+  ["CRAIR", "US", "RES", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
     ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
       ["M", "Q"].each do |f|
         begin
@@ -1241,14 +1252,14 @@ task :visitor_identities=>:environment do
     "VEXP#{ser}@#{cnty}.M".ts_eval= %Q|"VEXP#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXP#{ser}")|
     "VEXPPD#{ser}@#{cnty}.M".ts_eval= %Q|"VEXPPD#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXPPD#{ser}")|
     "VEXPPT#{ser}@#{cnty}.M".ts_eval= %Q|"VEXPPT#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXPPT#{ser}")|
-    
+    "VSO@#{cnty}.M".ts_eval= %Q|"VSO@HI.M".ts.share_using("VSONS@#{cnty}.M".ts.moving_average_offset_early, "VSONS@HI.M".ts.moving_average_offset_early).trim("2005-01-01","2005-12-01")|
+    "VSODM@#{cnty}.M".ts_eval= %Q|"VSODM@HI.M".ts.share_using("VSODMNS@#{cnty}.M".ts.moving_average_offset_early, "VSODMNS@HI.M".ts.moving_average_offset_early).trim("2005-01-01","2005-12-01")|
   end
 
   ["CAN", "JP", "USE", "USW"].each do |ser|
     ["HON", "HAW", "KAU", "MAU","MAUI","MOL","LAN"].each do |cnty|
       "VIS#{ser}@#{cnty}.M".ts_eval= %Q|"VIS#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VIS#{ser}")|
       "VDAY#{ser}@#{cnty}.M".ts_eval= %Q|"VDAY#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VDAY#{ser}")|
-      "VLOS#{ser}@#{cnty}.M".ts_eval= %Q|"VLOS#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VLOS#{ser}")| #only works for MOL / Maui / LAN
       "VIS#{ser}@#{cnty}.Q".ts_eval= %Q|"VIS#{ser}@#{cnty}.M".ts.aggregate(:quarter, :sum)|
       "VIS#{ser}@#{cnty}.A".ts_eval= %Q|"VIS#{ser}@#{cnty}.M".ts.aggregate(:year, :sum)|
       "VDAY#{ser}@#{cnty}.Q".ts_eval= %Q|"VDAY#{ser}@#{cnty}.M".ts.aggregate(:quarter, :sum)|
@@ -1266,7 +1277,8 @@ task :visitor_identities=>:environment do
   end
   
   
-  ["","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+  #CRAIR's are probably aggregations
+  ["US", "RES", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
     ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
       ["M", "Q", "A"].each do |f|
         begin
@@ -1280,17 +1292,33 @@ task :visitor_identities=>:environment do
   end
   
   
+  ["CR","CRAAF", "CRABF", "CRADR", "CRAF", "CRAND", "CRBF", "CRDR", "CRND", "CRSAF", "CRSBF", "CRSDR", "CRSHP", "CRSND", "OT"].each do |serlist| 
+    ["HI"].each do |cnty|
+      ["M", "Q"].each do |f|
+        begin
+          "VADC#{serlist}NS@#{cnty}.#{f}".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.#{f}".ts / "VDAY#{serlist}NS@#{cnty}.#{f}".ts.days_in_period|
+        rescue
+          puts "ERROR: #{serlist}NS, #{cnty}, #{f}"
+        end
+      end
+    end
+  end
+
+  #I'm guessing most of these are actually aggregations
+  #none of these vdays are in, I think
+  # ["CR","CRAAF", "CRABF", "CRADR", "CRAD", "CRAF",  "CRAND", "CRBF", "CRDR", "CRND", "CRSAF", "CRSBF", "CRSDR", "CRSHP", "CRSND", "OT"].each do |serlist| 
+  #   ["HI"].each do |cnty|
+  #     ["A","M", "Q"].each do |f|
+  #       begin
+  #         "VADC#{serlist}@#{cnty}.#{f}".ts_eval= %Q|"VDAY#{serlist}@#{cnty}.#{f}".ts / "VDAY#{serlist}@#{cnty}.#{f}".ts.days_in_period|
+  #       rescue
+  #         puts "ERROR: #{serlist}NS, #{cnty}, #{f}"
+  #       end
+  #     end
+  #   end
+  # end
   
-  #separate section for these...?
-  ["HON", "HI", "KAU", "MAU", "HAW"].each do |cnty|
-   "OCUP%NS@#{cnty}.Q".ts_eval= %Q|"OCUP%NS@#{cnty}.M".ts.aggregate(:quarter, :average)|
-   "RMRVNS@#{cnty}.Q".ts_eval= %Q|"RMRVNS@#{cnty}.M".ts.aggregate(:quarter, :average)|
-   "PRMNS@#{cnty}.Q".ts_eval= %Q|"PRMNS@#{cnty}.M".ts.aggregate(:quarter, :average)|
-  end 
- 
-  "OCUP%@HI.Q".ts_eval= %Q|"OCUP%@HI.M".ts.aggregate(:quarter, :average)|
-  "RMRV@HI.Q".ts_eval= %Q|"RMRV@HI.M".ts.aggregate(:quarter, :average)|
-  "PRM@HI.Q".ts_eval= %Q|"PRM@HI.M".ts.aggregate(:quarter, :average)|
+
   
   
   #passenger count stuff
@@ -1338,6 +1366,17 @@ task :visitor_identities=>:environment do
   end
 
 
+  #separate section for these...?
+  ["HON", "HI", "KAU", "MAU", "HAW"].each do |cnty|
+   "OCUP%NS@#{cnty}.Q".ts_eval= %Q|"OCUP%NS@#{cnty}.M".ts.aggregate(:quarter, :average)|
+   "RMRVNS@#{cnty}.Q".ts_eval= %Q|"RMRVNS@#{cnty}.M".ts.aggregate(:quarter, :average)|
+   "PRMNS@#{cnty}.Q".ts_eval= %Q|"PRMNS@#{cnty}.M".ts.aggregate(:quarter, :average)|
+  end 
+ 
+  "OCUP%@HI.Q".ts_eval= %Q|"OCUP%@HI.M".ts.aggregate(:quarter, :average)|
+  "RMRV@HI.Q".ts_eval= %Q|"RMRV@HI.M".ts.aggregate(:quarter, :average)|
+  "PRM@HI.Q".ts_eval= %Q|"PRM@HI.M".ts.aggregate(:quarter, :average)|
+  
   "TRMS@HI.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 2, :frequency => "A" })|
   "TRMS@HON.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 3, :frequency => "A" })|
   "TRMS@HAW.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 4, :frequency => "A" })|

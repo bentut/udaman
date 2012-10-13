@@ -29,7 +29,7 @@ class XlsFileProcessor
       
       col = @col_processor.compute(index, @cached_files, handle, sheet)
 #      puts "#{row}, #{col}"
-      #puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
+#      puts "trying: h:#{handle}, s:#{sheet}, r:#{row}, c:#{col}, p:#{path}"
       worksheet = @cached_files.xls(handle, sheet, path)
     rescue RuntimeError => e
       puts e.message unless @handle_processor.date_sensitive?
@@ -47,8 +47,8 @@ class XlsFileProcessor
       raise e
     end
   
- #   puts worksheet.cell(row,col)
-    observation_value = parse_cell(worksheet.cell(row,col))
+    # puts worksheet.cell(row,col)
+     observation_value = parse_cell(worksheet.cell(row,col))
 #    puts observation_value
     
     return "END" if observation_value == "BREAK IN DATA" unless @handle_processor.date_sensitive?
