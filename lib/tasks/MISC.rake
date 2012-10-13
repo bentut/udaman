@@ -165,6 +165,15 @@ task :const_identities => :environment do
   "NDEARCMD@HI.A".ts_eval = %Q|"NDEACMD@HI.A".ts / "NRCMD@HI.A".ts * 1000|
   "NMIGRCNM@HI.A".ts_eval = %Q|"NMIGCNM@HI.A".ts / "NRCNM@HI.A".ts * 1000|
 
+
+  "NR@HI.Q".ts_eval= %Q|"NR@HI.A".ts.census_interpolate(:quarter)|
+  "NR@HAW.Q".ts_eval= %Q|"NR@HAW.A".ts.census_interpolate(:quarter)|
+  "NR@HON.Q".ts_eval= %Q|"NR@HON.A".ts.census_interpolate(:quarter)|
+  "NR@KAU.Q".ts_eval= %Q|"NR@KAU.A".ts.census_interpolate(:quarter)|
+  "NR@MAU.Q".ts_eval= %Q|"NR@MAU.A".ts.census_interpolate(:quarter)|
+  "NR@NBI.Q".ts_eval= %Q|"NR@HI.Q".ts - "NR@HON.Q".ts|
+
+  
   #works for HON, but other counties are not defined
   #["HON", "HAW", "MAU", "KAU"].each do |cnty| 
   ["HON"].each do |cnty| 
