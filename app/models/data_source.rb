@@ -160,7 +160,29 @@ class DataSource < ActiveRecord::Base
     #     dp.update_attributes(:history => Time.now) if (dp.history.nil? and dates.index(dp.date_string).nil?)
     #   end
     # end
+    
+    # DataSource.where("eval LIKE '%bls_histextend_date_format_correct.xls%'").each {|ds| ds.mark_as_pseudo_history}
+    
+    def mark_as_pseudo_history
+      puts "marking ds: #{self.id}"
+      data_points.each {|dp| dp.update_attributes(:pseudo_history => true) }
+    end
+    
+    def mark_as_pseudo_history_before(date_string)
+      puts "marking ds: #{self.id}"
+      data_points.where("date_string < '#{date_string}'" ).each {|dp| dp.update_attributes(:pseudo_history => true) }
+    end
 
+    def unmark_as_pseudo_history
+      puts "unmarking ds: #{self.id}"
+      data_points.each {|dp| dp.update_attributes(:pseudo_history => false) }
+    end
+    
+    def unmark_as_pseudo_history_before(date_string)
+      puts "unmarking ds: #{self.id}"
+      data_points.where("date_string < '#{date_string}'" ).each {|dp| dp.update_attributes(:pseudo_history => false) }
+    end
+    
     def delete_all_other_sources
       s = self.series
       s.data_sources_by_last_run.each {|ds| ds.delete unless ds.id == self.id}

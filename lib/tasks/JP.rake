@@ -150,7 +150,7 @@ task :jp_upd_q => :environment do
 
     
     #this should probably move to an identities task
-		"INFGDPDEF@JP.Q" => %Q|"GDPDEF@JP.Q".ts.annualized_percentage_change|,
+		"INFGDPDEF@JP.Q" => %Q|"GDPDEF@JP.Q".ts.annualized_percentage_change.trim("1994-01-01")|,
 		
 		#"GNIDEF@JP.Q" => %Q|Series.load_from_download  "GDPDEF_Q@esri.cao.go.jp", { :file_type => "csv", :start_date => "1994-01-01", :row => "increment:8:1", :col => 19, :frequency => "Q" }|, 
 

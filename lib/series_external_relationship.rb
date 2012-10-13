@@ -170,6 +170,7 @@ module SeriesExternalRelationship
   # end
   
   def data_diff(comparison_data, digits_to_round)
+    self.units = 1000 if name[0..2] == "TGB" #hack for the tax scaling. Should not save units
     cdp = current_data_points
     diff_hash = {}
     results = []
