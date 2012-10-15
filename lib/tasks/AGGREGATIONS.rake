@@ -57,6 +57,22 @@ task :run_aggregations4 => :environment do
   "VSOUSENS@HAW.Q".ts_eval=%Q|"VSOUSENS@HAW.M".ts.aggregate(:quarter, :sum)|
   "VSOUSENS@HAW.Q".ts_eval=%Q|"VSOUSENS@HAW.M".ts.aggregate(:quarter, :average)|
   
+  "KNRSD@HAW.A".ts_eval=%Q|"KNRSDNS@HAW.Q".ts.aggregate(:year, :sum)|
+  "KNRSD@HI.A".ts_eval=%Q|"KNRSDNS@HI.Q".ts.aggregate(:year, :sum)|
+  "KNRSD@HON.A".ts_eval=%Q|"KNRSDNS@HON.Q".ts.aggregate(:year, :sum)|
+  "KNRSD@KAU.A".ts_eval=%Q|"KNRSDNS@KAU.Q".ts.aggregate(:year, :sum)|
+  "KNRSD@MAU.A".ts_eval=%Q|"KNRSDNS@MAU.Q".ts.aggregate(:year, :sum)|
+  "KNRSDMLT@HI.A".ts_eval=%Q|"KNRSDMLTNS@HI.Q".ts.aggregate(:year, :sum)|
+  "KNRSDSGF@HI.A".ts_eval=%Q|"KNRSDSGFNS@HI.Q".ts.aggregate(:year, :sum)|
+  "KPGOV@HI.A".ts_eval=%Q|"KPGOVNS@HI.Q".ts.aggregate(:year, :sum)|
+  "M2@US.A".ts_eval=%Q|"M2NS@US.Q".ts.aggregate(:year, :average)|
+  "PICTCON@HON.A".ts_eval=%Q|"PICTCONNS@HON.Q".ts.aggregate(:year, :average)|
+  "PICTSGF@HON.A".ts_eval=%Q|"PICTSGFNS@HON.Q".ts.aggregate(:year, :average)|
+  "VADCCRSAF@HI.A".ts_eval=%Q|"VADCCRSAFNS@HI.Q".ts.aggregate(:year, :average)|
+  
+  "M2@US.A".ts_eval=%Q|"M2NS@US.M".ts.aggregate(:year, :average)|
+  
+  
   "PC@HI.A".ts_eval=%Q|"PC@HI.M".ts.aggregate(:year, :sum)|
   "PCDM@HI.A".ts_eval=%Q|"PCDM@HI.M".ts.aggregate(:year, :sum)|
   "PCITJP@HI.A".ts_eval=%Q|"PCITJP@HI.M".ts.aggregate(:year, :sum)|
@@ -1315,10 +1331,6 @@ end
 
 task :run_aggregations5 => :environment do
 
-  
-  
-  
-  
   #try monthlies first
   
   "EGVFDDD@MAU.A".ts_eval=%Q|"EGVFDDDNS@MAU.Q".ts.aggregate(:year, :sum)|
