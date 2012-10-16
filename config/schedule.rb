@@ -124,6 +124,7 @@ every 1.day, :at => "#{bls_hour.to_i+2}:15 am" do
   rake "run_aggregations"
   rake "run_aggregations2"
   rake "run_aggregations3"
+  rake "run_aggregations4"
 end
 
 every 1.day, :at => "#{hour.to_i+5}:30 am" do

@@ -487,7 +487,7 @@ class Series < ActiveRecord::Base
   def days_in_period
     series_data = {}
     data.each {|date_string, val| series_data[date_string] = date_string.to_date.days_in_period(self.frequency) }
-    Series.new_transformation("days in time periods", series_data, Series.frequency_from_code(frequency))
+    Series.new_transformation("days in time periods", series_data, self.frequency)
   end
   
   def Series.load_from_fred(code, frequency)
