@@ -1069,14 +1069,14 @@ task :visitor_identities=>:environment do
   # end
   
   ["DM", "IT", "USW", "USE", "JP", "CAN"].each do |ser|
-    ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations      
+    ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations      
       "VRLS#{ser}NS@#{cnty}.M".ts_eval= %Q|"VRLS#{ser}NS@#{cnty}.M".ts|
       "VRLS#{ser}NS@#{cnty}.Q".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:quarter, :sum) / "VIS#{ser}NS@#{cnty}.Q".ts|
-      "VRLS#{ser}NS@#{cnty}.A".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS#{ser}@#{cnty}.A".ts|
+      "VRLS#{ser}@#{cnty}.A".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS#{ser}@#{cnty}.A".ts|
     end
   end
 
-  ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+  ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
     "VRLSNS@#{cnty}.Q".ts_eval= %Q|("VRLSNS@#{cnty}.M".ts * "VISNS@#{cnty}.M".ts).aggregate(:quarter, :sum)  / "VISNS@#{cnty}.Q".ts|        
     "VRLS@#{cnty}.A".ts_eval= %Q|("VRLSNS@#{cnty}.M".ts * "VISNS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS@#{cnty}.A".ts|
   end
