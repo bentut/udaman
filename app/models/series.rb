@@ -802,4 +802,11 @@ class Series < ActiveRecord::Base
     return Series.output_database_rebuild_statements(series_names_finished, series_to_finish_new, depth+1)
   end
   
+  def Series.missing_from_aremos
+    name_buckets = {}
+    (AremosSeries.all_names - Series.all_names).each {|name| name_buckets[name[0]] ||= []; name_buckets[name[0]].push(name)}
+    name_buckets.each {|letter, names| puts "#{letter}: #{names.count}"}
+    name_buckets
+  end
+  
 end

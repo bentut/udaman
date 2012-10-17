@@ -1268,9 +1268,12 @@ task :visitor_identities=>:environment do
 
   ["HON", "HAW", "KAU", "MAU"].each do |cnty| #MAUI / MOL / LAN?
     ser = ""
-    "VSO#{ser}@#{cnty}.M".ts_eval= %Q|"VSO#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VSO#{ser}")| 
     "VS#{ser}@#{cnty}.M".ts_eval= %Q|"VS#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VS#{ser}")|
     "VS#{ser}@#{cnty}.Q".ts_eval= %Q|"VS#{ser}@#{cnty}.M".ts.aggregate(:quarter, :sum)|
+    "VSDM@#{cnty}.M".ts_eval= %Q|"VSDM@HI.M".ts.mc_ma_county_share_for("#{cnty}","VSDM")|
+    "VSDM@#{cnty}.Q".ts_eval= %Q|"VSDM@#{cnty}.M".ts.aggregate(:quarter, :sum)|
+    
+    "VSO#{ser}@#{cnty}.M".ts_eval= %Q|"VSO#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VSO#{ser}")| 
     "VSODM#{ser}@#{cnty}.M".ts_eval= %Q|"VSODM#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VSODM#{ser}")|
     "VEXP#{ser}@#{cnty}.M".ts_eval= %Q|"VEXP#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXP#{ser}")|
     "VEXPPD#{ser}@#{cnty}.M".ts_eval= %Q|"VEXPPD#{ser}@HI.M".ts.mc_ma_county_share_for("#{cnty}","VEXPPD#{ser}")|

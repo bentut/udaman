@@ -1777,9 +1777,61 @@ task :bea_identities => :environment do
   "GDP_CD_R@US.A".ts_eval= %Q|"GDP_CD_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "YCE_R@US.M".ts_eval= %Q|"YCE_R@US.M".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_m.xls").trim("1900-01-01","1994-12-01")|
   "GDP_CN_R@US.A".ts_eval= %Q|"GDP_CN_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
+
+  ["", "_R"].each do |type|
+    ["L", "C"].each do |pre|
+      ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
+        ("Y#{pre}AG#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}AGFA#{type}@#{cnty}.A".ts + "Y#{pre}AGFF#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}AG#{type}@#{cnty}.A"
+        ("Y#{pre}_CTMI#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}CT#{type}@#{cnty}.A".ts + "Y#{pre}MI#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_CTMI#{type}@#{cnty}.A"
+        ("Y#{pre}_TU#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}TW#{type}@#{cnty}.A".ts + "Y#{pre}UT#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_TU#{type}@#{cnty}.A"
+        ("Y#{pre}_TRADE#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}WT#{type}@#{cnty}.A".ts + "Y#{pre}RT#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_TRADE#{type}@#{cnty}.A"
+        ("Y#{pre}_TTU#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}TW#{type}@#{cnty}.A".ts + "Y#{pre}UT#{type}@#{cnty}.A".ts + "Y#{pre}WT#{type}@#{cnty}.A".ts + "Y#{pre}RT#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_TTU#{type}@#{cnty}.A"
+        ("Y#{pre}_FIR#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}FI#{type}@#{cnty}.A".ts + "Y#{pre}RE#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_FIR#{type}@#{cnty}.A"
+        ("Y#{pre}_OT#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}MA#{type}@#{cnty}.A".ts + "Y#{pre}AD#{type}@#{cnty}.A".ts + "Y#{pre}OS#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_OT#{type}@#{cnty}.A"
+        ("Y#{pre}_ELSE#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}IF#{type}@#{cnty}.A".ts + "Y#{pre}AE#{type}@#{cnty}.A".ts + "Y#{pre}PS#{type}@#{cnty}.A".ts + "Y#{pre}MA#{type}@#{cnty}.A".ts + "Y#{pre}AD#{type}@#{cnty}.A".ts + "Y#{pre}ED#{type}@#{cnty}.A".ts + "Y#{pre}OS#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_ELSE#{type}@#{cnty}.A"
+        ("Y#{pre}_SV#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}HC#{type}@#{cnty}.A".ts + "Y#{pre}AF#{type}@#{cnty}.A".ts + "Y#{pre}_ELSE#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_SV#{type}@#{cnty}.A"
+      end
+    end
+  
+    ["S", "L"].each do |pre|
+      ["HI"].each do |cnty|
+        ["A", "Q"].each do |f|
+          ("Y#{pre}AG#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}AGFA#{type}@#{cnty}.#{f}".ts + "Y#{pre}AGFF#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}AG#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_CTMI#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}CT#{type}@#{cnty}.#{f}".ts + "Y#{pre}MI#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_CTMI#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_TU#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}TW#{type}@#{cnty}.#{f}".ts + "Y#{pre}UT#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_TU#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_TRADE#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}WT#{type}@#{cnty}.#{f}".ts + "Y#{pre}RT#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_TRADE#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_TTU#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}TW#{type}@#{cnty}.#{f}".ts + "Y#{pre}UT#{type}@#{cnty}.#{f}".ts + "Y#{pre}WT#{type}@#{cnty}.#{f}".ts + "Y#{pre}RT#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_TTU#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_FIR#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}FI#{type}@#{cnty}.#{f}".ts + "Y#{pre}RE#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_FIR#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_OT#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}MA#{type}@#{cnty}.#{f}".ts + "Y#{pre}AD#{type}@#{cnty}.#{f}".ts + "Y#{pre}OS#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_OT#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_ELSE#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}IF#{type}@#{cnty}.#{f}".ts + "Y#{pre}AE#{type}@#{cnty}.#{f}".ts + "Y#{pre}PS#{type}@#{cnty}.#{f}".ts + "Y#{pre}MA#{type}@#{cnty}.#{f}".ts + "Y#{pre}AD#{type}@#{cnty}.#{f}".ts + "Y#{pre}ED#{type}@#{cnty}.#{f}".ts + "Y#{pre}OS#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_ELSE#{type}@#{cnty}.#{f}"
+          ("Y#{pre}_SV#{type}@#{cnty}.#{f}".ts_eval= %Q|"Y#{pre}HC#{type}@#{cnty}.#{f}".ts + "Y#{pre}AF#{type}@#{cnty}.#{f}".ts + "Y#{pre}_ELSE#{type}@#{cnty}.#{f}".ts|) rescue puts "ERROR Y#{pre}_SV#{type}@#{cnty}.#{f}"
+        end
+      end
+    end
+  end
+
+
+  #These two blocks take care of 2500 series!
+  ["YC", "YL"].each do |pre|
+    ["ADAD", "ADWM", "AD", "AEMU", "AEPF", "AERE", "AE", "AFAC", "AFFD", "AF", "AGFA", "AGFFFO", "AGFFFS", "AGFFOT", "AGFFSP", "AGFF", "AG", "AVR", "CTBL", "CTHV", "CTSP", "CT", "ED", "FICR", "FIIN", "FIMO", "FIOT", "FISE", "FI", "GVFD", "GVLC", "GVML", "GVST", "GV", "HCAM", "HCHO", "HCNR", "HCSO", "HC", "IFBC", "IFDP", "IFIT", "IFMP", "IFOT", "IFPB", "IFTC", "IF", "MA", "MIMI", "MIOG", "MISP", "MI", "MNDRCM", "MNDREL", "MNDRFB", "MNDRFR", "MNDRMC", "MNDRMS", "MNDRMV", "MNDRNM", "MNDRPM", "MNDRTR", "MNDRWD", "MNDR", "MNNDAP", "MNNDBV", "MNNDCH", "MNNDFD", "MNNDLT", "MNNDPA", "MNNDPL", "MNNDPR", "MNNDPT", "MNNDXM", "MNNDXP", "MNND", "MN", "OSHH", "OSMA", "OSPL", "OSRP", "OS", "PS", "RELE", "RERE", "RERL", "RE", "RTBL", "RTCL", "RTEL", "RTFD", "RTFR", "RTGA", "RTGM", "RTHC", "RTMS", "RTMV", "RTOT", "RTSP", "RT", "TWCU", "TWPL", "TWSC", "TWSP", "TWTA", "TWTG", "TWTR", "TWTT", "TWTW", "TWWH", "TW", "UT", "WT", "_CTMI", "_ELSE", "_FIR", "_GVSL", "_NF", "_OT", "_PR", "", "_SV", "_TRADE", "_TTU", "_TU"].each do |type|
+      ("#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}#{type}"
+      ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
+        ("#{pre}#{type}_R@#{cnty}.A".ts_eval= %Q|"#{pre}#{type}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}#{type}_R@#{cnty}"
+      end
+    end
+  end
+  
+  pre = "YL"
+  ["PAGFA", "PAGFF1", "PAGFF2", "PAGFF3", "PAGFFA", "PAGFFF", "PAGFF", "PAG", "PCGB", "PCHV", "PCST", "PC", "PFIRCR", "PFIRDP", "PFIRHD", "PFIRIA", "PFIRIC", "PFIROF", "PFIRRE", "PFIRSE", "PFIR", "PGFC", "PGFM", "PGL", "PGSL", "PGST", "PG", "PMDEL", "PMDFB", "PMDFR", "PMDIS", "PMDMC", "PMDMS", "PMDMV", "PMDOR", "PMDPM", "PMDST", "PMDTR", "PMDWD", "PMD", "PMICO", "PMIMT", "PMINM", "PMIOL", "PMI", "PMNAP", "PMNCH", "PMNFD", "PMNLT", "PMNPA", "PMNPR", "PMNPT", "PMNRB", "PMNTB", "PMNXM", "PMN", "PM", "PRCM", "PRLT", "PROT", "PRPL", "PRSV", "PRTA", "PRTR", "PRTT", "PRTW", "PRUT", "PR", "PSVAM", "PSVAU", "PSVBS", "PSVED", "PSVEN", "PSVHE", "PSVHL", "PSVLG", "PSVMB", "PSVMO", "PSVMR", "PSVMS", "PSVMU", "PSVPH", "PSVPS", "PSVSO", "PSV", "PTRAP", "PTRAT", "PTRBL", "PTRET", "PTRFD", "PTRFR", "PTRGM", "PTROT", "PTR", "PTW", "P", "_NF", "_PR"].each do |type| 
+    ("#{pre}#{type}&@NBI.A".ts_eval= %Q|"#{pre}#{type}&@HI.A".ts - "#{pre}#{type}&@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}#{type}&"
+    ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
+      ("#{pre}#{type}_R&@#{cnty}.A".ts_eval= %Q|"#{pre}#{type}&@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}#{type}_R&@#{cnty}"
+    end
+  end
   
   
-  
+
+
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bea_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 
 end
