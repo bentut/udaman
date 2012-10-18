@@ -91,12 +91,21 @@ task :daily_history_load => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICDATA2.xls" #creates diffs for LFNS, WH, WWs etc
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SICHistory.xls" #this might fix the two above. NO DIFFS
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hiwi_hist.xls"
+
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_A_HAW.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_A_HI.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_A_HON.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_A_MAU.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_A_KAU.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_A_NBI.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_Q.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hon" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "haw" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "mau" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "kau" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SIC_income.xls", "hi"
+  
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" #diffs starting in 2011
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls" #diffs mostly in 2011, some in 2010. runs fast
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd3_hist.xls" #diffs starting in 2011, some in 2012 also runs fast

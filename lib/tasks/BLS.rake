@@ -886,7 +886,8 @@ task :bls_identities => :environment do
   # E_FIR@HI.M
   # Before 1990 calculate with identity:
   #circular reference
-  "E_FIR@HI.M".ts_eval= %Q|("EFI@HI.M".ts + "ERE@HI.M".ts).trim("1958-01-01","1989-12-01")|
+  #somehow got uncommented. Still a circular reference
+  #"E_FIR@HI.M".ts_eval= %Q|("EFI@HI.M".ts + "ERE@HI.M".ts).trim("1958-01-01","1989-12-01")|
 
   # E_TTU@cnty
   # Before 1990 distribute HI to CNTY

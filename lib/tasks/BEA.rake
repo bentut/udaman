@@ -1821,15 +1821,24 @@ task :bea_identities => :environment do
     end
   end
   
-  pre = "YL"
-  ["PAGFA", "PAGFF1", "PAGFF2", "PAGFF3", "PAGFFA", "PAGFFF", "PAGFF", "PAG", "PCGB", "PCHV", "PCST", "PC", "PFIRCR", "PFIRDP", "PFIRHD", "PFIRIA", "PFIRIC", "PFIROF", "PFIRRE", "PFIRSE", "PFIR", "PGFC", "PGFM", "PGL", "PGSL", "PGST", "PG", "PMDEL", "PMDFB", "PMDFR", "PMDIS", "PMDMC", "PMDMS", "PMDMV", "PMDOR", "PMDPM", "PMDST", "PMDTR", "PMDWD", "PMD", "PMICO", "PMIMT", "PMINM", "PMIOL", "PMI", "PMNAP", "PMNCH", "PMNFD", "PMNLT", "PMNPA", "PMNPR", "PMNPT", "PMNRB", "PMNTB", "PMNXM", "PMN", "PM", "PRCM", "PRLT", "PROT", "PRPL", "PRSV", "PRTA", "PRTR", "PRTT", "PRTW", "PRUT", "PR", "PSVAM", "PSVAU", "PSVBS", "PSVED", "PSVEN", "PSVHE", "PSVHL", "PSVLG", "PSVMB", "PSVMO", "PSVMR", "PSVMS", "PSVMU", "PSVPH", "PSVPS", "PSVSO", "PSV", "PTRAP", "PTRAT", "PTRBL", "PTRET", "PTRFD", "PTRFR", "PTRGM", "PTROT", "PTR", "PTW", "P", "_NF", "_PR"].each do |type| 
-    ("#{pre}#{type}&@NBI.A".ts_eval= %Q|"#{pre}#{type}&@HI.A".ts - "#{pre}#{type}&@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}#{type}&"
-    ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
-      ("#{pre}#{type}_R&@#{cnty}.A".ts_eval= %Q|"#{pre}#{type}&@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}#{type}_R&@#{cnty}"
-    end
-  end
+  #loads in & series from history instead
+  #this generates "correct" _R & series. for now reading from file
+  # pre = "YL"
+  # ["PAGFA", "PAGFF1", "PAGFF2", "PAGFF3", "PAGFFA", "PAGFFF", "PAGFF", "PAG", "PCGB", "PCHV", "PCST", "PC", "PFIRCR", "PFIRDP", "PFIRHD", "PFIRIA", "PFIRIC", "PFIROF", "PFIRRE", "PFIRSE", "PFIR", "PGFC", "PGFM", "PGL", "PGSL", "PGST", "PG", "PMDEL", "PMDFB", "PMDFR", "PMDIS", "PMDMC", "PMDMS", "PMDMV", "PMDOR", "PMDPM", "PMDST", "PMDTR", "PMDWD", "PMD", "PMICO", "PMIMT", "PMINM", "PMIOL", "PMI", "PMNAP", "PMNCH", "PMNFD", "PMNLT", "PMNPA", "PMNPR", "PMNPT", "PMNRB", "PMNTB", "PMNXM", "PMN", "PM", "PRCM", "PRLT", "PROT", "PRPL", "PRSV", "PRTA", "PRTR", "PRTT", "PRTW", "PRUT", "PR", "PSVAM", "PSVAU", "PSVBS", "PSVED", "PSVEN", "PSVHE", "PSVHL", "PSVLG", "PSVMB", "PSVMO", "PSVMR", "PSVMS", "PSVMU", "PSVPH", "PSVPS", "PSVSO", "PSV", "PTRAP", "PTRAT", "PTRBL", "PTRET", "PTRFD", "PTRFR", "PTRGM", "PTROT", "PTR", "PTW", "P", "_NF", "_PR"].each do |type| 
+  #   ("#{pre}#{type}&@NBI.A".ts_eval= %Q|"#{pre}#{type}&@HI.A".ts - "#{pre}#{type}&@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}#{type}&"
+  #   ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
+  #     ("#{pre}#{type}_R&@#{cnty}.A".ts_eval= %Q|"#{pre}#{type}&@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}#{type}_R&@#{cnty}"
+  #   end
+  # end
   
-  
+  #just for matching units
+  # pre = "YL"
+  # ["PAGFA", "PAGFF1", "PAGFF2", "PAGFF3", "PAGFFA", "PAGFFF", "PAGFF", "PAG", "PCGB", "PCHV", "PCST", "PC", "PFIRCR", "PFIRDP", "PFIRHD", "PFIRIA", "PFIRIC", "PFIROF", "PFIRRE", "PFIRSE", "PFIR", "PGFC", "PGFM", "PGL", "PGSL", "PGST", "PG", "PMDEL", "PMDFB", "PMDFR", "PMDIS", "PMDMC", "PMDMS", "PMDMV", "PMDOR", "PMDPM", "PMDST", "PMDTR", "PMDWD", "PMD", "PMICO", "PMIMT", "PMINM", "PMIOL", "PMI", "PMNAP", "PMNCH", "PMNFD", "PMNLT", "PMNPA", "PMNPR", "PMNPT", "PMNRB", "PMNTB", "PMNXM", "PMN", "PM", "PRCM", "PRLT", "PROT", "PRPL", "PRSV", "PRTA", "PRTR", "PRTT", "PRTW", "PRUT", "PR", "PSVAM", "PSVAU", "PSVBS", "PSVED", "PSVEN", "PSVHE", "PSVHL", "PSVLG", "PSVMB", "PSVMO", "PSVMR", "PSVMS", "PSVMU", "PSVPH", "PSVPS", "PSVSO", "PSV", "PTRAP", "PTRAT", "PTRBL", "PTRET", "PTRFD", "PTRFR", "PTRGM", "PTROT", "PTR", "PTW", "P", "_NF", "_PR"].each do |type| 
+  #   ("#{pre}#{type}&@NBI.A".ts.find_units) rescue puts "NBI ERROR FORM #{pre}#{type}&"
+  #   # ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
+  #   #   ("#{pre}#{type}_R&@#{cnty}.A".ts.find_units) rescue puts "_R ERROR FORM #{pre}#{type}_R&@#{cnty}"
+  #   # end
+  # end
 
 
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bea_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }

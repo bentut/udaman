@@ -1307,8 +1307,20 @@ task :visitor_identities=>:environment do
   end
   
   
-  #CRAIR's are probably aggregations
-  ["US", "RES", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
+  "VDAYCRAIR@HI.M".ts_eval = %Q|"VISCRAIR@HI.M".ts * "VLOSCRAIR@HI.M".ts|
+  "VDAYCRAIR@HI.Q".ts_eval = %Q|"VDAYCRAIR@HI.M".ts.aggregate(:quarter, :sum)|
+  "VLOSCRAIR@HI.Q".ts_eval= %Q| "VDAYCRAIR@HI.Q".ts / "VISCRAIR@HI.Q".ts |
+  
+  ["HON", "HAW", "MAU", "KAU"].each do |cnty|
+    "VISCRAIR@#{cnty}.M".ts_eval= %Q|"VISCRAIR@HI.M".ts|
+    "VISCRAIR@#{cnty}.Q".ts_eval= %Q|"VISCRAIR@HI.M".ts.aggregate(:quarter,:sum)|
+    "VLOSCRAIR@#{cnty}.M".ts_eval= %Q|"VLOSCRAIR@HI.M".ts / 4|
+    "VLOSCRAIR@#{cnty}.Q".ts_eval= %Q|"VLOSCRAIR@HI.Q".ts / 4|
+    "VDAYCRAIR@#{cnty}.M".ts_eval= %Q|"VISCRAIR@#{cnty}.M".ts * "VLOSCRAIR@#{cnty}.M".ts |
+    "VDAYCRAIR@#{cnty}.Q".ts_eval= %Q|"VISCRAIR@#{cnty}.Q".ts * "VLOSCRAIR@#{cnty}.Q".ts |
+  end
+  
+  ["CRAIR", "US", "RES", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
     ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
       ["M", "Q", "A"].each do |f|
         begin
@@ -1360,6 +1372,15 @@ task :visitor_identities=>:environment do
   #   end
   # end
   
+
+  # series vdaycrair@hi.m = viscrair@hi.m * vloscrair@hi.m
+  # for cnty = hon, haw, mau, kau
+  # 
+  #     series viscrair@CNTY = viscrair@hi
+  #     series vloscrair@CNTY = vloscrair@hi/4
+  #     series vdaycrair@CNTY = viscrair@CNTY * vloscrair@CNTY
+  # 
+  # end
 
   
   
