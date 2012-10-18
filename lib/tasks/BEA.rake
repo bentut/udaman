@@ -1778,6 +1778,21 @@ task :bea_identities => :environment do
   "YCE_R@US.M".ts_eval= %Q|"YCE_R@US.M".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_m.xls").trim("1900-01-01","1994-12-01")|
   "GDP_CN_R@US.A".ts_eval= %Q|"GDP_CN_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
 
+  #these are all a little wrong... history file?
+  ["HI", "HON", "MAU", "KAU", "HAW"].each do |cnty|
+    "YPC@#{cnty}.A".ts_eval = %Q|"YPCBEA@#{cnty}.A".ts|
+  end
+
+  #wrong
+  #{}"YPC@HI.Q".ts_eval = %Q|"YPCBEA@HI.Q".ts|
+  
+  #this is wrong
+  "YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
+  
+  #A is right. Q is wrong
+  "SH_YPC@HON.A".ts_eval = %Q|"YPC@HON.A".ts / "YPC@HI.A".ts|
+  #{}"SH_YPC@HON.Q".ts_eval = %Q|"YPC@HON.Q".ts / "YPC@HI.Q".ts|
+  
   ["", "_R"].each do |type|
     ["L", "C"].each do |pre|
       ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
@@ -1820,7 +1835,22 @@ task :bea_identities => :environment do
       end
     end
   end
+
+  #YPC doesn't work
+  ["YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPCBEA", "YPC", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSF", "YWAGE", "Y"].each do |pre|
+    ("#{pre}@NBI.A".ts_eval= %Q|"#{pre}@HI.A".ts - "#{pre}@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}"
+    ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
+      ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty}"
+    end
+  end
   
+  # _R ERROR FORM YTRNSFOT_R@HI
+  #   _R ERROR FORM YTRNSFUI_R@HI
+  #   _R ERROR FORM YXR_R@HI
+  ["YSADAD", "YSADWM", "YSAD", "YSAEPF", "YSAERE", "YSAE", "YSAFAC", "YSAFFD", "YSAF", "YSAGFA", "YSAGFF", "YSAG", "YSCT", "YSED", "YSFIIN", "YSFIMC", "YSFIOT", "YSFISE", "YSFI", "YSGVFD", "YSGVML", "YSGV", "YSHCAM", "YSHCHO", "YSHCSO", "YSHC", "YSIFBC", "YSIFDP", "YSIFMP", "YSIFPB", "YSIF", "YSMA", "YSMIMI", "YSMIOG", "YSMISP", "YSMI", "YSMNDRCM", "YSMNDREL", "YSMNDRFB", "YSMNDRFR", "YSMNDRMC", "YSMNDRMS", "YSMNDRMV", "YSMNDRNM", "YSMNDRPM", "YSMNDRTR", "YSMNDRWD", "YSMNDR", "YSMNNDAP", "YSMNNDCH", "YSMNNDFD", "YSMNNDPA", "YSMNNDPL", "YSMNNDPR", "YSMNNDPT", "YSMNNDXX", "YSMNND", "YSMN", "YSOS", "YSPSCO", "YSPSLS", "YSPSOS", "YSPS", "YSRERE", "YSRERL", "YSRE", "YSRT", "YSTWPL", "YSTWSP", "YSTWTA", "YSTWTG", "YSTWTR", "YSTWTT", "YSTWTW", "YSTWWH", "YSTW", "YSUT", "YSWT", "YS_CTMI", "YS_ELSE", "YS_FIR", "YS_GVSL", "YS_OT", "YS_PR", "YS", "YS_SV", "YS_TRADE", "YS_TTU", "YS_TU", "YTRNSFOT", "YTRNSFUI", "YXR"].each do |pre|
+    ("#{pre}_R@HI.A".ts_eval= %Q|"#{pre}@HI.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@HI"
+  end
+
   #loads in & series from history instead
   #this generates "correct" _R & series. for now reading from file
   # pre = "YL"

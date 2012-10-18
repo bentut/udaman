@@ -1229,6 +1229,23 @@ task :visitor_identities=>:environment do
   "SH_USNS@HI.M".ts_eval= %Q|"SH_USNS@HON.M".ts + "SH_USNS@HAW.M".ts + "SH_USNS@KAU.M".ts + "SH_USNS@MAU.M".ts|
   "SH_JPNS@HI.M".ts_eval= %Q|"SH_JPNS@HON.M".ts + "SH_JPNS@HAW.M".ts + "SH_JPNS@KAU.M".ts + "SH_JPNS@MAU.M".ts|
   "SH_RESNS@HI.M".ts_eval= %Q|"SH_RESNS@HON.M".ts + "SH_RESNS@HAW.M".ts + "SH_RESNS@KAU.M".ts + "SH_RESNS@MAU.M".ts|
+
+  "SH_JPNS@HON.Q".ts_eval= %Q|"VISJPNS@HON.Q".ts / "VISJPNS@HI.Q".ts|
+  "SH_RESNS@HON.Q".ts_eval= %Q|"VISRESNS@HON.Q".ts / "VISRESNS@HI.Q".ts|
+
+  "SH_JPNS@HI.Q".ts_eval= %Q|("VISJPNS@HON.Q".ts + "VISJPNS@HAW.Q".ts + "VISJPNS@KAU.Q".ts + "VISJPNS@MAU.Q".ts) / "VISJPNS@HI.Q".ts|
+  "SH_RESNS@HI.Q".ts_eval= %Q|("VISRESNS@HON.Q".ts + "VISRESNS@HAW.Q".ts + "VISRESNS@KAU.Q".ts + "VISRESNS@MAU.Q".ts) / "VISRESNS@HI.Q".ts|
+  
+  
+  ["JP","RES", "US"].each do |mma|
+    ["A", "Q", "M"].each do |f|
+      ["HAW", "HON", "MAU", "KAU"].each do |cnty|
+      	("SH_#{mma}@#{cnty}.#{f}".ts_eval= %Q|"VIS#{mma}@#{cnty}.#{f}".ts / "VIS#{mma}@HI.#{f}".ts |) rescue puts "ERROR : SH_#{mma}@#{cnty}.#{f}"
+      end
+      ("SH_#{mma}@HI.#{f}".ts_eval= %Q|"SH_#{mma}@HON.#{f}".ts + "SH_#{mma}@HAW.#{f}".ts + "SH_#{mma}@KAU.#{f}".ts + "SH_#{mma}@MAU.#{f}".ts  |) rescue puts "ERROR : SH_#{mma}@HI.#{f}"
+    end
+  end
+
   
   # Does first segment
   "VIS@HON.M".ts_eval= %Q|"VISDEMETRA_MC@HI.M".ts.mc_ma_county_share_for("HON","VIS").trim("1990-01-01","1999-12-01")|
