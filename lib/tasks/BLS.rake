@@ -744,6 +744,15 @@ task :bls_identities => :environment do
   "INF@HON.Q".ts_eval= %Q|"CPI@HON.Q".ts.rebase("2010-01-01").annualized_percentage_change|
   "INFCORE@HON.Q".ts_eval= %Q|"PC_FDEN@HON.Q".ts.annualized_percentage_change|
   "INF_SH@HON.Q".ts_eval= %Q|"PC_SH@HON.Q".ts.annualized_percentage_change|
+
+  "INF@HON.S".ts_eval= %Q|"CPI@HON.S".ts.rebase("2010-01-01").annualized_percentage_change|
+  "INFCORE@HON.S".ts_eval= %Q|"PC_FDEN@HON.S".ts.annualized_percentage_change|
+  "INF_SH@HON.S".ts_eval= %Q|"PC_SH@HON.S".ts.annualized_percentage_change|
+
+  "INF@HON.A".ts_eval= %Q|"CPI@HON.A".ts.rebase("2010-01-01").annualized_percentage_change|
+  "INFCORE@HON.A".ts_eval= %Q|"PC_FDEN@HON.A".ts.annualized_percentage_change|
+  "INF_SH@HON.A".ts_eval= %Q|"PC_SH@HON.A".ts.annualized_percentage_change|
+
   
   #Series loaded from this history sheet... may not need to load every day. But relatively fast...
   #["E_FIR@HI.M", "E_FIR@HON.M", "E_GDSPR@HON.M", "E_GVSL@HON.M", "E_TTU@HAW.M", "E_TTU@HON.M", "E_TTU@KAU.M", "E_TTU@MAU.M", "E_TU@HI.M", "E_TU@HON.M", "EAF@HI.M", "EAF@HON.M", "EAFAC@HI.M", "EAFAC@HON.M", "EAFFD@HI.M", "EAFFD@HON.M", "ECT@HI.M", "ECT@HON.M", "EFI@HI.M", "EFI@HON.M", "EGVFD@HI.M", "EGVFD@HON.M", "EGVLC@HI.M", "EGVLC@HON.M", "EGVST@HI.M", "EGVST@HON.M", "EHC@HI.M", "EHC@HON.M", "EMN@HI.M", "EMN@HON.M", "ERE@HI.M", "ERE@HON.M"]  

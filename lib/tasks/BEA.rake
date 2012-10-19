@@ -1784,7 +1784,8 @@ task :bea_identities => :environment do
   end
 
   #wrong
-  #{}"YPC@HI.Q".ts_eval = %Q|"YPCBEA@HI.Q".ts|
+  "YPC@HI.Q".ts_eval = %Q|"YPCBEA@HI.Q".ts|
+  "YPC_R@HI.Q".ts_eval = %Q|"YPC@HI.Q".ts / "CPI@HON.Q".ts|
   
   #this is wrong
   "YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
@@ -1836,8 +1837,8 @@ task :bea_identities => :environment do
     end
   end
 
-  #YPC doesn't work
-  ["YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPCBEA", "YPC", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSF", "YWAGE", "Y"].each do |pre|
+  #YPC base series needs corrections
+  ["YPC", "YDIV", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPCBEA", "YPC", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSF", "YWAGE", "Y"].each do |pre|
     ("#{pre}@NBI.A".ts_eval= %Q|"#{pre}@HI.A".ts - "#{pre}@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}"
     ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
       ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty}"
@@ -1851,6 +1852,22 @@ task :bea_identities => :environment do
     ("#{pre}_R@HI.A".ts_eval= %Q|"#{pre}@HI.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@HI"
   end
 
+  "#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|
+  "#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|
+
+  #{}"YPC@HI.Q", "YPC", "YXR", "YXR", "YXR"
+  
+  ["YDIV", "YLAD", "YLAE", "YLAF", "YLAGFA", "YLAGFF", "YLAG", "YLCT", "YLED", "YLFI", "YLGVFD", "YLGVML", "YLGV", "YLHC", "YLIF", "YLMA", "YLMI", "YLMNDR", "YLMNND", "YLMN", "YLOS", "YLPS", "YLRE", "YLRT", "YLTW", "YLUT", "YLWT", "YL_CTMI", "YL_ELSE", "YL_FIR", "YL_GVSL", "YL_NF", "YL_OT", "YL_PR", "YL", "YL_SV", "YL_TRADE", "YL_TTU", "YL_TU", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSFOT", "YTRNSFUI", "YTRNSF", "YWAGE"].each do |pre|
+    ("#{pre}_R@HI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts / "CPI@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@HI"
+  end
+  "CSCF@US.A".ts_eval= %Q|"CSCF@US.Q".ts.aggregate(:year, :average)|
+  "CSCF@JP.A".ts_eval= %Q|"CSCFNS@JP.Q".ts.aggregate(:year, :average)|
+
+  # Not sure how this is supposed to work. These don't work
+  "YXR_R@JP.A".ts_eval= %Q|"YXR@JP.A".ts / "CPI@JP.A".ts * 100|
+  "YXR_R@JP.Q".ts_eval= %Q|"YXR@JP.Q".ts / "CPI@JP.Q".ts * 100|
+  "YXR_R@JP.M".ts_eval= %Q|"YXR@JP.M".ts / "CPI@JP.M".ts * 100|
+  
   #loads in & series from history instead
   #this generates "correct" _R & series. for now reading from file
   # pre = "YL"

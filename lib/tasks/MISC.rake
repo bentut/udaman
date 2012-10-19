@@ -339,5 +339,13 @@ task :const_identities => :environment do
     "HYQUALCON@#{cnty}.A".ts_eval= %Q|"HPMTCON@#{cnty}.A".ts*10/3*12.0|
     "HAICON@#{cnty}.A".ts_eval= %Q|"YMED@#{cnty}.A".ts / "HYQUALCON@#{cnty}.A".ts*100.0|
    end
+   
+   ["KPGOV", "KPPRVADD","KPPRVCOM", "KPPRVNRSD", "KPPRVRSD", "KPPRV", "KP"].each do |pre|
+     ["HI", "HON", "MAU", "HAW", "KAU"].each do |cnty|
+       ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} A"
+       #("#{pre}_R@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.Q".ts / "CPI@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} Q"
+     end
+   end
+   
    CSV.open("public/rake_time.csv", "a") {|csv| csv << ["const_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

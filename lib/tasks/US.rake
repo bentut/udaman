@@ -61,7 +61,7 @@ task :us_upd_q => :environment do
 	"YPCCE_R@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:13", :col => "increment:3:1", :frequency => "Q" }|,
 	"YPCDPI@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:4", :col => "increment:3:1", :frequency => "Q" }|,
 	"YPCDPI_R@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => "header:col:1:12", :col => "increment:3:1", :frequency => "Q" }|,
-	"CAPUMN@US.Q" => %Q|Series.load_from_download  "US_CAPUMN_Q@research.stlouisfed.org", { :file_type => "txt" }|,
+	"CAPUMN@US.Q" => %Q|Series.load_from_download  "US_CAPUMN_Q@research.stlouisfed.org", { :file_type => "txt", :frequency => "Q" }|,
 	
 		#"GDPDEF@US.Q" => %Q|Series.load_from_download  "13Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 7, :col => "increment:3:1", :frequency => "Q" }|, 
 		#"YPC@US.Q" => %Q|Series.load_from_download  "264Q@bea.gov", { :file_type => "csv", :start_date => "1947-01-01", :row => 11, :col => "increment:3:1", :frequency => "Q" }|, 

@@ -1058,28 +1058,33 @@ task :visitor_identities=>:environment do
     "VIS@#{cnty}.A".ts_eval= %Q|"VISNS@#{cnty}.M".ts.aggregate(:year, :sum)|
   end
   
-  
-  # don't seem to need these histories... BT 8/29/12
-  # #need to load all history identities seem to take full precedence
-  # ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
-  #   "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  #   "VRLSUSENS@#{cnty}.M".ts_eval= %Q|"VRLSUSENS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  #   "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  #   "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
-  # end
-  
   ["DM", "IT", "USW", "USE", "JP", "CAN"].each do |ser|
-    ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations      
+    ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW", "MAU"].each do |cnty| 
       "VRLS#{ser}NS@#{cnty}.M".ts_eval= %Q|"VRLS#{ser}NS@#{cnty}.M".ts|
       "VRLS#{ser}NS@#{cnty}.Q".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:quarter, :sum) / "VIS#{ser}NS@#{cnty}.Q".ts|
       "VRLS#{ser}@#{cnty}.A".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS#{ser}@#{cnty}.A".ts|
     end
   end
 
-  ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
+  ["", "DM", "IT", "CAN", "JP", "USE", "USW"].each do |serlist| 
+    
+    #this is causing the circular reference.... don't run... actually, this is ok for Maui only. definitely for IT... not sure about others
+    #{}"VRLS#{serlist}NS@MAU.M".ts_eval= %Q|("VRLS#{serlist}NS@MAUI.M".ts * "VIS#{serlist}NS@MAUI.M".ts + "VRLS#{serlist}NS@MOL.M".ts * "VIS#{serlist}NS@MOL.M".ts + "VRLS#{serlist}NS@LAN.M".ts * "VIS#{serlist}NS@LAN.M".ts) / "VIS#{serlist}NS@MAU.M".ts|
+    #{}"VDAY#{serlist}NS@MAU.M".ts_eval= %Q|"VRLS#{serlist}NS@MAU.M".ts * "VIS#{serlist}NS@MAU.M".ts|
+    
+    #if these change back, need to delete the old series, or it will cause circular reference
+    #this got changed because of CyFeng, I think
+    "VDAY#{serlist}NS@MAU.M".ts_eval= %Q|"VDAY#{serlist}NS@MAUI.M".ts + "VDAY#{serlist}NS@MOL.M".ts + "VDAY#{serlist}NS@LAN.M".ts|
+    "VRLS#{serlist}NS@MAU.M".ts_eval= %Q|"VDAY#{serlist}NS@MAU.M".ts / "VIS#{serlist}NS@MAU.M".ts|
+  end
+  
+  ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW", "MAU"].each do |cnty| 
     "VRLSNS@#{cnty}.Q".ts_eval= %Q|("VRLSNS@#{cnty}.M".ts * "VISNS@#{cnty}.M".ts).aggregate(:quarter, :sum)  / "VISNS@#{cnty}.Q".ts|        
     "VRLS@#{cnty}.A".ts_eval= %Q|("VRLSNS@#{cnty}.M".ts * "VISNS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS@#{cnty}.A".ts|
   end
+
+  "VRLSOTNS@HI.Q".ts_eval= %Q|("VRLSOTNS@HI.M".ts * "VISOTNS@HI.M".ts).aggregate(:quarter, :sum)  / "VISOTNS@HI.Q".ts|        
+  "VRLSOT@HI.A".ts_eval= %Q|("VRLSOTNS@HI.M".ts * "VISOTNS@HI.M".ts).aggregate(:year, :sum) / "VISOT@HI.A".ts|
   
   #need to load all history identities seem to take full precedence
   ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
@@ -1096,20 +1101,7 @@ task :visitor_identities=>:environment do
   "VRLSCANNS@KAU.M".ts_eval= %Q|"VRLSCANNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
     
   #do the MAUI stuff here... THESE HAVE SOME MISMATCHING --------------------------------
-  ["DM", "IT", "CAN", "JP", "USE", "USW"].each do |serlist| 
-        #FOR SERLIST = DM, IT, CAN, JP, USE, USW;
-        #SERIES <TEXTSOURCE NO MODSOURCE NO> #LOADBNK|:VDAY|#SERLIST|NS@MAU = VDAY|#SERLIST|NS@MAUI + VDAY|#SERLIST|NS@MOL + VDAY|#SERLIST|NS@LAN;
-        #SERIES <TEXTSOURCE NO MODSOURCE NO> #LOADBNK|:VRLS|#SERLIST|NS@MAU = VDAY|#SERLIST|NS@MAU/VIS|#SERLIST|NS@MAU;
-    
-    #this is causing the circular reference.... don't run... actually, this is ok for Maui only. definitely for IT... not sure about others
-    #{}"VRLS#{serlist}NS@MAU.M".ts_eval= %Q|("VRLS#{serlist}NS@MAUI.M".ts * "VIS#{serlist}NS@MAUI.M".ts + "VRLS#{serlist}NS@MOL.M".ts * "VIS#{serlist}NS@MOL.M".ts + "VRLS#{serlist}NS@LAN.M".ts * "VIS#{serlist}NS@LAN.M".ts) / "VIS#{serlist}NS@MAU.M".ts|
-    #{}"VDAY#{serlist}NS@MAU.M".ts_eval= %Q|"VRLS#{serlist}NS@MAU.M".ts * "VIS#{serlist}NS@MAU.M".ts|
-    
-    #if these change back, need to delete the old series, or it will cause circular reference
-    #this got changed because of CyFeng, I think
-    "VDAY#{serlist}NS@MAU.M".ts_eval= %Q|"VDAY#{serlist}NS@MAUI.M".ts + "VDAY#{serlist}NS@MOL.M".ts + "VDAY#{serlist}NS@LAN.M".ts|
-    "VRLS#{serlist}NS@MAU.M".ts_eval= %Q|"VDAY#{serlist}NS@MAU.M".ts / "VIS#{serlist}NS@MAU.M".ts|
-  end
+
     
   #from task vlos requires vdayNSs and visNSs and vrlsNSs
   ["RES", "US", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
@@ -1119,14 +1111,28 @@ task :visitor_identities=>:environment do
     end
   end
 
-  ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty| #no .MAUI .MOL or .LAN ... missing components
+  ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty| 
     ["M", "Q", "A"].each do |f|
       "VLOS@#{cnty}.#{f}".ts_eval= %Q|"VDAY@#{cnty}.#{f}".ts / "VIS@#{cnty}.#{f}".ts|
       "VLOSJP@#{cnty}.#{f}".ts_eval= %Q|"VDAYJP@#{cnty}.#{f}".ts / "VISJP@#{cnty}.#{f}".ts|
-      "VLOSCAN@#{cnty}.#{f}".ts_eval= %Q|"VDAYCAN@#{cnty}.#{f}".ts / "VISCAN@#{cnty}.#{f}".ts| #missing components
-      "VLOSUSE@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSE@#{cnty}.#{f}".ts / "VISUSE@#{cnty}.#{f}".ts| #missing components
-      "VLOSUSW@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSW@#{cnty}.#{f}".ts / "VISUSW@#{cnty}.#{f}".ts| #missing components
-      "VLOSUS@#{cnty}.#{f}".ts_eval= %Q|"VDAYUS@#{cnty}.#{f}".ts / "VISUS@#{cnty}.#{f}".ts| #missing components
+      "VLOSCAN@#{cnty}.#{f}".ts_eval= %Q|"VDAYCAN@#{cnty}.#{f}".ts / "VISCAN@#{cnty}.#{f}".ts| 
+      "VLOSUSE@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSE@#{cnty}.#{f}".ts / "VISUSE@#{cnty}.#{f}".ts| 
+      "VLOSUSW@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSW@#{cnty}.#{f}".ts / "VISUSW@#{cnty}.#{f}".ts| 
+      "VLOSUS@#{cnty}.#{f}".ts_eval= %Q|"VDAYUS@#{cnty}.#{f}".ts / "VISUS@#{cnty}.#{f}".ts| 
+      "VLOSDM@#{cnty}.#{f}".ts_eval= %Q|"VDAYDM@#{cnty}.#{f}".ts / "VISDM@#{cnty}.#{f}".ts|
+      "VLOSIT@#{cnty}.#{f}".ts_eval= %Q|"VDAYIT@#{cnty}.#{f}".ts / "VISIT@#{cnty}.#{f}".ts|
+      "VLOSRES@#{cnty}.#{f}".ts_eval= %Q|"VDAYRES@#{cnty}.#{f}".ts / "VISRES@#{cnty}.#{f}".ts|
+    end
+  end
+  
+  ["MOL", "LAN", "MAUI"].each do |cnty| 
+    ["A"].each do |f|
+      "VLOS@#{cnty}.#{f}".ts_eval= %Q|"VDAY@#{cnty}.#{f}".ts / "VIS@#{cnty}.#{f}".ts|
+      "VLOSJP@#{cnty}.#{f}".ts_eval= %Q|"VDAYJP@#{cnty}.#{f}".ts / "VISJP@#{cnty}.#{f}".ts|
+      "VLOSCAN@#{cnty}.#{f}".ts_eval= %Q|"VDAYCAN@#{cnty}.#{f}".ts / "VISCAN@#{cnty}.#{f}".ts| 
+      "VLOSUSE@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSE@#{cnty}.#{f}".ts / "VISUSE@#{cnty}.#{f}".ts| 
+      "VLOSUSW@#{cnty}.#{f}".ts_eval= %Q|"VDAYUSW@#{cnty}.#{f}".ts / "VISUSW@#{cnty}.#{f}".ts| 
+      "VLOSUS@#{cnty}.#{f}".ts_eval= %Q|"VDAYUS@#{cnty}.#{f}".ts / "VISUS@#{cnty}.#{f}".ts| 
       "VLOSDM@#{cnty}.#{f}".ts_eval= %Q|"VDAYDM@#{cnty}.#{f}".ts / "VISDM@#{cnty}.#{f}".ts|
       "VLOSIT@#{cnty}.#{f}".ts_eval= %Q|"VDAYIT@#{cnty}.#{f}".ts / "VISIT@#{cnty}.#{f}".ts|
       "VLOSRES@#{cnty}.#{f}".ts_eval= %Q|"VDAYRES@#{cnty}.#{f}".ts / "VISRES@#{cnty}.#{f}".ts|
@@ -1141,11 +1147,9 @@ task :visitor_identities=>:environment do
   "VLOSRES@MOL.A".ts_eval=%Q|"VDAYRES@MOL.A".ts / "VISRES@MOL.A".ts|
   "VLOSRES@LAN.A".ts_eval=%Q|"VDAYRES@LAN.A".ts / "VISRES@LAN.A".ts|
 
-  #these are currently WRONG
   ["CR", "CRAF", "CRBF","CRDR", "CRND"].each do |serlist| 
-      #{}"VLOS#{serlist}NS@#{cnty}.M".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.M".ts / "VIS#{serlist}NS@#{cnty}.M".ts|
-      "VLOS#{serlist}NS@HI.Q".ts_eval= %Q|"VLOS#{serlist}NS@HI.M".ts.aggregate(:quarter, :average)|
-      "VLOS#{serlist}@HI.A".ts_eval= %Q|"VLOS#{serlist}NS@HI.M".ts.aggregate(:year, :average)|
+      "VLOS#{serlist}NS@HI.Q".ts_eval= %Q|"VDAY#{serlist}NS@HI.Q".ts / "VISCRNS@HI.Q".ts|
+      "VLOS#{serlist}@HI.A".ts_eval= %Q|"VDAY#{serlist}@HI.A".ts / "VISCR@HI.A".ts|
   end
   
   ["CRAIR", "US", "RES", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
@@ -1167,6 +1171,9 @@ task :visitor_identities=>:environment do
   "VRLSCRAIRNS@HI.M".ts_eval= %Q|"VLOSCRDRNS@HI.M".ts|
   "VLOSCRAIRNS@HI.M".ts_eval= %Q|"VLOSCRDRNS@HI.M".ts|
   "VLOSCRNDNS@HI.M".ts_eval= %Q|"VLOSCRNS@HI.M".ts - "VLOSCRDRNS@HI.M".ts|
+  
+  "VRLSCRAIRNS@HI.Q".ts_eval= %Q|("VRLSCRAIRNS@HI.M".ts * "VISCRAIRNS@HI.M".ts).aggregate(:quarter, :sum) / "VISCRAIRNS@HI.Q".ts|
+  "VRLSCRAIR@HI.A".ts_eval= %Q|("VRLSCRAIRNS@HI.M".ts * "VISCRAIRNS@HI.M".ts).aggregate(:year, :sum) / "VISCRAIR@HI.A".ts|
   
   ["HON", "HAW", "KAU", "MAU"].each do |cnty|
     "VISCRAIRNS@#{cnty}.M".ts_eval= %Q|"VISCRNS@#{cnty}.M".ts * "VISCRAIRNS@HI.M".ts / "VISCRNS@HI.M".ts|
@@ -1199,6 +1206,7 @@ task :visitor_identities=>:environment do
       "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.mc_ma_county_share_for("#{county}")|
     end
   end
+  
   
   #weird one off of history? maybe ns doesn't go that far back or something
   "VEXPPTOT@HI.M".ts_eval= %Q|"VEXPPTOT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|
@@ -1314,6 +1322,30 @@ task :visitor_identities=>:environment do
     end
   end
   
+  "VIS@NBI.M".ts_eval= %Q|"VIS@HI.M".ts - "VIS@HON.M".ts|
+  "VIS@NBI.Q".ts_eval= %Q|"VIS@HI.Q".ts - "VIS@HON.Q".ts|
+  
+  ["VEXP"].each do |s_name|
+    ["HON", "HAW", "MAU", "KAU"].each do |county|
+      "#{s_name}@#{county}.Q".ts_eval= %Q|"#{s_name}@#{county}.M".ts.aggregate(:quarter, :sum)|
+    end
+  end
+  
+  ["VEXPPD", "VEXPPT"].each do |s_name|
+    ["HON", "HAW", "MAU", "KAU"].each do |county|
+      "#{s_name}@#{county}.Q".ts_eval= %Q|"#{s_name}@#{county}.M".ts.aggregate(:quarter, :average)|
+    end
+  end
+  
+  # "VEXPUS@HI.A"=>%Q|"VEXPUS@HI.M".ts.aggregate(:year, :sum)|,
+  #   "VEXPJP@HI.A"=>%Q|"VEXPJP@HI.M".ts.aggregate(:year, :sum)|,
+  #   "VXPRUS@HI.A"=>%Q|"VEXPUS@HI.A".ts|,
+  #   "VXPRJP@HI.A"=>%Q|"VEXPJP@HI.A".ts|,
+  #   "VX@HI.A"=>[%Q|"VXPR@HI.A".ts + "VXBU@HI.A".ts|, 
+  #                 %Q|"VX@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls" |
+  #currently wrong // only VXs left, though
+  "VX@HI.Q".ts_eval= %Q|"VEXP@HI.Q".ts|
+  
   ["HI","HON", "HAW", "MAU", "KAU"].each do |county| #think I need to add MAUI, MOL, LAN but need to figure out VIS / VDAYRES
     "VIS@#{county}.M".ts_append_eval %Q|"VISJP@#{county}.M".ts + "VISUS@#{county}.M".ts + "VISRES@#{county}.M".ts|  
     "VDAY@#{county}.M".ts_append_eval %Q|"VDAYJP@#{county}.M".ts + "VDAYUS@#{county}.M".ts + "VDAYRES@#{county}.M".ts| 
@@ -1354,12 +1386,9 @@ task :visitor_identities=>:environment do
   ["CR","CRAAF", "CRABF", "CRADR", "CRAF", "CRAND", "CRBF", "CRDR", "CRND", "CRSAF", "CRSBF", "CRSDR", "CRSHP", "CRSND", "OT"].each do |serlist| 
     ["HI"].each do |cnty|
       ["M", "Q"].each do |f|
-        begin
-          "VADC#{serlist}NS@#{cnty}.#{f}".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.#{f}".ts / "VDAY#{serlist}NS@#{cnty}.#{f}".ts.days_in_period|
-        rescue
-          puts "ERROR: #{serlist}NS, #{cnty}, #{f}"
-        end
+        ("VADC#{serlist}NS@#{cnty}.#{f}".ts_eval= %Q|"VDAY#{serlist}NS@#{cnty}.#{f}".ts / "VDAY#{serlist}NS@#{cnty}.#{f}".ts.days_in_period|) rescue puts "ERROR: #{serlist}NS, #{cnty}, #{f}"        
       end
+      ("VADC#{serlist}@#{cnty}.A".ts_eval= %Q|"VDAY#{serlist}@#{cnty}.A".ts / "VDAY#{serlist}@#{cnty}.A".ts.days_in_period|) rescue puts "ERROR: #{serlist}, #{cnty}, A"        
     end
   end
   
