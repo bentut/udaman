@@ -340,12 +340,52 @@ task :const_identities => :environment do
     "HAICON@#{cnty}.A".ts_eval= %Q|"YMED@#{cnty}.A".ts / "HYQUALCON@#{cnty}.A".ts*100.0|
    end
    
-   ["KPGOV", "KPPRVADD","KPPRVCOM", "KPPRVNRSD", "KPPRVRSD", "KPPRV", "KP"].each do |pre|
-     ["HI", "HON", "MAU", "HAW", "KAU"].each do |cnty|
-       ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} A"
-       #("#{pre}_R@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.Q".ts / "CPI@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} Q"
+   "PICTSGF@HON.Q".ts_eval= %Q|"PICTSGFNS@HON.Q".ts|
+   
+   #this may work eventually, but KPNS is not defined yet
+   
+   "KPGOV@HI.Q".ts_eval= %Q|"KPGOVNS@HI.Q".ts|
+   "KPGOV_R@HI.A".ts_eval= %Q|"KPGOV@HI.A".ts / "PICTSGF@HON.A".ts * 100|
+   "KPGOV_R@HI.Q".ts_eval= %Q|"KPGOV@HI.Q".ts / "PICTSGF@HON.Q".ts * 100| 
+
+   "KPNS@HI.Q".ts_eval= %Q|"KPPRV@HI.Q".ts + "KPGOV@HI.Q".ts|
+   "KP@HI.Q".ts_eval= %Q|"KPPRV@HI.Q".ts + "KPGOV@HI.Q".ts|
+   "KPNS@HI.A".ts_eval= %Q|"KPPRV@HI.A".ts + "KPGOV@HI.A".ts|
+   "KP@HI.A".ts_eval= %Q|"KPPRV@HI.A".ts + "KPGOV@HI.A".ts|   
+   "KP_R@HI.A".ts_eval= %Q|"KPNS@HI.A".ts / "PICTSGF@HON.A".ts * 100|
+   "KP_R@HI.Q".ts_eval= %Q|"KPNS@HI.Q".ts / "PICTSGF@HON.Q".ts * 100|
+   
+   #KB, KBNS, KNRSD, #KR, KRNS
+
+   
+   ["KPPRVADD","KPPRVCOM", "KPPRVNRSD", "KPPRVRSD", "KPPRV"].each do |pre|
+     ["Q","M"].each do |f|
+       ["HI", "HON", "MAU", "HAW", "KAU"].each do |cnty|         
+         "#{pre}@#{cnty}.#{f}".ts_eval= %Q|"#{pre}NS@#{cnty}.#{f}".ts|
+       end
+       #some of these don't work
+       "#{pre}@NBI.#{f}".ts_eval= %Q|"#{pre}@HI.#{f}".ts - "#{pre}@HON.#{f}".ts|
      end
    end
+
+   ["KPPRVADD","KPPRVCOM", "KPPRVNRSD", "KPPRVRSD", "KPPRV"].each do |pre|
+     ["HI", "HON", "MAU", "HAW", "KAU"].each do |cnty|
+       ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "PICTSGF@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} A"
+       ("#{pre}_R@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.Q".ts / "PICTSGF@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} Q"
+     end
+   end
+   
+   "UICNS@HIONLY.W".ts_eval= %Q|"UICNS@HI.W".ts - "UICNS@OT.W".ts|
+   "UICININS@HIONLY.W".ts_eval= %Q|"UICININS@HI.W".ts - "UICININS@OT.W".ts|
+
+   ["UICINI", "UIC"].each do |pre|
+     ["HIONLY", "HI", "HON", "HONO", "KANE", "KAU", "HILO", "HAW", "MOLK", "KONA", "WLKU", "OT", "WPHU", "MAU"].each do |cnty|
+        ("#{pre}NS@#{cnty}.M".ts_eval= %Q|"#{pre}NS@#{cnty}.W".ts.distribute_days_interpolation.aggregate(:month, :sum)|) rescue puts "ERROR FORM #{pre}@#{cnty} M"
+        ("#{pre}NS@#{cnty}.Q".ts_eval= %Q|"#{pre}NS@#{cnty}.W".ts.distribute_days_interpolation.aggregate(:quarter, :sum)|) rescue puts "ERROR FORM #{pre}@#{cnty} Q"
+        ("#{pre}@#{cnty}.A".ts_eval= %Q|"#{pre}NS@#{cnty}.W".ts.distribute_days_interpolation.aggregate(:year, :sum)|) rescue puts "ERROR FORM #{pre}@#{cnty} A"        
+      end
+   end
+   
    
    CSV.open("public/rake_time.csv", "a") {|csv| csv << ["const_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

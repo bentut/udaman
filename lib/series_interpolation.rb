@@ -14,6 +14,18 @@ module SeriesInterpolation
     new_series.frequency = "day"
     new_series
   end
+
+  def distribute_days_interpolation
+    daily_data = {}
+    raise InterpolationException if frequency != "week" and frequency != "W"
+    self.data.each do |date, val|
+      6.downto(0).each { |days_back| daily_data[(Date.parse(date) - days_back).to_s] = val / 7 }
+    end 
+    new_series = new_transformation("Interpolated Days (distributed) from #{self.name}", daily_data)
+    new_series.frequency = "day"
+    new_series
+  end
+  
   def census_interpolate(frequency)
     raise AggregationError if frequency != :quarter and self.frequency != "year"
     quarterly_data = {}

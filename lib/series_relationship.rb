@@ -5,7 +5,7 @@ module SeriesRelationship
   end
   
   def current_data_points
-    self.data_points.where(:current => true).all
+    self.data_points.where(:current => true).order(:date_string).all
   end
   
   #does this return ascending or descending

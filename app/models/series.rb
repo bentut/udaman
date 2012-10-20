@@ -752,6 +752,14 @@ class Series < ActiveRecord::Base
     end
     self.delete
   end
+    
+  def last_data_added
+    self.data_points.order(:created_at).last.created_at
+  end
+  
+  def last_data_added_string
+    last_data_added.strftime("%B %e, %Y")
+  end
   
   def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )
     return series_to_finish if series_to_finish.count == 0 or depth == 25
