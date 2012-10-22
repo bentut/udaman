@@ -26,19 +26,26 @@ function draw_charts() {
 		                width: 375, 
 						height: 320,
 		                chartArea: { height: 160},
-		               	vAxis: {textStyle: {fontSize: 11}, maxValue: 11},
+		               	vAxis: {textStyle: {fontSize: 11, color:"888"}, minValue:0, maxValue: .11, gridlines: {color:'#F9F9F8'}, baseline:0, baselineColor: '#BBB', format:'#%'},
 		                title: 'UNEMPLOYMENT RATES, STATE OF HAWAII',
 		                titleTextStyle: {color: '#297B92', fontSize: 14},
 		                legend: {position:"none", textStyle:{color:'#555555'}},
-		                series: [{color: '#267991', targetAxisIndex: 0, type:'line'}],
+							//#E39014 orange
+							//#267991 blue
+							//#BECCD4 light blue
+		                series: [{color: '#BECCD4', targetAxisIndex: 0, type:'line', lineWidth: 1},
+								 {color: '#267991', targetAxisIndex: 0, type:'line', lineWidth: 2, pointSize: 1}],
 		                lineWidth: 2,
 		             	hAxis: {	
-		//			showTextEvery: '2', 
-					slantedText: true, 
-					slantedTextAngle: '45', 
-					textStyle: {fontSize: 10}
-					},
-		               backgroundColor: '#F9F9F8'
+							//showTextEvery: '2', 
+							slantedText: true, 
+							slantedTextAngle: '45', 
+							textStyle: {fontSize: 10},
+							baseline:6,
+							baselineColor: 'black',
+						},
+		               backgroundColor: '#F9F9F8',
+						tooltip: {textStyle:{color:"#267991"}, format:'#%'}
 			};
 		
 
@@ -58,7 +65,8 @@ function draw_charts() {
 				:width => iteration_data[:width],
 				:height => iteration_data[:height],
 				:chart_area => iteration_data[:chart_area],
-				:indicator => iteration_data[:indicator]
+				:indicator => iteration_data[:indicator],
+				:current_date_cutoff => iteration_data[:plot_data].ts.current_data_points[-2].date_string
 				}
 				%>
 
@@ -78,6 +86,7 @@ div#chart1 {width: 750px; }
 
 </style></p>
 
+<h4>Updated: <%= "UR@HI.M".ts.last_data_added_string %> </h4>
 <p><b>Source:</b> &nbsp;U.S. Department of Labor, Bureau of Labor Statistics, and Hawaii Department of Labor and Industrial Relations<br />
 <i>Unemployment rates are seasonally adjusted by UHERO</i></p>
 <div id="chartlist">
