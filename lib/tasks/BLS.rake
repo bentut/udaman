@@ -711,6 +711,14 @@ task :hiwi_upd => :environment do
 end
 
 
+task :bls_nbis => :environment do
+  ["E", "EAD", "EADES", "EADESNS", "EADNS", "EAE", "EAENS", "EAF", "EAFAC", "EAFACNS", "EAFFD", "EAFFDNS", "EAFFDRS", "EAFFDRSNS", "EAFNS", "EAG", "EAGNS", "ECT", "ECTNS", "ECTSP", "ECTSPNS", "EED12", "EED12NS", "EED", "EEDNS", "EFI", "EFINS", "EGV", "EGVFD", "EGVFDDD", "EGVFDDDNS", "EGVFDNS", "EGVFDSP", "EGVFDSPNS", "EGVLC", "EGVLCNS", "EGVNS", "EGVST", "EGVSTED", "EGVSTEDNS", "EGVSTNS", "EHC", "EHCAM", "EHCAMNS", "EHCHO", "EHCHONS", "EHCNS", "EIF", "EIFNS", "EIFTC", "EIFTCNS", "EMA", "EMANS", "EMN", "EMNDR", "EMNDRNS", "EMNND", "EMNNDNS", "EMNNS", "EMPL", "EMPLNS", "ENS", "EOS", "EOSNS", "EPS", "EPSNS", "ERE", "ERENS", "ERT", "ERTCL", "ERTCLNS", "ERTFD", "ERTFDGS", "ERTFDGSNS", "ERTFDNS", "ERTGM", "ERTGMDS", "ERTGMDSNS", "ERTGMNS", "ERTNS", "ETW", "ETWNS", "ETWTA", "ETWTANS", "EUT", "EUTNS", "EWT", "EWTNS", "E_EDHC", "E_EDHCNS", "E_ELSE", "E_ELSENS", "E_FIR", "E_FIRNS", "E_GDSPR", "E_GDSPRNS", "E_GVSL", "E_GVSLNS", "E_LH", "E_LHNS", "E_NF", "E_NFNS", "E_PBS", "E_PBSNS", "E_PR", "E_PRNS", "E_PRSVCPR", "E_PRSVCPRNS", "E_SV", "E_SVCPR", "E_SVCPRNS", "E_SVNS", "E_TRADE", "E_TRADENS", "E_TTU", "E_TTUNS", "E_TU", "E_TUNS"].each do |pre|
+    ["A", "Q", "M"].each do |f|
+      ("#{pre}@NBI.#{f}".ts_eval= %Q|"#{pre}@HI.#{f}".ts - "#{pre}@HON.#{f}".ts|) rescue "puts error #{pre}@NBI.#{f}"
+    end
+  end
+end
+
 task :bls_identities => :environment do
   t= Time.now
   "PC@HON.Q".ts_append_eval %Q|"PC@HON.S".ts.interpolate(:quarter, :linear).trim("1985-01-01")|

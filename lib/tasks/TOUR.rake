@@ -1060,7 +1060,8 @@ task :visitor_identities=>:environment do
   
   ["DM", "IT", "USW", "USE", "JP", "CAN"].each do |ser|
     ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW", "MAU"].each do |cnty| 
-      "VRLS#{ser}NS@#{cnty}.M".ts_eval= %Q|"VRLS#{ser}NS@#{cnty}.M".ts|
+      #not sure what the point of this was
+      #{}"VRLS#{ser}NS@#{cnty}.M".ts_eval= %Q|"VRLS#{ser}NS@#{cnty}.M".ts|
       "VRLS#{ser}NS@#{cnty}.Q".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:quarter, :sum) / "VIS#{ser}NS@#{cnty}.Q".ts|
       "VRLS#{ser}@#{cnty}.A".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS#{ser}@#{cnty}.A".ts|
     end

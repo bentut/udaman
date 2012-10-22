@@ -127,6 +127,10 @@ every 1.day, :at => "#{bls_hour.to_i+2}:15 am" do
   rake "run_aggregations4"
 end
 
+every 1.day, :at => "#{bls_hour.to_i+2}:30 am" do
+  rake "bls_nbis"
+end
+
 every 1.day, :at => "#{hour.to_i+5}:30 am" do
   rake "gen_investigate_csv"
 end

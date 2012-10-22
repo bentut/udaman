@@ -275,6 +275,14 @@ task :const_identities => :environment do
   "KBSGF@MAU.M".ts_eval= %Q|"KBSGF@MAU.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/mbr_sa.xls"|
   "KBSGF@MAU.M".ts_eval= %Q|"KBSGF@MAU.M".ts.apply_seasonal_adjustment :multiplicative|
   
+  ["HON", "MAU"].each do |cnty|
+    ["Q", "M"].each do |f|
+      "KBNS@#{cnty}.#{f}".ts_eval = %Q|"KBSGFNS@#{cnty}.#{f}".ts + "KBCONNS@#{cnty}.#{f}".ts|
+      "KB@#{cnty}.#{f}".ts_eval = %Q|"KBSGF@#{cnty}.#{f}".ts + "KBCON@#{cnty}.#{f}".ts|
+    end
+      "KB@#{cnty}.A".ts_eval = %Q|"KBSGF@#{cnty}.A".ts + "KBCON@#{cnty}.A".ts|
+  end
+  
   "PMKBSGF@HON.M".ts_eval= %Q|"PMKBSGF@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_upd_m.csv"|
   "PMKBCON@HON.M".ts_eval= %Q|"PMKBCON@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_upd_m.csv"|
   "PMKBSGF@MAU.M".ts_eval= %Q|"PMKBSGF@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/mbr_upd_m.csv"|
@@ -301,6 +309,12 @@ task :const_identities => :environment do
     "KRSGF@#{cnty}.Q".ts_eval= %Q|"KRSGF@HI.Q".ts.mc_price_share_for("#{cnty}")|
   end
 
+  ["HI","HAW", "KAU","HON", "MAU"].each do |cnty|
+  	"KRNS@#{cnty}.Q".ts_eval = %Q|"KRSGFNS@#{cnty}.Q".ts + "KRCONNS@#{cnty}.Q".ts|
+  	"KR@#{cnty}.Q".ts_eval = %Q|"KRSGF@#{cnty}.Q".ts + "KRCON@#{cnty}.Q".ts|
+  	"KR@#{cnty}.A".ts_eval = %Q|"KRSGF@#{cnty}.A".ts + "KRCON@#{cnty}.A".ts|
+  end
+  
   "PMKRCON@HON.Q".ts_eval= %Q| "PMKRCON@HON.Q".ts.apply_seasonal_adjustment :multiplicative  |
   "KRCON@HI.Q".ts_eval= %Q|  "KRCON@HI.Q".ts.apply_seasonal_adjustment :multiplicative|
   "KRSGF@HI.Q".ts_eval= %Q| "KRSGF@HI.Q".ts.apply_seasonal_adjustment :multiplicative|
@@ -340,6 +354,19 @@ task :const_identities => :environment do
     "HAICON@#{cnty}.A".ts_eval= %Q|"YMED@#{cnty}.A".ts / "HYQUALCON@#{cnty}.A".ts*100.0|
    end
    
+   "HPMTCON@HI.Q".ts_eval= %Q|"PMKRCON@HI.Q".ts * 0.8 * ("RMORT@US.Q".ts/1200.0)/(((("RMORT@US.Q".ts/1200.0)+1)**-360)*-1+1)|
+   "HPMTCON@HON.Q".ts_eval= %Q|"PMKRCON@HON.Q".ts * 0.8 * ("RMORT@US.Q".ts/1200.0)/(((("RMORT@US.Q".ts/1200.0)+1)**-360)*-1+1)|
+   "HPMT@HI.Q".ts_eval= %Q|"PMKRSGF@HI.Q".ts * 0.8 * ("RMORT@US.Q".ts/1200.0)/(((("RMORT@US.Q".ts/1200.0)+1)**-360)*-1+1)|
+   "HPMT@HON.Q".ts_eval= %Q|"PMKRSGF@HON.Q".ts * 0.8 * ("RMORT@US.Q".ts/1200.0)/(((("RMORT@US.Q".ts/1200.0)+1)**-360)*-1+1)|
+
+   "HYQUAL@HI.Q".ts_eval= %Q|"HPMT@HI.Q".ts*10/3*12.0|
+   "HYQUAL@HON.Q".ts_eval= %Q|"HPMT@HON.Q".ts*10/3*12.0|
+   "HYQUALCON@HI.Q".ts_eval= %Q|"HPMTCON@HI.Q".ts*10/3*12.0|
+   "HYQUALCON@HON.Q".ts_eval= %Q|"HPMTCON@HON.Q".ts*10/3*12.0|
+
+   # "HAI@HI.Q".ts_eval=  %Q|"YMED@HI.Q".ts / "HYQUAL@HI.Q".ts*100.0|
+   #    HAICON@HI.A =  "YMED@HI.A".ts / "HYQUALCON@HI.A".ts*100.0
+
    ["KPGOV", "KPPRVADD","KPPRVCOM", "KPPRVNRSD", "KPPRVRSD", "KPPRV", "KP"].each do |pre|
      ["HI", "HON", "MAU", "HAW", "KAU"].each do |cnty|
        ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} A"
