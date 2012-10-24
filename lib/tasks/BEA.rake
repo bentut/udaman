@@ -1723,7 +1723,8 @@ task :bea_identities => :environment do
   #some of the Y's rely on a manul file read in another process...
 
   #refer to identites in identites in bea_upd.cmd
-	"YSAG@HI.A".ts_eval= %Q|"YSAGFA@HI.A".ts + "YSAGFF@HI.A".ts|
+  # ben just removed
+  # "YSAG@HI.A".ts_eval= %Q|"YSAGFA@HI.A".ts + "YSAGFF@HI.A".ts|
 	  
   #these are all slightly off... same as below, not needed and wrong anyway 6/28/11
   # "YPCBEA_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / ("CPI@HON.A".ts * "NR@HI.A".ts)|
@@ -1732,21 +1733,15 @@ task :bea_identities => :environment do
   # "YPCBEA_R@KAU.A".ts_eval= %Q|"Y@KAU.A".ts / ("CPI@HON.A".ts * "NR@KAU.A".ts)|
   # "YPCBEA_R@MAU.A".ts_eval= %Q|"Y@MAU.A".ts / ("CPI@HON.A".ts * "NR@MAU.A".ts)|
 
-  "Y_R@HI.A".ts_eval= %Q|"Y@HI.A".ts / "CPI@HON.A".ts  |
-  "Y_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / "CPI@HON.A".ts |
-  "Y_R@HAW.A".ts_eval= %Q|"Y@HAW.A".ts / "CPI@HON.A".ts |
-  "Y_R@KAU.A".ts_eval= %Q|"Y@KAU.A".ts / "CPI@HON.A".ts |
-  "Y_R@MAU.A".ts_eval= %Q|"Y@MAU.A".ts / "CPI@HON.A".ts |
-
   #works, but might need to be overwritten by rebased version if carl says
   "Y_R@HI.Q".ts_eval= %Q|"Y@HI.Q".ts / "CPI@HON.Q".ts  * 100|
 
   #{}"YPCBEA_R@HON.A".ts_eval= %Q|"Y@HON.A".ts / ("CPI@HON.A".ts * "NR@HON.A".ts)|
-  "YPCBEA_R@HI.A".ts_eval=%Q|"YPCBEA@HI.A".ts / "CPI@HON.A".ts|
-  "YPCBEA_R@KAU.A".ts_eval=%Q|"YPCBEA@KAU.A".ts / "CPI@HON.A".ts|
-  "YPCBEA_R@MAU.A".ts_eval=%Q|"YPCBEA@MAU.A".ts / "CPI@HON.A".ts|
-  "YPCBEA_R@HAW.A".ts_eval=%Q|"YPCBEA@HAW.A".ts / "CPI@HON.A".ts|
-  "YPCBEA_R@HON.A".ts_eval= %Q|"YPCBEA@HON.A".ts / "CPI@HON.A".ts|
+  # "YPCBEA_R@HI.A".ts_eval=%Q|"YPCBEA@HI.A".ts / "CPI@HON.A".ts|
+  # "YPCBEA_R@KAU.A".ts_eval=%Q|"YPCBEA@KAU.A".ts / "CPI@HON.A".ts|
+  # "YPCBEA_R@MAU.A".ts_eval=%Q|"YPCBEA@MAU.A".ts / "CPI@HON.A".ts|
+  # "YPCBEA_R@HAW.A".ts_eval=%Q|"YPCBEA@HAW.A".ts / "CPI@HON.A".ts|
+  # "YPCBEA_R@HON.A".ts_eval= %Q|"YPCBEA@HON.A".ts / "CPI@HON.A".ts|
   
   # ["HI", "HON", "HAW", "KAU", "MAU"].each do |cnty|
   #   "Y_R@#{cnty}.A".ts_eval= %Q|"Y@#{cnty}.A".ts / "CPI@HON.A".ts|
@@ -1784,7 +1779,7 @@ task :bea_identities => :environment do
   end
 
   #wrong
-  "YPC@HI.Q".ts_eval = %Q|"YPCBEA@HI.Q".ts|
+  # "YPC@HI.Q".ts_eval = %Q|"YPCBEA@HI.Q".ts|
   "YPC_R@HI.Q".ts_eval = %Q|"YPC@HI.Q".ts / "CPI@HON.Q".ts|
   
   #this is wrong
@@ -1852,15 +1847,16 @@ task :bea_identities => :environment do
     ("#{pre}_R@HI.A".ts_eval= %Q|"#{pre}@HI.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@HI"
   end
 
-  "#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|
-  "#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|
+  # "#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|
+  # "#{pre}#{type}@NBI.A".ts_eval= %Q|"#{pre}#{type}@HI.A".ts - "#{pre}#{type}@HON.A".ts|
 
   #{}"YPC@HI.Q", "YPC", "YXR", "YXR", "YXR"
   
   ["YDIV", "YLAD", "YLAE", "YLAF", "YLAGFA", "YLAGFF", "YLAG", "YLCT", "YLED", "YLFI", "YLGVFD", "YLGVML", "YLGV", "YLHC", "YLIF", "YLMA", "YLMI", "YLMNDR", "YLMNND", "YLMN", "YLOS", "YLPS", "YLRE", "YLRT", "YLTW", "YLUT", "YLWT", "YL_CTMI", "YL_ELSE", "YL_FIR", "YL_GVSL", "YL_NF", "YL_OT", "YL_PR", "YL", "YL_SV", "YL_TRADE", "YL_TTU", "YL_TU", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSFOT", "YTRNSFUI", "YTRNSF", "YWAGE"].each do |pre|
     ("#{pre}_R@HI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts / "CPI@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@HI"
   end
-  "CSCF@US.A".ts_eval= %Q|"CSCF@US.Q".ts.aggregate(:year, :average)|
+
+#  "CSCF@US.A".ts_eval= %Q|"CSCF@US.Q".ts.aggregate(:year, :average)|
   "CSCF@JP.A".ts_eval= %Q|"CSCFNS@JP.Q".ts.aggregate(:year, :average)|
 
   # Not sure how this is supposed to work. These don't work

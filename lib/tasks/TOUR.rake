@@ -1059,11 +1059,8 @@ task :visitor_identities=>:environment do
   end
   
   ["DM", "IT", "USW", "USE", "JP", "CAN"].each do |ser|
-    ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW", "MAU"].each do |cnty| 
-      #not sure what the point of this was
-      #{}"VRLS#{ser}NS@#{cnty}.M".ts_eval= %Q|"VRLS#{ser}NS@#{cnty}.M".ts|
-      "VRLS#{ser}NS@#{cnty}.Q".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:quarter, :sum) / "VIS#{ser}NS@#{cnty}.Q".ts|
-      "VRLS#{ser}@#{cnty}.A".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS#{ser}@#{cnty}.A".ts|
+    ["HON", "KAU", "MAUI", "MOL", "LAN", "HAW", "MAU"].each do |cnty| 
+      "VRLS#{ser}NS@#{cnty}.M".ts_eval= %Q| "VDAY#{ser}NS@#{cnty}.M".ts / "VIS#{ser}NS@#{cnty}.M".ts |
     end
   end
 
@@ -1087,6 +1084,7 @@ task :visitor_identities=>:environment do
   "VRLSOTNS@HI.Q".ts_eval= %Q|("VRLSOTNS@HI.M".ts * "VISOTNS@HI.M".ts).aggregate(:quarter, :sum)  / "VISOTNS@HI.Q".ts|        
   "VRLSOT@HI.A".ts_eval= %Q|("VRLSOTNS@HI.M".ts * "VISOTNS@HI.M".ts).aggregate(:year, :sum) / "VISOT@HI.A".ts|
   
+  #identities seemed to take over 10/21/12 Ben
   #need to load all history identities seem to take full precedence
   ["HON", "MAUI", "MOL", "LAN", "HAW"].each do |cnty| #note MAU is not included here. totally separate calculations
     "VRLSUSWNS@#{cnty}.M".ts_eval= %Q|"VRLSUSWNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
@@ -1094,13 +1092,21 @@ task :visitor_identities=>:environment do
     "VRLSJPNS@#{cnty}.M".ts_eval= %Q|"VRLSJPNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
     "VRLSCANNS@#{cnty}.M".ts_eval= %Q|"VRLSCANNS@#{cnty}.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
   end
-
+  
   #KAU is in different history sheet
   "VRLSUSWNS@KAU.M".ts_eval= %Q|"VRLSUSWNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
   "VRLSUSENS@KAU.M".ts_eval= %Q|"VRLSUSENS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
   "VRLSJPNS@KAU.M".ts_eval= %Q|"VRLSJPNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
   "VRLSCANNS@KAU.M".ts_eval= %Q|"VRLSCANNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls"|
     
+    
+    
+  ["DM", "IT", "USW", "USE", "JP", "CAN"].each do |ser|
+    ["HI", "HON", "KAU", "MAUI", "MOL", "LAN", "HAW", "MAU"].each do |cnty| 
+      "VRLS#{ser}NS@#{cnty}.Q".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:quarter, :sum) / "VIS#{ser}NS@#{cnty}.Q".ts|
+      "VRLS#{ser}@#{cnty}.A".ts_eval= %Q|("VRLS#{ser}NS@#{cnty}.M".ts * "VIS#{ser}NS@#{cnty}.M".ts).aggregate(:year, :sum) / "VIS#{ser}@#{cnty}.A".ts|
+    end
+  end
   #do the MAUI stuff here... THESE HAVE SOME MISMATCHING --------------------------------
 
     
@@ -1323,8 +1329,7 @@ task :visitor_identities=>:environment do
     end
   end
   
-  "VIS@NBI.M".ts_eval= %Q|"VIS@HI.M".ts - "VIS@HON.M".ts|
-  "VIS@NBI.Q".ts_eval= %Q|"VIS@HI.Q".ts - "VIS@HON.Q".ts|
+
   
   ["VEXP"].each do |s_name|
     ["HON", "HAW", "MAU", "KAU"].each do |county|
@@ -1356,6 +1361,8 @@ task :visitor_identities=>:environment do
     "VIS@#{county}.A".ts_eval= %Q|"VIS@#{county}.M".ts.aggregate(:year, :sum)|
   end
   
+  "VIS@NBI.M".ts_eval= %Q|"VIS@HI.M".ts - "VIS@HON.M".ts|
+  "VIS@NBI.Q".ts_eval= %Q|"VIS@HI.Q".ts - "VIS@HON.Q".ts|
   
   "VDAYCRAIR@HI.M".ts_eval = %Q|"VISCRAIR@HI.M".ts * "VLOSCRAIR@HI.M".ts|
   "VDAYCRAIR@HI.Q".ts_eval = %Q|"VDAYCRAIR@HI.M".ts.aggregate(:quarter, :sum)|

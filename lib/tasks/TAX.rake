@@ -383,11 +383,15 @@ task :tax_identities => :environment do
   #would be nice if this load could be made more efficient. Not sure why the grouped call isn't working well right now...
 
   ["HI", "HON", "MAU", "KAU", "HAW"].each do |cnty|
-    "TRINNS@#{cnty}.M".ts_eval= %Q|"TRINESNS@#{cnty}.M".ts + "TRINPRNS@#{cnty}.M".ts + "TRINWHNS@#{cnty}.M".ts + "TRINRFNS@#{cnty}.M".ts|
-    "TRCONS@#{cnty}.M".ts_eval= %Q|"TRCOESNS@#{cnty}.M".ts + "TRCOPRNS@#{cnty}.M".ts + "TRCORFNS@#{cnty}.M".ts|
+    begin
+      "TRINNS@#{cnty}.M".ts_eval= %Q|"TRINESNS@#{cnty}.M".ts + "TRINPRNS@#{cnty}.M".ts + "TRINWHNS@#{cnty}.M".ts + "TRINRFNS@#{cnty}.M".ts|
+      "TRCONS@#{cnty}.M".ts_eval= %Q|"TRCOESNS@#{cnty}.M".ts + "TRCOPRNS@#{cnty}.M".ts + "TRCORFNS@#{cnty}.M".ts|
     
-    "TRCONS@#{cnty}.Q".ts_eval= %Q|"TRCONS@#{cnty}.M".ts.aggregate_by(:quarter, :sum)|
-    "TRINNS@#{cnty}.Q".ts_eval= %Q|"TRINNS@#{cnty}.M".ts.aggregate_by(:quarter, :sum)|
+      "TRCONS@#{cnty}.Q".ts_eval= %Q|"TRCONS@#{cnty}.M".ts.aggregate_by(:quarter, :sum)|
+      "TRINNS@#{cnty}.Q".ts_eval= %Q|"TRINNS@#{cnty}.M".ts.aggregate_by(:quarter, :sum)|
+    rescue
+      puts "problem with #{cnty}. 4 series skipped"
+    end
   end
   "TR@HI.M".ts_eval=%Q|"TR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
   "TR@HI.M".ts_eval=%Q|"TR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|

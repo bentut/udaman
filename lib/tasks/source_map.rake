@@ -116,7 +116,7 @@ task :daily_history_load => :environment do
   
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/esic_HON_a.xls" 
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/esic_HON_m.xls" 
-  #Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/esic_HON_q.xls" 
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/esic_HON_q.xls" 
   
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls" #diffs starting in 2011
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd2_hist.xls" #diffs mostly in 2011, some in 2010. runs fast

@@ -360,6 +360,8 @@ task :bls_job_upd_m => :environment do
 		"EGVSTNS@HON.M" => %Q|Series.load_from_bls("SMU15261809092000001", "M")|,
 		"EGVSTEDNS@HON.M" => %Q|Series.load_from_bls("SMU15261809092161101", "M")|,
 		"EGVLCNS@HON.M" => %Q|Series.load_from_bls("SMU15261809093000001", "M")|,
+		"EGVFDDDNS@HI.M" => %Q|Series.load_from_bls("SMU15000009091911901", "M")|,
+		"EGVFDDDNS@HON.M" => %Q|Series.load_from_bls("SMU15261809091911901", "M")|,
 		
 	}
 	
@@ -775,6 +777,32 @@ task :bls_identities => :environment do
     "E_SVNS@#{cnty}.M".ts_append_eval %Q|"E_NFNS@#{cnty}.M".ts - ("ECTNS@#{cnty}.M".ts + "EMNNS@#{cnty}.M".ts + "E_TRADENS@#{cnty}.M".ts + "E_TUNS@#{cnty}.M".ts + "E_FIRNS@#{cnty}.M".ts + "EGVNS@#{cnty}.M".ts) | 
     "E_ELSENS@HI.M".ts_append_eval %Q|"E_NFNS@HI.M".ts - ("ECTNS@HI.M".ts + "EMNNS@HI.M".ts + "E_TRADENS@HI.M".ts  + "E_TUNS@HI.M".ts + "E_FIRNS@HI.M".ts + "EAFNS@HI.M".ts + "EHCNS@HI.M".ts + "EGVNS@HI.M".ts)|
   end
+  
+  #NEW SECTION BEN ADDED. Not totally reliable
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
+    ["Q", "M"].each do |f| #?
+      ("E_ELSENS@#{cnty}.#{f}".ts_eval= %Q|"E_NFNS@#{cnty}.#{f}".ts - ("ECTNS@#{cnty}.#{f}".ts + "EMNNS@#{cnty}.#{f}".ts + "E_TRADENS@#{cnty}.#{f}".ts + "E_TUNS@#{cnty}.#{f}".ts + "E_FIRNS@#{cnty}.#{f}".ts + "EAFNS@#{cnty}.#{f}".ts + "EHCNS@#{cnty}.#{f}".ts + "EGVNS@#{cnty}.#{f}".ts)|) rescue puts "ERROR E_ELSENS@#{cnty}.#{f}"
+    end
+  end
+  
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
+    ("EMN@#{cnty}.Q".ts_eval= %Q|"EMN@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMN@#{cnty}.Q"
+    ("E_GVSL@#{cnty}.Q".ts_eval= %Q|"E_GVSL@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR E_GVSL@#{cnty}.Q"
+    ("EMPL@#{cnty}.Q".ts_eval= %Q|"EMPL@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMPL@#{cnty}.Q"
+    ("EMPL@#{cnty}.A".ts_eval= %Q|"EMPLNS@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMPL@#{cnty}.A"
+    ("EMPLNS@#{cnty}.Q".ts_eval= %Q|"EMPLNS@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMPLNS@#{cnty}.Q"    
+  end
+  
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|  
+    ["Q", "M"].each do |f| #?
+      ("E_GDSPR@#{cnty}.#{f}".ts_eval= %Q|"ECT@#{cnty}.#{f}".ts + "EMN@#{cnty}.#{f}".ts|) rescue puts "ERROR E_GDSPR@#{cnty}.#{f}"
+      ("E_SV@#{cnty}.#{f}".ts_eval= %Q|"E_NF@#{cnty}.#{f}".ts - ("ECT@#{cnty}.#{f}".ts + "EMN@#{cnty}.#{f}".ts + "E_TTU@#{cnty}.#{f}".ts + "E_FIR@#{cnty}.#{f}".ts + "EGV@#{cnty}.#{f}".ts)|) rescue puts "ERROR E_ELSENS@#{cnty}.#{f}"
+      ("E_SVCPR@#{cnty}.#{f}".ts_eval= %Q|"E_NF@#{cnty}.#{f}".ts - "E_GDSPR@#{cnty}.#{f}".ts|) rescue puts "ERROR E_SVCPR@#{cnty}.#{f}"
+      ("E_ELSE@#{cnty}.#{f}".ts_eval= %Q|"E_SV@#{cnty}.#{f}".ts - ("EAF@#{cnty}.#{f}".ts + "EHC@#{cnty}.#{f}".ts)|) rescue puts "ERROR E_ELSE@#{cnty}.#{f}"
+      ("E_PRSVCPR@#{cnty}.#{f}".ts_eval= %Q|"E_SVCPR@#{cnty}.#{f}".ts - "EGV@#{cnty}.#{f}".ts|) rescue puts "ERROR E_PRSVCPR@#{cnty}.#{f}"
+    end
+  end
+  
 
   "EAENS@HON.M".ts_eval= %Q|"E_LHNS@HON.M".ts - "EAFNS@HON.M".ts|
   'EAENS@HAW.M'.ts_eval= %Q|"E_LHNS@HAW.M".ts - "EAFNS@HAW.M".ts|
@@ -844,7 +872,7 @@ task :bls_identities => :environment do
   
   "E_PR@HI.M".ts_append_eval %Q|"E_NF@HI.M".ts - "EGV@HI.M".ts|
    
-  ["ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
+  ["EAG", "ECT", "EWT","ERT", "EED", "EHC", "EOS", "EGVST", "EGVLC", "EGVFD", "EAE", "ERE", "EPS", "EAFAC", "EAFFD", "EMA", "EAD", "EMN", "EIF", "EFI", "E_TU"].each do |s_name|
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       puts "distributing #{s_name}, #{county}"
       "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.aa_state_based_county_share_for("#{county}").trim("1990-01-01")|
@@ -887,6 +915,15 @@ task :bls_identities => :environment do
     "E_PRSVCPR@#{county}.M".ts_append_eval %Q|"E_SVCPR@#{county}.M".ts - "EGV@#{county}.M".ts|
     
   end
+  
+  
+  ["HON", "HAW", "MAU", "KAU"].each do |cnty|
+    "EAG@#{cnty}.Q".ts_eval= %Q|"EAG@#{cnty}.M".ts.aggregate(:quarter, :average)|
+    ["M", "Q", "A"].each do |f| 
+      "E@#{cnty}.#{f}".ts_eval = %Q|"EAG@#{cnty}.#{f}".ts + "E_NF@#{cnty}.#{f}".ts|
+    end
+  end
+  
   
   # ["EGV", "E_LH", "E_PBS", "E_FIR", "EAE"].each do |s_name|
   #   ["HON", "HAW", "MAU", "KAU"].each do |county|
