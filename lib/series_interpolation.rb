@@ -4,6 +4,31 @@ module SeriesInterpolation
     series_to_store_name.ts= interpolate frequency,operation
   end
   
+  def fill_interpolate_to(target_frequency)
+    freq = self.frequency.to_s
+    new_series_data = {}
+    if  freq == "year"
+      if target_frequency == :quarter
+        month_vals = ["01", "04", "07", "10"]
+      elsif target_frequency == :month
+        month_vals = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+      else
+        raise InterpolationException
+      end
+
+      self.data.each do |date_string, val|
+        year = date_string.to_date.year
+        month_vals.each {|month| new_series_data["#{year}-#{month}-01"] = val }
+      end
+    else
+      raise InterpolationException
+    end
+     
+    new_series = new_transformation("Interpolated by filling #{self.name} to #{target_frequency}", new_series_data)
+    new_series.frequency = target_frequency.to_s
+    new_series
+  end
+  
   def fill_days_interpolation
     daily_data = {}
     raise InterpolationException if frequency != "week" and frequency != "W"
