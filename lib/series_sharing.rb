@@ -149,4 +149,13 @@ module SeriesSharing
     new_series = ratio_top / ratio_bottom * self
     new_transformation("Share of #{name} using ratio of #{ratio_top.name} over #{ratio_bottom.name}", new_series.data)
   end
+  
+  def Series.add_demetra_series_and_mean_correct(add_series_1, add_series_2, mc_series, file)
+    as1 = add_series_1.ts.load_sa_from(file)
+    as2 = add_series_2.ts.load_sa_from(file)
+    as_sum = as1 + as2
+    new_series = as_sum / as_sum.annual_sum * mc_series.ts.annual_sum
+    new_transformation("#{add_series_1} + #{add_series_2} from demetra output of #{file} mean corrected against #{mc_series}", new_series.data, new_series.frequency)
+  end
+  
 end

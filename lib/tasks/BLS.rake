@@ -789,7 +789,7 @@ task :bls_identities => :environment do
     ("EMN@#{cnty}.Q".ts_eval= %Q|"EMN@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMN@#{cnty}.Q"
     ("E_GVSL@#{cnty}.Q".ts_eval= %Q|"E_GVSL@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR E_GVSL@#{cnty}.Q"
     ("EMPL@#{cnty}.Q".ts_eval= %Q|"EMPL@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMPL@#{cnty}.Q"
-    ("EMPL@#{cnty}.A".ts_eval= %Q|"EMPLNS@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMPL@#{cnty}.A"
+    ("EMPL@#{cnty}.A".ts_eval= %Q|"EMPLNS@#{cnty}.M".ts.aggregate(:year, :average)|) rescue puts "ERROR EMPL@#{cnty}.A"
     ("EMPLNS@#{cnty}.Q".ts_eval= %Q|"EMPLNS@#{cnty}.M".ts.aggregate(:quarter, :average)|) rescue puts "ERROR EMPLNS@#{cnty}.Q"    
   end
   
@@ -802,8 +802,11 @@ task :bls_identities => :environment do
       ("E_PRSVCPR@#{cnty}.#{f}".ts_eval= %Q|"E_SVCPR@#{cnty}.#{f}".ts - "EGV@#{cnty}.#{f}".ts|) rescue puts "ERROR E_PRSVCPR@#{cnty}.#{f}"
     end
   end
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|  
+    f = "A"
+    ("E_ELSE@#{cnty}.#{f}".ts_eval= %Q|"E_SV@#{cnty}.#{f}".ts - ("EAF@#{cnty}.#{f}".ts + "EHC@#{cnty}.#{f}".ts)|) rescue puts "ERROR E_ELSE@#{cnty}.#{f}"
+  end
   
-
   "EAENS@HON.M".ts_eval= %Q|"E_LHNS@HON.M".ts - "EAFNS@HON.M".ts|
   'EAENS@HAW.M'.ts_eval= %Q|"E_LHNS@HAW.M".ts - "EAFNS@HAW.M".ts|
   'EAENS@KAU.M'.ts_eval= %Q|"E_LHNS@KAU.M".ts - "EAFNS@KAU.M".ts|
@@ -837,7 +840,44 @@ task :bls_identities => :environment do
     puts "distributing UR, #{county}"
     ("UR@#{county}.M".ts_eval= %Q|(("EMPL@#{county}.M".ts / "LF@#{county}.M".ts) * -1 + 1)*100|) rescue puts "problem with UR, #{county}"
   end
-    
+
+  ["HI","HON", "HAW", "MAU", "KAU"].each do |county|
+    ["LF", "LFNS"].each do |pre|
+      "#{pre}@#{county}.Q".ts_eval = %Q|"#{pre}@#{county}.M".ts.aggregate(:quarter, :average)|
+    end
+    "LF@#{county}.A".ts_eval = %Q|"LFNS@#{county}.M".ts.aggregate(:year, :average)|
+  end
+  
+  "LFSA@HI.Q".ts_eval = %Q|"LFSA@HI.M".ts.aggregate(:quarter, :average)|
+
+
+  
+  "LFPRNS@HI.Q".ts_eval= %Q|"LFNS@HI.Q".ts / "NRC@HI.Q".ts * 100|
+  "LFPRNS@HON.Q".ts_eval=  %Q|"LFNS@HON.Q".ts / "NRC@HON.Q".ts * 100|
+  "LFPR@HI.Q".ts_eval= %Q|"LF@HI.Q".ts / "NRC@HI.Q".ts * 100|
+  "LFPR@HON.Q".ts_eval= %Q|"LF@HON.Q".ts / "NRC@HON.Q".ts * 100|
+
+  "LFPR@HI.A".ts_eval= %Q|"LF@HI.A".ts / "NRC@HI.A".ts * 100|
+  "LFPR@HON.A".ts_eval= %Q|"LF@HON.A".ts / "NRC@HON.A".ts * 100|
+
+
+  "LF@NBI.M".ts_eval = %Q|"LF@HI.M".ts - "LF@HON.M".ts|
+  "LF@NBI.Q".ts_eval = %Q|"LF@HI.Q".ts - "LF@HON.Q".ts|
+  "LF@NBI.A".ts_eval = %Q|"LF@HI.A".ts - "LF@HON.A".ts|
+  "LFNS@NBI.M".ts_eval= %Q|"LFNS@HI.M".ts - "LFNS@HON.M".ts|  
+  "LFNS@NBI.Q".ts_eval= %Q|"LFNS@HI.Q".ts - "LFNS@HON.Q".ts|  
+
+  ["HAW", "MAU", "KAU","NBI"].each do |county|
+    "LFPRNS@#{county}.Q".ts_eval=  %Q|"LFNS@#{county}.Q".ts / "NR@#{county}.Q".ts * 100|
+    "LFPR@#{county}.Q".ts_eval= %Q|"LF@#{county}.Q".ts / "NR@#{county}.Q".ts * 100|
+    "LFPR@#{county}.A".ts_eval= %Q|"LF@#{county}.A".ts / "NR@#{county}.A".ts * 100|
+  end
+  
+  #technically these are US bank, but putting here with other LF series
+  "LFNS@CA.Q".ts_eval = %Q|"LFNS@CA.M".ts.aggregate(:quarter, :average)|
+  "LF@CA.Q".ts_eval = %Q|"LF@CA.M".ts.aggregate(:quarter, :average)|
+  
+
   ["ECT", "E_TTU", "E_EDHC", "E_LH", "EOS", "EGV", "EWT", "ERT", "E_FIR", "ERE", "E_PBS", "EPS", "EED", "EHC", "EAE", "EAF", "EGVFD", "EGVST", "EGVLC"].each do |list|
     "#{list}@HI.M".ts_append_eval %Q|"#{list}SA@HI.M".ts|
   end

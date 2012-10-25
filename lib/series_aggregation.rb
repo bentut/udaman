@@ -43,13 +43,16 @@ module SeriesAggregation
     #puts override_prune
     # Prune out any incomplete aggregated groups (except days, since it's complicated to match month to day count)
     #can probably take out this override pruning nonsense since this function doesn't work anyway and should be some kind of interpolation
-    aggregated_data.delete_if {|key,value| value.count != 6} if frequency == :semi and self.frequency == "month"
-    aggregated_data.delete_if {|key,value| value.count != 3} if (frequency == :quarter and self.frequency == "month") and override_prune == false
-    aggregated_data.delete_if {|key,value| value.count != 12} if frequency == :year and self.frequency == "month"
-    aggregated_data.delete_if {|key,value| value.count != 4} if frequency == :year and self.frequency == "quarter"
-    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :semi and self.frequency == "quarter"    
-    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :year and self.frequency == "semi"
-    aggregated_data.delete_if {|key,value| value.count != Date.parse(key).days_in_month} if frequency == :month and self.frequency == "day"
+    
+    freq = self.frequency.to_s
+    
+    aggregated_data.delete_if {|key,value| value.count != 6} if frequency == :semi and freq == "month"
+    aggregated_data.delete_if {|key,value| value.count != 3} if (frequency == :quarter and freq == "month") and override_prune == false
+    aggregated_data.delete_if {|key,value| value.count != 12} if frequency == :year and freq == "month"
+    aggregated_data.delete_if {|key,value| value.count != 4} if frequency == :year and freq == "quarter"
+    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :semi and freq == "quarter"    
+    aggregated_data.delete_if {|key,value| value.count != 2} if frequency == :year and freq == "semi"
+    aggregated_data.delete_if {|key,value| value.count != Date.parse(key).days_in_month} if frequency == :month and freq == "day"
     #puts key+" "+value.count.to_s + " " + Date.parse(key).days_in_month.to_s;
     #month check for days is more complicated because need to check for number of days in each month
 
@@ -64,13 +67,14 @@ module SeriesAggregation
     # puts "self:#{self.frequency}:#{self.frequency.class}"
     # puts "frequency:#{frequency}:#{frequency.class}"
 
-    raise AggregationException.new if ["year", "semi", "quarter", "month", "day"].index(self.frequency).nil?
-    raise AggregationException.new if self.frequency == "year"
-    raise AggregationException.new if self.frequency == "semi"  and (frequency == :month or frequency == :quarter or frequency == :semi or frequency == :week or frequency == :day)
-    raise AggregationException.new if self.frequency == "quarter" and (frequency == :month or frequency == :quarter or frequency == :week or frequency == :day)
-    raise AggregationException.new if self.frequency == "month" and (frequency == :month or frequency == :week or frequency == :day)
-    raise AggregationException.new if self.frequency == "week" and (frequency == :day or frequency == :week)
-    raise AggregationException.new if self.frequency == "day" and frequency == :day
+    freq = self.frequency.to_s
+    raise AggregationException.new if ["year", "semi", "quarter", "month", "day"].index(freq).nil?
+    raise AggregationException.new if freq == "year"
+    raise AggregationException.new if freq == "semi"  and (frequency == :month or frequency == :quarter or frequency == :semi or frequency == :week or frequency == :day)
+    raise AggregationException.new if freq == "quarter" and (frequency == :month or frequency == :quarter or frequency == :week or frequency == :day)
+    raise AggregationException.new if freq == "month" and (frequency == :month or frequency == :week or frequency == :day)
+    raise AggregationException.new if freq == "week" and (frequency == :day or frequency == :week)
+    raise AggregationException.new if freq == "day" and frequency == :day
     
   end
   

@@ -275,12 +275,20 @@ task :const_identities => :environment do
   "KBSGF@MAU.M".ts_eval= %Q|"KBSGF@MAU.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/hbr/seasadj/mbr_sa.xls"|
   "KBSGF@MAU.M".ts_eval= %Q|"KBSGF@MAU.M".ts.apply_seasonal_adjustment :multiplicative|
   
+  
+  "KB@HON.M".ts_eval= %Q|Series.add_demetra_series_and_mean_correct("KBSGF@HON.M", "KBCON@HON.M", "KBNS@HON.M", "/Volumes/UHEROwork/data/misc/hbr/seasadj/sadata.xls")|
+  "KB@MAU.M".ts_eval= %Q|Series.add_demetra_series_and_mean_correct("KBSGF@MAU.M", "KBCON@MAU.M", "KBNS@MAU.M", "/Volumes/UHEROwork/data/misc/hbr/seasadj/mbr_sa.xls")|
+  
+  "KB@MAU.Q".ts_eval= %Q|"KB@MAU.M".ts.aggregate(:quarter, :sum)|
+  "KB@HON.Q".ts_eval= %Q|"KB@HON.M".ts.aggregate(:quarter, :sum)|
+
+  "KB@MAU.A".ts_eval= %Q|"KB@MAU.M".ts.aggregate(:year, :sum)|
+  "KB@HON.A".ts_eval= %Q|"KB@HON.M".ts.aggregate(:year, :sum)|
+  
   ["HON", "MAU"].each do |cnty|
     ["Q", "M"].each do |f|
       "KBNS@#{cnty}.#{f}".ts_eval = %Q|"KBSGFNS@#{cnty}.#{f}".ts + "KBCONNS@#{cnty}.#{f}".ts|
-      "KB@#{cnty}.#{f}".ts_eval = %Q|"KBSGF@#{cnty}.#{f}".ts + "KBCON@#{cnty}.#{f}".ts|
-    end
-      "KB@#{cnty}.A".ts_eval = %Q|"KBSGF@#{cnty}.A".ts + "KBCON@#{cnty}.A".ts|
+    end    
   end
   
   "PMKBSGF@HON.M".ts_eval= %Q|"PMKBSGF@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_upd_m.csv"|
@@ -384,6 +392,12 @@ task :const_identities => :environment do
    
    #KB, KBNS, KNRSD, #KR, KRNS
 
+  ["HI", "HON", "MAU", "HAW", "KAU"].each do |cnty|         
+    "KNRSD@#{cnty}.Q".ts_eval= %Q|"KNRSDNS@#{cnty}.Q".ts|
+  end
+
+  "KNRSDMLT@HI.Q".ts_eval= %Q|"KNRSDMLTNS@HI.Q".ts|
+  "KNRSDSGF@HI.Q".ts_eval= %Q|"KNRSDSGFNS@HI.Q".ts|
    
    ["KPPRVADD","KPPRVCOM", "KPPRVNRSD", "KPPRVRSD", "KPPRV"].each do |pre|
      ["Q","M"].each do |f|
