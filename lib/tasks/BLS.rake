@@ -964,6 +964,18 @@ task :bls_identities => :environment do
     end
   end
   
+  ["ETW", "EUT"].each do |pre|
+  	"#{pre}@HI.M".ts_eval= %Q|("#{pre}@HI.A".ts / "E_TU@HI.A".ts).fill_interpolate_to(:month) * "E_TU@HI.M".ts|
+  	"#{pre}@HON.M".ts_eval= %Q|("#{pre}@HON.A".ts / "E_TU@HON.A".ts).fill_interpolate_to(:month) * "E_TU@HON.M".ts|
+  	"#{pre}@HI.M".ts_eval= %Q|(("#{pre}NS@HI.M".ts.backward_looking_moving_average / "E_TUNS@HI.M".ts.backward_looking_moving_average) * "E_TU@HI.M".ts).trim|
+  	"#{pre}@HON.M".ts_eval= %Q|(("#{pre}NS@HON.M".ts.backward_looking_moving_average / "E_TUNS@HON.M".ts.backward_looking_moving_average) * "E_TU@HON.M".ts).trim|
+
+  	"#{pre}@HI.Q".ts_eval= %Q|"#{pre}@HI.M".ts.aggregate(:quarter, :average)|
+  	"#{pre}@HON.Q".ts_eval= %Q|"#{pre}@HON.M".ts.aggregate(:quarter, :average)|
+
+  	"#{pre}@NBI.M".ts_eval= %Q|"#{pre}@HI.M".ts - "#{pre}@HON.M".ts|
+  	"#{pre}@NBI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts - "#{pre}@HON.Q".ts|
+  end
   
   # ["EGV", "E_LH", "E_PBS", "E_FIR", "EAE"].each do |s_name|
   #   ["HON", "HAW", "MAU", "KAU"].each do |county|
