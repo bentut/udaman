@@ -1860,9 +1860,12 @@ task :bea_identities => :environment do
   "CSCF@JP.A".ts_eval= %Q|"CSCFNS@JP.Q".ts.aggregate(:year, :average)|
 
   # Not sure how this is supposed to work. These don't work
-  "YXR_R@JP.A".ts_eval= %Q|"YXR@JP.A".ts / "CPI@JP.A".ts * 100|
-  "YXR_R@JP.Q".ts_eval= %Q|"YXR@JP.Q".ts / "CPI@JP.Q".ts * 100|
-  "YXR_R@JP.M".ts_eval= %Q|"YXR@JP.M".ts / "CPI@JP.M".ts * 100|
+  "YXR_R@JP.M".ts_eval= %Q|"YXR@JP.M".ts * "CPI@US.M".ts / "CPI@JP.M".ts|
+  "YXR_R@JP.A".ts_eval= %Q|"YXR@JP.A".ts * "CPI@US.A".ts.rebase("2000-01-01") / "CPI@JP.A".ts|
+  #this one doesn't quite work
+  #need to distribute annual average to quarters... might have this somewhere
+  "YXR_R@JP.Q".ts_eval= %Q|"YXR@JP.Q".ts * "CPI@US.Q".ts.rebase("2000-01-01") / "CPI@JP.Q".ts|
+  
   
   #loads in & series from history instead
   #this generates "correct" _R & series. for now reading from file
