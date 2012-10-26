@@ -763,6 +763,19 @@ task :bls_identities => :environment do
   "INFCORE@HON.A".ts_eval= %Q|"PC_FDEN@HON.A".ts.annualized_percentage_change|
   "INF_SH@HON.A".ts_eval= %Q|"PC_SH@HON.A".ts.annualized_percentage_change|
 
+  "WPCSH@HON.A".ts_eval= %Q|("PC@HON.A".ts - "PC_SH@HON.A".ts) / ("PCHSSH@HON.A".ts - "PC_SH@HON.A".ts)|
+  "WPCEN@HON.A".ts_eval= %Q|("PC@HON.A".ts - "PC_EN@HON.A".ts) / ("PCEN@HON.A".ts - "PC_EN@HON.A".ts)|
+  "WPCFD@HON.A".ts_eval= %Q|("PC@HON.A".ts - "WPCEN@HON.A".ts * "PCEN@HON.A".ts - (("WPCEN@HON.A".ts - 1) * -1) * "PC_FDEN@HON.A".ts) / ("PCFBFD@HON.A".ts - "PC_FDEN@HON.A".ts)|
+  "WPCSH@HON.S".ts_eval= %Q|("PC@HON.S".ts - "PC_SH@HON.S".ts) / ("PCHSSH@HON.S".ts - "PC_SH@HON.S".ts)|
+  "WPCEN@HON.S".ts_eval= %Q|("PC@HON.S".ts - "PC_EN@HON.S".ts) / ("PCEN@HON.S".ts - "PC_EN@HON.S".ts)|
+  "WPCFD@HON.S".ts_eval= %Q|("PC@HON.S".ts - "WPCEN@HON.S".ts * "PCEN@HON.S".ts - (("WPCEN@HON.S".ts - 1) * -1) * "PC_FDEN@HON.S".ts) / ("PCFBFD@HON.S".ts - "PC_FDEN@HON.S".ts)|
+  "WPCSH@HON.Q".ts_eval=%Q|"WPCSH@HON.S".ts.interpolate(:quarter, :linear)| 
+  "WPCEN@HON.Q".ts_eval=%Q|"WPCEN@HON.S".ts.interpolate(:quarter, :linear)| 
+  "WPCFD@HON.Q".ts_eval=%Q|"WPCFD@HON.S".ts.interpolate(:quarter, :linear)| 
+  "PC_SHFDEN@HON.Q ".ts_eval= %Q|("PC@HON.Q".ts - "WPCSH@HON.Q".ts * "PCHSSH@HON.Q".ts - "WPCEN@HON.Q".ts * "PCEN@HON.Q".ts - "WPCFD@HON.Q".ts * "PCFBFD@HON.Q".ts) / (("WPCSH@HON.Q".ts * -1) - "WPCEN@HON.Q".ts - "WPCFD@HON.Q".ts + 1)|
+  "PC_SHEN@HON.Q   ".ts_eval= %Q|("PC@HON.Q".ts - "WPCSH@HON.Q".ts * "PCHSSH@HON.Q".ts - "WPCEN@HON.Q".ts * "PCEN@HON.Q".ts) / ( ("WPCSH@HON.Q".ts * -1) - "WPCEN@HON.Q".ts + 1)|
+
+
   
   #Series loaded from this history sheet... may not need to load every day. But relatively fast...
   #["E_FIR@HI.M", "E_FIR@HON.M", "E_GDSPR@HON.M", "E_GVSL@HON.M", "E_TTU@HAW.M", "E_TTU@HON.M", "E_TTU@KAU.M", "E_TTU@MAU.M", "E_TU@HI.M", "E_TU@HON.M", "EAF@HI.M", "EAF@HON.M", "EAFAC@HI.M", "EAFAC@HON.M", "EAFFD@HI.M", "EAFFD@HON.M", "ECT@HI.M", "ECT@HON.M", "EFI@HI.M", "EFI@HON.M", "EGVFD@HI.M", "EGVFD@HON.M", "EGVLC@HI.M", "EGVLC@HON.M", "EGVST@HI.M", "EGVST@HON.M", "EHC@HI.M", "EHC@HON.M", "EMN@HI.M", "EMN@HON.M", "ERE@HI.M", "ERE@HON.M"]  
@@ -877,6 +890,16 @@ task :bls_identities => :environment do
   "LFNS@CA.Q".ts_eval = %Q|"LFNS@CA.M".ts.aggregate(:quarter, :average)|
   "LF@CA.Q".ts_eval = %Q|"LF@CA.M".ts.aggregate(:quarter, :average)|
   
+  "URNS@NBI.M".ts_eval= %Q|("LFNS@NBI.M".ts - "EMPLNS@NBI.M".ts) / "LFNS@NBI.M".ts * 100|
+  "UR@NBI.M".ts_eval= %Q| ("LF@NBI.M".ts - "EMPL@NBI.M".ts) / "LF@NBI.M".ts * 100|
+  "UR@NBI.A".ts_eval= %Q|"URNS@NBI.M".ts.aggregate(:year, :average)|
+
+  ["UR", "URNS"].each do |pre|
+    "#{pre}@NBI.Q".ts_eval= %Q|"#{pre}@NBI.M".ts.aggregate(:quarter, :average)|
+  end
+
+  
+  
 
   ["ECT", "E_TTU", "E_EDHC", "E_LH", "EOS", "EGV", "EWT", "ERT", "E_FIR", "ERE", "E_PBS", "EPS", "EED", "EHC", "EAE", "EAF", "EGVFD", "EGVST", "EGVLC"].each do |list|
     "#{list}@HI.M".ts_append_eval %Q|"#{list}SA@HI.M".ts|
@@ -975,6 +998,20 @@ task :bls_identities => :environment do
 
   	"#{pre}@NBI.M".ts_eval= %Q|"#{pre}@HI.M".ts - "#{pre}@HON.M".ts|
   	"#{pre}@NBI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts - "#{pre}@HON.Q".ts|
+  end
+  
+  Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/bls_wagesa.xls"
+
+  ["HI", "HON"].each do |cnty|
+    ["WHAF","WHAFAC","WHAFFD","WHCT","WHIF","WHMN","WHRT","WHWT","WH_FIN","WH_TTU","WWAF","WWAFAC","WWAFACNS","WWAFFD","WWCT","WWIF","WWMN","WWRT","WWWT","WW_FIN","WW_TTU"].each do |pre|
+      "#{pre}@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.M".ts.aggregate(:quarter, :average)|
+    end
+  end
+
+  ["HI"].each do |cnty|
+    ["WHAFACNS","WHAFFDNS", "WWAFFDNS"].each do |pre|
+      "#{pre}@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.M".ts.aggregate(:quarter, :average)|
+    end
   end
   
   # ["EGV", "E_LH", "E_PBS", "E_FIR", "EAE"].each do |s_name|

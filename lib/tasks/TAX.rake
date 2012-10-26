@@ -460,5 +460,17 @@ task :tax_identities => :environment do
   "TRIN@HI.M".ts_eval=%Q|"TRIN@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
   "TRIN@HI.M".ts_eval=%Q|"TRIN@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
   
+  
+  ["TDAP","TDCT","TDCTFU","TDCTTT","TDGF","TDHW","TDTS","TGB","TGBHT","TGBRT","TGBSV","TGR","TGRCT","TGRHT",
+  "TGRRT","TGRSV","TR","TRCO","TRCOES","TRCOPR","TRCORF","TRFU","TRGT","TRIN","TRINES","TRINPR","TRINRF","TRINWH","TRTT"].each do |pre|
+  "#{pre}@HI.Q".ts_eval= %Q|"#{pre}@HI.M".ts.aggregate(:quarter, :sum)|
+  end
+
+  ["HAW", "HI", "HON", "KAU", "MAU"].each do |cnty|
+  "TGBCT_R@#{cnty}.A".ts_eval= %Q|"TGBCT@#{cnty}.A".ts / "PICTSGF@HON.A".ts * 100|
+  "TGBCTNS_R@#{cnty}.Q".ts_eval= %Q|"TGBCTNS@#{cnty}.Q".ts / "PICTSGF@HON.Q".ts * 100|
+  "TGBCT_R@#{cnty}.Q".ts_eval= %Q|"TGBCTNS@#{cnty}.Q".ts / "PICTSGF@HON.Q".ts * 100|
+  end
+  
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tax_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
