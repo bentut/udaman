@@ -1499,6 +1499,23 @@ task :visitor_identities=>:environment do
   "TRMS@HAW.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 4, :frequency => "A" })|
   "TRMS@KAU.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 5, :frequency => "A" })|
   "TRMS@MAU.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/trms.xls", {:file_type => "xls", :start_date => "1964-01-01", :sheet => "trms", :row => "increment:2:1", :col => 6, :frequency => "A" })|
+
+  ["Q", "A"].each do |f|
+    "PPRM_WITH_CR@HI.#{f}".ts_eval= %Q|("VADC@HI.#{f}".ts - "VADCCRAIR@HI.#{f}".ts * 5 / 7) / ("TRMS@HI.#{f}".ts * "OCUP%@HI.#{f}".ts / 100)|
+    "PPRM_WITH_CR@HON.#{f}".ts_eval= %Q|("VADC@HON.#{f}".ts - "VADCCRAIR@HON.#{f}".ts * 5 / 7) / ("TRMS@HON.#{f}".ts * "OCUP%@HON.#{f}".ts / 100)|
+    "PPRM_WITH_CR@HAW.#{f}".ts_eval= %Q|("VADC@HAW.#{f}".ts - "VADCCRAIR@HAW.#{f}".ts * 5 / 7) / ("TRMS@HAW.#{f}".ts * "OCUP%@HAW.#{f}".ts / 100)|
+    "PPRM_WITH_CR@KAU.#{f}".ts_eval= %Q|("VADC@KAU.#{f}".ts - "VADCCRAIR@KAU.#{f}".ts * 5 / 7) / ("TRMS@KAU.#{f}".ts * "OCUP%@KAU.#{f}".ts / 100)|
+    "PPRM_WITH_CR@MAU.#{f}".ts_eval= %Q|("VADC@MAU.#{f}".ts - "VADCCRAIR@MAU.#{f}".ts * 5 / 7) / ("TRMS@MAU.#{f}".ts * "OCUP%@MAU.#{f}".ts / 100)|
+    
+    ["HI","HON","HAW", "KAU", "MAU"].each do |cnty|
+      "PPRM_WITHOUT_CR@#{cnty}.#{f}".ts_eval= %Q|("VADC@#{cnty}.Q".ts) / ("TRMS@#{cnty}.Q".ts * "OCUP%@#{cnty}.Q".ts / 100)|
+      "PPRM@#{cnty}.#{f}".ts_eval= %Q|"PPRM_WITH_CR@#{cnty}.#{f}".ts|
+      "PPRM@#{cnty}.#{f}".ts_eval= %Q|("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts + ("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts - "PPRM_WITH_CR@#{cnty}.#{f}".ts).average).trim("1990-01-01", "2000-12-01")|
+    end
+  end
+  # qtemp = 
+  # (qtemp + (qtemp - "PPRM@HI.#{f}".ts).average).print
+  
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["visitor_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

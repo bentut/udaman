@@ -1,7 +1,7 @@
-module Statistics
+module SeriesStatistics
 
   def sum
-    num_array = self.data.sort.map { |a| a[1]}
+    num_array = (self.data.sort.reject{|a| a[1].nil?}).map { |a| a[1]}
     return num_array.inject(0, :+){ | sum, x | sum + x }
   end
   

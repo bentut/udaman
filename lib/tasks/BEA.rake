@@ -1785,7 +1785,7 @@ task :bea_identities => :environment do
   #this is wrong
   "YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
   
-  #A is right. Q is wrong
+  #A isn't really right either right. Q is wrong
   "SH_YPC@HON.A".ts_eval = %Q|"YPC@HON.A".ts / "YPC@HI.A".ts|
   #{}"SH_YPC@HON.Q".ts_eval = %Q|"YPC@HON.Q".ts / "YPC@HI.Q".ts|
   

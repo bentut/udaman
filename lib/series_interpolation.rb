@@ -135,5 +135,52 @@ module SeriesInterpolation
 
   end
   
+  def trms_interpolate_to_quarterly
+    raise InterpolationException if frequency != "year"
+    new_series_data = {}
+    previous_data_val = nil
+    previous_year = nil
+    last_diff = nil
+    self.data.sort.each do |key,val|
+      if previous_data_val.nil?
+        previous_data_val = val
+        previous_year = key
+        next
+      end
+      year = previous_year.to_date.year
+      new_series_data["#{year}-01-01"] = previous_data_val - (val - previous_data_val) / 4 * 1.5
+      new_series_data["#{year}-04-01"] = previous_data_val - (val - previous_data_val) / 4 * 0.5
+      new_series_data["#{year}-07-01"] = previous_data_val + (val - previous_data_val) / 4 * 0.5
+      new_series_data["#{year}-10-01"] = previous_data_val + (val - previous_data_val) / 4 * 1.5
+      last_diff = val - previous_data_val
+      previous_data_val = val
+      previous_year = key  
+    end
+    
+    year = previous_year.to_date.year
+    new_series_data["#{year}-01-01"] = previous_data_val - last_diff / 4 * 1.5
+    new_series_data["#{year}-04-01"] = previous_data_val - last_diff / 4 * 0.5
+    new_series_data["#{year}-07-01"] = previous_data_val + last_diff / 4 * 0.5
+    new_series_data["#{year}-10-01"] = previous_data_val + last_diff / 4 * 1.5
+    
+    blma_new_series_data = {}
+    prev_val = nil
+    prev_date = nil
+    new_series_data.sort.each do |key,val|
+      if prev_val.nil?
+        prev_val = val
+        prev_date = key
+        next
+      end
+      blma_new_series_data[key] = (val + prev_val) / 2
+      prev_val = val
+      prev_date = key
+    end
+    
+    new_series = new_transformation("TRMS style interpolation of #{self.name}", blma_new_series_data)
+    new_series.frequency = "quarter"
+    new_series
+    
+  end
   
 end

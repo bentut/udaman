@@ -171,6 +171,7 @@ task :const_identities => :environment do
   "NR@NBI.A".ts_eval = %Q|"NR@HI.A".ts - "NR@HON.A".ts| 
   "NRC@NBI.A".ts_eval = %Q|"NRC@HI.A".ts - "NRC@HON.A".ts|
   "NRCNM@NBI.A".ts_eval = %Q|"NRCNM@HI.A".ts - "NRCNM@HON.A".ts|
+  "NRBEA@NBI.A".ts_eval = %Q|"NRBEA@HI.A".ts - "NRBEA@HON.A".ts| 
 
   ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
     "NMIG@#{cnty}.A".ts_eval= %Q|"NR@#{cnty}.A".ts.absolute_change - "NBIR@#{cnty}.A".ts + "NDEA@#{cnty}.A".ts|
@@ -188,19 +189,77 @@ task :const_identities => :environment do
   "NDEARCMD@HI.A".ts_eval = %Q|"NDEACMD@HI.A".ts / "NRCMD@HI.A".ts * 1000|
   "NMIGRCNM@HI.A".ts_eval = %Q|"NMIGCNM@HI.A".ts / "NRCNM@HI.A".ts * 1000|
 
-  ["NR", "NRC", "NRCNM"].each do |pre|
-    ("#{pre}@HI.Q".ts_eval= %Q|"#{pre}@HI.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR HI"
-    ("#{pre}@HAW.Q".ts_eval= %Q|"#{pre}@HAW.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR HAW"
-    ("#{pre}@HON.Q".ts_eval= %Q|"#{pre}@HON.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR HON"
-    ("#{pre}@KAU.Q".ts_eval= %Q|"#{pre}@KAU.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR MAU"
-    ("#{pre}@MAU.Q".ts_eval= %Q|"#{pre}@MAU.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR KAU"
-    ("#{pre}@NBI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts - "#{pre}@HON.Q".ts|)
-  end 
-  
   ["HI", "HON", "HAW", "MAU", "KAU"].each do |county|
       "NNAT@#{county}.A".ts_eval = %Q|"NBIR@#{county}.A".ts - "NDEA@#{county}.A".ts|
       "NCHG@#{county}.A".ts_eval = %Q|"NNAT@#{county}.A".ts + "NMIG@#{county}.A".ts|
   end
+  
+  ["NR", "NDF"].each do |pre|
+    ("#{pre}@HI.Q".ts_eval= %Q|"#{pre}@HI.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR HI"
+    ("#{pre}@HAW.Q".ts_eval= %Q|"#{pre}@HAW.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR HAW"
+    ("#{pre}@KAU.Q".ts_eval= %Q|"#{pre}@KAU.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR MAU"
+    ("#{pre}@MAU.Q".ts_eval= %Q|"#{pre}@MAU.A".ts.census_interpolate(:quarter)|) rescue puts "ERROR KAU"
+  end 
+
+  
+  "NR@NBI.Q".ts_eval= %Q|"NR@HI.Q".ts - "NR@HON.Q".ts|
+  "NRC@NBI.Q".ts_eval= %Q|"NRC@HI.Q".ts - "NRC@HON.Q".ts|
+  "NRCNM@NBI.Q".ts_eval= %Q|"NRCNM@HI.Q".ts - "NRCNM@HON.Q".ts|
+
+  "NRCMD@HI.Q".ts_eval= %Q|"NRCMD@HI.A".ts.census_interpolate(:quarter)|  
+  "NRM@HI.Q".ts_eval= %Q|"NRM@HI.A".ts.census_interpolate(:quarter)|  
+  "NRM@KAU.Q".ts_eval= %Q|"NRM@KAU.A".ts.census_interpolate(:quarter)|  
+  
+  "NBIRCMD@HI.Q".ts_eval= %Q|("NBIRCMD@HI.A".ts / 4).census_interpolate(:quarter)|  
+  "NDEAM@HI.Q".ts_eval= %Q|("NDEAM@HI.A".ts / 4).census_interpolate(:quarter)|
+  "NDEACMD@HI.Q".ts_eval= %Q|("NDEACMD@HI.A".ts / 4).census_interpolate(:quarter)|
+
+  "NBIR@HI.Q".ts_eval= %Q|("NBIR@HI.A".ts / 4).census_interpolate(:quarter)|
+  "NBIR@HAW.Q".ts_eval= %Q|("NBIR@HAW.A".ts / 4).census_interpolate(:quarter)|
+  "NBIR@KAU.Q".ts_eval= %Q|("NBIR@KAU.A".ts / 4).census_interpolate(:quarter)|
+  "NBIR@MAU.Q".ts_eval= %Q|("NBIR@MAU.A".ts / 4).census_interpolate(:quarter)|
+  
+  "NDEA@HI.Q".ts_eval= %Q|("NDEA@HI.A".ts / 4).census_interpolate(:quarter)|
+  "NDEA@HAW.Q".ts_eval= %Q|("NDEA@HAW.A".ts / 4).census_interpolate(:quarter)|
+  "NDEA@KAU.Q".ts_eval= %Q|("NDEA@KAU.A".ts / 4).census_interpolate(:quarter)|
+  "NDEA@MAU.Q".ts_eval= %Q|("NDEA@MAU.A".ts / 4).census_interpolate(:quarter)|
+
+  "NRBEA@NBI.Q".ts_eval= %Q|("NRBEA@NBI.A".ts / 4).census_interpolate(:quarter)|
+
+  ["NR", "NBIR", "NDEA", "NDF"].each do |pre| 
+    "#{pre}@HON.Q".ts_eval = %Q|"#{pre}@HI.Q".ts - ("#{pre}@HAW.Q".ts + "#{pre}@MAU.Q".ts + "#{pre}@KAU.Q".ts)|
+  end
+  
+  "NRCNM@HI.Q".ts_eval = %Q|"NR@HI.Q".ts - "NRM@HI.Q".ts - "NRCMD@HI.Q".ts| #replaces the census data completely
+  "NRC@HI.Q".ts_eval = %Q|"NR@HI.Q".ts - "NRM@HI.Q".ts|
+  "NBIRCNM@HI.Q".ts_eval = %Q|"NBIR@HI.Q".ts - "NBIRCMD@HI.Q".ts|
+  "NDEACNM@HI.Q".ts_eval= %Q|"NDEA@HI.Q".ts - "NDEAM@HI.Q".ts - "NDEACMD@HI.Q".ts|
+  "NMIGCNM@HI.Q".ts_eval = %Q|"NRCNM@HI.Q".ts.absolute_change - "NBIRCNM@HI.Q".ts + "NDEACNM@HI.Q".ts|
+  "NRC@HON.Q".ts_eval = %Q|"NR@HON.Q".ts - "NRM@HI.Q".ts|
+  "NRCNM@HON.Q".ts_eval = %Q|"NR@HON.Q".ts - "NRM@HI.Q".ts - "NRCMD@HI.Q".ts|
+  "NR@NBI.Q".ts_eval = %Q|"NR@HI.Q".ts - "NR@HON.Q".ts| 
+  "NRC@NBI.Q".ts_eval = %Q|"NRC@HI.Q".ts - "NRC@HON.Q".ts| 
+  "NRCNM@NBI.Q".ts_eval = %Q|"NRCNM@HI.Q".ts - "NRCNM@HON.Q".ts| 
+
+  
+  
+  ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
+    "NMIG@#{cnty}.Q".ts_eval= %Q|"NR@#{cnty}.Q".ts.absolute_change - "NBIR@#{cnty}.Q".ts + "NDEA@#{cnty}.Q".ts|
+    "NBIRR@#{cnty}.Q".ts_eval = %Q|"NBIR@#{cnty}.Q".ts / "NR@#{cnty}.Q".ts * 1000|
+    "NDEAR@#{cnty}.Q".ts_eval = %Q|"NDEA@#{cnty}.Q".ts / "NR@#{cnty}.Q".ts * 1000|
+    "NMIGR@#{cnty}.Q".ts_eval = %Q|"NMIG@#{cnty}.Q".ts / "NR@#{cnty}.Q".ts * 1000|
+    "NNAT@#{cnty}.Q".ts_eval = %Q|"NBIR@#{cnty}.Q".ts - "NDEA@#{cnty}.Q".ts|
+    "NCHG@#{cnty}.Q".ts_eval = %Q|"NNAT@#{cnty}.Q".ts + "NMIG@#{cnty}.Q".ts|
+  end
+
+  "NBIRRCMD@HI.Q".ts_eval = %Q|"NBIRCMD@HI.Q".ts / "NRCMD@HI.Q".ts * 1000|
+  "NBIRRCNM@HI.Q".ts_eval = %Q|"NBIRCNM@HI.Q".ts / "NRCNM@HI.Q".ts * 1000|
+
+  "NDEARCNM@HI.Q".ts_eval = %Q|"NDEACNM@HI.Q".ts / "NRCNM@HI.Q".ts * 1000| 
+
+  "NDEARM@HI.Q".ts_eval = %Q|"NDEAM@HI.Q".ts / "NRM@HI.Q".ts * 1000|
+  "NDEARCMD@HI.Q".ts_eval = %Q|"NDEACMD@HI.Q".ts / "NRCMD@HI.Q".ts * 1000|
+  "NMIGRCNM@HI.Q".ts_eval = %Q|"NMIGCNM@HI.Q".ts / "NRCNM@HI.Q".ts * 1000|
   
   #works for HON, but other counties are not defined
   ["HON", "HAW", "MAU", "KAU"].each do |cnty|
@@ -208,18 +267,20 @@ task :const_identities => :environment do
     "SH_NR@#{cnty}.Q".ts_eval = %Q|"NR@#{cnty}.Q".ts / "NR@HI.Q".ts|
   end
    
-  ["HON"].each do |cnty| 
-#  ["HON", "HAW", "MAU", "KAU"].each do |cnty|
-    
+  ["HON"].each do |cnty|     
     "SH_NRCNM@#{cnty}.A".ts_eval = %Q|"NRCNM@#{cnty}.A".ts / "NRCNM@HI.A".ts|
     "SH_NRCNM@#{cnty}.Q".ts_eval = %Q|"NRCNM@#{cnty}.Q".ts / "NRCNM@HI.Q".ts|
-    
-    #{}"SH_NR@#{cnty}.A".ts_eval = %Q|"NR@#{cnty}.A".ts / "NR@HI.A".ts|
+  end
+  
+  ["HAW", "MAU", "KAU"].each do |cnty|
+    "SH_NRCNM@#{cnty}.A".ts_eval = %Q|"NR@#{cnty}.A".ts / "NRCNM@HI.A".ts|
+    "SH_NRCNM@#{cnty}.Q".ts_eval = %Q|"NR@#{cnty}.Q".ts / "NRCNM@HI.Q".ts|
   end
 
+
   "SH_MD@HI.A".ts_eval = %Q|"NRCMD@HI.A".ts / "NRM@HI.A".ts|
-  #this will eventuall work. Waiting on dependency
-  #"SH_MD@HI.Q".ts_eval= %Q| "NRCMD@HI.Q".ts / "NRM@HI.Q".ts |
+  "SH_MD@HI.Q".ts_eval= %Q| "NRCMD@HI.Q".ts / "NRM@HI.Q".ts |
+    
     
   #PRUD identities included here
 		"PAKRCON@HAW.Q".ts_eval= %Q|"PAKRCONNS@HAW.Q".ts|
