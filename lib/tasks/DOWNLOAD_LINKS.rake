@@ -2,6 +2,7 @@ task :update_bea_links => :environment do
   t = Time.now
   bea_table_links = {
     #{}"SA05N@bea.gov" => 'http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=2&7023=0&7024=NAICS&7025=0&7026=15000&7027=-1&7001=42&7029=28&7090=70&7033=-1'
+    "CA_YP@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7083=Levels&7031=0&7040=-1&7001=336&7022=36&7023=0&7024=Non-Industry&7025=0&7026=06000&7028=10&7029=36&7090=70&7033=-1&7027=-1",
     "SQ5N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=0&7023=0&7024=NAICS&7025=0&7026=00000&7027=-1&7001=30&7029=34&7090=70&7033=-1&form=7&7090=70&7024=NAICS&7026=15000&7028=-1&7083=Levels&7027=-1&7033=-1&7040=-1&step=30&7090=70&7024=NAICS&7026=15000&7028=-1&7083=Levels&7027=-1&7033=-1&7040=-1",
     "SA06N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=50&7023=0&7024=NAICS&7025=0&7026=15000&7027=-1&7001=450&7029=51&7090=70&7033=-1",
     "SA05N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=2&7023=0&7024=NAICS&7025=0&7026=15000&7027=-1&7001=42&7029=28&7090=70&7033=-1",

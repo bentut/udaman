@@ -65,6 +65,7 @@ module SeriesInterpolation
         quarterly_data["#{year}-04-01"]   = value - 1 * step
         quarterly_data["#{year}-07-01"]   = value
         unless started_interpolation
+          quarterly_data["#{year-2}-10-01"] = last - 3 * step
           quarterly_data["#{year-1}-01-01"]   = last - 2 * step
           quarterly_data["#{year-1}-04-01"]   = last - 1 * step
           quarterly_data["#{year-1}-07-01"]   = last

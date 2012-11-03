@@ -39,7 +39,7 @@ class IntegerPatternProcessor
   end
 
   def pos_by_repeating_number_x_times(start, step, repeat, index)
-    start + (index/repeat).truncate
+    start + (index/repeat).truncate * step
   end
   
   # def pos_by_header_search(search_by, search_index, header_name, cached_files, handle, sheet)

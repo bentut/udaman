@@ -148,6 +148,10 @@ every 1.day, :at => "#{hour.to_i+5}:55 am" do
   rake "tsd_exports"
 end
 
+every :saturday, :at => '9am' do
+  rake "mark_pseudo_history"
+end
+
 #every 1.day, :at => "#{hour.to_i+4}:59 am" do
 #  rake "prognoz_exports"
 #end

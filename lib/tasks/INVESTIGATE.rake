@@ -150,6 +150,16 @@ task :gen_daily_summary => :environment do
 end
 
 
+task :mark_pseudo_history => :environment do
+  t = Time.now
+  
+  DataSource.where("eval LIKE '%bls_histextend_date_format_correct.xls%'").each {|ds| ds.mark_as_pseudo_history}
+  DataSource.where("eval LIKE '%inc_hist.xls%'").each {|ds| ds.mark_as_pseudo_history}
+  DataSource.where("eval LIKE '%bls_sa_history.xls%'").each {|ds| ds.mark_as_pseudo_history}
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["mark_pseudo_history", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
+  
+end
 
 task :clean_data_sources => :environment do
 

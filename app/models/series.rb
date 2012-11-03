@@ -534,23 +534,24 @@ class Series < ActiveRecord::Base
   def Series.write_cached_files(cached_files)
     t = Time.now
     cached_files.reset_new_data
-    Rails.cache.write("downloads", Marshal.dump(cached_files), :time_to_live => 600.seconds)
     puts "#{Time.now - t} | Wrote downloads to cache"
+    Rails.cache.write("downloads", Marshal.dump(cached_files), :time_to_live => 600.seconds)
     #Rails.cache.write("downloads", cached_files, :time_to_live => 600.seconds)
     
   end
   
   def Series.get_cached_files
-    #won't need these two series invocations in productions
+    #won't need these three module invocations in productions
     DownloadsCache
     DataSourceDownload
-    #t = Time.now
+    DsdLogEntry
+#    t = Time.now
     #this is pretty good for now. Will eventually want to redo cache strategy to write directly to cache with individual keys
     #the larger file sizes really slow the system down, even though this is still a performance boost
     #may also be able to dump directly now that Marshal knows about the classes? 
     #also that class logic will work by itself. 
     cache = Rails.cache.read("downloads")
-    #puts "#{Time.now - t} | Got Downloads from Cache " unless cache.nil?
+#    puts "#{Time.now - t} | Got Downloads from Cache " unless cache.nil?
     return DownloadsCache.new if cache.nil?
     return Marshal.load(cache)
   end
