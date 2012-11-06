@@ -404,6 +404,42 @@ task :const_identities => :environment do
     "PMKRCONNS@#{cnty}.A".ts_eval= %Q|"PMKRCONNS@#{cnty}.Q".ts.aggregate(:year, :average)|
    end
       
+   ["HI","HON","HAW","MAU","KAU"].each do  |cnty|
+       "PAKR@#{cnty}.Q".ts_eval= %Q|("PAKRSGF@#{cnty}.Q".ts * "KRSGF@#{cnty}.Q".ts + "PAKRCON@#{cnty}.Q".ts * "KRCON@#{cnty}.Q".ts) / "KR@#{cnty}.Q".ts|
+   	"PMKR@#{cnty}.Q".ts_eval= %Q|("PMKRSGF@#{cnty}.Q".ts * "KRSGF@#{cnty}.Q".ts + "PMKRCON@#{cnty}.Q".ts * "KRCON@#{cnty}.Q".ts) / "KR@#{cnty}.Q".ts|	
+
+   	"PAKR@#{cnty}.A".ts_eval= %Q|("PAKR@#{cnty}.Q".ts * "KR@#{cnty}.Q".ts).aggregate(:year, :sum) / "KR@#{cnty}.A".ts|
+   	"PMKR@#{cnty}.A".ts_eval= %Q|"PMKR@#{cnty}.Q".ts.aggregate(:year, :average)|
+
+   	"PAKRSGF@#{cnty}.A".ts_eval= %Q|("PAKRSGF@#{cnty}.Q".ts * "KRSGF@#{cnty}.Q".ts).aggregate(:year, :sum) / "KRSGF@#{cnty}.A".ts|
+   	"PAKRCON@#{cnty}.A".ts_eval= %Q|("PAKRCON@#{cnty}.Q".ts * "KRCON@#{cnty}.Q".ts).aggregate(:year, :sum) / "KRCON@#{cnty}.A".ts|
+
+   	"PMKRSGF@#{cnty}.A".ts_eval= %Q|"PMKRSGF@#{cnty}.Q".ts.aggregate(:year, :average)|
+   	"PMKRCON@#{cnty}.A".ts_eval= %Q|"PMKRCON@#{cnty}.Q".ts.aggregate(:year, :average)|	
+   end
+
+
+   "PMKBCONNS@HON.M".ts_eval= %Q|"PMKBCON@HON.M".ts|
+   "PMKBSGFNS@HON.M".ts_eval= %Q|"PMKBSGF@HON.M".ts|
+   "PMKBCONNS@MAU.M".ts_eval= %Q|"PMKBCON@MAU.M".ts|
+   "PMKBSGFNS@MAU.M".ts_eval= %Q|"PMKBSGF@MAU.M".ts|
+
+   "PMKBCONNS@HON.Q".ts_eval= %Q|"PMKBCON@HON.M".ts.aggregate(:quarter, :average)|
+   "PMKBSGFNS@HON.Q".ts_eval= %Q|"PMKBSGF@HON.M".ts.aggregate(:quarter, :average)|
+   "PMKBCONNS@MAU.Q".ts_eval= %Q|"PMKBCON@MAU.M".ts.aggregate(:quarter, :average)|
+   "PMKBSGFNS@MAU.Q".ts_eval= %Q|"PMKBSGF@MAU.M".ts.aggregate(:quarter, :average)|
+
+   "PMKBCON@HON.Q".ts_eval= %Q|"PMKBCON@HON.M".ts.aggregate(:quarter, :average)|
+   "PMKBSGF@HON.Q".ts_eval= %Q|"PMKBSGF@HON.M".ts.aggregate(:quarter, :average)|
+   "PMKBCON@MAU.Q".ts_eval= %Q|"PMKBCON@MAU.M".ts.aggregate(:quarter, :average)|
+   "PMKBSGF@MAU.Q".ts_eval= %Q|"PMKBSGF@MAU.M".ts.aggregate(:quarter, :average)|
+
+   "PMKBCON@HON.A".ts_eval= %Q|"PMKBCON@HON.M".ts.aggregate(:year, :average)|
+   "PMKBSGF@HON.A".ts_eval= %Q|"PMKBSGF@HON.M".ts.aggregate(:year, :average)|
+   "PMKBCON@MAU.A".ts_eval= %Q|"PMKBCON@MAU.M".ts.aggregate(:year, :average)|
+   "PMKBSGF@MAU.A".ts_eval= %Q|"PMKBSGF@MAU.M".ts.aggregate(:year, :average)|
+      
+      
    #these RMORTS are from US, but that's ok
    "RMORT@US.Q".ts_eval= %Q|"RMORT@US.M".ts.aggregate(:quarter, :average)|
    "RMORT@US.A".ts_eval= %Q|"RMORT@US.M".ts.aggregate(:year, :average)|
@@ -476,6 +512,9 @@ task :const_identities => :environment do
        ("#{pre}_R@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.Q".ts / "PICTSGF@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty} Q"
      end
    end
+
+   #This is not right yet 11/5/12
+  "KB@HON.M".ts_eval= %Q|"KB@HON.M".ts.apply_seasonal_adjustment :additive |
    
    "UICNS@HIONLY.W".ts_eval= %Q|"UICNS@HI.W".ts - "UICNS@OT.W".ts|
    "UICININS@HIONLY.W".ts_eval= %Q|"UICININS@HI.W".ts - "UICININS@OT.W".ts|

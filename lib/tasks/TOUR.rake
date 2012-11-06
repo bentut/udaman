@@ -1086,6 +1086,9 @@ task :visitor_identities=>:environment do
     end
   end
   
+  ["HON", "HAW", "MAU", "KAU"].each do |county|
+    "VSDM@#{county}.M".ts_eval= %Q|("VSDMNS@#{county}.M".ts.offset_forward_looking_moving_average /  "VSDMNS@HI.M".ts.offset_forward_looking_moving_average * "VSDM@HI.M".ts).trim("2001-06-01", "2001-12-01")|
+  end
   
   #weird one off of history? maybe ns doesn't go that far back or something
   "VEXPPTOT@HI.M".ts_eval= %Q|"VEXPPTOT@HI.M".tsn.load_sa_from "/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata"|

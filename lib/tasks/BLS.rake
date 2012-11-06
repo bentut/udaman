@@ -1002,6 +1002,15 @@ task :bls_identities => :environment do
   
   Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/bls_wagesa.xls"
 
+  "E@HI.M".ts_eval= %Q|"E_NF@HI.M".ts + "EAG@HI.M".ts|
+  "E@HI.Q".ts_eval= %Q|"E@HI.M".ts.aggregate(:quarter, :average)|
+  "E@NBI.M".ts_eval= %Q|"E@HI.M".ts - "E@HON.M".ts|
+  "E@NBI.Q".ts_eval= %Q|"E@NBI.M".ts.aggregate(:quarter, :average)|
+
+  "EMPLNS@CA.Q".ts_eval= %Q|"EMPLNS@CA.M".ts.aggregate(:quarter, :average)|
+  "EMPL@CA.Q".ts_eval= %Q|"EMPL@CA.M".ts.aggregate(:quarter, :average)|
+  "EMPLSA@HI.Q".ts_eval= %Q|"EMPLSA@HI.M".ts.aggregate(:quarter, :average)|
+  
   ["HI", "HON"].each do |cnty|
     ["WHAF","WHAFAC","WHAFFD","WHCT","WHIF","WHMN","WHRT","WHWT","WH_FIN","WH_TTU","WWAF","WWAFAC","WWAFACNS","WWAFFD","WWCT","WWIF","WWMN","WWRT","WWWT","WW_FIN","WW_TTU"].each do |pre|
       "#{pre}@#{cnty}.Q".ts_eval= %Q|"#{pre}@#{cnty}.M".ts.aggregate(:quarter, :average)|
