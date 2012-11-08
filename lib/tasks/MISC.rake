@@ -156,8 +156,11 @@ task :const_identities => :environment do
   "KPPRVNRSDNS@KAU.M".ts_eval= %Q|"KPPRVNS@KAU.M".ts - "KPPRVRSDNS@KAU.M".ts|  
   "KPPRVNS@NBI.M".ts_eval= %Q|"KPPRVNS@HAW.M".ts + "KPPRVNS@MAU.M".ts + "KPPRVNS@KAU.M".ts|
   "KPPRVRSDNS@NBI.M".ts_eval= %Q|"KPPRVRSDNS@HAW.M".ts + "KPPRVRSDNS@MAU.M".ts + "KPPRVRSDNS@KAU.M".ts|
-  "KPPRVCOMNS@NBI.M".ts_eval= %Q|"KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts + "KPPRVCOMNS@KAU.M".ts|
-  "KPPRVADDNS@NBI.M".ts_eval= %Q|"KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts + "KPPRVADDNS@KAU.M".ts|
+  #"KPPRVCOMNS@NBI.M".ts_eval= %Q|"KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts + "KPPRVCOMNS@KAU.M".ts|
+  #"KPPRVADDNS@NBI.M".ts_eval= %Q|"KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts + "KPPRVADDNS@KAU.M".ts|
+  "KPPRVADDNS@NBI.M".ts_eval= %Q|("KPPRVADDNS@HAW.M".ts + "KPPRVADDNS@MAU.M".ts).zero_add "KPPRVADDNS@KAU.M".ts|
+  "KPPRVCOMNS@NBI.M".ts_eval= %Q|("KPPRVCOMNS@HAW.M".ts + "KPPRVCOMNS@MAU.M".ts).zero_add "KPPRVCOMNS@KAU.M".ts|
+  
   "KPPRVNRSDNS@NBI.M".ts_eval= %Q|"KPPRVNRSDNS@HAW.M".ts + "KPPRVNRSDNS@MAU.M".ts + "KPPRVNRSDNS@KAU.M".ts|
 
   
@@ -513,8 +516,9 @@ task :const_identities => :environment do
      end
    end
 
-   #This is not right yet 11/5/12
-  "KB@HON.M".ts_eval= %Q|"KB@HON.M".ts.apply_seasonal_adjustment :additive |
+   "KB@HON.M".ts_eval= %Q|"KBSGF@HON.M".ts.get_last_incomplete_year + "KBCON@HON.M".ts.get_last_incomplete_year|
+   "KB@MAU.M".ts_eval= %Q|"KBSGF@MAU.M".ts.get_last_incomplete_year + "KBCON@MAU.M".ts.get_last_incomplete_year|
+   
    
    "UICNS@HIONLY.W".ts_eval= %Q|"UICNS@HI.W".ts - "UICNS@OT.W".ts|
    "UICININS@HIONLY.W".ts_eval= %Q|"UICININS@HI.W".ts - "UICININS@OT.W".ts|
