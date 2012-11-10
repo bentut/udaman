@@ -689,25 +689,25 @@ task :hiwi_upd => :environment do
   
   p = Packager.new
   p.add_definitions hiwi_upd
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HI_NEW.xls"
+  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_HI.xls"
   
   p = Packager.new
   p.add_definitions hiwi_upd_hon
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HON_NEW.xls"
+  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_HON.xls"
   
   p = Packager.new
   p.add_definitions hiwi_upd_haw
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_HAW_NEW.xls"
+  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_HAW.xls"
   
   
   p = Packager.new
   p.add_definitions hiwi_upd_kau
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_KAU_NEW.xls"
+  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_KAU.xls"
   
   
   p = Packager.new
   p.add_definitions hiwi_upd_mau
-  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_upd_MAU_NEW.xls"
+  p.write_definitions_to "/Volumes/UHEROwork/data/bls/update/hiwi_MAU.xls"
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["hiwi_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

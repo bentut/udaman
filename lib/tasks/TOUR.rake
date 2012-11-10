@@ -1384,7 +1384,7 @@ task :visitor_identities=>:environment do
     "PPRM_WITH_CR@MAU.#{f}".ts_eval= %Q|("VADC@MAU.#{f}".ts - "VADCCRAIR@MAU.#{f}".ts * 5 / 7) / ("TRMS@MAU.#{f}".ts * "OCUP%@MAU.#{f}".ts / 100)|
     
     ["HI","HON","HAW", "KAU", "MAU"].each do |cnty|
-      "PPRM_WITHOUT_CR@#{cnty}.#{f}".ts_eval= %Q|("VADC@#{cnty}.Q".ts) / ("TRMS@#{cnty}.Q".ts * "OCUP%@#{cnty}.Q".ts / 100)|
+      "PPRM_WITHOUT_CR@#{cnty}.#{f}".ts_eval= %Q|("VADC@#{cnty}.#{f}".ts) / ("TRMS@#{cnty}.#{f}".ts * "OCUP%@#{cnty}.#{f}".ts / 100)|
       "PPRM@#{cnty}.#{f}".ts_eval= %Q|"PPRM_WITH_CR@#{cnty}.#{f}".ts|
       "PPRM@#{cnty}.#{f}".ts_eval= %Q|("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts + ("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts - "PPRM_WITH_CR@#{cnty}.#{f}".ts).average).trim("1990-01-01", "2000-12-01")|
     end
