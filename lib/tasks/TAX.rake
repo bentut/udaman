@@ -467,7 +467,7 @@ task :tax_identities => :environment do
   end
 
   ["HAW", "HI", "HON", "KAU", "MAU"].each do |cnty|
-    "TGBCT_R@#{cnty}.A".ts_eval= %Q|"TGBCT@#{cnty}.A".ts / "PICTSGF@HON.A".ts * 100|
+    #"TGBCT_R@#{cnty}.A".ts_eval= %Q|"TGBCT@#{cnty}.A".ts / "PICTSGF@HON.A".ts * 100|
     "TGBCTNS_R@#{cnty}.Q".ts_eval= %Q|"TGBCTNS@#{cnty}.Q".ts / "PICTSGF@HON.Q".ts * 100|
     #"TGBCT_R@#{cnty}.Q".ts_eval= %Q|"TGBCTNS@#{cnty}.Q".ts / "PICTSGF@HON.Q".ts * 100| # these are being taken out of AREMOS
     "TRMS@#{cnty}.Q".ts_eval= %Q|"TRMS@#{cnty}.A".ts.trms_interpolate_to_quarterly|

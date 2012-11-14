@@ -135,6 +135,7 @@ task :daily_history_load => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/jp_m_hist.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_histextend_date_format_correct.xls", "hiwi" #some diffs, but could be something else
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/vx_hist.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/TGBCT_hist.xls"
   
   
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge" #moved up from below

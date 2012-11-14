@@ -34,6 +34,39 @@ class String
   def pdf
     return PrognozDataFile.all(:filename => /Data_#{self}.xls$/)[0]
   end
+
+#  quarter_diff = ((d1.year - d2.year) * 12 + (d1.month - d2.month))/3
+  
+  def linear_path_to_previous_period(start_val, diff, source_frequency, target_frequency)
+    date = Date.parse(self) #will raise invalid date if necessary
+    
+    if (source_frequency == "year" or source_frequency == :year) and target_frequency == :quarter
+      return {
+        (date).to_s       => start_val - (diff / 4 * 3),
+        (date >> 3).to_s  => start_val - (diff / 4 * 2),
+        (date >> 6).to_s  => start_val - (diff / 4),
+        (date >> 9).to_s  => start_val
+      }
+    end
+    
+    if (source_frequency == "quarter" or source_frequency == :quarter) and target_frequency == :month
+      return {
+        (date).to_s       => start_val - (diff / 3 * 2),
+        (date >> 1).to_s  => start_val - (diff / 3),
+        (date >> 2).to_s  => start_val
+      }
+    end
+    if (source_frequency == "month" or source_frequency == :month) and target_frequency == :day      
+      num_days = date.days_in_month
+      data = {}
+      (1..num_days).each do |days_back|
+        data[(date + num_days - days_back).to_s] =  start_val - (diff / num_days * (days_back - 1))
+      end
+      return data
+    end
+
+    return {}
+  end
   
   def time
     t = Time.now

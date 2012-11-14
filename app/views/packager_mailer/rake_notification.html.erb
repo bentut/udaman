@@ -36,7 +36,12 @@
 	<table>
 		<tr><td></td><td><%= date1 %></td><td><%= date2 %></td><td><%= date3 %></td></tr>
 		<% @series.each do |series, data| %>
-			<tr><td><%= link_to(series, "http://s199n131.soc.hawaii.edu:3000/series/#{series.ts.id}", :target => "_blank") %></td><td><%= data[date1] %></td><td><%= data[date2] %></td><td><%= data[date3] %></td></tr>
+			<% unless series.ts.nil? %>
+			<tr>
+				<td><%= link_to(series, "http://udaman.uhero.hawaii.edu/series/#{series.ts.id}", :target => "_blank") %></td>
+				<td><%= data[date1] %></td><td><%= data[date2] %></td><td><%= data[date3] %></td>
+			</tr>
+			<% end %>
 		<% end %>
 	</table>
   </body>
