@@ -60,7 +60,7 @@ class String
       num_days = date.days_in_month
       data = {}
       (1..num_days).each do |days_back|
-        data[(date + num_days - days_back).to_s] =  start_val - (diff / num_days * (days_back - 1))
+        data[(date + days_back - 1).to_s] =  start_val - (diff / num_days * (num_days - days_back))
       end
       return data
     end

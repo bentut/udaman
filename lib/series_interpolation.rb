@@ -69,18 +69,19 @@ module SeriesInterpolation
         last_temp_val = val
         next
       end
-      
       if temp_series_data[last_date].nil?
-        temp_series_data[last_date] = last_temp_val + ((val-last_temp_val) / divisor) * ((divisor-1) / 2)
+        temp_series_data[last_date] = last_temp_val + ((val-last_temp_val) / divisor) * ((divisor-1) / 2.to_f)
       end
       
-      temp_series_data[date] = val + ((val - temp_series_data[last_date]) / divisor ) * ((divisor - 1) / 2)
+      temp_series_data[date] = val + ((val - temp_series_data[last_date]) / divisor ) * ((divisor - 1) / 2.to_f)
       last_temp_val = temp_series_data[date]
       last_date = date
     end
     temp_series = new_transformation("Temp series from #{self.name}", temp_series_data)
     temp_series.frequency = self.frequency
     series_data = temp_series.linear_interpolate(frequency).data
+    
+    temp_series.print
     
     new_series = new_transformation("Pseudo Centered Spline Interpolation of #{self.name}", series_data)
     new_series.frequency = frequency
