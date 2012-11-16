@@ -4,6 +4,48 @@ module SeriesInterpolation
     series_to_store_name.ts= interpolate frequency,operation
   end
   
+  def extend_first_data_point_back_to(date)
+    new_data = {}
+    first_data_point_date = self.first_value_date
+    first_data_point_val = data[first_data_point_date]
+
+    offset = 1 if self.frequency == "month"
+    offset = 3 if self.frequency == "quarter"
+    offset = 6 if self.frequency == "semi"
+    offset = 12 if self.frequency == "year"
+    new_date = Date.parse(first_data_point_date) << offset
+
+    while new_date.to_s >= date
+      new_data[new_date.to_s] = first_data_point_val
+      new_date = new_date << offset
+    end
+    new_series = new_transformation("Extended the first value back to #{date}", new_data)
+    new_series.frequency = self.frequency
+    new_series
+  end
+  
+  def extend_last_date_to_match(series_name)
+    new_data = {}
+    last_data_point_date = series_name.ts.last_value_date
+    current_last_data_point = self.last_value_date
+    
+    last_data_point_val = data[current_last_data_point]
+    
+    offset = 1 if self.frequency == "month"
+    offset = 3 if self.frequency == "quarter"
+    offset = 6 if self.frequency == "semi"
+    offset = 12 if self.frequency == "year"
+    new_date = Date.parse(current_last_data_point) >> offset
+
+    while new_date.to_s <= last_data_point_date
+      new_data[new_date.to_s] = last_data_point_val
+      new_date = new_date >> offset
+    end
+    new_series = new_transformation("Extended the value value out to the last date of #{series_name}", new_data)
+    new_series.frequency = self.frequency
+    new_series
+  end
+  
   def fill_interpolate_to(target_frequency)
     freq = self.frequency.to_s
     new_series_data = {}
@@ -80,8 +122,6 @@ module SeriesInterpolation
     temp_series = new_transformation("Temp series from #{self.name}", temp_series_data)
     temp_series.frequency = self.frequency
     series_data = temp_series.linear_interpolate(frequency).data
-    
-    temp_series.print
     
     new_series = new_transformation("Pseudo Centered Spline Interpolation of #{self.name}", series_data)
     new_series.frequency = frequency

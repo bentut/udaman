@@ -19,7 +19,7 @@ false,bls,bls_cpi_upd_m
 false,bls,hiwi_upd_HI
 false,bls,hiwi_upd_HON
 false,bls,hiwi_upd_HAW
-false,misc,const_upd_q
+true,misc,const_upd_q
 false,bls,hiwi_upd_KAU
 false,misc,const_upd_m
 false,rawdata,const_upd_m_ID

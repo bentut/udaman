@@ -3,8 +3,16 @@ module SeriesDataAdjustment
     self.data.sort.each do |datestring, value|
       return datestring unless value.nil?
     end
+    return nil
   end
-        
+     
+  def last_value_date
+    self.data.sort.reverse.each do |datestring, value|
+      return datestring unless value.nil?
+    end
+    return nil
+  end
+       
   def trim(start_date = get_last_incomplete_january_datestring, end_date = Time.now.to_date.to_s)
     new_series_data = get_values_after_including(start_date, end_date)
     new_transformation("Trimmed #{name} starting at #{start_date}", new_series_data)
