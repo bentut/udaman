@@ -1891,8 +1891,6 @@ task :bea_identities => :environment do
    #     calculate famsize and sh_ypc
    
    
-   "FAMSIZE_TEMP@HI.A".ts_eval= %Q|"YMED@HI.A".ts / "YPC@HI.A".ts|
-   "FAMSIZE@HI.Q".ts_eval = %Q|"FAMSIZE_TEMP@HI.A".ts.pseudo_centered_spline_interpolation(:quarter)|
    
    "FAMSIZE_TEMP@HON.A".ts_eval= %Q|"YMED@HON.A".ts / "YPC@HON.A".ts|
    "SH_YPC_TEMP@HON.A".ts_eval= %Q|"YPC@HON.A".ts/"YPC@HI.A".ts|
@@ -1906,47 +1904,29 @@ task :bea_identities => :environment do
    "FAMSIZE2@HON.Q".ts_eval = %Q|"FAMSIZE2@HON.Q".ts.extend_last_date_to_match("YPC@HI.Q")|
    "SH_YPC@HON.Q".ts_eval = %Q|"SH_YPC@HON.Q".ts.extend_last_date_to_match("YPC@HI.Q")|
 
+   #the ones coming up clean are already defined... in MISC... should move? dependencies are split between this and MISC transformations
+   #"HPMT@HON.Q".ts_eval=   %Q|"PMKRSGF@HON.Q".ts * 0.8 * ("RMORT@US.Q".ts / 1200) / (("RMORT@US.Q".ts / 1200 + 1)**-360 * -1 + 1)|
+   #"HYQUAL@HON.Q".ts_eval= %Q|"HPMT@HON.Q".ts * 10 / 3 * 12|
+   #{}"HPMTCON@HON.Q".ts_eval= %Q|"PMKRCON@HON.Q".ts * 0.8 * ("RMORT@US.Q".ts / 1200) / (("RMORT@US.Q".ts / 1200 + 1)**-360 * -1 + 1)|
+   #{}"HYQUALCON@HON.Q".ts_eval= %Q|"HPMTCON@HON.Q".ts * 10 / 3 * 12|
+   
    "PAFSGF@HON.Q".ts_eval = %Q| ("FAMSIZE2@HON.Q".ts * "SH_YPC@HON.Q".ts * "YPC@HI.Q".ts / "RMORT@US.Q".ts)*(("RMORT@US.Q".ts / 1200 + 1)**-360 * -1 + 1) * (300/8) |
-   #         series HPMT@HON.Q   = PMKRSGF@HON.Q*0.8*(RMORT@US.Q/1200)/(1-(1/(1+RMORT@US.Q/1200)**360))
-   #         series HYQUAL@HON.Q = HPMT@HON.Q*10/3*12
-   #         series HAI@HON.Q    = (FAMSFAMSIZE2@HON.Q*SH_YPC@HON.Q*YPC@HI.Q)/HYQUAL@HON.Q*100
-   #         series HPMTCON@HON.Q   = PMKRCON@HON.Q*0.8*(RMORT@US.Q/1200)/(1-(1/(1+RMORT@US.Q/1200)**360))
-   #         series HYQUALCON@HON.Q = HPMTCON@HON.Q*10/3*12
-   #         series HAICON@HON.Q    = (FAMSFAMSIZE2@HON.Q*SH_YPC@HON.Q*YPC@HI.Q)/HYQUALCON@HON.Q*100
-   
-   #DELETE original famsize defs for circular reference
+   "HAI@HON.Q".ts_eval= %Q|("FAMSIZE2@HON.Q".ts * "SH_YPC@HON.Q".ts * "YPC@HI.Q".ts) / "HYQUAL@HON.Q".ts * 100 * 1000|
+   "HAICON@HON.Q".ts_eval= %Q|("FAMSIZE2@HON.Q".ts * "SH_YPC@HON.Q".ts * "YPC@HI.Q".ts) / "HYQUALCON@HON.Q".ts * 100 * 1000|   
+   "FAMSIZE@HON.A".ts_eval= %Q|"FAMSIZE@HON.Q".ts.aggregate(:year, :average)|
+   "SH_YPC@HON.A".ts_eval= %Q|"SH_YPC@HON.Q".ts.aggregate(:year, :average)|
    
    
-   #     Aggregate FAMSIZE@HON.A and SH_YPC@HON.A
-   #         FAMSIZE@HON.A = average FAMSIZE@HON.Q
-   #             aggregate using famsize, not famsize2!
-   #         SH_YPC@HON.A = average SH_YPC@HON.Q
-   # 
-   # @HI
-   # 
-   #     Calculate famsize
-   #         FAMSIZE@HI.A = YMED@HI.A / YPC@HI.A
-   #     Extend FAMSIZE@HI.A backwards
-   #         We have YMED@HON.A going back to 1990 but YMED@HI.A only goes back to 1996, so we can only calculate FAMSIZE@HI.A after 1996
-   #         The basic idea to take the ratio of FAMSIZE@HI.A/FAMSIZE@HON.A and apply that ratio to FAMSIZE@HON.A for 1990-1995 to make FAMSIZE@HI.A
-   #         Calculate intermediate series DIFF.A = FAMSIZE@HI.A/FAMSIZE@HON.A
-   #         Calculate the mean of DIFF.A = AVGDIFF (I think this is something like 1.017)
-   #         Between 1990-1995 FAMSIZE@HI.A = FAMSIZE@HON.A * AVGDIFF
-   #     Interpolate to quarterly
-   #         FAMSIZE@HI.Q = FAMSIZE@HI.A interpolated with new method
-   #     Extend FAMSIZE@HI.Q if necessary
-   #         There might be a case where YPC@HI.A ends before YPC@HI.Q, so FAMSIZE@HI.Q will end before YPC@HI.Q
-   #         If FAMSIZE@HI.Q ends before YPC@HI.Q, repeat the last value of FAMSIZE@HI.Q until YPC@HI.Q and FAMSIZE@HI.Q end in the same period
-   #     Intermediate calculations finished! Calculate the following series by identity
-   #           series PAFSGF@HI.A = (300/8)*(FAMSIZE@HI.A*YPC@HI.A/RMORT@US.Q)*(1-1/(1+RMORT@US.Q/1200)**360)
-   #           series HPMT@HI.A   = PMKRSGF@HI.A*0.8*(RMORT@US.Q/1200)/(1-(1/(1+RMORT@US.Q/1200)**360))
-   #           series HYQUAL@HI.A = HPMT@HI.A*10/3*12
-   #           series HAI@HI.A    = (FAMSFAMSIZE@HI.A*YPC@HI.A)/HYQUAL@HI.A*100
-   #           series HPMTCON@HI.A   = PMKRCON@HI.A*0.8*(RMORT@US.Q/1200)/(1-(1/(1+RMORT@US.Q/1200)**360))
-   #           series HYQUALCON@HI.A = HPMTCON@HI.A*10/3*12
-   #           series HAICON@HI.A    = (FAMSFAMSIZE@HI.A*YPC@HI.A)/HYQUALCON@HI.A*100
-   #     Aggregate FAMSIZE@HI.Q
-   #         FAMSIZE@HI.A = average FAMSIZE@HI.Q
+   "FAMSIZE_TEMP@HI.A".ts_eval= %Q|"YMED@HI.A".ts / "YPC@HI.A".ts|
+   "FAMSIZE_TEMP@HI.A".ts_eval= %Q|("FAMSIZE@HON.A".ts * ("FAMSIZE_TEMP@HI.A".ts / "FAMSIZE@HON.A".ts).average).trim("1990-01-01","1996-01-01")|
+   "FAMSIZE@HI.Q".ts_eval = %Q|"FAMSIZE_TEMP@HI.A".ts.pseudo_centered_spline_interpolation(:quarter)|
+   "FAMSIZE@HI.Q".ts_eval = %Q|"FAMSIZE@HI.Q".ts.extend_last_date_to_match("YPC@HI.Q")|
+   
+   "PAFSGF@HI.Q".ts_eval = %Q| ("FAMSIZE@HI.Q".ts * "YPC@HI.Q".ts / "RMORT@US.Q".ts)*(("RMORT@US.Q".ts / 1200 + 1)**-360 * -1 + 1) * (300/8) |
+   "HAI@HI.Q".ts_eval= %Q|("FAMSIZE@HI.Q".ts * "YPC@HI.Q".ts) / "HYQUAL@HI.Q".ts * 100 * 1000|
+   "HAICON@HI.Q".ts_eval= %Q|("FAMSIZE@HI.Q".ts * "YPC@HI.Q".ts) / "HYQUALCON@HI.Q".ts * 100 * 1000|   
+   "FAMSIZE@HI.A".ts_eval= %Q|"FAMSIZE@HI.Q".ts.aggregate(:year, :average)|
+   
 
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bea_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 

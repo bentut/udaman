@@ -482,9 +482,6 @@ task :const_identities => :environment do
    "HYQUALCON@HI.Q".ts_eval= %Q|"HPMTCON@HI.Q".ts*10/3*12.0|
    "HYQUALCON@HON.Q".ts_eval= %Q|"HPMTCON@HON.Q".ts*10/3*12.0|
 
-   # "HAI@HI.Q".ts_eval=  %Q|"YMED@HI.Q".ts / "HYQUAL@HI.Q".ts*100.0|
-   #    HAICON@HI.A =  "YMED@HI.A".ts / "HYQUALCON@HI.A".ts*100.0
-
    "PICTSGF@HON.Q".ts_eval= %Q|"PICTSGFNS@HON.Q".ts|
    
    #this may work eventually, but KPNS is not defined yet

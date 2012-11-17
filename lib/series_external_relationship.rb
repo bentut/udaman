@@ -136,6 +136,19 @@ module SeriesExternalRelationship
     
   end
   
+  def aremos_series
+    AremosSeries.get self.name
+  end
+  
+  def aremos_data_side_by_side
+    comparison_hash = {}
+    as = self.aremos_series
+    
+    all_dates = self.data.keys | as.data.keys
+    all_dates.each { |date_string| comparison_hash[date_string] = {:aremos => as.data[date_string], :udaman => self.units_at(date_string)} }
+    return comparison_hash
+  end
+  
   # def data_diff_display_array(comparison_data, digits_to_round)
   #   results = []
   #   cdp = current_data_points

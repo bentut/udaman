@@ -82,6 +82,11 @@ class SeriesController < ApplicationController
   #   #render :partial => "data_points", :locals => {:series => @series, :as => @as, :chg => @chg, :ytd_chg => @ytd_chg}
   # end
   
+  def comparison_graph
+    @series = Series.find params[:id]
+    @comp = @series.aremos_data_side_by_side
+  end
+  
   def blog_graph
     @series = Series.find params[:id]
     @start_date = params[:start_date]
