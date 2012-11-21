@@ -178,7 +178,8 @@ task :jp_upd_m => :environment do
 		"E_NF@JP.M" => %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 14, :frequency => "M" }) * 10|, 
 		"UR@JP.M" => %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 31, :frequency => "M" })|, 
 		"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
-		"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
+		#"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
+		"CPI@JP.M" => %Q|Series.load_from_download  "CPI10@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:7:1", :col => 2, :frequency => "M" }|,
 		"CPICORE@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 47, :frequency => "M" }|, 
 		"INF@JP.M" => %Q|"CPI@JP.M".ts.annualized_percentage_change|,
 		"IP@JP.M" => %Q|Series.load_from_download  "IP@meti.go.jp", { :file_type => "csv", :start_date => "2003-01-01", :row => "4", :col => "increment:4:1", :frequency => "M" }|, 
@@ -199,7 +200,8 @@ task :jp_upd_m => :environment do
 	jp_m_special = {
   
 	"CPINS@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:19:1", :col => 2, :frequency => "M" }|, 
-	"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
+	#"CPI@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 46, :frequency => "M" }|, 
+	"CPI@JP.M" => %Q|Series.load_from_download  "CPI10@e-stat.go.jp", { :file_type => "csv", :start_date => "1970-01-01", :row => "increment:7:1", :col => 2, :frequency => "M" }|,
 	"CPICORE@JP.M" => %Q|Series.load_from_download  "CPI@e-stat.go.jp", { :file_type => "csv", :start_date => "2000-01-01", :row => "increment:379:1", :col => 47, :frequency => "M" }|, 
 	"STKNS@JP.M" => %Q|Series.load_from_download  "JP_STKNS@yahoo.com", { :file_type => "csv", :start_row => 3, :start_col => 1, :rev => true , :row => "increment:3:1", :col => "7", :frequency => "M" }|
 		#STKNS starts on row 3 rather than row 2 to capture only fully-completed months
