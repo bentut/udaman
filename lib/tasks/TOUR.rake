@@ -135,8 +135,9 @@ tour_vexp = {
 
 "VEXPUS@HI.A"=>%Q|"VEXPUS@HI.M".ts.aggregate(:year, :sum)|,
 "VEXPJP@HI.A"=>%Q|"VEXPJP@HI.M".ts.aggregate(:year, :sum)|,
-"VXPRUS@HI.A"=>%Q|"VEXPUS@HI.A".ts|,
-"VXPRJP@HI.A"=>%Q|"VEXPJP@HI.A".ts|,
+#VXPR[JP/US]@HI.A  gets overwritten by history which is correct in AREMOS anyway
+#{}"VXPRUS@HI.A"=>%Q|"VEXPUS@HI.A".ts|,
+#{}"VXPRJP@HI.A"=>%Q|"VEXPJP@HI.A".ts|,
 "VX@HI.A"=>[%Q|"VXPR@HI.A".ts + "VXBU@HI.A".ts|, 
               %Q|"VX@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls" |], 
 
@@ -1378,15 +1379,15 @@ task :visitor_identities=>:environment do
 
   ["Q", "A"].each do |f|
     "PPRM_WITH_CR@HI.#{f}".ts_eval= %Q|("VADC@HI.#{f}".ts - "VADCCRAIR@HI.#{f}".ts * 5 / 7) / ("TRMS@HI.#{f}".ts * "OCUP%@HI.#{f}".ts / 100)|
-    "PPRM_WITH_CR@HON.#{f}".ts_eval= %Q|("VADC@HON.#{f}".ts - "VADCCRAIR@HON.#{f}".ts * 5 / 7) / ("TRMS@HON.#{f}".ts * "OCUP%@HON.#{f}".ts / 100)|
-    "PPRM_WITH_CR@HAW.#{f}".ts_eval= %Q|("VADC@HAW.#{f}".ts - "VADCCRAIR@HAW.#{f}".ts * 5 / 7) / ("TRMS@HAW.#{f}".ts * "OCUP%@HAW.#{f}".ts / 100)|
-    "PPRM_WITH_CR@KAU.#{f}".ts_eval= %Q|("VADC@KAU.#{f}".ts - "VADCCRAIR@KAU.#{f}".ts * 5 / 7) / ("TRMS@KAU.#{f}".ts * "OCUP%@KAU.#{f}".ts / 100)|
-    "PPRM_WITH_CR@MAU.#{f}".ts_eval= %Q|("VADC@MAU.#{f}".ts - "VADCCRAIR@MAU.#{f}".ts * 5 / 7) / ("TRMS@MAU.#{f}".ts * "OCUP%@MAU.#{f}".ts / 100)|
+    "PPRM_WITH_CR@HON.#{f}".ts_eval= %Q|("VADC@HON.#{f}".ts - "VADCCRAIR@HON.#{f}".ts * 1 / 7) / ("TRMS@HON.#{f}".ts * "OCUP%@HON.#{f}".ts / 100)|
+    "PPRM_WITH_CR@HAW.#{f}".ts_eval= %Q|("VADC@HAW.#{f}".ts - "VADCCRAIR@HAW.#{f}".ts * 1 / 7) / ("TRMS@HAW.#{f}".ts * "OCUP%@HAW.#{f}".ts / 100)|
+    "PPRM_WITH_CR@KAU.#{f}".ts_eval= %Q|("VADC@KAU.#{f}".ts - "VADCCRAIR@KAU.#{f}".ts * 1 / 7) / ("TRMS@KAU.#{f}".ts * "OCUP%@KAU.#{f}".ts / 100)|
+    "PPRM_WITH_CR@MAU.#{f}".ts_eval= %Q|("VADC@MAU.#{f}".ts - "VADCCRAIR@MAU.#{f}".ts * 2 / 7) / ("TRMS@MAU.#{f}".ts * "OCUP%@MAU.#{f}".ts / 100)|
     
     ["HI","HON","HAW", "KAU", "MAU"].each do |cnty|
       "PPRM_WITHOUT_CR@#{cnty}.#{f}".ts_eval= %Q|("VADC@#{cnty}.#{f}".ts) / ("TRMS@#{cnty}.#{f}".ts * "OCUP%@#{cnty}.#{f}".ts / 100)|
       "PPRM@#{cnty}.#{f}".ts_eval= %Q|"PPRM_WITH_CR@#{cnty}.#{f}".ts|
-      "PPRM@#{cnty}.#{f}".ts_eval= %Q|("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts + ("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts - "PPRM_WITH_CR@#{cnty}.#{f}".ts).average).trim("1990-01-01", "2000-12-01")|
+      "PPRM@#{cnty}.#{f}".ts_eval= %Q|("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts - ("PPRM_WITHOUT_CR@#{cnty}.#{f}".ts - "PPRM_WITH_CR@#{cnty}.#{f}".ts).average).trim("1990-01-01", "2000-12-01")|
     end
   end
   # qtemp = 

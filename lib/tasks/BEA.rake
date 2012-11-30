@@ -1786,7 +1786,7 @@ task :bea_identities => :environment do
   #this is wrong
   "YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
   
-  #A isn't really right either right. Q is wrong
+  #A isn't really right either right. Q is wrong. Now A works and other thing is wrong
   "SH_YPC@HON.A".ts_eval = %Q|"YPC@HON.A".ts / "YPC@HI.A".ts|
   #{}"SH_YPC@HON.Q".ts_eval = %Q|"YPC@HON.Q".ts / "YPC@HI.Q".ts|
   
@@ -1833,6 +1833,9 @@ task :bea_identities => :environment do
     end
   end
 
+  #YPC calculated above needs to get overwritte. Should maybe remove
+  "YPC@NBI.A".ts_eval= %Q|"Y@NBI.A".ts / "NR@NBI.A".ts|
+  
   #YPC base series needs corrections
   ["YPC", "YDIV", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPCBEA", "YPC", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSF", "YWAGE", "Y"].each do |pre|
     ("#{pre}@NBI.A".ts_eval= %Q|"#{pre}@HI.A".ts - "#{pre}@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}"
@@ -1914,7 +1917,9 @@ task :bea_identities => :environment do
    "HAI@HON.Q".ts_eval= %Q|("FAMSIZE2@HON.Q".ts * "SH_YPC@HON.Q".ts * "YPC@HI.Q".ts) / "HYQUAL@HON.Q".ts * 100 * 1000|
    "HAICON@HON.Q".ts_eval= %Q|("FAMSIZE2@HON.Q".ts * "SH_YPC@HON.Q".ts * "YPC@HI.Q".ts) / "HYQUALCON@HON.Q".ts * 100 * 1000|   
    "FAMSIZE@HON.A".ts_eval= %Q|"FAMSIZE@HON.Q".ts.aggregate(:year, :average)|
-   "SH_YPC@HON.A".ts_eval= %Q|"SH_YPC@HON.Q".ts.aggregate(:year, :average)|
+
+   #this (SH_YPC) seems to be flopping back and forth. Commenting this one out for now and deleting from UDAMAN
+   #{}"SH_YPC@HON.A".ts_eval= %Q|"SH_YPC@HON.Q".ts.aggregate(:year, :average)|
    
    
    "FAMSIZE_TEMP@HI.A".ts_eval= %Q|"YMED@HI.A".ts / "YPC@HI.A".ts|
