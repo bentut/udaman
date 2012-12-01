@@ -103,31 +103,49 @@ module SeriesInterpolation
     divisor = 30.4375 if frequency == :day and self.frequency == "month"
     
     temp_series_data = {}
-    last_temp_val = nil
+    #last_temp_val = nil
     last_date = nil
+    first_val = nil
+    # self.data.sort.each do |date, val|
+    #   if last_date.nil?
+    #     last_date = date
+    #     last_temp_val = val
+    #     next
+    #   end
+    #   if temp_series_data[last_date].nil?
+    #     temp_series_data[last_date] = last_temp_val + ((val-last_temp_val) / divisor) * ((divisor-1) / 2.to_f)
+    #   end
+    #   
+    #   temp_series_data[date] = val + ((val - temp_series_data[last_date]) / divisor ) * ((divisor - 1) / 2.to_f)
+    #   last_temp_val = temp_series_data[date]
+    #   last_date = date
+    # end
+    
     self.data.sort.each do |date, val|
+      #first period only
       if last_date.nil?
         last_date = date
-        last_temp_val = val
+        temp_series_data[date] = val
+        first_val = val
         next
       end
-      if temp_series_data[last_date].nil?
-        temp_series_data[last_date] = last_temp_val + ((val-last_temp_val) / divisor) * ((divisor-1) / 2.to_f)
-      end
       
-      temp_series_data[date] = val + ((val - temp_series_data[last_date]) / divisor ) * ((divisor - 1) / 2.to_f)
-      last_temp_val = temp_series_data[date]
+      temp_series_data[date] = val + (val - temp_series_data[last_date]) * ((divisor - 1) / (divisor + 1).to_f)
+      
       last_date = date
     end
+    
     temp_series = new_transformation("Temp series from #{self.name}", temp_series_data)
     temp_series.frequency = self.frequency
-    series_data = temp_series.linear_interpolate(frequency).data
     
+    series_data = temp_series.linear_interpolate(frequency).data
+
     new_series = new_transformation("Pseudo Centered Spline Interpolation of #{self.name}", series_data)
     new_series.frequency = frequency
     new_series
   end
 
+  #first period is just first value
   def linear_interpolate(frequency)
     raise AggregationError unless (frequency == :quarter and self.frequency == "year") or 
                                   (frequency == :month and self.frequency == "quarter") or 
@@ -140,7 +158,7 @@ module SeriesInterpolation
     new_series_data = nil
     data_copy.each do |date_string, val|
       diff = val - last_val
-      new_series_data = last_date.linear_path_to_previous_period(last_val, diff, self.frequency, frequency) if new_series_data.nil?
+      new_series_data = last_date.linear_path_to_previous_period(last_val, 0, self.frequency, frequency) if new_series_data.nil?
       new_series_data.merge! date_string.linear_path_to_previous_period(val, diff, self.frequency, frequency)
       last_val = val
       last_date = date_string
