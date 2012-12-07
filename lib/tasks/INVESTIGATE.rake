@@ -39,11 +39,12 @@ task :gen_prognoz_diffs => :environment do
       diff_hash = ddiff[:display_array]
       diff_data.push({:pdf_id => pdf.id, :id => header.ts.id, :name => header, :display_array => diff_hash}) if diff_hash.count > 0
     end    
-    filenames.push pdf.filename
+    filenames.push pdf.filename.gsub("/prognoz_export/","/prognoz_exports/exports")
+    pdf.write_export
     puts "#{"%.2f" %(Time.now - t1)} | #{pdf.filename}"
   end 
   
-  Zip::ZipFile.open(folder+Date.today.strftime("%yM%mD%d")+".zip", Zip::ZipFile::CREATE) do |zipfile|
+  Zip::ZipFile.open(folder + "ready_to_send_zip_files/" + Date.today.strftime("%yM%mD%d") + ".zip", Zip::ZipFile::CREATE) do |zipfile|
     filenames.each {|fname| zipfile.add(fname.split("/")[-1], fname)}
   end
   
