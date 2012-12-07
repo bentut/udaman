@@ -9,9 +9,8 @@
 	div#all_charts {clear:both;}
 </style>
 
-
-<p class="notice"><%= notice %></p>
 <h1>Prognoz Output Files</h2>
+<p><%= link_to "Export" , "/send_prognoz_export" %></p>
 <p>
 <% @output_files.each do |data_file| %>
 	<%= link_to data_file.name , {:action => 'show', :id => data_file.id} %> | 

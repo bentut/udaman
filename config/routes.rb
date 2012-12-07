@@ -65,6 +65,7 @@ UheroDb::Application.routes.draw do
   resources :data_lists 
 
   
+  match 'send_prognoz_export' => 'prognoz_data_files#send_prognoz_export'
   match 'investigate' => 'dashboards#investigate'
   match 'investigate_visual' => 'dashboards#investigate_visual'
   match 'investigate_no_source' => 'dashboards#investigate_no_source'

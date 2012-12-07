@@ -49,4 +49,12 @@ class PackagerMailer < ActionMailer::Base
     @new_data_series = new_data_series
     mail(:to => ["btrevino@hawaii.edu","james29@hawaii.edu", "icintina@gmail.com", "bonham@hawaii.edu"], :subject => subject) #{})
   end
+  
+  def prognoz_notification(recipients, send_edition)
+    path = "/Volumes/UHEROwork/data/prognoz_export/ready_to_send_zip_files/"
+    filename = send_edition + ".zip"
+    attachments[filename] = File.read(path+filename) 
+    subject = "Prognoz Export"
+    mail(:to => recipients, :subject => subject)  
+  end
 end

@@ -59,5 +59,12 @@ class PrognozDataFilesController < ApplicationController
     @output_file.write_export
     redirect_to :action => 'index'
   end
+  
+  def send_prognoz_export
+    @recipients = ["btrevino@hawaii.edu","icintina@hawaii.edu", "james29@hawaii.edu"]
+    PrognozDataFile.send_prognoz_update(@recipients)
+    flash[:notice] = "Zipped Export was sent to [#{@recipients.join(", ")}]. Comparison files were updated in /data/prognoz_export."
+    redirect_to :action => 'index'
+  end
 
 end

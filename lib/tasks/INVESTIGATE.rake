@@ -23,40 +23,27 @@ task :gen_prognoz_diffs => :environment do
   t = Time.now
   diff_data = []
   
-  folder = "/Volumes/UHEROwork/data/prognoz_export/"
-  filenames = ["Agriculture.xls", "CAFRCounties.xls", "Kauai.xls", "metatable_isdi.xls", "SourceDoc.xls", "TableTemplate.xls"]
-  filenames.map! {|elem| folder+elem}
   
   PrognozDataFile.all.each do |pdf| 
     t1 = Time.now
     os = UpdateSpreadsheet.new pdf.filename    
     os.headers_with_frequency_code.each do |header|
-      #puts "checking #{header}"
       diff_data.push({:pdf_id => pdf.id, :id => 0, :name => header, :display_array => [-1]}) if header.ts.nil?
       next if header.ts.nil?
       ddiff = header.ts.data_diff(os.series(header.split(".")[0]), 3)
-      #next if ddiff[:diffs].count == 0
       diff_hash = ddiff[:display_array]
       diff_data.push({:pdf_id => pdf.id, :id => header.ts.id, :name => header, :display_array => diff_hash}) if diff_hash.count > 0
     end    
-    filenames.push pdf.filename.gsub("/prognoz_export/","/prognoz_exports/exports")
     pdf.write_export
     puts "#{"%.2f" %(Time.now - t1)} | #{pdf.filename}"
   end 
-  
-  Zip::ZipFile.open(folder + "ready_to_send_zip_files/" + Date.today.strftime("%yM%mD%d") + ".zip", Zip::ZipFile::CREATE) do |zipfile|
-    filenames.each {|fname| zipfile.add(fname.split("/")[-1], fname)}
-  end
-  
+    
   CSV.open("public/prognoz_diffs.csv", "wb") do |csv|        
     diff_data.each do |dd|
       csv << [dd[:pdf_id]]+[dd[:name]] + [dd[:id]] + dd[:display_array]
     end
   end
 
-  # PrognozDataFile.all.each do |pdf|
-  #   pdf.write_export
-  # end
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["gen_prognoz_diffs", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
