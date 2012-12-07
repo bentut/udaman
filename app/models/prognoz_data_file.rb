@@ -58,7 +58,7 @@ class PrognozDataFile < ActiveRecord::Base
     
   def output_path
     output_filename = filename.split("/")[-1]
-    "/Volumes/UHEROwork/data/prognoz_export/exports/" + output_filename
+    "/Volumes/UHEROwork/data/prognoz_export/" + output_filename
   end
   
   def write_export

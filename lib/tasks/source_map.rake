@@ -151,6 +151,10 @@ task :daily_history_load => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/SQ5NHistory.xls" #moved up from below
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/gsp_hist.xls" #moved up from below
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/bls_job_hist.xls" #moved up from below
+  
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/pc_sa_hist.xls"
+  #Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/hbr_histQ.xls"
+  
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["daily_history_load", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
   
   # ---------------------------------------------------------

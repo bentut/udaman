@@ -36,6 +36,28 @@ task :tsd_exports => :environment do
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tsd_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
+#redundant with prognoz diffs. Can delete, most likely
+task :prognoz_exports => :environment do
+  t = Time.now
+  
+  folder = "/Volumes/UHEROwork/data/prognoz_export/"
+  filenames = ["Agriculture.xls", "CAFRCounties.xls", "Kauai.xls", "metatable_isdi.xls", "SourceDoc.xls", "TableTemplate.xls"]
+  filenames.map! {|elem| folder+elem}
+  
+  PrognozDataFile.all.each do |pdf| 
+    t1 = Time.now
+    pdf.write_export
+    filenames.push pdf.filename
+    puts "#{"%.2f" %(Time.now - t1)} | #{pdf.filename}"
+  end 
+  
+  Zip::ZipFile.open(folder + "ready_to_send_zip_files/" + Date.today.strftime("%yM%mD%d") + ".zip", Zip::ZipFile::CREATE) do |zipfile|
+    filenames.each {|fname| zipfile.add(fname.split("/")[-1], fname)}
+  end
+  
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["prognoz_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
+  
+end
 # task :prognoz_exports => :environment do
 #   t = Time.now
 #   DataList.write "prognoz_month1", "/Volumes/UHEROwork/eis/data/12M09Atest/Data_month1.xls"

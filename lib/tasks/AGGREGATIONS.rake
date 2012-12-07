@@ -2677,8 +2677,6 @@ task :run_aggregations3 => :environment do
   "VEXPPTUS@HI.A".ts_eval=%Q|"VEXPPTUS@HI.Q".ts.aggregate(:year, :average)|
   "VEXPPTUSE@HI.A".ts_eval=%Q|"VEXPPTUSE@HI.Q".ts.aggregate(:year, :average)|
   "VEXPPTUSW@HI.A".ts_eval=%Q|"VEXPPTUSW@HI.Q".ts.aggregate(:year, :average)|
-  "VSO@HI.A".ts_eval=%Q|"VSO@HI.Q".ts.aggregate(:year, :average)|
-  "VSODM@HI.A".ts_eval=%Q|"VSODM@HI.Q".ts.aggregate(:year, :average)|
   "YXR@JP.A".ts_eval=%Q|"YXR@JP.Q".ts.aggregate(:year, :average)|
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["run_aggregations3", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }

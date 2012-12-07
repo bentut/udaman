@@ -1393,6 +1393,9 @@ task :visitor_identities=>:environment do
   # qtemp = 
   # (qtemp + (qtemp - "PPRM@HI.#{f}".ts).average).print
   
+  "VSODM@HI.A".ts_eval=%Q|"VSODMNS@HI.M".ts.aggregate(:year, :average)|
+  "VSO@HI.A".ts_eval=%Q|"VSONS@HI.M".ts.aggregate(:year, :average)|
+  
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["visitor_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

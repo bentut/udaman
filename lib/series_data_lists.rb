@@ -92,7 +92,7 @@ module SeriesDataLists
   end
   
   def Series.write_series(series_name, data, sheet, col, dates)
-    sheet[0,col] = series_name.dup
+    sheet[0,col] = series_name.dup.chop.chop
     return if data.nil?
     count = 1
     dates.each do |date|
@@ -108,7 +108,7 @@ module SeriesDataLists
     date_interval = (date2-date1).to_i
 
     return dates.map {|elem| elem[0..3].to_i} if (365..366) === date_interval #year
-    return dates.map {|elem| (elem[0..3]+((elem[5..6].to_i - 1 )/ 3).to_s).to_i} if (84..93) === date_interval #quarter
+    return dates.map {|elem| (elem[0..3] + "0" + ( (elem[5..6].to_i - 1 )/ 3 + 1).to_s).to_i} if (84..93) === date_interval #quarter
     return dates.map {|elem| (elem[0..3]+elem[5..6]).to_i} if (28..31) === date_interval #month
 
   end

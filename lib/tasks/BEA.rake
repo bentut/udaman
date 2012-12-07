@@ -1781,7 +1781,7 @@ task :bea_identities => :environment do
 
   #wrong
   # "YPC@HI.Q".ts_eval = %Q|"YPCBEA@HI.Q".ts|
-  "YPC_R@HI.Q".ts_eval = %Q|"YPC@HI.Q".ts / "CPI@HON.Q".ts|
+  "YPC_R@HI.Q".ts_eval = %Q|"YPC@HI.Q".ts / "CPI@HON.Q".ts * 100|
   
   #this is wrong
   "YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
@@ -1865,10 +1865,10 @@ task :bea_identities => :environment do
 
   # Not sure how this is supposed to work. These don't work
   "YXR_R@JP.M".ts_eval= %Q|"YXR@JP.M".ts * "CPI@US.M".ts / "CPI@JP.M".ts|
-  "YXR_R@JP.A".ts_eval= %Q|"YXR@JP.A".ts * "CPI@US.A".ts.rebase("2000-01-01") / "CPI@JP.A".ts|
+  "YXR_R@JP.A".ts_eval= %Q|"YXR@JP.A".ts * "CPI@US.A".ts.rebase("2000-01-01") / "CPI@JP.A".ts.rebase("2000-01-01")|
   #this one doesn't quite work
   #need to distribute annual average to quarters... might have this somewhere
-  "YXR_R@JP.Q".ts_eval= %Q|"YXR@JP.Q".ts * "CPI@US.Q".ts.rebase("2000-01-01") / "CPI@JP.Q".ts|
+  "YXR_R@JP.Q".ts_eval= %Q|"YXR@JP.Q".ts * "CPI@US.Q".ts.rebase("2000-01-01") / "CPI@JP.Q".ts.rebase("2000-01-01")|
   
   
   #loads in & series from history instead
