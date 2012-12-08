@@ -26,15 +26,16 @@ class Date
   end
   
   def tsd_start(f)
-    return "#{self.year}0100"             if f == "year"
-    return semi_i.to_s+"00"               if f == "semi"
-    return quarter_i.to_s+"00"            if f == "quarter"
-    return month_i.to_s+"00"              if f == "month"
-    return Date.parse(self).gsub("-","")  if f == "week"
-    return Date.parse(self).gsub("-","")  if f == "day"
+    return "#{self.year}0100"                         if f == "year"
+    return semi_i.to_s+"00"                           if f == "semi"
+    return quarter_i.to_s+"00"                        if f == "quarter"
+    return month_i.to_s+"00"                          if f == "month"
+    return (self - self.wday).to_s.gsub("-","")       if f == "week"
+    return self.to_s.gsub("-","")                     if f == "day"
   end
   
   def tsd_end(f)
+    return (self - self.wday + 6).to_s.gsub("-","")   if f == "week"
     tsd_start(f)
   end
   
