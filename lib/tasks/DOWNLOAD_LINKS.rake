@@ -1,7 +1,13 @@
+#BEA Links not yet in below because they are still working in the old style
+# Table name - Table Number
+# 82 - 2.8.5
+# 75 - 2.5.6
+# 253Y - 6.20B
+# 253Q - 6.20B
+
 task :update_bea_links => :environment do
   t = Time.now
   bea_table_links = {
-    #{}"SA05N@bea.gov" => 'http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=2&7023=0&7024=NAICS&7025=0&7026=15000&7027=-1&7001=42&7029=28&7090=70&7033=-1'
     "CA_YP@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7083=Levels&7031=0&7040=-1&7001=336&7022=36&7023=0&7024=Non-Industry&7025=0&7026=06000&7028=10&7029=36&7090=70&7033=-1&7027=-1",
     "SQ5N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=0&7023=0&7024=NAICS&7025=0&7026=00000&7027=-1&7001=30&7029=34&7090=70&7033=-1&form=7&7090=70&7024=NAICS&7026=15000&7028=-1&7083=Levels&7027=-1&7033=-1&7040=-1&step=30&7090=70&7024=NAICS&7026=15000&7028=-1&7083=Levels&7027=-1&7033=-1&7040=-1",
     "SA06N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=50&7023=0&7024=NAICS&7025=0&7026=15000&7027=-1&7001=450&7029=51&7090=70&7033=-1",
@@ -11,6 +17,25 @@ task :update_bea_links => :environment do
     "CA06N@bea.gov" => "http://www.bea.gov/iTable/iTable.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=15000&7022=54&7023=7&7024=NAICS&7025=4&7026=XX&7027=-1&7001=754&7029=55&7090=70&7033=-1",
     "SA04@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=Levels&7031=0&7022=48&7023=0&7024=Non-Industry&7025=0&7026=15000&7027=-1&7001=448&7029=48&7090=70&7033=-1",
     "CA04@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7090=70&7031=15000&7083=Levels&7022=49&7023=7&7024=Non-Industry&7025=4&7026=15001,15003,15007,15901&7027=-1&7001=749&7029=49&7003=749&7033=-1",
+    "83M@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&911=1&903=83&904=1995&905=2012",
+    "76M@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&911=1&903=76&904=1929&905=2012",
+    "6A@bea.gov" =>  "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=6&904=1929&905=2012&906=A",
+    "6Q@bea.gov" =>  "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=6&904=1929&905=2012&906=Q",
+    "66A@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&910=X&911=0&903=66&904=1995&905=2012&906=A",
+    "66Q@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&910=X&911=0&903=66&904=1995&905=2012&906=Q",
+    "58A@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=58&904=1929&905=2012&906=A",
+    "58Q@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=58&904=1929&905=2012&906=Q",
+    "44Q@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=44&904=1929&905=2012&906=Q",
+    "44A@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=44&904=1929&905=2012&906=A",
+    "43Q@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&910=X&911=0&903=43&904=1929&905=2012&906=Q",
+    "43A@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&910=X&911=0&903=43&904=1929&905=2012&906=A",
+    "264A@bea.gov" =>"http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&910=X&911=0&903=264&904=1929&905=2012&906=A",        
+    "264Q@bea.gov" =>"http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&910=X&911=0&903=264&904=1929&905=2012&906=Q" ,    
+    "5Q@bea.gov" =>  "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=5&904=1929&905=2012&906=Q",
+    "5A@bea.gov" =>  "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=5&904=1929&905=2012&906=A",
+    "13Q@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=13&904=1929&905=2012&906=Q",
+    "13A@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=9&step=3&isuri=1&903=13&904=1929&905=2012&906=A",
+                      
     }
   require 'watir-webdriver'
   b = Watir::Browser.new

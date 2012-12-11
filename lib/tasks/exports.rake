@@ -12,8 +12,8 @@ task :aremos_exports => :environment do
   DataList.write "bls_job_m", "/Volumes/UHEROwork/data/udaman/bls_job_m_UDA.xls" #25.5
   
   #pseudo spline
-  DataList.write "famsize_q", "/Volumes/UHEROwork/data/udaman/famsize_q.xls" # 1.05
-  DataList.write "famsize_a", "/Volumes/UHEROwork/data/udaman/famsize_a.xls" #0.1
+  DataList.write "famsize_q", "/Volumes/UHEROwork/data/udaman/famsize_q.xls" #3.15
+  DataList.write "famsize_a", "/Volumes/UHEROwork/data/udaman/famsize_a.xls" #0.63
 
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["aremos_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }

@@ -149,6 +149,17 @@ task :mark_pseudo_history => :environment do
   
 end
 
+task :clean_obvious_missing_data_issues do
+  # aremos_diff number indicates missing values. 10000... is how AREMOS encodes
+  # data_source == 1 is a weak criteria. Just noticed it was less likely to bring in series we didn't want to mess with... Should probably be something else
+  Series.where('aremos_diff > 10000000000').each do |s| 
+    if s.data_sources.count == 1
+      s.data_sources[0].clear_and_reload_source
+      puts s.name
+    end
+  end
+end
+
 task :clean_data_sources => :environment do
 
   active_ds = DataSource.where("last_run > FROM_DAYS(TO_DAYS(NOW()))").order(:last_run); 0

@@ -14,6 +14,11 @@
 							:action => 'source', 
 							:id => ds.id} unless ds.eval.nil? 
 					%>&nbsp;|&nbsp;<%= 
+						link_to "clear", {   	
+							:controller=> "data_sources", 
+							:action => 'clear_and_reload', 
+							:id => ds.id} unless ds.eval.nil? 
+					%>&nbsp;|&nbsp;<%= 
 						link_to "delete", { 	
 							:controller=> "data_sources", 
 							:action => 'delete', 

@@ -1790,7 +1790,7 @@ task :bea_identities => :environment do
   "SH_YPC@HON.A".ts_eval = %Q|"YPC@HON.A".ts / "YPC@HI.A".ts|
   #{}"SH_YPC@HON.Q".ts_eval = %Q|"YPC@HON.Q".ts / "YPC@HI.Q".ts|
   
-  ["", "_R"].each do |type|
+  [""].each do |type|
     ["L", "C"].each do |pre|
       ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
         ("Y#{pre}AG#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}AGFA#{type}@#{cnty}.A".ts + "Y#{pre}AGFF#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}AG#{type}@#{cnty}.A"
@@ -1804,6 +1804,23 @@ task :bea_identities => :environment do
         ("Y#{pre}_SV#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}HC#{type}@#{cnty}.A".ts + "Y#{pre}AF#{type}@#{cnty}.A".ts + "Y#{pre}_ELSE#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_SV#{type}@#{cnty}.A"
       end
     end
+
+    #not sure we need any of these
+    # ["_R"].each do |type|
+    #   ["L", "C"].each do |pre|
+    #     ["HI", "HON", "HAW", "MAU", "KAU"].each do |cnty|
+    #       ("Y#{pre}AG#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}AGFA#{type}@#{cnty}.A".ts + "Y#{pre}AGFF#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}AG#{type}@#{cnty}.A"
+    #       ("Y#{pre}_CTMI#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}CT#{type}@#{cnty}.A".ts + "Y#{pre}MI#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_CTMI#{type}@#{cnty}.A"
+    #       ("Y#{pre}_TU#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}TW#{type}@#{cnty}.A".ts + "Y#{pre}UT#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_TU#{type}@#{cnty}.A"
+    #       ("Y#{pre}_TRADE#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}WT#{type}@#{cnty}.A".ts + "Y#{pre}RT#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_TRADE#{type}@#{cnty}.A"
+    #       ("Y#{pre}_TTU#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}TW#{type}@#{cnty}.A".ts + "Y#{pre}UT#{type}@#{cnty}.A".ts + "Y#{pre}WT#{type}@#{cnty}.A".ts + "Y#{pre}RT#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_TTU#{type}@#{cnty}.A"
+    #       ("Y#{pre}_FIR#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}FI#{type}@#{cnty}.A".ts + "Y#{pre}RE#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_FIR#{type}@#{cnty}.A"
+    #       ("Y#{pre}_OT#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}MA#{type}@#{cnty}.A".ts + "Y#{pre}AD#{type}@#{cnty}.A".ts + "Y#{pre}OS#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_OT#{type}@#{cnty}.A"
+    #       ("Y#{pre}_ELSE#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}IF#{type}@#{cnty}.A".ts + "Y#{pre}AE#{type}@#{cnty}.A".ts + "Y#{pre}PS#{type}@#{cnty}.A".ts + "Y#{pre}MA#{type}@#{cnty}.A".ts + "Y#{pre}AD#{type}@#{cnty}.A".ts + "Y#{pre}ED#{type}@#{cnty}.A".ts + "Y#{pre}OS#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_ELSE#{type}@#{cnty}.A"
+    #       ("Y#{pre}_SV#{type}@#{cnty}.A".ts_eval= %Q|"Y#{pre}HC#{type}@#{cnty}.A".ts + "Y#{pre}AF#{type}@#{cnty}.A".ts + "Y#{pre}_ELSE#{type}@#{cnty}.A".ts|) rescue puts "ERROR Y#{pre}_SV#{type}@#{cnty}.A"
+    #     end
+    #   end
+
   
     ["S", "L"].each do |pre|
       ["HI"].each do |cnty|

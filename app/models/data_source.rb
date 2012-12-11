@@ -150,6 +150,14 @@ class DataSource < ActiveRecord::Base
       self.update_attributes(:description => s.name, :last_run => Time.now, :runtime => (Time.now - t))
     end
 
+    def clear_and_reload_source
+      t = Time.now
+      s = Kernel::eval self.eval
+      delete_data_points
+      self.series.update_data(s.data, self)
+      self.update_attributes(:description => s.name, :last_run => Time.now, :runtime => (Time.now - t))
+    end
+    
     # def mark_history
     #   #puts "SOURCE HISTORY-----------------------"
     #   dates = data.keys
@@ -202,20 +210,24 @@ class DataSource < ActiveRecord::Base
       return false
     end
     
-    def delete_no_series
+    # def delete_no_series
+    #   self.data_points.each do |dp|
+    #     dp.delete
+    #   end    
+    #   super
+    # end
+    
+    def delete_data_points
       self.data_points.each do |dp|
         dp.delete
       end    
-      super
     end
     
     def delete
-      series_id = self.series_id
-      self.data_points.each do |dp|
-        dp.delete
-      end    
+      #series_id = self.series_id
+      delete_data_points
       super
-      s = Series.find series_id
+      #s = Series.find series_id
   #    puts "Series name: #{s.name}, Sources:#{s.data_sources_by_last_run.count}"
   
     #put this in a separate function

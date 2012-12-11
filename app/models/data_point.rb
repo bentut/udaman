@@ -131,5 +131,12 @@ class DataPoint < ActiveRecord::Base
     end
   end
 
+  #have not tested as is. This is created from a one time job. Need to test again
+  def DataPoint.delete_all_created_on(date_string)
+    #dps_to_delete = DataPoint.where("TO_DAYS(created_at) = TO_DAYS('#{date_string}')")
+    #dps_to_delete.each { |dp| puts "#{dp.series_id} : #{dp.date_string} : #{dp.value}"; dp.delete }
+    DataPoint.where("TO_DAYS(created_at) = TO_DAYS('#{date_string}')").each { |dp| dp.delete }
+    
+  end
   
 end

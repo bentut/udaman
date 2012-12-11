@@ -7,6 +7,12 @@ class DataSourcesController < ApplicationController
     redirect_to :controller=> "series", :action => 'show', :id => source.series_id
   end
   
+  def clear_and_reload
+    source = DataSource.find(params[:id])
+    source.clear_and_reload_source
+    redirect_to :controller=> "series", :action => 'show', :id => source.series_id
+  end
+  
   def delete
     source = DataSource.find(params[:id])
     source.delete
