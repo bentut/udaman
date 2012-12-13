@@ -1784,7 +1784,7 @@ task :bea_identities => :environment do
   "YPC_R@HI.Q".ts_eval = %Q|"YPC@HI.Q".ts / "CPI@HON.Q".ts * 100|
   
   #this is wrong
-  "YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
+  #"YPC@NBI.A".ts_eval = %Q|"YPC@HI.A".ts - "YPC@HON.A".ts|
   
   #A isn't really right either right. Q is wrong. Now A works and other thing is wrong
   "SH_YPC@HON.A".ts_eval = %Q|"YPC@HON.A".ts / "YPC@HI.A".ts|
@@ -1850,12 +1850,19 @@ task :bea_identities => :environment do
     end
   end
 
-  #YPC calculated above needs to get overwritte. Should maybe remove
-  "YPC@NBI.A".ts_eval= %Q|"Y@NBI.A".ts / "NR@NBI.A".ts|
   
   #YPC base series needs corrections
-  ["YPC", "YDIV", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPCBEA", "YPC", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSF", "YWAGE", "Y"].each do |pre|
+  ["YDIV", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPCBEA", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSF", "YWAGE", "Y"].each do |pre|
     ("#{pre}@NBI.A".ts_eval= %Q|"#{pre}@HI.A".ts - "#{pre}@HON.A".ts|) rescue puts "NBI ERROR FORM #{pre}"
+    ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
+      ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty}"
+    end
+  end
+
+  #YPC calculated above needs to get overwritte. Should maybe remove
+  "YPC@NBI.A".ts_eval= %Q|"Y@NBI.A".ts / "NR@NBI.A".ts|
+
+  ["YPC"].each do |pre|
     ["HI", "HON", "MAU", "HAW", "KAU", "NBI"].each do |cnty|
       ("#{pre}_R@#{cnty}.A".ts_eval= %Q|"#{pre}@#{cnty}.A".ts / "CPI@HON.A".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@#{cnty}"
     end
@@ -1940,7 +1947,8 @@ task :bea_identities => :environment do
    
    
    "FAMSIZE_TEMP@HI.A".ts_eval= %Q|"YMED@HI.A".ts / "YPC@HI.A".ts|
-   "FAMSIZE_TEMP@HI.A".ts_eval= %Q|("FAMSIZE@HON.A".ts * ("FAMSIZE_TEMP@HI.A".ts / "FAMSIZE@HON.A".ts).average).trim("1990-01-01","1996-01-01")|
+   "FAMSIZE_TEMP@HI.A".ts_eval= %Q|("FAMSIZE@HON.A".ts * (("YMED@HI.A".ts / "YPC@HI.A".ts) / "FAMSIZE@HON.A".ts).average).trim("1990-01-01","1996-01-01")|
+   
    "FAMSIZE@HI.Q".ts_eval = %Q|"FAMSIZE_TEMP@HI.A".ts.pseudo_centered_spline_interpolation(:quarter)|
    "FAMSIZE@HI.Q".ts_eval = %Q|"FAMSIZE@HI.Q".ts.extend_last_date_to_match("YPC@HI.Q")|
    

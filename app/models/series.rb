@@ -682,7 +682,7 @@ class Series < ActiveRecord::Base
   
   def date_range
     
-    return self.data.keys.sort if frequency == "day" or frequency == "week"
+    #return self.data.keys.sort 
       
     data_dates = self.data.keys.sort
     start_date = Date.parse data_dates[0]
@@ -691,13 +691,24 @@ class Series < ActiveRecord::Base
     
     dates = []
     offset = 0
-    month_multiplier = month_mult
     
-    begin
-      curr_date = start_date>>offset*month_multiplier
-      dates.push(curr_date.to_s)
-      offset += 1
-    end while curr_date < end_date
+    if frequency == "day" or frequency == "week"
+      day_multiplier = frequency == "day" ? 1 : 7
+      begin
+        curr_date = start_date + offset * day_multiplier
+        dates.push(curr_date.to_s)
+        offset += 1
+      end while curr_date < end_date
+    else
+      month_multiplier = month_mult
+      begin
+        curr_date = start_date>>offset*month_multiplier
+        dates.push(curr_date.to_s)
+        offset += 1
+      end while curr_date < end_date
+    end
+    
+    
     dates
   end
 
@@ -721,7 +732,7 @@ class Series < ActiveRecord::Base
     sci_data = {}
     
     dps.each do |date_string, val|
-      sci_data[date_string] = ("%.6E" % val).insert(-3,"00")
+      sci_data[date_string] = ("%.6E" % units_at(date_string)).insert(-3,"00")
     end
     
     

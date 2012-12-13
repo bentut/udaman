@@ -151,7 +151,11 @@ task :const_identities => :environment do
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/hud_upd.xls"
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/manual/HAWpermits.xls"
 
-  ["KPPRVNS", "KPPRVRSDNS"].each do |s_name|
+  # ["KPPRVNS", "KPPRVRSDNS"].each do |s_name|
+  #   "#{s_name}@HI.M".ts_eval= %Q|("#{s_name}@HAW.M".ts + "#{s_name}@MAU.M".ts + "#{s_name}@KAU.M".ts + "#{s_name}@HON.M".ts).trim("2012-04-01")|
+  # end
+
+  ["KPPRVRSDNS"].each do |s_name|
     "#{s_name}@HI.M".ts_eval= %Q|("#{s_name}@HAW.M".ts + "#{s_name}@MAU.M".ts + "#{s_name}@KAU.M".ts + "#{s_name}@HON.M".ts).trim("2012-04-01")|
   end
   
