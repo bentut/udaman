@@ -15,6 +15,9 @@ task :aremos_exports => :environment do
   DataList.write "famsize_q", "/Volumes/UHEROwork/data/udaman/famsize_q.xls" #3.15
   DataList.write "famsize_a", "/Volumes/UHEROwork/data/udaman/famsize_a.xls" #0.63
 
+  #MISC
+  DataList.write "const", "/Volumes/UHEROwork/data/udaman/const.xls" #2.23
+
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["aremos_exports", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

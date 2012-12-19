@@ -102,8 +102,8 @@ task :const_upd_m => :environment do
 	poil = {
   	"POILEIASTNS@US.M" => %Q|Series.load_from_download("STEO@eia.gov", { :file_type => "xls", :start_date => "2008-01-01", :sheet => "2tab", :row => "6", :col =>"increment:3:1", :frequency => "M"})/1|,
     "POILEIAB@US.A" => %Q|Series.load_from_download("LTEO_B@eia.gov", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "sheet_num:1", :row => "66", :col =>"increment:2:1", :frequency => "A"})/1|,
-    "POILEIAH@US.A" => %Q|Series.load_from_download("LTEO_H@eia.gov", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "EIA_LTEO_H", :row => "56", :col =>"increment:2:1", :frequency => "A"})/1|,
-    "POILEIAL@US.A" => %Q|Series.load_from_download("LTEO_L@eia.gov", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "EIA_LTEO_L", :row => "56", :col =>"increment:2:1", :frequency => "A"})/1|,
+#    "POILEIAH@US.A" => %Q|Series.load_from_download("LTEO_H@eia.gov", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "EIA_LTEO_H", :row => "56", :col =>"increment:2:1", :frequency => "A"})/1|,
+#    "POILEIAL@US.A" => %Q|Series.load_from_download("LTEO_L@eia.gov", { :file_type => "xls", :start_date => "2009-01-01", :sheet => "EIA_LTEO_L", :row => "56", :col =>"increment:2:1", :frequency => "A"})/1|,
   }
 
 #move these and remove other	

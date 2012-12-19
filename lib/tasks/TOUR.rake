@@ -142,7 +142,7 @@ tour_vexp = {
               %Q|"VX@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls" |], 
 
 "VXBU@HI.A"=>%Q|"VXBU@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|,
-"VXPR@HI.A"=>%Q|"VXPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|, 
+#{}"VXPR@HI.A"=>%Q|"VXPR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/tour/update/vexp_upd.xls"|, 
 #add in VX things here
 }	
 	

@@ -94,7 +94,13 @@ module SeriesArithmetic
   
   def rebase(date_string)
     new_series_data = {}
-    new_base = self.at(date_string).to_f
+    
+    if frequency != "year" or frequency != :year
+      annual_series = (self.name.split(".")[0]+".A").ts
+      new_base = annual_series.at(date_string).to_f
+    else
+      new_base = self.at(date_string).to_f
+    end
     data.sort.each do |date_string, value|
       new_series_data[date_string] = value / new_base * 100
     end
