@@ -4690,7 +4690,7 @@ task :run_aggregations2 => :environment do
   "TRCVNS@HAW.Q".ts_eval=%Q|"TRCVNS@HAW.M".ts.aggregate(:quarter, :average)|
   "TRCVNS@KAU.Q".ts_eval=%Q|"TRCVNS@KAU.M".ts.aggregate(:quarter, :average)|
   "TRCVNS@MAU.Q".ts_eval=%Q|"TRCVNS@MAU.M".ts.aggregate(:quarter, :average)|
-  "TRIHNS@HAW.Q".ts_eval=%Q|"TRIHNS@HAW.M".ts.aggregate(:quarter, :average)|
+  
   "TRISNS@HAW.Q".ts_eval=%Q|"TRISNS@HAW.M".ts.aggregate(:quarter, :average)|
   "TRISNS@KAU.Q".ts_eval=%Q|"TRISNS@KAU.M".ts.aggregate(:quarter, :average)|
   "TRISNS@MAU.Q".ts_eval=%Q|"TRISNS@MAU.M".ts.aggregate(:quarter, :average)|

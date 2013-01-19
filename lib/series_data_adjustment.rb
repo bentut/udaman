@@ -36,6 +36,7 @@ module SeriesDataAdjustment
   
   def get_last_incomplete_year
     last_date = self.data.keys.sort[-1]
+    # BT 2013-01-09 Taking out temporarily. Will see if anything else breaks
     if last_date[5..6] == "12"
       new_series_data = {} 
       return new_transformation("No Data since no incomplete year", new_series_data)
@@ -62,5 +63,11 @@ module SeriesDataAdjustment
     compressed_date_range_data = {}
     compressed_date_array.each { |date| compressed_date_range_data[date] = data[date] }
     compressed_date_range_data
+  end
+  
+  def get_data_for_month(month_num)
+    return {} if month_num > 12 or month_num < 1
+    month_prefix = ["01","02","03","04","05","06","07","08","09","10","11","12"][month_num-1]
+    data.reject {|date_string, value| date_string[5..6] != month_prefix}
   end
 end

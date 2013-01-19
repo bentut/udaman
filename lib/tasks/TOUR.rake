@@ -251,7 +251,7 @@ task :tour_seats_upd=>:environment do
 	
 	p = Packager.new
 	p.add_definitions tour_seats
-	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/tour_seats_upd_NEW.xls"
+	p.write_definitions_to "/Volumes/UHEROwork/data/tour/update/seats_NEW.xls"
 	CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tour_seats_upd", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end
 
@@ -662,11 +662,11 @@ task :tour_upd=>:environment do
 "VSOTSCHNS@MAU.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Other:1:90", :col=>8, :frequency=>"M" })/1000|,
 "VSOTSCHNS@HAW.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Other:1:90", :col=>11, :frequency=>"M" })/1000|,
 "VSOTSCHNS@KAU.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Other:1:90", :col=>17, :frequency=>"M" })/1000|,
-"VSITCHTNS@HI.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:50", :col=>2, :frequency=>"M" })/1000|,
-"VSITCHTNS@HON.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:50", :col=>5, :frequency=>"M" })/1000|,
-"VSITCHTNS@MAU.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:50", :col=>8, :frequency=>"M" })/1000|,
-"VSITCHTNS@HAW.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:50", :col=>11, :frequency=>"M" })/1000|,
-"VSITCHTNS@KAU.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:50", :col=>17, :frequency=>"M" })/1000|,
+"VSITCHTNS@HI.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:60", :col=>2, :frequency=>"M" })/1000|,
+"VSITCHTNS@HON.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:60", :col=>5, :frequency=>"M" })/1000|,
+"VSITCHTNS@MAU.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:60", :col=>8, :frequency=>"M" })/1000|,
+"VSITCHTNS@HAW.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:60", :col=>11, :frequency=>"M" })/1000|,
+"VSITCHTNS@KAU.M"=>%Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-08-01", :sheet=>"sheet_num:10", :row=>"header_range:col:1:Charter Seats:40:60", :col=>17, :frequency=>"M" })/1000|,
 "VDAYDMNS@HON.M"=>%Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>4, :col=>"repeat:2:13", :frequency=>"M" })/1000|, 
 "VDAYDMNS@KAU.M"=>%Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>5, :col=>"repeat:2:13", :frequency=>"M" })/1000|, 
 "VDAYDMNS@MAUI.M"=>%Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>6, :col=>"repeat:2:13", :frequency=>"M" })/1000|, 
