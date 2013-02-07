@@ -473,5 +473,12 @@ task :tax_identities => :environment do
     "TRMS@#{cnty}.Q".ts_eval= %Q|"TRMS@#{cnty}.A".ts.trms_interpolate_to_quarterly|
   end
   
+  "TGBCT_R@HAW.A".ts_eval= %Q|"TGBCT@HAW.A".ts / "PICTSGF@HON.A".ts * 100|
+  "TGBCT_R@HI.A".ts_eval= %Q|"TGBCT@HI.A".ts / "PICTSGF@HON.A".ts * 100|
+  "TGBCT_R@HON.A".ts_eval= %Q|"TGBCT@HON.A".ts / "PICTSGF@HON.A".ts * 100|
+  "TGBCT_R@KAU.A".ts_eval= %Q|"TGBCT@KAU.A".ts / "PICTSGF@HON.A".ts * 100|
+  "TGBCT_R@MAU.A".ts_eval= %Q|"TGBCT@MAU.A".ts / "PICTSGF@HON.A".ts * 100|
+  
+  
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["tax_identities", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
 end

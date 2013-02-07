@@ -200,11 +200,15 @@ task :clean_data_sources => :environment do
   # inactive_not_current.count #delete. Store all deleted ones - 11840
   # inactive_but_current.count #make current / flag ones that need to be replaced - 3255
 
+  # inactive_but_current.each do |ds|
+  #     ds.print_eval_statement
+  # end
+
   puts "COPY THESE INTO AN ARCHIVE"
   inactive_not_current.each do |ds|
     begin
       ds.print_eval_statement
-#      ds.delete
+      #ds.delete
     rescue
       puts "ERROR!"
     end

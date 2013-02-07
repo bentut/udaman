@@ -1000,6 +1000,7 @@ task :bls_identities => :environment do
   	"#{pre}@NBI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts - "#{pre}@HON.Q".ts|
   end
   
+  
   Series.load_all_sa_series_from "/Volumes/UHEROwork/data/bls/seasadj/bls_wagesa.xls"
 
   "E@HI.M".ts_eval= %Q|"E_NF@HI.M".ts + "EAG@HI.M".ts|
@@ -1010,6 +1011,9 @@ task :bls_identities => :environment do
   "EMPLNS@CA.Q".ts_eval= %Q|"EMPLNS@CA.M".ts.aggregate(:quarter, :average)|
   "EMPL@CA.Q".ts_eval= %Q|"EMPL@CA.M".ts.aggregate(:quarter, :average)|
   "EMPLSA@HI.Q".ts_eval= %Q|"EMPLSA@HI.M".ts.aggregate(:quarter, :average)|
+
+  "EAF@NBI.M".ts_eval= %Q|  ("EAFAC@HI.M".ts + "EAFFD@HI.M".ts - "EAF@HON.M".ts).trim("1970-01-01","1989-12-01")|
+  "E_FIR@NBI.M".ts_eval= %Q|("EFI@HI.M".ts + "ERE@HI.M".ts - "E_FIR@HON.M".ts).trim("1970-01-01","1989-12-01")|
   
   ["HI", "HON"].each do |cnty|
     ["WHAF","WHAFAC","WHAFFD","WHCT","WHIF","WHMN","WHRT","WHWT","WH_FIN","WH_TTU","WWAF","WWAFAC","WWAFACNS","WWAFFD","WWCT","WWIF","WWMN","WWRT","WWWT","WW_FIN","WW_TTU"].each do |pre|

@@ -436,6 +436,9 @@ task :const_identities => :environment do
    	"PMKRCON@#{cnty}.A".ts_eval= %Q|"PMKRCON@#{cnty}.Q".ts.aggregate(:year, :average)|	
    end
 
+   "PMKBCONNS@HON.Q".ts_eval= %Q|"PMKBCON@HON.Q".ts.trim("1980-01-01","1986-12-01") |
+   "PMKBSGFNS@HON.Q".ts_eval= %Q| "PMKBSGF@HON.Q".ts.trim("1980-01-01","1986-12-01") |
+
 
    "PMKBCONNS@HON.M".ts_eval= %Q|"PMKBCON@HON.M".ts|
    "PMKBSGFNS@HON.M".ts_eval= %Q|"PMKBSGF@HON.M".ts|
@@ -543,6 +546,9 @@ task :const_identities => :environment do
       end
    end
    
+   "POILEIALTB@US.A".ts_eval= %Q|"POILEIALTB@US.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/Manual/EIA_LT.xls"|
+   "POILEIALTH@US.A".ts_eval= %Q|"POILEIALTH@US.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/Manual/EIA_LT.xls"|
+   "POILEIALTL@US.A".ts_eval= %Q|"POILEIALTL@US.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/Manual/EIA_LT.xls"|
    
    
    

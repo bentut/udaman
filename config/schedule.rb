@@ -28,13 +28,6 @@ job_type :rake,    "cd :path && rake :task"
 #job_type :rake,    "cd :path && RAILS_ENV=:environment bundle exec rake :task :output"
 
 
-# every 1.day, :at => "#{hour}:20 am" do
-#   rake "bls_job_upd_m"
-# end
-# 
-# every 1.day, :at => "#{hour}:35 am" do 
-#   rake "bls_identities"
-# end
 every 1.day, :at => "10:00 pm" do
   rake "reload_aremos"
 end
@@ -90,7 +83,7 @@ every 1.day, :at => "#{bls_hour.to_i+1}:30 am" do
   rake "bea_identities"
 end
 
-every 1.day, :at => "#{bls_hour.to_i+1}:45 am" do 
+every 1.day, :at => "#{bls_hour.to_i+2}:30 am" do 
   rake "write_ur_dash"
 end
 
@@ -113,7 +106,6 @@ every 1.day, :at => "#{bls_hour.to_i+2}:00 am" do
   rake "expenditures_and_nbi"
   rake "visitor_identities"
   rake "const_identities"
-  #rake "bea_identities"
 end
 
 every 1.day, :at => "#{hour.to_i+1}:30 am" do
@@ -152,6 +144,95 @@ every :saturday, :at => '9am' do
   rake "mark_pseudo_history"
 end
 
-#every 1.day, :at => "#{hour.to_i+4}:59 am" do
-#  rake "prognoz_exports"
-#end
+#alternatives in case of emergency
+
+# every 1.day, :at => "12:00 pm" do
+#   rake "update_bea_links"
+# end
+# 
+# every 1.day, :at => "12:00 pm" do
+#   rake "jp_upd_a"
+#   rake "jp_upd_q"
+#   rake "jp_upd_m"
+# end
+# 
+# every 1.day, :at => "12:10 pm" do
+#   rake "tour_PC_upd"
+#   rake "tour_seats_upd"
+#   rake "tour_upd"
+#   rake "tour_ocup_upd"
+# end
+# 
+# every 1.day, :at => "12:30 pm" do
+#   rake "uic_upd"
+#   rake "const_upd_q"
+#   rake "const_upd_m"
+# end
+# 
+# every 1.day, :at => "12:35 pm" do
+#   rake "tax_upd"
+# end
+# 
+# every 1.day, :at => "12:40 pm" do
+#   rake "tour_rev_upd"
+# end
+# 
+# every 1.day, :at => "1:00 pm" do
+#   rake "tax_identities"
+# end
+# 
+# 
+# every 1.day, :at => "1:15 pm" do
+#   rake "gsp_upd" 
+#   rake "inc_upd_q"
+#   rake "inc_upd_a"
+#   rake "com_upd"
+# end
+# 
+# every 1.day, :at => "1:40 pm" do
+#   rake "us_upd_a"
+#   rake "us_upd_q"
+#   rake "us_upd_m"
+# end
+# 
+# every 1.day, :at => "2:00 pm" do 
+#   rake "bls_cpi_upd_m"
+#   rake "bls_job_upd_m"
+#   rake "bls_cpi_upd_s"
+#   rake "hiwi_upd"
+# end
+# 
+# every 1.day, :at => "2:30 pm" do 
+#   rake "bls_identities"
+#   rake "bea_identities"
+# end
+# 
+# every 1.day, :at => "3:00 pm" do
+#   rake "expenditures_and_nbi"
+#   rake "visitor_identities"
+#   rake "const_identities"
+# end
+# 
+# 
+# every 1.day, :at => "3:20 pm" do
+#   rake "run_aggregations"
+#   rake "run_aggregations2"
+#   rake "run_aggregations3"
+#   rake "run_aggregations4"
+#   rake "run_aggregations5"
+# end
+# 
+# every 1.day, :at => "3:40 pm" do
+#   rake "bls_nbis"
+# end
+# 
+# every 1.day, :at => "3:50 pm" do
+#   rake "gen_investigate_csv"
+# end
+
+
+
+
+
+
+

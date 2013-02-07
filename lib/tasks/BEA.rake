@@ -1751,7 +1751,6 @@ task :bea_identities => :environment do
   
   "GDP_IIV_R@US.A".ts_eval= %Q|"GDP_IIV_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "YCE_R@US.A".ts_eval= %Q|"YCE_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
-  "YP_R@CA.A".ts_eval= %Q|"YP_R@CA.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "GDP_IFX_R@US.A".ts_eval= %Q|"GDP_IFX_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "GDP_INR_R@US.A".ts_eval= %Q|"GDP_INR_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "GDP_NX_R@US.A".ts_eval= %Q|"GDP_NX_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
@@ -1767,11 +1766,15 @@ task :bea_identities => :environment do
   "GDP_IRS_R@US.A".ts_eval= %Q|"GDP_IRS_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "GDP_CS_R@US.A".ts_eval= %Q|"GDP_CS_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "GDP_CN_R@US.Q".ts_eval= %Q|"GDP_CN_R@US.Q".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_q.xls").trim("1900-01-01","1994-12-01")|
-  "CPI@CA.A".ts_eval= %Q|"CPI@CA.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "INF@US.M".ts_eval= %Q| "CPI@US.M".ts.annualized_percentage_change |
   "GDP_CD_R@US.A".ts_eval= %Q|"GDP_CD_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
   "YCE_R@US.M".ts_eval= %Q|"YCE_R@US.M".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_m.xls").trim("1900-01-01","1994-12-01")|
   "GDP_CN_R@US.A".ts_eval= %Q|"GDP_CN_R@US.A".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls").trim("1900-01-01","1994-12-01")|
+
+  "YP_R@CA.A".ts_eval= %Q|"YP_R@CA.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls"|
+  "CPI@CA.A".ts_eval= %Q|"CPI@CA.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/us_upd_a.xls"|
+
+  "CAPUMN@US.A".ts_eval= %Q|"CAPUMN@US.Q".ts.aggregate(:year, :average)|
 
   ["HI", "HON", "MAU", "KAU", "HAW"].each do |cnty|
     "YPC@#{cnty}.A".ts_eval = %Q|"Y@#{cnty}.A".ts / "NR@#{cnty}.A".ts |
@@ -1883,6 +1886,12 @@ task :bea_identities => :environment do
   ["YDIV", "YLAD", "YLAE", "YLAF", "YLAGFA", "YLAGFF", "YLAG", "YLCT", "YLED", "YLFI", "YLGVFD", "YLGVML", "YLGV", "YLHC", "YLIF", "YLMA", "YLMI", "YLMNDR", "YLMNND", "YLMN", "YLOS", "YLPS", "YLRE", "YLRT", "YLTW", "YLUT", "YLWT", "YL_CTMI", "YL_ELSE", "YL_FIR", "YL_GVSL", "YL_NF", "YL_OT", "YL_PR", "YL", "YL_SV", "YL_TRADE", "YL_TTU", "YL_TU", "YNETR", "YOTLABPEN", "YOTLABSS", "YOTLAB", "YPROPFA", "YPROPNF", "YPROP", "YRESADJ", "YSOCSECEM", "YSOCSECPR", "YSOCSEC", "YTRNSFOT", "YTRNSFUI", "YTRNSF", "YWAGE"].each do |pre|
     ("#{pre}_R@HI.Q".ts_eval= %Q|"#{pre}@HI.Q".ts / "CPI@HON.Q".ts * 100|) rescue puts "_R ERROR FORM #{pre}_R@HI"
   end
+
+  "YL_TR@NBI.A".ts_eval= %Q|"YL_TR@HI.A".ts - "YL_TR@HON.A".ts|
+  "YL_TR_R@HI.A".ts_eval= %Q|"YL_TR@HI.A".ts / "CPI@HON.A".ts * 100|
+  "YL_TR_R@HON.A".ts_eval= %Q|"YL_TR@HON.A".ts / "CPI@HON.A".ts * 100|
+  "YL_TR_R@MAU.A".ts_eval= %Q|"YL_TR@MAU.A".ts / "CPI@HON.A".ts * 100|
+  "YL_TR_R@NBI.A".ts_eval= %Q|"YL_TR@NBI.A".ts / "CPI@HON.A".ts * 100|
 
 #  "CSCF@US.A".ts_eval= %Q|"CSCF@US.Q".ts.aggregate(:year, :average)|
   "CSCF@JP.A".ts_eval= %Q|"CSCFNS@JP.Q".ts.aggregate(:year, :average)|

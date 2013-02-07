@@ -860,6 +860,10 @@ end
 task :visitor_identities=>:environment do
   t = Time.now
   
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/visfix.xls"
+  Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/Manual/vexpfix.xls"
+  
+  
   "VISUSNS@HON.M".ts_eval= %Q|"VISUSWNS@HON.M".ts + "VISUSENS@HON.M".ts|
   "VISUSNS@HAW.M".ts_eval= %Q|"VISUSWNS@HAW.M".ts + "VISUSENS@HAW.M".ts|
   "VISUSNS@KAU.M".ts_eval= %Q|"VISUSWNS@KAU.M".ts + "VISUSENS@KAU.M".ts|
@@ -1031,6 +1035,10 @@ task :visitor_identities=>:environment do
       "VLOS#{serlist}NS@HI.Q".ts_eval= %Q|"VDAY#{serlist}NS@HI.Q".ts / "VISCRNS@HI.Q".ts|
       "VLOS#{serlist}@HI.A".ts_eval= %Q|"VDAY#{serlist}@HI.A".ts / "VISCR@HI.A".ts|
   end
+  
+  "VLOSCRAIRNS@HI.Q".ts_eval= %Q|"VDAYCRAIRNS@HI.Q".ts / "VISCRAIRNS@HI.Q".ts|
+  "VLOSCRAIR@HI.A".ts_eval= %Q|"VDAYCRAIR@HI.A".ts / "VISCRAIR@HI.A".ts|
+  
   
   ["CRAIR", "US", "RES", "","CAN", "JP", "USE", "USW", "DM", "IT"].each do |serlist| 
     ["HI", "HON", "HAW", "KAU", "MAU", "MAUI", "MOL", "LAN"].each do |cnty|
