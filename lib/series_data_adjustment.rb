@@ -20,8 +20,11 @@ module SeriesDataAdjustment
 
   def get_last_incomplete_january_datestring
     last_date = self.data.keys.sort[-1]
-    return last_date[5..6] == "12" ? "#{last_date[0..3].to_i + 1}-01-01" : "#{last_date[0..3].to_i}-01-01"
-    
+    #BT 2013-02-13 Changing the code to just always give the most recent january. regardless of whether the year is complete or not. Not sure if this will screw
+    #up other things, but seems like it should work in more cases
+    #return last_date[5..6] == "12" ? "#{last_date[0..3].to_i + 1}-01-01" : "#{last_date[0..3].to_i}-01-01"
+    #Additional note after running on TAX_IDENTITIES it looks like this doesn't break anything, but has results that get overwritten so there are temporary mismatches. But generally looks ok
+    return "#{last_date[0..3].to_i}-01-01"
   end
   
   def get_last_complete_december_datestring

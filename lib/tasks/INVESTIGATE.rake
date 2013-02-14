@@ -210,7 +210,7 @@ task :clean_data_sources => :environment do
       ds.print_eval_statement
       #ds.delete
     rescue
-      puts "ERROR!"
+      puts "ERROR! Series ID: #{ds.id}"
     end
   end; 0
   puts "COPY THESE INTO AN ARCHIVE"
