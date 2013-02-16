@@ -47,8 +47,8 @@ task :run_aggregations4 => :environment do
   # "OCUP%@HI.A".ts_eval=%Q|"OCUP%@HI.Q".ts.aggregate(:year, :average)|
   # "PRM@HI.A".ts_eval=%Q|"PRM@HI.Q".ts.aggregate(:year, :average)|
   # "RMRV@HI.A".ts_eval=%Q|"RMRV@HI.Q".ts.aggregate(:year, :average)|
-  "VADCCRAAF@HI.A".ts_eval=%Q|"VADCCRAAF@HI.Q".ts.aggregate(:year, :average)|
-  "VADCCRAF@HI.A".ts_eval=%Q|"VADCCRAF@HI.Q".ts.aggregate(:year, :average)|
+#  "VADCCRAAF@HI.A".ts_eval=%Q|"VADCCRAAF@HI.Q".ts.aggregate(:year, :average)|
+#  "VADCCRAF@HI.A".ts_eval=%Q|"VADCCRAF@HI.Q".ts.aggregate(:year, :average)|
   
   "OCUP%@HI.A".ts_eval=%Q|"OCUP%@HI.M".ts.aggregate(:year, :average)|
   "PRM@HI.A".ts_eval=%Q|"PRM@HI.M".ts.aggregate(:year, :average)|

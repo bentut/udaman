@@ -835,17 +835,19 @@ task :bls_identities => :environment do
   
   "UR@HI.M".ts_eval= %Q|"URSA@HI.M".ts|
   "LF_MC@HI.M".ts_eval= %Q|"LFSA@HI.M".ts / "LFSA@HI.M".ts.annual_sum * "LFNS@HI.M".ts.annual_sum|
-  "LF@HI.M".ts_append_eval %Q|"LF_MC@HI.M".ts|
   "LF@HI.M".ts_append_eval %Q|"LFSA@HI.M".ts.trim|
+  "LF@HI.M".ts_append_eval %Q|"LF_MC@HI.M".ts|
   "EMPL_MC@HI.M".ts_eval= %Q|"EMPLSA@HI.M".ts / "EMPLSA@HI.M".ts.annual_sum * "EMPLNS@HI.M".ts.annual_sum|
-  "EMPL@HI.M".ts_append_eval %Q|"EMPL_MC@HI.M".ts|
   "EMPL@HI.M".ts_append_eval %Q|"EMPLSA@HI.M".ts.trim|
+  "EMPL@HI.M".ts_append_eval %Q|"EMPL_MC@HI.M".ts|
+
 
   ["LF", "EMPL"].each do |s_name|
     ["HON", "HAW", "MAU", "KAU"].each do |county|
       puts "distributing #{s_name}, #{county}"
-      "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}_MC@HI.M".ts.share_using("#{s_name}NS@#{county}.M".ts, "#{s_name}NS@HI.M".ts)|
       "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}@HI.M".ts.share_using("#{s_name}NS@#{county}.M".ts.backward_looking_moving_average.trim,"#{s_name}NS@HI.M".ts.backward_looking_moving_average.trim)| 
+      "#{s_name}@#{county}.M".ts_eval= %Q|"#{s_name}_MC@HI.M".ts.share_using("#{s_name}NS@#{county}.M".ts, "#{s_name}NS@HI.M".ts)|
+      
     end
   end
   
@@ -906,11 +908,12 @@ task :bls_identities => :environment do
   end
   
   "E_GVSL@HI.M".ts_eval= %Q|"EGVST@HI.M".ts + "EGVLC@HI.M".ts| 
+
+  "EAFAC@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
+  "EAFFD@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
   
   "EAFAC@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average).trim("1990-01-01")|
-  "EAFAC@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFACNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
   "EAFFD@HI.M".ts_eval= %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.annual_average,"EAFNS@HI.M".ts.annual_average).trim("1990-01-01")|
-  "EAFFD@HI.M".ts_append_eval %Q|"EAF@HI.M".ts.share_using("EAFFDNS@HI.M".ts.backward_looking_moving_average.trim,"EAFNS@HI.M".ts.backward_looking_moving_average.trim)|
 
   #{}"EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.annual_sum, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).annual_sum)|
   #{}"#EMA@HI.M".ts_eval= %Q|("E_PBS@HI.M".ts - "EPS@HI.M".ts).share_using("EMANS@HI.M".ts.backward_looking_moving_average.trim, ("EMANS@HI.M".ts + "EADNS@HI.M".ts).backward_looking_moving_average.trim)|
@@ -988,10 +991,11 @@ task :bls_identities => :environment do
   end
   
   ["ETW", "EUT"].each do |pre|
-  	"#{pre}@HI.M".ts_eval= %Q|("#{pre}@HI.A".ts / "E_TU@HI.A".ts).fill_interpolate_to(:month) * "E_TU@HI.M".ts|
-  	"#{pre}@HON.M".ts_eval= %Q|("#{pre}@HON.A".ts / "E_TU@HON.A".ts).fill_interpolate_to(:month) * "E_TU@HON.M".ts|
   	"#{pre}@HI.M".ts_eval= %Q|(("#{pre}NS@HI.M".ts.backward_looking_moving_average / "E_TUNS@HI.M".ts.backward_looking_moving_average) * "E_TU@HI.M".ts).trim|
   	"#{pre}@HON.M".ts_eval= %Q|(("#{pre}NS@HON.M".ts.backward_looking_moving_average / "E_TUNS@HON.M".ts.backward_looking_moving_average) * "E_TU@HON.M".ts).trim|
+
+  	"#{pre}@HI.M".ts_eval= %Q|("#{pre}@HI.A".ts / "E_TU@HI.A".ts).fill_interpolate_to(:month) * "E_TU@HI.M".ts|
+  	"#{pre}@HON.M".ts_eval= %Q|("#{pre}@HON.A".ts / "E_TU@HON.A".ts).fill_interpolate_to(:month) * "E_TU@HON.M".ts|
 
   	"#{pre}@HI.Q".ts_eval= %Q|"#{pre}@HI.M".ts.aggregate(:quarter, :average)|
   	"#{pre}@HON.Q".ts_eval= %Q|"#{pre}@HON.M".ts.aggregate(:quarter, :average)|

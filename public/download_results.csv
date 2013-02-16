@@ -1,160 +1,161 @@
 id,handle,time,status,changed,url
-5,JP_STKNS@yahoo.com,2013-02-13 11:01:17 UTC,200,[],http://ichart.finance.yahoo.com/table.csv?s=^N225&a=00&b=4&c=1984&d=11&e=31&f=2050&g=m&ignore=.csv
-6,IP@meti.go.jp,2013-02-13 11:01:10 UTC,200,[],http://www.meti.go.jp/english/statistics/tyo/iip/csv/ha2gsm2e.csv
-7,LF@stat.go.jp,2013-02-13 11:00:50 UTC,200,[],http://www.stat.go.jp/english/data/roudou/zuhyou/15418.xls
-8,CPI@e-stat.go.jp,2013-02-13 11:00:58 UTC,200,[],http://www.e-stat.go.jp/SG1/estat/GL32020101.do?method=csvDownload&fileId=000005050765&releaseCount=38
-10,2011@hiwi.org,2013-02-13 15:15:43 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2011.xls
-11,ca_cpi@bea.gov,2013-02-13 14:30:52 UTC,200,[],http://www.dof.ca.gov/HTML/FS_DATA/LatestEconData/documents/BBCYCPI.xls
-13,2010@hiwi.org,2013-02-13 15:15:42 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2010.xls
-25,2009@hiwi.org,2013-02-13 15:15:38 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2009.xls
-35,CA06N@bea.gov,2013-02-13 14:05:50 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=E523CD5C72DC21A055AECBE8895D7E75D6B92209593F732A71E1EE8848EAC8BED39C3E962F3D8224741EEB7FD1EB81BE7E5B60C409B4B5DF670A5891D1F85D65
-36,CA_YP@bea.gov,2013-02-13 14:32:11 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=7F8A2A9143AA8B02A621B5B8E5E753820238785D94562407C30230E8A8FD611EB91080B19FA4F745D81CA975F44AF294FE4AD0B9E7F0CD7A325A604D7F2984E7
-37,US_RILGFCY10_M@research.stlouisfed.org,2013-02-13 14:33:06 UTC,200,[],http://research.stlouisfed.org/fred2/series/GS10/downloaddata/GS10.txt
-38,US_RMORT_M@research.stlouisfed.org,2013-02-13 14:33:07 UTC,200,[],http://research.stlouisfed.org/fred2/series/MORTG/downloaddata/MORTG.txt
-39,US_PCE_M@research.stlouisfed.org,2013-02-13 14:32:58 UTC,200,[],http://research.stlouisfed.org/fred2/series/PCEPI/downloaddata/PCEPI.txt
-40,US_HOUST_M@research.stlouisfed.org,2013-02-13 14:32:51 UTC,200,[],http://research.stlouisfed.org/fred2/series/HOUST/downloaddata/HOUST.txt
-41,US_UMCSENT_M@research.stlouisfed.org,2013-02-13 14:33:08 UTC,200,[],http://research.stlouisfed.org/fred2/series/UMCSENT/downloaddata/UMCSENT.txt
-42,US_POIL_M@research.stlouisfed.org,2013-02-13 14:33:01 UTC,200,[],http://research.stlouisfed.org/fred2/series/OILPRICE/downloaddata/OILPRICE.txt
-43,US_CAPUMN_Q@research.stlouisfed.org,2013-02-13 14:32:07 UTC,200,[],http://research.stlouisfed.org/fred2/series/CUMFN/downloaddata/CUMFN.txt
-45,US_CAPU_M@research.stlouisfed.org,2013-02-13 14:32:50 UTC,200,[],http://research.stlouisfed.org/fred2/series/TCU/downloaddata/TCU.txt
-46,US_IP_M@research.stlouisfed.org,2013-02-13 14:32:53 UTC,200,[],http://research.stlouisfed.org/fred2/series/INDPRO/downloaddata/INDPRO.txt
-47,US_M2_M@research.stlouisfed.org,2013-02-13 14:32:54 UTC,200,[],http://research.stlouisfed.org/fred2/series/M2SL/downloaddata/M2SL.txt
-48,US_M2NS_M@research.stlouisfed.org,2013-02-13 14:32:56 UTC,200,[],http://research.stlouisfed.org/fred2/series/M2NS/downloaddata/M2NS.txt
-49,US_N_M@research.stlouisfed.org,2013-02-13 14:32:57 UTC,200,[],http://research.stlouisfed.org/fred2/series/POPTHM/downloaddata/POPTHM.txt
-50,US_RAAANS_M@research.stlouisfed.org,2013-02-13 14:33:03 UTC,200,[],http://research.stlouisfed.org/fred2/series/AAA/downloaddata/AAA.txt
-51,US_RFED_M@research.stlouisfed.org,2013-02-13 14:33:05 UTC,200,[],http://research.stlouisfed.org/fred2/series/FEDFUNDS/downloaddata/FEDFUNDS.txt
-52,US_PCECORE_M@research.stlouisfed.org,2013-02-13 14:32:59 UTC,200,[],http://research.stlouisfed.org/fred2/series/PCEPILFE/downloaddata/PCEPILFE.txt
-53,US_EXUSEU_M@research.stlouisfed.org,2013-02-13 14:32:51 UTC,200,[],http://research.stlouisfed.org/fred2/series/EXUSEU/downloaddata/EXUSEU.txt
-55,TOUR_APR11@hawaiitourismauthority.org,2013-02-13 11:10:20 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/apr11.xls
-56,us_gdp@bea.gov,2013-02-13 14:30:49 UTC,200,[],http://www.bea.gov/national/xls/gdplev.xls
-57,US_STKNS@yahoo.com,2013-02-13 14:33:11 UTC,200,[],http://ichart.finance.yahoo.com/table.csv?s=^GSPC&a=00&b=3&c=1950&d=10&e=3&f=2050&g=m&ignore=.csv
-58,TOUR_MAR11@hawaiitourismauthority.org,2013-02-13 11:10:16 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Mar11.xls
-60,CONST_PICT@census.gov,2013-02-13 11:30:27 UTC,200,[],http://www.census.gov/const/price_uc_cust.xls
-62,IPNS@meti.go.jp,2013-02-13 11:01:13 UTC,200,[],http://www.meti.go.jp/english/statistics/tyo/iip/csv/ha2gom2e.csv
-64,UIC@hawaii.gov,2013-02-13 11:30:10 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/unemployment/Weekly_UI_Claims.xls
-66,tour_PC@hawaii.gov,2013-02-13 11:10:13 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/special/daily-pax-update.xls
-68,TOUR_HIST10@hawaiitourismauthority.org,2013-02-13 11:41:21 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/historical-data/Copy of 2010-highlights revised_Jun_aug_nov 2010.xls
-69,GSP@bea.gov,2013-02-13 14:05:36 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=79E4AE8D66CC540C6438B21B5D0F1E66A61DF43CA868561D0D6E625866F9DE31D65478495C6B2A282D092A05CDC78D50EB5F517E34A306D5C083CAA44E37B446
-70,SQ5N@bea.gov,2013-02-13 14:05:36 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=C19AF3371FFE8E36368BF3A9587688C34CBE75154EBF04ED435F66F0A20C2AF766CDDFEFB0454E2EEDFA542E6DB277617E49E3C27011B21478FB6795734F050C
-71,5Q@bea.gov,2013-02-13 14:30:30 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EDE9E6438C31B05874FE7EE6C2CCA076477803C883512ECD89082DDB79E40E0CBD9C645786229413F1FDFC12D17EA9185829E6217802FE4655ACB4DBADDAE260
-72,5A@bea.gov,2013-02-13 14:30:30 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=09B0925671CF9CAEA6DCC307428300EEECDD080C344F1F00E83D5D855037E41AD841725EE9E0A8D3B23FC3B14BCFC3C475CE6A10D8DD111DD530EB410B7DAFB9
-73,13Q@bea.gov,2013-02-13 14:30:48 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=C284F6E3197CA9B1762DD94B1934475670E7DFD3DB6A7B74F92194FF1922C428437C81F1266C35E919F45500AF50768F698171A7062107E89CC824B0F709DA1D
-74,13A@bea.gov,2013-02-13 14:30:38 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=D973937935C135CE4C0494DD1FF7AC66AC37F30845C4ABD6626188CE6F485F1F346A4C56BA332C454DD911CB21AD03532D267851D092DCFDC20C401667361669
-75,SA05N@bea.gov,2013-02-13 14:05:49 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EA68AFE98A3B6A35AED0F79141803A0D5D76D1C79358F3D5F9F9F1A82F625CD8E73B21794AA9B1A49038A8C068A55E9D51B764DD118AC2D850B2710E98D4597A
-76,SA06N@bea.gov,2013-02-13 14:05:36 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=F3D95C99C45B4E6D2AD26C6673D4CA323B7FD8722C7BF90A8B45D430D5158031BBE07D3D3AFB4441195B9E0364C2BB163EA26134E38F26468FA25D852FC74B6B
-79,264Q@bea.gov,2013-02-13 14:30:50 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=7A457D7366457E114B1AF32C918AC332932D794841E62FAB7334165794AD121F3BCC82CC8DEDA4E55642032CEC868D09BF81EF4FD87A6A446B2CF14D9E6CF771
-80,264A@bea.gov,2013-02-13 14:30:39 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EA79AF2D230F53C181F01AC321EAB0212968FC6D92076A11D00537A7613B45CEB76ECC452EB07CEA5D14E375BD97E82D5372B2CDB2204322C7784FE13A287139
-81,43Q@bea.gov,2013-02-13 14:30:53 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=62A84F147740F2C15DEADCB6317091583C8F7924F59E8E1045AEE868298D162E84ADF8F10965C145955F921A0B27A4DD37D8C180DEE8CD37814E0E07DDE3300B
-83,44Q@bea.gov,2013-02-13 14:30:57 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=BD640C128E9E019DC3755244EB24437449CF59963139BCAE57EA2CEA0135060E623D84C4E7FD2C11B5033358DB4D2E912136AFA031664517BAE77C8B6BE74FD1
-84,44A@bea.gov,2013-02-13 14:30:42 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=D8C8F04B4698C8EF8DE57C4E8794556DFAA37ECC4FA469948409896CA0467B3F2545EB6B2BCAC0A2902CF4186B7248C6837158626603D0D671D8A230B7E5EB07
-85,58Q@bea.gov,2013-02-13 14:31:01 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=3DB964A19A662E331058B12D20935999E2EA14BD3DDE583422B2C6BAC350CC79479875DB65664124B1E0C09D60121043FFC06AF3D956541D6F5EE90DA95AEF1A
-86,58A@bea.gov,2013-02-13 14:30:44 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=8D0F544F1C05675D91630C798CC8F26C24DA92F99C9BFE58A4159B97A3919169DB3379B01CED85224D864D1F96C2D30A40DE3796B36F710A535DC9DA8023D474
-87,66Q@bea.gov,2013-02-13 14:31:23 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=F2BF0BD4D63BA8C4A593F35BD9FC665C1B9C7AC12403AF5C5740405DD14842F2E9B83E409FE0BCC1EEBE1F4F2FD8695DAC9A8161C906CFA7B6DFD19C6623E35E
-88,66A@bea.gov,2013-02-13 14:30:45 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=0177AA1DC73F2795DB6C16FD966766AB5F24B998C0F920781C2C2F0358640D0C74D295C4395EAFB755CF301939D91B26085549336FB09B34DD38737605B705F4
-89,6Q@bea.gov,2013-02-13 14:30:33 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=70A13894597A7A66573E1DE649453F90353779EDFC179D3E18F425E5E5C53F12DF2F278F3DEFE9380D63A534EA5828B6DD86EC805D937B45E3C712B8E56AF1AE
-91,6A@bea.gov,2013-02-13 14:30:32 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=6043B25E2C2A18F9902739CC7DBC5DE88C70E174919B2C66D35CD62645A12C08685BFB371C5AC48CD7D91E239F155EE87B1CBE1ACF582F219AFAD79FD65024D8
-92,76M@bea.gov,2013-02-13 14:30:30 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=C9382D00F509C4E456B9DF956D674C405301B9C05B9950A28D5644E9953C015C16393A79155B5EBFDE96D3CD3FE1C86E785972D52853C7780ECD62D1681AD7DC
-94,83M@bea.gov,2013-02-13 14:30:36 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=F1E55A7F46A64D085500583CA213073672BDC074AFF6DF63032C11A29FB4A0E520A680F5B586DA27AE0529995C033E79962983ABE3B55E49FB6DD39B5789BCED
-103,CA05N@bea.gov,2013-02-13 14:05:53 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=30722D615D8897722B84CD8A6BE7A996587F618CC39AC475F878E6B510E50CC83BDEC5A412258EB8EAD45426807941306DD53DE192C7CD92CEE6C40DB20CF914
-104,CONST_HI@hawaii.gov,2013-02-13 11:30:10 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/state.xls
-105,CONST_HAW@hawaii.gov,2013-02-13 11:30:17 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/hawaii.xls
-106,CONST_HON@hawaii.gov,2013-02-13 11:30:14 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/honolulu.xls
-107,CONST_KAU@hawaii.gov,2013-02-13 11:30:24 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/kauai.xls
-108,CONST_MAU@hawaii.gov,2013-02-13 11:30:21 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/maui.xls
-109,QSER_E@hawaii.gov,2013-02-13 11:30:12 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/qser/construction-tables.xls
-110,QSER_G@hawaii.gov,2013-02-13 11:30:10 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/qser/select-county-tables.xls
-121,TOUR_FEB11@hawaiitourismauthority.org,2013-02-13 11:10:14 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Feb11.xls
-122,TOUR_MAY11@hawaiitourismauthority.org,2013-02-13 11:10:22 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/May 2011 Table.xls
-123,TOUR_JUN11@hawaiitourismauthority.org,2013-02-13 11:10:25 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/jun11R.xls
-124,TOUR_JAN11@hawaiitourismauthority.org,2013-02-13 11:15:46 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jan11.xls
-130,CSCFNS@esri.cao.go.jp,2013-02-13 11:00:45 UTC,404,[],http://www.esri.cao.go.jp/en/stat/shouhi/1212shouhi1-e.xls
-131,CSCF@esri.cao.go.jp,2013-02-13 11:00:53 UTC,404,[],http://www.esri.cao.go.jp/en/stat/shouhi/1212shouhi2-e.xls
-132,TOUR_JUL11@hawaiitourismauthority.org,2013-02-13 11:10:27 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/July 2011 Table(1).xls
-133,JP_POP@esa.un.org,2013-02-13 11:00:52 UTC,200,[],http://esa.un.org/wpp/Excel-Data/DB02_Stock_Indicators/WPP2010_DB2_F01_TOTAL_POPULATION_BOTH_SEXES.XLS
-134,tax_collec2011_01@hawaii.gov,2013-02-13 11:35:11 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-01_rev3.zip
-139,SEATS_SEP11@hawaiitourismauthority.org,2013-02-13 11:10:13 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Sep-Nov 2011.xls
-140,SEATS_OCT11@hawaiitourismauthority.org,2013-02-13 11:10:14 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Oct-Dec 2011.xls
-141,SEATS_NOV11@hawaiitourismauthority.org,2013-02-13 11:10:15 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/Nov 2011 - Jan 2012.xls
-142,SEATS_DEC11@hawaiitourismauthority.org,2013-02-13 11:10:16 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Dec2011- Feb2012.xls
-143,TOUR_AUG11@hawaiitourismauthority.org,2013-02-13 11:10:30 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/aug11.xls
-144,TOUR_SEP11@hawaiitourismauthority.org,2013-02-13 11:10:32 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Sep11.xls
-145,TOUR_OCT11@hawaiitourismauthority.org,2013-02-13 11:10:33 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/oct11.xls
-146,tax_collec2011_02@hawaii.gov,2013-02-13 11:35:11 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-02_rev4.zip
-147,tax_collec2011_04@hawaii.gov,2013-02-13 11:35:12 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-04_rev2.zip
-148,tax_collec2011_05@hawaii.gov,2013-02-13 11:35:12 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-05_rev2.zip
-149,tax_collec2011_06@hawaii.gov,2013-02-13 11:35:13 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-06_rev.zip
-150,tax_collec2011_07@hawaii.gov,2013-02-13 11:35:13 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-07_rev.zip
-151,tax_collec2011_08@hawaii.gov,2013-02-13 11:35:13 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-08_rev.zip
-152,tax_collec2011_09@hawaii.gov,2013-02-13 11:35:14 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-09_rev2.zip
-153,tax_collec2011_10@hawaii.gov,2013-02-13 11:35:14 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-10_rev.zip
-154,tax_collec2011_03@hawaii.gov,2013-02-13 11:35:11 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-03_rev3.zip
-157,tax_GE2011_03@hawaii.gov,2013-02-13 11:35:56 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-03_rev3.zip
-158,tax_GE2011_04@hawaii.gov,2013-02-13 11:35:56 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-04_rev2.zip
-159,tax_GE2011_05@hawaii.gov,2013-02-13 11:35:57 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-05_rev2.zip
-160,tax_GE2011_06@hawaii.gov,2013-02-13 11:35:57 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-06_rev.zip
-161,tax_GE2011_07@hawaii.gov,2013-02-13 11:35:57 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-07_rev.zip
-162,tax_GE2011_08@hawaii.gov,2013-02-13 11:35:57 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-08_rev.zip
-163,tax_GE2011_09@hawaii.gov,2013-02-13 11:35:58 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-09_rev2.zip
-165,TOUR_NOV11@hawaiitourismauthority.org,2013-02-13 11:10:35 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Nov11 Revised.xlsx
-166,SEATS_JAN12@hawaiitourismauthority.org,2013-02-13 11:10:18 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jan-Mar 2012.xls
-170,tax_GE2011_10@hawaii.gov,2013-02-13 11:35:58 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-10_rev.zip
-171,TOUR_DEC11@hawaiitourismauthority.org,2013-02-13 11:10:38 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Dec 2011.xlsx
-172,SEATS_FEB12@hawaiitourismauthority.org,2013-02-13 11:10:19 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Feb_Apr 2012.xls
-173,TOUR_JAN12@hawaiitourismauthority.org,2013-02-13 11:10:43 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jan_2012.xlsx
-174,tax_collec2011_12@hawaii.gov,2013-02-13 11:35:15 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-12.zip
-175,tax_collec2011_11@hawaii.gov,2013-02-13 11:35:14 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-11_rev.zip
-176,tax_GE2011_11@hawaii.gov,2013-02-13 11:35:58 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-11_rev.zip
-177,SEATS_MAR12@hawaiitourismauthority.org,2013-02-13 11:10:20 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Mar-May 2012.xls
-178,2012@hiwi.org,2013-02-13 15:15:45 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2012.xls
-179,LF@hiwi.org,2013-02-13 15:16:12 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_LAUS_LF.xls
-180,SEATS_APR12@hawaiitourismauthority.org,2013-02-13 11:10:22 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Apr-Jun 2012.xls
-181,TOUR_FEB12@hawaiitourismauthority.org,2013-02-13 11:10:47 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/February 2012(1).xlsx
-182,tax_GE2011_12@hawaii.gov,2013-02-13 11:35:59 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-12.zip
-183,tax_collec2012_01@hawaii.gov,2013-02-13 11:35:15 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-01.zip
-184,tax_GE2012_01@hawaii.gov,2013-02-13 11:35:59 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-01.zip
-185,tax_collec2012_02@hawaii.gov,2013-02-13 11:35:15 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-02.zip
-186,TOUR_MAR12@hawaiitourismauthority.org,2013-02-13 11:10:52 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/March 2012.xlsx
-187,SEATS_MAY12@hawaiitourismauthority.org,2013-02-13 11:10:23 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/May - Jul 2012.xls
-188,TOUR_APR12@hawaiitourismauthority.org,2013-02-13 11:10:55 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/April 2012rev.xlsx
-189,SEATS_JUN12@hawaiitourismauthority.org,2013-02-13 11:10:24 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jun - Aug 2012.xls
-190,tax_GE2012_02@hawaii.gov,2013-02-13 11:35:59 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-02.zip
-191,tax_collec2012_03@hawaii.gov,2013-02-13 11:35:16 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-03.zip
-192,TOUR_MAY12@hawaiitourismauthority.org,2013-02-13 11:11:00 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/May 2012.xlsx
-193,tax_GE2012_03@hawaii.gov,2013-02-13 11:36:00 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-03.zip
-194,tax_collec2012_04@hawaii.gov,2013-02-13 11:35:16 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-04.zip
-195,SEATS_JUL12@hawaiitourismauthority.org,2013-02-13 11:10:25 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jul - Sep 2012.xls
-196,TOUR_JUN12@hawaiitourismauthority.org,2013-02-13 11:11:03 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jun12.xls
-198,tax_collec2012_05@hawaii.gov,2013-02-13 11:35:17 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-05.zip
-204,SEATS_AUG12@hawaiitourismauthority.org,2013-02-13 11:10:26 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Aug-Oct 2012.xls
-205,TOUR_HIST11@hawaiitourismauthority.org,2013-02-13 11:41:23 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/historical-data/2011 Monthly Final Highlights Revised.xls
-206,R@www.stat-search.boj.or.jp,2013-02-13 11:01:26 UTC,404,[],http://www.stat-search.boj.or.jp/ssi/html/nme_R031.20696.20121215052258.01.csv
-207,43A@bea.gov,2013-02-13 14:30:41 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=018D8525CDD85BF92276564BB578FE834B4D15BA98246EF90BD1E787157EC95600CA60FB3CBD2338996C1CEBDB8B6D522D82DE01FC205D9ADCA9FD9F60CDB80F
-208,TOUR_JUL12@hawaiitourismauthority.org,2013-02-13 11:11:07 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jul12.xls
-210,tax_GE2012_04@hawaii.gov,2013-02-13 11:36:00 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-04.zip
-211,SEATS_SEP12@hawaiitourismauthority.org,2013-02-13 11:10:27 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Sep-Nov 2012.xls
-214,CA04@bea.gov,2013-02-13 14:06:04 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EE03649ACB1211FB9ABBB6868FEE48175EF7D3FACC4A198E1DC2D974DD048628DF97C1FED11CB9CD5DF2BEFD071D34C6953ED9B2C55026C22E3465942EB73958
-215,SA04@bea.gov,2013-02-13 14:05:36 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=297A947DE85F41E7A5220A5991A81B9F237E322EA85387CC78D73DC2F9C64800BE34DCDA0CE0F29C9624339A28E21543062ECBD3C009FD62128B5A2BA36E7997
-216,TOUR_AUG12@hawaiitourismauthority.org,2013-02-13 11:11:09 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/aug12.xls
-218,SEATS_OCT12@hawaiitourismauthority.org,2013-02-13 11:10:28 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Oct-Dec 2012.xls
-219,tax_GE2012_05@hawaii.gov,2013-02-13 11:36:00 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-05.zip
-220,tax_GE2012_06@hawaii.gov,2013-02-13 11:36:01 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-06.zip
-221,tax_collec2012_06@hawaii.gov,2013-02-13 11:35:17 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-06.zip
-222,tax_collec2012_07@hawaii.gov,2013-02-13 11:35:18 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-07_rev.zip
-223,TOUR_FINAL@hawaiitourismauthority.org,2013-02-13 11:40:12 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/historical-data/HAWAII_HISTORICAL_2010r.xlsx
-224,TOUR_SEP12@hawaiitourismauthority.org,2013-02-13 11:11:13 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Sep12.xls
-225,SEATS_NOV12@hawaiitourismauthority.org,2013-02-13 11:10:29 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Nov 2012-Jan 2013.xls
-226,STEO@eia.gov,2013-02-13 11:30:42 UTC,200,[],http://www.eia.gov/forecasts/steo/xls/STEO_m.xls
-227,LTEO_B@eia.gov,2013-02-13 11:30:44 UTC,200,[],http://www.eia.gov/forecasts/aeo/er/excel/aeotab_1.xlsx
-230,CPI10@e-stat.go.jp,2013-02-13 11:01:05 UTC,200,[],http://www.e-stat.go.jp/SG1/estat/Csvdl.do?sinfid=000011288575
-231,TOUR_OCT12@hawaiitourismauthority.org,2013-02-13 11:11:16 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Oct12.xls
-232,SEATS_DEC12@hawaiitourismauthority.org,2013-02-13 11:10:30 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Dec 2012-Feb 2013.xls
-233,tax_GE2012_07@hawaii.gov,2013-02-13 11:36:01 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-07_rev.zip
-234,tax_collec2012_08@hawaii.gov,2013-02-13 11:35:18 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-08_rev.zip
-235,TOUR_NOV12@hawaiitourismauthority.org,2013-02-13 11:11:17 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/nov12.xls
-236,tax_GE2012_08@hawaii.gov,2013-02-13 11:36:01 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-08_rev.zip
-237,tax_GE2012_09@hawaii.gov,2013-02-13 11:36:02 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-09_rev.zip
-238,tax_collec2012_09@hawaii.gov,2013-02-13 11:35:18 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-09_rev.zip
-239,SEATS_JAN13@hawaiitourismauthority.org,2013-02-13 11:10:31 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jan-Mar 2013(3).xls
-240,TOUR_DEC12@hawaiitourismauthority.org,2013-02-13 11:11:20 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/dec12.xls
-241,tax_GE2012_10@hawaii.gov,2013-02-13 11:36:02 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-10.zip
-242,tax_collec2012_10@hawaii.gov,2013-02-13 11:35:19 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-10.zip
+5,JP_STKNS@yahoo.com,2013-02-15 11:00:39 UTC,200,[],http://ichart.finance.yahoo.com/table.csv?s=^N225&a=00&b=4&c=1984&d=11&e=31&f=2050&g=m&ignore=.csv
+6,IP@meti.go.jp,2013-02-15 11:00:33 UTC,200,[],http://www.meti.go.jp/english/statistics/tyo/iip/csv/ha2gsm2e.csv
+7,LF@stat.go.jp,2013-02-15 11:00:20 UTC,200,[],http://www.stat.go.jp/english/data/roudou/zuhyou/15418.xls
+8,CPI@e-stat.go.jp,2013-02-15 11:00:24 UTC,200,[],http://www.e-stat.go.jp/SG1/estat/GL32020101.do?method=csvDownload&fileId=000005050765&releaseCount=38
+10,2011@hiwi.org,2013-02-15 15:15:13 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2011.xls
+11,ca_cpi@bea.gov,2013-02-15 14:30:27 UTC,200,[],http://www.dof.ca.gov/HTML/FS_DATA/LatestEconData/documents/BBCYCPI.xls
+13,2010@hiwi.org,2013-02-15 15:15:12 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2010.xls
+25,2009@hiwi.org,2013-02-15 15:15:10 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2009.xls
+35,CA06N@bea.gov,2013-02-15 14:05:27 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=E523CD5C72DC21A055AECBE8895D7E75D6B92209593F732A71E1EE8848EAC8BED39C3E962F3D8224741EEB7FD1EB81BE7E5B60C409B4B5DF670A5891D1F85D65
+36,CA_YP@bea.gov,2013-02-15 14:31:13 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=7F8A2A9143AA8B02A621B5B8E5E753820238785D94562407C30230E8A8FD611EB91080B19FA4F745D81CA975F44AF294FE4AD0B9E7F0CD7A325A604D7F2984E7
+37,US_RILGFCY10_M@research.stlouisfed.org,2013-02-15 14:32:19 UTC,200,[],http://research.stlouisfed.org/fred2/series/GS10/downloaddata/GS10.txt
+38,US_RMORT_M@research.stlouisfed.org,2013-02-15 14:32:20 UTC,200,[],http://research.stlouisfed.org/fred2/series/MORTG/downloaddata/MORTG.txt
+39,US_PCE_M@research.stlouisfed.org,2013-02-15 14:32:14 UTC,200,[],http://research.stlouisfed.org/fred2/series/PCEPI/downloaddata/PCEPI.txt
+40,US_HOUST_M@research.stlouisfed.org,2013-02-15 14:32:08 UTC,200,[],http://research.stlouisfed.org/fred2/series/HOUST/downloaddata/HOUST.txt
+41,US_UMCSENT_M@research.stlouisfed.org,2013-02-15 14:32:21 UTC,200,[],http://research.stlouisfed.org/fred2/series/UMCSENT/downloaddata/UMCSENT.txt
+42,US_POIL_M@research.stlouisfed.org,2013-02-15 14:32:16 UTC,200,[],http://research.stlouisfed.org/fred2/series/OILPRICE/downloaddata/OILPRICE.txt
+43,US_CAPUMN_Q@research.stlouisfed.org,2013-02-15 14:31:10 UTC,200,[],http://research.stlouisfed.org/fred2/series/CUMFN/downloaddata/CUMFN.txt
+45,US_CAPU_M@research.stlouisfed.org,2013-02-15 14:32:07 UTC,200,[],http://research.stlouisfed.org/fred2/series/TCU/downloaddata/TCU.txt
+46,US_IP_M@research.stlouisfed.org,2013-02-15 14:32:09 UTC,200,[],http://research.stlouisfed.org/fred2/series/INDPRO/downloaddata/INDPRO.txt
+47,US_M2_M@research.stlouisfed.org,2013-02-15 14:32:10 UTC,200,[],http://research.stlouisfed.org/fred2/series/M2SL/downloaddata/M2SL.txt
+48,US_M2NS_M@research.stlouisfed.org,2013-02-15 14:32:12 UTC,200,[],http://research.stlouisfed.org/fred2/series/M2NS/downloaddata/M2NS.txt
+49,US_N_M@research.stlouisfed.org,2013-02-15 14:32:13 UTC,200,[],http://research.stlouisfed.org/fred2/series/POPTHM/downloaddata/POPTHM.txt
+50,US_RAAANS_M@research.stlouisfed.org,2013-02-15 14:32:17 UTC,200,[],http://research.stlouisfed.org/fred2/series/AAA/downloaddata/AAA.txt
+51,US_RFED_M@research.stlouisfed.org,2013-02-15 14:32:18 UTC,200,[],http://research.stlouisfed.org/fred2/series/FEDFUNDS/downloaddata/FEDFUNDS.txt
+52,US_PCECORE_M@research.stlouisfed.org,2013-02-15 14:32:15 UTC,200,[],http://research.stlouisfed.org/fred2/series/PCEPILFE/downloaddata/PCEPILFE.txt
+53,US_EXUSEU_M@research.stlouisfed.org,2013-02-15 14:32:08 UTC,200,[],http://research.stlouisfed.org/fred2/series/EXUSEU/downloaddata/EXUSEU.txt
+55,TOUR_APR11@hawaiitourismauthority.org,2013-02-15 11:10:15 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/apr11.xls
+56,us_gdp@bea.gov,2013-02-15 14:30:25 UTC,200,[],http://www.bea.gov/national/xls/gdplev.xls
+57,US_STKNS@yahoo.com,2013-02-15 14:32:23 UTC,200,[],http://ichart.finance.yahoo.com/table.csv?s=^GSPC&a=00&b=3&c=1950&d=10&e=3&f=2050&g=m&ignore=.csv
+58,TOUR_MAR11@hawaiitourismauthority.org,2013-02-15 11:10:13 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Mar11.xls
+60,CONST_PICT@census.gov,2013-02-15 11:30:24 UTC,200,[],http://www.census.gov/const/price_uc_cust.xls
+62,IPNS@meti.go.jp,2013-02-15 11:00:36 UTC,200,[],http://www.meti.go.jp/english/statistics/tyo/iip/csv/ha2gom2e.csv
+64,UIC@hawaii.gov,2013-02-15 11:30:09 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/unemployment/Weekly_UI_Claims.xls
+66,tour_PC@hawaii.gov,2013-02-15 11:10:11 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/special/daily-pax-update.xls
+68,TOUR_HIST10@hawaiitourismauthority.org,2013-02-15 11:41:13 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/historical-data/Copy of 2010-highlights revised_Jun_aug_nov 2010.xls
+69,GSP@bea.gov,2013-02-15 14:05:18 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=79E4AE8D66CC540C6438B21B5D0F1E66A61DF43CA868561D0D6E625866F9DE31D65478495C6B2A282D092A05CDC78D50EB5F517E34A306D5C083CAA44E37B446
+70,SQ5N@bea.gov,2013-02-15 14:05:18 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=C19AF3371FFE8E36368BF3A9587688C34CBE75154EBF04ED435F66F0A20C2AF766CDDFEFB0454E2EEDFA542E6DB277617E49E3C27011B21478FB6795734F050C
+71,5Q@bea.gov,2013-02-15 14:30:10 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EDE9E6438C31B05874FE7EE6C2CCA076477803C883512ECD89082DDB79E40E0CBD9C645786229413F1FDFC12D17EA9185829E6217802FE4655ACB4DBADDAE260
+72,5A@bea.gov,2013-02-15 14:30:10 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=09B0925671CF9CAEA6DCC307428300EEECDD080C344F1F00E83D5D855037E41AD841725EE9E0A8D3B23FC3B14BCFC3C475CE6A10D8DD111DD530EB410B7DAFB9
+73,13Q@bea.gov,2013-02-15 14:30:26 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=C284F6E3197CA9B1762DD94B1934475670E7DFD3DB6A7B74F92194FF1922C428437C81F1266C35E919F45500AF50768F698171A7062107E89CC824B0F709DA1D
+74,13A@bea.gov,2013-02-15 14:30:16 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=D973937935C135CE4C0494DD1FF7AC66AC37F30845C4ABD6626188CE6F485F1F346A4C56BA332C454DD911CB21AD03532D267851D092DCFDC20C401667361669
+75,SA05N@bea.gov,2013-02-15 14:05:26 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EA68AFE98A3B6A35AED0F79141803A0D5D76D1C79358F3D5F9F9F1A82F625CD8E73B21794AA9B1A49038A8C068A55E9D51B764DD118AC2D850B2710E98D4597A
+76,SA06N@bea.gov,2013-02-15 14:05:18 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=F3D95C99C45B4E6D2AD26C6673D4CA323B7FD8722C7BF90A8B45D430D5158031BBE07D3D3AFB4441195B9E0364C2BB163EA26134E38F26468FA25D852FC74B6B
+79,264Q@bea.gov,2013-02-15 14:30:28 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=7A457D7366457E114B1AF32C918AC332932D794841E62FAB7334165794AD121F3BCC82CC8DEDA4E55642032CEC868D09BF81EF4FD87A6A446B2CF14D9E6CF771
+80,264A@bea.gov,2013-02-15 14:30:17 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EA79AF2D230F53C181F01AC321EAB0212968FC6D92076A11D00537A7613B45CEB76ECC452EB07CEA5D14E375BD97E82D5372B2CDB2204322C7784FE13A287139
+81,43Q@bea.gov,2013-02-15 14:30:30 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=62A84F147740F2C15DEADCB6317091583C8F7924F59E8E1045AEE868298D162E84ADF8F10965C145955F921A0B27A4DD37D8C180DEE8CD37814E0E07DDE3300B
+83,44Q@bea.gov,2013-02-15 14:30:32 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=BD640C128E9E019DC3755244EB24437449CF59963139BCAE57EA2CEA0135060E623D84C4E7FD2C11B5033358DB4D2E912136AFA031664517BAE77C8B6BE74FD1
+84,44A@bea.gov,2013-02-15 14:30:19 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=D8C8F04B4698C8EF8DE57C4E8794556DFAA37ECC4FA469948409896CA0467B3F2545EB6B2BCAC0A2902CF4186B7248C6837158626603D0D671D8A230B7E5EB07
+85,58Q@bea.gov,2013-02-15 14:30:36 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=3DB964A19A662E331058B12D20935999E2EA14BD3DDE583422B2C6BAC350CC79479875DB65664124B1E0C09D60121043FFC06AF3D956541D6F5EE90DA95AEF1A
+86,58A@bea.gov,2013-02-15 14:30:21 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=8D0F544F1C05675D91630C798CC8F26C24DA92F99C9BFE58A4159B97A3919169DB3379B01CED85224D864D1F96C2D30A40DE3796B36F710A535DC9DA8023D474
+87,66Q@bea.gov,2013-02-15 14:30:47 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=F2BF0BD4D63BA8C4A593F35BD9FC665C1B9C7AC12403AF5C5740405DD14842F2E9B83E409FE0BCC1EEBE1F4F2FD8695DAC9A8161C906CFA7B6DFD19C6623E35E
+88,66A@bea.gov,2013-02-15 14:30:22 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=0177AA1DC73F2795DB6C16FD966766AB5F24B998C0F920781C2C2F0358640D0C74D295C4395EAFB755CF301939D91B26085549336FB09B34DD38737605B705F4
+89,6Q@bea.gov,2013-02-15 14:30:13 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=70A13894597A7A66573E1DE649453F90353779EDFC179D3E18F425E5E5C53F12DF2F278F3DEFE9380D63A534EA5828B6DD86EC805D937B45E3C712B8E56AF1AE
+91,6A@bea.gov,2013-02-15 14:30:11 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=6043B25E2C2A18F9902739CC7DBC5DE88C70E174919B2C66D35CD62645A12C08685BFB371C5AC48CD7D91E239F155EE87B1CBE1ACF582F219AFAD79FD65024D8
+92,76M@bea.gov,2013-02-15 14:30:10 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=C9382D00F509C4E456B9DF956D674C405301B9C05B9950A28D5644E9953C015C16393A79155B5EBFDE96D3CD3FE1C86E785972D52853C7780ECD62D1681AD7DC
+94,83M@bea.gov,2013-02-15 14:30:15 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=F1E55A7F46A64D085500583CA213073672BDC074AFF6DF63032C11A29FB4A0E520A680F5B586DA27AE0529995C033E79962983ABE3B55E49FB6DD39B5789BCED
+103,CA05N@bea.gov,2013-02-15 14:05:29 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=30722D615D8897722B84CD8A6BE7A996587F618CC39AC475F878E6B510E50CC83BDEC5A412258EB8EAD45426807941306DD53DE192C7CD92CEE6C40DB20CF914
+104,CONST_HI@hawaii.gov,2013-02-15 11:30:09 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/state.xls
+105,CONST_HAW@hawaii.gov,2013-02-15 11:30:15 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/hawaii.xls
+106,CONST_HON@hawaii.gov,2013-02-15 11:30:12 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/honolulu.xls
+107,CONST_KAU@hawaii.gov,2013-02-15 11:30:21 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/kauai.xls
+108,CONST_MAU@hawaii.gov,2013-02-15 11:30:18 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/mei/maui.xls
+109,QSER_E@hawaii.gov,2013-02-15 11:30:11 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/qser/construction-tables.xls
+110,QSER_G@hawaii.gov,2013-02-15 11:30:09 UTC,200,[],http://hawaii.gov/dbedt/info/economic/data_reports/qser/select-county-tables.xls
+121,TOUR_FEB11@hawaiitourismauthority.org,2013-02-15 11:10:11 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Feb11.xls
+122,TOUR_MAY11@hawaiitourismauthority.org,2013-02-15 11:10:18 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/May 2011 Table.xls
+123,TOUR_JUN11@hawaiitourismauthority.org,2013-02-15 11:10:20 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/jun11R.xls
+124,TOUR_JAN11@hawaiitourismauthority.org,2013-02-15 11:14:39 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jan11.xls
+130,CSCFNS@esri.cao.go.jp,2013-02-15 11:00:17 UTC,200,[],http://www.esri.cao.go.jp/en/stat/shouhi/1301shouhi1-e.xls
+131,CSCF@esri.cao.go.jp,2013-02-15 11:00:19 UTC,200,[],http://www.esri.cao.go.jp/en/stat/shouhi/1301shouhi2-e.xls
+132,TOUR_JUL11@hawaiitourismauthority.org,2013-02-15 11:10:23 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/July 2011 Table(1).xls
+133,JP_POP@esa.un.org,2013-02-15 11:00:21 UTC,200,[],http://esa.un.org/wpp/Excel-Data/DB02_Stock_Indicators/WPP2010_DB2_F01_TOTAL_POPULATION_BOTH_SEXES.XLS
+134,tax_collec2011_01@hawaii.gov,2013-02-15 11:35:09 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-01_rev3.zip
+139,SEATS_SEP11@hawaiitourismauthority.org,2013-02-15 11:10:10 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Sep-Nov 2011.xls
+140,SEATS_OCT11@hawaiitourismauthority.org,2013-02-15 11:10:12 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Oct-Dec 2011.xls
+141,SEATS_NOV11@hawaiitourismauthority.org,2013-02-15 11:10:13 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/Nov 2011 - Jan 2012.xls
+142,SEATS_DEC11@hawaiitourismauthority.org,2013-02-15 11:10:14 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Dec2011- Feb2012.xls
+143,TOUR_AUG11@hawaiitourismauthority.org,2013-02-15 11:10:26 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/aug11.xls
+144,TOUR_SEP11@hawaiitourismauthority.org,2013-02-15 11:10:28 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Sep11.xls
+145,TOUR_OCT11@hawaiitourismauthority.org,2013-02-15 11:10:29 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/oct11.xls
+146,tax_collec2011_02@hawaii.gov,2013-02-15 11:35:09 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-02_rev4.zip
+147,tax_collec2011_04@hawaii.gov,2013-02-15 11:35:10 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-04_rev2.zip
+148,tax_collec2011_05@hawaii.gov,2013-02-15 11:35:10 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-05_rev2.zip
+149,tax_collec2011_06@hawaii.gov,2013-02-15 11:35:11 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-06_rev.zip
+150,tax_collec2011_07@hawaii.gov,2013-02-15 11:35:11 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-07_rev.zip
+151,tax_collec2011_08@hawaii.gov,2013-02-15 11:35:11 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-08_rev.zip
+152,tax_collec2011_09@hawaii.gov,2013-02-15 11:35:12 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-09_rev2.zip
+153,tax_collec2011_10@hawaii.gov,2013-02-15 11:35:12 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-10_rev.zip
+154,tax_collec2011_03@hawaii.gov,2013-02-15 11:35:09 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-03_rev3.zip
+157,tax_GE2011_03@hawaii.gov,2013-02-15 11:35:49 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-03_rev3.zip
+158,tax_GE2011_04@hawaii.gov,2013-02-15 11:35:49 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-04_rev2.zip
+159,tax_GE2011_05@hawaii.gov,2013-02-15 11:35:50 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-05_rev2.zip
+160,tax_GE2011_06@hawaii.gov,2013-02-15 11:35:50 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-06_rev.zip
+161,tax_GE2011_07@hawaii.gov,2013-02-15 11:35:50 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-07_rev.zip
+162,tax_GE2011_08@hawaii.gov,2013-02-15 11:35:51 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-08_rev.zip
+163,tax_GE2011_09@hawaii.gov,2013-02-15 11:35:51 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-09_rev2.zip
+165,TOUR_NOV11@hawaiitourismauthority.org,2013-02-15 11:10:31 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Nov11 Revised.xlsx
+166,SEATS_JAN12@hawaiitourismauthority.org,2013-02-15 11:10:15 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jan-Mar 2012.xls
+170,tax_GE2011_10@hawaii.gov,2013-02-15 11:35:51 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-10_rev.zip
+171,TOUR_DEC11@hawaiitourismauthority.org,2013-02-15 11:10:34 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Dec 2011.xlsx
+172,SEATS_FEB12@hawaiitourismauthority.org,2013-02-15 11:10:17 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Feb_Apr 2012.xls
+173,TOUR_JAN12@hawaiitourismauthority.org,2013-02-15 11:10:37 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jan_2012.xlsx
+174,tax_collec2011_12@hawaii.gov,2013-02-15 11:35:13 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-12.zip
+175,tax_collec2011_11@hawaii.gov,2013-02-15 11:35:12 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-11_rev.zip
+176,tax_GE2011_11@hawaii.gov,2013-02-15 11:35:52 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-11_rev.zip
+177,SEATS_MAR12@hawaiitourismauthority.org,2013-02-15 11:10:18 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Mar-May 2012.xls
+178,2012@hiwi.org,2013-02-15 15:15:15 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_CES_JC2012.xls
+179,LF@hiwi.org,2013-02-15 15:15:34 UTC,200,[],https://www.hiwi.org/admin/gsipub/htmlarea/uploads/LFR_LAUS_LF.xls
+180,SEATS_APR12@hawaiitourismauthority.org,2013-02-15 11:10:19 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Apr-Jun 2012.xls
+181,TOUR_FEB12@hawaiitourismauthority.org,2013-02-15 11:10:40 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/reports/visitor-statistics/February 2012(1).xlsx
+182,tax_GE2011_12@hawaii.gov,2013-02-15 11:35:52 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2011-12.zip
+183,tax_collec2012_01@hawaii.gov,2013-02-15 11:35:13 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-01.zip
+184,tax_GE2012_01@hawaii.gov,2013-02-15 11:35:52 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-01.zip
+185,tax_collec2012_02@hawaii.gov,2013-02-15 11:35:13 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-02.zip
+186,TOUR_MAR12@hawaiitourismauthority.org,2013-02-15 11:10:43 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/March 2012.xlsx
+187,SEATS_MAY12@hawaiitourismauthority.org,2013-02-15 11:10:20 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/May - Jul 2012.xls
+188,TOUR_APR12@hawaiitourismauthority.org,2013-02-15 11:10:45 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/April 2012rev.xlsx
+189,SEATS_JUN12@hawaiitourismauthority.org,2013-02-15 11:10:21 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jun - Aug 2012.xls
+190,tax_GE2012_02@hawaii.gov,2013-02-15 11:35:53 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-02.zip
+191,tax_collec2012_03@hawaii.gov,2013-02-15 11:35:14 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-03.zip
+192,TOUR_MAY12@hawaiitourismauthority.org,2013-02-15 11:10:48 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/May 2012.xlsx
+193,tax_GE2012_03@hawaii.gov,2013-02-15 11:35:53 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-03.zip
+194,tax_collec2012_04@hawaii.gov,2013-02-15 11:35:14 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-04.zip
+195,SEATS_JUL12@hawaiitourismauthority.org,2013-02-15 11:10:22 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jul - Sep 2012.xls
+196,TOUR_JUN12@hawaiitourismauthority.org,2013-02-15 11:10:50 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jun12.xls
+198,tax_collec2012_05@hawaii.gov,2013-02-15 11:35:15 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-05.zip
+204,SEATS_AUG12@hawaiitourismauthority.org,2013-02-15 11:10:23 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Aug-Oct 2012.xls
+205,TOUR_HIST11@hawaiitourismauthority.org,2013-02-15 11:41:14 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/historical-data/2011 Monthly Final Highlights Revised.xls
+206,R@www.stat-search.boj.or.jp,2013-02-15 11:00:46 UTC,404,[],http://www.stat-search.boj.or.jp/ssi/html/nme_R031.20696.20121215052258.01.csv
+207,43A@bea.gov,2013-02-15 14:30:18 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=018D8525CDD85BF92276564BB578FE834B4D15BA98246EF90BD1E787157EC95600CA60FB3CBD2338996C1CEBDB8B6D522D82DE01FC205D9ADCA9FD9F60CDB80F
+208,TOUR_JUL12@hawaiitourismauthority.org,2013-02-15 11:10:52 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Jul12.xls
+210,tax_GE2012_04@hawaii.gov,2013-02-15 11:35:53 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-04.zip
+211,SEATS_SEP12@hawaiitourismauthority.org,2013-02-15 11:10:24 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Sep-Nov 2012.xls
+214,CA04@bea.gov,2013-02-15 14:05:34 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=EE03649ACB1211FB9ABBB6868FEE48175EF7D3FACC4A198E1DC2D974DD048628DF97C1FED11CB9CD5DF2BEFD071D34C6953ED9B2C55026C22E3465942EB73958
+215,SA04@bea.gov,2013-02-15 14:05:18 UTC,200,[],http://www.bea.gov/iTable/download.cfm?ext=csv&fid=297A947DE85F41E7A5220A5991A81B9F237E322EA85387CC78D73DC2F9C64800BE34DCDA0CE0F29C9624339A28E21543062ECBD3C009FD62128B5A2BA36E7997
+216,TOUR_AUG12@hawaiitourismauthority.org,2013-02-15 11:10:54 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/aug12.xls
+218,SEATS_OCT12@hawaiitourismauthority.org,2013-02-15 11:10:25 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Oct-Dec 2012.xls
+219,tax_GE2012_05@hawaii.gov,2013-02-15 11:35:54 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-05.zip
+220,tax_GE2012_06@hawaii.gov,2013-02-15 11:35:54 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-06.zip
+221,tax_collec2012_06@hawaii.gov,2013-02-15 11:35:15 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-06.zip
+222,tax_collec2012_07@hawaii.gov,2013-02-15 11:35:15 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-07_rev.zip
+223,TOUR_FINAL@hawaiitourismauthority.org,2013-02-15 11:40:10 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/historical-data/HAWAII_HISTORICAL_2010r.xlsx
+224,TOUR_SEP12@hawaiitourismauthority.org,2013-02-15 11:10:56 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Sep12.xls
+225,SEATS_NOV12@hawaiitourismauthority.org,2013-02-15 11:10:26 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Nov 2012-Jan 2013.xls
+226,STEO@eia.gov,2013-02-15 11:30:34 UTC,200,[],http://www.eia.gov/forecasts/steo/xls/STEO_m.xls
+227,LTEO_B@eia.gov,2013-02-15 11:30:36 UTC,200,[],http://www.eia.gov/forecasts/aeo/er/excel/aeotab_1.xlsx
+230,CPI10@e-stat.go.jp,2013-02-15 11:00:29 UTC,200,[],http://www.e-stat.go.jp/SG1/estat/Csvdl.do?sinfid=000011288575
+231,TOUR_OCT12@hawaiitourismauthority.org,2013-02-15 11:10:58 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/Oct12.xls
+232,SEATS_DEC12@hawaiitourismauthority.org,2013-02-15 11:10:27 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Dec 2012-Feb 2013.xls
+233,tax_GE2012_07@hawaii.gov,2013-02-15 11:35:54 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-07_rev.zip
+234,tax_collec2012_08@hawaii.gov,2013-02-15 11:35:16 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-08_rev.zip
+235,TOUR_NOV12@hawaiitourismauthority.org,2013-02-15 11:11:00 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/nov12.xls
+236,tax_GE2012_08@hawaii.gov,2013-02-15 11:35:54 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-08_rev.zip
+237,tax_GE2012_09@hawaii.gov,2013-02-15 11:35:55 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-09_rev.zip
+238,tax_collec2012_09@hawaii.gov,2013-02-15 11:35:16 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-09_rev.zip
+239,SEATS_JAN13@hawaiitourismauthority.org,2013-02-15 11:10:28 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Jan-Mar 2013(3).xls
+240,TOUR_DEC12@hawaiitourismauthority.org,2013-02-15 11:11:02 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/monthly-visitors/dec12.xls
+241,tax_GE2012_10@hawaii.gov,2013-02-15 11:35:55 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-10.zip
+242,tax_collec2012_10@hawaii.gov,2013-02-15 11:35:16 UTC,200,[],http://www6.hawaii.gov/tax/monthly/2012-10.zip
+243,SEATS_FEB13@hawaiitourismauthority.org,2013-02-15 11:10:29 UTC,200,[],http://www.hawaiitourismauthority.org/default/assets/File/research/airline-capacity/Feb-Apr 2013.xls
