@@ -360,6 +360,10 @@ class Series < ActiveRecord::Base
     data_hash
   end
   
+  def Series.new_from_data(frequency, data)
+    Series.new_transformation("One off data", data, frequency)
+  end
+  
   def Series.new_transformation(name, data, frequency)
     Series.new(
       :name => name,
@@ -777,6 +781,23 @@ class Series < ActiveRecord::Base
   
   def last_data_added_string
     last_data_added.strftime("%B %e, %Y")
+  end
+  
+  def Series.run_all_dependencies(series_list, already_run)
+    series_list.each do |s_name|
+      next unless already_run.index(s_name).nil?
+      s = s_name.ts
+      begin
+        already_run = Series.run_all_dependencies(s.new_dependencies, already_run)
+      rescue
+        puts "THIS IS THE ONE THAT BROKE"
+        puts s.id
+        puts s.name
+      end
+      s.reload_sources
+      already_run.push(s_name)
+    end
+    return already_run
   end
   
   def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )

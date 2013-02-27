@@ -146,11 +146,11 @@ end
 
 #alternatives in case of emergency
 
-# every 1.day, :at => "12:00 pm" do
+# every 1.day, :at => "12:05 pm" do
 #   rake "update_bea_links"
 # end
 # 
-# every 1.day, :at => "12:00 pm" do
+# every 1.day, :at => "12:05 pm" do
 #   rake "jp_upd_a"
 #   rake "jp_upd_q"
 #   rake "jp_upd_m"

@@ -48,7 +48,7 @@ google.visualization.events.addListener(chart, 'select', function() {
 		<%= link_to 'Blog Chart', :action => 'blog_graph', :id => @series %> 
 
 		<div id="chart_div"></div>
-
+		<div id="notes"><p><%= @series.investigation_notes %></p></div>
 
 	</div>
 </div>

@@ -89,7 +89,14 @@ module SeriesRelationship
       #puts series.name
       fod = series.first_order_dependencies
       fod.each do |dependent_series|
-        circular_series.push(dependent_series) unless dependent_series.ts.first_order_dependencies.index(series.name).nil?
+        begin
+          circular_series.push(dependent_series) unless dependent_series.ts.first_order_dependencies.index(series.name).nil?
+        rescue
+          puts "THIS BROKE"
+          puts dependent_series
+          puts series.name
+          puts series.id
+        end
       end
     end
 
@@ -120,10 +127,11 @@ module SeriesRelationship
   
   def reload_sources
     begin
-      self.data_sources_by_last_run.each do |ds|
-        ds.print_eval_statement
-        ds.reload_source
-      end
+      puts self.name
+      # self.data_sources_by_last_run.each do |ds|
+      #   ds.print_eval_statement
+      #   ds.reload_source
+      # end
       return 0
     rescue Exception
       puts "SOMETHING BROKE -----------------------------------------------"

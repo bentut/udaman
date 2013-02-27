@@ -53,11 +53,12 @@ end
 task :const_upd_q => :environment do
   t = Time.now
 	const_q = {
+	  
 		"KNRSDNS@HON.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-25", :row => "block:6:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"KNRSDNS@HAW.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-26", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"KNRSDNS@MAU.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-27", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"KNRSDNS@KAU.Q" => %Q|Series.load_from_download  "QSER_G@hawaii.gov", { :file_type => "xls", :start_date => "1993-01-01", :sheet => "G-28", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
-		"KPGOVNS@HI.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1998-01-01", :sheet => "E-1", :row => "increment:38:1", :col => 7, :frequency => "Q" }|, 
+		"KPGOVNS@HI.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1998-01-01", :sheet => "E-1", :row => "increment:39:1", :col => 7, :frequency => "Q" }|, 
 		"KNRSDNS@HI.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-3", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"KNRSDSGFNS@HI.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-4", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
 		"KNRSDMLTNS@HI.Q" => %Q|Series.load_from_download  "QSER_E@hawaii.gov", { :file_type => "xls", :start_date => "1982-01-01", :sheet => "E-5", :row => "block:5:1:4", :col => "repeat:2:5", :frequency => "Q" }|, 
@@ -378,8 +379,9 @@ task :const_identities => :environment do
   
   "PMKBSGF@HON.Q".ts_eval= %Q|"PMKBSGF@HON.M".ts.aggregate(:quarter, :average)|
   "PMKBCON@HON.Q".ts_eval= %Q|"PMKBCON@HON.M".ts.aggregate(:quarter, :average)|
-  "PMKBSGF@HON.Q".ts_eval= %Q|"PMKBSGF@HON.Q".ts.trim("1980-01-01","1986-12-01")|
-  "PMKBCON@HON.Q".ts_eval= %Q|"PMKBCON@HON.Q".ts.trim("1980-01-01","1986-12-01")|
+  # Not sure why these were even here. Just circular references
+  # "PMKBSGF@HON.Q".ts_eval= %Q|"PMKBSGF@HON.Q".ts.trim("1980-01-01","1986-12-01")|
+  # "PMKBCON@HON.Q".ts_eval= %Q|"PMKBCON@HON.Q".ts.trim("1980-01-01","1986-12-01")|
   "PMKRCON@HON.Q".ts_eval=%Q|"PMKRCON@HON.Q".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/prud/seasadj/prud_sa.xls", "prud_sa" | 
   "PMKRSGF@HON.Q".ts_eval=%Q|"PMKRSGF@HON.Q".ts.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/misc/prud/seasadj/prud_sa.xls", "prud_sa" |
 
