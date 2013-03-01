@@ -5,7 +5,6 @@ class IntegerPatternProcessor
   end
 
   def compute(index, cached_files = nil, handle = nil, sheet = nil)
-    
     return Integer(@integer_pattern)
   rescue
     p = @integer_pattern.split ":"

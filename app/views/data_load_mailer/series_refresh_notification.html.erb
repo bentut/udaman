@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+	<h3>Errors</h3>
+	<p>
+       <% @errors.each do |line| %>
+          <%= line %><br />
+       <% end %>
+    </p>
+    
+	<h3>Circular Series</h3>
+    <p>
+       <% @circular_series.each do |line| %>
+          <%= line %><br />
+       <% end %>
+    </p>
+	<h3>Stale DataSources</h3>
+    <p>
+       <% @stale_data_sources.each do |ds| %>
+          <%= ds.id %> : <%= ds.eval %><br />
+       <% end %>
+    </p>
+	<h3>Empty DataSources</h3>
+	<p>implement later</p>
+
+  </body>
+</html>

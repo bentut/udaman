@@ -103,7 +103,7 @@ class DownloadPreprocessor
     cell_value = spreadsheet[row-1][col-1].to_s if options[:sheet].nil?
     cell_value = spreadsheet.cell(row,col).to_s unless options[:sheet].nil?
     options[:header_name].split("[or]").each do |header|
-      #puts "Searching for #{header} in row:#{row} col:#{col}"
+      #puts "Searching for #{header} in row:#{row} col:#{col} / VALUE: #{cell_value}"
       result = match(cell_value, header) if match_type == :hiwi
       result = match_prefix(cell_value, header) if match_type == :prefix
       result = match_trim_elipsis(cell_value,header) if match_type == :trim_elipsis

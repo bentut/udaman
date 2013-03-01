@@ -5,6 +5,12 @@ class DataSource < ActiveRecord::Base
   belongs_to :series
   has_many :data_points
   
+  composed_of :last_run,
+                :class_name => "Time",
+                :mapping => %w(last_run_in_seconds to_r),
+                :constructor => Proc.new { |t| Time.at(t) },
+                :converter => Proc.new { |t| t.is_a?(Time) ? t : Time.at(t/1000.0) }
+                
   #DataSource.where("eval LIKE '%load_from%'").all.each {|ds| puts "#{ds.series.name} - #{ds.eval}" }
   
     def DataSource.type_buckets
@@ -129,11 +135,7 @@ class DataSource < ActiveRecord::Base
 
     def create_from_form
       Series.eval Series.find(self.series_id).name, self.eval
-  #    puts "OK!"
       return true
-    # rescue Exception
-    #   puts "PROBLEM!!"
-    #   return false
     end
 
     def setup
@@ -157,17 +159,6 @@ class DataSource < ActiveRecord::Base
       self.series.update_data(s.data, self)
       self.update_attributes(:description => s.name, :last_run => Time.now, :runtime => (Time.now - t))
     end
-    
-    # def mark_history
-    #   #puts "SOURCE HISTORY-----------------------"
-    #   dates = data.keys
-    #   #puts dates.sort
-    #   self.data_points.each do |dp| 
-    #     #puts "history: #{dp.history}, date: #{dp.date_string}"
-    #     dp.update_attributes(:history => nil) if (!dp.history.nil? and !dates.index(dp.date_string).nil?) 
-    #     dp.update_attributes(:history => Time.now) if (dp.history.nil? and dates.index(dp.date_string).nil?)
-    #   end
-    # end
     
     # DataSource.where("eval LIKE '%bls_histextend_date_format_correct.xls%'").each {|ds| ds.mark_as_pseudo_history}
     
@@ -209,14 +200,7 @@ class DataSource < ActiveRecord::Base
     rescue
       return false
     end
-    
-    # def delete_no_series
-    #   self.data_points.each do |dp|
-    #     dp.delete
-    #   end    
-    #   super
-    # end
-    
+        
     def delete_data_points
       self.data_points.each do |dp|
         dp.delete
@@ -224,14 +208,8 @@ class DataSource < ActiveRecord::Base
     end
     
     def delete
-      #series_id = self.series_id
       delete_data_points
       super
-      #s = Series.find series_id
-  #    puts "Series name: #{s.name}, Sources:#{s.data_sources_by_last_run.count}"
-  
-    #put this in a separate function
-      #s.data_sources_by_last_run.each {|ds| ds.reload_source}
     end
 
 
@@ -255,13 +233,7 @@ class DataSource < ActiveRecord::Base
     end
     
     def print_eval_statement
-      #might not need to do something different for seasonal adjustment anymore
-      #if self.eval.index("apply_seasonal_adjustment").nil?
-        #puts "\"#{self.series.name}\".ts_append_eval %Q|#{self.eval}|" if self.mode == "append"
-        puts "\"#{self.series.name}\".ts_eval= %Q|#{self.eval}|" #if self.mode == "set"
-      # else
-      #         puts self.eval
-      #       end
+      puts "\"#{self.series.name}\".ts_eval= %Q|#{self.eval}|"
     end
 
     def set_dependencies

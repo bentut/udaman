@@ -783,21 +783,28 @@ class Series < ActiveRecord::Base
     last_data_added.strftime("%B %e, %Y")
   end
   
-  def Series.run_all_dependencies(series_list, already_run)
+  #currently runs in 3 hrs (for all series..if concurrent series could go first, that might be nice)
+  #could do everything with no dependencies first and do all of those in concurrent fashion...
+  #to find errors, or broken series, maybe update the ds with number of data points loaded on last run?
+  
+  def Series.run_all_dependencies(series_list, already_run, errors, eval_statements)
     series_list.each do |s_name|
-      next unless already_run.index(s_name).nil?
+      next unless already_run[s_name].nil?
       s = s_name.ts
       begin
-        already_run = Series.run_all_dependencies(s.new_dependencies, already_run)
+        Series.run_all_dependencies(s.new_dependencies, already_run, errors, eval_statements)
       rescue
         puts "THIS IS THE ONE THAT BROKE"
         puts s.id
         puts s.name
       end
-      s.reload_sources
-      already_run.push(s_name)
+      errors.concat s.reload_sources
+      eval_statements.concat(s.data_sources_by_last_run.map {|ds| ds.get_eval_statement})
+      puts "---------count-------------------"
+      puts errors.count
+      puts eval_statements.count
+      already_run[s_name] = true
     end
-    return already_run
   end
   
   def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )

@@ -124,18 +124,18 @@ module SeriesRelationship
     end
     return 1
   end
-  
+    
   def reload_sources
-    begin
-      puts self.name
-      # self.data_sources_by_last_run.each do |ds|
-      #   ds.print_eval_statement
-      #   ds.reload_source
-      # end
-      return 0
-    rescue Exception
-      puts "SOMETHING BROKE -----------------------------------------------"
+    errors = []
+    self.data_sources_by_last_run.each do |ds| 
+      begin
+        ds.reload_source
+      rescue Exception
+        errors.push("DataSource #{ds.id} for #{self.name} : #{self.id}")
+        puts "SOMETHING BROKE with source #{ds.id} in series #{self.name} (#{self.id})-----------------------------------------------"
+      end
     end
+    return errors
   end
   
   def print_source_eval_statements
