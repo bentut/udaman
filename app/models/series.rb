@@ -806,56 +806,7 @@ class Series < ActiveRecord::Base
       already_run[s_name] = true
     end
   end
-  
-  def Series.smart_update(series_names_finished = [], series_to_finish = Series.all, depth = 0 )
-    return series_to_finish if series_to_finish.count == 0 or depth == 25
-    series_to_finish_new = []
-    series_to_finish.each do |series|
-      if series.open_dependencies(series_names_finished).count == 0
-        series_names_finished.push series.name
-        series.reload_sources      
-      else
-        series_to_finish_new.push series
-      end
-    end
-    puts "# Series To finish: #{series_to_finish_new.count}"
-    #puts series_names_finished.count
-    puts "# -----end------"
-    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n"
-    if (series_to_finish.count == series_to_finish_new.count)
-      # series_to_finish.each do |stuck|
-      #   puts stuck.name
-      # end
-      return series_to_finish_new
-    end
-    return Series.smart_update(series_names_finished, series_to_finish_new, depth+1)
-  end
-  
-  def Series.output_database_rebuild_statements(series_names_finished = [], series_to_finish = Series.all, depth = 0 )
-    return series_to_finish if series_to_finish.count == 0 or depth == 25
-    series_to_finish_new = []
-    series_to_finish.each do |series|
-      if series.open_dependencies(series_names_finished).count == 0
-        series_names_finished.push series.name
-        #puts "# #{series.name}"
-        series.print_source_eval_statements
-      else
-        series_to_finish_new.push series
-      end
-    end
-    puts "# Series To finish: #{series_to_finish_new.count}"
-    #puts series_names_finished.count
-    puts "# -----end------"
-    puts "\n\n\n\n\n\n\n\n\n\n\n\n\n"
-    if (series_to_finish.count == series_to_finish_new.count)
-      # series_to_finish.each do |stuck|
-      #   puts stuck.name
-      # end
-      return series_to_finish_new
-    end
-    return Series.output_database_rebuild_statements(series_names_finished, series_to_finish_new, depth+1)
-  end
-  
+    
   def Series.missing_from_aremos
     name_buckets = {}
     (AremosSeries.all_names - Series.all_names).each {|name| name_buckets[name[0]] ||= []; name_buckets[name[0]].push(name)}

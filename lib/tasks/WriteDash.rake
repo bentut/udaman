@@ -64,6 +64,13 @@ end
 
 task :write_ur_dash => :environment do
   t = Time.now
+  
+  #now just updating these on the fly
+  series_to_refresh = ["UR@HI.M", "UR@HON.M", "UR@HAW.M", "UR@KAU.M", "UR@MAU.M"]
+  eval_statements = []
+  errors = []
+  Series.run_all_dependencies(series_to_refresh, {}, errors, eval_statements)
+  
   post_name = "Unemployment Rates in Hawaii (Seasonally Adjusted)"
   post_address ='http://www.uhero.hawaii.edu/123'
   new_data_series = {}
