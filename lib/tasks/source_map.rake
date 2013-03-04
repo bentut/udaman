@@ -44,8 +44,8 @@ task :reload_all_series => :environment do
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["complete series reload", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
   File.open('lib/tasks/REBUILD.rb', 'w') {|file| eval_statements.each {|line| file.puts(line)} }
 
-  #719527 is 1970-01-01 in mysql days (actually one day earlier because of HST = -8 GMT)
-  inactive_ds = DataSource.where("FROM_DAYS(719527 + TRUNCATE(last_run_in_seconds,0) / 3600 / 24)  < FROM_DAYS(TO_DAYS(NOW()))").order(:last_run_in_seconds)
+  #719528 is 1970-01-01 in mysql days, -10 does the adjustment for HST
+  inactive_ds = DataSource.where("FROM_DAYS(719528 + (last_run_in_seconds / 3600 - 10) / 24)  < FROM_DAYS(TO_DAYS(NOW()))").order(:last_run_in_seconds)
 
   DataLoadMailer.series_refresh_notification(circular, inactive_ds, eval_statements.count, errors).deliver  
 end
