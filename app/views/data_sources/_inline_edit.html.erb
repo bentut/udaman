@@ -1,0 +1,15 @@
+<%= form_for ds, :remote=> true, :url => { :controller => "data_sources", :id => ds.id, :action => "inline_update"} do |f| %>
+<%= f.text_field :eval, :class => "textbox", :size => 170 %>
+
+ 
+<%= f.submit "update", :class=>"updatebox", :id => "ds_submit_#{ds.id}" %>
+<%=  notice unless defined?(notice).nil?%>
+ | <%= link_to ds.series.name, ds.series, :target => "_blank" %>
+
+<% end %>
+
+<%= javascript_tag do %>
+  $('#edit_data_source_<%= ds.id %>').bind("ajax:complete", function(et, e){
+    $("#tr_ds_<%= ds.id%>").html(e.responseText); // insert content
+  });
+<% end %>

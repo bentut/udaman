@@ -42,6 +42,22 @@ class DataSourcesController < ApplicationController
       end
   end
   
+  def inline_update
+    params.each { |key,value| puts "#{key}: #{value}" }
+    
+    @data_source = DataSource.find(params[:id])
+     if @data_source.update_attributes(:eval => params[:data_source][:eval])
+        begin
+          @data_source.reload_source
+          render :partial => "inline_edit.html", :locals => {:ds => @data_source, :notice => "OK, (#{@data_source.series.aremos_diff})"}
+        rescue
+          render :partial => "inline_edit.html", :locals => {:ds => @data_source, :notice => "BROKE ON LOAD"}
+        end
+      else
+        render :partial => "inline_edit.html", :locals => {:ds => @data_source, :notice => "BROKE ON SAVE"}
+      end
+  end
+  
   def create
     params.each { |key,value| puts "#{key}: #{value}" }
     @data_source = DataSource.new(params[:data_source])

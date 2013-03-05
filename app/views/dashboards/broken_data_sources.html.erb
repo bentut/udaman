@@ -1,0 +1,15 @@
+<style>
+input.textbox {font-size:9px;}
+input.updatebox {font-size:8px; border:1px solid black}
+</style>
+
+<h1>Broken Data Sources</h1>
+<h3>These data sources have not been active today</h3>
+
+<table>
+<% @inactive_ds.each do |ds| %>
+<div id="tr_ds_<%= ds.id %>">
+<%= render :partial => "data_sources/inline_edit", :locals => { :ds => ds }%>
+</div>
+<% end %>
+</table>
