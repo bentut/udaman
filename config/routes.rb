@@ -65,6 +65,7 @@ UheroDb::Application.routes.draw do
   resources :data_lists 
 
   match 'broken_data_sources' => 'dashboards#broken_data_sources'
+  match 'search_data_sources' => 'dashboards#search_data_sources'
   match 'send_prognoz_export' => 'prognoz_data_files#send_prognoz_export'
   match 'investigate' => 'dashboards#investigate'
   match 'investigate_visual' => 'dashboards#investigate_visual'

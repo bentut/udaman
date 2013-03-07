@@ -50,7 +50,12 @@ class DownloadsCache
       begin
         excel.default_sheet = @sheet unless excel.default_sheet == @sheet 
       rescue RangeError
-        raise "sheet '#{@sheet}' does not exist in workbook '#{@dsd.save_path_flex}' [Handle: #{@handle}]"
+        whitespace_hidden_sheet_index = (excel.sheets.map {|sheet| sheet.strip.downcase}).index(@sheet.downcase)
+        if whitespace_hidden_sheet_index.nil?
+          raise "sheet '#{@sheet}' does not exist in workbook '#{@dsd.save_path_flex}' [Handle: #{@handle}]"
+        else
+          excel.default_sheet = excel.sheets[whitespace_hidden_sheet_index]
+        end
       end
     end
     @xls[@cache_handle] ||= {}

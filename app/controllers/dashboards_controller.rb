@@ -24,6 +24,12 @@ class DashboardsController < ApplicationController
     #this is also in the rake file. May want to match
     @inactive_ds = DataSource.where("FROM_DAYS(719528 + (last_run_in_seconds / 3600 - 10) / 24)  < FROM_DAYS(TO_DAYS(NOW()))").order(:last_run_in_seconds)
   end
+
+  def search_data_sources
+    #this is also in the rake file. May want to match
+    @inactive_ds = DataSource.where("eval LIKE '%TOUR_%b%y%sheet_num%'").each {|ds| ds.print_eval_statement}
+    render "broken_data_sources"
+  end
   
   def investigate
     #@maybe_ok_count = Series.where("aremos_missing = 0 AND ABS(aremos_diff) < 0.1 AND ABS(aremos_diff) > 0.0").count
