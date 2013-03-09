@@ -794,15 +794,12 @@ class Series < ActiveRecord::Base
       begin
         Series.run_all_dependencies(s.new_dependencies, already_run, errors, eval_statements)
       rescue
-        puts "THIS IS THE ONE THAT BROKE"
+        puts "-------------------THIS IS THE ONE THAT BROKE--------------------"
         puts s.id
         puts s.name
       end
       errors.concat s.reload_sources
       eval_statements.concat(s.data_sources_by_last_run.map {|ds| ds.get_eval_statement})
-      puts "---------count-------------------"
-      puts errors.count
-      puts eval_statements.count
       already_run[s_name] = true
     end
   end

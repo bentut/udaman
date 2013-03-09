@@ -19,7 +19,7 @@ module SeriesDataAdjustment
   end
 
   def get_last_incomplete_january_datestring
-    last_date = self.data.keys.sort[-1]
+    last_date = (self.data.reject {|key, val| val.nil?}).keys.sort[-1]
     #BT 2013-02-13 Changing the code to just always give the most recent january. regardless of whether the year is complete or not. Not sure if this will screw
     #up other things, but seems like it should work in more cases
     #return last_date[5..6] == "12" ? "#{last_date[0..3].to_i + 1}-01-01" : "#{last_date[0..3].to_i}-01-01"

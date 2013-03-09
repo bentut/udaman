@@ -81,10 +81,24 @@ UheroDb::Application.routes.draw do
   match 'permits/years/:num_years' => 'dashboards#permits'
   match 'prudential' => 'dashboards#prudential'
   match 'prudential/years/:num_years' => 'dashboards#prudential'
+
   match 'employment' => 'dashboards#employment'
   match 'employment/years/:num_years' => 'dashboards#employment'
   match 'employment_us' => 'dashboards#employment_us'
   match 'employment_us/years/:num_years' => 'dashboards#employment_us'
+  match 'employment_hon' => 'dashboards#employment_hon'
+  match 'employment_hon/years/:num_years' => 'dashboards#employment_hon'
+  match 'employment_mau' => 'dashboards#employment_mau'
+  match 'employment_mau/years/:num_years' => 'dashboards#employment_mau'
+  match 'employment_haw' => 'dashboards#employment_haw'
+  match 'employment_haw/years/:num_years' => 'dashboards#employment_haw'
+  match 'employment_kau' => 'dashboards#employment_kau'
+  match 'employment_kau/years/:num_years' => 'dashboards#employment_kau'
+
+  match 'income' => 'dashboards#income'
+  
+
+
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
   # The priority is based upon order of creation:

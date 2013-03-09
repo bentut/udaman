@@ -27,7 +27,7 @@ class DashboardsController < ApplicationController
 
   def search_data_sources
     #this is also in the rake file. May want to match
-    @inactive_ds = DataSource.where("eval LIKE '%TOUR_%b%y%sheet_num%'").each {|ds| ds.print_eval_statement}
+    @inactive_ds = DataSource.where("eval LIKE '%census_interpolate%'").each {|ds| ds.print_eval_statement}
     render "broken_data_sources"
   end
   
@@ -348,6 +348,175 @@ class DashboardsController < ApplicationController
     'EGVLC@US.M',
     ]
     dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  def employment_hon
+    @series_to_chart = [
+    'E_NF@HON.M',
+    'E_PR@HON.M',
+    'ECT@HON.M',
+    'EMN@HON.M',
+    'EWT@HON.M',
+    'ERT@HON.M',
+    'E_TU@HON.M',
+    'EIF@HON.M',
+    'EFI@HON.M',
+    'ERE@HON.M',
+    'EPS@HON.M',
+    'EMA@HON.M',
+    'EAD@HON.M',
+    'EED@HON.M',
+    'EHC@HON.M',
+    'EAF@HON.M',
+    'EAFAC@HON.M',
+    'EAFFD@HON.M',
+    'EOS@HON.M',
+    'EGV@HON.M',
+    'EGVFD@HON.M',
+    'EGVST@HON.M',
+    'EGVLC@HON.M',
+    ]
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  def employment_haw
+    @series_to_chart = [
+    'E_NF@HAW.M',
+    'E_PR@HAW.M',
+    'ECT@HAW.M',
+    'EMN@HAW.M',
+    'EWT@HAW.M',
+    'ERT@HAW.M',
+    'E_TU@HAW.M',
+    'EIF@HAW.M',
+    'EFI@HAW.M',
+    'ERE@HAW.M',
+    'EPS@HAW.M',
+    'EMA@HAW.M',
+    'EAD@HAW.M',
+    'EED@HAW.M',
+    'EHC@HAW.M',
+    'EAF@HAW.M',
+    'EAFAC@HAW.M',
+    'EAFFD@HAW.M',
+    'EOS@HAW.M',
+    'EGV@HAW.M',
+    'EGVFD@HAW.M',
+    'EGVST@HAW.M',
+    'EGVLC@HAW.M',
+    ]
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  
+  def employment_mau
+    @series_to_chart = [
+    'E_NF@MAU.M',
+    'E_PR@MAU.M',
+    'ECT@MAU.M',
+    'EMN@MAU.M',
+    'EWT@MAU.M',
+    'ERT@MAU.M',
+    'E_TU@MAU.M',
+    'EIF@MAU.M',
+    'EFI@MAU.M',
+    'ERE@MAU.M',
+    'EPS@MAU.M',
+    'EMA@MAU.M',
+    'EAD@MAU.M',
+    'EED@MAU.M',
+    'EHC@MAU.M',
+    'EAF@MAU.M',
+    'EAFAC@MAU.M',
+    'EAFFD@MAU.M',
+    'EOS@MAU.M',
+    'EGV@MAU.M',
+    'EGVFD@MAU.M',
+    'EGVST@MAU.M',
+    'EGVLC@MAU.M',
+    ]
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  
+  def employment_kau
+    @series_to_chart = [
+    'E_NF@KAU.M',
+    'E_PR@KAU.M',
+    'ECT@KAU.M',
+    'EMN@KAU.M',
+    'EWT@KAU.M',
+    'ERT@KAU.M',
+    'E_TU@KAU.M',
+    'EIF@KAU.M',
+    'EFI@KAU.M',
+    'ERE@KAU.M',
+    'EPS@KAU.M',
+    'EMA@KAU.M',
+    'EAD@KAU.M',
+    'EED@KAU.M',
+    'EHC@KAU.M',
+    'EAF@KAU.M',
+    'EAFAC@KAU.M',
+    'EAFFD@KAU.M',
+    'EOS@KAU.M',
+    'EGV@KAU.M',
+    'EGVFD@KAU.M',
+    'EGVST@KAU.M',
+    'EGVLC@KAU.M',
+    ]
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+
+  def income
+    @series_to_chart = [
+    'Y@HI.Q',
+    'YL@HI.Q',
+    'YLAD@HI.Q',
+    'YLAE@HI.Q',
+    'YLAF@HI.Q',
+    'YLAGFA@HI.Q',
+    'YLAGFF@HI.Q',
+    'YLCT@HI.Q',
+    'YLED@HI.Q',
+    'YLFI@HI.Q',
+    'YLGV@HI.Q',
+    'YLGVFD@HI.Q',
+    'YLGVML@HI.Q',
+    'YLHC@HI.Q',
+    'YLIF@HI.Q',
+    'YLMA@HI.Q',
+    'YLMI@HI.Q',
+    'YLMN@HI.Q',
+    'YLMNDR@HI.Q',
+    'YLMNND@HI.Q',
+    'YLOS@HI.Q',
+    'YLPS@HI.Q',
+    'YLRE@HI.Q',
+    'YLRT@HI.Q',
+    'YLTW@HI.Q',
+    'YLUT@HI.Q',
+    'YLWT@HI.Q',
+    'YL_GVSL@HI.Q',
+    'YL_NF@HI.Q',
+    'YL_PR@HI.Q',
+    ]
+    dates = set_dates_q(params)
     @start_date = dates[:start_date]
     @end_date = dates[:end_date]
     render "tableview"
