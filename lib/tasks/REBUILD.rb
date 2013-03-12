@@ -219,15 +219,15 @@
 "CPICORE@US.A".ts_eval= %Q|"CPICORENS@US.M".ts.aggregate(:year, :average)|
 "CPICORE@US.M".ts_eval= %Q|"CPICORE@US.M".tsn.load_from_bls("CUSR0000SA0L1E", "M")|
 "CPICORE@US.Q".ts_eval= %Q|"CPICORE@US.M".ts.aggregate(:quarter, :average)|
-"CSCFNS@JP.Q".ts_eval= %Q|"CSCFNS@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_q.xls"|
 "CSCFNS@JP.Q".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|
 "CSCFNS@JP.Q".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|
+"CSCFNS@JP.Q".ts_eval= %Q|"CSCFNS@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_q.xls"|
 "CSCF@JP.A".ts_eval= %Q|"CSCFNS@JP.Q".ts.aggregate(:year, :average)|
-"CSCF@JP.Q".ts_eval= %Q|"CSCF@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_q.xls"|
 "CSCF@JP.Q".ts_eval= %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|
 "CSCF@JP.Q".ts_eval= %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|
-"CSCFNS@JP.M".ts_eval= %Q|"CSCFNS@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
+"CSCF@JP.Q".ts_eval= %Q|"CSCF@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_q.xls"|
 "CSCFNS@JP.M".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:95:1", :col => 2, :frequency => "M" }|
+"CSCFNS@JP.M".ts_eval= %Q|"CSCFNS@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
 "E&@HAW.A".ts_eval= %Q|"E&@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_a.xls"|
 "E&@HAW.M".ts_eval= %Q|"E&@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_m.xls"|
 "E&@HAW.Q".ts_eval= %Q|"E&@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_q.xls"|
@@ -4377,7 +4377,7 @@
 "Y@HI.Q".ts_eval= %Q|"Y@HI.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/inc_hist.xls", "HI_Q"|
 "Y@HI.Q".ts_eval= %Q|Series.load_from_download "SQ5N@bea.gov", { :file_type => "csv", :start_date => "1990-01-01", :row => 7, :col => "increment:5:1", :frequency => "Q" }|
 "NR@HI.A".ts_eval= %Q|"NR@HI.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/Manual/census_imp.xls"|
-"NR@HI.Q".ts_eval= %Q|"NR@HI.A".ts.census_interpolate(:quarter)|
+"NR@HI.Q".ts_eval= %Q|  "NR@HI.A".ts.trim("1951-01-01").census_interpolate(:quarter) |
 "YPC@HI.Q".ts_eval= %Q|"Y@HI.Q".ts / "NR@HI.Q".ts |
 "FAMSIZE2@HON.Q".ts_eval= %Q|"FAMSIZE@HON.Q".ts|
 "FAMSIZE2@HON.Q".ts_eval= %Q| "FAMSIZE2@HON.Q".ts.extend_first_data_point_back_to("1970-01-01")|
@@ -5573,8 +5573,8 @@
 "NRM@HI.A".ts_eval= %Q|"NRM@HI.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/Manual/census_imp.xls"|
 "NRC@HI.A".ts_eval= %Q|"NR@HI.A".ts - "NRM@HI.A".ts|
 "LFPR@HI.A".ts_eval= %Q|"LF@HI.A".ts / "NRC@HI.A".ts * 100|
-"NRM@HI.Q".ts_eval= %Q|"NRM@HI.A".ts.census_interpolate(:quarter)|
-"NRC@HI.Q".ts_eval= %Q|"NR@HI.Q".ts - "NRM@HI.Q".ts|
+"NRM@HI.Q".ts_eval= %Q|"NRM@HI.A".ts.trim("1951-01-01").census_interpolate(:quarter) |
+"NRC@HI.Q".ts_eval= %Q|  "NR@HI.Q".ts - "NRM@HI.Q".ts |
 "LFPR@HI.Q".ts_eval= %Q|"LF@HI.Q".ts / "NRC@HI.Q".ts * 100|
 "NRC@HON.A".ts_eval= %Q|"NR@HON.A".ts - "NRM@HI.A".ts|
 "LFPR@HON.A".ts_eval= %Q|"LF@HON.A".ts / "NRC@HON.A".ts * 100|
@@ -5920,9 +5920,9 @@
 "PCNS@HI.D".ts_eval= %Q|Series.load_from_download(  "tour_PC@hawaii.gov", { :file_type=>"xls", :start_date=>"2009-08-31", :sheet=>"Total", :row=>"increment:5:1", :col=>4, :frequency=>"D" })/1|
 "PCNS@HI.M".ts_eval= %Q|"PCNS@HI.D".ts.aggregate(:month, :sum) / 1000|
 "PC@HI.M".ts_eval= %Q|"PC@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/pc_sa_hist.xls"|
-"PC@HI.M".ts_eval= %Q|"PC@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
-"PC@HI.M".ts_eval= %Q| "PC@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata")|
 "PC@HI.M".ts_eval= %Q|"PC@HI.M".ts.apply_seasonal_adjustment :additive|
+"PC@HI.M".ts_eval= %Q|"PC@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-09-01", "2001-12-01")|
+"PC@HI.M".ts_eval= %Q| "PC@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata")|
 "PCNS@HI.Q".ts_eval= %Q|"PCNS@HI.M".ts.aggregate(:quarter, :sum)|
 "PC@HI.A".ts_eval= %Q|"PC@HI.M".ts.aggregate(:year, :sum)|
 "PC@HI.A".ts_eval= %Q|"PCNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -5979,9 +5979,9 @@
 "PCDMNS@HI.D".ts_eval= %Q|"PCDMNS@HI.D".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/pc_upd_hist.xls"|
 "PCDMNS@HI.M".ts_eval= %Q|"PCDMNS@HI.D".ts.aggregate(:month, :sum) / 1000|
 "PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/pc_sa_hist.xls"|
-"PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
-"PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata")|
 "PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".ts.apply_seasonal_adjustment :additive|
+"PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-09-01", "2001-12-01")|
+"PCDM@HI.M".ts_eval= %Q|"PCDM@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata")|
 "PCDMNS@HI.Q".ts_eval= %Q|"PCDMNS@HI.M".ts.aggregate(:quarter, :sum)|
 "PCDM@HI.A".ts_eval= %Q|"PCDM@HI.M".ts.aggregate(:year, :sum)|
 "PCDM@HI.A".ts_eval= %Q|"PCDMNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -6106,9 +6106,9 @@
 "PCITJPNS@HI.D".ts_eval= %Q|Series.load_from_download(  "tour_PC@hawaii.gov", { :file_type=>"xls", :start_date=>"2009-08-31", :sheet=>"International", :row=>"increment:6:1", :col=>4, :frequency=>"D" })/1|
 "PCITJPNS@HI.M".ts_eval= %Q|"PCITJPNS@HI.D".ts.aggregate(:month, :sum) / 1000|
 "PCITJP@HI.M".ts_eval= %Q|"PCITJP@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/pc_sa_hist.xls"|
-"PCITJP@HI.M".ts_eval= %Q|"PCITJP@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
-"PCITJP@HI.M".ts_eval= %Q| "PCITJP@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata") |
 "PCITJP@HI.M".ts_eval= %Q| "PCITJP@HI.M".ts.apply_seasonal_adjustment :additive|
+"PCITJP@HI.M".ts_eval= %Q|"PCITJP@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-09-01", "2001-12-01")|
+"PCITJP@HI.M".ts_eval= %Q| "PCITJP@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata") |
 "PCITJPNS@HI.Q".ts_eval= %Q|"PCITJPNS@HI.M".ts.aggregate(:quarter, :sum)|
 "PCITJP@HI.A".ts_eval= %Q|"PCITJP@HI.M".ts.aggregate(:year, :sum)|
 "PCITJP@HI.A".ts_eval= %Q|"PCITJPNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -6119,9 +6119,9 @@
 "PCITOTNS@HI.D".ts_eval= %Q|Series.load_from_download(  "tour_PC@hawaii.gov", { :file_type=>"xls", :start_date=>"2009-08-31", :sheet=>"International", :row=>"increment:6:1", :col=>5, :frequency=>"D" })/1|
 "PCITOTNS@HI.M".ts_eval= %Q|"PCITOTNS@HI.D".ts.aggregate(:month, :sum) / 1000|
 "PCITOT@HI.M".ts_eval= %Q|"PCITOT@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/pc_sa_hist.xls"|
-"PCITOT@HI.M".ts_eval= %Q|"PCITOT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-10-01", "2001-12-01")|
-"PCITOT@HI.M".ts_eval= %Q|   "PCITOT@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata") |
 "PCITOT@HI.M".ts_eval= %Q| "PCITOT@HI.M".ts.apply_seasonal_adjustment :additive |
+"PCITOT@HI.M".ts_eval= %Q|"PCITOT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata").trim("2000-09-01", "2001-12-01")|
+"PCITOT@HI.M".ts_eval= %Q|   "PCITOT@HI.M".tsn.load_mean_corrected_sa_from("/Volumes/UHEROwork/data/tour/seasadj/sadata.xls", "sadata") |
 "PCITOTNS@HI.Q".ts_eval= %Q|"PCITOTNS@HI.M".ts.aggregate(:quarter, :sum)|
 "PCITOT@HI.A".ts_eval= %Q|"PCITOT@HI.M".ts.aggregate(:year, :sum)|
 "PCITOT@HI.A".ts_eval= %Q|"PCITOTNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7251,8 +7251,8 @@
 "TGB@HAW.A".ts_eval= %Q|"TGBNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGBNS@HI.M".ts_eval= %Q|"TGBNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGBNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 60, :col => 6, :frequency => "M" })/1000|
-"TGB@HI.M".ts_eval= %Q|"TGB@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGB@HI.M".ts_eval= %Q| "TGB@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGB@HI.M".ts_eval= %Q|"TGB@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBNS@HI.Q".ts_eval= %Q|"TGBNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGB@HI.A".ts_eval= %Q|"TGB@HI.M".ts.aggregate(:year, :sum)|
 "TGB@HI.A".ts_eval= %Q|"TGBNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7305,8 +7305,8 @@
 "TGBCT@HAW.A".ts_eval= %Q|"TGBCTNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGBCTNS@HI.M".ts_eval= %Q|"TGBCTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGBCTNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 40, :col => 6, :frequency => "M" })/1000|
-"TGBCT@HI.M".ts_eval= %Q|"TGBCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBCT@HI.M".ts_eval= %Q|"TGBCT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGBCT@HI.M".ts_eval= %Q|"TGBCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBCT@HI.Q".ts_eval= %Q|  "TGBCT@HI.M".ts.aggregate_by(:quarter, :sum) |
 "TGBCT@HI.A".ts_eval= %Q|"TGBCT@HI.Q".ts.aggregate(:year, :sum)|
 "TGBCTNS@HON.M".ts_eval= %Q|"TGBCTNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
@@ -7347,8 +7347,8 @@
 "TGBHT@HAW.A".ts_eval= %Q|"TGBHTNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGBHTNS@HI.M".ts_eval= %Q|"TGBHTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGBHTNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 44, :col => 6, :frequency => "M" })/1000|
-"TGBHT@HI.M".ts_eval= %Q|"TGBHT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBHT@HI.M".ts_eval= %Q|"TGBHT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGBHT@HI.M".ts_eval= %Q|"TGBHT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBHTNS@HI.Q".ts_eval= %Q|"TGBHTNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGBHT@HI.A".ts_eval= %Q|"TGBHT@HI.M".ts.aggregate(:year, :sum)|
 "TGBHT@HI.A".ts_eval= %Q|"TGBHTNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7551,8 +7551,8 @@
 "TGBRT@HAW.A".ts_eval= %Q|"TGBRTNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGBRTNS@HI.M".ts_eval= %Q|"TGBRTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGBRTNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 38, :col => 6, :frequency => "M" })/1000|
-"TGBRT@HI.M".ts_eval= %Q|"TGBRT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBRT@HI.M".ts_eval= %Q|"TGBRT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGBRT@HI.M".ts_eval= %Q|"TGBRT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBRTNS@HI.Q".ts_eval= %Q|"TGBRTNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGBRT@HI.A".ts_eval= %Q|"TGBRT@HI.M".ts.aggregate(:year, :sum)|
 "TGBRT@HI.A".ts_eval= %Q|"TGBRTNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7630,8 +7630,8 @@
 "TGBSV@HAW.A".ts_eval= %Q|"TGBSVNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGBSVNS@HI.M".ts_eval= %Q|"TGBSVNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGBSVNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 39, :col => 6, :frequency => "M" })/1000|
-"TGBSV@HI.M".ts_eval= %Q|"TGBSV@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBSV@HI.M".ts_eval= %Q|"TGBSV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGBSV@HI.M".ts_eval= %Q|"TGBSV@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGBSVNS@HI.Q".ts_eval= %Q|"TGBSVNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGBSV@HI.A".ts_eval= %Q|"TGBSV@HI.M".ts.aggregate(:year, :sum)|
 "TGBSV@HI.A".ts_eval= %Q|"TGBSVNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7759,8 +7759,8 @@
 "TGR@HAW.A".ts_eval= %Q|"TGRNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGRNS@HI.M".ts_eval= %Q|"TGRNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGRNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 32, :col => 6, :frequency => "M" })/1000|
-"TGR@HI.M".ts_eval= %Q|"TGR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGR@HI.M".ts_eval= %Q|"TGR@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGR@HI.M".ts_eval= %Q|"TGR@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRNS@HI.Q".ts_eval= %Q|"TGRNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGR@HI.A".ts_eval= %Q|"TGR@HI.M".ts.aggregate(:year, :sum)|
 "TGR@HI.A".ts_eval= %Q|"TGRNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7838,8 +7838,8 @@
 "TGRCT@HAW.A".ts_eval= %Q|"TGRCTNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGRCTNS@HI.M".ts_eval= %Q|"TGRCTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGRCTNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 8, :col => 6, :frequency => "M" })/1000|
-"TGRCT@HI.M".ts_eval= %Q|"TGRCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRCT@HI.M".ts_eval= %Q|"TGRCT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGRCT@HI.M".ts_eval= %Q|"TGRCT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRCTNS@HI.Q".ts_eval= %Q|"TGRCTNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGRCT@HI.A".ts_eval= %Q|"TGRCT@HI.M".ts.aggregate(:year, :sum)|
 "TGRCT@HI.A".ts_eval= %Q|"TGRCTNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -7867,8 +7867,8 @@
 "TGRHT@HAW.A".ts_eval= %Q|"TGRHTNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGRHTNS@HI.M".ts_eval= %Q|"TGRHTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGRHTNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 12, :col => 6, :frequency => "M" })/1000|
-"TGRHT@HI.M".ts_eval= %Q|"TGRHT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRHT@HI.M".ts_eval= %Q|"TGRHT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGRHT@HI.M".ts_eval= %Q|"TGRHT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRHTNS@HI.Q".ts_eval= %Q|"TGRHTNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGRHT@HI.A".ts_eval= %Q|"TGRHT@HI.M".ts.aggregate(:year, :sum)|
 "TGRHT@HI.A".ts_eval= %Q|"TGRHTNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -8071,8 +8071,8 @@
 "TGRRT@HAW.A".ts_eval= %Q|"TGRRTNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGRRTNS@HI.M".ts_eval= %Q|"TGRRTNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGRRTNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 6, :col => 6, :frequency => "M" })/1000|
-"TGRRT@HI.M".ts_eval= %Q|"TGRRT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRRT@HI.M".ts_eval= %Q|"TGRRT@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGRRT@HI.M".ts_eval= %Q|"TGRRT@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRRTNS@HI.Q".ts_eval= %Q|"TGRRTNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGRRT@HI.A".ts_eval= %Q|"TGRRT@HI.M".ts.aggregate(:year, :sum)|
 "TGRRT@HI.A".ts_eval= %Q|"TGRRTNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -8150,8 +8150,8 @@
 "TGRSV@HAW.A".ts_eval= %Q|"TGRSVNS@HAW.M".ts.aggregate(:year, :sum)|
 "TGRSVNS@HI.M".ts_eval= %Q|"TGRSVNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tax_hist_new.xls", "ge"|
 "TGRSVNS@HI.M".ts_eval= %Q|Series.load_from_download(  "tax_GE%Y_%m@hawaii.gov", { :file_type => "xls", :start_date => "2011-03-01", :sheet => "sheet_num:1", :row => 7, :col => 6, :frequency => "M" })/1000|
-"TGRSV@HI.M".ts_eval= %Q|"TGRSV@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRSV@HI.M".ts_eval= %Q|"TGRSV@HI.M".tsn.load_mean_corrected_sa_from "/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata"|
+"TGRSV@HI.M".ts_eval= %Q|"TGRSV@HI.M".tsn.load_sa_from("/Volumes/UHEROwork/data/tax/seasadj/sadata.xls", "sadata").trim|
 "TGRSVNS@HI.Q".ts_eval= %Q|"TGRSVNS@HI.M".ts.aggregate(:quarter, :sum)|
 "TGRSV@HI.A".ts_eval= %Q|"TGRSV@HI.M".ts.aggregate(:year, :sum)|
 "TGRSV@HI.A".ts_eval= %Q|"TGRSVNS@HI.Q".ts.aggregate(:year, :sum)|
@@ -11016,8 +11016,8 @@
 "VISDMNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Big Island[or]hawaii island:99:154:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISDMNS@HAW.M".ts_eval= %Q|"VISDMNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISDMNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "6", :row => "repeat:96:107", :col => "block:3:3:12", :frequency => "M" })/1000|
-"VISDMNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Big Island[or]Hawaii Island:92:188", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDMNS@HAW.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>19, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISDMNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Big Island[or]Hawaii Island:92:188", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDM@HAW.M".ts_eval= %Q|"VISDM@HI.M".ts.mc_ma_county_share_for("HAW")|
 "VISDM@HAW.Q".ts_eval= %Q|"VISDM@HAW.M".ts.aggregate(:quarter, :sum)|
 "VISDM@HAW.A".ts_eval= %Q|"VISDM@HAW.Q".ts.aggregate(:year, :sum)|
@@ -11026,16 +11026,16 @@
 "VISDMNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Oahu:99:154:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISDMNS@HON.M".ts_eval= %Q|"VISDMNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISDMNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "6", :row => "repeat:18:29", :col => "block:3:3:12", :frequency => "M" })/1000|
-"VISDMNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Oahu:92:188:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDMNS@HON.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>14, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISDMNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Oahu:92:188:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDM@HON.M".ts_eval= %Q|"VISDM@HI.M".ts.mc_ma_county_share_for("HON")|
 "VISDM@HON.Q".ts_eval= %Q|"VISDM@HON.M".ts.aggregate(:quarter, :sum)|
 "VISDM@HON.A".ts_eval= %Q|"VISDM@HON.Q".ts.aggregate(:year, :sum)|
 "VISDMNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Kauai:99:154:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISDMNS@KAU.M".ts_eval= %Q|"VISDMNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISDMNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "6", :row => "repeat:83:94", :col => "block:3:3:12", :frequency => "M" })/1000|
-"VISDMNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Kauai:92:188:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDMNS@KAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>15, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISDMNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Kauai:92:188:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDM@KAU.M".ts_eval= %Q|"VISDM@HI.M".ts.mc_ma_county_share_for("KAU")|
 "VISDM@KAU.Q".ts_eval= %Q|"VISDM@KAU.M".ts.aggregate(:quarter, :sum)|
 "VISDM@KAU.A".ts_eval= %Q|"VISDM@KAU.Q".ts.aggregate(:year, :sum)|
@@ -11055,14 +11055,14 @@
 "VISDMNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Maui:99:154", :col=>2, :frequency=>"M" })/1000|
 "VISDMNS@MAUI.M".ts_eval= %Q|"VISDMNS@MAUI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISDMNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1991-01-01", :sheet => "6", :row => "repeat:44:55", :col => "block:6:3:12", :frequency => "M" })/1000|
-"VISDMNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Maui:92:188:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDMNS@MAUI.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>16, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISDMNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Maui:92:188:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDM@MAUI.A".ts_eval= %Q|"VISDMNS@MAUI.M".ts.aggregate(:year, :sum)|
 "VISDMNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Molokai *:99:154:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISDMNS@MOL.M".ts_eval= %Q|"VISDMNS@MOL.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISDMNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1991-01-01", :sheet => "6", :row => "repeat:57:68", :col => "block:6:3:12", :frequency => "M" })/1000|
-"VISDMNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Molokai:92:188:prefix_no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDMNS@MOL.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:1", :row=>17, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISDMNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Molokai:92:188:prefix_no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISDM@MOL.A".ts_eval= %Q|"VISDMNS@MOL.M".ts.aggregate(:year, :sum)|
 "VISDMCANS@HI.M".ts_eval= %Q|"VISDMCANS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISDMCANS@HI.M".ts_eval= %Q|"VISDMCANS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_SN_History.xls "|
@@ -11185,8 +11185,8 @@
 "VISITNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Big Island[or]hawaii island:194:250:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@HAW.M".ts_eval= %Q|"VISITNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISITNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "6", :row => "repeat:96:107", :col => "block:4:3:12", :frequency => "M" })/1000|
-"VISITNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Big Island[or]Hawaii Island:184:300", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISITNS@HAW.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:2", :row=>19, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISITNS@HAW.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Big Island[or]Hawaii Island:184:300", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISIT@HAW.M".ts_eval= %Q|"VISIT@HI.M".ts.mc_ma_county_share_for("HAW")|
 "VISIT@HAW.Q".ts_eval= %Q|"VISIT@HAW.M".ts.aggregate(:quarter, :sum)|
 "VISIT@HAW.A".ts_eval= %Q|"VISIT@HAW.Q".ts.aggregate(:year, :sum)|
@@ -11195,24 +11195,24 @@
 "VISITNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Oahu:194:250:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@HON.M".ts_eval= %Q|"VISITNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISITNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "6", :row => "repeat:18:29", :col => "block:4:3:12", :frequency => "M" })/1000|
-"VISITNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Oahu:184:300:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISITNS@HON.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:2", :row=>14, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISITNS@HON.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Oahu:184:300:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISIT@HON.M".ts_eval= %Q|"VISIT@HI.M".ts.mc_ma_county_share_for("HON")|
 "VISIT@HON.Q".ts_eval= %Q|"VISIT@HON.M".ts.aggregate(:quarter, :sum)|
 "VISIT@HON.A".ts_eval= %Q|"VISIT@HON.Q".ts.aggregate(:year, :sum)|
 "VISITNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Kauai:194:250:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@KAU.M".ts_eval= %Q|"VISITNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISITNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1990-01-01", :sheet => "6", :row => "repeat:83:94", :col => "block:4:3:12", :frequency => "M" })/1000|
-"VISITNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Kauai:184:300:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISITNS@KAU.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:2", :row=>15, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISITNS@KAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Kauai:184:300:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISIT@KAU.M".ts_eval= %Q|"VISIT@HI.M".ts.mc_ma_county_share_for("KAU")|
 "VISIT@KAU.Q".ts_eval= %Q|"VISIT@KAU.M".ts.aggregate(:quarter, :sum)|
 "VISIT@KAU.A".ts_eval= %Q|"VISIT@KAU.Q".ts.aggregate(:year, :sum)|
 "VISITNS@LAN.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Lanai *:194:250:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@LAN.M".ts_eval= %Q|"VISITNS@LAN.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISITNS@LAN.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1991-01-01", :sheet => "6", :row => "repeat:70:81", :col => "block:7:3:12", :frequency => "M" })/1000|
-"VISITNS@LAN.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Lanai:184:300:prefix_no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISITNS@LAN.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:2", :row=>18, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISITNS@LAN.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Lanai:184:300:prefix_no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISIT@LAN.A".ts_eval= %Q|"VISITNS@LAN.M".ts.aggregate(:year, :sum)|
 "VISITNS@MAU.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Maui County:194:250", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@MAU.M".ts_eval= %Q|"VISITNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
@@ -11224,14 +11224,14 @@
 "VISITNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Maui:194:250", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@MAUI.M".ts_eval= %Q|"VISITNS@MAUI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISITNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1991-01-01", :sheet => "6", :row => "repeat:44:55", :col => "block:7:3:12", :frequency => "M" })/1000|
-"VISITNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Maui:184:300:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISITNS@MAUI.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:2", :row=>16, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISITNS@MAUI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Maui:184:300:no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISIT@MAUI.A".ts_eval= %Q|"VISITNS@MAUI.M".ts.aggregate(:year, :sum)|
 "VISITNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Molokai *:194:250:no_okina", :col=>2, :frequency=>"M" })/1000|
 "VISITNS@MOL.M".ts_eval= %Q|"VISITNS@MOL.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|
 "VISITNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_FINAL@hawaiitourismauthority.org", { :file_type => "xls", :start_date => "1991-01-01", :sheet => "6", :row => "repeat:57:68", :col => "block:7:3:12", :frequency => "M" })/1000|
-"VISITNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Molokai:184:300:prefix_no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISITNS@MOL.M".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/TOUR_CYFENG%y.xls", {:file_type=>"xls", :start_date=>"2011-01-01", :sheet=>"sheet_num:2", :row=>17, :col=>"repeat:2:13", :frequency=>"M" })/1000|
+"VISITNS@MOL.M".ts_eval= %Q|Series.load_from_download(  "TOUR_HIST%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2010-01-01", :sheet=>"sheet_num:1", :row=>"header_range:col:1:Molokai:184:300:prefix_no_okina", :col=>"repeat:2:13", :frequency=>"M" })/1000|
 "VISIT@MOL.A".ts_eval= %Q|"VISITNS@MOL.M".ts.aggregate(:year, :sum)|
 "VISITI1NS@HI.M".ts_eval= %Q|Series.load_from_download(  "TOUR_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-02-01", :sheet=>"HL", :row=>"header_range:col:1:Any one island only:194:250", :col=>2, :frequency=>"M" })/1000|
 "VISITI1NS@HI.M".ts_eval= %Q|"VISITI1NS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/tour_upd1_hist.xls"|

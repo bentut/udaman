@@ -14,7 +14,7 @@
 		ncdps = series.data_points.where(:current => false) 
 		series.current_data_points.sort_by(&:date_string).each {|cdp| date_hash[cdp.date_string] = cdp}
 	%>
- 	<% date_hash.sort.each do |date_string, element| %>
+ 	<% date_hash.sort.reverse.each do |date_string, element| %>
 	<% if element.class == DataPoint %>
 		<% cdp = element %>
 		<% series.units ||= 1 %>

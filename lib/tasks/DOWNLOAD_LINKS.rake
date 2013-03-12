@@ -79,8 +79,9 @@ task :update_seats_links => :environment do
     has_seats_text = !link.text.index("Seat Outlook for").nil?
     is_excel = !["xls", "xlsx"].index(href.split(".")[-1]).nil?
     is_not_already_in_downloads = seats_links.index(href.gsub("%20"," ")).nil?
+    is_not_in_exclusion_list = ["/default/assets/File/research/airline-capacity/Seat%20Outlook%202013.xls"].index(href).nil?
     
-    if has_seats_text and is_excel and is_not_already_in_downloads
+    if has_seats_text and is_excel and is_not_already_in_downloads and is_not_in_exclusion_list
       begin
         puts "creating Data Source Download for "+href
         file_name = href.split("/")[-1].gsub("%20"," ")
