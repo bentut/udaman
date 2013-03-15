@@ -219,15 +219,13 @@
 "CPICORE@US.A".ts_eval= %Q|"CPICORENS@US.M".ts.aggregate(:year, :average)|
 "CPICORE@US.M".ts_eval= %Q|"CPICORE@US.M".tsn.load_from_bls("CUSR0000SA0L1E", "M")|
 "CPICORE@US.Q".ts_eval= %Q|"CPICORE@US.M".ts.aggregate(:quarter, :average)|
-"CSCFNS@JP.Q".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|
 "CSCFNS@JP.Q".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|
-"CSCFNS@JP.Q".ts_eval= %Q|"CSCFNS@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_q.xls"|
+"CSCFNS@JP.Q".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|
 "CSCF@JP.A".ts_eval= %Q|"CSCFNS@JP.Q".ts.aggregate(:year, :average)|
 "CSCF@JP.Q".ts_eval= %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "1982-04-01", :end_date=>"2004-01-01", :sheet => "sheet_num:1", :row => "increment:7:1", :col => 2, :frequency => "Q" }|
 "CSCF@JP.Q".ts_eval= %Q|Series.load_from_download "CSCF@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:97:3", :col => 2, :frequency => "Q" }|
-"CSCF@JP.Q".ts_eval= %Q|"CSCF@JP.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_q.xls"|
 "CSCFNS@JP.M".ts_eval= %Q|Series.load_from_download "CSCFNS@esri.cao.go.jp", { :file_type => "xls", :start_date => "2004-04-01", :sheet => "sheet_num:1", :row => "increment:95:1", :col => 2, :frequency => "M" }|
-"CSCFNS@JP.M".ts_eval= %Q|"CSCFNS@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
+"CSCFNS@JP.M".ts_eval= %Q| "CSCFNS@JP.M".tsn.load_from("/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls" ).trim("2004-03-01","2004-03-01")|
 "E&@HAW.A".ts_eval= %Q|"E&@HAW.A".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_a.xls"|
 "E&@HAW.M".ts_eval= %Q|"E&@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_m.xls"|
 "E&@HAW.Q".ts_eval= %Q|"E&@HAW.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_q.xls"|
@@ -2512,8 +2510,7 @@
 "EMPL@HON.M".ts_eval= %Q|"EMPL@HI.M".ts.share_using("EMPLNS@HON.M".ts.backward_looking_moving_average.trim,"EMPLNS@HI.M".ts.backward_looking_moving_average.trim)|
 "EMPL@HON.M".ts_eval= %Q|"EMPL_MC@HI.M".ts.share_using("EMPLNS@HON.M".ts, "EMPLNS@HI.M".ts)|
 "EMPL@HON.Q".ts_eval= %Q|"EMPL@HON.M".ts.aggregate(:quarter, :average)|
-"EMPL@JP.M".ts_eval= %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 7, :frequency => "M" }) * 10|
-"EMPL@JP.M".ts_eval= %Q|"EMPL@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
+"EMPL@JP.M".ts_eval= %Q|Series.load_from_download(  "EMPL_HIST@stat.go.jp", { :file_type=>"xls", :start_date=>"1953-01-01", :sheet=>"sheet_num:1", :row=>"increment:11:1", :col=>"5", :frequency=>"M" }) * 10|
 "EMPL@JP.Q".ts_eval= %Q|"EMPL@JP.M".ts.aggregate(:quarter, :average)|
 "EMPL@JP.A".ts_eval= %Q|"EMPL@JP.Q".ts.aggregate(:year, :average)|
 "EMPLNS@KAU.M".ts_eval= %Q|"EMPLNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_histextend_date_format_correct.xls"|
@@ -3985,8 +3982,7 @@
 "E_NF&@MAU.M".ts_eval= %Q|"E_NF&@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_m.xls"|
 "E_NF&@MAU.Q".ts_eval= %Q|"E_NF&@MAU.Q".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/esic_CNTY_q.xls"|
 "E_NF@HI.A".ts_eval= %Q|"E_NFNS@HI.M".ts.aggregate(:year, :average)|
-"E_NF@JP.M".ts_eval= %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 14, :frequency => "M" }) * 10|
-"E_NF@JP.M".ts_eval= %Q|"E_NF@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
+"E_NF@JP.M".ts_eval= %Q| Series.load_from_download(  "ENF_HIST@stat.go.jp", { :file_type=>"xls", :start_date=>"1953-01-01", :sheet=>"sheet_num:1", :row=>"increment:12:1", :col=>"11", :frequency=>"M" }) * 10|
 "E_NF@JP.Q".ts_eval= %Q|"E_NF@JP.M".ts.aggregate(:quarter, :average)|
 "E_NF@JP.A".ts_eval= %Q|"E_NF@JP.Q".ts.aggregate(:year, :average)|
 "E_NF@NBI.A".ts_eval= %Q|"E_NF@HI.A".ts - "E_NF@HON.A".ts|
@@ -5507,8 +5503,7 @@
 "LF@HON.M".ts_eval= %Q| "LF_MC@HI.M".ts.share_using("LFNS@HON.M".ts, "LFNS@HI.M".ts)|
 "LF@HON.A".ts_eval= %Q|"LFNS@HON.M".ts.aggregate(:year, :average)|
 "LF@HON.Q".ts_eval= %Q|"LF@HON.M".ts.aggregate(:quarter, :average)|
-"LF@JP.M".ts_eval= %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 4, :frequency => "M" }) * 10|
-"LF@JP.M".ts_eval= %Q|"LF@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
+"LF@JP.M".ts_eval= %Q|Series.load_from_download(  "LF_HIST@stat.go.jp", { :file_type=>"xls", :start_date=>"1953-01-01", :sheet=>"sheet_num:1", :row=>"increment:11:1", :col=>"5", :frequency=>"M" }) * 10|
 "LF@JP.Q".ts_eval= %Q|"LF@JP.M".ts.aggregate(:quarter, :average)|
 "LF@JP.A".ts_eval= %Q|"LF@JP.Q".ts.aggregate(:year, :average)|
 "LFNS@KAU.M".ts_eval= %Q|"LFNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_histextend_date_format_correct.xls"|
@@ -9236,8 +9231,7 @@
 "UR@HON.A".ts_eval= %Q|"URNS@HON.M".ts.aggregate(:year, :average)|
 "UR@HON.M".ts_eval= %Q|(("EMPL@HON.M".ts / "LF@HON.M".ts) * -1 + 1)*100|
 "UR@HON.Q".ts_eval= %Q|"UR@HON.M".ts.aggregate(:quarter, :average)|
-"UR@JP.M".ts_eval= %Q|Series.load_from_download("LF@stat.go.jp", { :file_type => "xls", :start_row => 10, :start_col => 3, :sheet => "Table 18", :row => "increment:10:1", :col => 31, :frequency => "M" })|
-"UR@JP.M".ts_eval= %Q|"UR@JP.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/jp_upd_m.xls"|
+"UR@JP.M".ts_eval= %Q| Series.load_from_download(  "UR_HIST@stat.go.jp", { :file_type=>"xls", :start_date=>"1953-01-01", :sheet=>"sheet_num:1", :row=>"increment:11:1", :col=>"5", :frequency=>"M" })|
 "UR@JP.Q".ts_eval= %Q|"UR@JP.M".ts.aggregate(:quarter, :average)|
 "UR@JP.A".ts_eval= %Q|"UR@JP.Q".ts.aggregate(:year, :average)|
 "URNS@KAU.M".ts_eval= %Q|"URNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/bls_histextend_date_format_correct.xls"|

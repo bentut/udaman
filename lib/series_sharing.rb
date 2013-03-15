@@ -4,6 +4,7 @@ module SeriesSharing
   end
   
   def ma_series_data(ma_type_string = "ma", start_date_string = self.data.keys.sort[0], end_date_string = Time.now.to_date.to_s)
+    return {} if start_date_string.nil?
     trimmed_data = get_values_after((Date.parse(start_date_string) << 1).to_s, end_date_string)
     new_series_data = {}
     position = 0
@@ -26,6 +27,7 @@ module SeriesSharing
   def window_size
     return 12 if self.frequency == "month"
     return 4 if self.frequency == "quarter"
+    return 4 if self.frequency == "year"
   end
   
   
