@@ -150,7 +150,7 @@ module SeriesExternalRelationship
   
   def ma_data_side_by_side
     comparison_hash = {}
-    ma = self.backward_looking_moving_average
+    ma = self.moving_average
     all_dates = self.data.keys | ma.data.keys
     all_dates.each do |date_string| 
       ma_point = ma.data[date_string].nil? ? nil : ma.data[date_string] 

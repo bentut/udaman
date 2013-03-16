@@ -23,7 +23,7 @@ module SeriesStatistics
   def outlier
     begin
       outlier_hash = {}
-      ma = moving_average = self.backward_looking_moving_average
+      ma = moving_average = self.moving_average
       
       all_dates = self.data.keys | ma.data.keys
       residuals = []
@@ -36,7 +36,7 @@ module SeriesStatistics
       average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
       std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))
       
-      mult = 2.5
+      mult = 6
       self.data.each do |date_string, val|
         next if moving_average.data[date_string].nil?
         upper = moving_average.data[date_string] + mult * std_dev 
