@@ -154,7 +154,8 @@ module SeriesExternalRelationship
     all_dates = self.data.keys | ma.data.keys
     all_dates.each do |date_string| 
       ma_point = ma.data[date_string].nil? ? nil : ma.data[date_string] 
-      comparison_hash[date_string] = {:ma => ma_point, :udaman => self.data[date_string] } 
+      residual = ma.data[date_string].nil? ? nil : ma.data[date_string] - self.data[date_string]
+      comparison_hash[date_string] = {:ma => ma_point, :udaman => self.data[date_string], :residual => residual } 
     end
     return comparison_hash
   end

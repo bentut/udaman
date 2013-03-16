@@ -59,7 +59,15 @@ class SeriesController < ApplicationController
   def outlier_graph
     @series = Series.find params[:id]
     @comp = @series.ma_data_side_by_side
-    @std_dev = @series.backward_looking_moving_average.standard_deviation
+    residuals = @comp.map { |date, ma_hash| ma_hash[:residual] }
+    residuals.reject!{|a| a.nil?}
+    average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
+    @std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))
+
+    
+    
+    
+    #@series.backward_looking_moving_average.standard_deviation
   end
   
   def blog_graph
