@@ -59,7 +59,8 @@ class SeriesController < ApplicationController
   def outlier_graph
     @series = Series.find params[:id]
     @comp = @series.ma_data_side_by_side
-    residuals = @comp.map { |date, ma_hash| ma_hash[:residual] }
+    #residuals is actually whole range of values.
+    residuals = @comp.map { |date, ma_hash| ma_hash[:udaman] }
     residuals.reject!{|a| a.nil?}
     average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
     @std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))

@@ -26,13 +26,14 @@ module SeriesStatistics
       ma = moving_average = self.moving_average
       
       all_dates = self.data.keys | ma.data.keys
-      residuals = []
-      all_dates.each do |date_string| 
-        ma_point = ma.data[date_string].nil? ? nil : ma.data[date_string] 
-        residual = ma.data[date_string].nil? ? nil : ma.data[date_string] - self.data[date_string]
-        residuals.push(residual) unless residual.nil?
-      end
-      
+      # residuals = []
+      # all_dates.each do |date_string| 
+      #   ma_point = ma.data[date_string].nil? ? nil : ma.data[date_string] 
+      #   residual = ma.data[date_string].nil? ? nil : ma.data[date_string] - self.data[date_string]
+      #   residuals.push(ma_point) unless ma_point.nil?
+      # end
+
+      residuals = (self.data.reject {|date, d| d.nil? }).map { |date, d| d }
       average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
       std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))
       
