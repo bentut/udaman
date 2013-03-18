@@ -51,40 +51,24 @@ class SeriesController < ApplicationController
     @search_results = AremosSeries.web_search(params[:search])
   end
   
-  # def website_post
-  #   @series = Series.find params[:id]
-  #   @start_date = params[:start_date]
-  #   @end_date = params[:end_date]
-  # 
-  #   start_date = @start_date.nil? ? (Time.now.to_date << (15)).to_s : @start_date.to_s
-  #   end_date = @end_date.nil? ? Time.now.to_date.to_s : @end_date.to_s
-  #   plot_data = @series.get_values_after(start_date,end_date)
-  #   a_series = AremosSeries.get(@series.name)
-  #   chart_id = @series.id.to_s+"_"+Date.today.to_s
-  #   
-  #   if params[:bar_type] == "yoy"
-  #     bar_data = @series.annualized_percentage_change.data
-  #     bar_id_label = "yoy"
-  #     bar_color = "#AAAAAA"
-  #     bar_label = "YOY % Change"
-  #     render :partial => 'blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>bar_id_label, :bar_label => bar_label, :bar_color => bar_color, :bar_data => bar_data }
-  #   elsif params[:bar_type] == "ytd"
-  #     bar_data = @series.ytd_percentage_change.data 
-  #     bar_id_label = "ytd"
-  #     bar_color = "#AAAAAA"
-  #     bar_label = "YTD % Change"
-  #     render :partial => 'blog_chart_line_bar', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id, :bar_id_label=>bar_id_label, :bar_label => bar_label, :bar_color => bar_color, :bar_data => bar_data }
-  #   else
-  #     render :partial => 'blog_chart_line', :locals => {:plot_data => plot_data, :a_series => a_series, :chart_id => chart_id}
-  #   end    
-  #   
-  #   
-  #   #render :partial => "data_points", :locals => {:series => @series, :as => @as, :chg => @chg, :ytd_chg => @ytd_chg}
-  # end
-  
   def comparison_graph
     @series = Series.find params[:id]
     @comp = @series.aremos_data_side_by_side
+  end
+
+  def outlier_graph
+    @series = Series.find params[:id]
+    @comp = @series.ma_data_side_by_side
+    #residuals is actually whole range of values.
+    residuals = @comp.map { |date, ma_hash| ma_hash[:udaman] }
+    residuals.reject!{|a| a.nil?}
+    average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
+    @std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))
+
+    
+    
+    
+    #@series.backward_looking_moving_average.standard_deviation
   end
   
   def blog_graph
@@ -137,85 +121,5 @@ class SeriesController < ApplicationController
     render :partial => "investigation_sort.html"
   end
 
-  # # GET /series
-  # # GET /series.xml
-  # def index
-  #   @series = Series.all
-  # 
-  #   respond_to do |format|
-  #     format.html # index.html.erb
-  #     format.xml  { render :xml => @series }
-  #   end
-  # end
-  # 
-  # # GET /series/1
-  # # GET /series/1.xml
-  # def show
-  #   @series = Series.find(params[:id])
-  # 
-  #   respond_to do |format|
-  #     format.html # show.html.erb
-  #     format.xml  { render :xml => @series }
-  #   end
-  # end
-  # 
-  # # GET /series/new
-  # # GET /series/new.xml
-  # def new
-  #   @series = Series.new
-  # 
-  #   respond_to do |format|
-  #     format.html # new.html.erb
-  #     format.xml  { render :xml => @series }
-  #   end
-  # end
-  # 
-  # # GET /series/1/edit
-  # def edit
-  #   @series = Series.find(params[:id])
-  # end
-  # 
-  # # POST /series
-  # # POST /series.xml
-  # def create
-  #   @series = Series.new(params[:series])
-  # 
-  #   respond_to do |format|
-  #     if @series.save
-  #       format.html { redirect_to(@series, :notice => 'Series was successfully created.') }
-  #       format.xml  { render :xml => @series, :status => :created, :location => @series }
-  #     else
-  #       format.html { render :action => "new" }
-  #       format.xml  { render :xml => @series.errors, :status => :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  # 
-  # # PUT /series/1
-  # # PUT /series/1.xml
-  # def update
-  #   @series = Series.find(params[:id])
-  # 
-  #   respond_to do |format|
-  #     if @series.update_attributes(params[:series])
-  #       format.html { redirect_to(@series, :notice => 'Series was successfully updated.') }
-  #       format.xml  { head :ok }
-  #     else
-  #       format.html { render :action => "edit" }
-  #       format.xml  { render :xml => @series.errors, :status => :unprocessable_entity }
-  #     end
-  #   end
-  # end
-  # 
-  # # DELETE /series/1
-  # # DELETE /series/1.xml
-  # def destroy
-  #   @series = Series.find(params[:id])
-  #   @series.destroy
-  # 
-  #   respond_to do |format|
-  #     format.html { redirect_to(series_index_url) }
-  #     format.xml  { head :ok }
-  #   end
-  # end
+
 end

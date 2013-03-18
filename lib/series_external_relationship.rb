@@ -1,6 +1,5 @@
 module SeriesExternalRelationship
   def find_prognoz_data_file
-  	#also should rewrite if possible to query by contents of mongodb object
   	pdfs = PrognozDataFile.all
   	pdfs.each do |pdf|
   		return pdf if pdf.series_loaded.include?(self.name) 
@@ -149,38 +148,17 @@ module SeriesExternalRelationship
     return comparison_hash
   end
   
-  # def data_diff_display_array(comparison_data, digits_to_round)
-  #   results = []
-  #   cdp = current_data_points
-  #   comparison_data.each do |date_string, value|
-  #     dp = cdp.select {|dp| dp.date_string == date_string}[0]
-  #     #dp = DataPoint.where(:series_id => self.id, :date_string => date_string, :current=>true)[0]
-  #     
-  #     if dp.nil? and !value.nil?
-  #       results.push(-1)
-  #       next
-  #     end
-  # 
-  #     if (dp.nil? and value.nil?) or dp.pseudo_history
-  #       results.push(0)
-  #       next
-  #     end
-  #     
-  #     source_code = dp.source_type_code
-  #     diff = (units_at(date_string) - value).abs unless data[date_string].nil? or value.nil?
-  #     
-  #     unless diff.nil?
-  #       results.push(0+source_code) if diff < 10**-digits_to_round
-  #       results.push(1+source_code) if diff > 10**-digits_to_round and diff <= 1
-  #       results.push(2+source_code) if diff > 1.0 and diff  <= 10.0
-  #       results.push(3+source_code) if diff > 10.0          
-  #       next
-  #     end
-  #     
-  #     
-  #   end
-  #   results
-  # end
+  def ma_data_side_by_side
+    comparison_hash = {}
+    ma = self.moving_average
+    all_dates = self.data.keys | ma.data.keys
+    all_dates.each do |date_string| 
+      ma_point = ma.data[date_string].nil? ? nil : ma.data[date_string] 
+      residual = ma.data[date_string].nil? ? nil : ma.data[date_string] - self.data[date_string]
+      comparison_hash[date_string] = {:ma => ma_point, :udaman => self.data[date_string], :residual => residual } 
+    end
+    return comparison_hash
+  end
   
   def data_diff(comparison_data, digits_to_round)
     self.units = 1000 if name[0..2] == "TGB" #hack for the tax scaling. Should not save units
