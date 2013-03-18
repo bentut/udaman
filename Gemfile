@@ -13,6 +13,7 @@ gem 'httpclient'
 gem 'devise', '1.1.2'
 gem 'spork', '~> 0.9.0.rc'
 gem 'rubyzip', '~> 0.9.4'
+gem "selenium-webdriver", "~> 2.30.0"
 gem 'watir-webdriver'
 gem 'whenever', :require => false
 gem 'mechanize'
