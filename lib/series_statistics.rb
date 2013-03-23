@@ -46,8 +46,8 @@ module SeriesStatistics
       end
       outlier_hash
     rescue
-      puts "--------error: #{self.name}---------"
-      return {}
+      #puts "-error: #{self.name}---------"
+      return nil
     end
   end
     
