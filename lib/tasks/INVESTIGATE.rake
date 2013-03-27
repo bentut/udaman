@@ -217,3 +217,23 @@ task :clean_data_sources => :environment do
 end
 #Maybe should move circular diffs in here
 
+
+task :find_outliers => :environment do
+  errors = []
+  outlier_series = []
+  t = Time.now
+  Series.all.each do |s| 
+    outliers = s.outlier
+    if outliers.nil?
+      errors.push s.name 
+      print "E"
+    elsif outliers.count > 0
+      outlier_series.push s.name 
+      print s.name
+    else
+      print "."
+    end
+  end
+  puts "#{ "%.2f" % (Time.now - t) }"
+  puts errors
+end

@@ -27,7 +27,7 @@ class DashboardsController < ApplicationController
 
   def search_data_sources
     #this is also in the rake file. May want to match
-    @inactive_ds = DataSource.where("eval LIKE '%census_interpolate%'").each {|ds| ds.print_eval_statement}
+    @inactive_ds = DataSource.where("eval LIKE '%LF@hiwi.org%'").each {|ds| ds.print_eval_statement}
     render "broken_data_sources"
   end
   
