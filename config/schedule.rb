@@ -44,6 +44,17 @@ end
 every 1.day, :at => "#{hour}:10 am" do
   rake "reload_all_series"
 end
+
+# ------- These two are together. Need only sometimes --------
+every 1.day, :at => "4:30 am" do
+  rake "update_bea_links"
+end
+
+every 1.day, :at => "5:00 am" do
+  rake "reload_bea_series_only"
+end
+# -----------------------------------------------------------
+
 # every 1.day, :at => "#{hour}:00 am" do
 #   rake "jp_upd_a"
 #   rake "jp_upd_q"

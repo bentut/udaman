@@ -53,18 +53,30 @@ module SeriesRelationship
     return od
   end
   
+  def recursive_dependents(already_seen = [])
+    return [] unless already_seen.index(self.name).nil?
+    dependent_names = self.new_dependents
+    already_seen.push(self.name)
+
+    return [] if dependent_names.count == 0
+    all_dependents = dependent_names.dup
+    dependent_names.each do |s_name|
+      all_dependents.concat(s_name.ts.recursive_dependents(already_seen))
+    end
+    return all_dependents    
+  end
+
+  #not recursive
   def new_dependents
     results = []
-    DataSource.all(:conditions => ["description LIKE ?", "%#{self.name.gsub("%", "\\%")}%"]).each do |ds|
-#      puts ds.description
+    DataSource.all(:conditions => ["description LIKE ?", "% #{self.name.gsub("%", "\\%")}%"]).each do |ds|
       s = Series.find(ds.series_id)
-      #puts self.name + " : " +  s.name + " : " + ds.id.to_s
       results.push s.name
-      results += s.new_dependents
     end
     return results.uniq
   end
-  
+
+  #recursive
   def new_dependencies
     results = []
     self.data_sources.each do |ds|

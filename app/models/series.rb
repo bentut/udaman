@@ -783,6 +783,18 @@ class Series < ActiveRecord::Base
     last_data_added.strftime("%B %e, %Y")
   end
   
+  def Series.get_all_series_from_website(url_string)
+    series_from_website = (DataSource.where("eval LIKE '%#{url_string}%'").all.map {|ds| ds.series}).uniq
+    all_series_from_website = series_from_website.map {|s| s.name }
+
+    series_from_website.each do |s|
+      puts s.name
+      all_series_from_website.concat(s.recursive_dependents)
+    end
+
+    return all_series_from_website.uniq
+  end
+  
   #currently runs in 3 hrs (for all series..if concurrent series could go first, that might be nice)
   #could do everything with no dependencies first and do all of those in concurrent fashion...
   #to find errors, or broken series, maybe update the ds with number of data points loaded on last run?

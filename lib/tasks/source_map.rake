@@ -50,6 +50,14 @@ task :reload_all_series => :environment do
   DataLoadMailer.series_refresh_notification(circular, inactive_ds, eval_statements.count, errors).deliver  
 end
 
+task :reload_bea_series_only => :environment do
+  t = Time.now
+  #could also hard code this...
+  bea_series = Series.get_all_series_from_website("bea.gov")
+  Series.run_all_dependencies(bea_series, {}, [], [])
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["bea series dependency check and load", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
+end
+
 task :daily_history_load => :environment do
   t = Time.now
   Series.load_all_series_from "/Volumes/UHEROwork/data/rawdata/History/AgricultureForNewDB.xls"
