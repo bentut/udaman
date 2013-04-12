@@ -127,7 +127,16 @@ module SeriesArithmetic
     new_transformation("Absolute Change of #{name}", new_series_data)
   end
 
+  def all_nil
+    new_series_data = {}
+    data.each do |date_string, value|
+      new_series_data[date_string] = nil
+    end
+    new_transformation("All nil for dates in #{name}", new_series_data)
+  end
+  
   def annualized_percentage_change
+    return all_nil unless ["day", "week"].index(frequency).nil?
     new_series_data = {}
     last = {}
     data.sort.each do |date_string, value|
@@ -139,8 +148,8 @@ module SeriesArithmetic
   end
   
   def ytd_percentage_change
+    return all_nil unless ["day", "week"].index(frequency).nil?
     new_series_data = {}
-    #last = {}
     ytd_sum = 0
     ytd_year = nil
     data.sort.each do |date_string, value|

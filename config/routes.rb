@@ -96,9 +96,19 @@ UheroDb::Application.routes.draw do
   match 'employment_kau/years/:num_years' => 'dashboards#employment_kau'
 
   match 'income' => 'dashboards#income'
+
+  match 'visitor' => 'dashboards#visitor_hi_m'
+  match 'visitor_hon' => 'dashboards#visitor_hon_m'
+  match 'visitor_mau' => 'dashboards#visitor_mau_m'
+  match 'visitor_haw' => 'dashboards#visitor_haw_m'
+  match 'visitor_kau' => 'dashboards#visitor_kau_m'
   
-
-
+  match 'visitor_q' => 'dashboards#visitor_hi_q'
+  match 'visitor_hon_q' => 'dashboards#visitor_hon_q'
+  match 'visitor_mau_q' => 'dashboards#visitor_mau_q'
+  match 'visitor_haw_q' => 'dashboards#visitor_haw_q'
+  match 'visitor_kau_q' => 'dashboards#visitor_kau_q'
+  
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
   # The priority is based upon order of creation:
