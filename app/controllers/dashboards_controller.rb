@@ -522,6 +522,45 @@ class DashboardsController < ApplicationController
     render "tableview"
   end
   
+  def income_r
+    @series_to_chart = [
+    'Y_R@HI.Q',
+    'YL_R@HI.Q',
+    'YLAD_R@HI.Q',
+    'YLAE_R@HI.Q',
+    'YLAF_R@HI.Q',
+    'YLAGFA_R@HI.Q',
+    'YLAGFF_R@HI.Q',
+    'YLCT_R@HI.Q',
+    'YLED_R@HI.Q',
+    'YLFI_R@HI.Q',
+    'YLGV_R@HI.Q',
+    'YLGVFD_R@HI.Q',
+    'YLGVML_R@HI.Q',
+    'YLHC_R@HI.Q',
+    'YLIF_R@HI.Q',
+    'YLMA_R@HI.Q',
+    'YLMI_R@HI.Q',
+    'YLMN_R@HI.Q',
+    'YLMNDR_R@HI.Q',
+    'YLMNND_R@HI.Q',
+    'YLOS_R@HI.Q',
+    'YLPS_R@HI.Q',
+    'YLRE_R@HI.Q',
+    'YLRT_R@HI.Q',
+    'YLTW_R@HI.Q',
+    'YLUT_R@HI.Q',
+    'YLWT_R@HI.Q',
+    'YL_GVSL_R@HI.Q',
+    'YL_NF_R@HI.Q',
+    'YL_PR_R@HI.Q',
+    ]
+    dates = set_dates_q(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
 private
   def set_dates_m(params)
     if params[:num_years].nil?

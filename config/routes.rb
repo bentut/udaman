@@ -96,6 +96,7 @@ UheroDb::Application.routes.draw do
   match 'employment_kau/years/:num_years' => 'dashboards#employment_kau'
 
   match 'income' => 'dashboards#income'
+  match 'income_r' => 'dashboards#income_r'
   
 
 
