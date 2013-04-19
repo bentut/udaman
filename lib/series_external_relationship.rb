@@ -32,8 +32,9 @@ module SeriesExternalRelationship
 
     diff_first = diff_trunc < diff_sig_5 ? diff_trunc : diff_sig_5
     diff_second = diff_first < diff_sig_6 ? diff_first : diff_sig_6
-    
-    return diff_second > 0.001 ? diff_second : 0
+        
+    #diffsecond used to have to be greater than 0.001. Turned down sensitivity... on 4/12/13 to address the big subtraction problem
+    return diff_second > 0.01 ? diff_second : 0
   end
   
   def Series.a_diff(value, series_value)    
