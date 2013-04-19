@@ -32,8 +32,8 @@
 			<td><%= cdp.date_string %></td>
 			<td><span style='color:<%= a_color %>'><%= a_value %></span></td>
 			<td style="text-align:right;"><span class="per-chg"><%= lvl_chg_value %></span></td>
-			<td style="text-align:right;"><span class="per-chg"><%= chg_value %><%= "%" if lvl_chg_value != "-" %></span></td>
-			<td style="text-align:right;"><span class="per-chg"><%= ytd_chg_value %><%= "%" if chg_value != "-" %></span></td>
+			<td style="text-align:right;"><span class="per-chg"><%= chg_value %><%= "%" if chg_value != "-" %></span></td>
+			<td style="text-align:right;"><span class="per-chg"><%= ytd_chg_value %><%= "%" if ytd_chg_value != "-" %></span></td>
 			<td>
 				<span class='current-datapoint'>
 					<% bgcolor = DataSource.find(cdp.data_source_id).color rescue "FFF" %>

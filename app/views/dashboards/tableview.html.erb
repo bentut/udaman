@@ -24,7 +24,7 @@ span.lighten {color:#AAA;}
 		plot_data = series.get_values_after(@start_date)
 		ytd = series.ytd_percentage_change.get_values_after(@start_date).sort[-1][1]
  		dates = plot_data.keys.sort
-		ytd_abs = plot_data[dates[-1]] - plot_data["#{dates[-1][0..3]}-01-01"]
+		ytd_abs = plot_data[dates[-1]] - plot_data["#{dates[-1][0..3]}-01-01"] rescue nil
 		series_table_data[s] = {
 			:series => s.ts,
 			:s_chg_data => series.annualized_percentage_change.get_values_after(@start_date),

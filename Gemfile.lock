@@ -39,7 +39,7 @@ GEM
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
     childprocess (0.3.9)
-      ffi (~> 1.0, >= 1.0.11)
+      ffi (>= 1.0.11, ~> 1.0)
     choice (0.1.6)
     chronic (0.9.0)
     cucumber (1.2.1)
@@ -62,7 +62,7 @@ GEM
       abstract (>= 1.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
-    ffi (1.4.0)
+    ffi (1.7.0)
     gherkin (2.11.5)
       json (>= 1.4.6)
     google-spreadsheet-ruby (0.3.0)
@@ -94,7 +94,7 @@ GEM
       ntlm-http (~> 0.1, >= 0.1.1)
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.19)
-    multi_json (1.6.1)
+    multi_json (1.7.2)
     multipart-post (1.1.5)
     mysql2 (0.2.18)
     net-http-digest_auth (1.2.1)
@@ -154,7 +154,7 @@ GEM
       rspec-mocks (~> 2.12.0)
     ruby-ole (1.2.11.6)
     rubyzip (0.9.9)
-    selenium-webdriver (2.30.0)
+    selenium-webdriver (2.32.1)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
       rubyzip
@@ -203,7 +203,7 @@ DEPENDENCIES
   roo
   rspec-rails
   rubyzip (~> 0.9.4)
-  selenium-webdriver (~> 2.30.0)
+  selenium-webdriver (~> 2.32.0)
   spork (~> 0.9.0.rc)
   test-unit (= 1.2.3)
   watchr

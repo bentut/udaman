@@ -40,7 +40,7 @@ module SeriesDataAdjustment
   def get_last_incomplete_year
     last_date = self.data.keys.sort[-1]
     # BT 2013-01-09 Taking out temporarily. Will see if anything else breaks
-    if last_date[5..6] == "12"
+    if (last_date[5..6] == "12" and frequency == "month") or (last_date[5..6] == "10" and frequency == "quarter")
       new_series_data = {} 
       return new_transformation("No Data since no incomplete year", new_series_data)
     else

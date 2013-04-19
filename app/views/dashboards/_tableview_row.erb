@@ -32,9 +32,14 @@
 	<%= a_series.description %>
 </td>
 <% [d3,d2,d1].each do |d| %>
-<% abs = abs_chg_data[d].nil? ? "" : abs_chg_data[d] %>
+<% abs = abs_chg_data[d].nil? ? nil : abs_chg_data[d] %>
 <td>
-	<%= "%.1f" % plot_data[d] unless plot_data[d].nil? %> (<%= "+" if abs > 0 %><%= "%.1f" % abs %>)<br/>
+	<%= "%.1f" % plot_data[d] unless plot_data[d].nil? %> (
+	<% unless abs.nil? %>
+	<%= "+" if abs > 0 %>
+	<%= "%.1f" % abs %>
+	<% end %>
+	)<br/>
 	<span class="lighten"><%= "%.1f" % chg_data[d] unless chg_data[d].nil? %>% YOY</span>
 </td>
 <% end %>
@@ -94,7 +99,12 @@
   	}
 </script>
 
-<td><%= "%.1f" % series_table_data[:ytd] %>% (<%= "+" if ytd_abs > 0 %><%= "%.2f" % ytd_abs %>)
+<td><%= "%.1f" % series_table_data[:ytd] %>% (
+	<% unless ytd_abs.nil? %>
+	<%= "+" if ytd_abs > 0 %>
+	<%= "%.2f" % ytd_abs %>
+	<% end %>
+	)
 	<div id="ytd_<%= function_name %>">&nbsp;</div>
 </td>
 <td><div id="chart_<%= function_name %>">&nbsp;</div></td>
