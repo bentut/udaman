@@ -1,0 +1,73 @@
+
+	<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+	<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
+
+	
+
+<h1><%= @series.name %></h1>
+<h3><%= @desc %></h3>
+<h3><%= link_to 'Details', @series %></h3>
+<div id="finance" style="width:800px;">
+  <div id="labels">
+
+    <div id="financeTitle">Levels and YOY% Change</div>
+    <div id="time">
+      <a onclick="HumbleFinance.zoom(5);">last 5</a>
+      <a onclick="HumbleFinance.zoom(20);">last 20</a>
+      <a onclick="HumbleFinance.zoom(60);">last 60</a>
+      <a onclick="HumbleFinance.zoom(120);">last 120</a>
+      <a onclick="HumbleFinance.zoom(250);">last 250</a>
+    </div>
+    <div id="dateRange"></div>
+
+  </div>
+</div>
+
+<script>
+
+<% dates = @series.data.keys.sort %>
+<% data = @series.data %>
+<% chg = @chg.data %>
+
+var jsonData = [ 
+	<% dates.each do |date_string|  %> 
+	{ 
+		date: "<%=date_string %>", 
+		level: "<%= data[date_string].nil? ? "" : "%.3f" % data[date_string] %>" , 
+		change: "<%= chg[date_string].nil? ? "" : "%.1f" % chg[date_string]%>" 
+	}, 
+	<%end%>
+];
+
+var priceData = [ <% dates.each_index do |i|  %> [<%= i %>, <%= data[dates[i]] %>], <%end%> ];
+var volumeData = [ <% dates.each_index do |i|  %> [<%= i %>, <%= chg[dates[i]].nil? ? 0 : chg[dates[i]] %>], <%end%> ];
+
+var summaryData = [ 
+<%
+i = 0
+step = data.count > 100 ? data.count / 100 : 1
+while i < data.count do
+%>
+
+	[<%= i %>, <%= data[dates[i]] %>],
+
+<%	
+i += step
+end
+%>
+];
+
+</script>
+
+<script src="/javascripts/humblefinance/hsd.js"></script>
+<script src="/javascripts/humblefinance/prototype.min.js"></script>
+<script src="/javascripts/humblefinance/Finance.js"></script>
+<script src="/javascripts/humblefinance/excanvas.js"></script>
+<script src="/javascripts/humblefinance/base64.js"></script>
+<script src="/javascripts/humblefinance/canvas2image.js"></script>
+<script src="/javascripts/humblefinance/canvastext.js"></script>
+<script src="/javascripts/humblefinance/flotr.js"></script>
+<script src="/javascripts/humblefinance/HumbleFinance.js"></script>
+<script src="/javascripts/humblefinance/demo.js"></script>
+
+

@@ -71,6 +71,14 @@ class SeriesController < ApplicationController
     #@series.backward_looking_moving_average.standard_deviation
   end
   
+  
+  def analyze
+    @series = Series.find params[:id]
+    @chg = @series.annualized_percentage_change
+    @as = AremosSeries.get @series.name 
+    @desc = @as.nil? ? "No Aremos Series" : @as.description
+  end
+  
   def blog_graph
     @series = Series.find params[:id]
     @start_date = params[:start_date]

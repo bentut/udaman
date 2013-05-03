@@ -158,6 +158,11 @@ every :saturday, :at => '9am' do
   rake "mark_pseudo_history"
 end
 
+#bring down pv file daily
+every 1.day, :at => "9:15 am" do
+  runner "DataSourceDownload.get(\"PV_HON@hawaii.gov\").download"
+end
+
 #alternatives in case of emergency
 
 # every 1.day, :at => "12:05 pm" do

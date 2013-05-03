@@ -44,6 +44,7 @@ google.visualization.events.addListener(chart, 'select', function() {
 		<%= link_to 'Edit', edit_series_path(@series) %> |
 		<%= link_to 'Delete', @series, :method => :delete %> | 
 		<%= link_to 'Back', :action => 'index' %> |
+		<%= link_to 'Analyze', :action => 'analyze', :id => @series %> |
 		<%= link_to 'Comparison Chart', :action => 'comparison_graph', :id => @series %> | 
 		<%= link_to 'Blog Chart', :action => 'blog_graph', :id => @series %> | 
 		<%= link_to 'Outlier Chart', :action => 'outlier_graph', :id => @series %> 

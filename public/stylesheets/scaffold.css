@@ -55,13 +55,6 @@ div.field, div.actions {
   list-style: square;
 }
 
-#finance {
-	width:600px;
-	height:400px;
-	padding:20px;
-	float:left;
-	border:1px solid black;
-}
 #series_data {
 	float:left;
 	width:400px;
