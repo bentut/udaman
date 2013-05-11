@@ -110,6 +110,12 @@ UheroDb::Application.routes.draw do
   match 'visitor_mau_q' => 'dashboards#visitor_mau_q'
   match 'visitor_haw_q' => 'dashboards#visitor_haw_q'
   match 'visitor_kau_q' => 'dashboards#visitor_kau_q'
+
+  match 'visitor_a' => 'dashboards#visitor_hi_a'
+  match 'visitor_hon_a' => 'dashboards#visitor_hon_a'
+  match 'visitor_mau_a' => 'dashboards#visitor_mau_a'
+  match 'visitor_haw_a' => 'dashboards#visitor_haw_a'
+  match 'visitor_kau_a' => 'dashboards#visitor_kau_a'
   
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'

@@ -1062,6 +1062,256 @@ class DashboardsController < ApplicationController
     render "tableview"
   end
 
+  def visitor_mau_a
+    @series_to_chart = [
+      'VIS@MAU.A',
+      'VISUS@MAU.A',
+      'VISJP@MAU.A',
+      'VISCAN@MAU.A',
+      'VISRES@MAU.A',
+      'VDAY@MAU.A',
+      'VDAYUS@MAU.A',
+      'VDAYJP@MAU.A',
+      'VDAYCAN@MAU.A',
+      'VDAYRES@MAU.A',
+      'VLOS@MAU.A',
+      'VLOSUS@MAU.A',
+      'VLOSJP@MAU.A',
+      'VLOSCAN@MAU.A',
+      'VLOSRES@MAU.A',
+      'VEXP@MAU.A',
+      'VEXPUS@MAU.A',
+      'VEXPJP@MAU.A',
+      'VEXPCAN@MAU.A',
+      'VEXPOT@MAU.A',
+      'VEXPPD@MAU.A',
+      'VEXPPDUS@MAU.A',
+      'VEXPPDJP@MAU.A',
+      'VEXPPDCAN@MAU.A',
+      'VEXPPDOT@MAU.A',
+      'VEXPPT@MAU.A',
+      'VEXPPTUS@MAU.A',
+      'VEXPPTJP@MAU.A',
+      'VEXPPTCAN@MAU.A',
+      'VEXPPTOT@MAU.A',
+      'VS@MAU.A',
+      'VSDM@MAU.A',
+      'VSIT@MAU.A',
+      'OCUP%@MAU.A',
+      'PRM@MAU.A',
+      'RMRV@MAU.A',
+      'E_LH@MAU.A',
+      'E_AF@MAU.A',
+      'EAE@MAU.A',
+      'EAFFAC@MAU.A',
+      'EAFFD@MAU.A',
+    ]
+    dates = set_dates_a(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  def visitor_hon_a
+    @series_to_chart = [
+      'VIS@HON.A',
+      'VISUS@HON.A',
+      'VISJP@HON.A',
+      'VISCAN@HON.A',
+      'VISRES@HON.A',
+      'VDAY@HON.A',
+      'VDAYUS@HON.A',
+      'VDAYJP@HON.A',
+      'VDAYCAN@HON.A',
+      'VDAYRES@HON.A',
+      'VLOS@HON.A',
+      'VLOSUS@HON.A',
+      'VLOSJP@HON.A',
+      'VLOSCAN@HON.A',
+      'VLOSRES@HON.A',
+      'VEXP@HON.A',
+      'VEXPUS@HON.A',
+      'VEXPJP@HON.A',
+      'VEXPCAN@HON.A',
+      'VEXPOT@HON.A',
+      'VEXPPD@HON.A',
+      'VEXPPDUS@HON.A',
+      'VEXPPDJP@HON.A',
+      'VEXPPDCAN@HON.A',
+      'VEXPPDOT@HON.A',
+      'VEXPPT@HON.A',
+      'VEXPPTUS@HON.A',
+      'VEXPPTJP@HON.A',
+      'VEXPPTCAN@HON.A',
+      'VEXPPTOT@HON.A',
+      'VS@HON.A',
+      'VSDM@HON.A',
+      'VSIT@HON.A',
+      'OCUP%@HON.A',
+      'PRM@HON.A',
+      'RMRV@HON.A',
+      'E_LH@HON.A',
+      'E_AF@HON.A',
+      'EAE@HON.A',
+      'EAFFAC@HON.A',
+      'EAFFD@HON.A',
+    ]
+    dates = set_dates_a(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  def visitor_haw_a
+    @series_to_chart = [
+      'VIS@HAW.A',
+      'VISUS@HAW.A',
+      'VISJP@HAW.A',
+      'VISCAN@HAW.A',
+      'VISRES@HAW.A',
+      'VDAY@HAW.A',
+      'VDAYUS@HAW.A',
+      'VDAYJP@HAW.A',
+      'VDAYCAN@HAW.A',
+      'VDAYRES@HAW.A',
+      'VLOS@HAW.A',
+      'VLOSUS@HAW.A',
+      'VLOSJP@HAW.A',
+      'VLOSCAN@HAW.A',
+      'VLOSRES@HAW.A',
+      'VEXP@HAW.A',
+      'VEXPUS@HAW.A',
+      'VEXPJP@HAW.A',
+      'VEXPCAN@HAW.A',
+      'VEXPOT@HAW.A',
+      'VEXPPD@HAW.A',
+      'VEXPPDUS@HAW.A',
+      'VEXPPDJP@HAW.A',
+      'VEXPPDCAN@HAW.A',
+      'VEXPPDOT@HAW.A',
+      'VEXPPT@HAW.A',
+      'VEXPPTUS@HAW.A',
+      'VEXPPTJP@HAW.A',
+      'VEXPPTCAN@HAW.A',
+      'VEXPPTOT@HAW.A',
+      'VS@HAW.A',
+      'VSDM@HAW.A',
+      'VSIT@HAW.A',
+      'OCUP%@HAW.A',
+      'PRM@HAW.A',
+      'RMRV@HAW.A',
+      'E_LH@HAW.A',
+      'E_AF@HAW.A',
+      'EAE@HAW.A',
+      'EAFFAC@HAW.A',
+      'EAFFD@HAW.A',
+    ]
+    dates = set_dates_a(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
+  def visitor_kau_a
+    @series_to_chart = [
+      'VIS@KAU.A',
+      'VISUS@KAU.A',
+      'VISJP@KAU.A',
+      'VISCAN@KAU.A',
+      'VISRES@KAU.A',
+      'VDAY@KAU.A',
+      'VDAYUS@KAU.A',
+      'VDAYJP@KAU.A',
+      'VDAYCAN@KAU.A',
+      'VDAYRES@KAU.A',
+      'VLOS@KAU.A',
+      'VLOSUS@KAU.A',
+      'VLOSJP@KAU.A',
+      'VLOSCAN@KAU.A',
+      'VLOSRES@KAU.A',
+      'VEXP@KAU.A',
+      'VEXPUS@KAU.A',
+      'VEXPJP@KAU.A',
+      'VEXPCAN@KAU.A',
+      'VEXPOT@KAU.A',
+      'VEXPPD@KAU.A',
+      'VEXPPDUS@KAU.A',
+      'VEXPPDJP@KAU.A',
+      'VEXPPDCAN@KAU.A',
+      'VEXPPDOT@KAU.A',
+      'VEXPPT@KAU.A',
+      'VEXPPTUS@KAU.A',
+      'VEXPPTJP@KAU.A',
+      'VEXPPTCAN@KAU.A',
+      'VEXPPTOT@KAU.A',
+      'VS@KAU.A',
+      'VSDM@KAU.A',
+      'VSIT@KAU.A',
+      'OCUP%@KAU.A',
+      'PRM@KAU.A',
+      'RMRV@KAU.A',
+      'E_LH@KAU.A',
+      'E_AF@KAU.A',
+      'EAE@KAU.A',
+      'EAFFAC@KAU.A',
+      'EAFFD@KAU.A',
+    ]
+    dates = set_dates_a(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+
+  def visitor_hi_a
+    @series_to_chart = [
+      'VIS@HI.A',
+      'VISUS@HI.A',
+      'VISJP@HI.A',
+      'VISCAN@HI.A',
+      'VISRES@HI.A',
+      'VDAY@HI.A',
+      'VDAYUS@HI.A',
+      'VDAYJP@HI.A',
+      'VDAYCAN@HI.A',
+      'VDAYRES@HI.A',
+      'VLOS@HI.A',
+      'VLOSUS@HI.A',
+      'VLOSJP@HI.A',
+      'VLOSCAN@HI.A',
+      'VLOSRES@HI.A',
+      'VEXP@HI.A',
+      'VEXPUS@HI.A',
+      'VEXPJP@HI.A',
+      'VEXPCAN@HI.A',
+      'VEXPOT@HI.A',
+      'VEXPPD@HI.A',
+      'VEXPPDUS@HI.A',
+      'VEXPPDJP@HI.A',
+      'VEXPPDCAN@HI.A',
+      'VEXPPDOT@HI.A',
+      'VEXPPT@HI.A',
+      'VEXPPTUS@HI.A',
+      'VEXPPTJP@HI.A',
+      'VEXPPTCAN@HI.A',
+      'VEXPPTOT@HI.A',
+      'VS@HI.A',
+      'VSDM@HI.A',
+      'VSIT@HI.A',
+      'OCUP%@HI.A',
+      'PRM@HI.A',
+      'RMRV@HI.A',
+      'E_LH@HI.A',
+      'E_AF@HI.A',
+      'EAE@HI.A',
+      'EAFFAC@HI.A',
+      'EAFFD@HI.A',
+    ]
+    dates = set_dates_a(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+
 private
   def set_dates_m(params)
     if params[:num_years].nil?
@@ -1084,6 +1334,19 @@ private
     end
     return {:start_date => start_date, :end_date => end_date}
   end
+
+  def set_dates_a(params)
+    if params[:num_years].nil?
+      current_year = Time.now.to_date.year
+      start_date = "#{current_year-10}-01-01"
+      end_date = nil
+    else
+      start_date = (Time.now.to_date << (12 * params[:num_years].to_i + 4)).to_s
+      end_date = nil
+    end
+    return {:start_date => start_date, :end_date => end_date}
+  end
+
 end
 
 #kinds of series

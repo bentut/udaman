@@ -37,7 +37,10 @@ span.lighten {color:#AAA;}
 		date_keys |= plot_data.keys
 		all_series_ytd.push(ytd)
 	end
+	
+	date_keys.sort!
 %>
+<h1><%= @start_date %></h1>
 <div id="chart-board">
 <table>
 	<tr>

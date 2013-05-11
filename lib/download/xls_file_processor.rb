@@ -47,9 +47,7 @@ class XlsFileProcessor
       raise e
     end
   
-     puts worksheet.cell(row,col)
-     observation_value = parse_cell(worksheet.cell(row,col))
-    puts observation_value
+    observation_value = parse_cell(worksheet.cell(row,col))
     
     return "END" if observation_value == "BREAK IN DATA" unless @handle_processor.date_sensitive?
     return {} if observation_value == "BREAK IN DATA" if @handle_processor.date_sensitive?

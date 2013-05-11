@@ -25,9 +25,10 @@
 	d1 = date_keys[-1]
 	d2 = date_keys[-2]
 	d3 = date_keys[-3]
+	action = series.frequency == "year" ? 'show' : 'analyze'
 %>
 
-<td><%= link_to(series.name, {:controller => "series", :action => 'analyze', :id => series.id}, :target => "_blank")  %>
+<td><%= link_to(series.name, {:controller => "series", :action => action, :id => series.id}, :target => "_blank")  %>
 	<br>
 	<%= a_series.description %>
 </td>
