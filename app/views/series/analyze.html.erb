@@ -33,13 +33,15 @@
 <% dates = @series.data.keys.sort %>
 <% data = @series.data %>
 <% chg = @chg.data %>
+<% ytd = @ytd.data %>
 
 var jsonData = [ 
 	<% dates.each do |date_string|  %> 
 	{ 
 		date: "<%=date_string %>", 
 		level: "<%= data[date_string].nil? ? "" : "%.3f" % data[date_string] %>" , 
-		change: "<%= chg[date_string].nil? ? "" : "%.1f" % chg[date_string]%>" 
+		change: "<%= chg[date_string].nil? ? "" : "%.1f" % chg[date_string]%>" ,
+		ytd: "<%= ytd[date_string].nil? ? "" : "%.1f" % ytd[date_string]%>"
 	}, 
 	<%end%>
 ];

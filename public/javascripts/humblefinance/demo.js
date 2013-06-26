@@ -6,7 +6,7 @@ Event.observe(document, 'dom:loaded', function() {
         
         var x = Math.floor(obj.x);
         var data = jsonData[x];
-        var text = data.date + " Level: " + data.level + "  YOY: " + data.change + "%";
+        var text = data.date + " Level: " + data.level + "  YOY: " + data.change + "%" + " YTD: " + data.ytd + "%";
         
         return text; //black square
     };
