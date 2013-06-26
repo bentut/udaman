@@ -32,6 +32,7 @@
 
 <% dates = @series.data.keys.sort %>
 <% data = @series.data %>
+<% lvl_chg = @lvl_chg.data %>
 <% chg = @chg.data %>
 <% ytd = @ytd.data %>
 
@@ -76,5 +77,26 @@ end
 <script src="/javascripts/humblefinance/flotr.js"></script>
 <script src="/javascripts/humblefinance/HumbleFinance.js"></script>
 <script src="/javascripts/humblefinance/demo.js"></script>
+
+<table>
+	<tr>
+		<th>Date</th>
+		<th>Level</th>
+		<th>Level Change</th>
+		<th>YOY</th>
+		<th>YTD</th>
+	</tr>
+	<% dates.reverse.each do |date_string|  %>  
+	<tr>	
+		<td><%=date_string %></td> 
+		<td><%= data[date_string].nil? ? "" : "%.3f" % data[date_string] %></td>
+		<td><%= lvl_chg[date_string].nil? ? "" : "%.3f" % lvl_chg[date_string] %></td>
+		<td><%= chg[date_string].nil? ? "" : "%.1f" % chg[date_string]%></td>
+		<td><%= ytd[date_string].nil? ? "" : "%.1f" % ytd[date_string]%></td>
+	</tr>
+	<%end%>
+</table>	 
+	
+		
 
 

@@ -77,6 +77,7 @@ class SeriesController < ApplicationController
     @chg = @series.annualized_percentage_change
     @as = AremosSeries.get @series.name 
     @desc = @as.nil? ? "No Aremos Series" : @as.description
+    @lvl_chg = @series.absolute_change
     @ytd = @series.ytd_percentage_change
   end
   
