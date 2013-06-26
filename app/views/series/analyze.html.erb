@@ -2,11 +2,16 @@
 	<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
 	<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
 
-	
 
 <h1><%= @series.name %></h1>
 <h3><%= @desc %></h3>
-<h3><%= link_to 'Details', @series %></h3>
+<h3>
+<%= link_to 'Details', @series %> |  
+<% @series.other_frequencies.each do |other_freq| %>
+	<%= link_to other_freq,  action: "analyze", id: other_freq.ts %> |
+<% end %>
+
+</h3>
 <div id="finance" style="width:800px;">
   <div id="labels">
 

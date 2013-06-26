@@ -1,4 +1,18 @@
 module SeriesRelationship
+  def all_frequencies
+    s_root = self.name[0..-3]
+    f_array = []
+    
+    ["A", "S", "Q", "M", "W", "D"].each do |suffix|
+      f_array.push(s_root+"."+suffix) unless (s_root+"."+suffix).ts.nil?
+    end
+    f_array
+  end
+  
+  def other_frequencies
+    all_frequencies.reject { |element| self.name == element }
+  end
+  
   def get_ns_series
     ns_series_name = name.sub("@","NS@")
     Series.get ns_series_name
