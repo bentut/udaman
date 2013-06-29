@@ -18,6 +18,11 @@ class SeriesController < ApplicationController
     @ytd_chg = @series.ytd_percentage_change
     @lvl_chg = @series.absolute_change
     @desc = @as.nil? ? "No Aremos Series" : @as.description
+    
+    respond_to do |format|
+      format.csv { render :layout => false }
+      format.html # show.html.erb
+    end
   end
 
   def edit

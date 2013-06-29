@@ -1,5 +1,28 @@
 module SeriesHelper
   
+  require 'csv'
+
+  def csv_helper
+    CSV.generate do |csv| 
+      # series_data = @data_list.series_data
+      # sorted_names = series_data.keys.sort
+      # dates_array = @data_list.data_dates
+      dates = @series.data.keys
+      val = @series.data
+      lvls = @lvl_chg.data
+      yoy = @chg.data
+      ytd = @ytd_chg.data
+       
+      csv << ["Date", "Values", "LVL","YOY", "YTD"]
+      # dates_array.each do |date|
+      #   csv << [date] + sorted_names.map {|series_name| series_data[series_name][date]}
+      # end
+      dates.each do |date|
+        csv << [date, val[date], lvls[date], yoy[date], ytd[date]]
+      end
+    end
+  end
+  
   def gct_datapoints(series)
   arr = series.data.keys.sort
   html =""
@@ -66,3 +89,14 @@ module SeriesHelper
 		
   end
 end
+
+
+# array2d = []
+# array2d.push([""] + sorted_names)
+# dates_array.each do |date|
+#   array2d.push([date] + sorted_names.map {|series_name| series_data[series_name][date]})
+# end
+# csv << [""] + sorted_names
+# dates_array.each do |date|
+#   csv << [date] + sorted_names.map {|series_name| series_data[series_name][date]}
+# end
