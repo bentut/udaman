@@ -721,6 +721,7 @@ class Series < ActiveRecord::Base
     lm = data_points.order(:updated_at).last.updated_at
 
     as = AremosSeries.get name
+    as_description = as.nil? ? "" : as.description
 
     dps = data
     dates = dps.keys.sort
@@ -731,7 +732,7 @@ class Series < ActiveRecord::Base
     day_switches[10 + dates[0].to_date.wday] = '1'    if frequency == "week"
     day_switches = "0         1111111"                if frequency == "day"
     
-    data_string+= "#{name.split(".")[0].to_s.ljust(16," ")}#{as.description.ljust(64, " ")}\r\n"
+    data_string+= "#{name.split(".")[0].to_s.ljust(16," ")}#{as_description.ljust(64, " ")}\r\n"
     data_string+= "#{lm.month.to_s.rjust(34," ")}/#{lm.day.to_s.rjust(2," ")}/#{lm.year.to_s[2..4]}0800#{dates[0].to_date.tsd_start(frequency)}#{dates[-1].to_date.tsd_end(frequency)}#{Series.code_from_frequency frequency}  #{day_switches}\r\n"
     sci_data = {}
     

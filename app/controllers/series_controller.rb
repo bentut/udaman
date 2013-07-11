@@ -22,6 +22,7 @@ class SeriesController < ApplicationController
     respond_to do |format|
       format.csv { render :layout => false }
       format.html # show.html.erb
+      format.json { render :json => @series }
     end
   end
 

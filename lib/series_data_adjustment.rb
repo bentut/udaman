@@ -73,4 +73,9 @@ module SeriesDataAdjustment
     month_prefix = ["01","02","03","04","05","06","07","08","09","10","11","12"][month_num-1]
     data.reject {|date_string, value| date_string[5..6] != month_prefix}
   end
+  
+  def shift_forward_years(num_years)
+    new_series_data = Hash[data.map {|date, val| [(Date.parse(date) >> 12 * num_years).to_s, val]}]
+    new_transformation("Shifted Series #{name}", new_series_data)
+  end
 end

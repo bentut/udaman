@@ -1,7 +1,7 @@
 module DataListsHelper
   require 'csv'
 
-  def csv_helper
+  def csv_helper_data_list
     CSV.generate do |csv| 
       series_data = @data_list.series_data
       sorted_names = series_data.keys.sort

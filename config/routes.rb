@@ -116,9 +116,13 @@ UheroDb::Application.routes.draw do
   match 'visitor_mau_a' => 'dashboards#visitor_mau_a'
   match 'visitor_haw_a' => 'dashboards#visitor_haw_a'
   match 'visitor_kau_a' => 'dashboards#visitor_kau_a'
+
+  match 'prudential_list_q' => 'dashboards#prudential_list_q'
   
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
