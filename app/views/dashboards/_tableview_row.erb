@@ -30,7 +30,7 @@
 
 <td><%= link_to(series.name, {:controller => "series", :action => action, :id => series.id}, :target => "_blank")  %>
 	<br>
-	<%= a_series.description %>
+	<%= a_series.nil? ? "No Aremos Series" : a_series.description %>
 </td>
 <% [d3,d2,d1].each do |d| %>
 <% abs = abs_chg_data[d].nil? ? nil : abs_chg_data[d] %>

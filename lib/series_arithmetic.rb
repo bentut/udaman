@@ -147,6 +147,24 @@ module SeriesArithmetic
     new_transformation("Annualized Percentage Change of #{name}", new_series_data)
   end
   
+  def ytd_sum
+    return all_nil unless ["day", "week"].index(frequency).nil?
+    new_series_data = {}
+    ytd_sum = 0
+    ytd_year = nil
+    data.sort.each do |date_string, value|
+      year = Date.parse(date_string).year
+      if year == ytd_year
+        ytd_sum += value
+      else
+        ytd_sum = value
+        ytd_year = year
+      end
+      new_series_data[date_string] = ytd_sum
+    end
+    new_transformation("Year to Date sum of #{name}", new_series_data)
+  end
+  
   def ytd_percentage_change
     return all_nil unless ["day", "week"].index(frequency).nil?
     new_series_data = {}

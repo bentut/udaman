@@ -97,6 +97,8 @@ UheroDb::Application.routes.draw do
 
   match 'income' => 'dashboards#income'
   match 'income_r' => 'dashboards#income_r'
+
+  match 'tax_m' => 'dashboards#tax_m'
   
 
   match 'visitor' => 'dashboards#visitor_hi_m'

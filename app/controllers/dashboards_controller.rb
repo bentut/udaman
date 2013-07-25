@@ -561,6 +561,36 @@ class DashboardsController < ApplicationController
     render "tableview"
   end
   
+  def tax_m
+    @series_to_chart = [
+    "TRNS_FISCAL_YTD@HI.M",
+    "TGRNS_FISCAL_YTD@HI.M",
+    "TRHSNS_FISCAL_YTD@HI.M",
+    "TRTTNS_FISCAL_YTD@HI.M",
+    #{}"TRIINS_FISCAL_YTD@HI.M",
+    "TRCONS_FISCAL_YTD@HI.M",
+    "TDGFNS_FISCAL_YTD@HI.M",
+    "TGRNS_FISCAL_YTD@HI.M",
+    "TGRRTNS_FISCAL_YTD@HI.M",
+    "TGRSVNS_FISCAL_YTD@HI.M",
+    "TGRCTNS_FISCAL_YTD@HI.M",
+    "TGRHTNS_FISCAL_YTD@HI.M",
+    "TGRORNS_FISCAL_YTD@HI.M",
+    "TGRWTNS_FISCAL_YTD@HI.M",
+    "TGBNS_FISCAL_YTD@HI.M",
+    "TGBRTNS_FISCAL_YTD@HI.M",
+    "TGBSVNS_FISCAL_YTD@HI.M",
+    "TGBCTNS_FISCAL_YTD@HI.M",
+    "TGBHTNS_FISCAL_YTD@HI.M",
+    "TGBORNS_FISCAL_YTD@HI.M",
+    "TGBWTNS_FISCAL_YTD@HI.M"
+    ]
+    dates = set_dates_m(params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
+  
   def visitor_mau_m
     @series_to_chart = [
       'VIS@MAU.M',
