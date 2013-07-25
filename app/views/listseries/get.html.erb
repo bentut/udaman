@@ -1,0 +1,18 @@
+<h1>Hello!</h1>
+<h1>Results for <%=params[:name]%></h1><br><br>
+<%@data.each do |a|%>
+	<h2><%=a["file"]%>: <%=a["description"]%></h2>
+	<table border = "5">
+		<tr>
+			<th>Date</th>
+			<th>Data</th>
+		</tr>
+	<%a["data"].each do |year, point|%>
+	<tr>
+		<td><%=year%></td>
+		<td><%=point%></td>
+	</tr>
+	<%end%>		
+	</table>
+	<br><br>
+<%end%>
