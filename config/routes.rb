@@ -121,8 +121,13 @@ UheroDb::Application.routes.draw do
   
   match 'mapping' => 'dashboards#mapping'
   match 'cache' => 'dashboards#d_cache'
+
+  match 'listseries/search' => 'listseries#search'
+  match 'listseries/re' =>'listseries#redir'
+  match 'listseries/:name' => 'listseries#get'
   
   
+  #match 'path' => 'controller#method'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

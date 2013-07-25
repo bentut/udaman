@@ -33,7 +33,6 @@ google.visualization.events.addListener(chart, 'select', function() {
 
 
 </script>
-
 <p class="notice"><%= notice %></p>
 
 <div id="summary_area">
@@ -47,7 +46,8 @@ google.visualization.events.addListener(chart, 'select', function() {
 		<%= link_to 'Analyze', :action => 'analyze', :id => @series %> |
 		<%= link_to 'Comparison Chart', :action => 'comparison_graph', :id => @series %> | 
 		<%= link_to 'Blog Chart', :action => 'blog_graph', :id => @series %> | 
-		<%= link_to 'Outlier Chart', :action => 'outlier_graph', :id => @series %> 
+		<%= link_to 'Outlier Chart', :action => 'outlier_graph', :id => @series %> |
+		<a href="/listseries/<%=@series.name.chop.chop%>">All of this name</a> 
 
 		<div id="chart_div"></div>
 		<div id="notes"><p><%= @series.investigation_notes %></p></div>
