@@ -1,11 +1,8 @@
 class DataHtmlParser
 
   def get_fred_series(code)
-    @url = "http://api.stlouisfed.org/fred/series/observations"
-    @post_parameters = {
-      'api_key' => '1030292ef115ba08c1778a606eb7a6cc',
-      'series_id' => code
-    }
+    api_key = '1030292ef115ba08c1778a606eb7a6cc'
+    @url = "http://api.stlouisfed.org/fred/series/observations?series_id=#{code}&api_key=#{api_key}"
     @doc = self.download
     return self.get_fred_data
   end
