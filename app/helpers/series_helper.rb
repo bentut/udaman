@@ -17,7 +17,7 @@ module SeriesHelper
       # dates_array.each do |date|
       #   csv << [date] + sorted_names.map {|series_name| series_data[series_name][date]}
       # end
-      dates.each do |date|
+      dates.sort.each do |date|
         csv << [date, val[date], lvls[date], yoy[date], ytd[date]]
       end
     end

@@ -47,7 +47,9 @@ google.visualization.events.addListener(chart, 'select', function() {
 		<%= link_to 'Comparison Chart', :action => 'comparison_graph', :id => @series %> | 
 		<%= link_to 'Blog Chart', :action => 'blog_graph', :id => @series %> | 
 		<%= link_to 'Outlier Chart', :action => 'outlier_graph', :id => @series %> |
-		<a href="/listseries/<%=@series.name.chop.chop%>">All of this name</a> 
+		<a href="/listseries/<%=@series.name.chop.chop%>">TSDs</a> |
+		<%= link_to 'CSV', :action => 'show', :format => :csv, :id => @series %> 
+		
 
 		<div id="chart_div"></div>
 		<div id="notes"><p><%= @series.investigation_notes %></p></div>
