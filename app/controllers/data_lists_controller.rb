@@ -21,6 +21,16 @@ class DataListsController < ApplicationController
       format.xml  { render :xml => @data_list }
     end
   end
+  
+  def show_table
+    @data_list = DataList.find(params[:id])
+    @series_to_chart = @data_list.series_data.keys
+    frequency = @series_to_chart[0][-1]
+    dates = set_dates(frequency, params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tableview"
+  end
 
   # GET /data_lists/new
   # GET /data_lists/new.xml
@@ -81,4 +91,30 @@ class DataListsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  
+private
+  def set_dates(frequency, params)
+    case frequency
+    when "M"
+      months_back = 15
+      offset = 1
+    when "Q"
+      months_back = 34
+      offset = 4
+    when "A"
+      months_back = 120
+      offset = 4
+    end
+    
+    if params[:num_years].nil?
+      start_date = (Time.now.to_date << (months_back)).to_s
+      end_date = nil
+    else
+      start_date = (Time.now.to_date << (12 * params[:num_years].to_i + offset)).to_s
+      end_date = nil
+    end
+    return {:start_date => start_date, :end_date => end_date}
+  end
+
 end
