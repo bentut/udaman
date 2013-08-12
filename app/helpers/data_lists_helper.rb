@@ -4,12 +4,12 @@ module DataListsHelper
   def csv_helper_data_list
     CSV.generate do |csv| 
       series_data = @data_list.series_data
-      sorted_names = series_data.keys.sort
+      names = @data_list.series_names
       dates_array = @data_list.data_dates
        
-      csv << [""] + sorted_names
+      csv << [""] + names
       dates_array.each do |date|
-        csv << [date] + sorted_names.map {|series_name| series_data[series_name][date]}
+        csv << [date] + names.map {|series_name| series_data[series_name][date]}
       end
     end
   end
