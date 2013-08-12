@@ -1,0 +1,71 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("visualization", "1", {packages: ["table"]});
+	google.load("visualization", "1", {packages:["corechart"]});
+</script>
+
+<style>
+/*#chart-board div.tile {float:left; width:400px; height:275px;}*/
+span.lighten {color:#AAA;}
+</style>
+
+<%
+	#summary_series = "E_NF@HI.M"
+	series_table_data = {}
+	date_keys = []
+	ytd_chg_vals = []
+	slice_data = {}
+	cumulative_pre = 0
+	all_series_ytd = []	
+	
+	@series_to_chart.each do |s|
+		series = s.ts
+		next if series.nil?
+		plot_data = series.get_values_after(@start_date)
+		ytd = series.ytd_percentage_change.get_values_after(@start_date).sort[-1][1]
+ 		dates = plot_data.keys.sort
+		ytd_abs = plot_data[dates[-1]] - plot_data["#{dates[-1][0..3]}-01-01"] rescue nil
+		series_table_data[s] = {
+			:series => s.ts,
+			:s_chg_data => series.annualized_percentage_change.get_values_after(@start_date),
+			:a_chg_data => series.absolute_change.get_values_after(@start_date),
+	    	:ytd => ytd,
+			:ytd_abs => ytd_abs,
+			:a_series => AremosSeries.get(s),
+			:plot_data => plot_data,
+		}
+		date_keys |= plot_data.keys
+		all_series_ytd.push(ytd)
+	end
+	
+	date_keys.sort!
+%>
+<h1><%= @start_date %></h1>
+<div id="chart-board">
+<table>
+	<tr>
+		<th></th>
+		<th><%= date_keys[-3] %></th>
+		<th><%= date_keys[-2] %></th>
+		<th><%= date_keys[-1] %></th>
+		<th>YTD</th>
+	</tr>
+<% @series_to_chart.each do |s| %>
+	<%
+		next if s.ts.nil?
+		#highest_level = summary_series.ts.data[date_keys[-1]]
+		max_ytd = all_series_ytd.sort[-1]
+		min_ytd = all_series_ytd.sort[0]
+	%>
+	<%= render :partial => 'tableview_row', :locals => {
+		:series_table_data => series_table_data[s], 
+		:series_name => s, 
+		:date_keys => date_keys,
+		#:highest_level => highest_level,
+		:max_ytd => max_ytd,
+		:min_ytd => min_ytd,
+	} %>
+	
+<% end %>
+</table>
+</div>
