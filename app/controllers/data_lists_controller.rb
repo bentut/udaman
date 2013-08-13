@@ -32,6 +32,20 @@ class DataListsController < ApplicationController
     render "tableview"
   end
 
+  def show_tsd_table
+    @data_list = DataList.find(params[:id])
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
+    @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
+    # @params_tsd = params[:tsd_file]
+    # @tsd_file = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"][0]
+    @series_to_chart = @data_list.series_names
+    frequency = @series_to_chart[0][-1]
+    dates = set_dates(frequency, params)
+    @start_date = dates[:start_date]
+    @end_date = dates[:end_date]
+    render "tsd_tableview"
+  end
+  
   # GET /data_lists/new
   # GET /data_lists/new.xml
   def new
@@ -96,13 +110,13 @@ class DataListsController < ApplicationController
 private
   def set_dates(frequency, params)
     case frequency
-    when "M"
+    when "M", "m"
       months_back = 15
       offset = 1
-    when "Q"
+    when "Q", "q"
       months_back = 34
       offset = 4
-    when "A"
+    when "A", "a"
       months_back = 120
       offset = 4
     end

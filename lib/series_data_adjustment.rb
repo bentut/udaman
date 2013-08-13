@@ -50,11 +50,11 @@ module SeriesDataAdjustment
     end
   end
   
-  def get_values_after(startdatestring, enddatestring = Time.now.to_date.to_s)
+  def get_values_after(startdatestring, enddatestring = data.keys.sort[-1])
     data.reject {|datestring, value| datestring <= startdatestring or value.nil? or datestring > enddatestring}
   end
   
-  def get_values_after_including(startdatestring, enddatestring = Time.now.to_date.to_s)
+  def get_values_after_including(startdatestring, enddatestring = data.keys.sort[-1])
     data.reject {|datestring, value| datestring < startdatestring or value.nil? or datestring > enddatestring}
   end
   

@@ -1,6 +1,12 @@
 module DataListsHelper
   require 'csv'
 
+  def json_from_heroku_tsd(series_name, tsd_file)
+    url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{series_name[0..-3]}/json")
+    res = Net::HTTP.new(url.host, url.port).request_get(url.path)
+    data = res.code == "500" ? nil : JSON.parse(res.body)  
+  end
+  
   def csv_helper_data_list
     CSV.generate do |csv| 
       series_data = @data_list.series_data

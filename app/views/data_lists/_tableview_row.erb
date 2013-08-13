@@ -28,7 +28,7 @@
 	action = series.frequency == "year" ? 'show' : 'analyze'
 %>
 
-<td><%= link_to(series.name, {:controller => "series", :action => action, :id => series.id}, :target => "_blank")  %>
+<td><%= link_to(series_name, {:controller => "series", :action => action, :id => series.id}, :target => "_blank")  %>
 	<br>
 	<%= a_series.nil? ? "No Aremos Series" : a_series.description %>
 </td>
