@@ -77,6 +77,22 @@ class SeriesController < ApplicationController
     #@series.backward_looking_moving_average.standard_deviation
   end
   
+  def all_tsd_chart
+    @series = Series.find params[:id]
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
+    @all_series_to_chart = []
+    @all_tsd_files.each do |tsd|
+      data = json_from_heroku_tsd(@series.name, tsd)
+      puts tsd
+      puts @series.name
+      puts data
+      @all_series_to_chart.push(Series.new_transformation(
+        data["name"]+"."+data["frequency"]+":"+tsd,
+        data["data"], 
+        Series.frequency_from_code(data["frequency"])
+        )) unless data.nil? or data["frequency"] != @series.name[-1]
+    end
+  end
   
   def analyze
     @series = Series.find params[:id]
@@ -136,6 +152,12 @@ class SeriesController < ApplicationController
     @series.update_attributes({:investigation_notes => params[:note]})
     render :partial => "investigation_sort.html"
   end
+private
 
+  def json_from_heroku_tsd(series_name, tsd_file)
+    url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{series_name[0..-3]}/json")
+    res = Net::HTTP.new(url.host, url.port).request_get(url.path)
+    data = res.code == "500" ? nil : JSON.parse(res.body)  
+  end
 
 end

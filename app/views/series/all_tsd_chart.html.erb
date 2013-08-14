@@ -1,0 +1,86 @@
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>  
+<script type="text/javascript">
+
+google.load("visualization", "1", {packages: ["table"]});
+google.load("visualization", "1", {packages:["corechart"]});
+
+var data;
+var chart;
+series_names = [
+<% 
+#series_data = @data_list.series_data
+sorted_names = @all_series_to_chart.map {|s| s.name }
+sorted_names.each do |name|
+%>
+"<%= name %>",
+<% end %>
+];
+
+series_colors = ["#277991", "#7CBAC3", "#F4A130", "#666666", "#5D8DA2", "#96C5CC", "#F7B056", "#888888", "#82A3B5", "#AFD2D7", "#F9C37D", "#AAAAAA", "#A8BDC9", "#C8E0E4", "#FCD5A4", "#CCCCCC", "#CFDAE2", "#E2EEF1", "#FDE9CE", "#DEDEDE"]
+series_draw_details = series_names.map(function(name, index) {
+	return {color: series_colors[index], targetAxisIndex: 0, pointSize: 0 };
+});
+
+//////////////////////////////////////////////////////////
+google.setOnLoadCallback(draw_charts);
+
+///////////////////////////////////////////////////////////
+
+$(document).ready(function() {
+	
+<%= google_charts_data_table.html_safe %>
+chart = new google.visualization.LineChart(document.getElementById('chart_2012-07-06'));
+});
+
+
+function draw_charts() {
+	
+var myView = new google.visualization.DataView(data);
+var hidden = $("input:radio[value=hide]:checked").map(function(){ return series_names.indexOf(this.name) + 1 }).get();
+var left_axis = $("input:radio[value=left]:checked").map(function(){ return series_names.indexOf(this.name) + 1 }).get();
+var right_axis = $("input:radio[value=right]:checked").map(function(){ return series_names.indexOf(this.name) + 1 }).get();
+var series_to_draw = series_draw_details.slice(); // this is to make a copy
+
+right_axis.map(function(elem, i) { series_to_draw[elem-1].targetAxisIndex = 1; series_to_draw[elem-1].pointSize = 3; series_to_draw[elem-1].lineWidth = 2});
+left_axis.map(function(elem, i) {series_to_draw[elem-1].targetAxisIndex = 0; series_to_draw[elem-1].pointSize = 0; series_to_draw[elem-1].lineWidth = 1});
+
+//alert(series_to_draw.toSource());
+hidden.map(function(elem, i){series_to_draw.splice(elem-i-1,1)});
+
+var options = {curveType: "none",width: 1000, height: 500, title: 'NONFARM JOBS, U.S. (SEAS.ADJ.)', titleTextStyle: {color: '#297B92', fontSize: 14}, lineWidth: 2, 
+			   backgroundColor: '#F9F9F8',
+               vAxis: { textStyle: { fontSize: 11 } },
+               hAxis: { slantedText: true, slantedTextAngle: '45', textStyle: {fontSize: 10} },
+               legend: {position: 'in', textStyle: {color:'gray', fontSize: 10}},
+               series: series_to_draw,
+			   chartArea: {left:"10%", top:"10%", width: "70%", height: "80%"},
+	};
+	
+//if (right_axis.length != 0 && left_axis.length != 0) {
+	//options.animation = {duration:1000, easing: 'in'};
+//}
+
+myView.hideColumns(hidden);
+chart.draw(myView, options);
+
+}
+
+
+</script>
+
+<div id="chart_2012-07-06">
+</div>
+<form id="series_selector">
+	<% sorted_names.each do |name| 
+	left_checked = name == sorted_names[0] ? "checked" : ""
+	hide_checked = name == sorted_names[0] ? "" : "checked"
+	%>
+	<label for='<%= name %>'><%= name %></label>
+	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='left'  <%= left_checked %> /> left
+	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='right' /> right
+	<input type='radio' onClick = 'draw_charts();' name='<%= name %>' value ='hide'  <%= hide_checked %> /> hide
+	<br />
+	<% end %>
+</form>
