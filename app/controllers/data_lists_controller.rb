@@ -36,14 +36,27 @@ class DataListsController < ApplicationController
     @data_list = DataList.find(params[:id])
     @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
     @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
-    # @params_tsd = params[:tsd_file]
-    # @tsd_file = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"][0]
     @series_to_chart = @data_list.series_names
     frequency = @series_to_chart[0][-1]
     dates = set_dates(frequency, params)
     @start_date = dates[:start_date]
     @end_date = dates[:end_date]
     render "tsd_tableview"
+  end
+  
+  def analyze_view
+    @data_list = DataList.find(params[:id])
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
+    @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
+    @series_index = params[:list_index].nil? ? @data_list.series_names[0] : params[:list_index].to_i
+    @series_name = @data_list.series_names[@series_index]
+    @data = json_from_heroku_tsd(@series_name,@tsd_file)
+		@series = @data.nil? ? nil : Series.new_transformation(@data["name"]+"."+@data["frequency"],  @data["data"], Series.frequency_from_code(@data["frequency"]))
+		@chg = @series.annualized_percentage_change
+    #@as = AremosSeries.get @series.name 
+    @desc = "None yet" #@as.nil? ? "No Aremos Series" : @as.description
+    @lvl_chg = @series.absolute_change
+    @ytd = @series.ytd_percentage_change
   end
   
   # GET /data_lists/new
@@ -129,6 +142,12 @@ private
       end_date = nil
     end
     return {:start_date => start_date, :end_date => end_date}
+  end
+  
+  def json_from_heroku_tsd(series_name, tsd_file)
+    url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{series_name[0..-3]}/json")
+    res = Net::HTTP.new(url.host, url.port).request_get(url.path)
+    data = res.code == "500" ? nil : JSON.parse(res.body)  
   end
 
 end

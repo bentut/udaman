@@ -40,6 +40,22 @@ span.lighten {color:#AAA;}
 	end
 	
 	date_keys.sort!
+	vintage = @tsd_file.split(".")[0][-4..-1]
+	if vintage[2] == "Q"
+		year = vintage[0..1]
+		month = ["01","04","07","10"][vintage[3].to_i-1]
+		current_date_index = @series_to_chart[0][-1] == "A" ? date_keys.index("20#{year}-01-01") : date_keys.index("#{year}-#{month}-01")
+		show_dates = current_date_index.nil? ? [date_keys[-3], date_keys[-2], date_keys[-1]] : [
+			date_keys[current_date_index-1], 
+			date_keys[current_date_index], 
+			date_keys[current_date_index+1], 
+			date_keys[current_date_index+2], 
+			date_keys[current_date_index+3]
+		]
+	else
+		show_dates = [date_keys[-3], date_keys[-2], date_keys[-1]]
+	end
+	
 %>
 <h1><%= @tsd_file %></h1>
 <p>
@@ -47,17 +63,16 @@ span.lighten {color:#AAA;}
 	<%= link_to(tsd, {:action => :show_tsd_table, :id => @data_list.id, :tsd_file => tsd}) %> | 
 <% end %>
 </p>
-
 <div id="chart-board">
 <table>
 	<tr>
 		<th></th>
-		<th><%= date_keys[-3] %></th>
-		<th><%= date_keys[-2] %></th>
-		<th><%= date_keys[-1] %></th>
+		<% show_dates.each do |show_date| %>
+		<th><%= show_date %></th>
+		<% end %>
 		<th>YTD</th>
 	</tr>
-<% @series_to_chart.each do |s| %>
+<% @series_to_chart.each_with_index do |s,i| %>
 	<%
 		next if series_table_data[s].nil?
 		#highest_level = summary_series.ts.data[date_keys[-1]]
@@ -71,6 +86,9 @@ span.lighten {color:#AAA;}
 		#:highest_level => highest_level,
 		:max_ytd => max_ytd,
 		:min_ytd => min_ytd,
+		:tsd => @tsd_file,
+		:list_index => i,
+		:show_dates => show_dates
 	} %>
 	
 <% end %>

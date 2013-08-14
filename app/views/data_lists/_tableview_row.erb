@@ -22,17 +22,17 @@
 	sorted_plot_data = plot_data.sort
 	ytd = series_table_data[:ytd]
 	ytd_abs = series_table_data[:ytd_abs]
-	d1 = date_keys[-1]
-	d2 = date_keys[-2]
-	d3 = date_keys[-3]
+	# d1 = date_keys[-1]
+	# d2 = date_keys[-2]
+	# d3 = date_keys[-3]
 	action = series.frequency == "year" ? 'show' : 'analyze'
 %>
 
-<td><%= link_to(series_name, {:controller => "series", :action => action, :id => series.id}, :target => "_blank")  %>
+<td><%= link_to(series_name, {:action => :analyze_view, :id => @data_list.id, :tsd_file => tsd, :list_index => list_index}, :target => "_blank") %>
 	<br>
 	<%= a_series.nil? ? "No Aremos Series" : a_series.description %>
 </td>
-<% [d3,d2,d1].each do |d| %>
+<% show_dates.each do |d| %>
 <% abs = abs_chg_data[d].nil? ? nil : abs_chg_data[d] %>
 <td>
 	<%= "%.1f" % plot_data[d] unless plot_data[d].nil? %> (
