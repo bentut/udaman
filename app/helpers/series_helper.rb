@@ -24,7 +24,6 @@ module SeriesHelper
   end
   
   def google_charts_data_table
-    #series_data = @data_list.series_data
     sorted_names = @all_series_to_chart.map {|s| s.name }
     dates_array = []
     @all_series_to_chart.each {|s| dates_array |= s.data.keys}
@@ -42,13 +41,6 @@ module SeriesHelper
     rs += "');\ndata.addRows(["
     dates_array.each do |date| 
       rs += "['"+ date +"',"
-      # data_points = []
-      # sorted_names.each do |s|
-      #   push_val = 0
-      #   push_val = series_data[s][date] == ""
-      #   data_points.push(push_val)
-      # end
-      #rs += data_points.join(", ") +"],\n"
       rs += sorted_names.map {|s| series_data[s][date] == "" ? "0" : series_data[s][date] }.join(", ") +"],\n"
     end
     rs += "]);\n"
