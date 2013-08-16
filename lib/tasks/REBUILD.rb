@@ -2609,6 +2609,7 @@
 "ENS&@MAU.Q".ts_eval= %Q|"ENS&@MAU.M".ts.aggregate(:quarter, :average)|
 "ENS@NBI.M".ts_eval= %Q|"ENS@HI.M".ts - "ENS@HON.M".ts|
 "ENS@NBI.Q".ts_eval= %Q|"ENS@HI.Q".ts - "ENS@HON.Q".ts|
+"ENV_DASH_TESTER@HI.A".ts_eval= %Q|Series.load_from_file("/Volumes/UHEROwork/data/rawdata/manual/env_data.xlsx", { :file_type => "xls", :start_date=>"1977-01-01", :sheet=>"Bird Counts", :row=>"increment:12:1", :col=> "2", :frequency=>"A"}) |
 "EOS@HAW.Q".ts_eval= %Q|"EOS@HAW.M".ts.aggregate(:quarter, :average)|
 "EOS@HAW.A".ts_eval= %Q|"EOS@HAW.Q".ts.aggregate(:year, :average)|
 "EOS@HAW.A".ts_eval= %Q|"EOSNS@HAW.M".ts.aggregate(:year, :average) |
@@ -12934,8 +12935,8 @@
 "VSOCANNS@HI.Q".ts_eval= %Q|"VSOCANNS@HI.M".ts.aggregate(:quarter, :average)|
 "VSOCAN@HI.A".ts_eval= %Q|"VSOCANNS@HI.Q".ts.aggregate(:year, :average)|
 "VSOCAN@HI.A".ts_eval= %Q|"VSOCANNS@HI.M".ts.aggregate(:year, :average)|
-"VSOCANNS@HON.M".ts_eval= %Q|"VSOCANNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/seats_upd_hist.xls"|
 "VSOCANNS@HON.M".ts_eval= %Q|Series.load_from_download(  "SEATS_%b%y@hawaiitourismauthority.org", { :file_type=>"xls", :start_date=>"2011-09-01", :sheet=>"sheet_num:1", :row=>"header:col:1:CANADA", :col=>5, :frequency=>"M" })/1000|
+"VSOCANNS@HON.M".ts_eval= %Q|"VSOCANNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/History/seats_upd_hist.xls"|
 "VSOCANNS@HON.Q".ts_eval= %Q|"VSOCANNS@HON.M".ts.aggregate(:quarter, :average)|
 "VSOCAN@HON.A".ts_eval= %Q|"VSOCANNS@HON.Q".ts.aggregate(:year, :average)|
 "VSOCAN@HON.A".ts_eval= %Q|"VSOCANNS@HON.M".ts.aggregate(:year, :average)|

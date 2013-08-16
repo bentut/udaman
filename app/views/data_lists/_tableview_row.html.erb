@@ -1,0 +1,113 @@
+<tr>
+<% series = series_table_data[:series] %>
+<% if series.nil? %>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>
+
+<div class="tile" style="position:relative"><h3 style="position:absolute; top: 100px; text-align:center; display:block; width:100%"><%= series_name %> does not exist</h3></div>
+</td>
+<% else %>
+<%
+	#locals: series, start_date, end_date 
+	
+	function_name = "draw_#{series.name.gsub("@","_").gsub(".","_")}"
+	a_series = series_table_data[:a_series]
+	plot_data = series_table_data[:plot_data]
+	chg_data = series_table_data[:s_chg_data]
+	abs_chg_data = series_table_data[:a_chg_data]
+	sorted_plot_data = plot_data.sort
+	ytd = series_table_data[:ytd]
+	ytd_abs = series_table_data[:ytd_abs]
+	d1 = date_keys[-1]
+	d2 = date_keys[-2]
+	d3 = date_keys[-3]
+	action = series.frequency == "year" ? 'show' : 'analyze'
+%>
+
+<td><%= link_to(series.name, {:controller => "series", :action => action, :id => series.id}, :target => "_blank")  %>
+	<br>
+	<%= a_series.nil? ? "No Aremos Series" : a_series.description %>
+</td>
+<% [d3,d2,d1].each do |d| %>
+<% abs = abs_chg_data[d].nil? ? nil : abs_chg_data[d] %>
+<td>
+	<%= "%.1f" % plot_data[d] unless plot_data[d].nil? %> (
+	<% unless abs.nil? %>
+	<%= "+" if abs > 0 %>
+	<%= "%.1f" % abs %>
+	<% end %>
+	)<br/>
+	<span class="lighten"><%= "%.1f" % chg_data[d] unless chg_data[d].nil? %>% YOY</span>
+</td>
+<% end %>
+
+
+<script type="text/javascript">
+	google.setOnLoadCallback(<%= function_name%>);
+	function <%= function_name %>() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', '<%= series.frequency %>');
+		data.addColumn('number', 'Jobs (000)');
+		
+		<% plot_data.sort.each do |date,value| %>
+			data.addRow(['<%= date %>', <%= value %>]);
+		<% end %>
+		
+		var chart = new google.visualization.LineChart(document.getElementById('chart_<%= function_name%>')).
+		draw(data, {
+			curveType: "none", lineWidth: 2, vAxis: { textColor: '#FFFFFF', baselineColor: '#FFFFFF', gridlines: {color:'#FFFFFF'} }, hAxis: { textColor: '#FFFFFF', baselineColor: '#FFFFFF', gridlines: {color:'#FFFFFF'} }, legend: 'none',
+			width: 150, 
+			height: 40,
+			series: [{color: '#267991'}],
+			chartArea: {height: 40},
+		});
+		
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'volume');
+		//data.addColumn('number', 'Jobs (000)');
+		
+		data.addColumn('number','neg_unused');
+		data.addColumn('number','neg');
+		data.addColumn('number','pos');
+		data.addColumn('number','pos_unused');
+		
+		
+		data.addRow([
+				'<%= series.name %>',
+				//-1,-3,1,3
+				<%= ytd < 0 ? ytd : 0 %>,
+				<%= ytd < 0 ? min_ytd - ytd : min_ytd %>, 
+				
+				<%= ytd >= 0 ? ytd : 0 %>,
+				<%= ytd >= 0 ? max_ytd - ytd : max_ytd %>,
+				]);
+		
+		var chart = new google.visualization.BarChart(document.getElementById('ytd_<%= function_name%>')).
+		draw(data, {
+			curveType: "none", lineWidth: 2, vAxis: { textColor: '#FFFFFF', baselineColor: '#FFFFFF', gridlines: {color:'#FFFFFF'} }, hAxis: { textColor: '#FFFFFF', gridlines: {color:'#FFFFFF'} }, legend: 'none', 
+			width: 150, 
+			height: 25,
+			isStacked : true,
+			series: [  {color:'#B7382B'}, {color: '#ECCBC8'},  {color:'#749A5F'}, {color:'#C0D0B7'}],
+			chartArea: {height: 25},
+		});
+		
+		
+  	}
+</script>
+
+<td><%= "%.1f" % series_table_data[:ytd] %>% (
+	<% unless ytd_abs.nil? %>
+	<%= "+" if ytd_abs > 0 %>
+	<%= "%.2f" % ytd_abs %>
+	<% end %>
+	)
+	<div id="ytd_<%= function_name %>">&nbsp;</div>
+</td>
+<td><div id="chart_<%= function_name %>">&nbsp;</div></td>
+<% end %>
+</tr>

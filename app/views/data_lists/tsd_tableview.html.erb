@@ -79,7 +79,7 @@ span.lighten {color:#AAA;}
 		max_ytd = all_series_ytd.sort[-1]
 		min_ytd = all_series_ytd.sort[0]
 	%>
-	<%= render :partial => 'tableview_row', :locals => {
+	<%= render :partial => 'tsd_tableview_row', :locals => {
 		:series_table_data => series_table_data[s], 
 		:series_name => s[0..-3], 
 		:date_keys => date_keys,
