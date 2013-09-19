@@ -135,6 +135,10 @@ module SeriesArithmetic
     new_transformation("All nil for dates in #{name}", new_series_data)
   end
   
+  def yoy
+    annualized_percentage_change
+  end
+  
   def annualized_percentage_change
     return all_nil unless ["day", "week"].index(frequency).nil?
     new_series_data = {}
@@ -165,6 +169,10 @@ module SeriesArithmetic
     new_transformation("Year to Date sum of #{name}", new_series_data)
   end
   
+  def ytd
+    ytd_percentage_change
+  end
+  
   def ytd_percentage_change
     return all_nil unless ["day", "week"].index(frequency).nil?
     new_series_data = {}
@@ -181,6 +189,10 @@ module SeriesArithmetic
       new_series_data[date_string] = ytd_sum
     end
     new_transformation("Year to Date Percentage Change of #{name}", new_series_data).annualized_percentage_change
+  end
+  
+  def yoy_diff
+    annual_diff
   end
   
   def annual_diff

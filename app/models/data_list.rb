@@ -17,12 +17,38 @@ class DataList < ActiveRecord::Base
   end
   
   def series_data
+    @series_data ||= get_series_data
+  end
+  
+  def get_series_data
     series_data = {}
     series_names.each do |s| 
       series = s.ts
       series_data[s] = series.nil? ? {} : series.get_values_after_including(start_date)
     end
     series_data
+  end
+  
+  def get_all_series_data_with_changes
+    series_data = {}
+    series_names.each do |s| 
+      series = s.ts
+      if series.nil?
+        series_data[s] = {}
+      else
+        all_changes = {}
+        yoy = series.yoy.data
+        ytd = series.ytd.data
+        yoy_diff = series.yoy_diff.data
+        data = series.data
+        data.keys.sort.each do |date|
+          all_changes[date] = {:value => data[date], :yoy => yoy[date], :ytd => ytd[date], :yoy_diff => yoy_diff[date]}
+        end
+        series_data[s] = all_changes
+      end
+    end
+    series_data
+    
   end
   
   def data_dates
