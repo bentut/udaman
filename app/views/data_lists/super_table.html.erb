@@ -2,9 +2,12 @@
 <script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
 <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
 <h1>Super Table</h1>
-<a href="#" onclick="trim('1977-01-01')">trim 1977</a> | <a href="#" onclick="trim('1987-01-01')">trim 1987</a>
 
+<style>
+	#slider {width: 500px;}
+</style>
 <div id="slider"></div>
+<div id="date_range"></div>
 
 
 <table id="data_table">
@@ -24,7 +27,7 @@
 		})
 	});
 	
-	dates = d3.keys(all_dates);
+	dates = d3.keys(all_dates).sort(d3.ascending);
 
 	// --------- Fill get all arrays to have matching dates --------
 	filler_data_array = {}
@@ -37,16 +40,64 @@
 	
 	var test_area = d3.select("#test_area");
 	var data_table = d3.select("#data_table");
+	var header = data_table.append("tr")	
+		.attr("id", "header_row")
 	
+	header.append("td")
+		.text("")
+		
+	header
+		.selectAll("td")
+		.data(dates)
+		.enter()
+		.append("td")
+		.attr("class", "header_col")
+		.text(function(d) {return d;});
+		
 	var series_rows = data_table.selectAll("tr.series")
 		.data(d3.entries(all_data));
 		
+	var spark_height = 50;
+	var spark_width = 120;
+	
 	series_rows.enter()
 		.append("tr")
 		.attr("class", "series")
 		.append("td")
-		.text(function(d) {return d.key});
+		.text(function(d) {return d.key})
+		.append("svg")
+		.attr("id", function(d) {return "row_"+d.key})
+		.attr("class", "spark_box")
+		.attr("height", spark_height)
+		.attr("width", spark_width);
 	
+	var x = d3.scale.linear()
+		.range([0,spark_width])
+		.domain([new Date(dates[0]), new Date(dates[dates.length-1]) ])
+		
+	var y = d3.scale.linear()
+		.range([0,spark_height]);
+
+	var spark_line = d3.svg.line()
+		.x(function(d) { return x(new Date(d.key))})
+		.y(function(d) { return y(d.value.value)})
+		
+	var spark_paths = d3.selectAll("svg.spark_box")
+		.append("path")
+		.attr("class", "spark")
+		.data(d3.values(all_data));
+				
+	spark_paths
+		.attr("d", function(d) {
+			sorted_data = d3.entries(d).sort( function(a,b) {
+				return d3.ascending(a.key, b.key)
+			});
+			y.domain(d3.extent(sorted_data, function(a) {return a.value.value}));
+			return spark_line(sorted_data)
+		})
+		.attr("stroke", "red")
+		.attr("fill", "none");
+		
 	data_cells = series_rows.selectAll("td.inner")
 		.data(function(d) {return d3.entries(d.value).sort(function(a,b) 
 			{return d3.ascending(a.key, b.key)}
@@ -54,15 +105,29 @@
 		.enter()
 		.append("td")
 		.attr("class", "inner")
-		.text(function(d) {
-			return d.key + " : "
-				+ f(d.value.value) + " : "
-				+ f(d.value.yoy) + " : "
-				+f(d.value.yoy_diff) + " : "
-				+ f(d.value.ytd) + " : "
+		.html(function(d) {
+			return f(d.value.value) + "<br/>"
+				+ f(d.value.yoy) + "<br/>"
+				+f(d.value.yoy_diff) + "<br/>"
+				+ f(d.value.ytd) + "<br/>"
 				});
 				
 	function trim(start_date,end_date) {
+		
+		// Adjust headers
+		filtered_dates = dates.filter(function(elem) {
+			return (elem >= start_date && elem <= end_date); 
+		});
+
+		header_cells = d3.select("tr#header_row").selectAll("td.header_col")
+			.data(filtered_dates)
+			
+		header_cells.enter().append("td").attr("class", "header_col");
+		header_cells.text(function(d) {return d});
+		header_cells.exit().remove();
+		// -------------------
+		
+		// Adjust data cells
 		data_cells = series_rows.selectAll("td.inner")
 			.data(function(d) {
 				filtered_data = d3.entries(d.value).filter(function(elem) { 
@@ -72,28 +137,41 @@
 						return d3.ascending(a.key, b.key)
 					});
 			});
-			
-			
+				
 		data_cells
 			.enter()
 			.append("td")
 			.attr("class", "inner");
 		
-		data_cells
-			.text(function(d) {
-				return d.key + " : "
-					+ f(d.value.value) + " : "
-					+ f(d.value.yoy) + " : "
-					+f(d.value.yoy_diff) + " : "
-					+ f(d.value.ytd) + " : "
-					});
+		data_cells.html(function(d) {
+				return f(d.value.value) + "<br/>"
+					+ f(d.value.yoy) + "<br/>"
+					+f(d.value.yoy_diff) + "<br/>"
+					+ f(d.value.ytd) + ""
+			});
 
 		data_cells
 			.exit()
 			.remove();
+			
+		// ------------------------
+		
+		// Adjust sparklines
+		x.domain([new Date(filtered_dates[0]), new Date(filtered_dates[filtered_dates.length - 1])]);
+		d3.selectAll("path.spark")
+			.attr("d", function(d) {
+				filtered_data = d3.entries(d).filter(function(elem) { 
+					return (elem.key >= start_date && elem.key <= end_date); 
+				});
+				filtered_data = filtered_data.sort(function(a,b) { return d3.ascending(a.key, b.key) });
+				y.domain(d3.extent(filtered_data, function(a) {return a.value.value}));
+				return spark_line(filtered_data);
+			});
+		// -----------------
 
 	}
 	
+	$("#date_range").text(dates[0]+ " - " + dates[dates.length-1]);
 	$(function() {
     	$( "#slider" ).slider({
     		range: true,
@@ -104,6 +182,7 @@
 				min_date = dates[ui.values[0]];
 				max_date = dates[ui.values[1]];
 				trim(min_date, max_date);
+				$("#date_range").text(min_date+ " - " + max_date);
     		}
 		});
     });
