@@ -36,7 +36,7 @@ module DataListsHelper
     rs
   end
   
-  def google_charts_data_table
+  def google_charts_data_table_list
     series_data = @data_list.series_data
     sorted_names = series_data.keys.sort
     dates_array = @data_list.data_dates

@@ -1,4 +1,111 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
 <h1>Super Table</h1>
+<a href="#" onclick="trim('1977-01-01')">trim 1977</a> | <a href="#" onclick="trim('1987-01-01')">trim 1987</a>
+
+<div id="slider"></div>
+
+
+<table id="data_table">
+</table>
+<div id="test_area">Test Area</div>
 <script>
-var all_data = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>
+	function f(num) {
+		if (num === null) return ""
+		return num.toFixed(2);
+	}
+	var all_data = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>
+	
+	var all_dates = {}
+	d3.values(all_data).forEach(function(elem) { 
+		d3.keys(elem).forEach(function(date) {
+			all_dates[date]=1
+		})
+	});
+	
+	dates = d3.keys(all_dates);
+
+	// --------- Fill get all arrays to have matching dates --------
+	filler_data_array = {}
+	d3.keys(all_dates).forEach(function(date) {filler_data_array[date] = { value:null, yoy:null, yoy_diff:null, ytd:null, ytd_diff:null } });
+
+	d3.entries(all_data).forEach(function (elem) {
+		all_data[elem.key] = $.extend({}, filler_data_array, elem.value);
+	})
+	// -------------------------------------------------------------
+	
+	var test_area = d3.select("#test_area");
+	var data_table = d3.select("#data_table");
+	
+	var series_rows = data_table.selectAll("tr.series")
+		.data(d3.entries(all_data));
+		
+	series_rows.enter()
+		.append("tr")
+		.attr("class", "series")
+		.append("td")
+		.text(function(d) {return d.key});
+	
+	data_cells = series_rows.selectAll("td.inner")
+		.data(function(d) {return d3.entries(d.value).sort(function(a,b) 
+			{return d3.ascending(a.key, b.key)}
+		)})
+		.enter()
+		.append("td")
+		.attr("class", "inner")
+		.text(function(d) {
+			return d.key + " : "
+				+ f(d.value.value) + " : "
+				+ f(d.value.yoy) + " : "
+				+f(d.value.yoy_diff) + " : "
+				+ f(d.value.ytd) + " : "
+				});
+				
+	function trim(start_date,end_date) {
+		data_cells = series_rows.selectAll("td.inner")
+			.data(function(d) {
+				filtered_data = d3.entries(d.value).filter(function(elem) { 
+					return (elem.key >= start_date && elem.key <= end_date); 
+				});
+				return filtered_data.sort(function(a,b) {
+						return d3.ascending(a.key, b.key)
+					});
+			});
+			
+			
+		data_cells
+			.enter()
+			.append("td")
+			.attr("class", "inner");
+		
+		data_cells
+			.text(function(d) {
+				return d.key + " : "
+					+ f(d.value.value) + " : "
+					+ f(d.value.yoy) + " : "
+					+f(d.value.yoy_diff) + " : "
+					+ f(d.value.ytd) + " : "
+					});
+
+		data_cells
+			.exit()
+			.remove();
+
+	}
+	
+	$(function() {
+    	$( "#slider" ).slider({
+    		range: true,
+    		min: 0,
+    		max: dates.length-1,
+    		values: [0,dates.length-1],
+    		slide: function( event, ui ) {
+				min_date = dates[ui.values[0]];
+				max_date = dates[ui.values[1]];
+				trim(min_date, max_date);
+    		}
+		});
+    });
+	
 </script>
