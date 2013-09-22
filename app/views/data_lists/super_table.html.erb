@@ -1,28 +1,96 @@
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
-<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+<script src="/javascripts/ui/jquery-ui.js"></script>
 <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
-<h1>Super Table</h1>
 
 <style>
-	#slider {width: 500px;}
+	
+	#spark_adjuster {width: 300px; float:left; margin:0 20px 0 10px; position:relative; height:50px;}
+	#table_adjuster {width:500px; float:left; margin:0 20px 0 20px; position:relative; height:50px;}
+	td.inner {font-size:10px; line-height:13px}
+	tr#header_row td {font-size:10px; font-weight:bold}
+	span.level {font-size:11px}
+	span.yoy { color: gray}
+	span.yoy_diff { color :gray}
+
+	div.slider {position:absolute; width:100%; left:0px; top: 0px;}
+	div.slider_label,
+	table.date_range {top:15px;}
+	div.slider_label {width:190px; position:absolute; left:0px;}
+	table.date_range {color:gray;  font-weight:normal; width:100px; position:absolute; right:0px;}
+	table.date_range td {font-size:11px; line-height:13px; border:0;}
+
+	span#start_date, span#end_date {color: black}
+	td span.s_desc {font-size:9px; line-height:12px; color:gray;}
+	td div {line-height:12px}
+	table#data_table {clear:both;}
+	table#data_table td.header_col { width: 300px;}
 </style>
-<div id="slider"></div>
-<div id="date_range"></div>
+<div id="spark_adjuster">
+	<div id="spark_slider" class="slider"></div>
+	<div class="slider_label">Sparkline Date Range</div>
+	<table id="spark_date_range" class="date_range"></table>
+</div>
+
+<div id="table_adjuster">
+	<div id="table_slider" class="slider"></div>
+	<div class="slider_label">Table Date Range</div>
+	<table id="table_date_range" class="date_range"></table>
+	
+</div>
+
 
 
 <table id="data_table">
 </table>
-<div id="test_area">Test Area</div>
 <script>
+
+// features to add
+// DONE - separate sliders for table and sparkline
+// link to analyze
+// button to match sparkline to table and vice versa
+// new default for table
+// dot to show current/selected
+// 
+// Selected Value (selected value, date, YTD)
+// min column (min value, min date, min to selected level)
+// max column (max value, max date, max to selected level)
+// range column(min-max diff, min to current/min to max, current to max / min to max)
+// selected point percent change from (first point, min, max)
+// 
+// responsiveness to point
+
+	function perc(num) {
+		if (num === null) return ""
+		return num.toFixed(2) + "%";
+	}
 	function f(num) {
 		if (num === null) return ""
 		return num.toFixed(2);
 	}
+	function freq(series_name){
+		return series_name.split(".")[1];
+	}
+	function date_h(date,freq)
+	{
+		var parts = date.split("-")
+		if (freq.toUpperCase() === "M") {
+			return parts[0]+"&nbsp;M"+parts[1];
+		} else if (freq.toUpperCase() === "Q") {
+			var q = Math.floor(parseInt(parts[1])/3)+1;
+			return parts[0]+"&nbsp;Q"+q;
+		} else if (freq.toUpperCase() === "A") {
+			return parts[0];
+		} else {
+			return date;
+		}
+		
+	}
 	var all_data = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>
 	
+	var frequency = freq(d3.keys(all_data)[0]);
 	var all_dates = {}
 	d3.values(all_data).forEach(function(elem) { 
-		d3.keys(elem).forEach(function(date) {
+		d3.keys(elem.data).forEach(function(date) {
 			all_dates[date]=1
 		})
 	});
@@ -34,7 +102,7 @@
 	d3.keys(all_dates).forEach(function(date) {filler_data_array[date] = { value:null, yoy:null, yoy_diff:null, ytd:null, ytd_diff:null } });
 
 	d3.entries(all_data).forEach(function (elem) {
-		all_data[elem.key] = $.extend({}, filler_data_array, elem.value);
+		all_data[elem.key].data = $.extend({}, filler_data_array, elem.value.data);
 	})
 	// -------------------------------------------------------------
 	
@@ -43,28 +111,39 @@
 	var header = data_table.append("tr")	
 		.attr("id", "header_row")
 	
-	header.append("td")
-		.text("")
+	header.append("td").text("");
+	header.append("td").text("");
 		
 	header
-		.selectAll("td")
+		.selectAll("td.header_col")
 		.data(dates)
 		.enter()
 		.append("td")
 		.attr("class", "header_col")
-		.text(function(d) {return d;});
+		.html(function(d) {
+			return date_h(d,frequency);
+		});
 		
 	var series_rows = data_table.selectAll("tr.series")
 		.data(d3.entries(all_data));
 		
-	var spark_height = 50;
+	var spark_height = 30;
 	var spark_width = 120;
 	
 	series_rows.enter()
 		.append("tr")
-		.attr("class", "series")
+		.attr("class", "series");
+	
+	series_rows
 		.append("td")
-		.text(function(d) {return d.key})
+		.attr("class", "header_col")
+		.html(function(d) {
+			return "<div>" + d.key + "</div>"
+				+ "<div><span class='s_desc'>" + d.value.desc + "</span></div>"
+		})
+		
+	series_rows
+		.append("td")
 		.append("svg")
 		.attr("id", function(d) {return "row_"+d.key})
 		.attr("class", "spark_box")
@@ -89,7 +168,7 @@
 				
 	spark_paths
 		.attr("d", function(d) {
-			sorted_data = d3.entries(d).sort( function(a,b) {
+			sorted_data = d3.entries(d.data).sort( function(a,b) {
 				return d3.ascending(a.key, b.key)
 			});
 			y.domain(d3.extent(sorted_data, function(a) {return a.value.value}));
@@ -99,20 +178,29 @@
 		.attr("fill", "none");
 		
 	data_cells = series_rows.selectAll("td.inner")
-		.data(function(d) {return d3.entries(d.value).sort(function(a,b) 
+		.data(function(d) {return d3.entries(d.value.data).sort(function(a,b) 
 			{return d3.ascending(a.key, b.key)}
 		)})
 		.enter()
 		.append("td")
 		.attr("class", "inner")
-		.html(function(d) {
-			return f(d.value.value) + "<br/>"
-				+ f(d.value.yoy) + "<br/>"
-				+f(d.value.yoy_diff) + "<br/>"
-				+ f(d.value.ytd) + "<br/>"
-				});
+		.html(cell_html);
 				
-	function trim(start_date,end_date) {
+	function cell_html(d){
+		return ""
+		+ "<span class='level'>" + f(d.value.value) + "</span><br/>"
+		+ "<span class='yoy'>" + perc(d.value.yoy) + "</span><br/>"
+		+ "<span class='yoy_diff'>" + f(d.value.yoy_diff) + "</span><br/>";
+		//+ "<span class='ytd'>" + f(d.value.ytd) + "</span><br/>"
+	}
+	
+	function date_header(start_date, end_date) {
+		return ""
+		+ "<tr><td>Start</td><td><span id='start_date'>" + date_h(start_date,frequency) + "</span></tr>"
+		+ "<tr><td>End</td><td><span id='end_date'>" + date_h(end_date,frequency) + "</span></tr>"
+	}
+	
+	function trim_table(start_date,end_date) {
 		
 		// Adjust headers
 		filtered_dates = dates.filter(function(elem) {
@@ -123,14 +211,14 @@
 			.data(filtered_dates)
 			
 		header_cells.enter().append("td").attr("class", "header_col");
-		header_cells.text(function(d) {return d});
+		header_cells.html(function(d) {return date_h(d,frequency)});
 		header_cells.exit().remove();
 		// -------------------
 		
 		// Adjust data cells
 		data_cells = series_rows.selectAll("td.inner")
 			.data(function(d) {
-				filtered_data = d3.entries(d.value).filter(function(elem) { 
+				filtered_data = d3.entries(d.value.data).filter(function(elem) { 
 					return (elem.key >= start_date && elem.key <= end_date); 
 				});
 				return filtered_data.sort(function(a,b) {
@@ -143,24 +231,25 @@
 			.append("td")
 			.attr("class", "inner");
 		
-		data_cells.html(function(d) {
-				return f(d.value.value) + "<br/>"
-					+ f(d.value.yoy) + "<br/>"
-					+f(d.value.yoy_diff) + "<br/>"
-					+ f(d.value.ytd) + ""
-			});
+		data_cells.html(cell_html);
 
 		data_cells
 			.exit()
 			.remove();
-			
+	}
+	
+	function trim_spark(start_date,end_date) {
+		filtered_dates = dates.filter(function(elem) {
+			return (elem >= start_date && elem <= end_date); 
+		});
+		
 		// ------------------------
 		
 		// Adjust sparklines
 		x.domain([new Date(filtered_dates[0]), new Date(filtered_dates[filtered_dates.length - 1])]);
 		d3.selectAll("path.spark")
 			.attr("d", function(d) {
-				filtered_data = d3.entries(d).filter(function(elem) { 
+				filtered_data = d3.entries(d.data).filter(function(elem) { 
 					return (elem.key >= start_date && elem.key <= end_date); 
 				});
 				filtered_data = filtered_data.sort(function(a,b) { return d3.ascending(a.key, b.key) });
@@ -171,9 +260,10 @@
 
 	}
 	
-	$("#date_range").text(dates[0]+ " - " + dates[dates.length-1]);
+	$("#spark_date_range").html(date_header(dates[0], dates[dates.length-1]));
+	$("#table_date_range").html(date_header(dates[0], dates[dates.length-1]));
 	$(function() {
-    	$( "#slider" ).slider({
+    	$( "#spark_slider" ).slider({
     		range: true,
     		min: 0,
     		max: dates.length-1,
@@ -181,10 +271,27 @@
     		slide: function( event, ui ) {
 				min_date = dates[ui.values[0]];
 				max_date = dates[ui.values[1]];
-				trim(min_date, max_date);
-				$("#date_range").text(min_date+ " - " + max_date);
+				trim_spark(min_date, max_date);
+				$("#spark_date_range").html(date_header(min_date, max_date));
     		}
 		});
     });
+
+	$(function() {
+    	$( "#table_slider" ).slider({
+    		range: true,
+    		min: 0,
+    		max: dates.length-1,
+    		values: [0,dates.length-1],
+    		slide: function( event, ui ) {
+				min_date = dates[ui.values[0]];
+				max_date = dates[ui.values[1]];
+				trim_table(min_date, max_date);
+				$("#table_date_range").html(date_header(min_date, max_date));
+    		}
+		});
+    });
+
+
 	
 </script>

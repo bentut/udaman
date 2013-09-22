@@ -44,7 +44,9 @@ class DataList < ActiveRecord::Base
         data.keys.sort.each do |date|
           all_changes[date] = {:value => data[date], :yoy => yoy[date], :ytd => ytd[date], :yoy_diff => yoy_diff[date]}
         end
-        series_data[s] = all_changes
+        as = AremosSeries.get(s)
+        desc = as.nil? ? "" : as.description
+        series_data[s] = {:data => all_changes, :id => series.id, :desc => desc} 
       end
     end
     series_data
