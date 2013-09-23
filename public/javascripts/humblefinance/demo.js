@@ -33,27 +33,14 @@ Event.observe(document, 'dom:loaded', function() {
         return date; 
     }
     
-    console.log("0");
-console.log(priceData);
-console.log(volumeData);
-console.log(summaryData);
-//priceData.push([23,0]);
-//volumeData.push([38,0]);
-//summaryData.push([38,0]);
     HumbleFinance.init('finance', priceData, volumeData, summaryData);
 
     //HumbleFinance.setFlags(flagData); 
-    console.log("1");
     var xaxis = HumbleFinance.graphs.summary.axes.x;
- console.log("2");
     var prevSelection = HumbleFinance.graphs.summary.prevSelection;
- console.log("3");
     var xmin = xaxis.p2d(prevSelection.first.x);
- console.log("4");
     var xmax = xaxis.p2d(prevSelection.second.x);
-     console.log("5");
     $('dateRange').update('start:<strong>' + jsonData[xmin].date + '</strong> end:<strong>' + jsonData[xmax].date + '</strong>');
-     console.log("6");
     Event.observe(HumbleFinance.containers.summary, 'flotr:select', function (e) {
         
         var area = e.memo[0];

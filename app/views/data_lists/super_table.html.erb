@@ -6,6 +6,7 @@
 	
 	#spark_adjuster {width: 300px; float:left; margin:0 20px 0 10px; position:relative; height:50px;}
 	#table_adjuster {width:500px; float:left; margin:0 20px 0 20px; position:relative; height:50px;}
+	td.calc,
 	td.inner {font-size:10px; line-height:13px}
 	tr#header_row th {font-size:10px; font-weight:bold; border-bottom:1px solid gray}
 	span.level {font-size:11px}
@@ -18,7 +19,7 @@
 	div.slider_label {width:190px; position:absolute; left:0px;}
 	table.date_range {color:gray;  font-weight:normal; width:100px; position:absolute; right:0px;}
 	table.date_range td {font-size:11px; line-height:13px; border:0;}
-	div.range_links {font-size:11px; left:0px; top: 30px; position:absolute; width:190px;}
+	div.range_links {font-size:11px; left:0px; top: 30px; position:absolute; width:240px;}
 
 	span#start_date, span#end_date {color: black}
 	td span.s_desc {font-size:9px; line-height:12px; color:gray;}
@@ -27,20 +28,41 @@
 	table#data_table th.header_col { width: 175px;}
 	table#data_table th.date_col {width: 50px;}
 	table#data_table th.spark_col {width: 120px;}
+	table#data_table th.range_col {width: 100px;}
+	table#data_table th {width:75px}
+	
+	table#data_table th.calc {line-height:13px;}
 	
 </style>
 <div id="spark_adjuster">
 	<div id="spark_slider" class="slider"></div>
 	<div class="slider_label">Sparkline Date Range</div>
 	<table id="spark_date_range" class="date_range"></table>
-	<div class="range_links"><a href="#" onclick="match('table')">Match Table</a></div>
+	<div class="range_links">
+		<a href="#" onclick="match('table')">Match Table</a>
+		<a href="#" onclick="set_spark_periods_back(5)">Last 5</a>
+		<a href="#" onclick="set_spark_periods_back(12)">12</a>
+		<a href="#" onclick="set_spark_periods_back(24)">24</a>
+		<a href="#" onclick="set_spark_periods_back(60)">60</a>
+		<a href="#" onclick="set_spark_periods_back(120)">120</a>
+
+	</div>
 </div>
 
 <div id="table_adjuster">
 	<div id="table_slider" class="slider"></div>
 	<div class="slider_label">Table Date Range</div>
 	<table id="table_date_range" class="date_range"></table>
-	<div class="range_links"><a href="#" onclick="match('spark')">Match Sparkline</a></div>
+	<div class="range_links">
+		<a href="#" onclick="match('spark')">Match Sparkline</a>
+		<a href="#" onclick="set_table_periods_back(5)">Last 5</a>
+		<a href="#" onclick="set_table_periods_back(12)">12</a>
+		<a href="#" onclick="set_table_periods_back(24)">24</a>
+		<a href="#" onclick="set_table_periods_back(60)">60</a>
+		<a href="#" onclick="set_table_periods_back(120)">120</a>
+		
+		
+	</div>
 </div>
 
 
@@ -53,13 +75,12 @@
 // DONE - separate sliders for table and sparkline
 // DONE - button to match sparkline to table and vice versa
 // DONE - link to analyze
-// new default for table
-// 
-// Selected Value (selected value, date, YTD)
-// min column (min value, min date, min to selected level)
-// max column (max value, max date, max to selected level)
-// range column(min-max diff, min to current/min to max, current to max / min to max)
-// selected point percent change from (first point, min, max)
+// DONE - new default for table
+// DONE - Selected Value (selected value, date, YTD)
+// DONE - min column (min value, min date, min to selected level)
+// DONE - max column (max value, max date, max to selected level)
+// DONE - range column(min-max diff, min to current/min to max, current to max / min to max)
+// DONE - selected point percent change from (first point, min, max)
 // 
 // dot to show current/selected
 // responsiveness to point
@@ -91,6 +112,13 @@
 		}
 		
 	}
+	
+	function pf(num) {
+		if (num === "") return null;
+		parsed_float = parseFloat(num);
+		return parsed_float;
+	}
+	
 	var all_data = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>
 	
 	var frequency = freq(d3.keys(all_data)[0]);
@@ -117,8 +145,19 @@
 	var header = data_table.append("tr")	
 		.attr("id", "header_row")
 	
+	function head_html(line1, line2, line3) {
+		line1 = line1;
+		line2 = line2 != "" ? ("<br/>"+line2) : "";
+		line3 = line3 != "" ? ("<br/>"+line3) : "";
+		return line1+line2+line3
+	}
 	header.append("th").text("").attr("class", "header_col");
 	header.append("th").text("").attr("class", "spark_col");
+	header.append("th").html(head_html("Last Obs","date", "YTD %chg")).attr("class", "calc sel_col");
+	header.append("th").html(head_html("Min Obs","date", "Last - Min")).attr("class", "calc min_col");
+	header.append("th").html(head_html("Max Obs","date", "Max - Last")).attr("class", "calc max_col");
+	header.append("th").html(head_html("%chg fr first","%chg fr min", "%chg fr max")).attr("class", "calc chg_col");
+	header.append("th").html(head_html("Max - Min","Last-Min/Max-Min", "Max-Last/Max-Min")).attr("class", "calc range_col");
 		
 	header
 		.selectAll("th.date_col")
@@ -161,7 +200,7 @@
 		.domain([new Date(dates[0]), new Date(dates[dates.length-1]) ])
 		
 	var y = d3.scale.linear()
-		.range([0,spark_height]);
+		.range([spark_height,0]);
 
 	var spark_line = d3.svg.line()
 		.x(function(d) { return x(new Date(d.key))})
@@ -183,6 +222,58 @@
 		.attr("stroke", "red")
 		.attr("fill", "none");
 		
+	
+	function sp_calcs(d, start_date,end_date) {
+
+		var data = d3.entries(d.value.data).filter(function(elem) {
+			return (elem.value.value != null) && (elem.key >= start_date && elem.key <= end_date); 
+		});
+		
+		var sp = data[data.length-1]; //selected_point = last point for now
+		var sp_val = sp.value.value; 
+		
+		var fp = data[0]; //first point
+		var fp_val = fp.value.value
+		
+		var sorted_data = data.sort(function(a,b) {
+			return d3.ascending(a.value.value, b.value.value);
+		});
+		
+		var min_elem = sorted_data[0];
+		var min = min_elem.value.value;
+		var min_date = min_elem.key;
+		var min_diff = sp_val - min;
+		
+		var max_elem = sorted_data[sorted_data.length-1];
+		var max = max_elem.value.value;
+		var max_date = max_elem.key;
+		var max_diff = max-sp_val;
+		
+		return [{col_name:"sel", value:f(sp_val), yoy:date_h(sp.key,frequency), yoy_diff:perc(sp.value.ytd)},
+				{col_name:"min", value:f(min), yoy:date_h(min_date,frequency), yoy_diff:f(min_diff)},
+				{col_name:"max", value:f(max), yoy:date_h(max_date,frequency), yoy_diff:f(max_diff)},
+				{col_name:"chg", value:perc((sp_val-fp_val)/fp_val*100), yoy:perc((sp_val-min)/min*100), yoy_diff:perc((max-sp_val)/max*100)},
+				{col_name:"range", value:f(max-min), yoy:perc((sp_val-min)/(max-min)*100), yoy_diff:perc((max-sp_val)/(max-min)*100)}];
+	}
+	
+	function calc_html(d) {
+		return "<span class='level'>" + d.value + "</span><br />" +
+				"<span class='yoy'>" + d.yoy + "</span><br />" +
+		 		"<span class='yoy_diff'>" + d.yoy_diff + "</span>";
+	}
+	
+	//var sp_calcs = selected_point_calculations(dates[0], dates[dates.length-1]);
+
+	var calc_cells = series_rows.selectAll("td.calc")
+		.data(function(d) {return sp_calcs(d,dates[0], dates[dates.length-1])})
+		.enter()
+		.append("td")
+		.attr("class", "calc")
+		.attr("id",function(d) {return "col_"+d.col_name})
+		.html(calc_html);
+
+
+	// ----------------------------------------------
 	data_cells = series_rows.selectAll("td.inner")
 		.data(function(d) {return d3.entries(d.value.data).sort(function(a,b) 
 			{return d3.ascending(a.key, b.key)}
@@ -263,12 +354,13 @@
 				return spark_line(filtered_data);
 			});
 		// -----------------
+		
+		calc_cells = series_rows.selectAll("td.calc")
+			.data(function(d) {return sp_calcs(d,filtered_dates[0], filtered_dates[filtered_dates.length - 1])})
+			.html(calc_html);
 
 	}
 	
-	$("#spark_date_range").html(date_header(dates[0], dates[dates.length-1]));
-	$("#table_date_range").html(date_header(dates[0], dates[dates.length-1]));
-
 	function update_table(event, ui) {
 		min_date = dates[ui.values[0]];
 		max_date = dates[ui.values[1]];
@@ -284,6 +376,7 @@
 
 	var spark_slider;
 	var table_slider;
+
 	$(function() {
     	spark_slider = $( "#spark_slider" ).slider({
     		range: true,
@@ -305,6 +398,7 @@
     		slide: update_table
 
 		});
+		set_table_periods_back(12);
     });
 
 
@@ -321,5 +415,24 @@
 		
 	}
 
+	function set_table_periods_back(num_periods) {
+		var slider_len = dates.length;
+		num_periods = num_periods >= slider_len ? slider_len : num_periods;
+		//have to do this in order so as not to cross the slider positions
+		table_slider.slider("values",1,slider_len-1);
+		table_slider.slider("values",0,slider_len-num_periods);
+		
+	}
+	
+	function set_spark_periods_back(num_periods) {
+		var slider_len = dates.length;
+		num_periods = num_periods >= slider_len ? slider_len : num_periods;
+		//have to do this in order so as not to cross the slider positions
+		spark_slider.slider("values",1,slider_len-1);
+		spark_slider.slider("values",0,slider_len-num_periods);
+	}
+
+	$("#spark_date_range").html(date_header(dates[0], dates[dates.length-1]));
+	$("#table_date_range").html(date_header(dates[0], dates[dates.length-1]));
 	
 </script>
