@@ -7,7 +7,7 @@
 	#spark_adjuster {width: 300px; float:left; margin:0 20px 0 10px; position:relative; height:50px;}
 	#table_adjuster {width:500px; float:left; margin:0 20px 0 20px; position:relative; height:50px;}
 	td.inner {font-size:10px; line-height:13px}
-	tr#header_row td {font-size:10px; font-weight:bold}
+	tr#header_row th {font-size:10px; font-weight:bold; border-bottom:1px solid gray}
 	span.level {font-size:11px}
 	span.yoy { color: gray}
 	span.yoy_diff { color :gray}
@@ -18,24 +18,29 @@
 	div.slider_label {width:190px; position:absolute; left:0px;}
 	table.date_range {color:gray;  font-weight:normal; width:100px; position:absolute; right:0px;}
 	table.date_range td {font-size:11px; line-height:13px; border:0;}
+	div.range_links {font-size:11px; left:0px; top: 30px; position:absolute; width:190px;}
 
 	span#start_date, span#end_date {color: black}
 	td span.s_desc {font-size:9px; line-height:12px; color:gray;}
 	td div {line-height:12px}
-	table#data_table {clear:both;}
-	table#data_table td.header_col { width: 300px;}
+	table#data_table {clear:both; table-layout:fixed; width:0px;}
+	table#data_table th.header_col { width: 175px;}
+	table#data_table th.date_col {width: 50px;}
+	table#data_table th.spark_col {width: 120px;}
+	
 </style>
 <div id="spark_adjuster">
 	<div id="spark_slider" class="slider"></div>
 	<div class="slider_label">Sparkline Date Range</div>
 	<table id="spark_date_range" class="date_range"></table>
+	<div class="range_links"><a href="#" onclick="match('table')">Match Table</a></div>
 </div>
 
 <div id="table_adjuster">
 	<div id="table_slider" class="slider"></div>
 	<div class="slider_label">Table Date Range</div>
 	<table id="table_date_range" class="date_range"></table>
-	
+	<div class="range_links"><a href="#" onclick="match('spark')">Match Sparkline</a></div>
 </div>
 
 
@@ -46,10 +51,9 @@
 
 // features to add
 // DONE - separate sliders for table and sparkline
-// link to analyze
-// button to match sparkline to table and vice versa
+// DONE - button to match sparkline to table and vice versa
+// DONE - link to analyze
 // new default for table
-// dot to show current/selected
 // 
 // Selected Value (selected value, date, YTD)
 // min column (min value, min date, min to selected level)
@@ -57,7 +61,9 @@
 // range column(min-max diff, min to current/min to max, current to max / min to max)
 // selected point percent change from (first point, min, max)
 // 
+// dot to show current/selected
 // responsiveness to point
+// switch chart to growth rates / YTD rates options (bars)
 
 	function perc(num) {
 		if (num === null) return ""
@@ -111,15 +117,15 @@
 	var header = data_table.append("tr")	
 		.attr("id", "header_row")
 	
-	header.append("td").text("");
-	header.append("td").text("");
+	header.append("th").text("").attr("class", "header_col");
+	header.append("th").text("").attr("class", "spark_col");
 		
 	header
-		.selectAll("td.header_col")
+		.selectAll("th.date_col")
 		.data(dates)
 		.enter()
-		.append("td")
-		.attr("class", "header_col")
+		.append("th")
+		.attr("class", "date_col")
 		.html(function(d) {
 			return date_h(d,frequency);
 		});
@@ -138,7 +144,7 @@
 		.append("td")
 		.attr("class", "header_col")
 		.html(function(d) {
-			return "<div>" + d.key + "</div>"
+			return "<div><a href='/series/analyze/"+d.value.id+"' target='_blank'>" + d.key + "</a></div>"
 				+ "<div><span class='s_desc'>" + d.value.desc + "</span></div>"
 		})
 		
@@ -207,10 +213,10 @@
 			return (elem >= start_date && elem <= end_date); 
 		});
 
-		header_cells = d3.select("tr#header_row").selectAll("td.header_col")
+		header_cells = d3.select("tr#header_row").selectAll("th.date_col")
 			.data(filtered_dates)
 			
-		header_cells.enter().append("td").attr("class", "header_col");
+		header_cells.enter().append("th").attr("class", "date_col");
 		header_cells.html(function(d) {return date_h(d,frequency)});
 		header_cells.exit().remove();
 		// -------------------
@@ -262,36 +268,58 @@
 	
 	$("#spark_date_range").html(date_header(dates[0], dates[dates.length-1]));
 	$("#table_date_range").html(date_header(dates[0], dates[dates.length-1]));
+
+	function update_table(event, ui) {
+		min_date = dates[ui.values[0]];
+		max_date = dates[ui.values[1]];
+		trim_table(min_date, max_date);
+		$("#table_date_range").html(date_header(min_date, max_date));		
+	}
+	function update_spark(event, ui) {
+		min_date = dates[ui.values[0]];
+		max_date = dates[ui.values[1]];
+		trim_spark(min_date, max_date);
+		$("#spark_date_range").html(date_header(min_date, max_date));		
+	}
+
+	var spark_slider;
+	var table_slider;
 	$(function() {
-    	$( "#spark_slider" ).slider({
+    	spark_slider = $( "#spark_slider" ).slider({
     		range: true,
     		min: 0,
     		max: dates.length-1,
     		values: [0,dates.length-1],
-    		slide: function( event, ui ) {
-				min_date = dates[ui.values[0]];
-				max_date = dates[ui.values[1]];
-				trim_spark(min_date, max_date);
-				$("#spark_date_range").html(date_header(min_date, max_date));
-    		}
+    		slide: update_spark,
+			change: update_spark,
 		});
     });
 
 	$(function() {
-    	$( "#table_slider" ).slider({
+    	table_slider = $( "#table_slider" ).slider({
     		range: true,
     		min: 0,
     		max: dates.length-1,
     		values: [0,dates.length-1],
-    		slide: function( event, ui ) {
-				min_date = dates[ui.values[0]];
-				max_date = dates[ui.values[1]];
-				trim_table(min_date, max_date);
-				$("#table_date_range").html(date_header(min_date, max_date));
-    		}
+			change: update_table,
+    		slide: update_table
+
 		});
     });
 
+
+	function match(slider_name) {
+		if (slider_name === "spark") {
+			s1 = spark_slider; 
+			s2 = table_slider; 
+		} else {
+			s1 = table_slider; 
+			s2 = spark_slider; 
+		}
+		sv = s1.slider("values");
+		s2.slider("values",sv);
+		
+	}
 
 	
 </script>

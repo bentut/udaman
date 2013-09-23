@@ -44,25 +44,35 @@ var jsonData = [
 		change: "<%= chg[date_string].nil? ? "" : "%.1f" % chg[date_string]%>" ,
 		ytd: "<%= ytd[date_string].nil? ? "" : "%.1f" % ytd[date_string]%>"
 	}, 
+	<%end%> 
+	<% if dates.length <= 38 %>
+	<% (dates.length..38).each do |num| %>
+	{ 
+		date: "filler data-00-00", 
+		level: "0" , 
+		change: "0" ,
+		ytd: "0"
+	}, 
 	<%end%>
+	<% end %>
 ];
 
-var priceData = [ <% dates.each_index do |i|  %> [<%= i %>, <%= data[dates[i]] %>], <%end%> ];
-var volumeData = [ <% dates.each_index do |i|  %> [<%= i %>, <%= chg[dates[i]].nil? ? 0 : chg[dates[i]] %>], <%end%> ];
+<%
+fill = dates.length <= 38 ? ((dates.length..38).to_a.map {|elem| "[#{elem},0]"}).join(",") : ""
+%>
+var priceData = [ <% dates.each_index do |i|  %> [<%= i %>, <%= data[dates[i]] %>], <%end%> <%=fill%>];
+var volumeData = [ <% dates.each_index do |i|  %> [<%= i %>, <%= chg[dates[i]].nil? ? 0 : chg[dates[i]] %>], <%end%> <%=fill%>];
 
 var summaryData = [ 
 <%
 i = 0
 step = data.count > 100 ? data.count / 100 : 1
 while i < data.count do
-%>
-
-	[<%= i %>, <%= data[dates[i]] %>],
-
-<%	
+%> [<%= i %>, <%= data[dates[i]] %>], <%	
 i += step
 end
 %>
+<%=fill%>
 ];
 
 </script>
