@@ -27,6 +27,7 @@
 	<td><%= link_to 'CSV', :action => 'show', :id => data_list, :format => 'csv' %></td>
     <td><%= link_to 'Show', data_list %></td>
     <td><%= link_to 'Table', :action => 'show_table', :id => data_list %></td>
+    <td><%= link_to 'FlexTable', :action => 'super_table', :id => data_list %></td>
     <td><%= link_to 'Edit', edit_data_list_path(data_list) %></td>
     <td><%= link_to 'Destroy', data_list, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
