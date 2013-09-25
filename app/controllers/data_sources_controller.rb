@@ -20,8 +20,7 @@ class DataSourcesController < ApplicationController
   end
   
   def new
-    puts "I'm in the NEW actions"
-    params.each { |key,value| puts "#{key}: #{value}" }
+    #params.each { |key,value| puts "#{key}: #{value}" }
     @series = Series.find(params[:series_id])
     @data_source = DataSource.new(:series_id => @series.id)
   end
@@ -31,7 +30,7 @@ class DataSourcesController < ApplicationController
   end
 
   def update
-    params.each { |key,value| puts "#{key}: #{value}" }
+    #params.each { |key,value| puts "#{key}: #{value}" }
     
     @data_source = DataSource.find(params[:id])
      if @data_source.update_attributes(:eval => params[:data_source][:eval])
@@ -43,7 +42,7 @@ class DataSourcesController < ApplicationController
   end
   
   def inline_update
-    params.each { |key,value| puts "#{key}: #{value}" }
+    #params.each { |key,value| puts "#{key}: #{value}" }
     
     @data_source = DataSource.find(params[:id])
      if @data_source.update_attributes(:eval => params[:data_source][:eval])

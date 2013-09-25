@@ -94,6 +94,11 @@ class SeriesController < ApplicationController
     end
   end
   
+  def transform
+    params.each { |key,value| puts "#{key}: #{value}" }
+    @s = eval(params[:eval])
+  end
+  
   def analyze
     @series = Series.find params[:id]
     @chg = @series.annualized_percentage_change
