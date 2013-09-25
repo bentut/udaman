@@ -8,6 +8,16 @@
 </div>
 <div id="details_mask"></div>
 <div id="details_area">
+		<form accept-charset="UTF-8" action="/series/transform" method="post">
+				<div class="field">
+					<label for="eval">Eval</label>
+					<!-- could also try to add this with javascript -->
+					<input id="eval" name="eval" size="120" type="text" value=" " />
+				</div>
+				<div class="actions">
+					<input id="submit" name="commit" type="submit" value="Analyze Tranformation" />
+				</div>
+		</form>
 		<ul>
 		<% @all_series.each do |series| %>
 			<li><%= link_to series.name, {:action => 'show', :id => series.id} %></li>
