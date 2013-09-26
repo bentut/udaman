@@ -100,6 +100,10 @@ div#search {display:inline;}
 div#search form {display:inline}
 div#search input {font-size:10px; /**/ }
 #search_field {border-style:solid}
+input#eval {border-style:solid; font-size:16px; color:gray;}
+#submit_transformation {font-size:16px;}
+	
 form button,
-#submit_search {border: 1px solid;}
+#submit_search,
+#submit_transformation {border: 1px solid;}
 table#search_results td {border:none;}

@@ -95,8 +95,12 @@ class SeriesController < ApplicationController
   end
   
   def transform
-    params.each { |key,value| puts "#{key}: #{value}" }
-    @s = eval(params[:eval])
+    eval_statement = convert_to_udaman_notation(params[:eval])
+    @series = eval(eval_statement)
+    @chg = @series.annualized_percentage_change
+    @desc = ""
+    @lvl_chg = @series.absolute_change
+    @ytd = @series.ytd_percentage_change
   end
   
   def analyze
@@ -159,6 +163,11 @@ class SeriesController < ApplicationController
   end
 private
 
+  def convert_to_udaman_notation(eval_string)
+    operator_fix = eval_string.gsub("(","( ").gsub(")", " )").gsub("*"," * ").gsub("/"," / ").gsub("-"," - ").gsub("+"," + ")
+    (operator_fix.split(" ").map {|e| (e.index("@").nil? or e[-3..-1] == ".ts") ? e : "\"#{e}\".ts" }).join(" ")
+  end
+  
   def json_from_heroku_tsd(series_name, tsd_file)
     url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{series_name[0..-3]}/json")
     res = Net::HTTP.new(url.host, url.port).request_get(url.path)

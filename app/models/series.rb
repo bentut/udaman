@@ -378,7 +378,7 @@ class Series < ActiveRecord::Base
     Series.new(
       :name => name,
       :frequency => frequency,
-      :data => data
+      :data => data.reject {|k,v| v.nil?}
     )
   end
   

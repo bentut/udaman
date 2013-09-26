@@ -215,7 +215,7 @@
 		.attr("d", function(d) {
 			sorted_data = d3.entries(d.data).sort( function(a,b) {
 				return d3.ascending(a.key, b.key)
-			});
+			}).filter(function(elem) {return elem.value.value != null});
 			y.domain(d3.extent(sorted_data, function(a) {return a.value.value}));
 			return spark_line(sorted_data)
 		})
@@ -229,9 +229,16 @@
 			return (elem.value.value != null) && (elem.key >= start_date && elem.key <= end_date); 
 		});
 		
+		if (data.length === 0) //for undefined series
+			return [{col_name:"sel",   value:"", yoy:"", yoy_diff:""},
+					{col_name:"min",   value:"", yoy:"", yoy_diff:""},
+					{col_name:"max",   value:"", yoy:"", yoy_diff:""},
+					{col_name:"chg",   value:"", yoy:"", yoy_diff:""},
+					{col_name:"range", value:"", yoy:"", yoy_diff:""}];
+					
 		var sp = data[data.length-1]; //selected_point = last point for now
 		var sp_val = sp.value.value; 
-		
+
 		var fp = data[0]; //first point
 		var fp_val = fp.value.value
 		
@@ -347,7 +354,7 @@
 		d3.selectAll("path.spark")
 			.attr("d", function(d) {
 				filtered_data = d3.entries(d.data).filter(function(elem) { 
-					return (elem.key >= start_date && elem.key <= end_date); 
+					return (elem.key >= start_date && elem.key <= end_date) && elem.value.value != null; 
 				});
 				filtered_data = filtered_data.sort(function(a,b) { return d3.ascending(a.key, b.key) });
 				y.domain(d3.extent(filtered_data, function(a) {return a.value.value}));
