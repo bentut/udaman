@@ -42,6 +42,13 @@ class DataListsController < ApplicationController
     render "tableview"
   end
 
+  def show_tsd_super_table
+    @data_list = DataList.find(params[:id])
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
+    @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
+    render "tsd_super_tableview"
+  end
+  
   def show_tsd_table
     @data_list = DataList.find(params[:id])
     @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
@@ -58,8 +65,9 @@ class DataListsController < ApplicationController
     @data_list = DataList.find(params[:id])
     @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
     @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
-    @series_index = params[:list_index].nil? ? @data_list.series_names[0] : params[:list_index].to_i
-    @series_name = @data_list.series_names[@series_index]
+    @series_name = params[:list_index].nil? ? params[:series_name] : @data_list.series_names[params[:list_index].to_i]
+    #@series_name = @data_list.series_names[@series_index]
+
     @data = json_from_heroku_tsd(@series_name,@tsd_file)
 		@series = @data.nil? ? nil : Series.new_transformation(@data["name"]+"."+@data["frequency"],  @data["data"], Series.frequency_from_code(@data["frequency"]))
 		@chg = @series.annualized_percentage_change
