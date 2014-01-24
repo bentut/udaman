@@ -79,31 +79,40 @@ class DataListsController < ApplicationController
     @ytd = @series.ytd_percentage_change
   end
   
-  def compare_view
+  def compare_forecasts
     @data_list = DataList.find(params[:id])
-    #@all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
-    #@tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
-    @tsd_file1 = "heco14.TSD"
-    @tsd_file2 = "13Q4.TSD"
-    @series_name = params[:list_index].nil? ? params[:series_name] : @data_list.series_names[params[:list_index].to_i]
-    #@series_name = @data_list.series_names[@series_index]
+    @tsd_file1 = "13Q4.TSD"
+    @tsd_file2 = "heco14.TSD"
+    @series_name = "VIS@HI.Q"
 
     @data1 = json_from_heroku_tsd(@series_name,@tsd_file1)
 		@series1 = @data1.nil? ? nil : Series.new_transformation(@data1["name"]+"."+@data1["frequency"],  @data1["data"], Series.frequency_from_code(@data1["frequency"])).trim("2006-01-01","2017-10-01")
 		@chg1 = @series1.annualized_percentage_change
-    @desc1 = "None yet" #@as.nil? ? "No Aremos Series" : @as.description
-    @lvl_chg1 = @series1.absolute_change
-    @ytd1 = @series1.ytd_percentage_change
     
     @data2 = json_from_heroku_tsd(@series_name,@tsd_file2)
 		@series2 = @data2.nil? ? nil : Series.new_transformation(@data2["name"]+"."+@data2["frequency"],  @data2["data"], Series.frequency_from_code(@data2["frequency"])).trim("2006-01-01","2017-10-01")
 		@chg2 = @series2.annualized_percentage_change
-    @desc2 = "None yet" #@as.nil? ? "No Aremos Series" : @as.description
-    @lvl_chg2 = @series2.absolute_change
-    @ytd2 = @series2.ytd_percentage_change
-    
+
     @history_series = @series_name.ts.trim("2006-01-01","2017-10-01")
+    @history_chg = @history_series.annualized_percentage_change
+  end
+  
+  def compare_view
+    @data_list = DataList.find(params[:id])
+    @tsd_file1 = "heco14.TSD"
+    @tsd_file2 = "13Q4.TSD"
+    @series_name = params[:list_index].nil? ? params[:series_name] : @data_list.series_names[params[:list_index].to_i]
+
+    @data1 = json_from_heroku_tsd(@series_name,@tsd_file1)
+		@series1 = @data1.nil? ? nil : Series.new_transformation(@data1["name"]+"."+@data1["frequency"],  @data1["data"], Series.frequency_from_code(@data1["frequency"])).trim("2006-01-01","2017-10-01")
+		@chg1 = @series1.annualized_percentage_change
     
+    @data2 = json_from_heroku_tsd(@series_name,@tsd_file2)
+		@series2 = @data2.nil? ? nil : Series.new_transformation(@data2["name"]+"."+@data2["frequency"],  @data2["data"], Series.frequency_from_code(@data2["frequency"])).trim("2006-01-01","2017-10-01")
+		@chg2 = @series2.annualized_percentage_change
+
+    @history_series = @series_name.ts.trim("2006-01-01","2017-10-01")
+    @history_chg = @history_series.annualized_percentage_change
   end
   
   # GET /data_lists/new
