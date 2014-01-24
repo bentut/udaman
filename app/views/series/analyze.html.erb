@@ -1,3 +1,11 @@
+<%
+@chg = @series.annualized_percentage_change
+@as = AremosSeries.get @series.name 
+@desc = @as.nil? ? "No Aremos Series" : @as.description
+@lvl_chg = @series.absolute_change
+@ytd = @series.ytd_percentage_change
+%>
+
 <%= render :partial => 'calculate_form' %>
 <h1><%= @series.name %></h1>
 <h3><%= @desc %></h3>

@@ -26,6 +26,21 @@ class SeriesController < ApplicationController
     end
   end
 
+  def show_forecast
+    @series = Series.find params[:id]
+    tsd_file = params[:tsd_file]
+    if tsd_file.nil?
+      render inline: "WRITE AN ERROR TEMPLATE: You need a tsd_file parameter"
+    else
+      @series = @series.get_tsd_series_data(tsd_file)
+  
+      respond_to do |format|
+        format.html {render "analyze"}
+        format.json {render :json => @series}
+      end
+    end
+  end
+  
   def edit
     @series = Series.find params[:id]
   end
@@ -70,11 +85,6 @@ class SeriesController < ApplicationController
     residuals.reject!{|a| a.nil?}
     average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
     @std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))
-
-    
-    
-    
-    #@series.backward_looking_moving_average.standard_deviation
   end
   
   def all_tsd_chart
@@ -105,11 +115,6 @@ class SeriesController < ApplicationController
   
   def analyze
     @series = Series.find params[:id]
-    @chg = @series.annualized_percentage_change
-    @as = AremosSeries.get @series.name 
-    @desc = @as.nil? ? "No Aremos Series" : @as.description
-    @lvl_chg = @series.absolute_change
-    @ytd = @series.ytd_percentage_change
   end
   
   def blog_graph
