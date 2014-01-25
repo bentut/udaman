@@ -20,6 +20,15 @@ class DataList < ActiveRecord::Base
     @series_data ||= get_series_data
   end
   
+  def get_series_ids
+    series_data = {}
+    series_names.each do |s| 
+      series = s.ts
+      series_data[s] = series.nil? ? nil : series.id
+    end
+    series_data    
+  end
+  
   def get_series_data
     series_data = {}
     series_names.each do |s| 

@@ -1,6 +1,7 @@
 
-	<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+	<script type="text/javascript" src="/javascripts/d3.v3.min.js"></script>
 	<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
+	<script type="text/javascript" src="/javascripts/queue.min.js"></script>
 
 <style>
 #readout table  {table-layout:fixed; width:250px}
@@ -65,12 +66,6 @@
 </table>	  -->
 	
 		
-
-
-
-
-
-
 <script type="text/javascript">
 function to_db_date_string(date) {
 	y = date.getFullYear()
@@ -79,10 +74,10 @@ function to_db_date_string(date) {
 	return y+"-"+m+"-01"
 }
 
-function nan_if_undef(val, field) {
+function nan_if_undef(val) {
 	if (val === undefined)
 		return NaN;
-	return val[field];
+	return val;
 }
 
 function data_object_for_series(name, history, old_forecast, new_forecast, headers) {
@@ -105,9 +100,6 @@ function data_object_for_series(name, history, old_forecast, new_forecast, heade
 	
 }
 //two minutes to load all of these
-var old_forecast = <%= @data_list.get_tsd_series_data_with_changes(@tsd_file1).to_json.html_safe %>;
-var new_forecast = <%= @data_list.get_tsd_series_data_with_changes(@tsd_file2).to_json.html_safe %>;
-var history = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>;
 
 data = [
 <% dates.reverse.each do |date_string|  %>  
@@ -363,27 +355,44 @@ d3.entries(dat_gui_ranges).forEach(function(elem) {
 gui.addColor(params, 'udaman_color').onChange(draw);
 gui.addColor(params, 'aremos_color').onChange(draw);
 
-//add color or custom controls here
 
-// d3.csv("forecast_data.csv", function(data) {
-// 	all_series = {"series1": data.slice(0).reverse(), "series2": data.slice(0)}
  	params.viz_data = data.reverse();
 	draw();	
 
 	var headers = data.map(function(elem) { return elem.Date });
-
+	var old_forecast_name = "13Q4.TSD";
+	var new_forecast_name = "heco14.TSD";
+	 
+	series_ids = <%= @data_list.get_series_ids.to_json.html_safe %>;
 	d3.select("#series_selector").selectAll("p")
-		.data(d3.keys(old_forecast))
+		.data(d3.keys(series_ids))
 		.enter()
 		.append("p")
 		.append("a")
 		.text(function(d) {return d})
 		.on("click", function(d) {
 			d3.select("#series_name").text(d)
-			params.viz_data = data_object_for_series(d, history, old_forecast, new_forecast, headers)
-			draw();
+
+			queue()
+			.defer(d3.json, "/series/show_forecast/"+ series_ids[d] +".json?tsd_file=" + new_forecast_name)
+			.defer(d3.json, "/series/show_forecast/"+ series_ids[d] +".json?tsd_file=" + old_forecast_name)
+			.defer(d3.json, "/series/json_with_change/"+ series_ids[d])
+			.awaitAll(function(error, results) {
+				params.viz_data = headers.map(function(date) {
+					date_string = to_db_date_string(date)
+					return {
+						"Date": date,
+						"History" : nan_if_undef(results[2].series.data[date_string], "value"),
+						"13Q4": nan_if_undef(results[1].series.data[date_string], "value"),
+						"HECO14": nan_if_undef(results[0].series.data[date_string], "value"),
+						"History %CHG": nan_if_undef(results[2].chg.data[date_string], "yoy"),
+						"13Q4 %CHG": nan_if_undef(results[1].chg.data[date_string], "yoy"),
+						"HECO14 %CHG": nan_if_undef(results[0].chg.data[date_string], "yoy")
+					}
+				})
+				draw();
+			})
 		})
-//})
 
 
 </script>

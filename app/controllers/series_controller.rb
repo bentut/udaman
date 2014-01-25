@@ -26,6 +26,11 @@ class SeriesController < ApplicationController
     end
   end
 
+  def json_with_change
+    @series = Series.find params[:id]
+    render :json => { :series => @series, :chg => @series.annualized_percentage_change}
+  end
+  
   def show_forecast
     @series = Series.find params[:id]
     tsd_file = params[:tsd_file]
@@ -36,7 +41,7 @@ class SeriesController < ApplicationController
   
       respond_to do |format|
         format.html {render "analyze"}
-        format.json {render :json => @series}
+        format.json {render :json => { :series => @series, :chg => @series.annualized_percentage_change} }
       end
     end
   end

@@ -19,11 +19,13 @@ class Series < ActiveRecord::Base
   has_many :data_sources
   
   def as_json(options = {})
+    as = AremosSeries.get(self.name)
+    desc = as.nil? ? "" : as.description
     {
       data: self.data,
       frequency: self.frequency,
       units: self.units,
-      description: AremosSeries.get(self.name).description,
+      description: desc,
       source: self.original_url
     }
   end
