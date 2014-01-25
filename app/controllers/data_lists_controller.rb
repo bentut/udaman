@@ -81,20 +81,6 @@ class DataListsController < ApplicationController
   
   def compare_forecasts
     @data_list = DataList.find(params[:id])
-    @tsd_file1 = "13Q4.TSD"
-    @tsd_file2 = "heco14.TSD"
-    @series_name = "VIS@HI.Q"
-
-    @data1 = json_from_heroku_tsd(@series_name,@tsd_file1)
-		@series1 = @data1.nil? ? nil : Series.new_transformation(@data1["name"]+"."+@data1["frequency"],  @data1["data"], Series.frequency_from_code(@data1["frequency"])).trim("2006-01-01","2017-10-01")
-		@chg1 = @series1.annualized_percentage_change
-    
-    @data2 = json_from_heroku_tsd(@series_name,@tsd_file2)
-		@series2 = @data2.nil? ? nil : Series.new_transformation(@data2["name"]+"."+@data2["frequency"],  @data2["data"], Series.frequency_from_code(@data2["frequency"])).trim("2006-01-01","2017-10-01")
-		@chg2 = @series2.annualized_percentage_change
-
-    @history_series = @series_name.ts.trim("2006-01-01","2017-10-01")
-    @history_chg = @history_series.annualized_percentage_change
   end
   
   def compare_view
