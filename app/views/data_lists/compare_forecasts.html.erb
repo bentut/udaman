@@ -11,11 +11,12 @@
 #series_selector { position:absolute; width:150px; font-size:10px; left:0px; top:0px}
 #series_selector p  { padding:0; margin: 0;}
 #readout {position:absolute; top:0; left:250px;}
+#loading {position: absolute; text-align:center; top:150px; left:0; width:100%; font-weight:bold; font-size: 24px; color: black;}
 </style>
 
 <div id="controls">
-	Old Forecast: <select id="old_forecast"></select>
-	New Forecast: <select id="new_forecast"></select>
+	Old Forecast: <select id="old_forecast"><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
+	New Forecast: <select id="new_forecast"><option>heco14v1.TSD</option><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
 </div>
 <svg id="time_horizon_buttons"></svg>
 <h1 id="series_name"><%= @series_name %></h1>
@@ -28,8 +29,8 @@
 	<table>
 		<tr><th></th>
 			<th>History<br/><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="black" stroke-width=1.5 stroke-dasharray=3,3 /></svg></th>
-			<th>13Q4<svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
-			<th>HECO<svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
+			<th><span id="th_old">Replace</span><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
+			<th><span id="th_new">Replace</span><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
 		</tr>
 		<tr><td>Level</td><td id="l_hist"></td><td id="l_f1"></td><td id="l_f2"></td></tr>
 		<tr><td>%CHG</td><td id="c_hist"></td><td id="c_f1"></td><td id="c_f2"></td></tr>
@@ -39,6 +40,7 @@
 
 <div id= "chart_div">
 	<svg id="chart"><line id="highlight" /></svg>
+	<div id="loading">LOADING...</div>
 </div>
 
 <div id="series_selector"></div>
@@ -136,15 +138,15 @@ function f(val, suffix) {
 function draw() {
 	var mult = params.mult;
 	
-	var new_forecast = "HECO14"
-	var old_forecast = "13Q4"
+	//var new_forecast = "HECO14"
+	//var old_forecast = "13Q4"
 	
 	//store things for next draw iteration
 	//data = params.viz_data;
-	data = params.viz_data.filter(function(elem) { return !isNaN(elem[new_forecast]) });
+	data = params.viz_data.filter(function(elem) { return !isNaN(elem["new_forecast"]) });
 
-	var max_y_val = d3.max(data, function(row) {return d3.max([row["History"], row["13Q4"], row["HECO14"]]) });
-	var min_y_val = d3.min(data, function(row) {var min = d3.min([n(row["History"]), n(row["13Q4"]), n(row["HECO14"])]); return min});
+	var max_y_val = d3.max(data, function(row) {return d3.max([row["History"], row["old_forecast"], row["new_forecast"]]) });
+	var min_y_val = d3.min(data, function(row) {var min = d3.min([n(row["History"]), n(row["old_forecast"]), n(row["new_forecast"])]); return min});
 	
 	var headers = data.map(function(elem) { return elem.Date });
 
@@ -164,11 +166,11 @@ function draw() {
 				.attr("x1", xpos)
 				.attr("x2", xpos)
 			d3.select("#l_hist").text(f(data[tick]["History"],""))
-			d3.select("#l_f1").text(f(data[tick]["13Q4"],""))
-			d3.select("#l_f2").text(f(data[tick]["HECO14"],""))
+			d3.select("#l_f1").text(f(data[tick]["old_forecast"],""))
+			d3.select("#l_f2").text(f(data[tick]["new_forecast"],""))
 			d3.select("#c_hist").text(f(data[tick]["History %CHG"],"%"))
-			d3.select("#c_f1").text(f(data[tick]["13Q4 %CHG"],"%"))
-			d3.select("#c_f2").text(f(data[tick]["HECO14 %CHG"],"%"))
+			d3.select("#c_f1").text(f(data[tick]["old_forecast %CHG"],"%"))
+			d3.select("#c_f2").text(f(data[tick]["new_forecast %CHG"],"%"))
 			
 			d3.select("#date_selected").text(date_label(data[tick]["Date"]))
 			
@@ -184,19 +186,20 @@ function draw() {
 		.attr("stroke-dasharray", "10,5")
 
 
-	init_viz_element(svg, "path.current_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem[old_forecast]) })]; })
+	//probably don't need these filters anymore... as long as starting point for all series is the same
+	init_viz_element(svg, "path.current_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem["old_forecast"]) })]; })
 	     .attr("d", d3.svg.line()
 	     	.x(function(d) { return x(d.Date); })
-	     	.y(function(d) { return d["HECO14"] === null ? y(min_y_val) : y(d["HECO14"]); })
+	     	.y(function(d) { return d["new_forecast"] === null ? y(min_y_val) : y(d["new_forecast"]); })
 	 	)
 		.attr("stroke", params.udaman_color)
 		.attr("stroke-width",params.udaman_width)
 		.attr("fill", "none");
 
-	init_viz_element(svg, "path.old_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem[new_forecast]) })]; })
+	init_viz_element(svg, "path.old_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem["new_forecast"]) })]; })
 	     .attr("d", d3.svg.line()
 	     	.x(function(d) { return x(d.Date); })
-	     	.y(function(d) { return d["13Q4"] === null ? y(min_y_val) : y(d["13Q4"]); })
+	     	.y(function(d) { return d["old_forecast"] === null ? y(min_y_val) : y(d["old_forecast"]); })
 	 	)
 		.attr("stroke", params.aremos_color)
 		.attr("fill", "none")
@@ -225,14 +228,14 @@ function draw() {
 		.attr("x2", function(d) {return right_boundary()})
 		.attr("stroke", params.x_axis_color);
 
-	var xticks = init_viz_element(svg, "line.xtick", headers)
+	var xticks = init_viz_element(svg, "line.xtick", x.ticks(50))
 		.attr("y1", bottom_boundary())
 		.attr("y2", bottom_boundary() + params.tick_length )
 		.attr("x1", function(d) {return x(d)})
 		.attr("x2", function(d) {return x(d)})
 		.attr("stroke", params.x_axis_color);
 	
-	var xtick_labels = init_viz_element(svg, "text.xtick_label", headers)
+	var xtick_labels = init_viz_element(svg, "text.xtick_label", x.ticks(50))
 		.attr("x", function(d) { return x(d)})
 		.attr("y", bottom_boundary())
 		.attr("fill", params.x_axis_fontcolor)
@@ -292,11 +295,11 @@ function graph_data(queue_results, dates) {
 		return {
 			"Date": date,
 			"History" : nan_if_undef(queue_results[2].series.data[date_string]),
-			"13Q4": nan_if_undef(queue_results[1].series.data[date_string]),
-			"HECO14": nan_if_undef(queue_results[0].series.data[date_string]),
+			"old_forecast": nan_if_undef(queue_results[1].series.data[date_string]),
+			"new_forecast": nan_if_undef(queue_results[0].series.data[date_string]),
 			"History %CHG": nan_if_undef(queue_results[2].chg.data[date_string]),
-			"13Q4 %CHG": nan_if_undef(queue_results[1].chg.data[date_string]),
-			"HECO14 %CHG": nan_if_undef(queue_results[0].chg.data[date_string])
+			"old_forecast %CHG": nan_if_undef(queue_results[1].chg.data[date_string]),
+			"new_forecast %CHG": nan_if_undef(queue_results[0].chg.data[date_string])
 		}
 	})
 }
@@ -320,13 +323,24 @@ function nan_if_undef(val) {
 	return val;
 }
 
+function display_loading_screen() {
+	d3.select("#loading").style("display", "block");
+	d3.select("#chart_div").style("opacity", .1)
+}
+
+function hide_loading_screen() {
+	d3.select("#loading").style("display", "none")	
+	d3.select("#chart_div").style("opacity", 1)
+}
 function draw_data(series_name, dates, old_forecast_name, new_forecast_name) {
+	display_loading_screen();
 	queue()
 	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_name] +".json?tsd_file=" + new_forecast_name)
 	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_name] +".json?tsd_file=" + old_forecast_name)
 	.defer(d3.json, "/series/json_with_change/"+ series_ids[series_name])
 	.awaitAll(function(error, results) {
 		params.viz_data = graph_data(results, dates)
+		hide_loading_screen();
 		draw();
 	})
 }
@@ -335,8 +349,8 @@ var series_ids = <%= @data_list.get_series_ids.to_json.html_safe %>;
 var series_names = d3.keys(series_ids);
 var all_dates = [];
 var dates = [];
-var old_forecast_name = "13Q4.TSD";
-var new_forecast_name = "heco14.TSD";
+var old_forecast_name = d3.select("#old_forecast").node().value
+var new_forecast_name = d3.select("#new_forecast").node().value
 var time_horizon = "short-run";
 var button_hover = "#A77"
 var button_selected = "#777";
@@ -348,6 +362,15 @@ function button_color(time_horizon, element) {
 	return button_normal;
 }
 
+
+// configure readout and controls
+var svg = d3.select("svg#chart");
+svg
+	.attr("height", function(d,i) {return params.h * params.scale})
+	.attr("width", function(d) {return params.w * params.scale})
+	
+d3.select("#th_old").text(old_forecast_name.replace(".TSD",""));
+d3.select("#th_new").text(new_forecast_name.replace(".TSD",""));
 var svg = d3.select("svg#time_horizon_buttons").attr("width", 150).attr("height", 35);
 buttons = svg.selectAll("g.button")
 	.data(["short-run", "long-run"])
@@ -394,6 +417,7 @@ buttons.append("text")
 
 
 
+// initial load
 d3.select("#series_name").text(series_names[0])
 queue()
 	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_names[0]] +".json?tsd_file=" + new_forecast_name)
@@ -403,10 +427,12 @@ queue()
 		all_dates = d3.keys(results[0].series.data).map(function(date_string) { return new Date(date_string.replace(/-/g,'/')) });
 		dates = trim_dates(all_dates, new Date("2006/01/01"), new Date("2019/01/01"))
 		params.viz_data = graph_data(results, dates)
+		hide_loading_screen();
 		draw();
 	});
 
-	 
+
+// bind load events to series list	 
 d3.select("#series_selector").selectAll("p")
 	.data(d3.keys(series_ids))
 	.enter()
@@ -418,6 +444,17 @@ d3.select("#series_selector").selectAll("p")
 		draw_data(d, dates, old_forecast_name, new_forecast_name);
 		
 	})
+	
+d3.select("#old_forecast").on("change", function(d) {
+	old_forecast_name = this.value;
+	d3.select("#th_old").text(old_forecast_name.replace(".TSD",""));
+	draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);	
+})
 
+d3.select("#new_forecast").on("change", function(d) {
+	new_forecast_name = this.value;
+	d3.select("#th_new").text(new_forecast_name.replace(".TSD",""));
+	draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);	
+})
 
 </script>
