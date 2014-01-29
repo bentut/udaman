@@ -29,6 +29,16 @@ class DataList < ActiveRecord::Base
     series_data    
   end
   
+  def get_series_ids_for_frequency(frequency)
+    series_data = {}
+    series_names.each do |s| 
+      s_name = (s.split(".")[0]+"."+frequency)
+      series = s_name.ts
+      series_data[s_name] = series.id unless series.nil?
+    end
+    series_data    
+  end
+  
   def get_series_data
     series_data = {}
     series_names.each do |s| 

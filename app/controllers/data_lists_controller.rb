@@ -81,6 +81,7 @@ class DataListsController < ApplicationController
   
   def compare_forecasts
     @data_list = DataList.find(params[:id])
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
   end
   
   def compare_view

@@ -344,23 +344,58 @@ function draw_data(series_name, dates, old_forecast_name, new_forecast_name) {
 		draw();
 	})
 }
+function button_color(time_horizon, element) {
+	if (time_horizon === element) return button_selected;
+	return button_normal;
+}
+
+function filter_and_sort_tsd(tsd_array, frequency) {
+	return (tsd_array.filter(function(elem) {
+		parts = elem.split('_');
+		return parts[1] === frequency
+	})).sort(function(a,b) {
+		return d3.descending(a.split("_")[2], b.split("_")[2])
+	})
+}
+
 // --------- hard coded values from ruby -----------
-var series_ids = <%= @data_list.get_series_ids.to_json.html_safe %>;
+var frequency = "Q"
+var series_ids_f = {"Q": <%= @data_list.get_series_ids_for_frequency("Q").to_json.html_safe %>,
+					"A": <%= @data_list.get_series_ids_for_frequency("A").to_json.html_safe %>};
+var series_ids = series_ids_f[frequency]
+
 var series_names = d3.keys(series_ids);
+var all_tsds = <%= @all_tsd_files.to_json.html_safe %>;
 var all_dates = [];
 var dates = [];
-var old_forecast_name = d3.select("#old_forecast").node().value
-var new_forecast_name = d3.select("#new_forecast").node().value
 var time_horizon = "short-run";
 var button_hover = "#A77"
 var button_selected = "#777";
 var button_normal = "#CCC";
 // ---------------------------------------------------
 
-function button_color(time_horizon, element) {
-	if (time_horizon === element) return button_selected;
-	return button_normal;
-}
+
+d3.select("#new_forecast").selectAll("option").remove();
+d3.select("#old_forecast").selectAll("option").remove();
+
+d3.select("#new_forecast").selectAll("option")
+	.data(filter_and_sort_tsd(all_tsds, frequency))
+	.enter()
+	.append("option")
+	.attr("value", function(d) {return d})
+	.text(function(d) { return d.split("_")[0] });
+
+d3.select("#old_forecast").selectAll("option")
+	.data(filter_and_sort_tsd(all_tsds, frequency))
+	.enter()
+	.append("option")
+	.attr("value", function(d) {return d})
+	.text(function(d) { return d.split("_")[0] });
+	
+
+
+var old_forecast_name = d3.select("#old_forecast").node().value
+var new_forecast_name = d3.select("#new_forecast").node().value
 
 
 // configure readout and controls
@@ -369,8 +404,8 @@ svg
 	.attr("height", function(d,i) {return params.h * params.scale})
 	.attr("width", function(d) {return params.w * params.scale})
 	
-d3.select("#th_old").text(old_forecast_name.replace(".TSD",""));
-d3.select("#th_new").text(new_forecast_name.replace(".TSD",""));
+d3.select("#th_old").text(old_forecast_name.split("_")[0]);
+d3.select("#th_new").text(new_forecast_name.split("_")[0]);
 var svg = d3.select("svg#time_horizon_buttons").attr("width", 150).attr("height", 35);
 buttons = svg.selectAll("g.button")
 	.data(["short-run", "long-run"])
@@ -447,13 +482,13 @@ d3.select("#series_selector").selectAll("p")
 	
 d3.select("#old_forecast").on("change", function(d) {
 	old_forecast_name = this.value;
-	d3.select("#th_old").text(old_forecast_name.replace(".TSD",""));
+	d3.select("#th_old").text(old_forecast_name.split("_")[0]);
 	draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);	
 })
 
 d3.select("#new_forecast").on("change", function(d) {
 	new_forecast_name = this.value;
-	d3.select("#th_new").text(new_forecast_name.replace(".TSD",""));
+	d3.select("#th_new").text(new_forecast_name.split("_")[0]);
 	draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);	
 })
 
