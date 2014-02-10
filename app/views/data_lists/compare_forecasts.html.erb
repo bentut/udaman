@@ -4,14 +4,15 @@
 <script type="text/javascript" src="/javascripts/queue.min.js"></script>
 
 <style>
-#readout table  {table-layout:fixed; width:250px}
+#readout table  {table-layout:fixed; width:300px}
 #readout table th,
 #readout table td {font-size: 11px; border: none;}
 #chart_div { position:absolute; left:150px; top:0px;}
-#series_selector { position:absolute; width:150px; font-size:10px; left:0px; top:0px}
+#series_selector { position:absolute; font-size:10px; left:0px; top:0px}
 #series_selector p  { padding:0; margin: 0;}
 #readout {position:absolute; top:0; left:250px;}
 #loading {position: absolute; text-align:center; top:150px; left:0; width:100%; font-weight:bold; font-size: 24px; color: black;}
+#readout table th#date_selected {font-size:16px;}
 </style>
 
 <div id="controls">
@@ -19,18 +20,20 @@
 	New Forecast: <select id="new_forecast"><option>heco14v1.TSD</option><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
 </div>
 <svg id="time_horizon_buttons"></svg>
-<h1 id="series_name"><%= @series_name %></h1>
+<h1 id="series_name"></h1>
+<h2 id="series_description"></h2>
+<a id="udaman_link" target="_blank" href="">See Series in Udaman</a>
 
 
 
 <div style="position:relative;">
 <div id="readout">
-	<h3 id="date_selected">No Date Selected</h3>
+	
 	<table>
-		<tr><th></th>
+		<tr><th id="date_selected"></th>
 			<th>History<br/><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="black" stroke-width=1.5 stroke-dasharray=3,3 /></svg></th>
-			<th><span id="th_old">Replace</span><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
-			<th><span id="th_new">Replace</span><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
+			<th><span id="th_old">Replace</span><svg height="10" width="60"><line x1=0 x2=60 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
+			<th><span id="th_new">Replace</span><svg height="10" width="60"><line x1=0 x2=60 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
 		</tr>
 		<tr><td>Level</td><td id="l_hist"></td><td id="l_f1"></td><td id="l_f2"></td></tr>
 		<tr><td>%CHG</td><td id="c_hist"></td><td id="c_f1"></td><td id="c_f2"></td></tr>
@@ -122,9 +125,10 @@ function q(month) {
 	if (month===7) return "Q3"
 	if (month===10) return "Q4"
 }
-function date_label(date) {
+function date_label(date, frequency) {
 	//return date.toDateString();
 	// dp = date.split("/")
+	if (frequency === "A") return date.getFullYear()+"";
 	return (date.getFullYear()+"").slice(2,4) + q(date.getMonth()+1);
 }
 function to_date(date) {
@@ -135,7 +139,7 @@ function f(val, suffix) {
 	if (isNaN(val)) return ""
 	return Math.round(val*1000) / 1000 + suffix;
 }
-function draw() {
+function draw(frequency) {
 	var mult = params.mult;
 	
 	//var new_forecast = "HECO14"
@@ -172,7 +176,7 @@ function draw() {
 			d3.select("#c_f1").text(f(data[tick]["old_forecast %CHG"],"%"))
 			d3.select("#c_f2").text(f(data[tick]["new_forecast %CHG"],"%"))
 			
-			d3.select("#date_selected").text(date_label(data[tick]["Date"]))
+			d3.select("#date_selected").text(date_label(data[tick]["Date"], frequency))
 			
 		})
 		.data([data])
@@ -228,21 +232,21 @@ function draw() {
 		.attr("x2", function(d) {return right_boundary()})
 		.attr("stroke", params.x_axis_color);
 
-	var xticks = init_viz_element(svg, "line.xtick", x.ticks(50))
+	var xticks = init_viz_element(svg, "line.xtick", x.ticks())
 		.attr("y1", bottom_boundary())
 		.attr("y2", bottom_boundary() + params.tick_length )
 		.attr("x1", function(d) {return x(d)})
 		.attr("x2", function(d) {return x(d)})
 		.attr("stroke", params.x_axis_color);
 	
-	var xtick_labels = init_viz_element(svg, "text.xtick_label", x.ticks(50))
+	var xtick_labels = init_viz_element(svg, "text.xtick_label", x.ticks())
 		.attr("x", function(d) { return x(d)})
 		.attr("y", bottom_boundary())
 		.attr("fill", params.x_axis_fontcolor)
 		.attr("font-size", params.x_axis_fontsize+"px")
 		.attr("transform", function(d) {return "rotate("+params.x_axis_font_rotation +" "+ (x(d)+params.tick_length*4).toString() + "," + bottom_boundary() + ")"; })
 		.attr("text-anchor", "end")
-		.text(function(d) {return date_label(d); });
+		.text(function(d) {return date_label(d, frequency); });
 
 	//------ x Axis End -------------------------------------------------------------------
 	
@@ -288,6 +292,100 @@ gui.addColor(params, 'aremos_color').onChange(draw);
 
 // --------- dat gui section end ---------------------------------
 
+function select_option(select_id, option_text) {
+	var dd = document.getElementById(select_id);
+	for (var i = 0; i < dd.options.length; i++) {
+	    if (dd.options[i].text === option_text) {
+	        dd.selectedIndex = i;
+	        break;
+	    }
+	}
+}
+
+function load_page_for_frequency(frequency) {
+	series_ids = series_ids_f[frequency]
+	var series = d3.select("#series_name").text()
+	if (series === "") series = d3.keys(series_ids)[0];
+	
+	series = series.split(".")[0]+"."+frequency
+	d3.select("#series_name").text(series)
+	d3.select("#series_description").text(series_descriptions[series.split(".")[0]])
+	d3.select("#udaman_link").attr("href", "/series/"+series_ids[series])
+	
+	d3.select("#new_forecast").selectAll("option").remove();
+	d3.select("#old_forecast").selectAll("option").remove();
+
+	d3.select("#new_forecast").selectAll("option")
+		.data(filter_and_sort_tsd(all_tsds, frequency))
+		.enter()
+		.append("option")
+		.attr("value", function(d) {return d})
+		.text(function(d) { return d.split("_")[0] });
+
+	d3.select("#old_forecast").selectAll("option")
+		.data(filter_and_sort_tsd(all_tsds, frequency))
+		.enter()
+		.append("option")
+		.attr("value", function(d) {return d})
+		.text(function(d) { return d.split("_")[0] });
+	
+	if (typeof(old_forecast_name) === 'undefined') {
+		old_forecast_name = d3.select("#old_forecast").node().value;
+		new_forecast_name = d3.select("#new_forecast").node().value;
+	}
+	else {
+		select_option("old_forecast", old_forecast_name.split("_")[0]);
+		select_option("new_forecast", new_forecast_name.split("_")[0]);
+		// d3.select("#old_forecast").node().value = old_forecast_name.split("_")[0];
+		// d3.select("#new_forecast").node().value = new_forecast_name.split("_")[0];
+		old_forecast_name = d3.select("#old_forecast").node().value;
+		new_forecast_name = d3.select("#new_forecast").node().value;
+		
+	}
+		
+		
+		
+	d3.select("#th_old").text(old_forecast_name.split("_")[0]);
+	d3.select("#th_new").text(new_forecast_name.split("_")[0]);
+	
+	
+	queue()
+		.defer(d3.json, "/series/show_forecast/"+ series_ids[series] +".json?tsd_file=" + new_forecast_name)
+		.defer(d3.json, "/series/show_forecast/"+ series_ids[series] +".json?tsd_file=" + old_forecast_name)
+		.defer(d3.json, "/series/json_with_change/"+ series_ids[series])
+		.awaitAll(function(error, results) {
+			all_dates = d3.keys(results[0].series.data).map(function(date_string) { return new Date(date_string.replace(/-/g,'/')) });
+			dates = get_dates(time_horizon, all_dates);
+			params.viz_data = graph_data(results, dates)
+			hide_loading_screen();
+			draw(frequency);
+		});
+
+
+	// bind load events to series list	 
+	d3.select("#series_selector").selectAll("p").remove();
+	d3.select("#series_selector").selectAll("p")
+		.data(d3.keys(series_ids))
+		.enter()
+		.append("p")
+		.append("a")
+		.text(function(d) {return d})
+		.on("click", function(d) {
+			d3.select("#series_name").text(d)
+			d3.select("#series_description").text(series_descriptions[d.split(".")[0]])
+			d3.select("#udaman_link").attr("href", "/series/"+series_ids[series])
+			draw_data(d, dates, frequency, old_forecast_name, new_forecast_name);
+
+		})
+		.on("mouseover", function(d) {
+			var link = d3.select(this);
+			link.text(d+" : "+series_descriptions[d.split(".")[0]]);
+		})
+		.on("mouseout", function(d) {
+			var link = d3.select(this);
+			link.text(d);
+		})
+}
 
 function graph_data(queue_results, dates) {
 	return dates.map(function(date) {
@@ -308,6 +406,13 @@ function trim_dates(dates, start_date, end_date) {
 	return dates.filter(function(date) {
 		return (to_db_date_string(date) >= to_db_date_string(start_date) && to_db_date_string(date) <= to_db_date_string(end_date))
 	});
+}
+
+function get_dates(time_horizon, all_dates) {
+	if (time_horizon === "short-run")
+		return trim_dates(all_dates, new Date("2006/01/01"), new Date("2019/01/01"))
+	else
+		return all_dates.slice();
 }
 
 function to_db_date_string(date) {
@@ -332,7 +437,7 @@ function hide_loading_screen() {
 	d3.select("#loading").style("display", "none")	
 	d3.select("#chart_div").style("opacity", 1)
 }
-function draw_data(series_name, dates, old_forecast_name, new_forecast_name) {
+function draw_data(series_name, dates, frequency, old_forecast_name, new_forecast_name) {
 	display_loading_screen();
 	queue()
 	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_name] +".json?tsd_file=" + new_forecast_name)
@@ -341,7 +446,7 @@ function draw_data(series_name, dates, old_forecast_name, new_forecast_name) {
 	.awaitAll(function(error, results) {
 		params.viz_data = graph_data(results, dates)
 		hide_loading_screen();
-		draw();
+		draw(frequency);
 	})
 }
 function button_color(time_horizon, element) {
@@ -362,9 +467,11 @@ function filter_and_sort_tsd(tsd_array, frequency) {
 var frequency = "Q"
 var series_ids_f = {"Q": <%= @data_list.get_series_ids_for_frequency("Q").to_json.html_safe %>,
 					"A": <%= @data_list.get_series_ids_for_frequency("A").to_json.html_safe %>};
-var series_ids = series_ids_f[frequency]
+var series_ids;
+var series_descriptions = <%= @data_list.get_series_descriptions.to_json.html_safe %>;
 
-var series_names = d3.keys(series_ids);
+var old_forecast_name;
+var new_forecast_name;
 var all_tsds = <%= @all_tsd_files.to_json.html_safe %>;
 var all_dates = [];
 var dates = [];
@@ -375,27 +482,7 @@ var button_normal = "#CCC";
 // ---------------------------------------------------
 
 
-d3.select("#new_forecast").selectAll("option").remove();
-d3.select("#old_forecast").selectAll("option").remove();
 
-d3.select("#new_forecast").selectAll("option")
-	.data(filter_and_sort_tsd(all_tsds, frequency))
-	.enter()
-	.append("option")
-	.attr("value", function(d) {return d})
-	.text(function(d) { return d.split("_")[0] });
-
-d3.select("#old_forecast").selectAll("option")
-	.data(filter_and_sort_tsd(all_tsds, frequency))
-	.enter()
-	.append("option")
-	.attr("value", function(d) {return d})
-	.text(function(d) { return d.split("_")[0] });
-	
-
-
-var old_forecast_name = d3.select("#old_forecast").node().value
-var new_forecast_name = d3.select("#new_forecast").node().value
 
 
 // configure readout and controls
@@ -404,9 +491,9 @@ svg
 	.attr("height", function(d,i) {return params.h * params.scale})
 	.attr("width", function(d) {return params.w * params.scale})
 	
-d3.select("#th_old").text(old_forecast_name.split("_")[0]);
-d3.select("#th_new").text(new_forecast_name.split("_")[0]);
-var svg = d3.select("svg#time_horizon_buttons").attr("width", 150).attr("height", 35);
+
+var svg = d3.select("svg#time_horizon_buttons").attr("width", 300).attr("height", 35);
+
 buttons = svg.selectAll("g.button")
 	.data(["short-run", "long-run"])
 	.enter()
@@ -425,12 +512,9 @@ buttons = svg.selectAll("g.button")
 	})
 	.on("click", function(d) {
 		time_horizon = d;
-		if (time_horizon === "short-run")
-			dates = trim_dates(all_dates, new Date("2006/01/01"), new Date("2019/01/01"))
-		else
-			dates = all_dates.slice();
+		dates = get_dates(time_horizon, all_dates);
 		d3.selectAll("g.button").select("rect").attr("fill", function(d) {return button_color(time_horizon, d)})
-		draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);
+		draw_data(d3.select("#series_name").text(), dates, frequency, old_forecast_name, new_forecast_name);
 	})
 	
 buttons.append("rect")
@@ -452,44 +536,64 @@ buttons.append("text")
 
 
 
-// initial load
-d3.select("#series_name").text(series_names[0])
-queue()
-	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_names[0]] +".json?tsd_file=" + new_forecast_name)
-	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_names[0]] +".json?tsd_file=" + old_forecast_name)
-	.defer(d3.json, "/series/json_with_change/"+ series_ids[series_names[0]])
-	.awaitAll(function(error, results) {
-		all_dates = d3.keys(results[0].series.data).map(function(date_string) { return new Date(date_string.replace(/-/g,'/')) });
-		dates = trim_dates(all_dates, new Date("2006/01/01"), new Date("2019/01/01"))
-		params.viz_data = graph_data(results, dates)
-		hide_loading_screen();
-		draw();
-	});
-
-
-// bind load events to series list	 
-d3.select("#series_selector").selectAll("p")
-	.data(d3.keys(series_ids))
+f_buttons = svg.selectAll("g.f_button")
+	.data(["A", "Q"])
 	.enter()
-	.append("p")
-	.append("a")
-	.text(function(d) {return d})
-	.on("click", function(d) {
-		d3.select("#series_name").text(d)
-		draw_data(d, dates, old_forecast_name, new_forecast_name);
-		
+	.append("g")
+	.attr("class", "f_button")
+	.attr("cursor", "pointer")
+	.attr("transform", function(d) {
+		if (d == "Q") return "translate(160,10)"
+		else return "translate(190,10)";
 	})
-	
+	.on("mouseover", function(d) {
+		d3.select(this).select("rect").attr("fill", button_hover)
+	})
+	.on("mouseout", function(d) {
+		d3.select(this).select("rect").attr("fill", button_color(frequency, d))
+	})
+	.on("click", function(d) {
+		display_loading_screen();
+		frequency = d;
+		load_page_for_frequency(frequency)
+		d3.selectAll("g.f_button").select("rect").attr("fill", function(d) {return button_color(frequency, d)})
+	})
+
+f_buttons.append("rect")
+	.attr("x",0)
+	.attr("y",0)
+	.attr("height", 15)
+	.attr("width", 20)
+	.attr("fill", function(d) {
+		return button_color(frequency, d)
+	})
+
+f_buttons.append("text")
+	.attr("x", 10)
+	.attr("y", 11)
+	.attr("font-size", 8)
+	.attr("text-anchor", "middle")
+	.attr("fill", "#FFF")
+	.text(function(d) {return d})
+
 d3.select("#old_forecast").on("change", function(d) {
 	old_forecast_name = this.value;
 	d3.select("#th_old").text(old_forecast_name.split("_")[0]);
-	draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);	
+	draw_data(d3.select("#series_name").text(), dates, frequency, old_forecast_name, new_forecast_name);	
 })
 
 d3.select("#new_forecast").on("change", function(d) {
 	new_forecast_name = this.value;
 	d3.select("#th_new").text(new_forecast_name.split("_")[0]);
-	draw_data(d3.select("#series_name").text(), dates, old_forecast_name, new_forecast_name);	
+	draw_data(d3.select("#series_name").text(), dates, frequency, old_forecast_name, new_forecast_name);	
 })
+
+
+// initial load
+load_page_for_frequency(frequency)
+
+
+	
+
 
 </script>

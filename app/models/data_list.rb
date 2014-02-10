@@ -20,6 +20,15 @@ class DataList < ActiveRecord::Base
     @series_data ||= get_series_data
   end
   
+  def get_series_descriptions 
+    series_data = {}
+    series_names.each do |s| 
+      as = AremosSeries.get(s)
+      series_data[s.split(".")[0]] = as.description unless as.nil?
+    end
+    series_data    
+  end
+  
   def get_series_ids
     series_data = {}
     series_names.each do |s| 
