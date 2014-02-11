@@ -386,13 +386,20 @@ class Series < ActiveRecord::Base
   
   #need to spec out tests for this
   #this would benefit from some caching scheme
+  
+  #SeriesReloadExceptions
+  #until we can figure out a solid for sources ordering, this error is particularly costly
+  #just keeping data the same if there's a problem to preserve the order.
+  
   def load_from(update_spreadsheet_path, sheet_to_load = nil)
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
-    raise SeriesReloadException if update_spreadsheet.load_error?
+    #raise SeriesReloadException if update_spreadsheet.load_error?
+    return self if update_spreadsheet.load_error?
 
     default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? default_sheet : sheet_to_load unless update_spreadsheet.class == UpdateCSV
-    raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    #raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    return self unless update_spreadsheet.update_formatted?
     
     self.frequency = update_spreadsheet.frequency
     new_transformation(update_spreadsheet_path, update_spreadsheet.series(self.name))
@@ -401,24 +408,32 @@ class Series < ActiveRecord::Base
   
   def load_sa_from(update_spreadsheet_path, sheet_to_load = nil)
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
-    raise SeriesReloadException if update_spreadsheet.load_error?
+    #raise SeriesReloadException if update_spreadsheet.load_error?
+    return self if update_spreadsheet.load_error?
 
     ns_name = self.name.sub("@", "NS@")
 #    default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? "sadata" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
-    raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    #raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    return self unless update_spreadsheet.update_formatted?
+    
     self.frequency = update_spreadsheet.frequency 
     new_transformation(update_spreadsheet_path, update_spreadsheet.series(ns_name))
   end
     
+  
   def load_mean_corrected_sa_from(update_spreadsheet_path, sheet_to_load = nil)
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
-    raise SeriesReloadException if update_spreadsheet.load_error?
+
+    #raise SeriesReloadException if update_spreadsheet.load_error?
+    return self if update_spreadsheet.load_error?
 
     ns_name = self.name.sub("@", "NS@")
     default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? "sadata" : sheet_to_load unless update_spreadsheet.class == UpdateCSV
-    raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    #raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    return self unless update_spreadsheet.update_formatted?
+    
     demetra_series = new_transformation("demetra series", update_spreadsheet.series(ns_name))
     demetra_series.frequency = update_spreadsheet.frequency.to_s
     self.frequency = update_spreadsheet.frequency
