@@ -19,11 +19,13 @@ class Series < ActiveRecord::Base
   has_many :data_sources
   
   def as_json(options = {})
+    as = AremosSeries.get(self.name)
+    desc = as.nil? ? "" : as.description
     {
       data: self.data,
       frequency: self.frequency,
       units: self.units,
-      description: AremosSeries.get(self.name).description,
+      description: desc,
       source: self.original_url
     }
   end
@@ -378,7 +380,7 @@ class Series < ActiveRecord::Base
     Series.new(
       :name => name,
       :frequency => frequency,
-      :data => data
+      :data => data.reject {|k,v| v.nil?}
     )
   end
   
@@ -731,6 +733,19 @@ class Series < ActiveRecord::Base
     dates
   end
 
+  def Series.new_from_tsd_data(tsd_data)
+    return Series.new_transformation(tsd_data["name"]+"."+tsd_data["frequency"],  tsd_data["data"], Series.frequency_from_code(tsd_data["frequency"]))
+  end
+  
+  def get_tsd_series_data(tsd_file)      
+    url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{name.split(".")[0].gsub("%","%25")}/json")
+    res = Net::HTTP.new(url.host, url.port).request_get(url.path)
+    tsd_data = res.code == "500" ? nil : JSON.parse(res.body)  
+    
+    return nil if tsd_data.nil?
+    return Series.new_from_tsd_data(tsd_data)
+  end
+  
   def tsd_string
     data_string = ""
     lm = data_points.order(:updated_at).last.updated_at

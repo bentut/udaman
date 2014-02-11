@@ -42,6 +42,15 @@ class DataListsController < ApplicationController
     render "tableview"
   end
 
+
+#NOTE DATA LIST NEEDS TO BE ALL CAPS... SOMETHING TO FIX. Not the case for regular super table
+  def show_tsd_super_table
+    @data_list = DataList.find(params[:id])
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
+    @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
+    render "tsd_super_tableview"
+  end
+  
   def show_tsd_table
     @data_list = DataList.find(params[:id])
     @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
@@ -58,8 +67,9 @@ class DataListsController < ApplicationController
     @data_list = DataList.find(params[:id])
     @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
     @tsd_file = params[:tsd_file].nil? ? @all_tsd_files[0] : params[:tsd_file]
-    @series_index = params[:list_index].nil? ? @data_list.series_names[0] : params[:list_index].to_i
-    @series_name = @data_list.series_names[@series_index]
+    @series_name = params[:list_index].nil? ? params[:series_name] : @data_list.series_names[params[:list_index].to_i]
+    #@series_name = @data_list.series_names[@series_index]
+
     @data = json_from_heroku_tsd(@series_name,@tsd_file)
 		@series = @data.nil? ? nil : Series.new_transformation(@data["name"]+"."+@data["frequency"],  @data["data"], Series.frequency_from_code(@data["frequency"]))
 		@chg = @series.annualized_percentage_change
@@ -67,6 +77,29 @@ class DataListsController < ApplicationController
     @desc = "None yet" #@as.nil? ? "No Aremos Series" : @as.description
     @lvl_chg = @series.absolute_change
     @ytd = @series.ytd_percentage_change
+  end
+  
+  def compare_forecasts
+    @data_list = DataList.find(params[:id])
+    @all_tsd_files = JSON.parse(open("http://readtsd.herokuapp.com/listnames/json").read)["file_list"]
+  end
+  
+  def compare_view
+    @data_list = DataList.find(params[:id])
+    @tsd_file1 = "heco14.TSD"
+    @tsd_file2 = "13Q4.TSD"
+    @series_name = params[:list_index].nil? ? params[:series_name] : @data_list.series_names[params[:list_index].to_i]
+
+    @data1 = json_from_heroku_tsd(@series_name,@tsd_file1)
+		@series1 = @data1.nil? ? nil : Series.new_transformation(@data1["name"]+"."+@data1["frequency"],  @data1["data"], Series.frequency_from_code(@data1["frequency"])).trim("2006-01-01","2017-10-01")
+		@chg1 = @series1.annualized_percentage_change
+    
+    @data2 = json_from_heroku_tsd(@series_name,@tsd_file2)
+		@series2 = @data2.nil? ? nil : Series.new_transformation(@data2["name"]+"."+@data2["frequency"],  @data2["data"], Series.frequency_from_code(@data2["frequency"])).trim("2006-01-01","2017-10-01")
+		@chg2 = @series2.annualized_percentage_change
+
+    @history_series = @series_name.ts.trim("2006-01-01","2017-10-01")
+    @history_chg = @history_series.annualized_percentage_change
   end
   
   # GET /data_lists/new

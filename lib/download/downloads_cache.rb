@@ -50,7 +50,10 @@ class DownloadsCache
       begin
         excel.default_sheet = @sheet unless excel.default_sheet == @sheet 
       rescue RangeError
-        whitespace_hidden_sheet_index = (excel.sheets.map {|sheet| sheet.strip.downcase}).index(@sheet.downcase)
+        # added sheetnames to allow for sheetnames separated by "[or]" (case insensitive)
+        sheetnames = @sheet.split(/\[[oO][rR]\]/).collect! {|sheet| sheet.downcase} 
+        # whitespace_hidden_sheet_index = (excel.sheets.map {|sheet| sheet.strip.downcase}).index(@sheet.downcase)
+        whitespace_hidden_sheet_index = excel.sheets.index {|sheet| sheetnames.include?(sheet.strip.downcase)}
         if whitespace_hidden_sheet_index.nil?
           raise "sheet '#{@sheet}' does not exist in workbook '#{@dsd.save_path_flex}' [Handle: #{@handle}]"
         else

@@ -26,6 +26,26 @@ class SeriesController < ApplicationController
     end
   end
 
+  def json_with_change
+    @series = Series.find params[:id]
+    render :json => { :series => @series, :chg => @series.annualized_percentage_change}
+  end
+  
+  def show_forecast
+    @series = Series.find params[:id]
+    tsd_file = params[:tsd_file]
+    if tsd_file.nil?
+      render inline: "WRITE AN ERROR TEMPLATE: You need a tsd_file parameter"
+    else
+      @series = @series.get_tsd_series_data(tsd_file)
+  
+      respond_to do |format|
+        format.html {render "analyze"}
+        format.json {render :json => { :series => @series, :chg => @series.annualized_percentage_change} }
+      end
+    end
+  end
+  
   def edit
     @series = Series.find params[:id]
   end
@@ -70,11 +90,6 @@ class SeriesController < ApplicationController
     residuals.reject!{|a| a.nil?}
     average = residuals.inject{ |sum, el| sum + el }.to_f / residuals.count
     @std_dev = Math.sqrt((residuals.inject(0){ | sum, x | sum + (x - average) ** 2 }) / (residuals.count - 1))
-
-    
-    
-    
-    #@series.backward_looking_moving_average.standard_deviation
   end
   
   def all_tsd_chart
@@ -95,17 +110,16 @@ class SeriesController < ApplicationController
   end
   
   def transform
-    params.each { |key,value| puts "#{key}: #{value}" }
-    @s = eval(params[:eval])
+    eval_statement = convert_to_udaman_notation(params[:eval])
+    @series = eval(eval_statement)
+    @chg = @series.annualized_percentage_change
+    @desc = ""
+    @lvl_chg = @series.absolute_change
+    @ytd = @series.ytd_percentage_change
   end
   
   def analyze
     @series = Series.find params[:id]
-    @chg = @series.annualized_percentage_change
-    @as = AremosSeries.get @series.name 
-    @desc = @as.nil? ? "No Aremos Series" : @as.description
-    @lvl_chg = @series.absolute_change
-    @ytd = @series.ytd_percentage_change
   end
   
   def blog_graph
@@ -159,6 +173,11 @@ class SeriesController < ApplicationController
   end
 private
 
+  def convert_to_udaman_notation(eval_string)
+    operator_fix = eval_string.gsub("(","( ").gsub(")", " )").gsub("*"," * ").gsub("/"," / ").gsub("-"," - ").gsub("+"," + ")
+    (operator_fix.split(" ").map {|e| (e.index("@").nil? or e[-3..-1] == ".ts") ? e : "\"#{e}\".ts" }).join(" ")
+  end
+  
   def json_from_heroku_tsd(series_name, tsd_file)
     url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{series_name[0..-3]}/json")
     res = Net::HTTP.new(url.host, url.port).request_get(url.path)

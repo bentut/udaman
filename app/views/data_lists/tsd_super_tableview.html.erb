@@ -1,3 +1,14 @@
+
+<h1><%= @tsd_file %></h1>
+<p>
+<% @all_tsd_files.each do |tsd| %>
+	<%= link_to(tsd, {:action => :show_tsd_super_table, :id => @data_list.id, :tsd_file => tsd}) %> | 
+<% end %>
+</p>
+
+
+<!-- Same as super table below here -->
+
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
 <script src="/javascripts/ui/jquery-ui.js"></script>
 <script type="text/javascript" src="/javascripts/d3.v2.js"></script>
@@ -119,9 +130,9 @@
 		return parsed_float;
 	}
 	
-	var all_data = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>
+	var all_data = <%= @data_list.get_tsd_series_data_with_changes(@tsd_file).to_json.html_safe %>
+	var frequency = d3.values(all_data)[0].freq;
 	
-	var frequency = freq(d3.keys(all_data)[0]);
 	var all_dates = {}
 	d3.values(all_data).forEach(function(elem) { 
 		d3.keys(elem.data).forEach(function(date) {
@@ -183,9 +194,11 @@
 		.append("td")
 		.attr("class", "header_col")
 		.html(function(d) {
-			return "<div><a href='/series/analyze/"+d.value.id+"' target='_blank'>" + d.key + "</a></div>"
+			return "<div>"
+				+ "<a href='/data_lists/analyze_view/54?series_name="+d.key+"&tsd_file=<%= @tsd_file %>' target='_blank'>" + d.key + "</a></div>"
 				+ "<div><span class='s_desc'>" + d.value.desc + "</span></div>"
 		})
+		// http://udaman.uhero.hawaii.edu/data_lists/analyze_view/54?list_index=4&tsd_file=QSOL_Q_13Q4.TSD
 		
 	series_rows
 		.append("td")

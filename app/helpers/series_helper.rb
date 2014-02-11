@@ -1,7 +1,7 @@
 module SeriesHelper
   
   require 'csv'
-
+  
   def csv_helper
     CSV.generate do |csv| 
       # series_data = @data_list.series_data
@@ -58,13 +58,17 @@ module SeriesHelper
   end
   
   def linked_version(description)
+    linked_version_with_action(description,'show')
+  end
+  
+  def linked_version_with_action(description, action)
     return "" if description.nil?
     new_words = []
     description.split(" ").each do |word|
       #new_word = word.index('@').nil? ? word : link_to(word, {:action => 'show', :id => word.ts.id})
       new_word = word
       begin
-        new_word = (word.index('@').nil? or word.split(".")[-1].length > 1) ? word : link_to(word, {:action => 'show', :id => word.ts.id}) 
+        new_word = (word.index('@').nil? or word.split(".")[-1].length > 1) ? word : link_to(word, {:action => action, :id => word.ts.id}, :target=>'_blank' ) 
       rescue
         new_word = word
       end

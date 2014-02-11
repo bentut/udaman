@@ -20,6 +20,34 @@ class DataList < ActiveRecord::Base
     @series_data ||= get_series_data
   end
   
+  def get_series_descriptions 
+    series_data = {}
+    series_names.each do |s| 
+      as = AremosSeries.get(s)
+      series_data[s.split(".")[0]] = as.description unless as.nil?
+    end
+    series_data    
+  end
+  
+  def get_series_ids
+    series_data = {}
+    series_names.each do |s| 
+      series = s.ts
+      series_data[s] = series.nil? ? nil : series.id
+    end
+    series_data    
+  end
+  
+  def get_series_ids_for_frequency(frequency)
+    series_data = {}
+    series_names.each do |s| 
+      s_name = (s.split(".")[0]+"."+frequency)
+      series = s_name.ts
+      series_data[s_name] = series.id unless series.nil?
+    end
+    series_data    
+  end
+  
   def get_series_data
     series_data = {}
     series_names.each do |s| 
@@ -44,9 +72,38 @@ class DataList < ActiveRecord::Base
         data.keys.sort.each do |date|
           all_changes[date] = {:value => data[date], :yoy => yoy[date], :ytd => ytd[date], :yoy_diff => yoy_diff[date]}
         end
-        as = AremosSeries.get(s)
+        as = AremosSeries.get(s.upcase)
         desc = as.nil? ? "" : as.description
         series_data[s] = {:data => all_changes, :id => series.id, :desc => desc} 
+      end
+    end
+    series_data
+    
+  end
+  
+  def get_tsd_series_data_with_changes(tsd_file)
+    series_data = {}
+    series_names.each do |s| 
+      as = AremosSeries.get(s.upcase)
+      desc = as.nil? ? "" : as.description
+      
+      url = URI.parse("http://readtsd.herokuapp.com/open/#{tsd_file}/search/#{s.split(".")[0].gsub("%","%25")}/json")
+      res = Net::HTTP.new(url.host, url.port).request_get(url.path)
+      tsd_data = res.code == "500" ? nil : JSON.parse(res.body)  
+
+      if tsd_data.nil?
+        series_data[s] = {:data => {}, :id => nil, :desc => desc, :freq => "M"} 
+      else
+        series = Series.new_transformation(tsd_data["name"]+"."+tsd_data["frequency"],  tsd_data["data"], Series.frequency_from_code(tsd_data["frequency"]))
+        all_changes = {}
+        yoy = series.yoy.data
+        ytd = series.ytd.data
+        yoy_diff = series.yoy_diff.data
+        data = series.data
+        data.keys.sort.each do |date|
+          all_changes[date] = {:value => data[date], :yoy => yoy[date], :ytd => ytd[date], :yoy_diff => yoy_diff[date]}
+        end
+        series_data[s] = {:data => all_changes, :id => nil, :desc => desc, :freq => tsd_data["frequency"]} 
       end
     end
     series_data

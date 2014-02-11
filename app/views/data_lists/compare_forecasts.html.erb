@@ -1,0 +1,599 @@
+
+<script type="text/javascript" src="/javascripts/d3.v3.min.js"></script>
+<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
+<script type="text/javascript" src="/javascripts/queue.min.js"></script>
+
+<style>
+#readout table  {table-layout:fixed; width:300px}
+#readout table th,
+#readout table td {font-size: 11px; border: none;}
+#chart_div { position:absolute; left:150px; top:0px;}
+#series_selector { position:absolute; font-size:10px; left:0px; top:0px}
+#series_selector p  { padding:0; margin: 0;}
+#readout {position:absolute; top:0; left:250px;}
+#loading {position: absolute; text-align:center; top:150px; left:0; width:100%; font-weight:bold; font-size: 24px; color: black;}
+#readout table th#date_selected {font-size:16px;}
+</style>
+
+<div id="controls">
+	Old Forecast: <select id="old_forecast"><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
+	New Forecast: <select id="new_forecast"><option>heco14v1.TSD</option><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
+</div>
+<svg id="time_horizon_buttons"></svg>
+<h1 id="series_name"></h1>
+<h2 id="series_description"></h2>
+<a id="udaman_link" target="_blank" href="">See Series in Udaman</a>
+
+
+
+<div style="position:relative;">
+<div id="readout">
+	
+	<table>
+		<tr><th id="date_selected"></th>
+			<th>History<br/><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="black" stroke-width=1.5 stroke-dasharray=3,3 /></svg></th>
+			<th><span id="th_old">Replace</span><svg height="10" width="60"><line x1=0 x2=60 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
+			<th><span id="th_new">Replace</span><svg height="10" width="60"><line x1=0 x2=60 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
+		</tr>
+		<tr><td>Level</td><td id="l_hist"></td><td id="l_f1"></td><td id="l_f2"></td></tr>
+		<tr><td>%CHG</td><td id="c_hist"></td><td id="c_f1"></td><td id="c_f2"></td></tr>
+	</table>
+	
+</div>
+
+<div id= "chart_div">
+	<svg id="chart"><line id="highlight" /></svg>
+	<div id="loading">LOADING...</div>
+</div>
+
+<div id="series_selector"></div>
+
+</div>
+	
+		
+<script type="text/javascript">
+
+
+var all_series = {}
+var gui = new dat.GUI();
+
+var dat_gui_ranges = {
+	w				: [0, 800],
+	h				: [0, 1200],
+	udaman_width		:[0,20],		
+	aremos_width		:[0,20],
+	//mult		:[0,10],
+	
+}
+
+//put all hard coded values in this object
+var params = {
+	scale: 1.7,
+	w: 555,
+	h: 280,
+	t_margin: 20,
+	r_margin: 20,
+	b_margin: 85,
+	l_margin: 50,
+	
+	tick_length: 7,
+	
+	x_axis_color: "gray",
+	x_axis_fontcolor: "gray",
+	x_axis_fontsize: 10,
+	x_axis_font_rotation: 320,
+
+	y_axis_color: "gray",
+	y_axis_fontcolor: "gray",
+	y_axis_fontsize: 10,
+
+	udaman_color: "#227893",
+	aremos_color: "#D84506",
+	aremos_width:2,
+	udaman_width:2,
+	mult: 6,
+
+	viz_data: [],
+};
+
+function left_boundary() { return params.l_margin; }
+function right_boundary() { return params.w * params.scale - params.r_margin; }
+function top_boundary() { return params.t_margin; }
+function bottom_boundary() { return params.h * params.scale - params.b_margin; }
+
+	
+function init_viz_element(svg, elem_with_class, data) {
+	var elem_parts = elem_with_class.split(".");
+	var elem = elem_parts[0];
+	var elem_class = elem_parts[1];
+	
+	var viz_element = svg.selectAll(elem_with_class).data(data);
+	viz_element.enter().append(elem).attr("class", elem_class);
+	viz_element.exit().remove();
+	
+	return viz_element;
+}
+
+function n(num) {
+	if (num==="") return NaN;
+	return num
+}
+
+function q(month) {
+	if (month===1) return "Q1"
+	if (month===4) return "Q2"
+	if (month===7) return "Q3"
+	if (month===10) return "Q4"
+}
+function date_label(date, frequency) {
+	//return date.toDateString();
+	// dp = date.split("/")
+	if (frequency === "A") return date.getFullYear()+"";
+	return (date.getFullYear()+"").slice(2,4) + q(date.getMonth()+1);
+}
+function to_date(date) {
+	dp = date.split("/")
+	return new Date(dp[0]+"/"+dp[1]+ "/20"+dp[2])
+}
+function f(val, suffix) {
+	if (isNaN(val)) return ""
+	return Math.round(val*1000) / 1000 + suffix;
+}
+function draw(frequency) {
+	var mult = params.mult;
+	
+	//var new_forecast = "HECO14"
+	//var old_forecast = "13Q4"
+	
+	//store things for next draw iteration
+	//data = params.viz_data;
+	data = params.viz_data.filter(function(elem) { return !isNaN(elem["new_forecast"]) });
+
+	var max_y_val = d3.max(data, function(row) {return d3.max([row["History"], row["old_forecast"], row["new_forecast"]]) });
+	var min_y_val = d3.min(data, function(row) {var min = d3.min([n(row["History"]), n(row["old_forecast"]), n(row["new_forecast"])]); return min});
+	
+	var headers = data.map(function(elem) { return elem.Date });
+
+	var x = d3.time.scale().domain([headers[0], headers.slice(-1)[0]]).range([left_boundary(), right_boundary() ]);
+	var y = d3.scale.linear().domain([min_y_val, max_y_val]).range([bottom_boundary(), top_boundary() ]);
+
+	//preparing SVG Area
+	var svg = d3.select("svg#chart");
+	svg
+		.attr("height", function(d,i) {return params.h * params.scale})
+		.attr("width", function(d) {return params.w * params.scale})
+		.on("mousemove", function(d,i) {
+			var xpos = d3.mouse(this)[0]
+			tick = d3.bisect(headers, x.invert(xpos))
+			xpos = x(headers[tick])
+			d3.select("line#highlight")
+				.attr("x1", xpos)
+				.attr("x2", xpos)
+			d3.select("#l_hist").text(f(data[tick]["History"],""))
+			d3.select("#l_f1").text(f(data[tick]["old_forecast"],""))
+			d3.select("#l_f2").text(f(data[tick]["new_forecast"],""))
+			d3.select("#c_hist").text(f(data[tick]["History %CHG"],"%"))
+			d3.select("#c_f1").text(f(data[tick]["old_forecast %CHG"],"%"))
+			d3.select("#c_f2").text(f(data[tick]["new_forecast %CHG"],"%"))
+			
+			d3.select("#date_selected").text(date_label(data[tick]["Date"], frequency))
+			
+		})
+		.data([data])
+		
+	
+	svg.select("line#highlight")
+		.attr("y1", top_boundary())
+		.attr("y2", bottom_boundary())
+		.attr("stroke", "gray")
+		.attr("stroke-width", 0.5)
+		.attr("stroke-dasharray", "10,5")
+
+
+	//probably don't need these filters anymore... as long as starting point for all series is the same
+	init_viz_element(svg, "path.current_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem["old_forecast"]) })]; })
+	     .attr("d", d3.svg.line()
+	     	.x(function(d) { return x(d.Date); })
+	     	.y(function(d) { return d["new_forecast"] === null ? y(min_y_val) : y(d["new_forecast"]); })
+	 	)
+		.attr("stroke", params.udaman_color)
+		.attr("stroke-width",params.udaman_width)
+		.attr("fill", "none");
+
+	init_viz_element(svg, "path.old_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem["new_forecast"]) })]; })
+	     .attr("d", d3.svg.line()
+	     	.x(function(d) { return x(d.Date); })
+	     	.y(function(d) { return d["old_forecast"] === null ? y(min_y_val) : y(d["old_forecast"]); })
+	 	)
+		.attr("stroke", params.aremos_color)
+		.attr("fill", "none")
+		.attr("stroke-dasharray", "6,6")
+		.attr("stroke-width", params.aremos_width);
+
+	init_viz_element(svg, "path.history", function(d) { return [d.filter(function(elem) {return !isNaN(elem["History"])})]; })
+	     .attr("d", d3.svg.line()
+	     	.x(function(d) { return x(d.Date); })
+	     	.y(function(d) { return y(d["History"]); })
+	 	)
+		.attr("stroke", "black")
+		.attr("fill", "none")
+		.attr("stroke-dasharray", "3,3")
+		.attr("stroke-width", params.aremos_width);
+
+	
+	
+	
+		
+	//------ x Axis -------------------------------------------------------------------
+	var xaxis = init_viz_element(svg, "line.xaxis", ["dummy_data"])
+		.attr("y1", bottom_boundary())
+		.attr("y2", bottom_boundary())
+		.attr("x1", function(d) {return left_boundary()})
+		.attr("x2", function(d) {return right_boundary()})
+		.attr("stroke", params.x_axis_color);
+
+	var xticks = init_viz_element(svg, "line.xtick", x.ticks())
+		.attr("y1", bottom_boundary())
+		.attr("y2", bottom_boundary() + params.tick_length )
+		.attr("x1", function(d) {return x(d)})
+		.attr("x2", function(d) {return x(d)})
+		.attr("stroke", params.x_axis_color);
+	
+	var xtick_labels = init_viz_element(svg, "text.xtick_label", x.ticks())
+		.attr("x", function(d) { return x(d)})
+		.attr("y", bottom_boundary())
+		.attr("fill", params.x_axis_fontcolor)
+		.attr("font-size", params.x_axis_fontsize+"px")
+		.attr("transform", function(d) {return "rotate("+params.x_axis_font_rotation +" "+ (x(d)+params.tick_length*4).toString() + "," + bottom_boundary() + ")"; })
+		.attr("text-anchor", "end")
+		.text(function(d) {return date_label(d, frequency); });
+
+	//------ x Axis End -------------------------------------------------------------------
+	
+	
+	//------ y Axis -------------------------------------------------------------------
+	var yaxis = init_viz_element(svg, "line.yaxis", ["dummy_data"])
+		.attr("x1", left_boundary())
+		.attr("x2", left_boundary())
+		.attr("y1", function(d) {return top_boundary()})
+		.attr("y2", function(d) {return bottom_boundary()})
+		.attr("stroke", params.y_axis_color);
+	
+	var yticks = init_viz_element(svg, "line.ytick", y.ticks(10))
+		.attr("y1", function(d) {return y(d)})
+		.attr("y2", function(d) {return y(d)})		
+		.attr("x1", left_boundary() - params.tick_length)
+		.attr("x2", left_boundary() )
+		.attr("stroke", params.y_axis_color);
+	
+	var ytick_labels = init_viz_element(svg, "text.ytick_label", y.ticks(10))
+		.attr("y", function(d) { return y(d) + (params.y_axis_fontsize / 3.5)})
+		.attr("x", left_boundary() - params.tick_length * 1.5)
+		.attr("fill", params.y_axis_fontcolor)
+		.attr("font-size", params.y_axis_fontsize+"px")
+		.attr("text-anchor", "end")
+		.text(function(d) {return d; });
+
+	//------ y Axis End -------------------------------------------------------------------
+		
+}		
+
+
+//all dat.gui changes should trigger a redraw
+// generate the dat.gui control for any numerical ranges
+d3.entries(dat_gui_ranges).forEach(function(elem) { 
+	var attr = elem.key;
+	var range = elem.value;
+	gui.add(params, attr, range[0], range[1]).onChange(draw);
+} ); 
+
+gui.addColor(params, 'udaman_color').onChange(draw);
+gui.addColor(params, 'aremos_color').onChange(draw);
+
+// --------- dat gui section end ---------------------------------
+
+function select_option(select_id, option_text) {
+	var dd = document.getElementById(select_id);
+	for (var i = 0; i < dd.options.length; i++) {
+	    if (dd.options[i].text === option_text) {
+	        dd.selectedIndex = i;
+	        break;
+	    }
+	}
+}
+
+function load_page_for_frequency(frequency) {
+	series_ids = series_ids_f[frequency]
+	var series = d3.select("#series_name").text()
+	if (series === "") series = d3.keys(series_ids)[0];
+	
+	series = series.split(".")[0]+"."+frequency
+	d3.select("#series_name").text(series)
+	d3.select("#series_description").text(series_descriptions[series.split(".")[0]])
+	d3.select("#udaman_link").attr("href", "/series/"+series_ids[series])
+	
+	d3.select("#new_forecast").selectAll("option").remove();
+	d3.select("#old_forecast").selectAll("option").remove();
+
+	d3.select("#new_forecast").selectAll("option")
+		.data(filter_and_sort_tsd(all_tsds, frequency))
+		.enter()
+		.append("option")
+		.attr("value", function(d) {return d})
+		.text(function(d) { return d.split("_")[0] });
+
+	d3.select("#old_forecast").selectAll("option")
+		.data(filter_and_sort_tsd(all_tsds, frequency))
+		.enter()
+		.append("option")
+		.attr("value", function(d) {return d})
+		.text(function(d) { return d.split("_")[0] });
+	
+	if (typeof(old_forecast_name) === 'undefined') {
+		old_forecast_name = d3.select("#old_forecast").node().value;
+		new_forecast_name = d3.select("#new_forecast").node().value;
+	}
+	else {
+		select_option("old_forecast", old_forecast_name.split("_")[0]);
+		select_option("new_forecast", new_forecast_name.split("_")[0]);
+		// d3.select("#old_forecast").node().value = old_forecast_name.split("_")[0];
+		// d3.select("#new_forecast").node().value = new_forecast_name.split("_")[0];
+		old_forecast_name = d3.select("#old_forecast").node().value;
+		new_forecast_name = d3.select("#new_forecast").node().value;
+		
+	}
+		
+		
+		
+	d3.select("#th_old").text(old_forecast_name.split("_")[0]);
+	d3.select("#th_new").text(new_forecast_name.split("_")[0]);
+	
+	
+	queue()
+		.defer(d3.json, "/series/show_forecast/"+ series_ids[series] +".json?tsd_file=" + new_forecast_name)
+		.defer(d3.json, "/series/show_forecast/"+ series_ids[series] +".json?tsd_file=" + old_forecast_name)
+		.defer(d3.json, "/series/json_with_change/"+ series_ids[series])
+		.awaitAll(function(error, results) {
+			all_dates = d3.keys(results[0].series.data).map(function(date_string) { return new Date(date_string.replace(/-/g,'/')) });
+			dates = get_dates(time_horizon, all_dates);
+			params.viz_data = graph_data(results, dates)
+			hide_loading_screen();
+			draw(frequency);
+		});
+
+
+	// bind load events to series list	 
+	d3.select("#series_selector").selectAll("p").remove();
+	d3.select("#series_selector").selectAll("p")
+		.data(d3.keys(series_ids))
+		.enter()
+		.append("p")
+		.append("a")
+		.text(function(d) {return d})
+		.on("click", function(d) {
+			d3.select("#series_name").text(d)
+			d3.select("#series_description").text(series_descriptions[d.split(".")[0]])
+			d3.select("#udaman_link").attr("href", "/series/"+series_ids[series])
+			draw_data(d, dates, frequency, old_forecast_name, new_forecast_name);
+
+		})
+		.on("mouseover", function(d) {
+			var link = d3.select(this);
+			link.text(d+" : "+series_descriptions[d.split(".")[0]]);
+		})
+		.on("mouseout", function(d) {
+			var link = d3.select(this);
+			link.text(d);
+		})
+}
+
+function graph_data(queue_results, dates) {
+	return dates.map(function(date) {
+		date_string = to_db_date_string(date)
+		return {
+			"Date": date,
+			"History" : nan_if_undef(queue_results[2].series.data[date_string]),
+			"old_forecast": nan_if_undef(queue_results[1].series.data[date_string]),
+			"new_forecast": nan_if_undef(queue_results[0].series.data[date_string]),
+			"History %CHG": nan_if_undef(queue_results[2].chg.data[date_string]),
+			"old_forecast %CHG": nan_if_undef(queue_results[1].chg.data[date_string]),
+			"new_forecast %CHG": nan_if_undef(queue_results[0].chg.data[date_string])
+		}
+	})
+}
+
+function trim_dates(dates, start_date, end_date) {
+	return dates.filter(function(date) {
+		return (to_db_date_string(date) >= to_db_date_string(start_date) && to_db_date_string(date) <= to_db_date_string(end_date))
+	});
+}
+
+function get_dates(time_horizon, all_dates) {
+	if (time_horizon === "short-run")
+		return trim_dates(all_dates, new Date("2006/01/01"), new Date("2019/01/01"))
+	else
+		return all_dates.slice();
+}
+
+function to_db_date_string(date) {
+	y = date.getFullYear()
+	m = date.getMonth() + 1
+	m = (m <= 9) ? "0"+m : m+""
+	return y+"-"+m+"-01"
+}
+
+function nan_if_undef(val) {
+	if (val === undefined)
+		return NaN;
+	return val;
+}
+
+function display_loading_screen() {
+	d3.select("#loading").style("display", "block");
+	d3.select("#chart_div").style("opacity", .1)
+}
+
+function hide_loading_screen() {
+	d3.select("#loading").style("display", "none")	
+	d3.select("#chart_div").style("opacity", 1)
+}
+function draw_data(series_name, dates, frequency, old_forecast_name, new_forecast_name) {
+	display_loading_screen();
+	queue()
+	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_name] +".json?tsd_file=" + new_forecast_name)
+	.defer(d3.json, "/series/show_forecast/"+ series_ids[series_name] +".json?tsd_file=" + old_forecast_name)
+	.defer(d3.json, "/series/json_with_change/"+ series_ids[series_name])
+	.awaitAll(function(error, results) {
+		params.viz_data = graph_data(results, dates)
+		hide_loading_screen();
+		draw(frequency);
+	})
+}
+function button_color(time_horizon, element) {
+	if (time_horizon === element) return button_selected;
+	return button_normal;
+}
+
+function filter_and_sort_tsd(tsd_array, frequency) {
+	return (tsd_array.filter(function(elem) {
+		parts = elem.split('_');
+		return parts[1] === frequency
+	})).sort(function(a,b) {
+		return d3.descending(a.split("_")[2], b.split("_")[2])
+	})
+}
+
+// --------- hard coded values from ruby -----------
+var frequency = "Q"
+var series_ids_f = {"Q": <%= @data_list.get_series_ids_for_frequency("Q").to_json.html_safe %>,
+					"A": <%= @data_list.get_series_ids_for_frequency("A").to_json.html_safe %>};
+var series_ids;
+var series_descriptions = <%= @data_list.get_series_descriptions.to_json.html_safe %>;
+
+var old_forecast_name;
+var new_forecast_name;
+var all_tsds = <%= @all_tsd_files.to_json.html_safe %>;
+var all_dates = [];
+var dates = [];
+var time_horizon = "short-run";
+var button_hover = "#A77"
+var button_selected = "#777";
+var button_normal = "#CCC";
+// ---------------------------------------------------
+
+
+
+
+
+// configure readout and controls
+var svg = d3.select("svg#chart");
+svg
+	.attr("height", function(d,i) {return params.h * params.scale})
+	.attr("width", function(d) {return params.w * params.scale})
+	
+
+var svg = d3.select("svg#time_horizon_buttons").attr("width", 300).attr("height", 35);
+
+buttons = svg.selectAll("g.button")
+	.data(["short-run", "long-run"])
+	.enter()
+	.append("g")
+	.attr("class", "button")
+	.attr("cursor", "pointer")
+	.attr("transform", function(d) {
+		if (d == "short-run") return "translate(0,10)"
+		else return "translate(70,10)";
+	})
+	.on("mouseover", function(d) {
+		d3.select(this).select("rect").attr("fill", button_hover)
+	})
+	.on("mouseout", function(d) {
+		d3.select(this).select("rect").attr("fill", button_color(time_horizon, d))
+	})
+	.on("click", function(d) {
+		time_horizon = d;
+		dates = get_dates(time_horizon, all_dates);
+		d3.selectAll("g.button").select("rect").attr("fill", function(d) {return button_color(time_horizon, d)})
+		draw_data(d3.select("#series_name").text(), dates, frequency, old_forecast_name, new_forecast_name);
+	})
+	
+buttons.append("rect")
+	.attr("x",0)
+	.attr("y",0)
+	.attr("height", 15)
+	.attr("width", 60)
+	.attr("fill", function(d) {
+		return button_color(time_horizon, d)
+	})
+	
+buttons.append("text")
+	.attr("x", 30)
+	.attr("y", 11)
+	.attr("font-size", 8)
+	.attr("text-anchor", "middle")
+	.attr("fill", "#FFF")
+	.text(function(d) {return d})
+
+
+
+f_buttons = svg.selectAll("g.f_button")
+	.data(["A", "Q"])
+	.enter()
+	.append("g")
+	.attr("class", "f_button")
+	.attr("cursor", "pointer")
+	.attr("transform", function(d) {
+		if (d == "Q") return "translate(160,10)"
+		else return "translate(190,10)";
+	})
+	.on("mouseover", function(d) {
+		d3.select(this).select("rect").attr("fill", button_hover)
+	})
+	.on("mouseout", function(d) {
+		d3.select(this).select("rect").attr("fill", button_color(frequency, d))
+	})
+	.on("click", function(d) {
+		display_loading_screen();
+		frequency = d;
+		load_page_for_frequency(frequency)
+		d3.selectAll("g.f_button").select("rect").attr("fill", function(d) {return button_color(frequency, d)})
+	})
+
+f_buttons.append("rect")
+	.attr("x",0)
+	.attr("y",0)
+	.attr("height", 15)
+	.attr("width", 20)
+	.attr("fill", function(d) {
+		return button_color(frequency, d)
+	})
+
+f_buttons.append("text")
+	.attr("x", 10)
+	.attr("y", 11)
+	.attr("font-size", 8)
+	.attr("text-anchor", "middle")
+	.attr("fill", "#FFF")
+	.text(function(d) {return d})
+
+d3.select("#old_forecast").on("change", function(d) {
+	old_forecast_name = this.value;
+	d3.select("#th_old").text(old_forecast_name.split("_")[0]);
+	draw_data(d3.select("#series_name").text(), dates, frequency, old_forecast_name, new_forecast_name);	
+})
+
+d3.select("#new_forecast").on("change", function(d) {
+	new_forecast_name = this.value;
+	d3.select("#th_new").text(new_forecast_name.split("_")[0]);
+	draw_data(d3.select("#series_name").text(), dates, frequency, old_forecast_name, new_forecast_name);	
+})
+
+
+// initial load
+load_page_for_frequency(frequency)
+
+
+	
+
+
+</script>

@@ -1,0 +1,349 @@
+
+	<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
+	<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
+
+<style>
+#readout table  {table-layout:fixed; width:250px}
+#readout table th,
+#readout table td {font-size: 11px; border: none;}
+</style>
+
+<h1><%= @series_name %></h1>
+
+<div id="readout">
+<h3 id="date_selected">No Date Selected</h3>
+<table>
+	<tr><th></th>
+		<th>History<br/><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="black" stroke-width=1.5 stroke-dasharray=3,3 /></svg></th>
+		<th>13Q4<svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
+		<th>HECO<svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
+	</tr>
+	<tr><td>Level</td><td id="l_hist"></td><td id="l_f1"></td><td id="l_f2"></td></tr>
+	<tr><td>%CHG</td><td id="c_hist"></td><td id="c_f1"></td><td id="c_f2"></td></tr>
+<table>
+</div>
+
+<div id= "chart_div">
+	<svg id="chart"><line id="highlight" /></svg>
+</div>
+<div id="series_selector">Im here</div>
+
+<% dates = @series1.data.keys.sort %>
+<% data1 = @series1.data %>
+<% data2 = @series2.data %>
+<% data0 = @history_series.data %>
+<% chg1 = @chg1.data %>
+<% chg2 = @chg2.data %>
+<% chg0 = @history_chg.data %>
+
+<!-- <table>
+	<tr>
+		<th>Date</th>
+		<th>History</th>
+		<th>13Q4</th>
+		<th>HECO14</th>
+		<th>HECO14 %CHG</th>
+	</tr>
+	<% dates.reverse.each do |date_string|  %>  
+	<tr>	
+		<td><%=date_string %></td> 
+		<td><%= data0[date_string].nil? ? "" : "%.3f" % data0[date_string] %></td>
+		<td><%= data1[date_string].nil? ? "" : "%.3f" % data1[date_string] %></td>
+		<td><%= data2[date_string].nil? ? "" : "%.3f" % data2[date_string] %></td>		
+	</tr>
+	<%end%>
+</table>	  -->
+	
+		
+
+
+
+
+
+
+<script type="text/javascript">
+
+data = [
+<% dates.reverse.each do |date_string|  %>  
+	{ "Date" : new Date("<%= date_string.gsub('-','/') %>"), 
+	"History" : <%= data0[date_string].nil? ? "NaN" : data0[date_string].round(3) %>,
+	"13Q4": <%= data1[date_string] %>,
+	"HECO14": <%= data2[date_string] %>,
+	"History %CHG": <%= chg0[date_string].nil? ? "NaN" : chg0[date_string].round(1) %>,
+	"13Q4 %CHG": <%= chg1[date_string].nil? ? "NaN" : chg1[date_string].round(1) %>,
+	"HECO14 %CHG": <%= chg2[date_string].nil? ? "NaN" : chg2[date_string].round(1) %>
+	
+	},
+<%end%>
+];
+
+var all_series = {}
+var gui = new dat.GUI();
+
+var dat_gui_ranges = {
+	w				: [0, 800],
+	h				: [0, 1200],
+	udaman_width		:[0,20],		
+	aremos_width		:[0,20],
+	mult		:[0,10],
+	
+}
+
+//put all hard coded values in this object
+var params = {
+	scale: 1.7,
+	w: 555,
+	h: 280,
+	t_margin: 20,
+	r_margin: 20,
+	b_margin: 85,
+	l_margin: 50,
+	
+	// bar_width: 50,
+	tick_length: 7,
+	
+	x_axis_color: "gray",
+	x_axis_fontcolor: "gray",
+	x_axis_fontsize: 10,
+	x_axis_font_rotation: 320,
+
+	y_axis_color: "gray",
+	y_axis_fontcolor: "gray",
+	y_axis_fontsize: 10,
+
+	udaman_color: "#227893",
+	aremos_color: "#D84506",
+	aremos_width:1.5,
+	udaman_width:1.5,
+	mult: 6,
+	// fill_opacity: 0.2,
+	// point_size :2.5,
+	//just to store for redraw
+	viz_data: [],
+};
+
+function left_boundary() { return params.l_margin; }
+function right_boundary() { return params.w * params.scale - params.r_margin; }
+function top_boundary() { return params.t_margin; }
+function bottom_boundary() { return params.h * params.scale - params.b_margin; }
+
+	
+function init_viz_element(svg, elem_with_class, data) {
+	var elem_parts = elem_with_class.split(".");
+	var elem = elem_parts[0];
+	var elem_class = elem_parts[1];
+	
+	var viz_element = svg.selectAll(elem_with_class).data(data);
+	viz_element.enter().append(elem).attr("class", elem_class);
+	viz_element.exit().remove();
+	
+	return viz_element;
+}
+
+function n(num) {
+	if (num==="") return NaN;
+	return num
+}
+
+function q(month) {
+	if (month===1) return "Q1"
+	if (month===4) return "Q2"
+	if (month===7) return "Q3"
+	if (month===10) return "Q4"
+}
+function date_label(date) {
+	//return date.toDateString();
+	// dp = date.split("/")
+	return (date.getFullYear()+"").slice(2,4) + q(date.getMonth()+1);
+}
+function to_date(date) {
+	dp = date.split("/")
+	return new Date(dp[0]+"/"+dp[1]+ "/20"+dp[2])
+}
+function draw() {
+	var mult = params.mult;
+	
+	//store things for next draw iteration
+	data = params.viz_data;
+
+	var max_y_val = d3.max(data, function(row) {return d3.max([row["History"], row["13Q4"], row["HECO14"]]) });//row.upper > row.udaman && row.upper != null ? row.upper : row.udaman });// 30000; // replace with actual value from data
+	var min_y_val = d3.min(data, function(row) {var min = d3.min([n(row["History"]), n(row["13Q4"]), n(row["HECO14"])]); return min});//row.lower < row.udaman && row.lower != null ? row.lower : row.udaman });// 30000; // replace with actual value from data
+	
+	var headers = data.map(function(elem) { return elem.Date });
+	//var categories = headers.slice(1); 		//alert(categories.toSource());
+	// var first_year = d3.min(data, function(row) {return row[headers[0]]}); 
+	// var last_year = d3.max(data, function(row) {return row[headers[0]]});
+	// 
+	// console.log(headers)
+	// console.log(first_year)
+	// console.log(last_year)
+	var x = d3.time.scale().domain([headers[0], headers.slice(-1)[0]]).range([left_boundary(), right_boundary() ]);
+	var y = d3.scale.linear().domain([min_y_val, max_y_val]).range([bottom_boundary(), top_boundary() ]);
+
+//	console.log(x.rangePoints)
+	//preparing SVG Area
+	var svg = d3.select("svg#chart");
+	svg
+		.attr("height", function(d,i) {return params.h * params.scale})
+		.attr("width", function(d) {return params.w * params.scale})
+		.on("mousemove", function(d,i) {
+			var xpos = d3.mouse(this)[0]
+			tick = d3.bisect(headers, x.invert(xpos))
+			xpos = x(headers[tick])
+			d3.select("line#highlight")
+				.attr("x1", xpos)
+				.attr("x2", xpos)
+			d3.select("#l_hist").text(data[tick]["History"])
+			d3.select("#l_f1").text(data[tick]["13Q4"])
+			d3.select("#l_f2").text(data[tick]["HECO14"])
+			d3.select("#c_hist").text(data[tick]["History %CHG"] + "%")
+			d3.select("#c_f1").text(data[tick]["13Q4 %CHG"] + "%")
+			d3.select("#c_f2").text(data[tick]["HECO14 %CHG"] + "%")
+			
+			d3.select("#date_selected").text(date_label(data[tick]["Date"]))
+			
+		})
+		.data([data])
+		
+	
+
+	svg.select("line#highlight")
+		.attr("y1", top_boundary())
+		.attr("y2", bottom_boundary())
+		.attr("stroke", "gray")
+		.attr("stroke-width", 0.5)
+		.attr("stroke-dasharray", "10,5")
+		
+		
+			
+	
+	// var line = init_viz_element(svg, "path.line_aremos", function(d) { return [d]; })
+	//      .attr("d", d3.svg.line()
+	//      	.x(function(d) { return x(d.date); })
+	//      	.y(function(d) { return d.aremos === null ? y(min_y_val) : y(d.aremos); })
+	//  	)
+	// 	.attr("stroke", params.aremos_color)
+	// 	.attr("fill", "none")
+	// 	.attr("stroke-dasharray", "10,5")
+	// 	.attr("stroke-width", params.aremos_width);
+
+	var line = init_viz_element(svg, "path.current_forecast", function(d) { return [d]; })
+	     .attr("d", d3.svg.line()
+	     	.x(function(d) { return x(d.Date); })
+	     	.y(function(d) { return d["HECO14"] === null ? y(min_y_val) : y(d["HECO14"]); })
+	 	)
+		.attr("stroke", params.udaman_color)
+		.attr("stroke-width",params.udaman_width)
+		.attr("fill", "none");
+
+	var line = init_viz_element(svg, "path.old_forecast", function(d) { return [d]; })
+	     .attr("d", d3.svg.line()
+	     	.x(function(d) { return x(d.Date); })
+	     	.y(function(d) { return d["13Q4"] === null ? y(min_y_val) : y(d["13Q4"]); })
+	 	)
+		.attr("stroke", params.aremos_color)
+		.attr("fill", "none")
+		.attr("stroke-dasharray", "6,6")
+		.attr("stroke-width", params.aremos_width);
+
+	var line = init_viz_element(svg, "path.history", function(d) { return [d.filter(function(elem) {return elem["History"] !== ""})]; })
+	     .attr("d", d3.svg.line()
+	     	.x(function(d) { return x(d.Date); })
+	     	.y(function(d) { return y(d["History"]); })
+	 	)
+		.attr("stroke", "black")
+		.attr("fill", "none")
+		.attr("stroke-dasharray", "3,3")
+		.attr("stroke-width", params.aremos_width);
+
+	
+	
+	
+		
+	//------ x Axis -------------------------------------------------------------------
+	var xaxis = init_viz_element(svg, "line.xaxis", ["dummy_data"])
+		.attr("y1", bottom_boundary())
+		.attr("y2", bottom_boundary())
+		.attr("x1", function(d) {return left_boundary()})
+		.attr("x2", function(d) {return right_boundary()})
+		.attr("stroke", params.x_axis_color);
+
+	var xticks = init_viz_element(svg, "line.xtick", headers)
+		.attr("y1", bottom_boundary())
+		.attr("y2", bottom_boundary() + params.tick_length )
+		.attr("x1", function(d) {return x(d)})
+		.attr("x2", function(d) {return x(d)})
+		.attr("stroke", params.x_axis_color);
+	
+	var xtick_labels = init_viz_element(svg, "text.xtick_label", headers)
+		.attr("x", function(d) { return x(d)})
+		.attr("y", bottom_boundary())
+		.attr("fill", params.x_axis_fontcolor)
+		.attr("font-size", params.x_axis_fontsize+"px")
+		.attr("transform", function(d) {return "rotate("+params.x_axis_font_rotation +" "+ (x(d)+params.tick_length*4).toString() + "," + bottom_boundary() + ")"; })
+		.attr("text-anchor", "end")
+		.text(function(d) {return date_label(d); });
+
+	//------ x Axis End -------------------------------------------------------------------
+	
+	
+	//------ y Axis -------------------------------------------------------------------
+	var yaxis = init_viz_element(svg, "line.yaxis", ["dummy_data"])
+		.attr("x1", left_boundary())
+		.attr("x2", left_boundary())
+		.attr("y1", function(d) {return top_boundary()})
+		.attr("y2", function(d) {return bottom_boundary()})
+		.attr("stroke", params.y_axis_color);
+	
+	var yticks = init_viz_element(svg, "line.ytick", y.ticks(10))
+		.attr("y1", function(d) {return y(d)})
+		.attr("y2", function(d) {return y(d)})		
+		.attr("x1", left_boundary() - params.tick_length)
+		.attr("x2", left_boundary() )
+		.attr("stroke", params.y_axis_color);
+	
+	var ytick_labels = init_viz_element(svg, "text.ytick_label", y.ticks(10))
+		.attr("y", function(d) { return y(d) + (params.y_axis_fontsize / 3.5)})
+		.attr("x", left_boundary() - params.tick_length * 1.5)
+		.attr("fill", params.y_axis_fontcolor)
+		.attr("font-size", params.y_axis_fontsize+"px")
+		.attr("text-anchor", "end")
+		.text(function(d) {return d; });
+
+	//------ y Axis End -------------------------------------------------------------------
+		
+}		
+
+
+//all dat.gui changes should trigger a redraw
+// generate the dat.gui control for any numerical ranges
+d3.entries(dat_gui_ranges).forEach(function(elem) { 
+	var attr = elem.key;
+	var range = elem.value;
+	gui.add(params, attr, range[0], range[1]).onChange(draw);
+} ); 
+
+gui.addColor(params, 'udaman_color').onChange(draw);
+gui.addColor(params, 'aremos_color').onChange(draw);
+
+//add color or custom controls here
+
+// d3.csv("forecast_data.csv", function(data) {
+// 	all_series = {"series1": data.slice(0).reverse(), "series2": data.slice(0)}
+ 	params.viz_data = data.reverse();
+	draw();	
+
+	// d3.select("#series_selector").selectAll("p")
+	// 	.data(d3.keys(all_series))
+	// 	.enter()
+	// 	.append("p")
+	// 	.append("a")
+	// 	.text(function(d) {return d})
+	// 	.on("click", function(d) {
+	// 		params.viz_data = all_series[d]
+	// 		draw();
+	// 	})
+//})
+
+
+</script>
