@@ -12,9 +12,12 @@ gem 'roo'
 gem 'httpclient'
 gem 'devise', '1.1.2'
 gem 'spork', '~> 0.9.0.rc'
-gem 'rubyzip', '~> 0.9.4'
-gem "selenium-webdriver", "~> 2.32.0"
+gem 'rubyzip', '~> 1.0'
+gem 'capybara',  '2.0.3'
+gem "selenium-webdriver", "~> 2.39.0"
+#gem 'watir'
 gem 'watir-webdriver'
+#gem 'watir-webdriver-rails'
 gem 'whenever', :require => false
 gem 'mechanize'
 gem 'net-sftp'
