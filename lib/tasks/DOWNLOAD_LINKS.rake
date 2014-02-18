@@ -4,7 +4,6 @@
 # 75 - 2.5.6
 # 253Y - 6.20B
 # 253Q - 6.20B
-
 task :update_bea_links => :environment do
   t = Time.now
   bea_table_links = {

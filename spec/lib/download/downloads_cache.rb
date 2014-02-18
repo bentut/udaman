@@ -15,17 +15,17 @@ describe DownloadsCache do
   
     it "should return the correct Excel object from an xls call" do
       xls = @dc.xls("pattern@test.com", "increment_col_m")
-      xls.class.should == Excel
+      xls.class.should == Roo::Excel
       xls.cell(1,1).should == "increment_col_m"
     end
   
     it "should return a different Excel object when a different call is made" do
       xls = @dc.xls("pattern@test.com", "increment_col_m")
-      xls.class.should == Excel
+      xls.class.should == Roo::Excel
       xls.cell(1,1).should == "increment_col_m"
     
       xls = @dc.xls("pattern@test.com", "increment_col_a")
-      xls.class.should == Excel
+      xls.class.should == Roo::Excel
       xls.cell(1,1).should == "increment_col_a"
     end
   

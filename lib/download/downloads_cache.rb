@@ -42,7 +42,7 @@ class DownloadsCache
   def set_xls_sheet
     @new_data = true
     file_extension = @cache_handle.split(".")[-1]
-    excel = file_extension == "xlsx" ? Excelx.new(@cache_handle) : Excel.new(@cache_handle) 
+    excel = file_extension == "xlsx" ? Roo::Excelx.new(@cache_handle) : Roo::Excel.new(@cache_handle) 
     sheet_parts = @sheet.split(":")
     if sheet_parts[0] == "sheet_num" #and excel.default_sheet != excel.sheets[sheet_parts[1].to_i - 1]
       excel.default_sheet = excel.sheets[sheet_parts[1].to_i - 1] 

@@ -1,7 +1,7 @@
 require 'iconv'
 require 'roo'
 
-class UpdateSpreadsheet < Excel
+class UpdateSpreadsheet < Roo::Excel
   include UpdateCore
   
   def UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_name)
