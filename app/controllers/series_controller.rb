@@ -111,7 +111,10 @@ class SeriesController < ApplicationController
   
   def transform
     eval_statement = convert_to_udaman_notation(params[:eval])
+    puts eval_statement
+    puts params[:eval]
     @series = eval(eval_statement)
+
     @chg = @series.annualized_percentage_change
     @desc = ""
     @lvl_chg = @series.absolute_change

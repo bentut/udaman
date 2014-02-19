@@ -140,7 +140,7 @@ module SeriesArithmetic
   end
   
   def annualized_percentage_change
-    return all_nil unless ["day", "week"].index(frequency).nil?
+    return all_nil unless ["week"].index(frequency).nil?
     new_series_data = {}
     last = {}
     data.sort.each do |date_string, value|
@@ -149,6 +149,29 @@ module SeriesArithmetic
       last[Date.parse(date_string).month] = value
     end
     new_transformation("Annualized Percentage Change of #{name}", new_series_data)
+  end
+  
+  #should unify these a bit
+  def mtd_sum
+    return all_nil unless frequency == "day"
+    new_series_data = {}
+    mtd_sum = 0
+    mtd_month = nil
+    data.sort.each do |date_string, value|
+      month = Date.parse(date_string).month
+      if month == mtd_month
+        mtd_sum += value
+      else
+        mtd_sum = value
+        mtd_month = month
+      end
+      new_series_data[date_string] = mtd_sum
+    end
+    new_transformation("Month to Date sum of #{name}", new_series_data)    
+  end
+  
+  def mtd
+    mtd_sum.annualized_percentage_change
   end
   
   def ytd_sum
