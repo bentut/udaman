@@ -56,7 +56,7 @@ class DataSourceDownload < ActiveRecord::Base
     #this needs to be fixed
     def download_changed?
       self.download
-      puts self.download_log[-1][:changed].to_s+" "+save_path 
+      #puts self.download_log[-1][:changed].to_s+" "+save_path 
       #return self.download_log[-1][:changed] unless self.download_log[-1][:changed].nil?
       return true
     end
@@ -66,6 +66,7 @@ class DataSourceDownload < ActiveRecord::Base
       client = HTTPClient.new
       #some will only respond to certain user agents... this may have to be updated
       client.agent_name = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:9.0) Gecko/20100101 Firefox/9.0'
+      client.connect_timeout = 1000
       resp = nil
       #loop seems to allow cookie to be downloaded... maybe more effective way to do this?
       (1..2).each do |i|
@@ -76,7 +77,7 @@ class DataSourceDownload < ActiveRecord::Base
         end
         break if resp.header.status_code == 200
       end
-      #puts "downloaded"
+      puts "downloaded"
       #not sure why I was raising this exception. Want to note the failed downloads and continue
       #raise DownloadException if resp.header.status_code != 200
       if resp.header.status_code == 200 #successful download
@@ -104,12 +105,14 @@ class DataSourceDownload < ActiveRecord::Base
     end
     
     def content_changed?(new_content)
+      puts "checking for changed content"
       return true unless File::exists? save_path_flex
       previous_download = open(save_path_flex, "rb").read
       return previous_download != new_content
     end
 
     def backup
+      puts "backing up"
       return unless File::exists? save_path_flex 
       Dir.mkdir save_path_flex+"_vintages" unless File::directory?(save_path_flex+"_vintages")
       filename = save_path_flex.split("/")[-1]

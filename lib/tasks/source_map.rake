@@ -37,7 +37,7 @@ task :reload_all_series => :environment do
 
   t = Time.now
   series_to_refresh = Series.all_names - circular.uniq
-  #series_to_refresh = ["VIS@HON.A"]
+  #series_to_refresh = ["VEXP@HI.M"]
   eval_statements = []
   errors = []
   Series.run_all_dependencies(series_to_refresh, {}, errors, eval_statements)

@@ -140,13 +140,30 @@ module SeriesArithmetic
   end
   
   def annualized_percentage_change
-    return all_nil unless ["week"].index(frequency).nil?
+    day_based_yoy
+  end
+  
+  def old_annualized_percentage_change
+    return all_nil unless ["day","week"].index(frequency).nil?
     new_series_data = {}
     last = {}
     data.sort.each do |date_string, value|
       month = Date.parse(date_string).month
       new_series_data[date_string] = (value-last[month])/last[month]*100 unless last[month].nil?
       last[Date.parse(date_string).month] = value
+    end
+    new_transformation("Annualized Percentage Change of #{name}", new_series_data)
+  end
+  
+  #just going to leave out the 29th on leap years for now
+  def day_based_yoy
+    return all_nil unless ["week"].index(frequency).nil?
+    new_series_data = {}
+    data.sort.each do |date_string, value|
+      date = Date.parse(date_string)
+      last_year = date.year - 1
+      last_year_date = last_year.to_s + date_string[4..10]
+      new_series_data[date_string] = (value-data[last_year_date])/data[last_year_date]*100 unless data[last_year_date].nil?
     end
     new_transformation("Annualized Percentage Change of #{name}", new_series_data)
   end
@@ -171,7 +188,7 @@ module SeriesArithmetic
   end
   
   def mtd
-    mtd_sum.annualized_percentage_change
+    mtd_sum.yoy
   end
   
   def ytd_sum

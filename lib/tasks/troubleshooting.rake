@@ -1,5 +1,9 @@
 task :test_rake => :environment do
   puts "all rakes are syntactically ok!"
+  series_to_refresh = ["VEXP@HI.M"]
+  eval_statements = []
+  errors = []
+  Series.run_all_dependencies(series_to_refresh, {}, errors, eval_statements)
 end
 
 # Definition fixes

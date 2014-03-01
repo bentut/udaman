@@ -178,7 +178,7 @@ private
 
   def convert_to_udaman_notation(eval_string)
     operator_fix = eval_string.gsub("(","( ").gsub(")", " )").gsub("*"," * ").gsub("/"," / ").gsub("-"," - ").gsub("+"," + ")
-    (operator_fix.split(" ").map {|e| (e.index("@").nil? or e[-3..-1] == ".ts") ? e : "\"#{e}\".ts" }).join(" ")
+    (operator_fix.split(" ").map {|e| (e.index("@").nil? or !e.index(".ts").nil? ) ? e : "\"#{e}\".ts" }).join(" ")
   end
   
   def json_from_heroku_tsd(series_name, tsd_file)
