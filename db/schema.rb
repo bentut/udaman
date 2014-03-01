@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130301003211) do
+ActiveRecord::Schema.define(:version => 20140301004236) do
 
   create_table "aremos_series", :force => true do |t|
     t.string   "name"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20130301003211) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "last_run_in_seconds", :precision => 17, :scale => 3
+    t.integer  "priority",                                           :default => 100
   end
 
   add_index "data_sources", ["series_id"], :name => "index_data_sources_on_series_id"

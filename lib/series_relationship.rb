@@ -27,8 +27,11 @@ module SeriesRelationship
   #probably something to watch out for. but might be locked into some of the front end
   #stuff
   
+  #Also need to add in priority
+  
   def data_sources_by_last_run
-    data_sources.sort_by(&:last_run)
+    #data_sources.sort_by(&:last_run)
+    data_sources.sort_by { |ds| [ds.priority, ds.last_run] }
   end
 
   def clean_data_sources

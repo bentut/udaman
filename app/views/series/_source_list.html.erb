@@ -7,7 +7,7 @@
   	<% eval = ds.eval.nil? ? " " : ds.eval.split(" ").join("&nbsp;") %>
   	<tr style="background-color:#<%= ds.color%>" >
   		<td><%= ds.last_run.localtime.strftime("%m/%d/%y") %>&nbsp;<span style="color:gray"><%= 		
-					ds.last_run.localtime.strftime("%H:%M:%S") %></span><br />
+					ds.last_run.localtime.strftime("%H:%M:%S") %></span>&nbsp;(<%= ds.priority %>)<br />
  					<%= 
 						link_to "load", {   	
 							:controller=> "data_sources", 
