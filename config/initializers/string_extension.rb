@@ -80,7 +80,7 @@ class String
     file = self
     #destination = "/" + self.split("/")[1..-2].join("/") + "/"
     destination = self + "_extracted_files/"
-    Zip::ZipFile.open(file) { |zip_file|
+    Zip::File.open(file) { |zip_file|
       zip_file.each { |f|
         f_path=File.join(destination, f.name)
         #puts f_path
