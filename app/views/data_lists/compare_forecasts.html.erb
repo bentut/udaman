@@ -1,29 +1,39 @@
 
-	<script type="text/javascript" src="/javascripts/d3.v2.js"></script>
-	<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
+<script type="text/javascript" src="/javascripts/d3.v3.min.js"></script>
+<script type="text/javascript" src="/javascripts/dat.gui.min.js"></script>
+<script type="text/javascript" src="/javascripts/queue.min.js"></script>
 
 <style>
-#readout table  {table-layout:fixed; width:250px}
+#readout table  {table-layout:fixed; width:300px}
 #readout table th,
 #readout table td {font-size: 11px; border: none;}
 #chart_div { position:absolute; left:150px; top:0px;}
-#series_selector { position:absolute; width:150px; font-size:10px; left:0px; top:0px}
+#series_selector { position:absolute; font-size:10px; left:0px; top:0px}
 #series_selector p  { padding:0; margin: 0;}
 #readout {position:absolute; top:0; left:250px;}
+#loading {position: absolute; text-align:center; top:150px; left:0; width:100%; font-weight:bold; font-size: 24px; color: black;}
+#readout table th#date_selected {font-size:16px;}
 </style>
 
-<h1 id="series_name"><%= @series_name %></h1>
+<div id="controls">
+	Old Forecast: <select id="old_forecast"><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
+	New Forecast: <select id="new_forecast"><option>heco14v1.TSD</option><option>heco14.TSD</option><option>13Q4.TSD</option><option>QSOL_Q_13Q1.TSD</option></select>
+</div>
+<svg id="time_horizon_buttons"></svg>
+<h1 id="series_name"></h1>
+<h2 id="series_description"></h2>
+<a id="udaman_link" target="_blank" href="">See Series in Udaman</a>
 
 
 
 <div style="position:relative;">
 <div id="readout">
-	<h3 id="date_selected">No Date Selected</h3>
+	
 	<table>
-		<tr><th></th>
+		<tr><th id="date_selected"></th>
 			<th>History<br/><svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="black" stroke-width=1.5 stroke-dasharray=3,3 /></svg></th>
-			<th>13Q4<svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
-			<th>HECO<svg height="10" width="40"><line x1=0 x2=40 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
+			<th><span id="th_old">Replace</span><svg height="10" width="60"><line x1=0 x2=60 y1=5 y2=5 stroke="#d84506" stroke-width=1.5 stroke-dasharray=6,6 /></svg></th>
+			<th><span id="th_new">Replace</span><svg height="10" width="60"><line x1=0 x2=60 y1=5 y2=5 stroke="#227893" stroke-width=1.5 /></svg></th>
 		</tr>
 		<tr><td>Level</td><td id="l_hist"></td><td id="l_f1"></td><td id="l_f2"></td></tr>
 		<tr><td>%CHG</td><td id="c_hist"></td><td id="c_f1"></td><td id="c_f2"></td></tr>
@@ -33,95 +43,16 @@
 
 <div id= "chart_div">
 	<svg id="chart"><line id="highlight" /></svg>
+	<div id="loading">LOADING...</div>
 </div>
 
 <div id="series_selector"></div>
 
 </div>
-<% dates = @series1.data.keys.sort %>
-<% data1 = @series1.data %>
-<% data2 = @series2.data %>
-<% data0 = @history_series.data %>
-<% chg1 = @chg1.data %>
-<% chg2 = @chg2.data %>
-<% chg0 = @history_chg.data %>
-
-<!-- <table>
-	<tr>
-		<th>Date</th>
-		<th>History</th>
-		<th>13Q4</th>
-		<th>HECO14</th>
-		<th>HECO14 %CHG</th>
-	</tr>
-	<% dates.reverse.each do |date_string|  %>  
-	<tr>	
-		<td><%=date_string %></td> 
-		<td><%= data0[date_string].nil? ? "" : "%.3f" % data0[date_string] %></td>
-		<td><%= data1[date_string].nil? ? "" : "%.3f" % data1[date_string] %></td>
-		<td><%= data2[date_string].nil? ? "" : "%.3f" % data2[date_string] %></td>		
-	</tr>
-	<%end%>
-</table>	  -->
 	
 		
-
-
-
-
-
-
 <script type="text/javascript">
-function to_db_date_string(date) {
-	y = date.getFullYear()
-	m = date.getMonth() + 1
-	m = (m <= 9) ? "0"+m : m+""
-	return y+"-"+m+"-01"
-}
 
-function nan_if_undef(val, field) {
-	if (val === undefined)
-		return NaN;
-	return val[field];
-}
-
-function data_object_for_series(name, history, old_forecast, new_forecast, headers) {
-	h = history[name].data;
-	of = old_forecast[name].data;
-	nf = new_forecast[name].data;
-	
-	return headers.map(function(date) {
-		date_string = to_db_date_string(date)
-		return {
-			"Date": date,
-			"History" : nan_if_undef(h[date_string], "value"),
-			"13Q4": nan_if_undef(of[date_string], "value"),
-			"HECO14": nan_if_undef(nf[date_string], "value"),
-			"History %CHG": nan_if_undef(h[date_string], "yoy"),
-			"13Q4 %CHG": nan_if_undef(of[date_string], "yoy"),
-			"HECO14 %CHG": nan_if_undef(nf[date_string], "yoy")
-		}
-	})
-	
-}
-//two minutes to load all of these
-var old_forecast = <%= @data_list.get_tsd_series_data_with_changes(@tsd_file1).to_json.html_safe %>;
-var new_forecast = <%= @data_list.get_tsd_series_data_with_changes(@tsd_file2).to_json.html_safe %>;
-var history = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>;
-
-data = [
-<% dates.reverse.each do |date_string|  %>  
-	{ "Date" : new Date("<%= date_string.gsub('-','/') %>"), 
-	"History" : <%= data0[date_string].nil? ? "NaN" : data0[date_string].round(3) %>,
-	"13Q4": <%= data1[date_string] %>,
-	"HECO14": <%= data2[date_string] %>,
-	"History %CHG": <%= chg0[date_string].nil? ? "NaN" : chg0[date_string].round(1) %>,
-	"13Q4 %CHG": <%= chg1[date_string].nil? ? "NaN" : chg1[date_string].round(1) %>,
-	"HECO14 %CHG": <%= chg2[date_string].nil? ? "NaN" : chg2[date_string].round(1) %>
-	
-	},
-<%end%>
-];
 
 var all_series = {}
 var gui = new dat.GUI();
@@ -145,7 +76,6 @@ var params = {
 	b_margin: 85,
 	l_margin: 50,
 	
-	// bar_width: 50,
 	tick_length: 7,
 	
 	x_axis_color: "gray",
@@ -162,9 +92,7 @@ var params = {
 	aremos_width:2,
 	udaman_width:2,
 	mult: 6,
-	// fill_opacity: 0.2,
-	// point_size :2.5,
-	//just to store for redraw
+
 	viz_data: [],
 };
 
@@ -197,9 +125,10 @@ function q(month) {
 	if (month===7) return "Q3"
 	if (month===10) return "Q4"
 }
-function date_label(date) {
+function date_label(date, frequency) {
 	//return date.toDateString();
 	// dp = date.split("/")
+	if (frequency === "A") return date.getFullYear()+"";
 	return (date.getFullYear()+"").slice(2,4) + q(date.getMonth()+1);
 }
 function to_date(date) {
@@ -210,38 +139,24 @@ function f(val, suffix) {
 	if (isNaN(val)) return ""
 	return Math.round(val*1000) / 1000 + suffix;
 }
-function draw() {
+function draw(frequency) {
 	var mult = params.mult;
 	
+	//var new_forecast = "HECO14"
+	//var old_forecast = "13Q4"
+	
 	//store things for next draw iteration
-	data = params.viz_data;
+	//data = params.viz_data;
+	data = params.viz_data.filter(function(elem) { return !isNaN(elem["new_forecast"]) });
 
-	var max_y_val = d3.max(data, function(row) {return d3.max([row["History"], row["13Q4"], row["HECO14"]]) });//row.upper > row.udaman && row.upper != null ? row.upper : row.udaman });// 30000; // replace with actual value from data
-	var min_y_val = d3.min(data, function(row) {var min = d3.min([n(row["History"]), n(row["13Q4"]), n(row["HECO14"])]); return min});//row.lower < row.udaman && row.lower != null ? row.lower : row.udaman });// 30000; // replace with actual value from data
+	var max_y_val = d3.max(data, function(row) {return d3.max([row["History"], row["old_forecast"], row["new_forecast"]]) });
+	var min_y_val = d3.min(data, function(row) {var min = d3.min([n(row["History"]), n(row["old_forecast"]), n(row["new_forecast"])]); return min});
 	
 	var headers = data.map(function(elem) { return elem.Date });
-	//var categories = headers.slice(1); 		//alert(categories.toSource());
-	// var first_year = d3.min(data, function(row) {return row[headers[0]]}); 
-	// var last_year = d3.max(data, function(row) {return row[headers[0]]});
-	// 
-	// console.log(headers)
-	// console.log(first_year)
-	// console.log(last_year)
+
 	var x = d3.time.scale().domain([headers[0], headers.slice(-1)[0]]).range([left_boundary(), right_boundary() ]);
 	var y = d3.scale.linear().domain([min_y_val, max_y_val]).range([bottom_boundary(), top_boundary() ]);
 
-    // update the legend colors
-    d3.select(
-	// var last_year = d3.max(data, function(row) {return row[headers[0]]});
-	// 
-	// console.log(headers)
-	// console.log(first_year)
-	// console.log(last_year)
-	var x = d3.time.scale().domain([headers[0], headers.slice(-1)[0]]).range([left_boundary(), right_boundary() ]);
-	var y = d3.scale.linear().domain([min_y_val, max_y_val]).range([bottom_boundary(), top_boundary() ]);
-
-    // update the legend colors
-    d3.select(
 	//preparing SVG Area
 	var svg = d3.select("svg#chart");
 	svg
@@ -255,13 +170,13 @@ function draw() {
 				.attr("x1", xpos)
 				.attr("x2", xpos)
 			d3.select("#l_hist").text(f(data[tick]["History"],""))
-			d3.select("#l_f1").text(f(data[tick]["13Q4"],""))
-			d3.select("#l_f2").text(f(data[tick]["HECO14"],""))
+			d3.select("#l_f1").text(f(data[tick]["old_forecast"],""))
+			d3.select("#l_f2").text(f(data[tick]["new_forecast"],""))
 			d3.select("#c_hist").text(f(data[tick]["History %CHG"],"%"))
-			d3.select("#c_f1").text(f(data[tick]["13Q4 %CHG"],"%"))
-			d3.select("#c_f2").text(f(data[tick]["HECO14 %CHG"],"%"))
+			d3.select("#c_f1").text(f(data[tick]["old_forecast %CHG"],"%"))
+			d3.select("#c_f2").text(f(data[tick]["new_forecast %CHG"],"%"))
 			
-			d3.select("#date_selected").text(date_label(data[tick]["Date"]))
+			d3.select("#date_selected").text(date_label(data[tick]["Date"], frequency))
 			
 		})
 		.data([data])
@@ -275,26 +190,27 @@ function draw() {
 		.attr("stroke-dasharray", "10,5")
 
 
-	var line = init_viz_element(svg, "path.current_forecast", function(d) { return [d]; })
+	//probably don't need these filters anymore... as long as starting point for all series is the same
+	init_viz_element(svg, "path.current_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem["old_forecast"]) })]; })
 	     .attr("d", d3.svg.line()
 	     	.x(function(d) { return x(d.Date); })
-	     	.y(function(d) { return d["HECO14"] === null ? y(min_y_val) : y(d["HECO14"]); })
+	     	.y(function(d) { return d["new_forecast"] === null ? y(min_y_val) : y(d["new_forecast"]); })
 	 	)
 		.attr("stroke", params.udaman_color)
 		.attr("stroke-width",params.udaman_width)
 		.attr("fill", "none");
 
-	var line = init_viz_element(svg, "path.old_forecast", function(d) { return [d]; })
+	init_viz_element(svg, "path.old_forecast", function(d) { return [d.filter(function(elem) { return !isNaN(elem["new_forecast"]) })]; })
 	     .attr("d", d3.svg.line()
 	     	.x(function(d) { return x(d.Date); })
-	     	.y(function(d) { return d["13Q4"] === null ? y(min_y_val) : y(d["13Q4"]); })
+	     	.y(function(d) { return d["old_forecast"] === null ? y(min_y_val) : y(d["old_forecast"]); })
 	 	)
 		.attr("stroke", params.aremos_color)
 		.attr("fill", "none")
 		.attr("stroke-dasharray", "6,6")
 		.attr("stroke-width", params.aremos_width);
 
-	var line = init_viz_element(svg, "path.history", function(d) { return [d.filter(function(elem) {return elem["History"] !== ""})]; })
+	init_viz_element(svg, "path.history", function(d) { return [d.filter(function(elem) {return !isNaN(elem["History"])})]; })
 	     .attr("d", d3.svg.line()
 	     	.x(function(d) { return x(d.Date); })
 	     	.y(function(d) { return y(d["History"]); })
@@ -316,21 +232,21 @@ function draw() {
 		.attr("x2", function(d) {return right_boundary()})
 		.attr("stroke", params.x_axis_color);
 
-	var xticks = init_viz_element(svg, "line.xtick", headers)
+	var xticks = init_viz_element(svg, "line.xtick", x.ticks())
 		.attr("y1", bottom_boundary())
 		.attr("y2", bottom_boundary() + params.tick_length )
 		.attr("x1", function(d) {return x(d)})
 		.attr("x2", function(d) {return x(d)})
 		.attr("stroke", params.x_axis_color);
 	
-	var xtick_labels = init_viz_element(svg, "text.xtick_label", headers)
+	var xtick_labels = init_viz_element(svg, "text.xtick_label", x.ticks())
 		.attr("x", function(d) { return x(d)})
 		.attr("y", bottom_boundary())
 		.attr("fill", params.x_axis_fontcolor)
 		.attr("font-size", params.x_axis_fontsize+"px")
 		.attr("transform", function(d) {return "rotate("+params.x_axis_font_rotation +" "+ (x(d)+params.tick_length*4).toString() + "," + bottom_boundary() + ")"; })
 		.attr("text-anchor", "end")
-		.text(function(d) {return date_label(d); });
+		.text(function(d) {return date_label(d, frequency); });
 
 	//------ x Axis End -------------------------------------------------------------------
 	
@@ -374,12 +290,76 @@ d3.entries(dat_gui_ranges).forEach(function(elem) {
 gui.addColor(params, 'udaman_color').onChange(draw);
 gui.addColor(params, 'aremos_color').onChange(draw);
 
-//add color or custom controls here
+// --------- dat gui section end ---------------------------------
 
-// d3.csv("forecast_data.csv", function(data) {
-// 	all_series = {"series1": data.slice(0).reverse(), "series2": data.slice(0)}
- 	params.viz_data = data.reverse();
-	draw();	
+function select_option(select_id, option_text) {
+	var dd = document.getElementById(select_id);
+	for (var i = 0; i < dd.options.length; i++) {
+	    if (dd.options[i].text === option_text) {
+	        dd.selectedIndex = i;
+	        break;
+	    }
+	}
+}
+
+function load_page_for_frequency(frequency) {
+	series_ids = series_ids_f[frequency]
+	var series = d3.select("#series_name").text()
+	if (series === "") series = d3.keys(series_ids)[0];
+	
+	series = series.split(".")[0]+"."+frequency
+	d3.select("#series_name").text(series)
+	d3.select("#series_description").text(series_descriptions[series.split(".")[0]])
+	d3.select("#udaman_link").attr("href", "/series/"+series_ids[series])
+	
+	d3.select("#new_forecast").selectAll("option").remove();
+	d3.select("#old_forecast").selectAll("option").remove();
+
+	d3.select("#new_forecast").selectAll("option")
+		.data(filter_and_sort_tsd(all_tsds, frequency))
+		.enter()
+		.append("option")
+		.attr("value", function(d) {return d})
+		.text(function(d) { return d.split("_")[0] });
+
+	d3.select("#old_forecast").selectAll("option")
+		.data(filter_and_sort_tsd(all_tsds, frequency))
+		.enter()
+		.append("option")
+		.attr("value", function(d) {return d})
+		.text(function(d) { return d.split("_")[0] });
+	
+	if (typeof(old_forecast_name) === 'undefined') {
+		old_forecast_name = d3.select("#old_forecast").node().value;
+		new_forecast_name = d3.select("#new_forecast").node().value;
+	}
+	else {
+		select_option("old_forecast", old_forecast_name.split("_")[0]);
+		select_option("new_forecast", new_forecast_name.split("_")[0]);
+		// d3.select("#old_forecast").node().value = old_forecast_name.split("_")[0];
+		// d3.select("#new_forecast").node().value = new_forecast_name.split("_")[0];
+		old_forecast_name = d3.select("#old_forecast").node().value;
+		new_forecast_name = d3.select("#new_forecast").node().value;
+		
+	}
+		
+		
+		
+	d3.select("#th_old").text(old_forecast_name.split("_")[0]);
+	d3.select("#th_new").text(new_forecast_name.split("_")[0]);
+	
+	
+	queue()
+		.defer(d3.json, "/series/show_forecast/"+ series_ids[series] +".json?tsd_file=" + new_forecast_name)
+		.defer(d3.json, "/series/show_forecast/"+ series_ids[series] +".json?tsd_file=" + old_forecast_name)
+		.defer(d3.json, "/series/json_with_change/"+ series_ids[series])
+		.awaitAll(function(error, results) {
+			all_dates = d3.keys(results[0].series.data).map(function(date_string) { return new Date(date_string.replace(/-/g,'/')) });
+			dates = get_dates(time_horizon, all_dates);
+			params.viz_data = graph_data(results, dates)
+			hide_loading_screen();
+			draw(frequency);
+		});
 
 
 	// bind load events to series list	 
