@@ -33,6 +33,24 @@ class DataHtmlParser
     frequency = self.data.keys[0] if frequency.nil?
     return self.data[frequency]
   end
+
+  # working Y@HI.A query
+  # http://www.bea.gov/api/data/?&UserID=66533E32-0B70-4EF6-B367-05662C3B7CA8&method=GetData&datasetname=RegionalData&KeyCode=TPI_SI&GeoFIPS=15000&ResultFormat=JSON&
+  # NIPA Test
+  # http://www.bea.gov/api/data/?&UserID=66533E32-0B70-4EF6-B367-05662C3B7CA8&method=GetData&datasetname=NIPA&TableID=6&Frequency=A&Year=X&GeoFIPS=15001&ResultFormat=JSON&
+  def get_bea_series(code, region)
+    api_key = "66533E32-0B70-4EF6-B367-05662C3B7CA8"
+    fips = {"HI" => "15000", "HON" => "15003", "HAW" => "15001", "MAU" => "15009", "KAU" => "15007", "US" => "00000", "CA" => "06000"}[region]
+    @url = "http://www.bea.gov/api/data/?&UserID=#{api_key}&method=GetData&datasetname=RegionalData&KeyCode=#{code}&GeoFIPS=#{fips}&ResultFormat=JSON&"
+    @doc = self.download
+    new_data = {}
+    bea_data = JSON.parse self.content
+    bea_data["BEAAPI"]["Results"]["Data"].each do |d| 
+      time_period = d["TimePeriod"]
+      new_data[ get_date(time_period[0..3], time_period[4..-1]) ] = d["DataValue"].to_f unless d["DataValue"].nil?
+    end
+    return new_data
+  end
   
   def doc
     return @doc
@@ -81,6 +99,11 @@ class DataHtmlParser
     return "#{year_string}-#{other_string[1..2]}-01" unless ["M01","M02","M03","M04","M05","M06","M07","M08","M09","M10","M11","M12"].index(other_string).nil?
     return "#{year_string}-01-01" if other_string == "S01"
     return "#{year_string}-07-01" if other_string == "S02"
+    return "#{year_string}-01-01" if other_string == "Q1"
+    return "#{year_string}-04-01" if other_string == "Q2"
+    return "#{year_string}-07-01" if other_string == "Q3"
+    return "#{year_string}-10-01" if other_string == "Q4"
+    return "#{year_string}-01-01" if other_string == ""
   end
   
   def download

@@ -490,6 +490,17 @@ class Series < ActiveRecord::Base
     new_transformation("loaded from download #{handle} with options:#{options}", series_data)
   end
   
+  def Series.load_from_bea(code, region, frequency)
+    series_data = DataHtmlParser.new.get_bea_series(code, region)
+    Series.new_transformation("loaded series code: #{code} for region #{region} from bea website", series_data, Series.frequency_from_code(frequency))
+  end
+  
+  def load_from_bea(code, region)
+    frequency = Series.frequency_from_code(self.name.split(".")[1])
+    series_data = DataHtmlParser.new.get_bea_series(code, region)
+    Series.new_transformation("loaded series code: #{code} for region #{region} from bea website", series_data, frequency)
+  end
+  
   def Series.load_from_bls(code, frequency)
     series_data = DataHtmlParser.new.get_bls_series(code,frequency)
     Series.new_transformation("loaded series code: #{code} from bls website", series_data, Series.frequency_from_code(frequency))

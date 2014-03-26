@@ -50,6 +50,14 @@ task :reload_all_series => :environment do
   DataLoadMailer.series_refresh_notification(circular, inactive_ds, eval_statements.count, errors).deliver  
 end
 
+task :reload_hiwi_series_only => :environment do
+  t = Time.now
+  #could also hard code this...
+  bls_series = Series.get_all_series_from_website("hiwi.org")
+  Series.run_all_dependencies(bls_series, {}, [], [])
+  CSV.open("public/rake_time.csv", "a") {|csv| csv << ["hiwi series dependency check and load", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
+end
+
 task :reload_bls_series_only => :environment do
   t = Time.now
   #could also hard code this...
