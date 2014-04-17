@@ -21,7 +21,7 @@ class PrognozDataFile < ActiveRecord::Base
       filenames.push pdf.filename
     end
     
-    Zip::ZipFile.open(folder + "ready_to_send_zip_files/" + send_edition + ".zip", Zip::ZipFile::CREATE) do |zipfile|
+    Zip::File.open(folder + "ready_to_send_zip_files/" + send_edition + ".zip", Zip::File::CREATE) do |zipfile|
       filenames.each {|fname| zipfile.add(fname.split("/")[-1], fname)}
     end
     

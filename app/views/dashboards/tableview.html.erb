@@ -19,8 +19,9 @@ span.lighten {color:#AAA;}
 	all_series_ytd = []	
 	
 	@series_to_chart.each do |s|
+		puts s
 		series = s.ts
-		next if series.nil?
+		next if series.nil? or series.data.length == 0
 		plot_data = series.get_values_after(@start_date)
 		ytd = series.ytd_percentage_change.get_values_after(@start_date).sort[-1][1]
  		dates = plot_data.keys.sort
@@ -52,7 +53,7 @@ span.lighten {color:#AAA;}
 	</tr>
 <% @series_to_chart.each do |s| %>
 	<%
-		next if s.ts.nil?
+		next if s.ts.nil? or s.ts.data.length == 0
 		#highest_level = summary_series.ts.data[date_keys[-1]]
 		max_ytd = all_series_ytd.sort[-1]
 		min_ytd = all_series_ytd.sort[0]

@@ -393,13 +393,13 @@ class Series < ActiveRecord::Base
   
   def load_from(update_spreadsheet_path, sheet_to_load = nil)
     update_spreadsheet = UpdateSpreadsheet.new_xls_or_csv(update_spreadsheet_path)
-    #raise SeriesReloadException if update_spreadsheet.load_error?
-    return self if update_spreadsheet.load_error?
+    raise SeriesReloadException if update_spreadsheet.load_error?
+    #return self if update_spreadsheet.load_error?
 
     default_sheet = update_spreadsheet.sheets.first unless update_spreadsheet.class == UpdateCSV
     update_spreadsheet.default_sheet = sheet_to_load.nil? ? default_sheet : sheet_to_load unless update_spreadsheet.class == UpdateCSV
-    #raise SeriesReloadException unless update_spreadsheet.update_formatted?
-    return self unless update_spreadsheet.update_formatted?
+    raise SeriesReloadException unless update_spreadsheet.update_formatted?
+    #return self unless update_spreadsheet.update_formatted?
     
     self.frequency = update_spreadsheet.frequency
     new_transformation(update_spreadsheet_path, update_spreadsheet.series(self.name))
