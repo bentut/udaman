@@ -23,12 +23,13 @@ class DataListsController < ApplicationController
   end
   
   def super_table
+    @freq = params[:freq]
     @data_list = DataList.find(params[:id])
-    @series_to_chart = @data_list.series_names
-    frequency = @series_to_chart[0][-1]
-    dates = set_dates(frequency, params)
-    @start_date = dates[:start_date]
-    @end_date = dates[:end_date]
+    # @series_to_chart = @data_list.series_names
+    # frequency = @series_to_chart[0][-1]
+    # dates = set_dates(frequency, params)
+    # @start_date = dates[:start_date]
+    # @end_date = dates[:end_date]
     render "super_table"
   end
   

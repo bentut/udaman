@@ -50,9 +50,8 @@ class SeriesController < ApplicationController
     @series = Series.find params[:id]
   end
   
-  def update
+  def update    
     @series = Series.find(params[:id])
-
     respond_to do |format|
       if @series.update_attributes(params[:series])
         format.html { redirect_to(@series,
@@ -75,6 +74,13 @@ class SeriesController < ApplicationController
   
   def search
     @search_results = AremosSeries.web_search(params[:search])
+  end
+  
+  def autocomplete_search
+    puts params
+    #render :json => {"hi" => params[:term]}
+    render :json => (Series.web_search(params[:term]).map {|s| {:label => (s[:name] + ":" + s[:description]), :value => s[:series_id] } }) 
+    #render :json => Series.web_search(params[:term]).map {|s| s[:name] }
   end
   
   def comparison_graph

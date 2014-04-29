@@ -865,4 +865,32 @@ class Series < ActiveRecord::Base
     name_buckets
   end
   
+  
+  def Series.web_search(search_string, num_results = 10)
+    regex = /"([^"]*)"/
+    search_parts = (search_string.scan(regex).map {|s| s[0] }) + search_string.gsub(regex, "").split(" ")
+    name_where = (search_parts.map {|s| "name LIKE '%#{s}%'"}).join (" AND ")
+    name_results = Series.where(name_where).limit(num_results)
+    
+    desc_where = (search_parts.map {|s| "description LIKE '%#{s}%'"}).join (" AND ")
+    desc_results = AremosSeries.where(desc_where).limit(num_results)
+    
+    results = []
+  
+    name_results.each do |s| 
+      as = AremosSeries.get(s.name)
+      results.push({ :name => s.name, :series_id => s.id, :description => as.nil? ? "no aremos series" : as.description})
+      #puts "#{s.id} : #{s.name} - #{as.nil? ? "no aremos series" : as.description}"
+    end
+    
+    desc_results.each do |as|
+      s = as.name.ts
+      results.push({:name => as.name, :series_id => s.nil? ? "no series" : s.id, :description => as.description})
+      #puts "#{s.nil? ? "no series" : s.id}  : #{as.name} - #{as.description}"
+    end
+    
+    results
+    
+  end
+  
 end

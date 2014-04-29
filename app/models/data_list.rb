@@ -57,9 +57,10 @@ class DataList < ActiveRecord::Base
     series_data
   end
   
-  def get_all_series_data_with_changes
+  def get_all_series_data_with_changes(frequency_suffix = nil)
     series_data = {}
     series_names.each do |s| 
+      s = s.split(".")[0] + "." + frequency_suffix unless frequency_suffix.nil?
       series = s.ts
       if series.nil?
         series_data[s] = {}

@@ -33,6 +33,7 @@ class DataSourcesController < ApplicationController
     #params.each { |key,value| puts "#{key}: #{value}" }
     
     @data_source = DataSource.find(params[:id])
+    @data_source.update_attributes(:priority => params[:data_source][:priority].to_i)
      if @data_source.update_attributes(:eval => params[:data_source][:eval])
         @data_source.reload_source
         redirect_to :controller => "series", :action => 'show', :id => @data_source.series_id, :notice => "datasource processed successfully"

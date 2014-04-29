@@ -128,6 +128,7 @@ UheroDb::Application.routes.draw do
   match 'listseries/re' =>'listseries#redir'
   match 'listseries/:name' => 'listseries#get'
   
+  match 'autocomplete' => 'series#autocomplete_search'
   
   #match 'path' => 'controller#method'
   # The priority is based upon order of creation:

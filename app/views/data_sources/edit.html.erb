@@ -8,6 +8,8 @@
 			<%= ds.label :eval %>
 			<!-- could also try to add this with javascript -->
 			<%= ds.text_field :eval, :size => 120 %>
+			<%= ds.label :priority %>
+			<%= ds.number_field :priority, :size => 3 %>
 		</div>
 		<div class="actions">
 			<%= ds.submit %>

@@ -32,8 +32,11 @@
 	table#data_table th {width:75px}
 	
 	table#data_table th.calc {line-height:13px;}
-	
+	div#frequency_selector {padding-bottom:5px;}
 </style>
+<div id="frequency_selector">
+	Try a Different Frequency: <%= link_to "A", { :freq => "A" } %> | <%= link_to "Q", { :freq => "Q" } %> | <%= link_to "M", { :freq => "M" } %> | <%= link_to "Edit this List", :action => "edit"%>
+</div>
 <div id="spark_adjuster">
 	<div id="spark_slider" class="slider"></div>
 	<div class="slider_label">Sparkline Date Range</div>
@@ -119,7 +122,7 @@
 		return parsed_float;
 	}
 	
-	var all_data = <%= @data_list.get_all_series_data_with_changes.to_json.html_safe %>
+	var all_data = <%= @freq.nil? ? @data_list.get_all_series_data_with_changes.to_json.html_safe : @data_list.get_all_series_data_with_changes(@freq).to_json.html_safe %>
 	
 	var frequency = freq(d3.keys(all_data)[0]);
 	var all_dates = {}
