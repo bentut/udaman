@@ -16,7 +16,7 @@ class PackagerMailer < ActionMailer::Base
     @dates = Series.get_all_dates_from_data(@series)
     subject = "UDAMAN Error (#{rake_task})" if is_error
     subject = "UDAMAN New Download (#{rake_task})" unless is_error
-    mail(:to => ["btrevino@hawaii.edu"], :subject => subject)
+    mail(:to => ["btrevino@hawaii.edu","jonpage.econ@gmail.com"], :subject => subject)
   end
   
   def rake_error(e, output_path)
@@ -29,7 +29,7 @@ class PackagerMailer < ActionMailer::Base
     attachments.inline['photo.png'] = File.read('/Users/Shared/Dev/udaman/script/investigate_visual.png')
     attachments['photo.png'] = File.read('/Users/Shared/Dev/udaman/script/investigate_visual.png')
     subject = "Udaman Download Report: #{new_dps.to_s + " new data points / " unless new_dps == 0} #{new_downloads.to_s + " updated downloads / " unless new_downloads == 0} #{changed_files.to_s + " modified update spreadsheets" unless changed_files == 0}"
-    mail(:to => ["btrevino@hawaii.edu", "james29@hawaii.edu", "icintina@gmail.com", "fuleky@hawaii.edu"], :subject => subject)
+    mail(:to => ["btrevino@hawaii.edu", "james29@hawaii.edu", "fuleky@hawaii.edu", "jonpage.econ@gmail.com"], :subject => subject)
     #mail(:to => ["bentut@gmail.com"], :subject => subject)
   end
   
@@ -47,7 +47,7 @@ class PackagerMailer < ActionMailer::Base
     subject = "Udaman tried but failed to post new data for #{post_name} to the UHERO website" unless created
     @post_address = post_address
     @new_data_series = new_data_series
-    mail(:to => ["btrevino@hawaii.edu","james29@hawaii.edu", "icintina@gmail.com"], :subject => subject) #{})
+    mail(:to => ["btrevino@hawaii.edu","james29@hawaii.edu", "jonpage.econ@gmail.com"], :subject => subject) #{})
   end
   
   def prognoz_notification(recipients, send_edition)

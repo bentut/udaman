@@ -166,9 +166,9 @@
 	header.append("th").text("").attr("class", "spark_col");
 	header.append("th").html(head_html("Last Obs","date", "YTD %chg")).attr("class", "calc sel_col");
 	header.append("th").html(head_html("Min Obs","date", "Last - Min")).attr("class", "calc min_col");
-	header.append("th").html(head_html("Max Obs","date", "Max - Last")).attr("class", "calc max_col");
+	header.append("th").html(head_html("Max Obs","date", "Last - Max")).attr("class", "calc max_col");
 	header.append("th").html(head_html("%chg fr first","%chg fr min", "%chg fr max")).attr("class", "calc chg_col");
-	header.append("th").html(head_html("Max - Min","Last-Min/Max-Min", "Max-Last/Max-Min")).attr("class", "calc range_col");
+	header.append("th").html(head_html("Max - Min","Last-Min/Max-Min", "Last-Max/Max-Min")).attr("class", "calc range_col");
 		
 	header
 		.selectAll("th.date_col")
@@ -240,40 +240,40 @@
 
 		var data = d3.entries(d.value.data).filter(function(elem) {
 			return (elem.value.value != null) && (elem.key >= start_date && elem.key <= end_date); 
-		});
-		
+		}).sort(function(a,b) { return d3.ascending(a.key, b.key)});
+
 		if (data.length === 0) //for undefined series
 			return [{col_name:"sel",   value:"", yoy:"", yoy_diff:""},
 					{col_name:"min",   value:"", yoy:"", yoy_diff:""},
 					{col_name:"max",   value:"", yoy:"", yoy_diff:""},
 					{col_name:"chg",   value:"", yoy:"", yoy_diff:""},
 					{col_name:"range", value:"", yoy:"", yoy_diff:""}];
-					
+
 		var sp = data[data.length-1]; //selected_point = last point for now
 		var sp_val = sp.value.value; 
 
 		var fp = data[0]; //first point
 		var fp_val = fp.value.value
-		
+
 		var sorted_data = data.sort(function(a,b) {
 			return d3.ascending(a.value.value, b.value.value);
 		});
-		
+
 		var min_elem = sorted_data[0];
 		var min = min_elem.value.value;
 		var min_date = min_elem.key;
 		var min_diff = sp_val - min;
-		
+
 		var max_elem = sorted_data[sorted_data.length-1];
 		var max = max_elem.value.value;
 		var max_date = max_elem.key;
-		var max_diff = max-sp_val;
-		
+		var max_diff = sp_val-max;
+
 		return [{col_name:"sel", value:f(sp_val), yoy:date_h(sp.key,frequency), yoy_diff:perc(sp.value.ytd)},
 				{col_name:"min", value:f(min), yoy:date_h(min_date,frequency), yoy_diff:f(min_diff)},
 				{col_name:"max", value:f(max), yoy:date_h(max_date,frequency), yoy_diff:f(max_diff)},
-				{col_name:"chg", value:perc((sp_val-fp_val)/fp_val*100), yoy:perc((sp_val-min)/min*100), yoy_diff:perc((max-sp_val)/max*100)},
-				{col_name:"range", value:f(max-min), yoy:perc((sp_val-min)/(max-min)*100), yoy_diff:perc((max-sp_val)/(max-min)*100)}];
+				{col_name:"chg", value:perc((sp_val-fp_val)/fp_val*100), yoy:perc((sp_val-min)/min*100), yoy_diff:perc((sp_val-max)/max*100)},
+				{col_name:"range", value:f(max-min), yoy:perc((sp_val-min)/(max-min)*100), yoy_diff:perc((sp_val-max)/(max-min)*100)}];
 	}
 	
 	function calc_html(d) {
