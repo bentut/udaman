@@ -362,6 +362,16 @@ class Series < ActiveRecord::Base
     data_hash
   end
   
+  def scaled_data(round_to = 3)
+    data_hash = {}
+    self.units ||= 1
+    self.units = 1000 if name[0..2] == "TGB" #hack for the tax scaling. Should not save units
+    data_points.each do |dp|
+      data_hash[dp.date_string] = (dp.value / self.units).round(round_to) if dp.current
+    end
+    data_hash
+  end
+  
   def Series.new_from_data(frequency, data)
     Series.new_transformation("One off data", data, frequency)
   end

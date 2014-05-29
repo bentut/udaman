@@ -36,6 +36,35 @@ task :add_2014_seasonal_adjustment_method_change do
   end
 end
 
+task :add_construction_series => :environment do
+  "DOMSGFNS@HON.M".ts_eval= %Q|"DOMSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  "DOMCONNS@HON.M".ts_eval= %Q|"DOMCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  "MINVSGFNS@HON.M".ts_eval= %Q|"MINVSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  "MINVCONNS@HON.M".ts_eval= %Q|"MINVCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  "NLSGFNS@HON.M".ts_eval= %Q|"NLSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  "NLCONNS@HON.M".ts_eval= %Q|"NLCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  
+  
+  # "INVSGFNS@HON.M".ts_eval= %Q|"INVSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  # "INVCONNS@HON.M".ts_eval= %Q|"INVCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
+  
+  "DOMCONNS@MAU.M".ts_eval= %Q|"DOMCONNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/mbr_upd_m.csv"|
+  "DOMSGFNS@MAU.M".ts_eval= %Q|"DOMSGFNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/mbr_upd_m.csv"|
+  
+  "KBSGFNS@HAW.M".ts_eval= %Q|"KBSGFNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "KBCONNS@HAW.M".ts_eval= %Q|"KBCONNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "PMKBSGFNS@HAW.M".ts_eval= %Q|"PMKBSGFNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "PMKBCONNS@HAW.M".ts_eval= %Q|"PMKBCONNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "KBSGFNS@KAU.M".ts_eval= %Q|"KBSGFNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "KBCONNS@KAU.M".ts_eval= %Q|"KBCONNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "PMKBSGFNS@KAU.M".ts_eval= %Q|"PMKBSGFNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  "PMKBCONNS@KAU.M".ts_eval= %Q|"PMKBCONNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hiinfo_upd_m.csv"|
+  
+  "KPGOVNS@HON.M".ts_eval= %Q|("KPGOVNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/BIA_M.xls")/1000|
+  "KPGVONNS@HAW.M".ts_eval= %Q|("KPGVONNS@HAW.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/BIA_M.xls")/1000|
+  "KPGOVNS@MAU.M".ts_eval= %Q|("KPGOVNS@MAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/BIA_M.xls")/1000|
+  "KPGOVNS@KAU.M".ts_eval= %Q|("KPGOVNS@KAU.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/BIA_M.xls")/1000|
+end
 
 task :fix_VS_history_series => :environment do
   "VSNS@HI.M".ts_eval=%Q|("VSNS@HI.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/seats_0711.csv")/1000|

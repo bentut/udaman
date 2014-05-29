@@ -44,8 +44,8 @@ task :update_bea_links => :environment do
       b.goto url
       sleep(10)
       b.link(:id => "showDownload").click
-      sleep(1)
-      new_url = b.link(:text => "Download CSV File").href
+      sleep(2)
+      new_url = b.link(:text => "CSV Download your table in CSV format.").href
       dsd = DataSourceDownload.get(handle)
       puts new_url
       puts dsd.url

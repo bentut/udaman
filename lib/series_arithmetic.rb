@@ -235,6 +235,17 @@ module SeriesArithmetic
     annual_diff
   end
   
+  def scaled_yoy_diff
+    new_series_data = {}
+    last = {}
+    scaled_data.sort.each do |date_string, value|
+      month = Date.parse(date_string).month
+      new_series_data[date_string] = (value-last[month]) unless last[month].nil?
+      last[Date.parse(date_string).month] = value
+    end
+    new_transformation("Scaled year over year diff of #{name}", new_series_data)
+  end
+  
   def annual_diff
     new_series_data = {}
     last = {}

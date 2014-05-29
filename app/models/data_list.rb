@@ -68,8 +68,8 @@ class DataList < ActiveRecord::Base
         all_changes = {}
         yoy = series.yoy.data
         ytd = series.ytd.data
-        yoy_diff = series.yoy_diff.data
-        data = series.data
+        yoy_diff = series.scaled_yoy_diff.data
+        data = series.scaled_data
         data.keys.sort.each do |date|
           all_changes[date] = {:value => data[date], :yoy => yoy[date], :ytd => ytd[date], :yoy_diff => yoy_diff[date]}
         end
