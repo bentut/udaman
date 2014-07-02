@@ -133,6 +133,10 @@ class DataSource < ActiveRecord::Base
       return 0
     end
 
+    def current_data_points
+      self.data_points.where(:current => true).order(:date_string).all
+    end
+    
     def create_from_form
       Series.eval Series.find(self.series_id).name, self.eval
       return true

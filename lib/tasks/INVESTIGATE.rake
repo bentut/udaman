@@ -1,4 +1,14 @@
 
+task :gen_system_summary => :environment do
+  CSV.open("public/system_summary.csv", "wb") do |csv|        
+    csv << ["series_name", "ds_id", "ds_eval", "current_data_points", "dependencies_count", "aremos_diffs", "last_run"]
+    DataSource.order('series_id desc').all.each do |ds| 
+      puts ds.series.name.rjust(20, " ") + ds.id.to_s.rjust(6," ") + ds.series.current_data_points.count.to_s.rjust(5," ") + ds.dependencies.count.to_s.rjust(3, " ") + ds.series.aremos_diff.to_s.rjust(5, " ") + ds.last_run.to_s.rjust(40," ")      
+      csv << [ ds.series.name, ds.id, ds.eval, ds.series.current_data_points.count, ds.dependencies.count, ds.series.aremos_diff, ds.last_run ]
+    end
+  end
+end
+
 task :update_diffs => :environment do
   to_investigate = Series.where("aremos_missing > 0 OR ABS(aremos_diff) > 0.0").order('frequency, name ASC')
   to_investigate.each {|s| s.aremos_comparison}
