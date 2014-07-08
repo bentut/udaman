@@ -56,6 +56,9 @@ class DashboardsController < ApplicationController
     @diff_data = []
     @to_investigate = Series.where("aremos_missing > 0 OR ABS(aremos_diff) > 0.0").order('name ASC')
   end
+
+  def udamacmini_comparison
+  end
   
   def rake_report
   end

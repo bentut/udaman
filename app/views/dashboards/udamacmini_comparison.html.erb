@@ -1,0 +1,200 @@
+
+<script type="text/javascript" src="/javascripts/d3.v3.min.js"></script>
+
+<script type="text/javascript">
+	var local_data, remote_data;
+	var comp_data = {}
+	
+	function defs_from_1_not_in_2(data1, data2) {
+		d2 = data2.map(function(d) { return d.ds_eval })
+		return data1.filter(function(d) { return d2.indexOf(d.ds_eval) === -1})
+	}
+	
+	function treemap_from_structure(structured_data) {
+		var children_data = d3.entries(structured_data).map(function(first_letter) { 
+			return {
+				series_name: first_letter.key, 
+				children: d3.entries(first_letter.value).map(function(series_name) {
+					return {
+						series_name: series_name.key,
+						children: series_name.value
+					}
+				})
+			}
+			// var children_array = d.value.map(function(child) { 
+			// 	return  { 
+			// 		node_name: child.series_name
+			// 		size: child.current_data_points
+			// 	}
+			// })
+			// return {
+			// 	node_name: d.key
+			// 	children: children_array
+			// } 
+		})
+		return { series_name: "root", children: children_data }
+	}
+	function structure(summary_data) {
+		return d3.nest()
+			.key(function(d) {return d.series_name[0]})
+			.rollup(function(leaves) { return d3.nest()
+				.key(function(d) { return d.series_name})
+				.map(leaves)})
+			.map(summary_data)
+	}
+	
+	function position() {
+	  this.style("left", function(d) { return d.x + "px"; })
+	      .style("top", function(d) { return d.y + "px"; })
+	      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+	      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+	}
+	
+	function compare() {
+		comp_data["udaman"] = { 
+			data: local_data,
+			structured: structure(local_data),
+			data_points: d3.sum(local_data, function(e) { return e.current_data_points }),
+			missing_defs: defs_from_1_not_in_2(remote_data, local_data),
+		}
+		comp_data["udamacmini"] = { 
+			data: remote_data,
+			structured: structure(remote_data),
+			data_points: d3.sum(remote_data, function(e) { return e.current_data_points }),
+			missing_defs: defs_from_1_not_in_2(local_data, remote_data),
+		}
+		
+				
+		var systems = d3.selectAll(".system_summary")
+			.data(d3.entries(comp_data))
+		
+		var definition_count = systems.append("p")
+			.text(function(d) { return "Data Definitions: " + d.value.data.length})
+
+		var datapoint_count = systems.append("p")
+			.text(function(d) { return "Current Data Points: " + d.value.data_points })
+			
+
+		var definition_diffs = systems.append("p")
+			.text(function(d) { return "Missing Definitions (defs in the other system, but not in this system): " + d.value.missing_defs.length })
+		
+		var definition_detail = systems.append("ul").attr("class", "missing_defs")
+
+		definition_diffs.append("a")
+			.attr("href", "javascript:;")
+			.text("(show)")
+			.on("click", function(d) { 
+				console.log(d.value.missing_def)
+				d3.select(this).text("")
+				d3.select("#"+d.key+ " .missing_defs")
+					.selectAll("li")
+					.data(d.value.missing_defs)
+					.enter()
+					.append("li")
+					.text(function(d) { return d.ds_id + " : " + d.series_name + " : " + d.ds_eval})
+			})
+
+		var readout = systems.append("p").attr("class", "readout").text("No series selected")
+
+		var width = 590
+		var color = d3.scale.category20c();
+				
+		var tree_d = treemap_from_structure(comp_data["udaman"].structured)		
+		var total_data_points = comp_data["udaman"].data_points
+		var height = total_data_points / width
+		
+		var treemap = d3.layout.treemap()
+		    .size([width, height])
+		    .sticky(true)
+		    .value(function(d) { return d.current_data_points; });
+		
+		var div = d3.select("#udaman .system_summary").append("div")
+		    .style("position", "relative")
+		    .style("width", (width) + "px")
+		    .style("height", (height) + "px")
+		    .style("left", 0 + "px")
+		    .style("top", 0+ "px");
+		
+		var node = div.datum(tree_d).selectAll(".node")
+			.data(treemap.nodes)
+			.enter().append("div")
+			.attr("class", "node")
+			.call(position)
+			.style("background", function(d) { return d.children ? color(d.series_name[0]) : null; })
+			.text(function(d) { return d.series_name.length > 1 ? null : d.series_name ; })
+			.on("mouseover", function(d) { d3.select("#udaman .readout").text(d.series_name) });
+		
+		var tree_d = treemap_from_structure(comp_data["udamacmini"].structured)		
+		var total_data_points = comp_data["udamacmini"].data_points
+		var height = total_data_points / width
+		
+		var treemap = d3.layout.treemap()
+		    .size([width, height])
+		    .sticky(true)
+		    .value(function(d) { return d.current_data_points; });
+		
+		var div = d3.select("#udamacmini .system_summary").append("div")
+		    .style("position", "relative")
+		    .style("width", (width) + "px")
+		    .style("height", (height) + "px")
+		    .style("left", 0 + "px")
+		    .style("top", 0+ "px");
+		
+		var node = div.datum(tree_d).selectAll(".node")
+			.data(treemap.nodes)
+			.enter().append("div")
+			.attr("class", "node")
+			.call(position)
+			.style("background", function(d) { return d.children ? color(d.series_name[0]) : null; })
+			.text(function(d) { return d.series_name.length > 1 ? null : d.series_name ; })
+			.on("mouseover", function(d) { d3.select("#udamacmini .readout").text(d.series_name) });
+
+
+	}
+	
+	d3.csv("system_summary.csv", function(data) {
+		local_data = data
+		d3.csv("udamacmini_system_summary.csv", function(data2) {
+			remote_data = data2
+			compare();
+		})
+	})
+</script>
+
+<style>
+	h2 {font-weight:normal;}
+	body {width:1200px;}
+	table td {border:none}
+	#udaman, #udamacmini {width:600px;}
+	
+	.node {
+	  border: solid 1px white;
+	  font: 10px sans-serif;
+	  line-height: 12px;
+	  overflow: hidden;
+	  position: absolute;
+	  text-indent: 2px;
+	}
+	
+	ul.missing_defs { font-size:8px;}
+	
+</style>
+
+<div style="clear:all;">
+</div>
+
+<table>
+	<tr>
+		<td id="udaman">
+			<div class="system_summary">
+				<h2>Udaman</h2>
+			</div>
+		</td>
+		<td id="udamacmini">
+			<div class="system_summary">
+				<h2>Udamac Mini</h2>
+			</div>
+		</td>
+	</tr>
+</table>
+

@@ -70,6 +70,7 @@ UheroDb::Application.routes.draw do
   match 'investigate' => 'dashboards#investigate'
   match 'investigate_visual' => 'dashboards#investigate_visual'
   match 'investigate_no_source' => 'dashboards#investigate_no_source'
+  match 'udamacmini_comparison' => 'dashboards#udamacmini_comparison'
   match 'rake_report' => 'dashboards#rake_report'
   match 'construction' => 'dashboards#construction'
   match 'construction/years/:num_years' => 'dashboards#construction'
