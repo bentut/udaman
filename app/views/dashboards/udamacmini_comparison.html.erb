@@ -7,7 +7,7 @@
 	
 	function defs_from_1_not_in_2(data1, data2) {
 		d2 = data2.map(function(d) { return d.ds_eval })
-		return data1.filter(function(d) { return d2.indexOf(d.ds_eval) === -1})
+		return data1.filter(function(d) { return d2.indexOf(d.ds_eval) === -1}).filter(function(d) { return !d.ds_eval.contains("/data/rawdata/") })
 	}
 	
 	function treemap_from_structure(structured_data) {

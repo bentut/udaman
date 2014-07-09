@@ -38,6 +38,21 @@ class DataSourceDownload < ActiveRecord::Base
     #but this script doesn't appear to need it
     #client.ssl_config.set_trust_ca('ca.secure.webapp.domain.com.crt')
 
+
+    def DataSourceDownload.upd(options)
+      dsd = DataSourceDownload.where(:handle => options["handle"]).first
+      if dsd.nil?
+        DataSourceDownload.create(options)
+      else
+        handle = options.delete("handle")
+        dsd.update_attributes(options)
+      end
+    end
+    
+    def update_statement
+      return "DataSourceDownload.upd(#{self.attributes.select {|key, value| !value.is_a? Time}})"
+    end
+    
     def save_path_flex
       return save_path unless ENV["JON"] == "true"
       return save_path.gsub("UHEROwork", "UHEROwork-1")
