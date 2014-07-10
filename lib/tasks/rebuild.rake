@@ -7,8 +7,9 @@ task :rebuild => :environment do
       end
     end
     
+    errors = []
+    
     File.open('lib/tasks/REBUILD.rb', 'r') do |file|
-      errors = []
       while line = file.gets
         begin
           eval(line)

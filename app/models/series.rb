@@ -220,8 +220,10 @@ class Series < ActiveRecord::Base
   end
   
   def Series.get_or_new(series_name)
+    frequency = (series_name.split(".").count == 2 and series_name.split("@") == 2 and series_name.split(".")[1].length == 1) ? Series.frequency_from_code(name[-1]) : nil
+
     series_to_store = Series.get series_name
-    series_to_store = Series.create(:name => series_name) if series_to_store.nil?
+    series_to_store = Series.create(:name => series_name, :frequency => frequency) if series_to_store.nil?
     return series_to_store
   end
 
@@ -386,7 +388,7 @@ class Series < ActiveRecord::Base
   
   def new_transformation(name, data)
     frequency = (self.frequency.nil? and name.split(".").count == 2 and name.split("@") == 2 and name.split(".")[1].length == 1) ? Series.frequency_from_code(name[-1]) : self.frequency
-    #puts "NEW TRANFORMATION: #{name} - frequency: #{frequency}"  
+    #puts "NEW TRANFORMATION: #{name} - frequency: #{frequency} | frequency.nil? : #{self.frequency.nil?} | .split 2 :#{name.split('.').count == 2} | @split 2 : #{name.split('@') == 2} |"# postfix1 : #{name.split('.')[1].length == 1}"  
     Series.new(
       :name => name,
       :frequency => frequency,
