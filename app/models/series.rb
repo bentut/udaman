@@ -220,8 +220,7 @@ class Series < ActiveRecord::Base
   end
   
   def Series.get_or_new(series_name)
-    frequency = (series_name.split(".").count == 2 and series_name.split("@") == 2 and series_name.split(".")[1].length == 1) ? Series.frequency_from_code(name[-1]) : nil
-
+    frequency = (series_name.split(".").count == 2 and series_name.split("@").count == 2 and series_name.split(".")[1].length == 1) ? Series.frequency_from_code(series_name[-1]) : nil
     series_to_store = Series.get series_name
     series_to_store = Series.create(:name => series_name, :frequency => frequency) if series_to_store.nil?
     return series_to_store
