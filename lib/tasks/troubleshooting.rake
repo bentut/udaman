@@ -36,6 +36,19 @@ task :add_2014_seasonal_adjustment_method_change do
   end
 end
 
+task :bea_2014_extra_data_cleanout => :environment do
+  DataPoint.maximum(:date_string, :group => :data_source_id).each do |dsd_id, date_string|
+    if !date_string.nil? and date_string > "2013-01-01"
+      ds = DataSource.find(dsd_id)
+      s = ds.series
+      if s.frequency == "year" and s.name[0].upcase == "Y"
+        puts s.name + " : " + ds.eval
+        ds.clear_and_reload_source
+      end
+    end
+  end
+end
+
 task :add_construction_series => :environment do
   "DOMSGFNS@HON.M".ts_eval= %Q|"DOMSGFNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|
   "DOMCONNS@HON.M".ts_eval= %Q|"DOMCONNS@HON.M".tsn.load_from "/Volumes/UHEROwork/data/rawdata/manual/hbr_detail_m.csv"|

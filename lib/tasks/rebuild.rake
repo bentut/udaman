@@ -7,7 +7,9 @@ task :rebuild => :environment do
       end
     end
     
+    error_rounds = []
     errors = []
+    last_errors = []
     
     File.open('lib/tasks/REBUILD.rb', 'r') do |file|
       while line = file.gets
@@ -16,13 +18,31 @@ task :rebuild => :environment do
           print "."
         rescue Exception => exc
           puts line
-          puts exc.message
           errors.push [line,exc.message]
         end
       end
     end
     
-    CSV.open("public/rebuild_errors", "wb") {|file| errors.each {|e| file << e} }
+    while last_errors.count == errors.count
+      error_rounds.push(errors)
+      last_errors = errors
+      errors = []
+        
+      last_errors.each do |error|
+        begin
+          eval(error[0])
+        rescue Exception => exc
+          puts error[0]
+          errors.push [error[0], exc.message]
+        end
+      end
+      
+    end
+    
+    error_rounds.each_index do |i|
+      error = error_rounds[i]
+      CSV.open("public/rebuild_errors_#{i}.csv", "wb") {|file| error.each {|e| file << e} }
+    end
     
 end
 

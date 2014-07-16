@@ -154,6 +154,7 @@ task :mark_pseudo_history => :environment do
   DataSource.where("eval LIKE '%bls_histextend_date_format_correct.xls%'").each {|ds| ds.mark_as_pseudo_history}
   DataSource.where("eval LIKE '%inc_hist.xls%'").each {|ds| ds.mark_as_pseudo_history}
   DataSource.where("eval LIKE '%bls_sa_history.xls%'").each {|ds| ds.mark_as_pseudo_history}
+  DataSource.where("eval LIKE '%SQ5NHistory.xls%'").each {|ds| ds.mark_as_pseudo_history}
   
   CSV.open("public/rake_time.csv", "a") {|csv| csv << ["mark_pseudo_history", "%.2f" % (Time.now - t) , t.to_s, Time.now.to_s] }
   
