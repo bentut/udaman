@@ -81,6 +81,13 @@ class DashboardsController < ApplicationController
     @pattern_and_load = (@pattern & @load)
   end
   
+  def reload_sources
+    @output = []
+    #IO.popen('ls -l') { |io| while (line = io.gets) do @output.push(line) end }
+    IO.popen('date') { |io| while (line = io.gets) do @output.push(line) end }      
+    render :partial => "reload_sources" #, :locals => {:output => @output}
+  end
+  
   def d_cache
     #begin
       @cache = Series.get_cached_files

@@ -37,20 +37,25 @@ task :update_bea_links => :environment do
     "SQ4@bea.gov" => "http://bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7022=56&7023=0&7033=-1&7024=non-industry&7025=0&7026=15000&7027=-1&7001=356&7028=-1&7031=0&7040=-1&7083=levels&7029=56&7090=70",
     "SA1_CA@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=21&7023=0&7033=-1&7024=non-industry&7025=0&7026=06000&7027=-1&7001=421&7028=-1&7031=0&7040=-1&7083=levels&7029=21&7090=70",
     "SA05N_HI@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=2&7023=0&7033=-1&7024=naics&7025=0&7026=15000&7027=-1&7001=42&7028=-1&7031=0&7040=-1&7083=levels&7029=28&7090=70",
-    "CA05N_HAW@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=10&7023=7&7033=-1&7024=naics&7025=4&7026=15001&7027=-1&7001=710&7028=-1&7031=15000&7040=-1&7083=levels&7029=32&7090=70",                      
-    "CA05N_HON@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=10&7023=7&7033=-1&7024=naics&7025=4&7026=15003&7027=-1&7001=710&7028=-1&7031=15000&7040=-1&7083=levels&7029=32&7090=70",
-     "CA05N_KAU@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=10&7023=7&7033=-1&7024=naics&7025=4&7026=15007&7027=-1&7001=710&7028=-1&7031=15000&7040=-1&7083=levels&7029=32&7090=70",
-     "CA05N_MAU@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=10&7023=7&7033=-1&7024=naics&7025=4&7026=15901&7027=-1&7001=710&7028=-1&7031=15000&7040=-1&7083=levels&7029=32&7090=70",
-     "SA06N_HI@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=50&7023=0&7033=-1&7024=naics&7025=0&7026=15000&7027=-1&7001=450&7028=-1&7031=0&7040=-1&7083=levels&7029=51&7090=70",
-     "SQ35_HI@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=79&7023=0&7033=-1&7024=non-industry&7025=0&7026=15000&7027=-1&7001=379&7028=-1&7031=0&7040=-1&7083=levels&7029=79&7090=70",
-     "CA04_HAW@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=49&7023=7&7033=-1&7024=non-industry&7025=4&7026=15001&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
-     "CA04_HON@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=49&7023=7&7033=-1&7024=non-industry&7025=4&7026=15003&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
-     "CA04_KAU@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=49&7023=7&7033=-1&7024=non-industry&7025=4&7026=15007&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
-     "SA06S_HI@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=50&7023=0&7033=-1&7024=sic&7025=0&7026=15000&7027=-1&7001=450&7028=-1&7031=0&7040=-1&7083=levels&7029=50&7090=70"
+    "SA06N_HI@bea.gov" => "http://bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7022=50&7023=0&7024=naics&7033=-1&7025=0&7026=15000&7027=-1&7001=450&7028=-1&7031=0&7040=-1&7083=levels&7029=51&7090=70",
+    "SQ35_HI@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=79&7023=0&7033=-1&7024=non-industry&7025=0&7026=15000&7027=-1&7001=379&7028=-1&7031=0&7040=-1&7083=levels&7029=79&7090=70",
+    "SA06S_HI@bea.gov" => "http://bea.gov/iTable/iTable.cfm?reqid=70&step=1&isuri=1&acrdn=4#reqid=70&step=30&isuri=1&7022=50&7023=0&7033=-1&7024=sic&7025=0&7026=15000&7027=-1&7001=450&7028=-1&7031=0&7040=-1&7083=levels&7029=50&7090=70",
+    "CA04_HON@bea.gov" => "http://bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7022=49&7023=7&7024=non-industry&7033=-1&7025=4&7026=15003&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
+    "CA04_KAU@bea.gov" => "http://bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7022=49&7023=7&7033=-1&7024=non-industry&7025=4&7026=15007&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
+    "CA04_MAU@bea.gov" => "http://bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7022=49&7023=7&7033=-1&7024=non-industry&7025=4&7026=15901&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
+    "CA04_HAW@bea.gov" => "http://bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7022=49&7023=7&7033=-1&7024=non-industry&7025=4&7026=15001&7027=-1&7001=749&7028=-1&7031=15000&7040=-1&7083=levels&7029=49&7090=70",
+    "CA05N_HON@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=levels&7031=15000&7022=10&7023=7&7024=naics&7025=4&7026=15003&7027=-1&7001=710&7029=32&7090=70&7033=-1",
+    "CA05N_KAU@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7031=15000&7030=0&7025=4&7022=10&7023=7&7024=naics&7083=levels&7026=15007&7027=-1&7001=710&7029=32&7090=70&7033=-1",
+    "CA05N_MAU@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7040=-1&7083=levels&7031=15000&7001=710&7022=10&7023=7&7024=naics&7025=4&7026=15901&7027=-1&7028=-1&7029=32&7090=70&7033=-1&7030=0",
+    "CA05N_HAW@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7031=15000&7030=0&7025=4&7022=10&7023=7&7024=naics&7083=levels&7026=15001&7027=-1&7001=710&7029=32&7090=70&7033=-1",
+    "CA06N_HON@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7083=levels&7031=15000&7022=54&7023=7&7024=naics&7025=4&7026=15003&7027=-1&7001=754&7029=55&7090=70&7033=-1",
+    "CA06N_KAU@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7028=-1&7040=-1&7031=15000&7030=0&7025=4&7022=54&7023=7&7024=naics&7083=levels&7026=15007&7027=-1&7001=754&7029=55&7090=70&7033=-1",
+    "CA06N_MAU@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7040=-1&7083=levels&7031=15000&7001=754&7022=54&7023=7&7024=naics&7025=4&7026=15901&7027=-1&7028=-1&7029=55&7090=70&7033=-1&7030=0",
+    "CA06N_HAW@bea.gov" => "http://www.bea.gov/iTable/iTableHtml.cfm?reqid=70&step=30&isuri=1&7040=-1&7083=levels&7031=15000&7001=754&7022=54&7023=7&7024=naics&7025=4&7026=15001&7027=-1&7028=-1&7029=55&7090=70&7033=-1&7030=0",
+
+
    }
-     
-
-
+   
   require 'watir-webdriver'
   b = Watir::Browser.new
   new_links = {}
