@@ -35,6 +35,7 @@ class DataSourcesController < ApplicationController
     @data_source = DataSource.find(params[:id])
     @data_source.update_attributes(:priority => params[:data_source][:priority].to_i)
      if @data_source.update_attributes(:eval => params[:data_source][:eval])
+        @data_source.set_dependencies
         @data_source.reload_source
         redirect_to :controller => "series", :action => 'show', :id => @data_source.series_id, :notice => "datasource processed successfully"
       else
@@ -48,6 +49,7 @@ class DataSourcesController < ApplicationController
     @data_source = DataSource.find(params[:id])
      if @data_source.update_attributes(:eval => params[:data_source][:eval])
         begin
+          @data_source.set_dependencies
           @data_source.reload_source
           render :partial => "inline_edit.html", :locals => {:ds => @data_source, :notice => "OK, (#{@data_source.series.aremos_diff})"}
         rescue

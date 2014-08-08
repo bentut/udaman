@@ -160,6 +160,7 @@ class DataSource < ActiveRecord::Base
       t = Time.now
       s = Kernel::eval self.eval
       delete_data_points
+      self.set_dependencies
       self.series.update_data(s.data, self)
       self.update_attributes(:description => s.name, :last_run => Time.now, :runtime => (Time.now - t))
     end
