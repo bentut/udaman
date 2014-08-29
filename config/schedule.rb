@@ -42,11 +42,11 @@ every 1.day, :at => "#{hour}:10 am" do
 end
 
 # ------- These two are together. Need only sometimes --------
-every 1.day, :at => "4:30 am" do
+every 1.day, :at => "5:30 am" do
   rake "update_bea_links"
 end
 
-every 1.day, :at => "5:00 am" do
+every 1.day, :at => "6:00 am" do
   rake "reload_bea_series_only"
   rake "reload_bls_series_only"
 end
